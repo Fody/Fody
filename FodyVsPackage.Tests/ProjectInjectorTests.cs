@@ -19,7 +19,7 @@ public class ProjectInjectorTests
                                };
             injector.Execute();
 
-            Assert.AreEqual(File.ReadAllText(Path.GetFullPath(@"TestProjects\ProjectWithWeaving.csproj")), File.ReadAllText(targetFile));
+            Assert.AreEqual(FileReader.Read(@"TestProjects\ProjectWithWeaving.csproj"), FileReader.Read(targetFile));
         }
         finally
         {
@@ -43,8 +43,8 @@ public class ProjectInjectorTests
                                };
             injector.Execute();
 
-            var source = File.ReadAllText(sourceProjectFile);
-            var target = File.ReadAllText(targetFile);
+            var source = FileReader.Read(sourceProjectFile);
+            var target = FileReader.Read(targetFile);
             Assert.AreEqual(source, target);
         }
         finally
@@ -69,7 +69,7 @@ public class ProjectInjectorTests
                                };
             injector.Execute();
 
-            Assert.AreEqual(File.ReadAllText(Path.GetFullPath(@"TestProjects\ProjectWithWeaving.csproj")), File.ReadAllText(targetFile));
+            Assert.AreEqual(FileReader.Read(@"TestProjects\ProjectWithWeaving.csproj"), FileReader.Read(targetFile));
         }
         finally
         {
@@ -79,4 +79,3 @@ public class ProjectInjectorTests
     }
 
 }
-

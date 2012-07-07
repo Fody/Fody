@@ -13,7 +13,7 @@ public class ProjectRemoverTests
         try
         {
             new ProjectRemover(targetFile);
-            Assert.AreEqual(File.ReadAllText(Path.GetFullPath(@"TestProjects\ProjectWithNoWeaving.csproj")), File.ReadAllText(targetFile));
+            Assert.AreEqual(FileReader.Read(@"TestProjects\ProjectWithNoWeaving.csproj"), FileReader.Read(targetFile));
         }
         finally
         {
@@ -32,7 +32,7 @@ public class ProjectRemoverTests
         {
 
             new ProjectRemover(targetFile);
-            Assert.AreEqual(File.ReadAllText(Path.GetFullPath(@"TestProjects\ProjectWithNoWeaving.csproj")), File.ReadAllText(targetFile));
+            Assert.AreEqual(FileReader.Read(Path.GetFullPath(@"TestProjects\ProjectWithNoWeaving.csproj")), FileReader.Read(targetFile));
     
         }
         finally
@@ -51,7 +51,7 @@ public class ProjectRemoverTests
         {
 
             new ProjectRemover(targetFile);
-            Assert.AreEqual(File.ReadAllText(Path.GetFullPath(@"TestProjects\ProjectWithNoWeaving.csproj")), File.ReadAllText(targetFile));
+            Assert.AreEqual(FileReader.Read(@"TestProjects\ProjectWithNoWeaving.csproj"), FileReader.Read(targetFile));
     
         }
         finally
