@@ -61,6 +61,7 @@
     <Compile Include="CrossThreadRunner.cs" />
     <Compile Include="ExceptionExtensionsTests.cs" />
     <Compile Include="ExceptionWindowTests.cs" />
+    <Compile Include="FileReader.cs" />
     <Compile Include="FooTests.cs" />
     <Compile Include="ProjectInjectorTests.cs" />
     <Compile Include="ProjectRemoverTests.cs" />
