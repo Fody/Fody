@@ -12,17 +12,6 @@ Uses [Mono.Cecil](http://www.mono-project.com/Cecil)  and an add-in based approa
 
 There is a  [Visual Studio addin](http://visualstudiogallery.msdn.microsoft.com/074a2a26-d034-46f1-8fe1-0da97265eb7a) 
 
-## Usage
+## WIKI
 
-See [SampleUsage] for an introduction on using Fody.
-
-## Naming
-
-The name "Fody" comes from the small birds that belong to the weaver family [Ploceidae](http://en.wikipedia.org/wiki/Fody).
-
-
-## Tools and Products Used 
-
- * [JetBrains dotTrace](http://www.jetbrains.com/profiler/)
- * [JetBrains Resharper](http://www.jetbrains.com/resharper/)
- * [Mono Cecil](http://www.mono-project.com/Cecil)
+[See Wiki for more doco](https://github.com/SimonCropp/Fody/wiki/)
