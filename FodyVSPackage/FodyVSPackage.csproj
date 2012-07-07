@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2356DD30-B9AC-48ED-A0A1-103382A9CFC3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FodyVSPackage</RootNamespace>
+    <AssemblyName>FodyVSPackage</AssemblyName>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\Key.snk</AssemblyOriginatorKeyFile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="envdte, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>$(SolutionDir)Tools\vs2010.sdk\envdte.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="envdte100, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>$(SolutionDir)Tools\vs2010.sdk\envdte100.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="envdte80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>$(SolutionDir)Tools\vs2010.sdk\envdte80.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="envdte90, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>$(SolutionDir)Tools\vs2010.sdk\envdte90.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.CommandBars, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>$(SolutionDir)Tools\vs2010.sdk\Microsoft.VisualStudio.CommandBars.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SolutionDir)Tools\vs2010.sdk\Microsoft.VisualStudio.OLE.Interop.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SolutionDir)Tools\vs2010.sdk\Microsoft.VisualStudio.Shell.10.0.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SolutionDir)Tools\vs2010.sdk\Microsoft.VisualStudio.Shell.Immutable.10.0.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SolutionDir)Tools\vs2010.sdk\Microsoft.VisualStudio.Shell.Interop.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.10.0, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <HintPath>$(SolutionDir)Tools\vs2010.sdk\Microsoft.VisualStudio.Shell.Interop.10.0.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SolutionDir)Tools\vs2010.sdk\Microsoft.VisualStudio.Shell.Interop.8.0.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.Shell.Interop.9.0, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SolutionDir)Tools\vs2010.sdk\Microsoft.VisualStudio.Shell.Interop.9.0.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TextManager.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(SolutionDir)Tools\vs2010.sdk\Microsoft.VisualStudio.TextManager.Interop.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AllProjectFinder.cs" />
+    <Compile Include="ConfigFile.cs" />
+    <Compile Include="ConfigureMenuCallback.cs" />
+    <Compile Include="ContainsFodyChecker.cs" />
+    <Compile Include="CurrentProjectFinder.cs" />
+    <Compile Include="CurrentVersion.cs" />
+    <Compile Include="DisableMenuConfigure.cs" />
+    <Compile Include="MenuStatusChecker.cs" />
+    <Compile Include="MSBuildKiller.cs" />
+    <Compile Include="ProcessExtensions.cs" />
+    <Compile Include="Wpf\EnumBooleanConverter.cs" />
+    <Compile Include="MessageDisplayer.cs" />
+    <Compile Include="ExceptionDialog.cs" />
+    <Compile Include="ExceptionExtensions.cs" />
+    <Compile Include="ExceptionWindow.xaml.cs">
+      <DependentUpon>ExceptionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExceptionWindowModel.cs" />
+    <Compile Include="Wpf\HyperlinkEx.cs" />
+    <Compile Include="Wpf\InverseBooleanConverter.cs" />
+    <Compile Include="MenuConfigure.cs" />
+    <Compile Include="ProjectInjector.cs" />
+    <Compile Include="ProjectKind.cs" />
+    <Compile Include="..\CommonAssemblyInfo.cs" />
+    <Compile Include="..\Fody\XmlExtensions.cs" />
+    <Compile Include="FodyVSPackagePackage.cs" />
+    <Compile Include="ProjectRemover.cs" />
+    <Compile Include="ContentsFinder.cs" />
+    <Compile Include="SolutionEvents.cs" />
+    <Compile Include="TaskFileProcessor.cs" />
+    <Compile Include="TaskFileReplacer.cs" />
+    <Compile Include="UnsaveProjectChecker.cs" />
+    <Compile Include="VersionChecker.cs" />
+    <Compile Include="MsBuildXmlExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="VSPackage.resx">
+      <MergeWithCTO>true</MergeWithCTO>
+      <ManifestResourceName>VSPackage</ManifestResourceName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="source.extension.vsixmanifest">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <VSCTCompile Include="FodyVSPackage.vsct">
+      <ResourceName>Menus.ctmenu</ResourceName>
+      <SubType>Designer</SubType>
+    </VSCTCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Images_32bit.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll">
+      <Link>ContentFiles\Fody\Fody.dll</Link>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.pdb">
+      <Link>ContentFiles\Fody\Fody.pdb</Link>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\FodyIsolated.dll">
+      <Link>ContentFiles\Fody\FodyIsolated.dll</Link>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\FodyIsolated.pdb">
+      <Link>ContentFiles\Fody\FodyIsolated.pdb</Link>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="$(SolutionDir)FodyCommon\bin\$(ConfigurationName)\FodyCommon.dll">
+      <Link>ContentFiles\Fody\FodyCommon.dll</Link>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="$(SolutionDir)FodyCommon\bin\$(ConfigurationName)\FodyCommon.pdb">
+      <Link>ContentFiles\Fody\FodyCommon.pdb</Link>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\Mono.Cecil.dll">
+      <Link>ContentFiles\Fody\Mono.Cecil.dll</Link>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\Mono.Cecil.Mdb.dll">
+      <Link>ContentFiles\Fody\Mono.Cecil.Mdb.dll</Link>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\Mono.Cecil.Pdb.dll">
+      <Link>ContentFiles\Fody\Mono.Cecil.Pdb.dll</Link>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\Mono.Cecil.Rocks.dll">
+      <Link>ContentFiles\Fody\Mono.Cecil.Rocks.dll</Link>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="$(SolutionDir)Fody.targets">
+      <Link>ContentFiles\Fody\Fody.targets</Link>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="$(TargetDir)FodyVSPackage.pdb">
+      <Link>FodyVSPackage.pdb</Link>
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="ContentFiles\FodyWeavers.xml">
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="License.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Resources\Package.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ExceptionWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj">
+      <Project>{89681581-a390-4761-9c27-1f274fe506e7}</Project>
+      <Name>FodyIsolated</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\Fody\Fody.csproj">
+      <Project>{64880f43-e6c1-428e-b00a-e0374697b5cf}</Project>
+      <Name>Fody</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <UseCodebase>true</UseCodebase>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VsSDKInstall>$(SolutionDir)Tools\vs2010.sdk\</VsSDKInstall>
+    <VsSDKIncludes>$(VsSDKInstall)inc\</VsSDKIncludes>
+    <VsixSchemaPath>$(VsSDKInstall)VSIXManifestSchema.xsd</VsixSchemaPath>
+    <DeployExtension>false</DeployExtension>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VsSDKInstall)Microsoft.VsSDK.targets" />
+  <UsingTask TaskName="FileUpdate" AssemblyFile="$(SolutionDir)Tools\SimpleMsBuildTasks.dll" />
+  <UsingTask TaskName="EnvironmentVariable" AssemblyFile="$(SolutionDir)Tools\SimpleMsBuildTasks.dll" />
+  <UsingTask TaskName="PepitaGet.WeavingTask" AssemblyFile="$(SolutionDir)Tools\PepitaGet.dll" />
+  <Target Name="BeforeBuild" DependsOnTargets="ConfigureVsSDKBuild">
+    <PepitaGet.WeavingTask />
+    <GetAssemblyIdentity AssemblyFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll">
+      <Output TaskParameter="Assemblies" ItemName="WeaverAssembly" />
+    </GetAssemblyIdentity>
+    <FileUpdate File="$(SolutionDir)FodyVsPackage\source.extension.vsixmanifest" Regex="Version&gt;([^&lt;]*)&lt;/Version" ReplacementText="Version&gt;%(WeaverAssembly.Version)&lt;/Version" />
+  </Target>
+  <Target Name="ConfigureVsSDKBuild">
+    <EnvironmentVariable Variable="VsSDKToolsPath" Value="$(VsSDKInstall)" />
+  </Target>
+</Project>

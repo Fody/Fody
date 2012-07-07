@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2AFCC073-136D-4FF3-AC83-BE94B35A4C7B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fody.Tests</RootNamespace>
+    <AssemblyName>Fody.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Build.Utilities.v4.0" />
+    <Reference Include="Mono.Cecil, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.3\lib\net40\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.3\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.3\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.3\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstitute, Version=1.4.0.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NSubstitute.1.4.0.0\lib\NET40\NSubstitute.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ContainsTypeCheckerTests.cs" />
+    <Compile Include="InstanceLinker\NoWeaversConfiguredInstanceLinkerTests.cs" />
+    <Compile Include="InstanceLinker\WeaversConfiguredInstanceLinkerTests.cs" />
+    <Compile Include="NugetPackagePathFinderTest.cs" />
+    <Compile Include="ProjectPathFinderTests.cs" />
+    <Compile Include="SearchDirectories\AddinDirectoriesTests.cs" />
+    <Compile Include="WeaverAssemblyPathFinderTests.cs" />
+    <Compile Include="WeaverProjectFileFinderTests.cs" />
+    <Compile Include="WeaversHistoryTests.cs" />
+    <Compile Include="WeaversXmlHistoryTests.cs" />
+    <Compile Include="SearchDirectories\ConfigDirectoryFinderTests.cs" />
+    <Compile Include="AssemblyPathFinderTests.cs" />
+    <Compile Include="DynamicTests.cs" />
+    <Compile Include="FileChangedCheckerTests.cs" />
+    <Compile Include="ModuleWeaverTypeLoaderTests.cs" />
+    <Compile Include="NugetPackagePathFinderTests.cs" />
+    <Compile Include="ProjectWeaversReaderTests\ProjectWeaversReaderTests.cs" />
+    <Compile Include="SearchDirectories\NugetDirectoryFinderTests.cs" />
+    <Compile Include="SearchDirectories\ToolsDirectoryFinderTests.cs" />
+    <Compile Include="SolutionPathValidatorTests.cs" />
+    <Compile Include="AddinFilesEnumeratorTests.cs" />
+    <Compile Include="XmlExtensionsTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj">
+      <Project>{e839a346-8804-4eac-b635-19d7a911460e}</Project>
+      <Name>FodyCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj">
+      <Project>{89681581-a390-4761-9c27-1f274fe506e7}</Project>
+      <Name>FodyIsolated</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Fody\Fody.csproj">
+      <Project>{64880F43-E6C1-428E-B00A-E0374697B5CF}</Project>
+      <Name>Fody</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SampleTask.Fody\SampleTask.Fody.csproj">
+      <Project>{2C10CBD1-5913-46D5-B705-0F3B46E68DD1}</Project>
+      <Name>SampleTask.Fody</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DirWithNugetConfigAndNoPath\nuget.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="DirWithNugetConfig\nuget.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="NugetPackagePathFinder\FakeSolutionWithNugetConfig\nuget.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="WeaversProjectFileFinder\WithNoWeaver\Weavers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NugetPackagePathFinder\FakeSolutionWithNugetConfig\Solution.sln" />
+    <Content Include="NugetPackagePathFinder\FakeSolution\Solution.sln" />
+    <Content Include="ProjectWeaversReaderTests\FodyWeavers1.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectWeaversReaderTests\FodyWeavers2.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectWithShortWeavingTask.csproj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectWeaversReaderTests\FodyWeavers3.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Packages\SampleTask.Fody.1.0.0.0\SampleTask.Fody.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="ProjectWithWeavingTask.csproj">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Solution\SearchPath1\TextFile1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Solution\SearchPath2\TextFile1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Solution\Tools\TextFile1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WeaversProjectFileFinder\WithWeaver\Weavers\bin\Debug\Weavers.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <UsingTask TaskName="PepitaGet.RestorePackagesTask" AssemblyFile="$(SolutionDir)Tools\PepitaGet.dll" />
+  <Target Name="BeforeBuild">
+    <PepitaGet.RestorePackagesTask />
+  </Target>
+</Project>

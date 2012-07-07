@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
+    <IntermediateDir>$(ProjectDir)$(IntermediateOutputPath)</IntermediateDir>
+    <FodyMessageImportance Condition="$(FodyMessageImportance) == '' Or $(FodyMessageImportance) == '*Undefined*'">Low</FodyMessageImportance>
+  </PropertyGroup>
+  <UsingTask 
+	TaskName="Fody.WeavingTask" 
+	AssemblyFile="$(MSBuildThisFileDirectory)\Fody.dll" />
+  <Target 
+	AfterTargets="CopyFilesToOutputDirectory" 
+	Name="FodyTarget">
+    <Fody.WeavingTask 
+		AssemblyPath="$(TargetPath)" 
+		SolutionDir="$(SolutionDir)" 
+		ProjectPath="$(ProjectPath)" 
+		References="@(ReferencePath)" 
+		MessageImportance="$(FodyMessageImportance)"   
+		KeyFilePath="$(KeyOriginatorFile)" 
+		IntermediateDir="$(IntermediateDir)"/>
+    <Copy 
+		SourceFiles="$(TargetPath)" 
+		DestinationFolder="$(IntermediateDir)" />
+    <Copy 
+		SourceFiles="$(TargetDir)$(TargetName).pdb" 
+		DestinationFolder="$(IntermediateDir)" 
+		Condition="Exists('$(TargetDir)$(TargetName).pdb')"/>
+    <Copy 
+		SourceFiles="$(TargetDir)$(TargetName).mdb" 
+		DestinationFolder="$(IntermediateDir)" 
+		Condition="Exists('$(TargetDir)$(TargetName).mdb')"/>
+  </Target>
+</Project>

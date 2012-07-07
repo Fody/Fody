@@ -1,0 +1,77 @@
+
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<!--
+*************************************************************************
+Copyright (c) Microsoft Corporation. All rights reserved.
+This code is licensed under the Visual Studio SDK license terms.
+THIS CODE IS PROVIDED *AS IS* WITHOUT WARRANTY OF
+ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY
+IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR
+PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
+*************************************************************************
+-->
+
+
+
+
+
+
+
+
+
+
+
+  <!--
+    Set the general properties for this installation of the SDK
+  -->
+  <PropertyGroup>
+    <VsSDKVersion>10.0</VsSDKVersion>
+    <VSSDKTargetPlatformVersion>10.0</VSSDKTargetPlatformVersion>
+    <VSSDKTargetsPath>$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VsSDKVersion)\VSSDK</VSSDKTargetsPath>
+    <VSSDKTargetPlatformRegRoot>Software\Microsoft\VisualStudio\$(VSSDKTargetPlatformVersion)</VSSDKTargetPlatformRegRoot>
+    <VSSDKTargetPlatformRegRootSuffix Condition="'$(VSSDKTargetPlatformRegRootSuffix)' == ''">Exp</VSSDKTargetPlatformRegRootSuffix>
+    <ExtensionsDeploymentSubPath Condition="'$(ExtensionsDeploymentSubPath)' == ''">Microsoft\VisualStudio\$(VSSDKTargetPlatformVersion)$(VSSDKTargetPlatformRegRootSuffix)\Extensions\</ExtensionsDeploymentSubPath>
+  </PropertyGroup>
+
+  <PropertyGroup Label="UserMacros">
+    <VSIntegrationRoot>$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VisualStudio\VSIP\$(VsSDKVersion)\@InstallDir)\VisualStudioIntegration</VSIntegrationRoot>
+    <VSIntegrationCommon>$(VSIntegrationRoot)\common</VSIntegrationCommon>
+    <VSIntegrationIdl>$(VSIntegrationCommon)\idl</VSIntegrationIdl>
+    <VSIntegrationInclude>$(VSIntegrationCommon)\inc</VSIntegrationInclude>
+    <Office10Include>$(VSIntegrationInclude)\Office10</Office10Include>
+    <VSIntegrationLibraries>$(VSIntegrationCommon)\lib\x86</VSIntegrationLibraries>
+    <VSLIncludePath>$(VSIntegrationRoot)\Common\Source\CPP\VSL\Include</VSLIncludePath>
+    <VSIntegrationTools>$(VSIntegrationRoot)\Tools\Bin</VSIntegrationTools>
+    <RegitPath>$(VSIntegrationTools)</RegitPath>
+    <VsctPath>$(VSIntegrationTools)</VsctPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Midl>
+      <AdditionalIncludeDirectories>$(VSIntegrationInclude);$(VSIntegrationIdl);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </Midl>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(VSLIncludePath);$(VSIntegrationInclude);$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>true</TreatWarningAsError>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(VSIntegrationInclude);$(IntDir);$(OutDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(VSIntegrationLibraries);$(IntDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="Office10Include" />
+    <BuildMacro Include="RegitPath" />
+    <BuildMacro Include="VsctPath" />
+    <BuildMacro Include="VSIntegrationCommon" />
+    <BuildMacro Include="VSIntegrationIdl" />
+    <BuildMacro Include="VSIntegrationInclude" />
+    <BuildMacro Include="VSIntegrationLibraries" />
+    <BuildMacro Include="VSIntegrationRoot" />
+    <BuildMacro Include="VSIntegrationTools" />
+    <BuildMacro Include="VSLIncludePath" />
+  </ItemGroup>
+</Project>

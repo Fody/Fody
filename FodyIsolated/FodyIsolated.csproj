@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{89681581-A390-4761-9C27-1F274FE506E7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FodyIsolated</RootNamespace>
+    <AssemblyName>FodyIsolated</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Cecil, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.3\lib\net40\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.3\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.3\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.Cecil.0.9.5.3\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs" />
+    <Compile Include="AssemblyLoader.cs" />
+    <Compile Include="AssemblyReferenceFinder.cs" />
+    <Compile Include="AssemblyResolver.cs" />
+    <Compile Include="DependencyLoader.cs" />
+    <Compile Include="ExceptionExtensions.cs" />
+    <Compile Include="InnerWeaver.cs" />
+    <Compile Include="InstanceConstructor.cs" />
+    <Compile Include="IsolatedContainsTypeChecker.cs" />
+    <Compile Include="ModuleReader.cs" />
+    <Compile Include="ModuleWeaverRunner.cs" />
+    <Compile Include="ModuleWriter.cs" />
+    <Compile Include="ObjectTypeName.cs" />
+    <Compile Include="StrongNameKeyFinder.cs" />
+    <Compile Include="TypeFinder.cs" />
+    <Compile Include="WeaverInitialiser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj">
+      <Project>{E839A346-8804-4EAC-B635-19D7A911460E}</Project>
+      <Name>FodyCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="AfterBuild">
+    <MakeDir Directories="$(SolutionDir)ForSample" />
+    <Copy SourceFiles="$(TargetDir)FodyIsolated.dll" DestinationFolder="$(SolutionDir)ForSample" />
+    <Copy SourceFiles="$(TargetDir)FodyIsolated.pdb" DestinationFolder="$(SolutionDir)ForSample" />
+    <Copy SourceFiles="$(TargetDir)Mono.Cecil.dll" DestinationFolder="$(SolutionDir)ForSample" />
+    <Copy SourceFiles="$(TargetDir)Mono.Cecil.Mdb.dll" DestinationFolder="$(SolutionDir)ForSample" />
+    <Copy SourceFiles="$(TargetDir)Mono.Cecil.Pdb.dll" DestinationFolder="$(SolutionDir)ForSample" />
+    <Copy SourceFiles="$(TargetDir)Mono.Cecil.Rocks.dll" DestinationFolder="$(SolutionDir)ForSample" />
+  </Target>
+</Project>

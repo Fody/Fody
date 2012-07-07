@@ -1,0 +1,26 @@
+﻿<Window x:Class="ExceptionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="An exception occurred in the Fody VSIX"
+        Height="432" Width="630" ResizeMode="NoResize" ShowInTaskbar="False">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <StackPanel>
+        <TextBlock HorizontalAlignment="Left">An exception occurred in the Fody VSIX</TextBlock>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock HorizontalAlignment="Left">Please take a copy of the text and log a bug here</TextBlock>
+            <Button Padding="0" Margin="0" Click="LaunchIssues" Style="{StaticResource LinkButton}">Issues</Button>
+        </StackPanel>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Left">Exception Detail:</TextBlock>
+        <TextBox Height="267" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" Grid.Row="2"  IsReadOnly="true" Text="{Binding Path=ExceptionText}" />
+        <StackPanel Orientation="Horizontal" Grid.Row="3" FlowDirection="RightToLeft">
+            <Button Click="Close" IsCancel="True">Close</Button>
+            <Button Click="Copy" IsDefault="True">Copy</Button>
+        </StackPanel>
+    </StackPanel>
+</Window>
