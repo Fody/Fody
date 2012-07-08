@@ -26,7 +26,7 @@ public class XmlExtensionsTests
     <width>80</width>
     <length>120</length>
   </table>
-</root>", xDocument.ToString());
+</root>".Replace("\r\n", "\n"), xDocument.ToString().Replace("\r\n", "\n"));
     }
 
     [Test]
