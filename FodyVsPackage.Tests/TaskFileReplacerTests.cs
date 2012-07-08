@@ -23,7 +23,7 @@ public class TaskFileReplacerTests
                                            TaskFilePath = tempFileName
                                        };
             taskFileReplacer.AddFile(@"C:\Foo");
-            Assert.AreEqual("C:\\Foo\r\n", FileReader.Read(taskFileReplacer.TaskFilePath));
+            Assert.AreEqual("C:\\Foo\n", FileReader.Read(taskFileReplacer.TaskFilePath));
         }
         finally
         {
@@ -48,7 +48,7 @@ public class TaskFileReplacerTests
                                        };
             taskFileReplacer.AddFile(@"C:\Foo");
             taskFileReplacer.AddFile(@"C:\Foo2");
-            Assert.AreEqual("C:\\Foo\r\nC:\\Foo2\r\n", FileReader.Read(taskFileReplacer.TaskFilePath));
+            Assert.AreEqual("C:\\Foo\nC:\\Foo2\n", FileReader.Read(taskFileReplacer.TaskFilePath));
         }
         finally
         {
@@ -108,7 +108,7 @@ public class TaskFileReplacerTests
             taskFileReplacer.AddFile(dir2);
 
             taskFileReplacer.CheckForFilesToUpdate();
-            Assert.AreEqual(dir1 + "\r\n" + dir2 + "\r\n", FileReader.Read(taskFileReplacer.TaskFilePath));
+            Assert.AreEqual(dir1 + "\n" + dir2 + "\n", FileReader.Read(taskFileReplacer.TaskFilePath));
         }
         finally
         {
