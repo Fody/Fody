@@ -20,3 +20,7 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+
+# Denote all files that are truly binary and should not be modified.
+*.dll binary
+*.exe binary
