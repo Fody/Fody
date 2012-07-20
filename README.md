@@ -1,6 +1,19 @@
-##Extensible tool for weaving .net assemblies
+## Extensible tool for weaving .net assemblies
 
-Uses [Mono.Cecil](http://www.mono-project.com/Cecil)  and an add-in based approach to modifying the IL of .net assemblies at compile time.
+## Introduction 
+
+Manipulating the IL of an assembly as part of a build requires a significant amount of plumbing code. This plumbing code involves knowledge of both the MSBuild and Visual Studio APIs. Fody attempts to elimination that plumbing code through an extensible add-in model. 
+
+## The plumbing tasks Fody handles 
+
+  * Injection of the MSBuild task into the build pipeline
+  * Resolving the location of the assembly and pdb
+  * Abstracts the complexities of logging to MSBuild
+  * Reads the assembly and pdb into the Mono.Cecil object model
+  * Re-applying the strong name if necessary
+  * Saving the assembly and pdb
+
+FOoy Uses [Mono.Cecil](http://www.mono-project.com/Cecil)  and an add-in based approach to modifying the IL of .net assemblies at compile time.
 
  * No install required to build
  * No attributes required
@@ -12,6 +25,19 @@ Uses [Mono.Cecil](http://www.mono-project.com/Cecil)  and an add-in based approa
 
 There is a  [Visual Studio addin](http://visualstudiogallery.msdn.microsoft.com/074a2a26-d034-46f1-8fe1-0da97265eb7a) 
 
+## Usage
+
+See [SampleUsage](SampleUsage) for an introduction on using Fody.
+
+## Naming
+
+The name "Fody" comes from the small birds that belong to the weaver family [Ploceidae](http://en.wikipedia.org/wiki/Fody).
+
+## Tools and Products Used 
+
+ * [JetBrains dotTrace](http://www.jetbrains.com/profiler/)
+ * [JetBrains Resharper](http://www.jetbrains.com/resharper/)
+ * [Mono Cecil](http://www.mono-project.com/Cecil)
 
 ## More Info
 
@@ -22,7 +48,6 @@ There is a  [Visual Studio addin](http://visualstudiogallery.msdn.microsoft.com/
  * [HowToWriteAnAddin](https://github.com/SimonCropp/Fody/wiki/HowToWriteAnAddin)
  * [InSolutionWeaving](https://github.com/SimonCropp/Fody/wiki/InSolutionWeaving)
  * [ModuleWeaver](https://github.com/SimonCropp/Fody/wiki/ModuleWeaver)
- * [Overview](https://github.com/SimonCropp/Fody/wiki/Overview)
  * [PdbReWritingAndDebugging](https://github.com/SimonCropp/Fody/wiki/PdbReWritingAndDebugging)
  * [ReleaseNotes](https://github.com/SimonCropp/Fody/wiki/ReleaseNotes)
  * [SampleUsage](https://github.com/SimonCropp/Fody/wiki/SampleUsage)
