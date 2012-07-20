@@ -12,6 +12,24 @@ Uses [Mono.Cecil](http://www.mono-project.com/Cecil)  and an add-in based approa
 
 There is a  [Visual Studio addin](http://visualstudiogallery.msdn.microsoft.com/074a2a26-d034-46f1-8fe1-0da97265eb7a) 
 
-## WIKI
 
-[See Wiki for more doco](https://github.com/SimonCropp/Fody/wiki/)
+## More Info
+
+ * [AddinSearchPaths](wiki/AddinSearchPaths)
+ * [AddinsList](wiki/AddinsList)
+ * [DeployingAddinsAsNugets](wiki/DeployingAddinsAsNugets)
+ * [Home](wiki/Home)
+ * [HowToWriteAnAddin](wiki/HowToWriteAnAddin)
+ * [InSolutionWeaving](wiki/InSolutionWeaving)
+ * [ModuleWeaver](wiki/ModuleWeaver)
+ * [Overview](wiki/Overview)
+ * [PdbReWritingAndDebugging](wiki/PdbReWritingAndDebugging)
+ * [ReleaseNotes](wiki/ReleaseNotes)
+ * [SampleUsage](wiki/SampleUsage)
+ * [Setup](wiki/Setup)
+ * [SignedAssemblies](wiki/SignedAssemblies)
+ * [SupportedRuntimesAndIde](wiki/SupportedRuntimesAndIde)
+ * [TaskAddsAFlagInterface](wiki/TaskAddsAFlagInterface)
+ * [TaskCouldNotBeLoaded](wiki/TaskCouldNotBeLoaded)
+ * [VSIXPackage](wiki/VSIXPackage)
+ * [WeavingTaskOptions](wiki/WeavingTaskOptions)
