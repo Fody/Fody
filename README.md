@@ -15,7 +15,7 @@ There is a  [Visual Studio addin](http://visualstudiogallery.msdn.microsoft.com/
 
 ## More Info
 
- * [AddinSearchPaths](wiki/AddinSearchPaths)
+ * [AddinSearchPaths](/wiki/AddinSearchPaths)
  * [AddinsList](wiki/AddinsList)
  * [DeployingAddinsAsNugets](wiki/DeployingAddinsAsNugets)
  * [Home](wiki/Home)
