@@ -10,25 +10,19 @@ namespace Fody
 
     public class WeavingTask : Task
     {
+        public string AddinSearchPaths { get; set; }
         [Required]
         public string AssemblyPath { set; get; }
-
+        public string IntermediateDir { get; set; }
+        public string KeyFilePath { get; set; }
         public string MessageImportance { set; get; }
-
+        [Required]
+        public string ProjectPath { get; set; }
         [Required]
         public string References { get; set; }
-
-        public string KeyFilePath { get; set; }
-
         [Required]
         public string SolutionDir { get; set; }
 
-        [Required]
-        public string ProjectPath { get; set; }
-
-        public string IntermediateDir { get; set; }
-
-        public string AddinSearchPaths { get; set; }
         BuildLogger logger;
         static object locker;
 

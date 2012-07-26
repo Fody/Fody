@@ -6,29 +6,31 @@
     <FodyMessageImportance Condition="$(FodyMessageImportance) == '' Or $(FodyMessageImportance) == '*Undefined*'">Low</FodyMessageImportance>
   </PropertyGroup>
   <UsingTask 
-	TaskName="Fody.WeavingTask" 
-	AssemblyFile="$(MSBuildThisFileDirectory)\Fody.dll" />
+	  TaskName="Fody.WeavingTask" 
+	  AssemblyFile="$(MSBuildThisFileDirectory)\Fody.dll" />
   <Target 
-	AfterTargets="CopyFilesToOutputDirectory" 
-	Name="FodyTarget">
+	  AfterTargets="CopyFilesToOutputDirectory" 
+	  Name="FodyTarget">
     <Fody.WeavingTask 
-		AssemblyPath="$(TargetPath)" 
-		SolutionDir="$(SolutionDir)" 
-		ProjectPath="$(ProjectPath)" 
-		References="@(ReferencePath)" 
-		MessageImportance="$(FodyMessageImportance)"   
-		KeyFilePath="$(KeyOriginatorFile)" 
-		IntermediateDir="$(IntermediateDir)"/>
+      AddinSearchPaths="$(FodyAddinSearchPaths)"
+		  AssemblyPath="$(TargetPath)" 
+		  IntermediateDir="$(IntermediateDir)"
+		  KeyFilePath="$(KeyOriginatorFile)" 
+		  MessageImportance="$(FodyMessageImportance)"
+		  ProjectPath="$(ProjectPath)" 
+		  SolutionDir="$(SolutionDir)" 
+		  References="@(ReferencePath)" 
+      />
     <Copy 
-		SourceFiles="$(TargetPath)" 
-		DestinationFolder="$(IntermediateDir)" />
+		  SourceFiles="$(TargetPath)" 
+		  DestinationFolder="$(IntermediateDir)" />
     <Copy 
-		SourceFiles="$(TargetDir)$(TargetName).pdb" 
-		DestinationFolder="$(IntermediateDir)" 
-		Condition="Exists('$(TargetDir)$(TargetName).pdb')"/>
+		  SourceFiles="$(TargetDir)$(TargetName).pdb" 
+		  DestinationFolder="$(IntermediateDir)" 
+		  Condition="Exists('$(TargetDir)$(TargetName).pdb')"/>
     <Copy 
-		SourceFiles="$(TargetDir)$(TargetName).mdb" 
-		DestinationFolder="$(IntermediateDir)" 
-		Condition="Exists('$(TargetDir)$(TargetName).mdb')"/>
+		  SourceFiles="$(TargetDir)$(TargetName).mdb" 
+		  DestinationFolder="$(IntermediateDir)" 
+		  Condition="Exists('$(TargetDir)$(TargetName).mdb')"/>
   </Target>
 </Project>

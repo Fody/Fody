@@ -8,8 +8,7 @@ public class WeaverAssemblyPathFinder
         var assemblyPath = AddinFilesEnumerator.FindAddinAssembly(weaverName + ".Fody");
         if (assemblyPath != null)
         {
-            var check = ContainsTypeChecker.Check(assemblyPath, "ModuleWeaver");
-            if (check)
+            if (ContainsTypeChecker.Check(assemblyPath, "ModuleWeaver"))
             {
                 return assemblyPath;
             }
