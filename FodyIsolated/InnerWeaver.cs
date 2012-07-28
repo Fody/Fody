@@ -13,7 +13,6 @@ public class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
     public void Execute()
     {
-        string weaverName = null;
         try
         {
 
@@ -40,11 +39,21 @@ public class InnerWeaver : MarshalByRefObject, IInnerWeaver
             var weaverRunner = new ModuleWeaverRunner
                                    {
                                        Logger = Logger,
-                                       WeaverInitialiser = weaverInitialiser,
-                                       SetCurrentWeaverName = s => weaverName = s
                                    };
-            weaverRunner.Execute();
-            weaverName = null;
+            Logger.LogInfo("");
+            foreach (var weaverInstance in weaverInitialiser.WeaverInstances)
+            {
+                var weaverName = ObjectTypeName.GetAssemblyName(weaverInstance);
+                try
+                {
+                    weaverRunner.Execute(weaverInstance);
+                }
+                catch (Exception exception)
+                {
+                    Logger.LogError(string.Format("Fody/{0}: {1}", weaverName.Replace(".Fody", ""), exception.ToFriendlyString()));
+                    return;
+                }
+            }
 
             var keyFinder = new StrongNameKeyFinder
                 {
@@ -65,7 +74,7 @@ public class InnerWeaver : MarshalByRefObject, IInnerWeaver
         }
         catch (Exception exception)
         {
-            Logger.LogError(weaverName ,exception.ToFriendlyString());
+            Logger.LogError(exception.ToFriendlyString());
         }
     }
 

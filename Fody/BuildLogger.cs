@@ -30,21 +30,11 @@ public class BuildLogger : MarshalByRefObject, ILogger
         stringBuilder.AppendLine("  " + message);
     }
 
-    public virtual void LogError(string currentWeaver, string message)
+    public virtual void LogError(string message)
     {
         ErrorOccurred = true;
         stringBuilder.AppendLine("  Error: " + message);
-        string format;
-
-        if (currentWeaver == null)
-        {
-            format = string.Format("Fody: {0}:", message);
-        }
-        else
-        {
-            format = string.Format("Fody/{0}: {1}", currentWeaver.Replace(".Fody",""), message);
-        }
-        BuildEngine.LogErrorEvent(new BuildErrorEventArgs("", "", "", 0, 0, 0, 0, format, "", "Fody"));
+        BuildEngine.LogErrorEvent(new BuildErrorEventArgs("", "", "", 0, 0, 0, 0, message, "", "Fody"));
     }
 
     public bool ErrorOccurred { get; set; }

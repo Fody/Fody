@@ -59,7 +59,7 @@ namespace Fody
             }
             catch (Exception exception)
             {
-                logger.LogError(null, exception.ToFriendlyString());
+                logger.LogError(exception.ToFriendlyString());
                 return false;
             }
             finally
