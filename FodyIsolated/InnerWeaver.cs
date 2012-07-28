@@ -11,7 +11,7 @@ public class InnerWeaver : MarshalByRefObject, IInnerWeaver
     public ILogger Logger { get; set; }
     public string IntermediateDir { get; set; }
 
-    public bool Execute()
+    public void Execute()
     {
         string weaverName = null;
         try
@@ -66,9 +66,7 @@ public class InnerWeaver : MarshalByRefObject, IInnerWeaver
         catch (Exception exception)
         {
             Logger.LogError(weaverName ,exception.ToFriendlyString());
-            return false;
         }
-        return true;
     }
 
 

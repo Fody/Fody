@@ -32,6 +32,7 @@ public class BuildLogger : MarshalByRefObject, ILogger
 
     public virtual void LogError(string currentWeaver, string message)
     {
+        ErrorOccurred = true;
         stringBuilder.AppendLine("  Error: " + message);
         string format;
 
@@ -45,6 +46,8 @@ public class BuildLogger : MarshalByRefObject, ILogger
         }
         BuildEngine.LogErrorEvent(new BuildErrorEventArgs("", "", "", 0, 0, 0, 0, format, "", "Fody"));
     }
+
+    public bool ErrorOccurred { get; set; }
 
     public virtual void Flush()
     {

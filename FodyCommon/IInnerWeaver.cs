@@ -8,5 +8,5 @@ public interface IInnerWeaver
     List<WeaverEntry> Weavers { get; set; }
     ILogger Logger { get; set; }
     string IntermediateDir { get; set; }
-    bool Execute();
+    void Execute();
 }

@@ -54,7 +54,8 @@ namespace Fody
 
             try
             {
-                return Inner();
+                Inner();
+                return logger.ErrorOccurred;
             }
             catch (Exception exception)
             {
@@ -69,7 +70,7 @@ namespace Fody
             }
         }
 
-        bool Inner()
+        void Inner()
         {
             var projectPathFinder = new ProjectPathFinder
                                         {
@@ -107,7 +108,7 @@ namespace Fody
             if (!fileChangedChecker.ShouldStart())
             {
                 weaversXmlHistory.CheckForChanged();
-                return true;
+                return;
             }
 
             var solutionPathValidator = new SolutionPathValidator
@@ -128,19 +129,14 @@ namespace Fody
             if (projectWeaversReader.Weavers.Count == 0)
             {
                 logger.LogWarning(string.Format("Could not find any weavers. Either add a project named 'Weavers' with a type named 'ModuleWeaver' or add some items to '{0}'.", ProjectWeaversFinder.FodyWeaversXml));
-                return true;
+                return;
             }
 
             lock (locker)
             {
-                if (!ExecuteInOwnAppDomain(projectWeaversReader))
-                {
-                    return false;
-                }
+                ExecuteInOwnAppDomain(projectWeaversReader);
             }
             weaversXmlHistory.Flush();
-            //Debug.Assert(!AppDomain.CurrentDomain.GetAssemblies().Any(x => x.FullName.StartsWith("Mono.Cecil")));
-            return true;
         }
 
         void FindWeavers(ProjectWeaversReader projectWeaversReader)
@@ -224,7 +220,7 @@ namespace Fody
             return addinDirectories;
         }
 
-        bool ExecuteInOwnAppDomain(ProjectWeaversReader projectWeaversReader)
+        void ExecuteInOwnAppDomain(ProjectWeaversReader projectWeaversReader)
         {
             if (WeaversHistory.HasChanged(projectWeaversReader.Weavers.Select(x => x.AssemblyPath)) || appDomain == null)
             {
@@ -248,7 +244,7 @@ namespace Fody
             innerWeavingTask.Weavers = projectWeaversReader.Weavers;
             innerWeavingTask.IntermediateDir = IntermediateDir;
 
-            return innerWeavingTask.Execute();
+            innerWeavingTask.Execute();
         }
     }
 }
