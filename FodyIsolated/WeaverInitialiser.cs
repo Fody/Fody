@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using Microsoft.CSharp.RuntimeBinder;
 using Mono.Cecil;
+using Mono.Cecil.Cil;
 
 public class WeaverInitialiser
 {
@@ -45,6 +46,9 @@ public class WeaverInitialiser
         SetAssemblyPath(weaverInstance);
         SetLogInfo(weaverInstance);
         SetLogWarning(weaverInstance);
+        SetLogWarningPoint(weaverInstance);
+        SetLogError(weaverInstance);
+        SetLogErrorPoint(weaverInstance);
     }
 
     void SetModule(dynamic instance)
@@ -138,6 +142,90 @@ public class WeaverInitialiser
             if (exception.IsWrongType())
             {
                 throw new WeavingException(string.Format("Property 'LogWarning' of '{0}' has an incorrect type. Expected 'Action<string>'.", ((object) instance).GetTypeName()));
+            }
+            throw;
+        }
+    }
+    
+    void SetLogWarningPoint(dynamic instance)
+    {
+        try
+        {
+            instance.LogWarningPoint = new Action<string, SequencePoint>((message, point) => Logger.LogWarning(message, point.Document.Url, point.StartLine, point.StartColumn, point.EndLine, point.EndColumn));
+        }
+        catch (RuntimeBinderException exception)
+        {
+            if (exception.IsNoDefinition())
+            {
+                return;
+            }
+            if (exception.IsStatic())
+            {
+                throw new WeavingException(string.Format("Property 'LogWarningPoint' of '{0}' must not be static.", ((object)instance).GetTypeName()));
+            }
+            if (exception.IsStatic())
+            {
+                throw new WeavingException(string.Format("Property 'LogWarningPoint' of '{0}' must not be static.", ((object)instance).GetTypeName()));
+            }
+            if (exception.IsWrongType())
+            {
+                throw new WeavingException(string.Format("Property 'LogWarningPoint' of '{0}' has an incorrect type. Expected 'Action<string, SequencePoint>'.", ((object)instance).GetTypeName()));
+            }
+            throw;
+        }
+    }
+  
+    void SetLogError(dynamic instance)
+    {
+        try
+        {
+            instance.LogError = new Action<string>(s => Logger.LogError(s));
+        }
+        catch (RuntimeBinderException exception)
+        {
+            if (exception.IsNoDefinition())
+            {
+                return;
+            }
+            if (exception.IsStatic())
+            {
+                throw new WeavingException(string.Format("Property 'LogError' of '{0}' must not be static.", ((object) instance).GetTypeName()));
+            }
+            if (exception.IsStatic())
+            {
+                throw new WeavingException(string.Format("Property 'LogError' of '{0}' must not be static.", ((object)instance).GetTypeName()));
+            }
+            if (exception.IsWrongType())
+            {
+                throw new WeavingException(string.Format("Property 'LogError' of '{0}' has an incorrect type. Expected 'Action<string>'.", ((object)instance).GetTypeName()));
+            }
+            throw;
+        }
+    }
+
+    void SetLogErrorPoint(dynamic instance)
+    {
+        try
+        {
+            instance.LogErrorPoint = new Action<string, SequencePoint>((message, point) => Logger.LogError(message, point.Document.Url, point.StartLine, point.StartColumn, point.EndLine, point.EndColumn));
+        }
+        catch (RuntimeBinderException exception)
+        {
+            if (exception.IsNoDefinition())
+            {
+                return;
+            }
+            if (exception.IsStatic())
+            {
+                throw new WeavingException(string.Format("Property 'SetLogErrorPoint' of '{0}' must not be static.", ((object)instance).GetTypeName()));
+            }
+            if (exception.IsStatic())
+            {
+                throw new WeavingException(string.Format("Property 'SetLogErrorPoint' of '{0}' must not be static.", ((object)instance).GetTypeName()));
+            }
+            if (exception.IsWrongType())
+            {
+                throw new WeavingException(string.Format("Property 'SetLogErrorPoint' of '{0}' has an incorrect type. Expected 'Action<string, SequencePoint>'.", ((object)instance).GetTypeName()));
             }
             throw;
         }

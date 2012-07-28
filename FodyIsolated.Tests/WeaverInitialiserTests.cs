@@ -1,6 +1,7 @@
 using System;
 using System.Xml.Linq;
 using Mono.Cecil;
+using Mono.Cecil.Cil;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -29,6 +30,9 @@ public class WeaverInitialiserTests
         
         Assert.IsNotNull(moduleWeaver.LogInfo);
         Assert.IsNotNull(moduleWeaver.LogWarning);
+        Assert.IsNotNull(moduleWeaver.LogWarningPoint);
+        Assert.IsNotNull(moduleWeaver.LogError);
+        Assert.IsNotNull(moduleWeaver.LogErrorPoint);
         Assert.AreEqual(moduleDefinition, moduleWeaver.ModuleDefinition);
         Assert.AreEqual(assemblyResolver, moduleWeaver.AssemblyResolver);
         Assert.AreEqual("AssemblyPath", moduleWeaver.AssemblyPath);
@@ -39,8 +43,11 @@ public class WeaverInitialiserTests
     {
         public XElement Config { get; set; }
         public string AssemblyPath { get; set; }
-        public Action<string> LogInfo = s => { };
-        public Action<string> LogWarning = s => { };
+        public Action<string> LogInfo { get; set; }
+        public Action<string> LogWarning { get; set; }
+        public Action<string, SequencePoint> LogWarningPoint { get; set; }
+        public Action<string> LogError { get; set; }
+        public Action<string, SequencePoint> LogErrorPoint { get; set; }
         public IAssemblyResolver AssemblyResolver { get; set; }
         public ModuleDefinition ModuleDefinition;
         public bool ExecuteCalled;
