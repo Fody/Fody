@@ -48,7 +48,7 @@ public class BuildLogger : MarshalByRefObject, ILogger
         BuildEngine.LogErrorEvent(new BuildErrorEventArgs("", "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber, message, "", "Fody"));
     }
 
-    public bool ErrorOccurred { get; set; }
+    public bool ErrorOccurred;
 
     public virtual void Flush()
     {

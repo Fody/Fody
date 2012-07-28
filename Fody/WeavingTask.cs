@@ -7,7 +7,6 @@ using Microsoft.Build.Utilities;
 namespace Fody
 {
 
-
     public class WeavingTask : Task
     {
         public string AddinSearchPaths { get; set; }
@@ -55,7 +54,7 @@ namespace Fody
             try
             {
                 Inner();
-                return logger.ErrorOccurred;
+                return !logger.ErrorOccurred;
             }
             catch (Exception exception)
             {
@@ -107,7 +106,21 @@ namespace Fody
                                          };
             if (!fileChangedChecker.ShouldStart())
             {
-                weaversXmlHistory.CheckForChanged();
+                var weaversXmlChanged = weaversXmlHistory.CheckForChanged();
+                if (!weaversXmlChanged)
+                {
+
+                    var innerProjectWeaversReader = new ProjectWeaversReader
+                        {
+                            ProjectWeaversFinder = projectWeaversFinder
+                        };
+                    innerProjectWeaversReader.Execute();
+                    FindWeavers(innerProjectWeaversReader);
+                    if (WeaversHistory.HasChanged(innerProjectWeaversReader.Weavers.Select(x => x.AssemblyPath)))
+                    {
+                        logger.LogWarning("A re-build is required to because a weaver changed");
+                    }
+                }
                 return;
             }
 

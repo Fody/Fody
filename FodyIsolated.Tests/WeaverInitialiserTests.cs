@@ -26,7 +26,8 @@ public class WeaverInitialiserTests
                                          AssemblyResolver = assemblyResolver,
                                          InnerWeavingTask = innerWeavingTask
                                      };
-        moduleWeaverRunner.SetProperties( new WeaverEntry {Element = "<foo/>"}, moduleWeaver);
+        var weaverEntry = new WeaverEntry {Element = "<foo/>"};
+        moduleWeaverRunner.SetProperties( weaverEntry, moduleWeaver);
         
         Assert.IsNotNull(moduleWeaver.LogInfo);
         Assert.IsNotNull(moduleWeaver.LogWarning);

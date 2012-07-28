@@ -13,8 +13,9 @@ public class WeaversXmlHistory
         TimeStamps = new Dictionary<string, DateTime>();
     }
 
-    public void CheckForChanged()
+    public bool CheckForChanged()
     {
+        var changed = false;
         foreach (var configFile in ProjectWeaversFinder.ConfigFiles)
         {
             var timeStamp = File.GetLastWriteTimeUtc(configFile);
@@ -24,6 +25,7 @@ public class WeaversXmlHistory
                 if (dateTime != timeStamp)
                 {
                     Logger.LogWarning(string.Format("A re-build is required to apply the changes from '{0}'.", configFile));
+                    changed = true;
                 }
             }
             else
@@ -31,6 +33,7 @@ public class WeaversXmlHistory
                 TimeStamps[configFile] = timeStamp;
             }   
         }
+        return changed;
     }
 
     public void Flush()
