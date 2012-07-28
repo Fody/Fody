@@ -50,7 +50,7 @@ public class InnerWeaver : MarshalByRefObject, IInnerWeaver
                 }
                 catch (Exception exception)
                 {
-                    Logger.LogError(string.Format("Fody/{0}: {1}", weaverName.Replace(".Fody", ""), exception.ToFriendlyString()));
+                    Logger.LogError(string.Format("{0}: {1}", weaverName, exception.ToFriendlyString()));
                     return;
                 }
             }

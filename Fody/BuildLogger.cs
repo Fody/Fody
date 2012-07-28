@@ -22,7 +22,13 @@ public class BuildLogger : MarshalByRefObject, ILogger
 
     public virtual void LogWarning(string message)
     {
-        BuildEngine.LogWarningEvent(new BuildWarningEventArgs("", "", "", 0, 0, 0, 0, string.Format("{0}: {1}", "Fody", message), "", "Fody"));
+        LogWarning(message, null, 0, 0, 0, 0);
+    }
+
+    public virtual void LogWarning(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
+    {
+        stringBuilder.AppendLine("  Warning: " + message);
+        BuildEngine.LogWarningEvent(new BuildWarningEventArgs("", "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber, message, "", "Fody"));
     }
 
     public virtual void LogInfo(string message)
@@ -32,9 +38,14 @@ public class BuildLogger : MarshalByRefObject, ILogger
 
     public virtual void LogError(string message)
     {
+        LogError(message, null, 0, 0, 0, 0);
+    }
+
+    public virtual void LogError(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
+    {
         ErrorOccurred = true;
         stringBuilder.AppendLine("  Error: " + message);
-        BuildEngine.LogErrorEvent(new BuildErrorEventArgs("", "", "", 0, 0, 0, 0, message, "", "Fody"));
+        BuildEngine.LogErrorEvent(new BuildErrorEventArgs("", "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber, message, "", "Fody"));
     }
 
     public bool ErrorOccurred { get; set; }
