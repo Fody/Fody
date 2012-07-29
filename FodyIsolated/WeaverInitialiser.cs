@@ -151,7 +151,7 @@ public class WeaverInitialiser
     {
         try
         {
-            instance.LogWarningPoint = new Action<string, SequencePoint>((message, point) => Logger.LogWarning(message, point.Document.Url, point.StartLine, point.StartColumn, point.EndLine, point.EndColumn));
+            instance.LogWarningPoint = new Action<string, SequencePoint>(LogWarningPoint);
         }
         catch (RuntimeBinderException exception)
         {
@@ -174,7 +174,19 @@ public class WeaverInitialiser
             throw;
         }
     }
-  
+
+    void LogWarningPoint(string message, SequencePoint point)
+    {
+        if (point == null)
+        {
+            Logger.LogWarning(message);
+        }
+        else
+        {
+            Logger.LogWarning(message, point.Document.Url, point.StartLine, point.StartColumn, point.EndLine, point.EndColumn);
+        }
+    }
+
     void SetLogError(dynamic instance)
     {
         try
@@ -207,7 +219,7 @@ public class WeaverInitialiser
     {
         try
         {
-            instance.LogErrorPoint = new Action<string, SequencePoint>((message, point) => Logger.LogError(message, point.Document.Url, point.StartLine, point.StartColumn, point.EndLine, point.EndColumn));
+            instance.LogErrorPoint = new Action<string, SequencePoint>(LogErrorPoint);
         }
         catch (RuntimeBinderException exception)
         {
@@ -228,6 +240,18 @@ public class WeaverInitialiser
                 throw new WeavingException(string.Format("Property 'SetLogErrorPoint' of '{0}' has an incorrect type. Expected 'Action<string, SequencePoint>'.", ((object)instance).GetTypeName()));
             }
             throw;
+        }
+    }
+
+    void LogErrorPoint(string message, SequencePoint point)
+    {
+        if (point == null)
+        {
+            Logger.LogError(message);
+        }
+        else
+        {
+            Logger.LogError(message, point.Document.Url, point.StartLine, point.StartColumn, point.EndLine, point.EndColumn);
         }
     }
 
