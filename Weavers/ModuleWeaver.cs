@@ -20,7 +20,7 @@ public class ModuleWeaver
             .Select(x => x.SequencePoint)
             .Where(x => x != null).ToList();
 
-        LogWarningPoint("Nav to sequencePoint", sequencePoints[1]);
+        LogWarningPoint("Nav to sequencePoint", sequencePoints[0]);
         ModuleDefinition.Types.Add(new TypeDefinition("MyNamespace", "MyType", TypeAttributes.Public, ModuleDefinition.Import(typeof(object))));
     }
 }
