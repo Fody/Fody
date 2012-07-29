@@ -25,7 +25,7 @@ public class SolutionPathValidatorTests
     {
         var pathValidator = new SolutionPathValidator
             {
-                SolutionDir = Environment.CurrentDirectory
+                SolutionDir = "baddir"
             };
         pathValidator.Execute();
     }
