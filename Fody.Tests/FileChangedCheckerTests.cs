@@ -1,4 +1,3 @@
-using Fody;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -8,15 +7,11 @@ public class FileChangedCheckerTests
     [Test]
     public void Simple()
     {
-        var weavingTask = new WeavingTask
-                              {
-                                  AssemblyPath = GetType().Assembly.Location
-                              };
         var changedChecker = new FileChangedChecker
                                  {
                                      ContainsTypeChecker = Substitute.For<ContainsTypeChecker>(),
                                      Logger = Substitute.For<ILogger>(),
-                                     WeavingTask = weavingTask
+                                     AssemblyPath = GetType().Assembly.Location
                                  };
         Assert.IsTrue(changedChecker.ShouldStart());
     }

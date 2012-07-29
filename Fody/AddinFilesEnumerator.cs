@@ -4,7 +4,7 @@ using System.Linq;
 
 public class AddinFilesEnumerator
 {
-    public AddinDirectories AddinDirectories;
+    public List<string> AddinDirectories;
 
     public virtual string FindAddinAssembly(string packageName)
     {
@@ -17,7 +17,6 @@ public class AddinFilesEnumerator
     IEnumerable<string> GetAllAssemblyFiles(string packageName)
     {
         var packageFileName = packageName + ".dll";
-        var searchPaths = AddinDirectories.SearchPaths;
-        return searchPaths.SelectMany(x => Directory.EnumerateFiles(x, packageFileName, SearchOption.AllDirectories));
+        return AddinDirectories.SelectMany(x => Directory.EnumerateFiles(x, packageFileName, SearchOption.AllDirectories));
     }
 }

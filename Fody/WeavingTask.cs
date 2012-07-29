@@ -10,15 +10,20 @@ namespace Fody
     public class WeavingTask : Task
     {
         public string AddinSearchPaths { get; set; }
+
         [Required]
         public string AssemblyPath { set; get; }
+
         public string IntermediateDir { get; set; }
         public string KeyFilePath { get; set; }
         public string MessageImportance { set; get; }
+
         [Required]
         public string ProjectPath { get; set; }
+
         [Required]
         public string References { get; set; }
+
         [Required]
         public string SolutionDir { get; set; }
 
@@ -46,9 +51,9 @@ namespace Fody
             var stopwatch = Stopwatch.StartNew();
 
             logger = new BuildLogger
-                         {
-                             BuildEngine = BuildEngine,
-                         };
+                {
+                    BuildEngine = BuildEngine,
+                };
             logger.Initialise(MessageImportance);
 
             try
@@ -71,39 +76,39 @@ namespace Fody
 
         void Inner()
         {
-            var projectPathFinder = new ProjectPathFinder
-                                        {
-                                            Logger = logger,
-                                            WeavingTask = this
-                                        };
+            var projectPathFinder = new ProjectPathValidator
+                {
+                    Logger = logger,
+                    ProjectPath = ProjectPath
+                };
             projectPathFinder.Execute();
 
             var assemblyPathValidator = new AssemblyPathValidator
-                                            {
-                                                Logger = logger,
-                                                WeavingTask = this
-                                            };
+                {
+                    Logger = logger,
+                    WeavingTask = this
+                };
             assemblyPathValidator.Execute();
             var projectWeaversFinder = new ProjectWeaversFinder
-                                           {
-                                               ProjectPathFinder = projectPathFinder,
-                                               Logger = logger,
-                                               WeavingTask = this
-                                           };
+                {
+                    ProjectFilePath = ProjectPath,
+                    Logger = logger,
+                    WeavingTask = this
+                };
             projectWeaversFinder.Execute();
             var weaversXmlHistory = new WeaversXmlHistory
-                                        {
-                                            Logger = logger,
-                                            ProjectWeaversFinder = projectWeaversFinder
-                                        };
+                {
+                    Logger = logger,
+                    ProjectWeaversFinder = projectWeaversFinder
+                };
 
             containsTypeChecker = new ContainsTypeChecker();
             var fileChangedChecker = new FileChangedChecker
-                                         {
-                                             ContainsTypeChecker = containsTypeChecker,
-                                             Logger = logger,
-                                             WeavingTask = this
-                                         };
+                {
+                    ContainsTypeChecker = containsTypeChecker,
+                    Logger = logger,
+                    AssemblyPath = AssemblyPath
+                };
             if (!fileChangedChecker.ShouldStart())
             {
                 var weaversXmlChanged = weaversXmlHistory.CheckForChanged();
@@ -125,16 +130,16 @@ namespace Fody
             }
 
             var solutionPathValidator = new SolutionPathValidator
-                                            {
-                                                Logger = logger,
-                                                WeavingTask = this
-                                            };
+                {
+                    Logger = logger,
+                    WeavingTask = this
+                };
             solutionPathValidator.Execute();
 
             var projectWeaversReader = new ProjectWeaversReader
-                                           {
-                                               ProjectWeaversFinder = projectWeaversFinder
-                                           };
+                {
+                    ProjectWeaversFinder = projectWeaversFinder
+                };
             projectWeaversReader.Execute();
 
             FindWeavers(projectWeaversReader);
@@ -154,84 +159,53 @@ namespace Fody
 
         void FindWeavers(ProjectWeaversReader projectWeaversReader)
         {
-            var addinDirectories = FindAddinDirectories();
+            var addinDirectoriesFinder = new AddinDirectoriesFinder
+                {
+                    Logger = logger, 
+                    WeavingTask = this
+                };
+            var addinDirectories = addinDirectoriesFinder.FindAddinDirectories();
 
             var weaverProjectFileFinder = new WeaverProjectFileFinder
-                                              {
-                                                  Logger = logger,
-                                                  WeavingTask = this
-                                              };
+                {
+                    Logger = logger,
+                    WeavingTask = this
+                };
             weaverProjectFileFinder.Execute();
 
 
             var addinFilesEnumerator = new AddinFilesEnumerator
-                                           {
-                                               AddinDirectories = addinDirectories
-                                           };
+                {
+                    AddinDirectories = addinDirectories
+                };
             var weaverProjectContainsWeaverChecker = new WeaverProjectContainsWeaverChecker
-                                                         {
-                                                             ContainsTypeChecker = containsTypeChecker, WeaverProjectFileFinder = weaverProjectFileFinder
-                                                         };
+                {
+                    ContainsTypeChecker = containsTypeChecker, WeaverProjectFileFinder = weaverProjectFileFinder
+                };
             var weaverAssemblyPathFinder = new WeaverAssemblyPathFinder
-                                               {
-                                                   ContainsTypeChecker = containsTypeChecker,
-                                                   AddinFilesEnumerator = addinFilesEnumerator,
-                                               };
+                {
+                    ContainsTypeChecker = containsTypeChecker,
+                    AddinFilesEnumerator = addinFilesEnumerator,
+                };
             var weaversConfiguredInstanceLinker = new WeaversConfiguredInstanceLinker
-                                                      {
-                                                          WeaverProjectFileFinder = weaverProjectFileFinder,
-                                                          WeaverAssemblyPathFinder = weaverAssemblyPathFinder,
-                                                          ProjectWeaversReader = projectWeaversReader,
-                                                          WeaverProjectContainsWeaverChecker = weaverProjectContainsWeaverChecker,
-                                                      };
+                {
+                    WeaverProjectFileFinder = weaverProjectFileFinder,
+                    WeaverAssemblyPathFinder = weaverAssemblyPathFinder,
+                    ProjectWeaversReader = projectWeaversReader,
+                    WeaverProjectContainsWeaverChecker = weaverProjectContainsWeaverChecker,
+                };
             weaversConfiguredInstanceLinker.Execute();
 
-           var noWeaversConfiguredInstanceLinker = new NoWeaversConfiguredInstanceLinker
-                                                        {
-                                                            Logger = logger,
-                                                            WeaverProjectFileFinder = weaverProjectFileFinder,
-                                                            WeaverProjectContainsWeaverChecker = weaverProjectContainsWeaverChecker,
-                                                            ProjectWeaversReader = projectWeaversReader,
-                                                        };
+            var noWeaversConfiguredInstanceLinker = new NoWeaversConfiguredInstanceLinker
+                {
+                    Logger = logger,
+                    WeaverProjectFileFinder = weaverProjectFileFinder,
+                    WeaverProjectContainsWeaverChecker = weaverProjectContainsWeaverChecker,
+                    ProjectWeaversReader = projectWeaversReader,
+                };
             noWeaversConfiguredInstanceLinker.Execute();
         }
 
-        AddinDirectories FindAddinDirectories()
-        {
-            var nugetPackagePathFinder = new NugetPackagePathFinder
-                                             {
-                                                 Logger = logger,
-                                                 WeavingTask = this
-                                             };
-            nugetPackagePathFinder.Execute();
-            var addinDirectories = new AddinDirectories
-                                       {
-                                           Logger = logger
-                                       };
-            var nugetDirectoryFinder = new NugetDirectoryFinder
-                                           {
-                                               Logger = logger,
-                                               AddinDirectories = addinDirectories,
-                                               NugetPackagePathFinder = nugetPackagePathFinder
-                                           };
-            nugetDirectoryFinder.Execute();
-            var configDirectoryFinder = new ConfigDirectoryFinder
-                                            {
-                                                AddinDirectories = addinDirectories,
-                                                Logger = logger,
-                                                WeavingTask = this
-                                            };
-            configDirectoryFinder.Execute();
-            var toolsDirectoryFinder = new ToolsDirectoryFinder
-                                           {
-                                               AddinDirectories = addinDirectories,
-                                               Logger = logger,
-                                               WeavingTask = this
-                                           };
-            toolsDirectoryFinder.Execute();
-            addinDirectories.Execute();
-            return addinDirectories;
-        }
 
         void ExecuteInOwnAppDomain(ProjectWeaversReader projectWeaversReader)
         {
@@ -243,9 +217,9 @@ namespace Fody
                 }
 
                 var appDomainSetup = new AppDomainSetup
-                                         {
-                                             ApplicationBase = AssemblyLocation.CurrentDirectory(),
-                                         };
+                    {
+                        ApplicationBase = AssemblyLocation.CurrentDirectory(),
+                    };
                 appDomain = AppDomain.CreateDomain("Fody", null, appDomainSetup);
             }
             var innerWeavingTask = (IInnerWeaver) appDomain.CreateInstanceAndUnwrap("FodyIsolated", "InnerWeaver");
@@ -261,3 +235,4 @@ namespace Fody
         }
     }
 }
+

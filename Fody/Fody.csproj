@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs" />
+    <Compile Include="AddinDirectoriesFinder.cs" />
     <Compile Include="AssemblyLocation.cs" />
     <Compile Include="ContainsTypeChecker.cs" />
     <Compile Include="DomainAssemblyResolver.cs" />

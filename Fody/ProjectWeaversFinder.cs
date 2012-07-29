@@ -5,7 +5,7 @@ using Fody;
 public class ProjectWeaversFinder
 {
     public const string FodyWeaversXml = "FodyWeavers.xml";
-    public ProjectPathFinder ProjectPathFinder;
+    public string ProjectFilePath;
     public WeavingTask WeavingTask;
     public BuildLogger Logger;
     public List<string> ConfigFiles = new List<string>();
@@ -31,7 +31,7 @@ public class ProjectWeaversFinder
         }
 
 
-        var projectDirectory = Path.GetDirectoryName(ProjectPathFinder.ProjectFilePath);
+        var projectDirectory = Path.GetDirectoryName(ProjectFilePath);
         var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversXml);
         if (File.Exists(projectConfigFilePath))
         {

@@ -1,24 +1,17 @@
 using System.IO;
-using Fody;
 
-public class ProjectPathFinder
+public class ProjectPathValidator
 {
-    public WeavingTask WeavingTask;
+    public string ProjectPath;
     public BuildLogger Logger;
-    public string ProjectFilePath;
 
     public virtual void Execute()
     {
-        ProjectFilePath = GetProjectPath();
-        Logger.LogInfo(string.Format("ProjectFilePath path is '{0}.'", ProjectFilePath));
+        if (!File.Exists(ProjectPath))
+        {
+            throw new WeavingException(string.Format("ProjectPath \"{0}\" does not exist.", ProjectPath));
+        }
+        Logger.LogInfo(string.Format("ProjectFilePath path is '{0}.'", ProjectPath));
     }
 
-    string GetProjectPath()
-    {
-        if (!File.Exists(WeavingTask.ProjectPath))
-        {
-            throw new WeavingException(string.Format("ProjectPath \"{0}\" does not exist.", WeavingTask.ProjectPath));
-        }
-        return WeavingTask.ProjectPath;
-    }
 }

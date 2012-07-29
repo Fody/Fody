@@ -4,7 +4,7 @@ using Fody;
 public class ToolsDirectoryFinder
 {
     public WeavingTask WeavingTask;
-    public BuildLogger Logger;
+    public ILogger Logger;
     public AddinDirectories AddinDirectories;
 
     public void Execute()
