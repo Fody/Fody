@@ -8,8 +8,8 @@
     <ProjectGuid>{9C8338D4-3F27-4FA5-97A0-6039FDB07724}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InSolutionWeaving.Tests</RootNamespace>
-    <AssemblyName>InSolutionWeaving.Tests</AssemblyName>
+    <RootNamespace>Tests</RootNamespace>
+    <AssemblyName>Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FodyMessageImportance>High</FodyMessageImportance>
