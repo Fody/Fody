@@ -20,7 +20,7 @@ public class SolutionPathValidatorTests
     }
 
     [Test]
-    [ExpectedException(ExpectedException = typeof(WeavingException), ExpectedMessage = "SolutionDir \"\" does not exist.")]
+    [ExpectedException(ExpectedException = typeof(WeavingException), ExpectedMessage = "SolutionDir \"baddir\" does not exist.")]
     public void InValid()
     {
         var pathValidator = new SolutionPathValidator
