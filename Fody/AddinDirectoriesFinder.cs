@@ -1,17 +1,18 @@
 using System.Collections.Generic;
-using Fody;
 
 public class AddinDirectoriesFinder
 {
     public ILogger Logger;
-    public WeavingTask WeavingTask;
+    public string SolutionDir;
+    public string AddinSearchPaths;
+
 
     public List<string> FindAddinDirectories()
     {
         var nugetPackagePathFinder = new NugetPackagePathFinder
             {
                 Logger = Logger,
-                WeavingTask = WeavingTask
+                SolutionDir = SolutionDir
             };
         nugetPackagePathFinder.Execute();
         var addinDirectories = new AddinDirectories
@@ -29,14 +30,15 @@ public class AddinDirectoriesFinder
             {
                 AddinDirectories = addinDirectories,
                 Logger = Logger,
-                WeavingTask = WeavingTask
+                SolutionDir = SolutionDir,
+                AddinSearchPaths = AddinSearchPaths
             };
         configDirectoryFinder.Execute();
         var toolsDirectoryFinder = new ToolsDirectoryFinder
             {
                 AddinDirectories = addinDirectories,
                 Logger = Logger,
-                WeavingTask = WeavingTask
+                SolutionDir = SolutionDir
             };
         toolsDirectoryFinder.Execute();
         addinDirectories.Execute();

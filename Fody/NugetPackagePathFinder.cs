@@ -1,16 +1,15 @@
 using System.IO;
 using System.Xml.Linq;
-using Fody;
 
 public class NugetPackagePathFinder
 {
     public ILogger Logger;
-    public WeavingTask WeavingTask;
+    public string SolutionDir;
     public string PackagesPath;
 
     string GetPackagesPath()
     {
-        var nugetConfigPath = GetNugetConfigPath(WeavingTask.SolutionDir);
+        var nugetConfigPath = GetNugetConfigPath(SolutionDir);
 
         if (nugetConfigPath != null)
         {
@@ -28,7 +27,7 @@ public class NugetPackagePathFinder
                 }
             }
         }
-        return Path.Combine(WeavingTask.SolutionDir, "Packages");
+        return Path.Combine(SolutionDir, "Packages");
     }
 
     static string GetNugetConfigPath(string solutionDirectory)

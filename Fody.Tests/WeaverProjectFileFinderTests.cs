@@ -1,5 +1,4 @@
 using System.IO;
-using Fody;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -11,15 +10,11 @@ public class WeaverProjectFileFinderTests
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory();
         var combine = Path.Combine(currentDirectory, @"..\..\WeaversProjectFileFinder\WithWeaver");
-        var weavingTask = new WeavingTask
-                              {
-                                  SolutionDir = combine
-                              };
         var buildLogger = Substitute.For<BuildLogger>();
 
         var projectFileFinder = new WeaverProjectFileFinder
                                     {
-                                        WeavingTask = weavingTask,
+                                        SolutionDir = combine,
                                         Logger = buildLogger
                                     };
 
@@ -32,15 +27,11 @@ public class WeaverProjectFileFinderTests
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory();
         var combine = Path.Combine(currentDirectory, @"..\..\WeaversProjectFileFinder\WithNoWeaver");
-        var weavingTask = new WeavingTask
-                              {
-                                  SolutionDir = combine
-                              };
         var buildLogger = Substitute.For<BuildLogger>();
 
         var projectFileFinder = new WeaverProjectFileFinder
                                     {
-                                        WeavingTask = weavingTask,
+                                        SolutionDir = combine,
                                         Logger = buildLogger
                                     };
 

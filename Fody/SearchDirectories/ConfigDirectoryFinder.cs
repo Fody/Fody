@@ -1,22 +1,21 @@
 using System;
 using System.IO;
-using Fody;
 
 public class ConfigDirectoryFinder
 {
-    public WeavingTask WeavingTask;
+    public string SolutionDir;
+    public string AddinSearchPaths;
     public ILogger Logger;
     public AddinDirectories AddinDirectories;
 
     public void Execute()
     {
-        var addinSearchPaths = WeavingTask.AddinSearchPaths;
-
-        if (addinSearchPaths != null)
+     
+        if (AddinSearchPaths != null)
         {
-            foreach (var addinSearchPath in addinSearchPaths.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var addinSearchPath in AddinSearchPaths.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
-                var fullPath = Path.GetFullPath(Path.Combine(WeavingTask.SolutionDir, addinSearchPath));
+                var fullPath = Path.GetFullPath(Path.Combine(SolutionDir, addinSearchPath));
                 if (Directory.Exists(fullPath))
                 {
                     AddinDirectories.SearchPaths.Add(fullPath);

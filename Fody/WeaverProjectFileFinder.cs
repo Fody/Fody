@@ -1,11 +1,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Fody;
 
 public class WeaverProjectFileFinder
 {
-    public WeavingTask WeavingTask;
+    public string SolutionDir;
     public BuildLogger Logger;
     public string WeaverAssemblyPath;
     public bool Found;
@@ -29,7 +28,7 @@ public class WeaverProjectFileFinder
 
     IEnumerable<string> GetAllAssemblyFiles()
     {
-        var weaversBin = Path.Combine(WeavingTask.SolutionDir, @"Weavers\bin");
+        var weaversBin = Path.Combine(SolutionDir, @"Weavers\bin");
         if (Directory.Exists(weaversBin))
         {
             return Directory.EnumerateFiles(weaversBin, "Weavers.dll", SearchOption.AllDirectories);

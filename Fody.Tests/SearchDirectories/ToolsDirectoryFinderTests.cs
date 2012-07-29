@@ -1,5 +1,4 @@
 using System.IO;
-using Fody;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -9,7 +8,6 @@ public class ToolsDirectoryFinderTests
     [Test]
     public void Simple()
     {
-        var weavingTask = new WeavingTask {SolutionDir = "Solution"};
         var logger = Substitute.For<BuildLogger>();
         var searchDirectories = new AddinDirectories
                                     {
@@ -19,7 +17,7 @@ public class ToolsDirectoryFinderTests
                                  {
                                      AddinDirectories = searchDirectories,
                                      Logger = logger,
-                                     WeavingTask = weavingTask
+                                     SolutionDir = "Solution"
                                  };
         taskTypeLoader.Execute();
         var searchPaths = searchDirectories.SearchPaths;

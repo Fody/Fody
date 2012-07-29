@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using System.IO;
-using Fody;
 
 public class ProjectWeaversFinder
 {
     public const string FodyWeaversXml = "FodyWeavers.xml";
     public string ProjectFilePath;
-    public WeavingTask WeavingTask;
+    public string SolutionDir;
     public BuildLogger Logger;
     public List<string> ConfigFiles = new List<string>();
 
@@ -22,8 +21,7 @@ public class ProjectWeaversFinder
             Logger.LogInfo(string.Format("Found path to weavers file '{0}'.", fodyDirConfigFilePath));
         }
 
-        var solutionDirectory = WeavingTask.SolutionDir;
-        var solutionConfigFilePath = Path.Combine(solutionDirectory, FodyWeaversXml);
+        var solutionConfigFilePath = Path.Combine(SolutionDir, FodyWeaversXml);
         if (File.Exists(solutionConfigFilePath))
         {
             ConfigFiles.Add(solutionConfigFilePath);

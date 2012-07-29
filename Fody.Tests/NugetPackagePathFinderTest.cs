@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using Fody;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -11,13 +10,9 @@ public class NugetPackagePathFinderTest
     [Test]
     public void NoNugetConfig()
     {
-        var weavingTask = new WeavingTask
-                                      {
-                                          SolutionDir = Path.GetFullPath( Path.Combine(Environment.CurrentDirectory, "../../NugetPackagePathFinder/FakeSolution"))
-                                      };
         var runner = new NugetPackagePathFinder
                          {
-                             WeavingTask = weavingTask,
+                             SolutionDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../../NugetPackagePathFinder/FakeSolution")),
                              Logger = Substitute.For<BuildLogger>()
                          };
 
@@ -28,13 +23,9 @@ public class NugetPackagePathFinderTest
     [Test]
     public void WithNugetConfig()
     {
-        var weavingTask = new WeavingTask
-                                      {
-                                          SolutionDir =Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../../NugetPackagePathFinder/FakeSolutionWithNugetConfig"))
-                                      };
         var runner = new NugetPackagePathFinder
                          {
-                             WeavingTask = weavingTask,
+                             SolutionDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../../NugetPackagePathFinder/FakeSolutionWithNugetConfig")),
                              Logger = Substitute.For<BuildLogger>()
                          };
 
@@ -44,13 +35,9 @@ public class NugetPackagePathFinderTest
     [Test]
     public void WithNugetConfigInTree()
     {
-        var weavingTask = new WeavingTask
-                                      {
-                                          SolutionDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../../NugetPackagePathFinder/FakeSolutionWithNugetConfigTreeWalk/SolutionDir"))
-                                      };
         var runner = new NugetPackagePathFinder
                          {
-                             WeavingTask = weavingTask,
+                             SolutionDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../../NugetPackagePathFinder/FakeSolutionWithNugetConfigTreeWalk/SolutionDir")),
                              Logger = Substitute.For<BuildLogger>()
                          };
 

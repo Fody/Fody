@@ -86,14 +86,14 @@ namespace Fody
             var assemblyPathValidator = new AssemblyPathValidator
                 {
                     Logger = logger,
-                    WeavingTask = this
+                    AssemblyPath = AssemblyPath
                 };
             assemblyPathValidator.Execute();
             var projectWeaversFinder = new ProjectWeaversFinder
                 {
                     ProjectFilePath = ProjectPath,
                     Logger = logger,
-                    WeavingTask = this
+                    SolutionDir = SolutionDir
                 };
             projectWeaversFinder.Execute();
             var weaversXmlHistory = new WeaversXmlHistory
@@ -132,7 +132,7 @@ namespace Fody
             var solutionPathValidator = new SolutionPathValidator
                 {
                     Logger = logger,
-                    WeavingTask = this
+                    SolutionDir = SolutionDir
                 };
             solutionPathValidator.Execute();
 
@@ -162,14 +162,15 @@ namespace Fody
             var addinDirectoriesFinder = new AddinDirectoriesFinder
                 {
                     Logger = logger, 
-                    WeavingTask = this
+                    SolutionDir = SolutionDir,
+                    AddinSearchPaths = AddinSearchPaths
                 };
             var addinDirectories = addinDirectoriesFinder.FindAddinDirectories();
 
             var weaverProjectFileFinder = new WeaverProjectFileFinder
                 {
                     Logger = logger,
-                    WeavingTask = this
+                    SolutionDir = SolutionDir
                 };
             weaverProjectFileFinder.Execute();
 
@@ -180,7 +181,8 @@ namespace Fody
                 };
             var weaverProjectContainsWeaverChecker = new WeaverProjectContainsWeaverChecker
                 {
-                    ContainsTypeChecker = containsTypeChecker, WeaverProjectFileFinder = weaverProjectFileFinder
+                    ContainsTypeChecker = containsTypeChecker,
+                    WeaverProjectFileFinder = weaverProjectFileFinder
                 };
             var weaverAssemblyPathFinder = new WeaverAssemblyPathFinder
                 {

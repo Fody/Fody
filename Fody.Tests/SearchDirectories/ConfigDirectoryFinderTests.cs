@@ -1,5 +1,4 @@
 using System.IO;
-using Fody;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -9,11 +8,6 @@ public class ConfigDirectoryFinderTests
     [Test]
     public void Simple()
     {
-        var weavingTask = new WeavingTask
-                              {
-                                  AddinSearchPaths = "SearchPath1,SearchPath2",
-                                  SolutionDir = "Solution"
-                              };
         var logger = Substitute.For<ILogger>();
         var searchDirectories = new AddinDirectories
                                     {
@@ -23,7 +17,8 @@ public class ConfigDirectoryFinderTests
                                  {
                                      AddinDirectories = searchDirectories,
                                      Logger = logger,
-                                     WeavingTask = weavingTask
+                                     AddinSearchPaths = "SearchPath1,SearchPath2",
+                                     SolutionDir = "Solution"
                                  };
         taskTypeLoader.Execute();
         var searchPaths = searchDirectories.SearchPaths;

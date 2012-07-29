@@ -1,15 +1,14 @@
 using System.IO;
-using Fody;
 
 public class ToolsDirectoryFinder
 {
-    public WeavingTask WeavingTask;
+    public string SolutionDir;
     public ILogger Logger;
     public AddinDirectories AddinDirectories;
 
     public void Execute()
     {
-        var toolsDirectory = Path.GetFullPath(Path.Combine(WeavingTask.SolutionDir, "Tools"));
+        var toolsDirectory = Path.GetFullPath(Path.Combine(SolutionDir, "Tools"));
         if (Directory.Exists(toolsDirectory))
         {
             AddinDirectories.SearchPaths.Add(toolsDirectory);
