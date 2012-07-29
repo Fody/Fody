@@ -17,6 +17,7 @@ public class WeaversConfiguredInstanceLinker
 
     public void ProcessConfig(WeaverEntry weaverConfig)
     {
+        //support for diff names weavers when "In solution weaving"
         var weaverProjectContains = WeaverProjectContainsWeaverChecker.WeaverProjectContainsType(weaverConfig.AssemblyName);
         if (weaverProjectContains)
         {

@@ -6,6 +6,8 @@ public class BuildLogger : MarshalByRefObject, ILogger
 {
     public IBuildEngine BuildEngine { get; set; }
     public MessageImportance MessageImportance { get; set; }
+    public bool ErrorOccurred;
+    string currentWeaverName;
 
     StringBuilder stringBuilder;
  
@@ -28,7 +30,17 @@ public class BuildLogger : MarshalByRefObject, ILogger
     public virtual void LogWarning(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
     {
         stringBuilder.AppendLine("  Warning: " + message);
-        BuildEngine.LogWarningEvent(new BuildWarningEventArgs("", "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber, message, "", "Fody"));
+        BuildEngine.LogWarningEvent(new BuildWarningEventArgs("", "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber, PrependMessage(message), "", "Fody"));
+    }
+
+    public void SetCurrentWeaverName(string weaverName)
+    {
+        currentWeaverName = weaverName;
+    }
+
+    public void ClearWeaverName()
+    {
+        currentWeaverName = null;
     }
 
     public virtual void LogInfo(string message)
@@ -45,10 +57,19 @@ public class BuildLogger : MarshalByRefObject, ILogger
     {
         ErrorOccurred = true;
         stringBuilder.AppendLine("  Error: " + message);
-        BuildEngine.LogErrorEvent(new BuildErrorEventArgs("", "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber, message, "", "Fody"));
+        BuildEngine.LogErrorEvent(new BuildErrorEventArgs("", "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber,PrependMessage( message), "", "Fody"));
     }
 
-    public bool ErrorOccurred;
+    string PrependMessage(string message)
+    {
+        if (currentWeaverName == null)
+        {
+            return "Fody: " + message;
+        }
+
+        return string.Format("Fody/{0}: {1}", currentWeaverName, message);
+    }
+
 
     public virtual void Flush()
     {

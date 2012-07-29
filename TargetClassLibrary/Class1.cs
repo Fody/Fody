@@ -7,7 +7,7 @@ namespace TargetClassLibrary
         void Method1()
         {
             Debug.WriteLine("sfsdf");
-            Debug.WriteLine("sfsdf");
+            Debug.WriteLine("sfsdf21");
         }
     }
 }

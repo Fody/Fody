@@ -11,8 +11,6 @@ public class WeaversConfiguredInstanceLinkerTests
         var weaverProjectFileFinder = new WeaverProjectFileFinder
                                           {
                                               WeaverAssemblyPath = "Path",
-                                              
-                                              
                                           };
         var containsWeaverChecker = Substitute.For<WeaverProjectContainsWeaverChecker>();
         containsWeaverChecker.WeaverProjectContainsType("CustomWeaver").Returns(true);

@@ -44,14 +44,19 @@ public class InnerWeaver : MarshalByRefObject, IInnerWeaver
             foreach (var weaverInstance in weaverInitialiser.WeaverInstances)
             {
                 var weaverName = ObjectTypeName.GetAssemblyName(weaverInstance);
+                Logger.SetCurrentWeaverName(weaverName);
                 try
                 {
                     weaverRunner.Execute(weaverInstance);
                 }
                 catch (Exception exception)
                 {
-                    Logger.LogError(string.Format("{0}: {1}", weaverName, exception.ToFriendlyString()));
+                    Logger.LogError(exception.ToFriendlyString());
                     return;
+                }
+                finally
+                {
+                    Logger.ClearWeaverName();                    
                 }
             }
 
