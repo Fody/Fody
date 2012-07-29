@@ -5,14 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9C8338D4-3F27-4FA5-97A0-6039FDB07724}</ProjectGuid>
+    <ProjectGuid>{7DDD6A9E-7D35-4D5B-8B60-D9D32F3D521A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>InSolutionWeaving.Tests</RootNamespace>
-    <AssemblyName>InSolutionWeaving.Tests</AssemblyName>
+    <RootNamespace>WithNugetAndInSolutionWeavers</RootNamespace>
+    <AssemblyName>WithNugetAndInSolutionWeavers</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <FodyMessageImportance>High</FodyMessageImportance>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.6.0.12051, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,22 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EnsureAssemblyIsWovenTest.cs" />
+    <Compile Include="Class1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TargetClassLibrary\TargetClassLibrary.csproj">
-      <Project>{2817EDBA-8F2B-4A67-A161-7751C099FF55}</Project>
-      <Name>TargetClassLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <UsingTask TaskName="PepitaGet.RestorePackagesTask" AssemblyFile="$(SolutionDir)Tools\PepitaGet.dll" />
-  <Target Name="BeforeBuild">
-    <PepitaGet.RestorePackagesTask />
-  </Target>
+  <Import Project="$(SolutionDir)\..\ForSample\Fody.targets" />
 </Project>

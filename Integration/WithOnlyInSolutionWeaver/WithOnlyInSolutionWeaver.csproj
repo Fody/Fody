@@ -1,20 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <FodyAssemblyPath>$(SolutionDir)ForSample\Fody.dll</FodyAssemblyPath>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2817EDBA-8F2B-4A67-A161-7751C099FF55}</ProjectGuid>
+    <ProjectGuid>{4D1BF1C8-5C19-4A95-BEFF-6F8D67FF7B87}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TargetClassLibrary</RootNamespace>
-    <AssemblyName>TargetClassLibrary</AssemblyName>
+    <RootNamespace>WithOnlyInSolutionWeaver</RootNamespace>
+    <AssemblyName>WithOnlyInSolutionWeaver</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <FodyAssemblyPath>$(SolutionDir)ForSample\Fody.dll</FodyAssemblyPath>
-    <FodyMessageImportance>High</FodyMessageImportance>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,9 +43,5 @@
     <Compile Include="Class1.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <UsingTask TaskName="PepitaGet.RestorePackagesTask" AssemblyFile="$(SolutionDir)Tools\PepitaGet.dll" />
-  <Target Name="BeforeBuild">
-    <PepitaGet.RestorePackagesTask />
-  </Target>
-  <Import Project="$(SolutionDir)\ForSample\Fody.targets" />
+  <Import Project="$(SolutionDir)\..\ForSample\Fody.targets" />
 </Project>
