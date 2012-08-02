@@ -55,12 +55,12 @@ public class ConfigureMenuCallback
     void ExportFodyWeaversXml(string projectFilePath)
     {
         var projectDirectory = Path.GetDirectoryName(projectFilePath);
-        var tasksFile = Path.Combine(projectDirectory, ConfigFile.FodyWeaversXml);
+        var tasksFile = Path.Combine(projectDirectory, "FodyWeavers.xml");
         if (File.Exists(tasksFile))
         {
             return;
         }
-        var path = Path.Combine(contentsFinder.ContentFilesPath, ConfigFile.FodyWeaversXml);
+        var path = Path.Combine(contentsFinder.ContentFilesPath, "FodyWeavers.xml");
         File.Copy(path, tasksFile);
     }
 

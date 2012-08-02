@@ -8,7 +8,7 @@ public class ToolsDirectoryFinderTests
     [Test]
     public void Simple()
     {
-        var logger = Substitute.For<BuildLogger>();
+        var logger = Substitute.For<ILogger>();
         var searchDirectories = new AddinDirectories
                                     {
                                         Logger = logger

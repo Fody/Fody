@@ -120,7 +120,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllProjectFinder.cs" />
-    <Compile Include="ConfigFile.cs" />
     <Compile Include="ConfigureMenuCallback.cs" />
     <Compile Include="ContainsFodyChecker.cs" />
     <Compile Include="CurrentProjectFinder.cs" />

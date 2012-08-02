@@ -11,7 +11,6 @@ public class ProjectRemover
     {
         new FileInfo(projectFile).IsReadOnly = false;
         xDocument = XDocument.Load(projectFile);
-        OldProjectRemover.Remove(xDocument);
         RemoveImport();
         RemoveFodyWeaversXmlContent();
         xDocument.Save(projectFile);
@@ -21,13 +20,13 @@ public class ProjectRemover
     void RemoveFodyWeaversXmlContent()
     {
         xDocument.Descendants()
-            .Where(x => string.Equals((string)x.Attribute("Include"), ConfigFile.FodyWeaversXml, StringComparison.InvariantCultureIgnoreCase))
+            .Where(x => string.Equals((string)x.Attribute("Include"), "FodyWeavers.xml", StringComparison.InvariantCultureIgnoreCase))
             .Remove();
     }
 
     void DeleteFodyWeaversXmlFile(string projectFile)
     {
-        var tasksPath = Path.Combine(Path.GetDirectoryName(projectFile), ConfigFile.FodyWeaversXml);
+        var tasksPath = Path.Combine(Path.GetDirectoryName(projectFile), "FodyWeavers.xml");
         if (File.Exists(tasksPath))
         {
             new FileInfo(tasksPath).IsReadOnly = false;
@@ -45,19 +44,4 @@ public class ProjectRemover
                        })
             .Remove();
     }
-}
-public static class OldProjectRemover{
-
-//TODO: remove
-    public static void Remove(XDocument xDocument)
-    {
-        xDocument.BuildDescendants("Target")
-            .Where(x => string.Equals((string)x.Attribute("Name"), "AfterCompile", StringComparison.InvariantCultureIgnoreCase))
-            .Descendants(MsBuildXmlExtensions.BuildNamespace + "Fody.WeavingTask")
-            .Remove();
-        xDocument.BuildDescendants("UsingTask")
-            .Where(x => (string)x.Attribute("TaskName") == "Fody.WeavingTask")
-            .Remove();
-    }
-
 }

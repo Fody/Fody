@@ -2,7 +2,7 @@ public class NoWeaversConfiguredInstanceLinker
 {
     public ProjectWeaversReader ProjectWeaversReader;
     public WeaverProjectContainsWeaverChecker WeaverProjectContainsWeaverChecker;
-    public BuildLogger Logger;
+    public ILogger Logger;
     public WeaverProjectFileFinder WeaverProjectFileFinder;
 
     public void Execute()

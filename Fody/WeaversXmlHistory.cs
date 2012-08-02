@@ -4,7 +4,7 @@ using System.IO;
 
 public class WeaversXmlHistory
 {
-    public BuildLogger Logger;
+    public ILogger Logger;
     public ProjectWeaversFinder ProjectWeaversFinder;
     public static Dictionary<string, DateTime> TimeStamps;
 

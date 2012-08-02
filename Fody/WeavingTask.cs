@@ -50,11 +50,10 @@ namespace Fody
 
             var stopwatch = Stopwatch.StartNew();
 
-            logger = new BuildLogger
+            logger = new BuildLogger(MessageImportance)
                 {
                     BuildEngine = BuildEngine,
                 };
-            logger.Initialise(MessageImportance);
 
             try
             {
@@ -146,7 +145,7 @@ namespace Fody
 
             if (projectWeaversReader.Weavers.Count == 0)
             {
-                logger.LogWarning(string.Format("Could not find any weavers. Either add a project named 'Weavers' with a type named 'ModuleWeaver' or add some items to '{0}'.", ProjectWeaversFinder.FodyWeaversXml));
+                logger.LogWarning(string.Format("Could not find any weavers. Either add a project named 'Weavers' with a type named 'ModuleWeaver' or add some items to '{0}'.", "FodyWeavers.xml"));
                 return;
             }
 
@@ -179,6 +178,7 @@ namespace Fody
                 {
                     AddinDirectories = addinDirectories
                 };
+            addinFilesEnumerator.Execute();
             var weaverProjectContainsWeaverChecker = new WeaverProjectContainsWeaverChecker
                 {
                     ContainsTypeChecker = containsTypeChecker,

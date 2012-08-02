@@ -75,10 +75,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TestProjects\ProjectWithOldWeaving.csproj">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="TestProjects\ProjectWithNoWeaving.csproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

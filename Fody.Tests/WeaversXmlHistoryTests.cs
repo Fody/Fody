@@ -60,7 +60,7 @@ public class WeaversXmlHistoryTests
         try
         {
             var expected = File.GetLastWriteTimeUtc(fileName);
-            var logger = Substitute.For<BuildLogger>();
+            var logger = Substitute.For<ILogger>();
             var projectWeaversFinder = new ProjectWeaversFinder();
             projectWeaversFinder.ConfigFiles.Add(fileName);
             var xmlHistory = new WeaversXmlHistory

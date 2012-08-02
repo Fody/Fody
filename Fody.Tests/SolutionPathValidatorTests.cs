@@ -8,7 +8,7 @@ public class SolutionPathValidatorTests
     [Test]
     public void Valid()
     {
-        var buildLogger = Substitute.For<BuildLogger>();
+        var buildLogger = Substitute.For<ILogger>();
 
         var pathValidator = new SolutionPathValidator
                                 {

@@ -5,7 +5,7 @@ using System.Linq;
 public class WeaverProjectFileFinder
 {
     public string SolutionDir;
-    public BuildLogger Logger;
+    public ILogger Logger;
     public string WeaverAssemblyPath;
     public bool Found;
 

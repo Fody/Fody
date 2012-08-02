@@ -54,28 +54,5 @@ public class ProjectInjectorTests
 
     }
 
-    [Test]
-    public void WithOldWeaving()
-    {
-        var sourceProjectFile = Path.GetFullPath(@"TestProjects\ProjectWithOldWeaving.csproj");
-        var targetFile = Path.GetTempFileName();
-        File.Copy(sourceProjectFile, targetFile, true);
-
-        try
-        {
-            var injector = new ProjectInjector
-                               {
-                                   ProjectFile = targetFile,
-                               };
-            injector.Execute();
-
-            Assert.AreEqual(FileReader.Read(@"TestProjects\ProjectWithWeaving.csproj"), FileReader.Read(targetFile));
-        }
-        finally
-        {
-            File.Delete(targetFile);
-        }
-
-    }
 
 }

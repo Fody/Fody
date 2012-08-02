@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
 
+
 [TestFixture]
 public class AddinFilesEnumeratorTests
 {
@@ -15,6 +16,7 @@ public class AddinFilesEnumeratorTests
                         Path.GetFullPath("Packages")
                     }
             };
+        taskTypeLoader.Execute();
         Assert.IsNull(taskTypeLoader.FindAddinAssembly("DoesNotExist"));
     }
 
@@ -28,6 +30,7 @@ public class AddinFilesEnumeratorTests
                         Path.GetFullPath("Packages")
                     }
             };
+        taskTypeLoader.Execute();
         taskTypeLoader.FindAddinAssembly("SampleTask.Fody");
     }
 }

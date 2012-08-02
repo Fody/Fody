@@ -10,7 +10,7 @@ public class WeaverProjectFileFinderTests
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory();
         var combine = Path.Combine(currentDirectory, @"..\..\WeaversProjectFileFinder\WithWeaver");
-        var buildLogger = Substitute.For<BuildLogger>();
+        var buildLogger = Substitute.For<ILogger>();
 
         var projectFileFinder = new WeaverProjectFileFinder
                                     {
@@ -19,15 +19,16 @@ public class WeaverProjectFileFinderTests
                                     };
 
         projectFileFinder.Execute();
-        buildLogger .Received().LogInfo(Arg.Any<string>());
+        buildLogger.Received().LogInfo(Arg.Any<string>());
         Assert.IsTrue(projectFileFinder.Found);
     }
+
     [Test]
     public void NotFound()
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory();
         var combine = Path.Combine(currentDirectory, @"..\..\WeaversProjectFileFinder\WithNoWeaver");
-        var buildLogger = Substitute.For<BuildLogger>();
+        var buildLogger = Substitute.For<ILogger>();
 
         var projectFileFinder = new WeaverProjectFileFinder
                                     {

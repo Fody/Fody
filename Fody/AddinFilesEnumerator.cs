@@ -5,7 +5,13 @@ using System.Linq;
 public class AddinFilesEnumerator
 {
     public List<string> AddinDirectories;
+    List<string> fodyFiles;
 
+    public void Execute()
+    {
+        fodyFiles = AddinDirectories.SelectMany(x => Directory.EnumerateFiles(x, "*.Fody.dll", SearchOption.AllDirectories))
+            .ToList();
+    }
     public virtual string FindAddinAssembly(string packageName)
     {
         return GetAllAssemblyFiles(packageName)
@@ -17,6 +23,6 @@ public class AddinFilesEnumerator
     IEnumerable<string> GetAllAssemblyFiles(string packageName)
     {
         var packageFileName = packageName + ".dll";
-        return AddinDirectories.SelectMany(x => Directory.EnumerateFiles(x, packageFileName, SearchOption.AllDirectories));
+        return fodyFiles.Where(x => x == packageFileName);
     }
 }

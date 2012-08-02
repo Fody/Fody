@@ -41,7 +41,7 @@ public class ProjectWeaversReader
         }
         catch (XmlException exception)
         {
-            throw new WeavingException(string.Format("Could not read '{0}' because it has invalid xml. Message: '{1}'.", ProjectWeaversFinder.FodyWeaversXml, exception.Message));
+            throw new WeavingException(string.Format("Could not read '{0}' because it has invalid xml. Message: '{1}'.", "FodyWeavers.xml", exception.Message));
         }
     }
 }

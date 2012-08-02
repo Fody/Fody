@@ -12,7 +12,6 @@ public class ProjectInjector
     {
         new FileInfo(ProjectFile).IsReadOnly = false;
         xDocument = XDocument.Load(ProjectFile);
-        OldProjectRemover.Remove(xDocument);
         InjectImport();
         InjectWeaversContent();
         xDocument.Save(ProjectFile);

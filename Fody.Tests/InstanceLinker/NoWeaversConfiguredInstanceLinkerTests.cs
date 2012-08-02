@@ -17,7 +17,7 @@ public class NoWeaversConfiguredInstanceLinkerTests
                          {
                              ProjectWeaversReader = projectWeaversReader,
                              WeaverProjectFileFinder = weaverProjectFileFinder,
-                             Logger = Substitute.For<BuildLogger>(),
+                             Logger = Substitute.For<ILogger>(),
                              WeaverProjectContainsWeaverChecker = containsWeaverChecker
                          };
         linker.Execute();

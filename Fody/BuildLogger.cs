@@ -10,8 +10,8 @@ public class BuildLogger : MarshalByRefObject, ILogger
     string currentWeaverName;
 
     StringBuilder stringBuilder;
- 
-    public virtual void Initialise(string messageImportance)
+
+    public BuildLogger(string messageImportance)
     {
         stringBuilder = new StringBuilder();
         MessageImportance messageImportanceEnum;

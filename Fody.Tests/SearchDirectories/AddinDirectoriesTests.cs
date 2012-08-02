@@ -8,7 +8,7 @@ public class AddinDirectoriesTests
     [Test]
     public void Simple()
     {
-        var buildLogger = Substitute.For<BuildLogger>();
+        var buildLogger = Substitute.For<ILogger>();
         var addinDirectories = new AddinDirectories
                                    {
                                        SearchPaths = new List<string> {"Path"},

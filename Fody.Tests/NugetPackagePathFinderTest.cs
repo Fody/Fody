@@ -13,7 +13,7 @@ public class NugetPackagePathFinderTest
         var runner = new NugetPackagePathFinder
                          {
                              SolutionDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../../NugetPackagePathFinder/FakeSolution")),
-                             Logger = Substitute.For<BuildLogger>()
+                             Logger = Substitute.For<ILogger>()
                          };
 
         runner.Execute();
@@ -26,7 +26,7 @@ public class NugetPackagePathFinderTest
         var runner = new NugetPackagePathFinder
                          {
                              SolutionDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../../NugetPackagePathFinder/FakeSolutionWithNugetConfig")),
-                             Logger = Substitute.For<BuildLogger>()
+                             Logger = Substitute.For<ILogger>()
                          };
 
         runner.Execute();
@@ -38,7 +38,7 @@ public class NugetPackagePathFinderTest
         var runner = new NugetPackagePathFinder
                          {
                              SolutionDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../../NugetPackagePathFinder/FakeSolutionWithNugetConfigTreeWalk/SolutionDir")),
-                             Logger = Substitute.For<BuildLogger>()
+                             Logger = Substitute.For<ILogger>()
                          };
 
         runner.Execute();

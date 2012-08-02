@@ -67,6 +67,7 @@
     <Compile Include="InstanceLinker\WeaversConfiguredInstanceLinkerTests.cs" />
     <Compile Include="NugetPackagePathFinderTest.cs" />
     <Compile Include="ProjectPathFinderTests.cs" />
+    <Compile Include="ProjectWeaversFinderTests.cs" />
     <Compile Include="SearchDirectories\AddinDirectoriesTests.cs" />
     <Compile Include="WeaverAssemblyPathFinderTests.cs" />
     <Compile Include="WeaverProjectFileFinderTests.cs" />

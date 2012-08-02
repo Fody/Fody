@@ -3,7 +3,7 @@ using System.IO;
 public class ProjectPathValidator
 {
     public string ProjectPath;
-    public BuildLogger Logger;
+    public ILogger Logger;
 
     public virtual void Execute()
     {

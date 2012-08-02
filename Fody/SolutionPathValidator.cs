@@ -2,7 +2,7 @@ using System.IO;
 
 public class SolutionPathValidator
 {
-    public BuildLogger Logger;
+    public ILogger Logger;
     public string SolutionDir;
 
     public void Execute()

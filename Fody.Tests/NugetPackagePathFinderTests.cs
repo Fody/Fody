@@ -37,7 +37,7 @@ public class NugetPackagePathFinderTests
     {
         var packagePathFinder = new NugetPackagePathFinder
         {
-            Logger = Substitute.For<BuildLogger>(),
+            Logger = Substitute.For<ILogger>(),
             SolutionDir = "DirWithNugetConfigAndNoPath" 
         };
         packagePathFinder.Execute();

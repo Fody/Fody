@@ -2,11 +2,10 @@ using System.Collections.Generic;
 using System.IO;
 
 public class ProjectWeaversFinder
-{
-    public const string FodyWeaversXml = "FodyWeavers.xml";
+{ 
     public string ProjectFilePath;
     public string SolutionDir;
-    public BuildLogger Logger;
+    public ILogger Logger;
     public List<string> ConfigFiles = new List<string>();
 
     public string SolutionConfigFilePath;
@@ -14,23 +13,22 @@ public class ProjectWeaversFinder
 
     public void Execute()
     {
-        var fodyDirConfigFilePath = Path.Combine(AssemblyLocation.CurrentDirectory(), FodyWeaversXml);
+        var fodyDirConfigFilePath = Path.Combine(AssemblyLocation.CurrentDirectory(), "FodyWeavers.xml");
         if (File.Exists(fodyDirConfigFilePath))
         {
             ConfigFiles.Add(fodyDirConfigFilePath);
             Logger.LogInfo(string.Format("Found path to weavers file '{0}'.", fodyDirConfigFilePath));
         }
 
-        var solutionConfigFilePath = Path.Combine(SolutionDir, FodyWeaversXml);
+        var solutionConfigFilePath = Path.Combine(SolutionDir, "FodyWeavers.xml");
         if (File.Exists(solutionConfigFilePath))
         {
             ConfigFiles.Add(solutionConfigFilePath);
             Logger.LogInfo(string.Format("Found path to weavers file '{0}'.", solutionConfigFilePath));
         }
 
-
         var projectDirectory = Path.GetDirectoryName(ProjectFilePath);
-        var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversXml);
+        var projectConfigFilePath = Path.Combine(projectDirectory, "FodyWeavers.xml");
         if (File.Exists(projectConfigFilePath))
         {
             ConfigFiles.Add(projectConfigFilePath);
@@ -38,9 +36,9 @@ public class ProjectWeaversFinder
         }
 
 
-        if (ConfigFiles.Count > 0)
+        if (ConfigFiles.Count == 0)
         {
-            var pathsSearched = string.Join(", ", fodyDirConfigFilePath, solutionConfigFilePath, projectConfigFilePath);
+            var pathsSearched = string.Join("', '", fodyDirConfigFilePath, solutionConfigFilePath, projectConfigFilePath);
             Logger.LogInfo(string.Format("Could not find path to weavers file. Searched '{0}'.", pathsSearched));
         }
     }

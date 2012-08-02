@@ -41,22 +41,4 @@ public class ProjectRemoverTests
         }
     }
 
-    [Test]
-    public void OldWeavingRemoved()
-    {
-        var sourceProjectFile = Path.GetFullPath(@"TestProjects\ProjectWithOldWeaving.csproj");
-        var targetFile = Path.GetTempFileName();
-        File.Copy(sourceProjectFile, targetFile, true);
-        try
-        {
-
-            new ProjectRemover(targetFile);
-            Assert.AreEqual(FileReader.Read(@"TestProjects\ProjectWithNoWeaving.csproj"), FileReader.Read(targetFile));
-    
-        }
-        finally
-        {
-            File.Delete(targetFile);
-        }
-    }
 }

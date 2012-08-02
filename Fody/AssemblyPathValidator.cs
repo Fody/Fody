@@ -3,7 +3,7 @@ using System.IO;
 public class AssemblyPathValidator
 {
     public string AssemblyPath;
-    public BuildLogger Logger;
+    public ILogger Logger;
 
     public void Execute()
     {
