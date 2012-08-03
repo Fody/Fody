@@ -23,6 +23,6 @@ public partial class Processor
     IEnumerable<string> GetAllAssemblyFiles(string packageName)
     {
         var packageFileName = packageName + ".dll";
-        return fodyFiles.Where(x => string.Equals(x, packageFileName,StringComparison.OrdinalIgnoreCase));
+        return fodyFiles.Where(x => x.EndsWith(packageFileName, StringComparison.OrdinalIgnoreCase));
     }
 }

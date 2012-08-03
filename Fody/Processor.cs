@@ -99,6 +99,8 @@ public partial class Processor
     void FindWeavers()
     {
         ReadProjectWeavers();
+        
+        FindAddinDirectories();
 
         FindWeaverProjectFile();
 
