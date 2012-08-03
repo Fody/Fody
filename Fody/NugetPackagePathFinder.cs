@@ -1,10 +1,8 @@
 using System.IO;
 using System.Xml.Linq;
 
-public class NugetPackagePathFinder
+public partial class Processor
 {
-    public ILogger Logger;
-    public string SolutionDir;
     public string PackagesPath;
 
     string GetPackagesPath()
@@ -48,7 +46,7 @@ public class NugetPackagePathFinder
         }
     }
 
-    public virtual void Execute()
+    public virtual void FindNugetPackagePath()
     {
         PackagesPath = GetPackagesPath();
         Logger.LogInfo(string.Format("Packages path is '{0}'", PackagesPath));

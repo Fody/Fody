@@ -1,11 +1,9 @@
 using System.IO;
 
-public class SolutionPathValidator
+public partial class Processor
 {
-    public ILogger Logger;
-    public string SolutionDir;
 
-    public void Execute()
+    public void ValidateSolutionPath()
     {
         if (!Directory.Exists(SolutionDir))
         {

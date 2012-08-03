@@ -1,11 +1,9 @@
 using System.IO;
 
-public class AssemblyPathValidator
+public partial class Processor
 {
-    public string AssemblyPath;
-    public ILogger Logger;
 
-    public void Execute()
+    public void ValidatorAssemblyPath()
     {
         if (!File.Exists(AssemblyPath))
         {

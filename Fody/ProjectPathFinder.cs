@@ -1,11 +1,8 @@
 using System.IO;
 
-public class ProjectPathValidator
+public partial class Processor
 {
-    public string ProjectPath;
-    public ILogger Logger;
-
-    public virtual void Execute()
+    public virtual void ValidateProjectPath()
     {
         if (!File.Exists(ProjectPath))
         {

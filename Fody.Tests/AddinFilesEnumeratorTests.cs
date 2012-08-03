@@ -9,28 +9,28 @@ public class AddinFilesEnumeratorTests
     [Test]
     public void NotFound()
     {
-        var taskTypeLoader = new AddinFilesEnumerator
-            {
-                AddinDirectories = new List<string>
+        var taskTypeLoader = new Processor
+                                 {
+                AddinSearchPaths = new List<string>
                     {
                         Path.GetFullPath("Packages")
                     }
             };
-        taskTypeLoader.Execute();
+        taskTypeLoader.CacheAllFodyAddinDlls();
         Assert.IsNull(taskTypeLoader.FindAddinAssembly("DoesNotExist"));
     }
 
     [Test]
     public void Valid()
     {
-        var taskTypeLoader = new AddinFilesEnumerator
-            {
-                AddinDirectories = new List<string>
+        var taskTypeLoader = new Processor
+                                 {
+            AddinSearchPaths = new List<string>
                     {
                         Path.GetFullPath("Packages")
                     }
             };
-        taskTypeLoader.Execute();
+        taskTypeLoader.CacheAllFodyAddinDlls();
         taskTypeLoader.FindAddinAssembly("SampleTask.Fody");
     }
 }

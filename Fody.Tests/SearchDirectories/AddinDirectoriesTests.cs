@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using NSubstitute;
+using Moq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -8,13 +8,14 @@ public class AddinDirectoriesTests
     [Test]
     public void Simple()
     {
-        var buildLogger = Substitute.For<ILogger>();
-        var addinDirectories = new AddinDirectories
+        var loggerMock = new Mock<BuildLogger>();
+        loggerMock.Setup(x => x.LogInfo("Directory added to addin search paths 'Path'."));
+        var addinDirectories = new Processor
                                    {
-                                       SearchPaths = new List<string> {"Path"},
-                                       Logger = buildLogger
+                                       AddinSearchPaths = new List<string> {"Path"},
+                                       Logger = loggerMock.Object
                                    };
-        addinDirectories.Execute();
-        buildLogger.Received().LogInfo("Directory added to addin search paths 'Path'.");
+        addinDirectories.LogAddinSearchPaths();
+        loggerMock.Verify();
     }
 }

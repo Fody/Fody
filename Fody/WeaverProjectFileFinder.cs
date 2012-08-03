@@ -2,14 +2,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-public class WeaverProjectFileFinder
+public partial class Processor
 {
-    public string SolutionDir;
-    public ILogger Logger;
     public string WeaverAssemblyPath;
-    public bool Found;
+    public bool FoundWeaverProjectFile;
 
-    public virtual void Execute()
+    public virtual void FindWeaverProjectFile()
     {
         WeaverAssemblyPath = GetAllAssemblyFiles()
             .OrderByDescending(File.GetLastWriteTime)
@@ -17,12 +15,12 @@ public class WeaverProjectFileFinder
         if (WeaverAssemblyPath == null)
         {
             Logger.LogInfo("No Weaver project file found.");
-            Found = false;
+            FoundWeaverProjectFile = false;
         }
         else
         {
             Logger.LogInfo(string.Format("Weaver project file found at '{0}'.", WeaverAssemblyPath));
-            Found = true;
+            FoundWeaverProjectFile = true;
         }
     }
 

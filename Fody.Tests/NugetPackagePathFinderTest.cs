@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-using NSubstitute;
+using Moq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -10,38 +10,38 @@ public class NugetPackagePathFinderTest
     [Test]
     public void NoNugetConfig()
     {
-        var runner = new NugetPackagePathFinder
+        var runner = new Processor
                          {
                              SolutionDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../../NugetPackagePathFinder/FakeSolution")),
-                             Logger = Substitute.For<ILogger>()
+                             Logger = new Mock<BuildLogger>().Object
                          };
 
-        runner.Execute();
+        runner.FindNugetPackagePath();
         Assert.IsTrue(runner.PackagesPath.EndsWith("\\FakeSolution\\Packages"));
     }
 
     [Test]
     public void WithNugetConfig()
     {
-        var runner = new NugetPackagePathFinder
+        var runner = new Processor
                          {
                              SolutionDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../../NugetPackagePathFinder/FakeSolutionWithNugetConfig")),
-                             Logger = Substitute.For<ILogger>()
+                             Logger = new Mock<BuildLogger>().Object
                          };
 
-        runner.Execute();
+        runner.FindNugetPackagePath();
         Assert.IsTrue(runner.PackagesPath.EndsWith("\\lib/packages"));
     }
     [Test]
     public void WithNugetConfigInTree()
     {
-        var runner = new NugetPackagePathFinder
+        var runner = new Processor
                          {
                              SolutionDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../../NugetPackagePathFinder/FakeSolutionWithNugetConfigTreeWalk/SolutionDir")),
-                             Logger = Substitute.For<ILogger>()
+                             Logger = new Mock<BuildLogger>().Object
                          };
 
-        runner.Execute();
+        runner.FindNugetPackagePath();
         Assert.IsTrue(runner.PackagesPath.EndsWith("\\lib/packages"));
     }
 

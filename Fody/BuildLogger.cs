@@ -11,6 +11,11 @@ public class BuildLogger : MarshalByRefObject, ILogger
 
     StringBuilder stringBuilder;
 
+    //TODO: remove and move to interface
+    public BuildLogger()
+    {
+    }
+
     public BuildLogger(string messageImportance)
     {
         stringBuilder = new StringBuilder();

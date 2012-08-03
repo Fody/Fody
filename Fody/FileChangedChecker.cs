@@ -1,10 +1,7 @@
-public class FileChangedChecker
+public partial class Processor
 {
-    public ContainsTypeChecker ContainsTypeChecker;
-    public ILogger Logger;
-    public string AssemblyPath;
 
-    public bool ShouldStart()
+    public bool ShouldStartSinceFileChanged()
     {
         if (ContainsTypeChecker.Check(AssemblyPath, "ProcessedByFody"))
         {

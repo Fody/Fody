@@ -1,23 +1,21 @@
 using System.IO;
 
-public class ToolsDirectoryFinder
+public partial class Processor
 {
-    public string SolutionDir;
-    public ILogger Logger;
-    public AddinDirectories AddinDirectories;
 
-    public void Execute()
+    public void AddToolsDirectoryToAddinSearch()
     {
         var solutionDirToolsDirectory = Path.GetFullPath(Path.Combine(SolutionDir, "Tools"));
         if (Directory.Exists(solutionDirToolsDirectory))
         {
-            AddinDirectories.SearchPaths.Add(solutionDirToolsDirectory);
+            AddinSearchPaths.Add(solutionDirToolsDirectory);
         }
         else
         {
             Logger.LogInfo(string.Format("Could not search for addins in '{0}' because it does not exist", solutionDirToolsDirectory));
         }
-        var assemblyLocationToolsDirectory = Path.GetFullPath(Path.Combine(Directory.GetParent(AssemblyLocation.CurrentDirectory()).FullName, "Tools"));
+        var parent = Directory.GetParent(AssemblyLocation.CurrentDirectory()).FullName;
+        var assemblyLocationToolsDirectory = Path.GetFullPath(Path.Combine(parent, "Tools"));
         
         if (assemblyLocationToolsDirectory == solutionDirToolsDirectory)
         {
@@ -25,7 +23,7 @@ public class ToolsDirectoryFinder
         }
         if (Directory.Exists(assemblyLocationToolsDirectory))
         {
-            AddinDirectories.SearchPaths.Add(assemblyLocationToolsDirectory);
+            AddinSearchPaths.Add(assemblyLocationToolsDirectory);
         }
         else
         {

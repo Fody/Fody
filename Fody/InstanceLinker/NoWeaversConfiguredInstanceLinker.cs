@@ -1,30 +1,26 @@
-public class NoWeaversConfiguredInstanceLinker
+public partial class Processor
 {
-    public ProjectWeaversReader ProjectWeaversReader;
-    public WeaverProjectContainsWeaverChecker WeaverProjectContainsWeaverChecker;
-    public ILogger Logger;
-    public WeaverProjectFileFinder WeaverProjectFileFinder;
 
-    public void Execute()
+    public void ConfigureWhenNoWeaversFound()
     {
-        if (!WeaverProjectFileFinder.Found)
+        if (!FoundWeaverProjectFile)
         {
             return;
         }
-        if (WeaverProjectContainsWeaverChecker.WeaverProjectUsed)
+        if (WeaverProjectUsed)
         {
             return;
         }
-        var weaverProjectContainsType = WeaverProjectContainsWeaverChecker.WeaverProjectContainsType("ModuleWeaver");
+        var weaverProjectContainsType = WeaverProjectContainsType("ModuleWeaver");
         if (weaverProjectContainsType)
         {
             Logger.LogInfo("Found 'ModuleWeaver' in project 'Weavers' so will run that one.");
             var weaverEntry = new WeaverEntry
                                   {
-                                      AssemblyPath = WeaverProjectFileFinder.WeaverAssemblyPath,
+                                      AssemblyPath = WeaverAssemblyPath,
                                       TypeName = "ModuleWeaver"
                                   };
-            ProjectWeaversReader.Weavers.Add(weaverEntry);
+            Weavers.Add(weaverEntry);
         }
     }
 }

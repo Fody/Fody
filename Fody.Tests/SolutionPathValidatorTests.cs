@@ -1,5 +1,5 @@
 using System;
-using NSubstitute;
+using Moq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -8,25 +8,28 @@ public class SolutionPathValidatorTests
     [Test]
     public void Valid()
     {
-        var buildLogger = Substitute.For<ILogger>();
+        var loggerMock = new Mock<BuildLogger>();
 
-        var pathValidator = new SolutionPathValidator
+       loggerMock.Setup(x=>x.LogInfo(It.Is<string>(y => y.Contains(Environment.CurrentDirectory))));
+        var buildLogger = loggerMock.Object;
+
+        var pathValidator = new Processor
                                 {
                                     Logger = buildLogger,
                                     SolutionDir = Environment.CurrentDirectory
                                 };
-        pathValidator.Execute();
-        buildLogger.Received(1).LogInfo(Arg.Is<string>(x => x.Contains(Environment.CurrentDirectory)));
+        pathValidator.ValidateSolutionPath();
+        loggerMock.Verify();
     }
 
     [Test]
     [ExpectedException(ExpectedException = typeof(WeavingException), ExpectedMessage = "SolutionDir \"baddir\" does not exist.")]
     public void InValid()
     {
-        var pathValidator = new SolutionPathValidator
+        var pathValidator = new Processor
             {
                 SolutionDir = "baddir"
             };
-        pathValidator.Execute();
+        pathValidator.ValidateSolutionPath();
     }
 }

@@ -1,24 +1,20 @@
 using System;
 using System.IO;
 
-public class ConfigDirectoryFinder
+public partial class Processor
 {
-    public string SolutionDir;
-    public string AddinSearchPaths;
-    public ILogger Logger;
-    public AddinDirectories AddinDirectories;
 
-    public void Execute()
+    public void AddMsBuildConfigToAddinSearch()
     {
      
-        if (AddinSearchPaths != null)
+        if (AddinSearchPathsFromMsBuild != null)
         {
-            foreach (var addinSearchPath in AddinSearchPaths.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var addinSearchPath in AddinSearchPathsFromMsBuild.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
                 var fullPath = Path.GetFullPath(Path.Combine(SolutionDir, addinSearchPath));
                 if (Directory.Exists(fullPath))
                 {
-                    AddinDirectories.SearchPaths.Add(fullPath);
+                    AddinSearchPaths.Add(fullPath);
                 }
                 else
                 {

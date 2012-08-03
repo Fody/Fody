@@ -3,7 +3,7 @@
 using System;
 using System.IO;
 using System.Threading;
-using NSubstitute;
+using Moq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -17,7 +17,7 @@ public class TaskFileReplacerTests
         try
         {
             tempFileName = Path.GetTempFileName();
-            var errorDisplayer = Substitute.For<MessageDisplayer>();
+            var errorDisplayer = new Mock<MessageDisplayer>().Object;
             var taskFileReplacer = new TaskFileReplacer(errorDisplayer, null)
                                        {
                                            TaskFilePath = tempFileName
@@ -40,7 +40,7 @@ public class TaskFileReplacerTests
         string tempFileName = null;
         try
         {
-            var errorDisplayer = Substitute.For<MessageDisplayer>();
+            var errorDisplayer = new Mock<MessageDisplayer>().Object;
             tempFileName = Path.GetTempFileName();
             var taskFileReplacer = new TaskFileReplacer(errorDisplayer, null)
                                        {
@@ -67,8 +67,8 @@ public class TaskFileReplacerTests
         {
             tempFileName = Path.GetTempFileName();
 
-            var errorDisplayer = Substitute.For<MessageDisplayer>();
-            var taskFileReplacer = new TaskFileReplacer(errorDisplayer, null)
+
+            var errorDisplayer = new Mock<MessageDisplayer>().Object; var taskFileReplacer = new TaskFileReplacer(errorDisplayer, null)
                                        {
                                            TaskFilePath = tempFileName
                                        };
@@ -96,7 +96,7 @@ public class TaskFileReplacerTests
         {
             tempFileName = Path.GetTempFileName();
 
-            var errorDisplayer = Substitute.For<MessageDisplayer>();
+            var errorDisplayer = new Mock<MessageDisplayer>().Object;
             var taskFileReplacer = new TaskFileReplacer(errorDisplayer, new ContentsFinder())
                                        {
                                            TaskFilePath = tempFileName

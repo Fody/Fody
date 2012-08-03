@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using NSubstitute;
 using NUnit.Framework;
 
 
@@ -10,15 +9,10 @@ public class ProjectWeaversReaderTests
     [Test]
     public void Simple()
     {
-        
-        var projectPathFinder = Substitute.For<ProjectWeaversFinder>();
-        projectPathFinder.ConfigFiles.AddRange(GetPaths());
-        var weaversReader = new ProjectWeaversReader
-                                {
-                                    ProjectWeaversFinder = projectPathFinder
-                                };
-        weaversReader.Execute();
-        var weavers = weaversReader.Weavers;
+        var innerWeavingTask = new Processor();
+        innerWeavingTask.ConfigFiles.AddRange(GetPaths());
+        innerWeavingTask.ReadProjectWeavers();
+        var weavers = innerWeavingTask.Weavers;
         Assert.AreEqual(3, weavers.Count);
         Assert.AreEqual("SampleTask1", weavers[0].AssemblyName);
         Assert.AreEqual("<SampleTask1 MyProperty1=\"PropertyValue2Overwrite\" />", weavers[0].Element);

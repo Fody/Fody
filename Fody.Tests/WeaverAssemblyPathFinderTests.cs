@@ -1,4 +1,4 @@
-using NSubstitute;
+using Moq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -8,11 +8,10 @@ public class WeaverAssemblyPathFinderTests
     //TODO:
     public void Valid()
     {
-        var finder = new WeaverAssemblyPathFinder
+        var finder = new Processor
                          {
-                             ContainsTypeChecker = Substitute.For<ContainsTypeChecker>(),
-                             AddinFilesEnumerator = Substitute.For<AddinFilesEnumerator>(),
+                             ContainsTypeChecker = new Mock<ContainsTypeChecker>().Object,
                          };
-        finder.FindAssemblyPath("Name");
+        //finder.FindAssemblyPath("Name");
     }
 }

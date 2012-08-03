@@ -2,21 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-public class WeaversXmlHistory
+public partial class Processor
 {
-    public ILogger Logger;
-    public ProjectWeaversFinder ProjectWeaversFinder;
-    public static Dictionary<string, DateTime> TimeStamps;
+    public static Dictionary<string, DateTime> TimeStamps = new Dictionary<string, DateTime>();
 
-    static WeaversXmlHistory()
-    {
-        TimeStamps = new Dictionary<string, DateTime>();
-    }
-
-    public bool CheckForChanged()
+    public bool CheckForWeaversXmlChanged()
     {
         var changed = false;
-        foreach (var configFile in ProjectWeaversFinder.ConfigFiles)
+        foreach (var configFile in ConfigFiles)
         {
             var timeStamp = File.GetLastWriteTimeUtc(configFile);
             DateTime dateTime;
@@ -36,9 +29,9 @@ public class WeaversXmlHistory
         return changed;
     }
 
-    public void Flush()
+    public void FlushWeaversXmlHistory()
     {
-        foreach (var configFile in ProjectWeaversFinder.ConfigFiles)
+        foreach (var configFile in ConfigFiles)
         {
             TimeStamps[configFile] = File.GetLastWriteTimeUtc(configFile);
         }

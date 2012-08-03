@@ -1,7 +1,7 @@
 using System;
 using System.Xml.Linq;
 using Mono.Cecil;
-using NSubstitute;
+using Moq;
 using NUnit.Framework;
 
 
@@ -13,7 +13,7 @@ public class ModuleWeaverRunnerTests
     public void Execute()
     {
         var moduleWeaver = new ValidModuleWeaver();
-        var moduleWeaverRunner = new ModuleWeaverRunner { Logger = Substitute.For<ILogger>() };
+        var moduleWeaverRunner = new ModuleWeaverRunner { Logger = new Mock<ILogger>().Object };
         moduleWeaverRunner.Execute(moduleWeaver);
     }
 
@@ -22,7 +22,7 @@ public class ModuleWeaverRunnerTests
     public void BadExecute()
     {
         var moduleWeaver = new BadExecuteWithParamsModuleWeaver();
-        var moduleWeaverRunner = new ModuleWeaverRunner { Logger = Substitute.For<ILogger>() };
+        var moduleWeaverRunner = new ModuleWeaverRunner { Logger = new Mock<ILogger>().Object };
         moduleWeaverRunner.Execute( moduleWeaver);
     }
 
@@ -30,7 +30,7 @@ public class ModuleWeaverRunnerTests
     [ExpectedException(typeof (WeavingException))]
     public void NoExecute()
     {
-        var moduleWeaverRunner = new ModuleWeaverRunner { Logger = Substitute.For<ILogger>() };
+        var moduleWeaverRunner = new ModuleWeaverRunner { Logger = new Mock<ILogger>().Object };
         moduleWeaverRunner.Execute("sdf");
     }
 

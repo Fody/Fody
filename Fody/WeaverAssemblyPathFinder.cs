@@ -1,11 +1,8 @@
-public class WeaverAssemblyPathFinder
+public partial class Processor
 {
-    public ContainsTypeChecker ContainsTypeChecker;
-    public AddinFilesEnumerator AddinFilesEnumerator;
-
     public virtual string FindAssemblyPath(string weaverName)
     {
-        var assemblyPath = AddinFilesEnumerator.FindAddinAssembly(weaverName + ".Fody");
+        var assemblyPath = FindAddinAssembly(weaverName + ".Fody");
         if (assemblyPath != null)
         {
             if (ContainsTypeChecker.Check(assemblyPath, "ModuleWeaver"))

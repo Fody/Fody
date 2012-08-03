@@ -48,10 +48,11 @@
     <Compile Include="AssemblyLocation.cs" />
     <Compile Include="ContainsTypeChecker.cs" />
     <Compile Include="DomainAssemblyResolver.cs" />
+    <Compile Include="Processor.cs" />
     <Compile Include="InstanceLinker\WeaversConfiguredInstanceLinker.cs" />
     <Compile Include="InstanceLinker\NoWeaversConfiguredInstanceLinker.cs" />
     <Compile Include="ProjectWeaversFinder.cs" />
-    <Compile Include="SearchDirectories\AddinDirectories.cs" />
+    <Compile Include="SearchDirectories\AddinSearchDirectories.cs" />
     <Compile Include="AssemblyVersionReader.cs" />
     <Compile Include="BuildLogger.cs" />
     <Compile Include="NugetPackagePathFinder.cs" />

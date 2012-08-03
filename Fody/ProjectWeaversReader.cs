@@ -3,14 +3,18 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 
-public class ProjectWeaversReader
+public partial class Processor
 {
-    public List<WeaverEntry> Weavers = new List<WeaverEntry>();
-    public ProjectWeaversFinder ProjectWeaversFinder;
+    public List<WeaverEntry> Weavers;
 
-    public void Execute()
+    public void ReadProjectWeavers()
     {
-        foreach (var configFile in ProjectWeaversFinder.ConfigFiles)
+        if (Weavers != null)
+        {
+            return;
+        }
+        Weavers = new List<WeaverEntry>();
+        foreach (var configFile in ConfigFiles)
         {
             var xDocument = GetDocument(configFile);
             foreach (var element in xDocument.Root.Elements())

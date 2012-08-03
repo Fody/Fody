@@ -1,15 +1,15 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-public class AddinFilesEnumerator
+public partial class Processor
 {
-    public List<string> AddinDirectories;
     List<string> fodyFiles;
 
-    public void Execute()
+    public void CacheAllFodyAddinDlls()
     {
-        fodyFiles = AddinDirectories.SelectMany(x => Directory.EnumerateFiles(x, "*.Fody.dll", SearchOption.AllDirectories))
+        fodyFiles = AddinSearchPaths.SelectMany(x => Directory.EnumerateFiles(x, "*.Fody.dll", SearchOption.AllDirectories))
             .ToList();
     }
     public virtual string FindAddinAssembly(string packageName)
@@ -23,6 +23,6 @@ public class AddinFilesEnumerator
     IEnumerable<string> GetAllAssemblyFiles(string packageName)
     {
         var packageFileName = packageName + ".dll";
-        return fodyFiles.Where(x => x == packageFileName);
+        return fodyFiles.Where(x => string.Equals(x, packageFileName,StringComparison.OrdinalIgnoreCase));
     }
 }

@@ -1,17 +1,14 @@
 using System.Collections.Generic;
 using System.IO;
 
-public class ProjectWeaversFinder
+public partial class Processor
 { 
-    public string ProjectFilePath;
-    public string SolutionDir;
-    public ILogger Logger;
     public List<string> ConfigFiles = new List<string>();
 
     public string SolutionConfigFilePath;
 
 
-    public void Execute()
+    public virtual void FindProjectWeavers()
     {
         var fodyDirConfigFilePath = Path.Combine(AssemblyLocation.CurrentDirectory(), "FodyWeavers.xml");
         if (File.Exists(fodyDirConfigFilePath))
@@ -27,7 +24,7 @@ public class ProjectWeaversFinder
             Logger.LogInfo(string.Format("Found path to weavers file '{0}'.", solutionConfigFilePath));
         }
 
-        var projectDirectory = Path.GetDirectoryName(ProjectFilePath);
+        var projectDirectory = Path.GetDirectoryName(ProjectPath);
         var projectConfigFilePath = Path.Combine(projectDirectory, "FodyWeavers.xml");
         if (File.Exists(projectConfigFilePath))
         {

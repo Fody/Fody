@@ -1,4 +1,4 @@
-using NSubstitute;
+using Moq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -8,23 +8,18 @@ public class WeaversConfiguredInstanceLinkerTests
     [Test]
     public void CustomWeaverInWeaversProject()
     {
-        var weaverProjectFileFinder = new WeaverProjectFileFinder
-                                          {
-                                              WeaverAssemblyPath = "Path",
-                                          };
-        var containsWeaverChecker = Substitute.For<WeaverProjectContainsWeaverChecker>();
-        containsWeaverChecker.WeaverProjectContainsType("CustomWeaver").Returns(true);
-        var linker = new WeaversConfiguredInstanceLinker
-                         {
-                             WeaverProjectFileFinder = weaverProjectFileFinder,
-                             WeaverProjectContainsWeaverChecker = containsWeaverChecker,
-                             
-                         };
+        var mock = new Mock<Processor>();
+        mock.Setup(x => x.WeaverProjectContainsType("CustomWeaver"))
+            .Returns(true);
+        var innerWeavingTask = mock.Object;
+        innerWeavingTask.WeaverAssemblyPath = "Path";
+
+
         var weaverConfig = new WeaverEntry
                                {
                                    AssemblyName = "CustomWeaver"
                                };
-        linker.ProcessConfig(weaverConfig);
+        innerWeavingTask.ProcessConfig(weaverConfig);
 
         Assert.AreEqual("CustomWeaver", weaverConfig.TypeName);
         Assert.AreEqual("Path",weaverConfig.AssemblyPath);
@@ -33,27 +28,23 @@ public class WeaversConfiguredInstanceLinkerTests
     [Test]
     public void WeaverInAddin()
     {
-        var containsWeaverChecker = Substitute.For<WeaverProjectContainsWeaverChecker>();
-        containsWeaverChecker.WeaverProjectContainsType("AddinName")
+
+
+        var mock = new Mock<Processor>();
+        mock.Setup(x => x.WeaverProjectContainsType("AddinName"))
             .Returns(false);
+        mock.Setup(x => x.FindAssemblyPath("AddinName")).Returns("Path");
 
-        var weaverAssemblyPathFinder = Substitute.For<WeaverAssemblyPathFinder>();
-        weaverAssemblyPathFinder .FindAssemblyPath("AddinName")
-            .Returns("Path");
-
-        var linker = new WeaversConfiguredInstanceLinker
-                         {
-                             WeaverAssemblyPathFinder = weaverAssemblyPathFinder,
-                             WeaverProjectContainsWeaverChecker = containsWeaverChecker,
-                             
-                         };
+        var innerWeavingTask = mock.Object;
+        
         var weaverConfig = new WeaverEntry
                                {
                                    AssemblyName = "AddinName"
                                };
-        linker.ProcessConfig(weaverConfig);
+        innerWeavingTask.ProcessConfig(weaverConfig);
 
         Assert.AreEqual("ModuleWeaver", weaverConfig.TypeName);
         Assert.AreEqual("Path",weaverConfig.AssemblyPath);
+        mock.Verify();
     }
 }

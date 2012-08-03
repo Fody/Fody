@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
-using NSubstitute;
+using Moq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -13,20 +13,16 @@ public class WeaversXmlHistoryTests
         var fileName = Path.GetTempFileName();
         try
         {
-            var projectWeaversFinder = new ProjectWeaversFinder();
-            projectWeaversFinder.ConfigFiles.Add(fileName);
-            var xmlHistory = new WeaversXmlHistory
-                                 {
-                                     ProjectWeaversFinder = projectWeaversFinder
-                                 };
-            xmlHistory.CheckForChanged();
+            var innerWeavingTask = new Processor();
+            innerWeavingTask.ConfigFiles.Add(fileName);
+            innerWeavingTask.CheckForWeaversXmlChanged();
 
-            Assert.AreEqual(File.GetLastWriteTimeUtc(fileName), WeaversXmlHistory.TimeStamps.First().Value);
+            Assert.AreEqual(File.GetLastWriteTimeUtc(fileName), Processor.TimeStamps.First().Value);
         }
         finally
         {
             File.Delete(fileName);
-            WeaversXmlHistory.TimeStamps.Clear();
+            Processor.TimeStamps.Clear();
         }
     }
     [Test]
@@ -35,21 +31,17 @@ public class WeaversXmlHistoryTests
         var fileName = Path.GetTempFileName();
         try
         {
-            var projectWeaversFinder = new ProjectWeaversFinder();
-            projectWeaversFinder.ConfigFiles.Add(fileName);
-            var xmlHistory = new WeaversXmlHistory
-                                 {
-                                     ProjectWeaversFinder = projectWeaversFinder
-                                 };
-            xmlHistory.CheckForChanged();
-            xmlHistory.CheckForChanged();
+            var innerWeavingTask = new Processor();
+            innerWeavingTask.ConfigFiles.Add(fileName);
+            innerWeavingTask.CheckForWeaversXmlChanged();
+            innerWeavingTask.CheckForWeaversXmlChanged();
 
-            Assert.AreEqual(File.GetLastWriteTimeUtc(fileName), WeaversXmlHistory.TimeStamps.First().Value);
+            Assert.AreEqual(File.GetLastWriteTimeUtc(fileName), Processor.TimeStamps.First().Value);
         }
         finally
         {
             File.Delete(fileName);
-            WeaversXmlHistory.TimeStamps.Clear();
+            Processor.TimeStamps.Clear();
         }
     }
 
@@ -60,26 +52,26 @@ public class WeaversXmlHistoryTests
         try
         {
             var expected = File.GetLastWriteTimeUtc(fileName);
-            var logger = Substitute.For<ILogger>();
-            var projectWeaversFinder = new ProjectWeaversFinder();
-            projectWeaversFinder.ConfigFiles.Add(fileName);
-            var xmlHistory = new WeaversXmlHistory
-                                 {
-                                     ProjectWeaversFinder = projectWeaversFinder,
-                                     Logger = logger 
+            var loggerMock = new Mock<BuildLogger>();
+            loggerMock.Setup(x => x.LogInfo(It.IsAny<string>()));
+
+            var innerWeavingTask = new Processor
+                                       {
+                                     Logger = loggerMock.Object 
                                  };
-            xmlHistory.CheckForChanged();
+            innerWeavingTask.ConfigFiles.Add(fileName);
+            innerWeavingTask.CheckForWeaversXmlChanged();
             File.SetLastWriteTimeUtc(fileName, DateTime.Now.AddHours(1));
-            xmlHistory.CheckForChanged();
+            innerWeavingTask.CheckForWeaversXmlChanged();
 
-            logger.Received(1).LogWarning(Arg.Any<string>());
+            loggerMock.Verify();
 
-            Assert.AreEqual(expected, WeaversXmlHistory.TimeStamps.First().Value);
+            Assert.AreEqual(expected, Processor.TimeStamps.First().Value);
         }
         finally
         {
             File.Delete(fileName);
-            WeaversXmlHistory.TimeStamps.Clear();
+            Processor.TimeStamps.Clear();
         }
     }
 }

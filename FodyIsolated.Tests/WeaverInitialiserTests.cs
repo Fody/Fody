@@ -2,7 +2,7 @@ using System;
 using System.Xml.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
-using NSubstitute;
+using Moq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -13,7 +13,7 @@ public class WeaverInitialiserTests
     {
         var moduleWeaver = new ValidModuleWeaver();
         var moduleDefinition = ModuleDefinition.CreateModule("Foo", ModuleKind.Dll);
-        var assemblyResolver = Substitute.For<IAssemblyResolver>();
+        var assemblyResolver = new Mock<IAssemblyResolver>().Object;
         var innerWeavingTask = new InnerWeaver
                                    {
                                        AssemblyPath = "AssemblyPath"
@@ -22,7 +22,7 @@ public class WeaverInitialiserTests
         var moduleWeaverRunner = new WeaverInitialiser
                                      {
                                          ModuleDefinition = moduleDefinition,
-                                         Logger = Substitute.For<ILogger>(),
+                                         Logger = new Mock<ILogger>().Object,
                                          AssemblyResolver = assemblyResolver,
                                          InnerWeavingTask = innerWeavingTask
                                      };

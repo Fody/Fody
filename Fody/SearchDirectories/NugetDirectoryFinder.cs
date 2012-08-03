@@ -1,20 +1,17 @@
 using System.IO;
 
-public class NugetDirectoryFinder
+public partial class Processor
 {
-    public NugetPackagePathFinder NugetPackagePathFinder;
-    public AddinDirectories AddinDirectories;
-    public ILogger Logger;
 
-    public void Execute()
+    public void AddNugetDirectoryToAddinSearch()
     {
-        if (Directory.Exists(NugetPackagePathFinder.PackagesPath))
+        if (Directory.Exists(PackagesPath))
         {
-            AddinDirectories.SearchPaths.Add(NugetPackagePathFinder.PackagesPath);
+            AddinSearchPaths.Add(PackagesPath);
         }
         else
         {
-            Logger.LogInfo(string.Format("Could not search for addins in '{0}' because it does not exist", NugetPackagePathFinder.PackagesPath));
+            Logger.LogInfo(string.Format("Could not search for addins in '{0}' because it does not exist", PackagesPath));
         }
     }
 

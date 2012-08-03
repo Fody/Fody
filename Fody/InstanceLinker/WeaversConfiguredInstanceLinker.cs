@@ -1,14 +1,10 @@
-public class WeaversConfiguredInstanceLinker
+public partial class Processor
 {
-    public ProjectWeaversReader ProjectWeaversReader;
-    public WeaverAssemblyPathFinder WeaverAssemblyPathFinder;
-    public WeaverProjectContainsWeaverChecker WeaverProjectContainsWeaverChecker;
-    public WeaverProjectFileFinder WeaverProjectFileFinder;
 
-    public void Execute()
+    public void ConfigureWhenWeaversFound()
     {
 
-        foreach (var weaverConfig in ProjectWeaversReader.Weavers)
+        foreach (var weaverConfig in Weavers)
         {
             ProcessConfig(weaverConfig);
         }
@@ -18,15 +14,15 @@ public class WeaversConfiguredInstanceLinker
     public void ProcessConfig(WeaverEntry weaverConfig)
     {
         //support for diff names weavers when "In solution weaving"
-        var weaverProjectContains = WeaverProjectContainsWeaverChecker.WeaverProjectContainsType(weaverConfig.AssemblyName);
+        var weaverProjectContains = WeaverProjectContainsType(weaverConfig.AssemblyName);
         if (weaverProjectContains)
         {
-            weaverConfig.AssemblyPath = WeaverProjectFileFinder.WeaverAssemblyPath;
+            weaverConfig.AssemblyPath = WeaverAssemblyPath;
             weaverConfig.TypeName = weaverConfig.AssemblyName;
             return;
         }
 
-        var assemblyPath = WeaverAssemblyPathFinder.FindAssemblyPath(weaverConfig.AssemblyName);
+        var assemblyPath = FindAssemblyPath(weaverConfig.AssemblyName);
         if (assemblyPath == null)
         {
             throw new WeavingException(string.Format("Could not find a weaver named '{0}'.", weaverConfig.AssemblyName));

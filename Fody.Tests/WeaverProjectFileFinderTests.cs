@@ -1,5 +1,5 @@
 using System.IO;
-using NSubstitute;
+using Moq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -10,17 +10,18 @@ public class WeaverProjectFileFinderTests
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory();
         var combine = Path.Combine(currentDirectory, @"..\..\WeaversProjectFileFinder\WithWeaver");
-        var buildLogger = Substitute.For<ILogger>();
+        var loggerMock = new Mock<BuildLogger>();
+        loggerMock.Setup(x => x.LogInfo(It.IsAny<string>()));
 
-        var projectFileFinder = new WeaverProjectFileFinder
+        var projectFileFinder = new Processor
                                     {
                                         SolutionDir = combine,
-                                        Logger = buildLogger
+                                        Logger = loggerMock.Object
                                     };
 
-        projectFileFinder.Execute();
-        buildLogger.Received().LogInfo(Arg.Any<string>());
-        Assert.IsTrue(projectFileFinder.Found);
+        projectFileFinder.FindWeaverProjectFile();
+        Assert.IsTrue(projectFileFinder.FoundWeaverProjectFile);
+        loggerMock.Verify();
     }
 
     [Test]
@@ -28,16 +29,18 @@ public class WeaverProjectFileFinderTests
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory();
         var combine = Path.Combine(currentDirectory, @"..\..\WeaversProjectFileFinder\WithNoWeaver");
-        var buildLogger = Substitute.For<ILogger>();
+        var loggerMock = new Mock<BuildLogger>();
+        loggerMock.Setup(x => x.LogInfo(It.IsAny<string>()));
 
-        var projectFileFinder = new WeaverProjectFileFinder
+
+        var projectFileFinder = new Processor
                                     {
                                         SolutionDir = combine,
-                                        Logger = buildLogger
+                                        Logger = loggerMock.Object
                                     };
 
-        projectFileFinder.Execute();
-        buildLogger .Received().LogInfo(Arg.Any<string>());
-        Assert.IsFalse(projectFileFinder.Found);
+        projectFileFinder.FindWeaverProjectFile();
+        Assert.IsFalse(projectFileFinder.FoundWeaverProjectFile);
+        loggerMock.Verify();
     }
 }

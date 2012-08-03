@@ -1,5 +1,5 @@
 using System;
-using NSubstitute;
+using Moq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -8,15 +8,18 @@ public class ProjectWeaversFinderTests
     [Test]
     public void NotFound()
     {
-        var logger = Substitute.For<ILogger>();
-        var projectWeaversFinder = new ProjectWeaversFinder
+        var loggerMock = new Mock<BuildLogger>();
+        loggerMock.Setup(x => x.LogInfo(It.IsAny<string>()));
+        var logger = loggerMock.Object;
+        var projectWeaversFinder = new Processor
                                        {
-                                           ProjectFilePath = Environment.CurrentDirectory,
+                                           ProjectPath = Environment.CurrentDirectory,
                                            Logger = logger,
                                            SolutionDir = Environment.CurrentDirectory
                                        };
-        projectWeaversFinder.Execute();
+        projectWeaversFinder.FindProjectWeavers();
         Assert.IsEmpty(projectWeaversFinder.ConfigFiles);
-        logger.Received(1).LogInfo(Arg.Any<string>());
+        loggerMock.Verify();
+        
     }
 }

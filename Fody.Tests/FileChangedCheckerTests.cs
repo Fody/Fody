@@ -1,4 +1,4 @@
-using NSubstitute;
+using Moq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -7,12 +7,12 @@ public class FileChangedCheckerTests
     [Test]
     public void Simple()
     {
-        var changedChecker = new FileChangedChecker
+        var changedChecker = new Processor
                                  {
-                                     ContainsTypeChecker = Substitute.For<ContainsTypeChecker>(),
-                                     Logger = Substitute.For<ILogger>(),
+                                     ContainsTypeChecker = new Mock<ContainsTypeChecker>().Object,
+                                     Logger = new Mock<BuildLogger>().Object,
                                      AssemblyPath = GetType().Assembly.Location
                                  };
-        Assert.IsTrue(changedChecker.ShouldStart());
+        Assert.IsTrue(changedChecker.ShouldStartSinceFileChanged());
     }
 }
