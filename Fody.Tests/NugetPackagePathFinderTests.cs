@@ -10,37 +10,36 @@ public class NugetPackagePathFinderTests
     [Test]
     public void GetPackagesPathDefault()
     {
-        var packagePathFinder = new Processor
-                                    {
-                                        Logger = new Mock<BuildLogger>().Object,
-                                        SolutionDir = Environment.CurrentDirectory
-                                    };
-        packagePathFinder.FindNugetPackagePath();
-        Assert.AreEqual(Path.Combine(Environment.CurrentDirectory, "Packages"), packagePathFinder.PackagesPath);
+        var processor = new Processor
+            {
+                Logger = new Mock<BuildLogger>().Object,
+                SolutionDir = Environment.CurrentDirectory
+            };
+        processor.FindNugetPackagePath();
+        Assert.AreEqual(Path.Combine(Environment.CurrentDirectory, "Packages"), processor.PackagesPath);
     }
 
     [Test]
     public void GetPackagesPathWithNugetConfig()
     {
-
-        var packagePathFinder = new Processor
-                                    {
-                                        Logger = new Mock<BuildLogger>().Object,
-                                        SolutionDir = "DirWithNugetConfig"
-                                    };
-        packagePathFinder.FindNugetPackagePath();
-        Assert.AreEqual(Path.Combine("DirWithNugetConfig", "PathFromConfig"), packagePathFinder.PackagesPath);
+        var processor = new Processor
+            {
+                Logger = new Mock<BuildLogger>().Object,
+                SolutionDir = "DirWithNugetConfig"
+            };
+        processor.FindNugetPackagePath();
+        Assert.AreEqual(Path.Combine("DirWithNugetConfig", "PathFromConfig"), processor.PackagesPath);
     }
 
     [Test]
     public void GetPackagesPathWithNugetConfigAndNoPath()
     {
-        var packagePathFinder = new Processor
-                                    {
-                                        Logger = new Mock<BuildLogger>().Object,
-                                        SolutionDir = "DirWithNugetConfigAndNoPath"
-                                    };
-        packagePathFinder.FindNugetPackagePath();
-        Assert.AreEqual(Path.Combine("DirWithNugetConfigAndNoPath", "Packages"), packagePathFinder.PackagesPath);
+        var processor = new Processor
+            {
+                Logger = new Mock<BuildLogger>().Object,
+                SolutionDir = "DirWithNugetConfigAndNoPath"
+            };
+        processor.FindNugetPackagePath();
+        Assert.AreEqual(Path.Combine("DirWithNugetConfigAndNoPath", "Packages"), processor.PackagesPath);
     }
 }

@@ -9,14 +9,14 @@ public class ConfigDirectoryFinderTests
     public void Simple()
     {
         var logger = new Mock<BuildLogger>().Object;
-        var taskTypeLoader = new Processor
+        var processor = new Processor
                                  {
                                      Logger = logger,
                                      AddinSearchPathsFromMsBuild = "SearchPath1,SearchPath2",
                                      SolutionDir = "Solution"
                                  };
-        taskTypeLoader.AddMsBuildConfigToAddinSearch();
-        var searchPaths = taskTypeLoader.AddinSearchPaths;
+        processor.AddMsBuildConfigToAddinSearch();
+        var searchPaths = processor.AddinSearchPaths;
         Assert.AreEqual(Path.GetFullPath(@"Solution\SearchPath1"), searchPaths[0]);
         Assert.AreEqual(Path.GetFullPath(@"Solution\SearchPath2"), searchPaths[1]);
     }

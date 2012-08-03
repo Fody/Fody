@@ -14,21 +14,21 @@ public class WeaverInitialiserTests
         var moduleWeaver = new ValidModuleWeaver();
         var moduleDefinition = ModuleDefinition.CreateModule("Foo", ModuleKind.Dll);
         var assemblyResolver = new Mock<IAssemblyResolver>().Object;
-        var innerWeavingTask = new InnerWeaver
-                                   {
-                                       AssemblyPath = "AssemblyPath"
-                                   };
+        var innerWeaver = new InnerWeaver
+            {
+                AssemblyPath = "AssemblyPath"
+            };
 
         var moduleWeaverRunner = new WeaverInitialiser
-                                     {
-                                         ModuleDefinition = moduleDefinition,
-                                         Logger = new Mock<ILogger>().Object,
-                                         AssemblyResolver = assemblyResolver,
-                                         InnerWeavingTask = innerWeavingTask
-                                     };
+            {
+                ModuleDefinition = moduleDefinition,
+                Logger = new Mock<ILogger>().Object,
+                AssemblyResolver = assemblyResolver,
+                InnerWeaver = innerWeaver
+            };
         var weaverEntry = new WeaverEntry {Element = "<foo/>"};
-        moduleWeaverRunner.SetProperties( weaverEntry, moduleWeaver);
-        
+        moduleWeaverRunner.SetProperties(weaverEntry, moduleWeaver);
+
         Assert.IsNotNull(moduleWeaver.LogInfo);
         Assert.IsNotNull(moduleWeaver.LogWarning);
         Assert.IsNotNull(moduleWeaver.LogWarningPoint);
@@ -39,7 +39,7 @@ public class WeaverInitialiserTests
         Assert.AreEqual("AssemblyPath", moduleWeaver.AssemblyPath);
     }
 
-    
+
     public class ValidModuleWeaver
     {
         public XElement Config { get; set; }
@@ -58,6 +58,4 @@ public class WeaverInitialiserTests
             ExecuteCalled = true;
         }
     }
-
-    
 }

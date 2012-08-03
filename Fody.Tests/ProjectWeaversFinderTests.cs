@@ -11,14 +11,14 @@ public class ProjectWeaversFinderTests
         var loggerMock = new Mock<BuildLogger>();
         loggerMock.Setup(x => x.LogInfo(It.IsAny<string>()));
         var logger = loggerMock.Object;
-        var projectWeaversFinder = new Processor
+        var processor = new Processor
                                        {
                                            ProjectPath = Environment.CurrentDirectory,
                                            Logger = logger,
                                            SolutionDir = Environment.CurrentDirectory
                                        };
-        projectWeaversFinder.FindProjectWeavers();
-        Assert.IsEmpty(projectWeaversFinder.ConfigFiles);
+        processor.FindProjectWeavers();
+        Assert.IsEmpty(processor.ConfigFiles);
         loggerMock.Verify();
         
     }

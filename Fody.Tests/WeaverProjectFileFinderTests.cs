@@ -13,14 +13,14 @@ public class WeaverProjectFileFinderTests
         var loggerMock = new Mock<BuildLogger>();
         loggerMock.Setup(x => x.LogInfo(It.IsAny<string>()));
 
-        var projectFileFinder = new Processor
-                                    {
-                                        SolutionDir = combine,
-                                        Logger = loggerMock.Object
-                                    };
+        var processor = new Processor
+            {
+                SolutionDir = combine,
+                Logger = loggerMock.Object
+            };
 
-        projectFileFinder.FindWeaverProjectFile();
-        Assert.IsTrue(projectFileFinder.FoundWeaverProjectFile);
+        processor.FindWeaverProjectFile();
+        Assert.IsTrue(processor.FoundWeaverProjectFile);
         loggerMock.Verify();
     }
 
@@ -32,15 +32,14 @@ public class WeaverProjectFileFinderTests
         var loggerMock = new Mock<BuildLogger>();
         loggerMock.Setup(x => x.LogInfo(It.IsAny<string>()));
 
+        var processor = new Processor
+            {
+                SolutionDir = combine,
+                Logger = loggerMock.Object
+            };
 
-        var projectFileFinder = new Processor
-                                    {
-                                        SolutionDir = combine,
-                                        Logger = loggerMock.Object
-                                    };
-
-        projectFileFinder.FindWeaverProjectFile();
-        Assert.IsFalse(projectFileFinder.FoundWeaverProjectFile);
+        processor.FindWeaverProjectFile();
+        Assert.IsFalse(processor.FoundWeaverProjectFile);
         loggerMock.Verify();
     }
 }

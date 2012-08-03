@@ -11,15 +11,15 @@ public class WeaversConfiguredInstanceLinkerTests
         var mock = new Mock<Processor>();
         mock.Setup(x => x.WeaverProjectContainsType("CustomWeaver"))
             .Returns(true);
-        var innerWeavingTask = mock.Object;
-        innerWeavingTask.WeaverAssemblyPath = "Path";
+        var processor = mock.Object;
+        processor.WeaverAssemblyPath = "Path";
 
 
         var weaverConfig = new WeaverEntry
                                {
                                    AssemblyName = "CustomWeaver"
                                };
-        innerWeavingTask.ProcessConfig(weaverConfig);
+        processor.ProcessConfig(weaverConfig);
 
         Assert.AreEqual("CustomWeaver", weaverConfig.TypeName);
         Assert.AreEqual("Path",weaverConfig.AssemblyPath);
@@ -35,13 +35,13 @@ public class WeaversConfiguredInstanceLinkerTests
             .Returns(false);
         mock.Setup(x => x.FindAssemblyPath("AddinName")).Returns("Path");
 
-        var innerWeavingTask = mock.Object;
+        var processor = mock.Object;
         
         var weaverConfig = new WeaverEntry
                                {
                                    AssemblyName = "AddinName"
                                };
-        innerWeavingTask.ProcessConfig(weaverConfig);
+        processor.ProcessConfig(weaverConfig);
 
         Assert.AreEqual("ModuleWeaver", weaverConfig.TypeName);
         Assert.AreEqual("Path",weaverConfig.AssemblyPath);

@@ -10,13 +10,13 @@ public class WeaverInitialiser
     public ModuleDefinition ModuleDefinition;
     public ILogger Logger;
     public IAssemblyResolver AssemblyResolver;
-    public InnerWeaver InnerWeavingTask;
+    public InnerWeaver InnerWeaver;
     public List<dynamic> WeaverInstances = new List<dynamic>();
 
 
     public void Execute()
     {
-        foreach (var weaverConfig in InnerWeavingTask.Weavers)
+        foreach (var weaverConfig in InnerWeaver.Weavers)
         {
             SetProperties(weaverConfig);
         }
@@ -259,7 +259,7 @@ public class WeaverInitialiser
     {
         try
         {
-            instance.AssemblyPath = InnerWeavingTask.AssemblyPath;
+            instance.AssemblyPath = InnerWeaver.AssemblyPath;
         }
         catch (RuntimeBinderException exception)
         {

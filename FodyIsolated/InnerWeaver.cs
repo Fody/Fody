@@ -31,7 +31,7 @@ public class InnerWeaver : MarshalByRefObject, IInnerWeaver
                                         {
                                             ModuleDefinition = reader.ModuleDefinition,
                                             AssemblyResolver = assemblyResolver,
-                                            InnerWeavingTask = this,
+                                            InnerWeaver = this,
                                             Logger = Logger
                                         };
             weaverInitialiser.Execute();

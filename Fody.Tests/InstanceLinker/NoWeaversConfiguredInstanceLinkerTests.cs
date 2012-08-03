@@ -9,22 +9,21 @@ public class NoWeaversConfiguredInstanceLinkerTests
     [Test]
     public void Simple()
     {
-        var containsWeaverCheckerMock = new Mock<Processor>();
-        containsWeaverCheckerMock
-            .Setup(x => x.WeaverProjectContainsType("ModuleWeaver"))
+        var mock = new Mock<Processor>();
+        mock.Setup(x => x.WeaverProjectContainsType("ModuleWeaver"))
             .Returns(true);
-        var innerWeavingTask = containsWeaverCheckerMock.Object;
+        var processor = mock.Object;
 
-        innerWeavingTask.WeaverAssemblyPath = "Path";
-        innerWeavingTask.FoundWeaverProjectFile = true;
-        innerWeavingTask.Weavers = new List<WeaverEntry>();
-        innerWeavingTask.Logger = new Mock<BuildLogger>().Object;
+        processor.WeaverAssemblyPath = "Path";
+        processor.FoundWeaverProjectFile = true;
+        processor.Weavers = new List<WeaverEntry>();
+        processor.Logger = new Mock<BuildLogger>().Object;
 
-        innerWeavingTask.ConfigureWhenNoWeaversFound();
+        processor.ConfigureWhenNoWeaversFound();
 
-        var weaverEntry = innerWeavingTask.Weavers.First();
+        var weaverEntry = processor.Weavers.First();
         Assert.AreEqual("ModuleWeaver",weaverEntry.TypeName);
         Assert.AreEqual("Path",weaverEntry.AssemblyPath);
-        containsWeaverCheckerMock.Verify();
+        mock.Verify();
     }
 }

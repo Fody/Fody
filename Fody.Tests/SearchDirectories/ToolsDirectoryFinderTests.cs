@@ -9,13 +9,13 @@ public class ToolsDirectoryFinderTests
     public void Simple()
     {
         var logger = new Mock<BuildLogger>().Object;
-        var taskTypeLoader = new Processor
-                                 {
-                                     Logger = logger,
-                                     SolutionDir = "Solution"
-                                 };
-        taskTypeLoader.AddToolsDirectoryToAddinSearch();
-        var searchPaths = taskTypeLoader.AddinSearchPaths;
+        var processor = new Processor
+            {
+                Logger = logger,
+                SolutionDir = "Solution"
+            };
+        processor.AddToolsDirectoryToAddinSearch();
+        var searchPaths = processor.AddinSearchPaths;
         Assert.AreEqual(Path.GetFullPath(@"Solution\Tools"), searchPaths[0]);
     }
 }

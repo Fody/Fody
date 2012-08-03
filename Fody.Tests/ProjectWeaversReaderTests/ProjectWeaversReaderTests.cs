@@ -9,10 +9,10 @@ public class ProjectWeaversReaderTests
     [Test]
     public void Simple()
     {
-        var innerWeavingTask = new Processor();
-        innerWeavingTask.ConfigFiles.AddRange(GetPaths());
-        innerWeavingTask.ReadProjectWeavers();
-        var weavers = innerWeavingTask.Weavers;
+        var processor = new Processor();
+        processor.ConfigFiles.AddRange(GetPaths());
+        processor.ReadProjectWeavers();
+        var weavers = processor.Weavers;
         Assert.AreEqual(3, weavers.Count);
         Assert.AreEqual("SampleTask1", weavers[0].AssemblyName);
         Assert.AreEqual("<SampleTask1 MyProperty1=\"PropertyValue2Overwrite\" />", weavers[0].Element);

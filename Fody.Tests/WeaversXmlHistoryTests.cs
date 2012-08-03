@@ -13,9 +13,9 @@ public class WeaversXmlHistoryTests
         var fileName = Path.GetTempFileName();
         try
         {
-            var innerWeavingTask = new Processor();
-            innerWeavingTask.ConfigFiles.Add(fileName);
-            innerWeavingTask.CheckForWeaversXmlChanged();
+            var processor = new Processor();
+            processor.ConfigFiles.Add(fileName);
+            processor.CheckForWeaversXmlChanged();
 
             Assert.AreEqual(File.GetLastWriteTimeUtc(fileName), Processor.TimeStamps.First().Value);
         }
@@ -25,16 +25,17 @@ public class WeaversXmlHistoryTests
             Processor.TimeStamps.Clear();
         }
     }
+
     [Test]
     public void AddExistingFile()
     {
         var fileName = Path.GetTempFileName();
         try
         {
-            var innerWeavingTask = new Processor();
-            innerWeavingTask.ConfigFiles.Add(fileName);
-            innerWeavingTask.CheckForWeaversXmlChanged();
-            innerWeavingTask.CheckForWeaversXmlChanged();
+            var processor = new Processor();
+            processor.ConfigFiles.Add(fileName);
+            processor.CheckForWeaversXmlChanged();
+            processor.CheckForWeaversXmlChanged();
 
             Assert.AreEqual(File.GetLastWriteTimeUtc(fileName), Processor.TimeStamps.First().Value);
         }
@@ -55,14 +56,14 @@ public class WeaversXmlHistoryTests
             var loggerMock = new Mock<BuildLogger>();
             loggerMock.Setup(x => x.LogInfo(It.IsAny<string>()));
 
-            var innerWeavingTask = new Processor
-                                       {
-                                     Logger = loggerMock.Object 
-                                 };
-            innerWeavingTask.ConfigFiles.Add(fileName);
-            innerWeavingTask.CheckForWeaversXmlChanged();
+            var processor = new Processor
+                {
+                    Logger = loggerMock.Object
+                };
+            processor.ConfigFiles.Add(fileName);
+            processor.CheckForWeaversXmlChanged();
             File.SetLastWriteTimeUtc(fileName, DateTime.Now.AddHours(1));
-            innerWeavingTask.CheckForWeaversXmlChanged();
+            processor.CheckForWeaversXmlChanged();
 
             loggerMock.Verify();
 

@@ -127,14 +127,14 @@ public partial class Processor
                                      };
             appDomain = AppDomain.CreateDomain("Fody", null, appDomainSetup);
         }
-        var innerWeavingTask = (IInnerWeaver) appDomain.CreateInstanceAndUnwrap("FodyIsolated", "InnerWeaver");
-        innerWeavingTask.AssemblyPath = AssemblyPath;
-        innerWeavingTask.References = References;
-        innerWeavingTask.KeyFilePath = KeyFilePath;
-        innerWeavingTask.Logger = Logger;
-        innerWeavingTask.AssemblyPath = AssemblyPath;
-        innerWeavingTask.Weavers = Weavers;
-        innerWeavingTask.IntermediateDir = IntermediateDir;
-        innerWeavingTask.Execute();
+        var innerWeaver = (IInnerWeaver) appDomain.CreateInstanceAndUnwrap("FodyIsolated", "InnerWeaver");
+        innerWeaver.AssemblyPath = AssemblyPath;
+        innerWeaver.References = References;
+        innerWeaver.KeyFilePath = KeyFilePath;
+        innerWeaver.Logger = Logger;
+        innerWeaver.AssemblyPath = AssemblyPath;
+        innerWeaver.Weavers = Weavers;
+        innerWeaver.IntermediateDir = IntermediateDir;
+        innerWeaver.Execute();
     }
 }

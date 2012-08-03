@@ -2,7 +2,7 @@ using System;
 
 public class ContainsTypeChecker
 {
-    static IContainsTypeChecker innerWeavingTask;
+    static IContainsTypeChecker containsTypeChecker;
 
     static ContainsTypeChecker()
     {
@@ -12,14 +12,14 @@ public class ContainsTypeChecker
         };
         var appDomain = AppDomain.CreateDomain("Fody.ContainsTypeChecker", null, appDomainSetup);
         var instanceAndUnwrap = appDomain.CreateInstanceAndUnwrap("FodyIsolated", "IsolatedContainsTypeChecker");
-        innerWeavingTask = (IContainsTypeChecker)instanceAndUnwrap;
+        containsTypeChecker = (IContainsTypeChecker)instanceAndUnwrap;
     }
 
 
     //TODO: possibly cache based on file stamp to avoid cros domain call. need to profile.
     public virtual bool Check(string assemblyPath, string typeName)
     {
-        return innerWeavingTask.Check(assemblyPath, typeName);
+        return containsTypeChecker.Check(assemblyPath, typeName);
     }
 
 }

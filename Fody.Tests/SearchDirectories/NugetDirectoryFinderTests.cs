@@ -9,13 +9,13 @@ public class NugetDirectoryFinderTests
     public void Simple()
     {
         var logger = new Mock<BuildLogger>().Object;
-        var searcher = new Processor
+        var processor = new Processor
                            {
                                Logger = logger,
                                PackagesPath = Environment.CurrentDirectory
                            };
-        searcher.AddNugetDirectoryToAddinSearch();
-        var searchPaths = searcher.AddinSearchPaths;
+        processor.AddNugetDirectoryToAddinSearch();
+        var searchPaths = processor.AddinSearchPaths;
         Assert.AreEqual(Environment.CurrentDirectory, searchPaths[0]);
     }
 
