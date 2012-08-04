@@ -60,10 +60,11 @@
     <Compile Include="ProjectPathFinder.cs" />
     <Compile Include="ProjectWeaversReader.cs" />
     <Compile Include="AssemblyPathValidator.cs" />
+    <Compile Include="SearchDirectories\AddToolsAssemblyLocationToAddinSearch.cs" />
     <Compile Include="WeaverAssemblyPathFinder.cs" />
-    <Compile Include="SearchDirectories\ConfigDirectoryFinder.cs" />
-    <Compile Include="SearchDirectories\NugetDirectoryFinder.cs" />
-    <Compile Include="SearchDirectories\ToolsDirectoryFinder.cs" />
+    <Compile Include="SearchDirectories\AddMsBuildConfigToAddinSearch.cs" />
+    <Compile Include="SearchDirectories\AddNugetDirectoryToAddinSearch.cs" />
+    <Compile Include="SearchDirectories\AddToolsDirectoryToAddinSearch.cs" />
     <Compile Include="SolutionPathValidator.cs" />
     <Compile Include="AddinFilesEnumerator.cs" />
     <Compile Include="WeaverProjectContainsWeaverChecker.cs" />

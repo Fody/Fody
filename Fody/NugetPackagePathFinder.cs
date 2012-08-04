@@ -28,7 +28,7 @@ public partial class Processor
         return Path.Combine(SolutionDir, "Packages");
     }
 
-    static string GetNugetConfigPath(string solutionDirectory)
+    string GetNugetConfigPath(string solutionDirectory)
     {
         while (true)
         {
@@ -37,12 +37,21 @@ public partial class Processor
             {
                 return nugetConfigPath;
             }
-            var directoryInfo = Directory.GetParent(solutionDirectory);
-            if (directoryInfo == null)
+            try
             {
+                var directoryInfo = Directory.GetParent(solutionDirectory);
+                if (directoryInfo == null)
+                {
+                    return null;
+                }
+                solutionDirectory = directoryInfo.FullName;
+            }
+            catch 
+            {
+                // trouble with tree walk. log and ignore
+                Logger.LogInfo(string.Format("Could not get parent directory of '{0}'.", solutionDirectory));
                 return null;
             }
-            solutionDirectory = directoryInfo.FullName;
         }
     }
 

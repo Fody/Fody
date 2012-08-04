@@ -16,11 +16,15 @@ public class TaskFileProcessor
     {
         try
         {
-            var fodyFile = Path.Combine(solutionDirectory, @"Tools\Fody.dll");
-            if (File.Exists(fodyFile))
+            var fodyDir = FodyDirectoryFinder.TreeWalkForToolsFodyDir(solutionDirectory);
+            if (fodyDir != null)
             {
-                Check(fodyFile);
-                return;
+                var fodyFile = Path.Combine(fodyDir, "Fody.dll");
+                if (File.Exists(fodyFile))
+                {
+                    Check(fodyFile);
+                    return;
+                }
             }
             foreach (var filePath in Directory.EnumerateFiles(solutionDirectory, "Fody.dll", SearchOption.AllDirectories))
             {

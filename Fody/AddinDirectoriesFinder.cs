@@ -7,7 +7,8 @@ public partial class Processor
         FindNugetPackagePath();
         AddNugetDirectoryToAddinSearch();
         AddMsBuildConfigToAddinSearch();
-        AddToolsDirectoryToAddinSearch();
+        AddToolsSolutionDirectoryToAddinSearch();
+        AddToolsAssemblyLocationToAddinSearch();
         LogAddinSearchPaths();
     }
 }

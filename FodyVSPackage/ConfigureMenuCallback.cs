@@ -88,11 +88,28 @@ public class ConfigureMenuCallback
     string CreateToolsDirectory()
     {
         var dte = (DTE)ServiceProvider.GlobalProvider.GetService(typeof(DTE));
-        var toolsDirectory = Path.Combine(Path.GetDirectoryName(dte.Solution.FullName), @"Tools\Fody");
-        if (!Directory.Exists(toolsDirectory))
+        var solutionDirectory = Path.GetDirectoryName(dte.Solution.FullName);
+
+
+        var fodyDirectory = FodyDirectoryFinder.TreeWalkForToolsFodyDir(solutionDirectory);
+        if (fodyDirectory != null)
         {
-            Directory.CreateDirectory(toolsDirectory);
+            return fodyDirectory;
         }
-        return toolsDirectory;
+        var toolFromTree = ToolDirectoryTreeWalker.TreeWalkForToolsDirs(solutionDirectory).FirstOrDefault();
+
+        if (toolFromTree != null)
+        {
+            fodyDirectory = Path.Combine(toolFromTree, "Fody");
+        }
+        else
+        {
+            fodyDirectory = Path.Combine(solutionDirectory, @"Tools\Fody");   
+        }
+        if (!Directory.Exists(fodyDirectory))
+        {
+            Directory.CreateDirectory(fodyDirectory);
+        }
+        return fodyDirectory;
     }
 }

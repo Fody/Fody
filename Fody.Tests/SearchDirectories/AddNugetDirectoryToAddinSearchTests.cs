@@ -3,7 +3,7 @@ using Moq;
 using NUnit.Framework;
 
 [TestFixture]
-public class NugetDirectoryFinderTests
+public class AddNugetDirectoryToAddinSearchTests
 {
     [Test]
     public void Simple()
