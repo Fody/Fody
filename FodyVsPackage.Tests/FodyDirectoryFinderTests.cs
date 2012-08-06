@@ -9,7 +9,7 @@ public class FodyDirectoryFinderTests
     [Test]
     public void Existing()
     {
-        var fodyDir = FodyDirectoryFinder.TreeWalkForToolsFodyDir(Environment.CurrentDirectory);
+        var fodyDir = FodyDirectoryFinder.TreeWalkForToolsFodyDir(AssemblyLocation.CurrentDirectory());
         Assert.IsTrue(Directory.Exists(fodyDir));
     }
 
