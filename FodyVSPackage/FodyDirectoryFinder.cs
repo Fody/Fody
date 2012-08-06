@@ -1,12 +1,31 @@
 using System.IO;
-using System.Linq;
 
 public static class FodyDirectoryFinder
 {
-    public static string TreeWalkForToolsFodyDir(string solutionDirectory)
+    public static string TreeWalkForToolsFodyDir(string currentDirectory)
     {
-        return ToolDirectoryTreeWalker.TreeWalkForToolsDirs(solutionDirectory)
-            .Select(toolsDir => Path.Combine(toolsDir, @"Tools\Fody"))
-            .FirstOrDefault(Directory.Exists);
+        while (true)
+        {
+            var fodyDir = Path.Combine(currentDirectory, @"Tools\Fody");
+            if (Directory.Exists(fodyDir))
+            {
+                return fodyDir;
+            }
+            try
+            {
+                var parent = Directory.GetParent(currentDirectory);
+                if (parent == null)
+                {
+                    break;
+                }
+                currentDirectory = parent.FullName;
+            }
+            catch
+            {
+                // trouble with tree walk.
+                return null;
+            }
+        }
+        return null;
     }
 }

@@ -65,7 +65,7 @@
     <Compile Include="ProjectInjectorTests.cs" />
     <Compile Include="ProjectRemoverTests.cs" />
     <Compile Include="TaskFileReplacerTests.cs" />
-    <Compile Include="TreeWalkForToolsDirTests.cs" />
+    <Compile Include="FodyDirectoryFinderTests.cs" />
     <Compile Include="TypeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

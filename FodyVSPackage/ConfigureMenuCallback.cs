@@ -89,18 +89,16 @@ public class ConfigureMenuCallback
     {
         var dte = (DTE)ServiceProvider.GlobalProvider.GetService(typeof(DTE));
         var solutionDirectory = Path.GetDirectoryName(dte.Solution.FullName);
-
-
         var fodyDirectory = FodyDirectoryFinder.TreeWalkForToolsFodyDir(solutionDirectory);
         if (fodyDirectory != null)
         {
             return fodyDirectory;
         }
-        var toolFromTree = ToolDirectoryTreeWalker.TreeWalkForToolsDirs(solutionDirectory).FirstOrDefault();
+        var packagesPath = NugetConfigReader.GetPackagesPathFromConfig(solutionDirectory);
 
-        if (toolFromTree != null)
+        if (packagesPath != null)
         {
-            fodyDirectory = Path.Combine(toolFromTree, "Fody");
+            fodyDirectory = Path.Combine(Directory.GetParent(packagesPath).FullName, @"Tools\Fody");
         }
         else
         {

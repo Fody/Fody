@@ -32,9 +32,8 @@ public sealed class FodyVSPackagePackage : Package
             new MenuConfigure(configureMenuCallback, disableMenuConfigure, menuCommandService, menuStatusChecker).RegisterMenus();
             var taskFileReplacer = new TaskFileReplacer(messageDisplayer, contentsFinder);
             var taskFileProcessor = new TaskFileProcessor(taskFileReplacer, messageDisplayer);
-            var allProjectFinder = new AllProjectFinder();
             var msBuildKiller = new MSBuildKiller();
-            new SolutionEvents(taskFileProcessor, exceptionDialog, allProjectFinder, msBuildKiller).RegisterSolutionEvents();
+            new SolutionEvents(taskFileProcessor, exceptionDialog, msBuildKiller).RegisterSolutionEvents();
             new TaskFileReplacer(messageDisplayer, contentsFinder).CheckForFilesToUpdate();
         }
         catch (Exception exception)

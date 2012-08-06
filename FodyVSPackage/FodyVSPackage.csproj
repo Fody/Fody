@@ -119,6 +119,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\NugetConfigReader.cs">
+      <Link>NugetConfigReader.cs</Link>
+    </Compile>
     <Compile Include="AllProjectFinder.cs" />
     <Compile Include="ConfigureMenuCallback.cs" />
     <Compile Include="ContainsFodyChecker.cs" />
@@ -129,7 +132,6 @@
     <Compile Include="MenuStatusChecker.cs" />
     <Compile Include="MSBuildKiller.cs" />
     <Compile Include="ProcessExtensions.cs" />
-    <Compile Include="ToolDirectoryTreeWalker.cs" />
     <Compile Include="Wpf\EnumBooleanConverter.cs" />
     <Compile Include="MessageDisplayer.cs" />
     <Compile Include="ExceptionDialog.cs" />

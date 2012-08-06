@@ -7,7 +7,6 @@ using Microsoft.VisualStudio.Shell;
 public class CurrentProjectFinder
 {
 
-
     public  List<Project> GetCurrentProjects()
     {
         var dte = (DTE) ServiceProvider.GlobalProvider.GetService(typeof (DTE));

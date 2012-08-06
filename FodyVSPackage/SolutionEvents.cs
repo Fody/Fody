@@ -9,14 +9,12 @@ public class SolutionEvents : IVsSolutionEvents
 {
     TaskFileProcessor taskFileProcessor;
     ExceptionDialog exceptionDialog;
-    AllProjectFinder allProjectFinder;
     MSBuildKiller msBuildKiller;
 
-    public SolutionEvents(TaskFileProcessor taskFileProcessor, ExceptionDialog exceptionDialog, AllProjectFinder allProjectFinder, MSBuildKiller msBuildKiller)
+    public SolutionEvents(TaskFileProcessor taskFileProcessor, ExceptionDialog exceptionDialog, MSBuildKiller msBuildKiller)
     {
         this.taskFileProcessor = taskFileProcessor;
         this.exceptionDialog = exceptionDialog;
-        this.allProjectFinder = allProjectFinder;
         this.msBuildKiller = msBuildKiller;
     }
 

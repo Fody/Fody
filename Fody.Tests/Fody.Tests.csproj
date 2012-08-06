@@ -64,6 +64,7 @@
     <Compile Include="ContainsTypeCheckerTests.cs" />
     <Compile Include="InstanceLinker\NoWeaversConfiguredInstanceLinkerTests.cs" />
     <Compile Include="InstanceLinker\WeaversConfiguredInstanceLinkerTests.cs" />
+    <Compile Include="NugetConfigReaderTest.cs" />
     <Compile Include="NugetPackagePathFinderTest.cs" />
     <Compile Include="ProjectPathFinderTests.cs" />
     <Compile Include="ProjectWeaversFinderTests.cs" />

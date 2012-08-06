@@ -44,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs" />
+    <Compile Include="..\NugetConfigReader.cs">
+      <Link>NugetConfigReader.cs</Link>
+    </Compile>
     <Compile Include="AddinDirectoriesFinder.cs" />
     <Compile Include="AssemblyLocation.cs" />
     <Compile Include="ContainsTypeChecker.cs" />

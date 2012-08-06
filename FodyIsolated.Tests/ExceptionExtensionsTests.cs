@@ -84,10 +84,12 @@ public class ExceptionExtensionsTests
         throw new Exception();
     }
 
+    // ReSharper disable UnusedParameter.Local
     void Method(int param)
     {
         
     }
+    // ReSharper restore UnusedParameter.Local
     string StringProperty;
     public static string StaticProperty { get; set; }
     public static void StaticMethod (){}
