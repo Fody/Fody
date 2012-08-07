@@ -13,7 +13,7 @@ Manipulating the IL of an assembly as part of a build requires a significant amo
   * Re-applying the strong name if necessary
   * Saving the assembly and pdb
 
-FOoy Uses [Mono.Cecil](http://www.mono-project.com/Cecil)  and an add-in based approach to modifying the IL of .net assemblies at compile time.
+Fody Uses [Mono.Cecil](http://www.mono-project.com/Cecil)  and an add-in based approach to modifying the IL of .net assemblies at compile time.
 
  * No install required to build
  * No attributes required
