@@ -87,11 +87,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Tools\Fody\PlaceHolder.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Dir1\" />
     <Folder Include="Dir2\" />
-    <Folder Include="Tools\Fody\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
