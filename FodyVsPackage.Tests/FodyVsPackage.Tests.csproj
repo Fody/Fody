@@ -62,6 +62,7 @@
     <Compile Include="ExceptionWindowTests.cs" />
     <Compile Include="FileReader.cs" />
     <Compile Include="FooTests.cs" />
+    <Compile Include="PathExTests.cs" />
     <Compile Include="ProjectInjectorTests.cs" />
     <Compile Include="ProjectRemoverTests.cs" />
     <Compile Include="TaskFileReplacerTests.cs" />

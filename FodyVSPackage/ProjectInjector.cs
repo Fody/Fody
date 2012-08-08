@@ -6,6 +6,7 @@ using System.Xml.Linq;
 public class ProjectInjector
 {
     public string ProjectFile;
+    public string FodyToolsDirectory;
     XDocument xDocument;
 
     public void Execute()
@@ -51,7 +52,7 @@ public class ProjectInjector
         {
             return;
         }
-        xDocument.Root.Add(new XElement(MsBuildXmlExtensions.BuildNamespace + "Import", new XAttribute("Project", @"$(SolutionDir)\Tools\Fody\Fody.targets")));
+        xDocument.Root.Add(new XElement(MsBuildXmlExtensions.BuildNamespace + "Import", new XAttribute("Project", FodyToolsDirectory + @"Fody.targets")));
 
     }
 }

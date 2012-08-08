@@ -131,6 +131,7 @@
     <Compile Include="FodyDirectoryFinder.cs" />
     <Compile Include="MenuStatusChecker.cs" />
     <Compile Include="MSBuildKiller.cs" />
+    <Compile Include="PathEx.cs" />
     <Compile Include="ProcessExtensions.cs" />
     <Compile Include="Wpf\EnumBooleanConverter.cs" />
     <Compile Include="MessageDisplayer.cs" />

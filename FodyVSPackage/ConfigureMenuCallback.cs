@@ -46,10 +46,38 @@ public class ConfigureMenuCallback
 
     void Configure(Project project)
     {
-        var toolsDirectory = CreateToolsDirectory();
+        var dte = (DTE)ServiceProvider.GlobalProvider.GetService(typeof(DTE));
+        var solutionDirectory = Path.GetDirectoryName(dte.Solution.FullName);
+        var toolsDirectory = CreateToolsDirectory(solutionDirectory);
         ExportBuildFile(toolsDirectory);
         ExportFodyWeaversXml(project.FullName);
-        InjectIntoProject(project.FullName);
+        //@"$(SolutionDir)\Tools\Fody\"
+        var relativePath = PathEx.MakeRelativePath(solutionDirectory, toolsDirectory);
+        InjectIntoProject(project.FullName, string.Concat(@"$(SolutionDir)\", relativePath));
+    }
+
+    string CreateToolsDirectory(string solutionDirectory)
+    {
+        var fodyDirectory = FodyDirectoryFinder.TreeWalkForToolsFodyDir(solutionDirectory);
+        if (fodyDirectory != null)
+        {
+            return fodyDirectory;
+        }
+        var packagesPath = NugetConfigReader.GetPackagesPathFromConfig(solutionDirectory);
+
+        if (packagesPath != null)
+        {
+            fodyDirectory = Path.Combine(Directory.GetParent(packagesPath).FullName, @"Tools\Fody");
+        }
+        else
+        {
+            fodyDirectory = Path.Combine(solutionDirectory, @"Tools\Fody");
+        }
+        if (!Directory.Exists(fodyDirectory))
+        {
+            Directory.CreateDirectory(fodyDirectory);
+        }
+        return fodyDirectory;
     }
 
     void ExportFodyWeaversXml(string projectFilePath)
@@ -64,11 +92,12 @@ public class ConfigureMenuCallback
         File.Copy(path, tasksFile);
     }
 
-    void InjectIntoProject(string projectFilePath)
+    void InjectIntoProject(string projectFilePath, string fodyToolsDirectory)
     {
         var projectInjector = new ProjectInjector
                                   {
-                                      ProjectFile = projectFilePath
+                                      ProjectFile = projectFilePath,
+                                      FodyToolsDirectory = fodyToolsDirectory 
                                   };
         projectInjector.Execute();
     }
@@ -85,29 +114,4 @@ public class ConfigureMenuCallback
         }
     }
 
-    string CreateToolsDirectory()
-    {
-        var dte = (DTE)ServiceProvider.GlobalProvider.GetService(typeof(DTE));
-        var solutionDirectory = Path.GetDirectoryName(dte.Solution.FullName);
-        var fodyDirectory = FodyDirectoryFinder.TreeWalkForToolsFodyDir(solutionDirectory);
-        if (fodyDirectory != null)
-        {
-            return fodyDirectory;
-        }
-        var packagesPath = NugetConfigReader.GetPackagesPathFromConfig(solutionDirectory);
-
-        if (packagesPath != null)
-        {
-            fodyDirectory = Path.Combine(Directory.GetParent(packagesPath).FullName, @"Tools\Fody");
-        }
-        else
-        {
-            fodyDirectory = Path.Combine(solutionDirectory, @"Tools\Fody");   
-        }
-        if (!Directory.Exists(fodyDirectory))
-        {
-            Directory.CreateDirectory(fodyDirectory);
-        }
-        return fodyDirectory;
-    }
 }
