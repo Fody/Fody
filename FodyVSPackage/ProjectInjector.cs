@@ -22,15 +22,15 @@ public class ProjectInjector
     {
         var exists = xDocument.Descendants()
             .Any(x =>
-                     {
-                         var xAttribute = x.Attribute("Include");
-                         return xAttribute != null && xAttribute.Value == "FodyWeavers.xml";
-                     });
+                {
+                    var xAttribute = x.Attribute("Include");
+                    return xAttribute != null && xAttribute.Value == "FodyWeavers.xml";
+                });
         if (exists)
         {
             return;
         }
-    
+
         var itemGroup = xDocument.BuildDescendants("ItemGroup").FirstOrDefault();
         if (itemGroup == null)
         {
@@ -43,16 +43,19 @@ public class ProjectInjector
     void InjectImport()
     {
         // <Import Project="$(SolutionDir)\Tools\Fody\Fody.targets" />
-        var exists = xDocument.BuildDescendants("Import").Any(x =>
-                                                                  {
-                                                                      var xAttribute = x.Attribute("Project");
-                                                                      return xAttribute != null && xAttribute.Value.EndsWith("Fody.targets",StringComparison.InvariantCultureIgnoreCase);
-                                                                  });
+        var exists = xDocument
+            .BuildDescendants("Import")
+            .Any(x =>
+                {
+                    var xAttribute = x.Attribute("Project");
+                    return xAttribute != null && xAttribute.Value.EndsWith("Fody.targets", StringComparison.InvariantCultureIgnoreCase);
+                });
         if (exists)
         {
             return;
         }
-        xDocument.Root.Add(new XElement(MsBuildXmlExtensions.BuildNamespace + "Import", new XAttribute("Project", FodyToolsDirectory + @"Fody.targets")));
+        var importAttribute = new XAttribute("Project", Path.Combine(FodyToolsDirectory, "Fody.targets"));
+        xDocument.Root.Add(new XElement(MsBuildXmlExtensions.BuildNamespace + "Import", importAttribute));
 
     }
 }

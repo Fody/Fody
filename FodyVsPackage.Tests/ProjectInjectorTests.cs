@@ -16,6 +16,7 @@ public class ProjectInjectorTests
             var injector = new ProjectInjector
                                {
                                    ProjectFile = targetFile,
+                                   FodyToolsDirectory = @"$(SolutionDir)\Tools\Fody\"
                                };
             injector.Execute();
 
