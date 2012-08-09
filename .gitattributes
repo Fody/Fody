@@ -24,3 +24,4 @@
 # Denote all files that are truly binary and should not be modified.
 *.dll binary
 *.exe binary
+*.snk binary

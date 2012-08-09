@@ -35,6 +35,20 @@ void throwexception2()
             Assert.AreEqual(expected, friendlyString);
         }
     }
+    [Test]
+    public void ToFriendlyNameWeaverException()
+    {
+        try
+        {
+            throw new WeavingException("Foo");
+
+        }
+        catch (Exception exception)
+        {
+            var friendlyString = exception.ToFriendlyString();
+            Assert.AreEqual("Foo", friendlyString);
+        }
+    }
 
     void ThrowException1()
     {

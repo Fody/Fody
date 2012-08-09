@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="ContentsFinderTests.cs" />
     <Compile Include="CrossThreadRunner.cs" />
+    <Compile Include="CurrentVersionTests.cs" />
     <Compile Include="ExceptionExtensionsTests.cs" />
     <Compile Include="ExceptionWindowTests.cs" />
     <Compile Include="FileReader.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="TaskFileReplacerTests.cs" />
     <Compile Include="FodyDirectoryFinderTests.cs" />
     <Compile Include="TypeExtensions.cs" />
+    <Compile Include="VersionCheckerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FodyVSPackage\FodyVSPackage.csproj">
