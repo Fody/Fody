@@ -9,20 +9,16 @@ public partial class Processor
 
     public void CacheAllFodyAddinDlls()
     {
-        fodyFiles = AddinSearchPaths.SelectMany(x => Directory.EnumerateFiles(x, "*.Fody.dll", SearchOption.AllDirectories))
+        fodyFiles = AddinSearchPaths
+            .SelectMany(x => Directory.EnumerateFiles(x, "*.Fody.dll", SearchOption.AllDirectories))
             .ToList();
     }
+
     public virtual string FindAddinAssembly(string packageName)
     {
-        return GetAllAssemblyFiles(packageName)
+        var packageFileName = packageName + ".Fody.dll";
+        return fodyFiles.Where(x => x.EndsWith(packageFileName, StringComparison.OrdinalIgnoreCase))
             .OrderByDescending(AssemblyVersionReader.GetAssemblyVersion)
             .FirstOrDefault();
-    }
-
-
-    IEnumerable<string> GetAllAssemblyFiles(string packageName)
-    {
-        var packageFileName = packageName + ".dll";
-        return fodyFiles.Where(x => x.EndsWith(packageFileName, StringComparison.OrdinalIgnoreCase));
     }
 }

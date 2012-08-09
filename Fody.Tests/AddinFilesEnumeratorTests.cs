@@ -31,6 +31,6 @@ public class AddinFilesEnumeratorTests
                     }
             };
         processor.CacheAllFodyAddinDlls();
-        processor.FindAddinAssembly("SampleTask.Fody");
+        Assert.IsNotNull( processor.FindAddinAssembly("SampleTask"));
     }
 }
