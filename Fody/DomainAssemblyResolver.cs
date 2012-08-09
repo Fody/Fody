@@ -6,11 +6,11 @@ public static class DomainAssemblyResolver
 {
     public static void Connect()
     {
-        AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolve;
+        AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => GetAssembly(args.Name);
     }
 
-    static Assembly AssemblyResolve(object sender, ResolveEventArgs args)
+    public static Assembly GetAssembly(string name)
     {
-        return AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(assembly => assembly.FullName == args.Name);
+        return AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(x => x.FullName == name);
     }
 }

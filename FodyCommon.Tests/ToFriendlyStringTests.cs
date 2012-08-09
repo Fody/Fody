@@ -24,8 +24,8 @@ public class ToFriendlyStringTests
 exception:
 foo
 stacktrace:
-   at tofriendlystringtests.throwexception2() in tofriendlystringtests.cs:line 46
-   at tofriendlystringtests.throwexception1() in tofriendlystringtests.cs:line 41
+   at tofriendlystringtests.throwexception2() in tofriendlystringtests.cs:line 60
+   at tofriendlystringtests.throwexception1() in tofriendlystringtests.cs:line 55
    at tofriendlystringtests.tofriendlyname() in tofriendlystringtests.cs:line 15
 source:
 fodycommon.tests
