@@ -19,12 +19,19 @@ public class BuildLogger : MarshalByRefObject, ILogger
     public BuildLogger(string messageImportance)
     {
         stringBuilder = new StringBuilder();
-        MessageImportance messageImportanceEnum;
-        if (!Enum.TryParse(messageImportance, out messageImportanceEnum))
+        if (string.IsNullOrWhiteSpace(messageImportance))
         {
-            throw new WeavingException(string.Format("Invalid MessageImportance in config. Should be 'Low', 'Normal' or 'High' but was '{0}'.", messageImportance));
+            MessageImportance = MessageImportance.Low;
         }
-        MessageImportance = messageImportanceEnum;
+        else
+        {
+            MessageImportance messageImportanceEnum;
+            if (!Enum.TryParse(messageImportance, out messageImportanceEnum))
+            {
+                throw new WeavingException(string.Format("Invalid MessageImportance in config. Should be 'Low', 'Normal' or 'High' but was '{0}'.", messageImportance));
+            }
+            MessageImportance = messageImportanceEnum;
+        }
     }
 
     public virtual void LogWarning(string message)
