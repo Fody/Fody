@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyVersionReaderTests.cs" />
+    <Compile Include="BuildLoggerTests.cs" />
     <Compile Include="ContainsTypeCheckerTests.cs" />
     <Compile Include="DomainAssemblyResolverTests.cs" />
     <Compile Include="InstanceLinker\NoWeaversConfiguredInstanceLinkerTests.cs" />

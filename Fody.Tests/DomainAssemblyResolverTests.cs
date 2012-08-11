@@ -9,3 +9,4 @@ public class DomainAssemblyResolverTests
         Assert.IsNotNull( DomainAssemblyResolver.GetAssembly(GetType().Assembly.GetName().FullName));
     }
 }
+
