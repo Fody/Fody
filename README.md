@@ -39,6 +39,10 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
  * [JetBrains Resharper](http://www.jetbrains.com/resharper/)
  * [Mono Cecil](http://www.mono-project.com/Cecil)
 
+## A working sample of every addin
+
+[FodyAddinSamples](https://github.com/SimonCropp/FodyAddinSamples) is a single solution that contains a working copy of every fody addin.
+
 ## More Info
 
  * [AddinSearchPaths](https://github.com/SimonCropp/Fody/wiki/AddinSearchPaths)
