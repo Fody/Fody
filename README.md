@@ -62,3 +62,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
  * [TaskCouldNotBeLoaded](https://github.com/SimonCropp/Fody/wiki/TaskCouldNotBeLoaded)
  * [VSIXPackage](https://github.com/SimonCropp/Fody/wiki/VSIXPackage)
  * [WeavingTaskOptions](https://github.com/SimonCropp/Fody/wiki/WeavingTaskOptions)
+
+## With thanks to
+
+![Resharper.png](http://www.jetbrains.com/resharper/)
