@@ -74,6 +74,14 @@ http://www.jetbrains.com/resharper/
 
 ### TeamCity from Jetbrains
 
-http://www.jetbrains.com/resharper/
+http://www.jetbrains.com/TeamCity/
 
 ![TeamCity.png](https://raw.github.com/wiki/SimonCropp/Fody/TeamCity.png)
+
+### Codebetter
+
+For supplying a build server
+
+http://codebetter.com/
+
+![CodeBetter.png](https://raw.github.com/wiki/SimonCropp/Fody/CodeBetter.png)
