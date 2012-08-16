@@ -65,6 +65,15 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
 
 ## With thanks to
 
-![Resharper.png](https://raw.github.com/wiki/SimonCropp/Fody/Resharper.png)
+### Resharper from Jetbrains
 
 http://www.jetbrains.com/resharper/
+
+![Resharper.png](https://raw.github.com/wiki/SimonCropp/Fody/Resharper.png)
+
+
+### TeamCity from Jetbrains
+
+http://www.jetbrains.com/resharper/
+
+![TeamCity.png](https://raw.github.com/wiki/SimonCropp/Fody/TeamCity.png)
