@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.ComponentModel.Design;
+using EnvDTE;
+using FodyVSPackage;
 using Microsoft.VisualStudio.Shell;
 
 [ProvideAutoLoad("F1536EF8-92EC-443C-9ED7-FDADF150DA82")] //SolutionExists
@@ -29,7 +31,7 @@ public sealed class FodyVSPackagePackage : Package
             var disableMenuConfigure = new DisableMenuConfigure(currentProjectFinder, messageDisplayer, exceptionDialog);
             var containsFodyChecker = new ContainsFodyChecker();
             var menuStatusChecker = new MenuStatusChecker(currentProjectFinder, exceptionDialog, containsFodyChecker);
-            new MenuConfigure(configureMenuCallback, disableMenuConfigure, menuCommandService, menuStatusChecker).RegisterMenus();
+            new MenuConfigure((DTE)GetService(typeof(DTE)), configureMenuCallback, disableMenuConfigure, menuCommandService, menuStatusChecker).RegisterMenus();
             var taskFileReplacer = new TaskFileReplacer(messageDisplayer, contentsFinder);
             var taskFileProcessor = new TaskFileProcessor(taskFileReplacer, messageDisplayer);
             var msBuildKiller = new MSBuildKiller();

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -9,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FodyVSPackage</RootNamespace>
     <AssemblyName>FodyVSPackage</AssemblyName>
-    <SignAssembly>True</SignAssembly>
+    <SignAssembly>false</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Key.snk</AssemblyOriginatorKeyFile>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
@@ -21,6 +22,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DeployExtension>False</DeployExtension>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Build.Framework" />
@@ -129,10 +133,36 @@
     <Compile Include="CurrentVersion.cs" />
     <Compile Include="DisableMenuConfigure.cs" />
     <Compile Include="FodyDirectoryFinder.cs" />
+    <Compile Include="Helpers\CatelInitializer.cs" />
+    <Compile Include="Helpers\DteHelper.cs" />
+    <Compile Include="Helpers\FodyHelper.cs" />
+    <Compile Include="Helpers\SelectableProjectHelper.cs" />
     <Compile Include="MenuStatusChecker.cs" />
+    <Compile Include="Models\FodyAddin.cs" />
+    <Compile Include="Models\Interfaces\IFodyAddin.cs" />
+    <Compile Include="Models\Interfaces\IProject.cs" />
+    <Compile Include="Models\Interfaces\ISolutionItem.cs" />
+    <Compile Include="Models\Interfaces\ISolutionFolder.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\SolutionFolder.cs" />
+    <Compile Include="Models\SolutionItem.cs" />
+    <Compile Include="Services\FodyAddinManager.cs" />
     <Compile Include="MSBuildKiller.cs" />
     <Compile Include="PathEx.cs" />
     <Compile Include="ProcessExtensions.cs" />
+    <Compile Include="Services\Interfaces\IFodyAddinManager.cs" />
+    <Compile Include="Services\Interfaces\IVisualStudioService.cs" />
+    <Compile Include="Services\Interfaces\IProjectManager.cs" />
+    <Compile Include="Services\ProjectManager.cs" />
+    <Compile Include="Services\VisualStudioService.cs" />
+    <Compile Include="ViewModels\ManageAddinsViewModel.cs" />
+    <Compile Include="ViewModels\ProjectSelectionViewModel.cs" />
+    <Compile Include="Views\ManageAddinsView.xaml.cs">
+      <DependentUpon>ManageAddinsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProjectSelectionView.xaml.cs">
+      <DependentUpon>ProjectSelectionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wpf\EnumBooleanConverter.cs" />
     <Compile Include="MessageDisplayer.cs" />
     <Compile Include="ExceptionDialog.cs" />
@@ -157,6 +187,7 @@
     <Compile Include="UnsaveProjectChecker.cs" />
     <Compile Include="VersionChecker.cs" />
     <Compile Include="MsBuildXmlExtensions.cs" />
+    <Compile Include="Wpf\SolutionItemToImageConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="VSPackage.resx">
@@ -165,6 +196,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
@@ -247,7 +279,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+    <Resource Include="Resources\Folder.png" />
+    <Resource Include="Resources\Project.png" />
+    <Resource Include="Resources\Go.png" />
     <Content Include="Resources\Package.ico" />
+    <Resource Include="Resources\Refresh.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="ExceptionWindow.xaml">
@@ -257,6 +293,14 @@
     <Page Include="Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ManageAddinsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProjectSelectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +315,7 @@
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>
@@ -278,7 +323,6 @@
     <VsSDKInstall>$(SolutionDir)Tools\vs2010.sdk\</VsSDKInstall>
     <VsSDKIncludes>$(VsSDKInstall)inc\</VsSDKIncludes>
     <VsixSchemaPath>$(VsSDKInstall)VSIXManifestSchema.xsd</VsixSchemaPath>
-    <DeployExtension>false</DeployExtension>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VsSDKInstall)Microsoft.VsSDK.targets" />
@@ -295,4 +339,8 @@
   <Target Name="ConfigureVsSDKBuild">
     <EnvironmentVariable Variable="VsSDKToolsPath" Value="$(VsSDKInstall)" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>
