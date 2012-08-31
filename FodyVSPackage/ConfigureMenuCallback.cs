@@ -52,8 +52,8 @@ public class ConfigureMenuCallback
         ExportBuildFile(toolsDirectory);
         ExportFodyWeaversXml(project.FullName);
         //@"$(SolutionDir)\Tools\Fody\"
-        var relativePath = PathEx.MakeRelativePath(solutionDirectory, toolsDirectory);
-        InjectIntoProject(project.FullName, Path.Combine("$(SolutionDir)", relativePath));
+        var relativePath = PathEx.MakeRelativePath(project.FullName, toolsDirectory);
+        InjectIntoProject(project.FullName, Path.Combine("$(ProjectPath)", relativePath));
     }
 
     string CreateToolsDirectory(string solutionDirectory)

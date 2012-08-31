@@ -28,6 +28,6 @@ public partial class ExceptionWindow
 
     void LaunchIssues(object sender, RoutedEventArgs e)
     {
-        Process.Start("http://code.google.com/p/fody/issues/list");
+        Process.Start("https://github.com/SimonCropp/Fody/issues");
     }
 }
