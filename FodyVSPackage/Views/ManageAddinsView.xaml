@@ -1,0 +1,51 @@
+﻿<catel:DataWindow x:Class="FodyVSPackage.Views.ManageAddinsView"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				  xmlns:catel="http://catel.codeplex.com">
+
+    <!-- Resources -->
+    <catel:DataWindow.Resources>
+    </catel:DataWindow.Resources>
+
+    <!-- Content -->
+    <catel:StackGrid>
+        <catel:StackGrid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" MaxHeight="400" />
+            <RowDefinition Height="Auto" />
+        </catel:StackGrid.RowDefinitions>
+
+        <catel:StackGrid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </catel:StackGrid.ColumnDefinitions>
+
+        <Label Content="Please select the addin you want to configure for the current solution:" />
+        <Button Command="{Binding Refresh}" ToolTip="Refresh addins in current solution" Width="26" Height="26">
+            <Image Source="/FodyVSPackage;component/Resources/Refresh.png" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Button>
+
+        <ScrollViewer catel:StackGrid.ColumnSpan="2" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="addinsItemsControl" ItemsSource="{Binding AvailableAddins}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <catel:StackGrid>
+                            <catel:StackGrid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </catel:StackGrid.ColumnDefinitions>
+
+                            <Label Content="{Binding Name}" />
+                            <Button Command="{Binding ElementName=addinsItemsControl, Path=DataContext.Go}" CommandParameter="{Binding}" ToolTip="Manage" Width="26" Height="26">
+                                <Image Source="/FodyVSPackage;component/Resources/Go.png" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Button>
+                        </catel:StackGrid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <catel:LinkLabel catel:StackGrid.ColumnSpan="2" Content="Find more Fody addins..." Url="http://nuget.org/packages?q=fody"
+                         ClickBehavior="OpenUrlInBrowser" />
+    </catel:StackGrid>
+</catel:DataWindow>

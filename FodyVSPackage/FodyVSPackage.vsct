@@ -13,7 +13,7 @@
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_PROJECT"/>
       </Group>
     </Groups>
-    <Buttons>
+    <Buttons>   
       <Button guid="packageCmdSet" id="cmdConfigure" priority="0x0100" type="Button">
         <Parent guid="packageCmdSet" id="SubMenuGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
@@ -28,6 +28,14 @@
         <Strings>
           <CommandName>cmdDisable</CommandName>
           <ButtonText>Disable</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="packageCmdSet" id="cmdManage" priority="0x0100" type="Button">
+        <Parent guid="packageCmdSet" id="SubMenuGroup" />
+        <Icon guid="guidImages" id="bmpPic3" />
+        <Strings>
+          <CommandName>cmdConfigure</CommandName>
+          <ButtonText>Manage Fody addins...</ButtonText>
         </Strings>
       </Button>
     </Buttons>
@@ -52,10 +60,12 @@
       <IDSymbol name="MenuGroup" value="0x1020" />
       <IDSymbol name="cmdConfigure" value="0x0001" />
       <IDSymbol name="cmdDisable" value="0x0002" />
+      <IDSymbol name="cmdManage" value="0x0003" />
     </GuidSymbol>
     <GuidSymbol name="guidImages" value="{792b1773-a5ed-4266-a802-7dbf78fcba3f}" >
       <IDSymbol name="bmpPic1" value="1" />
       <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPic3" value="3" />
     </GuidSymbol>
   </Symbols>
 </CommandTable>

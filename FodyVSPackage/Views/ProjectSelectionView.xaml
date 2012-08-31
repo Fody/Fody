@@ -1,0 +1,53 @@
+﻿<catel:DataWindow x:Class="FodyVSPackage.Views.ProjectSelectionView"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				  xmlns:catel="http://catel.codeplex.com" 
+                  xmlns:converters="clr-namespace:FodyVSPackage.Wpf">
+
+    <!-- Resources -->
+    <catel:DataWindow.Resources>
+        <converters:SolutionItemToImageConverter x:Key="SolutionItemToImageConverter" />
+    </catel:DataWindow.Resources>
+
+    <!-- Content -->
+    <catel:StackGrid>
+        <catel:StackGrid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" MaxHeight="400" />
+        </catel:StackGrid.RowDefinitions>
+
+        <Label Content="Please select the projects for which the addin must be enabled" />
+
+        <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <TreeView ItemsSource="{Binding Projects}">
+                <TreeView.ItemContainerStyle>
+                    <Style>
+                        <Setter Property="TreeViewItem.IsExpanded" Value="True" />
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding ChildProjects, Mode=OneTime}">
+                        <catel:StackGrid>
+                            <catel:StackGrid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </catel:StackGrid.ColumnDefinitions>
+
+                            <Image Width="16" Height="16" Source="{Binding SolutionItem, Converter={StaticResource SolutionItemToImageConverter}}" />
+                            <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding Name}" />
+                        </catel:StackGrid>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+
+            <!--<ItemsControl ItemsSource="{Binding Projects}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox IsChecked="{Binding IsSelected}" Content="{Binding Name}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>-->
+        </ScrollViewer>
+    </catel:StackGrid>
+</catel:DataWindow>
