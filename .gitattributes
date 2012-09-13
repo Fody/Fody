@@ -1,6 +1,10 @@
 # Auto detect text files and perform LF normalization
 * text eol=crlf
 
+*.xml     eol=crlf
+*.targets eol=crlf
+
+
 # Custom for Visual Studio
 *.cs     diff=csharp
 *.sln    merge=union
