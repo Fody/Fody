@@ -14,4 +14,8 @@
 *.dbproj merge=union
 
 # Denote all files that are truly binary and should not be modified.
+*.dll binary
+*.exe binary
+*.png binary
+*.ico binary
 *.snk binary
