@@ -135,12 +135,12 @@
     <Compile Include="ProcessExtensions.cs" />
     <Compile Include="Wpf\EnumBooleanConverter.cs" />
     <Compile Include="MessageDisplayer.cs" />
-    <Compile Include="ExceptionDialog.cs" />
-    <Compile Include="ExceptionExtensions.cs" />
-    <Compile Include="ExceptionWindow.xaml.cs">
+    <Compile Include="ExceptionHandling\ExceptionDialog.cs" />
+    <Compile Include="ExceptionHandling\ExceptionExtensions.cs" />
+    <Compile Include="ExceptionHandling\ExceptionWindow.xaml.cs">
       <DependentUpon>ExceptionWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ExceptionWindowModel.cs" />
+    <Compile Include="ExceptionHandling\ExceptionWindowModel.cs" />
     <Compile Include="Wpf\HyperlinkEx.cs" />
     <Compile Include="Wpf\InverseBooleanConverter.cs" />
     <Compile Include="MenuConfigure.cs" />
@@ -250,7 +250,7 @@
     <Content Include="Resources\Package.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ExceptionWindow.xaml">
+    <Page Include="ExceptionHandling\ExceptionWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
