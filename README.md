@@ -86,3 +86,7 @@ For supplying a build server
 http://codebetter.com/
 
 ![CodeBetter.png](https://raw.github.com/wiki/SimonCropp/Fody/CodeBetter.png)
+
+## License
+
+Fody is licensed under MIT. Refer to license.txt for more information.
