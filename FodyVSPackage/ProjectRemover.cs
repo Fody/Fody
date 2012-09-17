@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -20,7 +19,7 @@ public class ProjectRemover
     void RemoveFodyWeaversXmlContent()
     {
         xDocument.Descendants()
-            .Where(x => string.Equals((string)x.Attribute("Include"), "FodyWeavers.xml", StringComparison.InvariantCultureIgnoreCase))
+            .Where(x => (string)x.Attribute("Include")== "FodyWeavers.xml")
             .Remove();
     }
 
@@ -40,7 +39,7 @@ public class ProjectRemover
             .Where(x =>
                        {
                            var xAttribute = x.Attribute("Project");
-                           return xAttribute != null && xAttribute.Value.EndsWith("Fody.targets", StringComparison.InvariantCultureIgnoreCase);
+                           return xAttribute != null && xAttribute.Value.EndsWith("Fody.targets");
                        })
             .Remove();
     }

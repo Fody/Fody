@@ -41,6 +41,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <None Include="FodyWeavers.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs" />
@@ -97,4 +100,5 @@
     <Copy SourceFiles="$(TargetDir)Fody.pdb" DestinationFolder="$(SolutionDir)ForSample" />
     <Copy SourceFiles="$(SolutionDir)Fody.targets" DestinationFolder="$(SolutionDir)ForSample" />
   </Target>
+  <Import Project="$(ProjectPath)\..\..\Tools\Fody\Fody.targets" />
 </Project>

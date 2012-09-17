@@ -17,7 +17,7 @@ public class ContainsFodyChecker
                 .Any(x =>
                          {
                              var xAttribute = x.Attribute("Project");
-                             return xAttribute != null && xAttribute.Value.EndsWith("Fody.targets", StringComparison.InvariantCultureIgnoreCase);
+                             return xAttribute != null && xAttribute.Value.EndsWith("Fody.targets");
                          });
         }
         catch (Exception exception)

@@ -17,7 +17,7 @@ public partial class Processor
     public virtual string FindAddinAssembly(string packageName)
     {
         var packageFileName = packageName + ".Fody.dll";
-        return fodyFiles.Where(x => x.EndsWith(packageFileName, StringComparison.OrdinalIgnoreCase))
+        return fodyFiles.Where(x => x.EndsWith(packageFileName))
             .OrderByDescending(AssemblyVersionReader.GetAssemblyVersion)
             .FirstOrDefault();
     }

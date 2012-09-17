@@ -95,7 +95,7 @@ public class TaskFileReplacer
                 return;
             }
             var allText = File.ReadAllLines(TaskFilePath);
-            var fileContainsDirectory = allText.Any(line => string.Equals(line, directoryInfo, StringComparison.InvariantCultureIgnoreCase));
+            var fileContainsDirectory = allText.Any(line => line == directoryInfo);
             if (!fileContainsDirectory)
             {
                 messageDisplayer.ShowInfo("Fody: Restart of Visual Studio required to update Fody.");
