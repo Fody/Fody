@@ -12,6 +12,7 @@ public class NoWeaversConfiguredInstanceLinkerTests
         var mock = new Mock<Processor>();
         mock.Setup(x => x.WeaverProjectContainsType("ModuleWeaver"))
             .Returns(true);
+        mock.CallBase = true;
         var processor = mock.Object;
 
         processor.WeaverAssemblyPath = "Path";

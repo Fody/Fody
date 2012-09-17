@@ -11,6 +11,7 @@ public class WeaversConfiguredInstanceLinkerTests
         var mock = new Mock<Processor>();
         mock.Setup(x => x.WeaverProjectContainsType("CustomWeaver"))
             .Returns(true);
+        mock.CallBase = true;
         var processor = mock.Object;
         processor.WeaverAssemblyPath = "Path";
 
@@ -28,12 +29,12 @@ public class WeaversConfiguredInstanceLinkerTests
     [Test]
     public void WeaverInAddin()
     {
-
-
         var mock = new Mock<Processor>();
         mock.Setup(x => x.WeaverProjectContainsType("AddinName"))
             .Returns(false);
         mock.Setup(x => x.FindAssemblyPath("AddinName")).Returns("Path");
+
+        mock.CallBase = true;
 
         var processor = mock.Object;
         
