@@ -8,7 +8,7 @@ public partial class Processor
     public string SolutionConfigFilePath;
 
 
-    public virtual void FindProjectWeavers()
+    public void FindProjectWeavers()
     {
         var fodyDirConfigFilePath = Path.Combine(AssemblyLocation.CurrentDirectory(), "FodyWeavers.xml");
         if (File.Exists(fodyDirConfigFilePath))

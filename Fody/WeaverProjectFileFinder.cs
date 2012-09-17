@@ -7,7 +7,7 @@ public partial class Processor
     public string WeaverAssemblyPath;
     public bool FoundWeaverProjectFile;
 
-    public virtual void FindWeaverProjectFile()
+    public void FindWeaverProjectFile()
     {
         WeaverAssemblyPath = GetAllAssemblyFiles()
             .OrderByDescending(File.GetLastWriteTime)

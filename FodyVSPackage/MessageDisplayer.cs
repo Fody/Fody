@@ -14,7 +14,7 @@ public class MessageDisplayer
         this.errorProvider = errorProvider;
     }
 
-    public virtual void ShowError(string error)
+    public void ShowError(string error)
     {
         var errorTask = new ErrorTask
                             {
@@ -25,7 +25,7 @@ public class MessageDisplayer
         errorProvider.Tasks.Add(errorTask);
     }
 
-    public virtual void ShowInfo(string info)
+    public void ShowInfo(string info)
     {
         var task = new Task
                        {

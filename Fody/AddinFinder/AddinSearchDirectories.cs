@@ -18,7 +18,7 @@ public partial class AddinFinder
     public ILogger Logger;
     public string SolutionDir;
 
-    public virtual void LogAddinSearchPaths()
+    public void LogAddinSearchPaths()
     {
         AddinSearchPaths = AddinSearchPaths.Distinct().ToList();
         foreach (var searchPath in AddinSearchPaths)

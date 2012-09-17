@@ -14,7 +14,7 @@ public partial class AddinFinder
             .ToList();
     }
 
-    public virtual string FindAddinAssembly(string packageName)
+    public string FindAddinAssembly(string packageName)
     {
         var packageFileName = packageName + ".Fody.dll";
         return fodyFiles.Where(x => x.EndsWith(packageFileName))

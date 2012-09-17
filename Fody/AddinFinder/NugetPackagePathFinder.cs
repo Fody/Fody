@@ -15,7 +15,7 @@ public partial class AddinFinder
     }
 
 
-    public virtual void FindNugetPackagePath()
+    public void FindNugetPackagePath()
     {
         PackagesPath = GetPackagesPath();
         Logger.LogInfo(string.Format("Packages path is '{0}'", PackagesPath));

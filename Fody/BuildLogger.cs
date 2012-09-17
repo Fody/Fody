@@ -34,12 +34,12 @@ public class BuildLogger : MarshalByRefObject, ILogger
         }
     }
 
-    public virtual void LogWarning(string message)
+    public void LogWarning(string message)
     {
         LogWarning(message, null, 0, 0, 0, 0);
     }
 
-    public virtual void LogWarning(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
+    public void LogWarning(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
     {
         stringBuilder.AppendLine("  Warning: " + message);
         BuildEngine.LogWarningEvent(new BuildWarningEventArgs("", "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber, PrependMessage(message), "", "Fody"));
@@ -55,17 +55,17 @@ public class BuildLogger : MarshalByRefObject, ILogger
         currentWeaverName = null;
     }
 
-    public virtual void LogInfo(string message)
+    public void LogInfo(string message)
     {
         stringBuilder.AppendLine("  " + message);
     }
 
-    public virtual void LogError(string message)
+    public void LogError(string message)
     {
         LogError(message, null, 0, 0, 0, 0);
     }
 
-    public virtual void LogError(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
+    public void LogError(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
     {
         ErrorOccurred = true;
         stringBuilder.AppendLine("  Error: " + message);
@@ -83,7 +83,7 @@ public class BuildLogger : MarshalByRefObject, ILogger
     }
 
 
-    public virtual void Flush()
+    public void Flush()
     {
         var message = stringBuilder.ToString();
         //message = message.Substring(0, message.Length - 2);
