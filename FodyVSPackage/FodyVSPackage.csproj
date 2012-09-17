@@ -120,16 +120,40 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Fody\AddinFinder\AddinFilesEnumerator.cs">
+      <Link>AddinFinder\AddinFilesEnumerator.cs</Link>
+    </Compile>
+    <Compile Include="..\Fody\AddinFinder\AddinSearchDirectories.cs">
+      <Link>AddinFinder\AddinSearchDirectories.cs</Link>
+    </Compile>
+    <Compile Include="..\Fody\AddinFinder\AddNugetDirectoryToAddinSearch.cs">
+      <Link>AddinFinder\AddNugetDirectoryToAddinSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\Fody\AddinFinder\AddToolsAssemblyLocationToAddinSearch.cs">
+      <Link>AddinFinder\AddToolsAssemblyLocationToAddinSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\Fody\AddinFinder\AddToolsDirectoryToAddinSearch.cs">
+      <Link>AddinFinder\AddToolsDirectoryToAddinSearch.cs</Link>
+    </Compile>
+    <Compile Include="..\Fody\AddinFinder\NugetPackagePathFinder.cs">
+      <Link>AddinFinder\NugetPackagePathFinder.cs</Link>
+    </Compile>
+    <Compile Include="..\Fody\AssemblyLocation.cs">
+      <Link>AssemblyLocation.cs</Link>
+    </Compile>
     <Compile Include="..\NugetConfigReader.cs">
-      <Link>NugetConfigReader.cs</Link>
+      <Link>AddinFinder\NugetConfigReader.cs</Link>
     </Compile>
     <Compile Include="AllProjectFinder.cs" />
+    <Compile Include="AssemblyVersionReader.cs" />
     <Compile Include="ConfigureMenuCallback.cs" />
     <Compile Include="ContainsFodyChecker.cs" />
     <Compile Include="CurrentProjectFinder.cs" />
     <Compile Include="CurrentVersion.cs" />
     <Compile Include="DisableMenuConfigure.cs" />
     <Compile Include="FodyDirectoryFinder.cs" />
+    <Compile Include="ILogger.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="MenuStatusChecker.cs" />
     <Compile Include="MSBuildKiller.cs" />
     <Compile Include="PathEx.cs" />

@@ -78,11 +78,9 @@
     <Compile Include="WeaverProjectFileFinderTests.cs" />
     <Compile Include="WeaversHistoryTests.cs" />
     <Compile Include="WeaversXmlHistoryTests.cs" />
-    <Compile Include="SearchDirectories\AddMsBuildConfigToAddinSearchTests.cs" />
     <Compile Include="AssemblyPathFinderTests.cs" />
     <Compile Include="DynamicTests.cs" />
     <Compile Include="FileChangedCheckerTests.cs" />
-    <Compile Include="ModuleWeaverTypeLoaderTests.cs" />
     <Compile Include="NugetPackagePathFinderTests.cs" />
     <Compile Include="ProjectWeaversReaderTests\ProjectWeaversReaderTests.cs" />
     <Compile Include="SearchDirectories\AddNugetDirectoryToAddinSearchTests.cs" />

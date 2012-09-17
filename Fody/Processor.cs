@@ -5,7 +5,6 @@ using Microsoft.Build.Framework;
 
 public partial class Processor
 {
-    public string AddinSearchPathsFromMsBuild;
     public string AssemblyPath;
     public string IntermediateDir;
     public string KeyFilePath;
@@ -14,6 +13,8 @@ public partial class Processor
     public string References;
     public string SolutionDir;
     public IBuildEngine BuildEngine;
+
+    AddinFinder addinFinder;
 
     public BuildLogger Logger;
     static object locker;
@@ -99,12 +100,15 @@ public partial class Processor
     void FindWeavers()
     {
         ReadProjectWeavers();
-        
-        FindAddinDirectories();
+        addinFinder = new AddinFinder
+            {
+                Logger = Logger, 
+                SolutionDir = SolutionDir
+            };
+        addinFinder.FindAddinDirectories();
 
         FindWeaverProjectFile();
 
-        CacheAllFodyAddinDlls();
 
         ConfigureWhenWeaversFound();
 

@@ -10,7 +10,7 @@ public class AddinDirectoriesTests
     {
         var loggerMock = new Mock<BuildLogger>();
         loggerMock.Setup(x => x.LogInfo("Directory added to addin search paths 'Path'."));
-        var processor = new Processor
+        var processor = new AddinFinder
                                    {
                                        AddinSearchPaths = new List<string> {"Path"},
                                        Logger = loggerMock.Object

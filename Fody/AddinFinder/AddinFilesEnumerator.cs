@@ -1,11 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-public partial class Processor
+public partial class AddinFinder
 {
     List<string> fodyFiles;
+
 
     public void CacheAllFodyAddinDlls()
     {

@@ -10,7 +10,7 @@ public class NugetPackagePathFinderTests
     [Test]
     public void GetPackagesPathDefault()
     {
-        var processor = new Processor
+        var processor = new AddinFinder
             {
                 Logger = new Mock<BuildLogger>().Object,
                 SolutionDir = Environment.CurrentDirectory
@@ -22,7 +22,7 @@ public class NugetPackagePathFinderTests
     [Test]
     public void GetPackagesPathWithNugetConfig()
     {
-        var processor = new Processor
+        var processor = new AddinFinder
             {
                 Logger = new Mock<BuildLogger>().Object,
                 SolutionDir = "DirWithNugetConfig"
@@ -34,7 +34,7 @@ public class NugetPackagePathFinderTests
     [Test]
     public void GetPackagesPathWithNugetConfigAndNoPath()
     {
-        var processor = new Processor
+        var processor = new AddinFinder
             {
                 Logger = new Mock<BuildLogger>().Object,
                 SolutionDir = "DirWithNugetConfigAndNoPath"

@@ -9,7 +9,7 @@ public class AddToolsSolutionDirectoryToAddinSearchTests
     public void Simple()
     {
         var logger = new Mock<BuildLogger>().Object;
-        var processor = new Processor
+        var processor = new AddinFinder
             {
                 Logger = logger,
                 SolutionDir = "Solution"

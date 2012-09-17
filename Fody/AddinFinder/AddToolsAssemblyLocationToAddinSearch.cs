@@ -1,6 +1,6 @@
 using System.IO;
 
-public partial class Processor
+public partial class AddinFinder
 {
 
     public void AddToolsAssemblyLocationToAddinSearch()

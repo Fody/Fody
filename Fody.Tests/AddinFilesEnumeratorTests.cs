@@ -9,7 +9,7 @@ public class AddinFilesEnumeratorTests
     [Test]
     public void NotFound()
     {
-        var processor = new Processor
+        var processor = new AddinFinder
             {
                 AddinSearchPaths = new List<string>
                     {
@@ -23,7 +23,7 @@ public class AddinFilesEnumeratorTests
     [Test]
     public void Valid()
     {
-        var processor = new Processor
+        var processor = new AddinFinder
             {
                 AddinSearchPaths = new List<string>
                     {

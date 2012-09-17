@@ -6,8 +6,6 @@ namespace Fody
 
     public class WeavingTask : Task
     {
-        public string AddinSearchPaths { get; set; }
-
         [Required]
         public string AssemblyPath { set; get; }
 
@@ -28,7 +26,6 @@ namespace Fody
         {
             return new Processor
                        {
-                           AddinSearchPathsFromMsBuild = AddinSearchPaths,
                            AssemblyPath = AssemblyPath,
                            IntermediateDir = IntermediateDir,
                            KeyFilePath = KeyFilePath,

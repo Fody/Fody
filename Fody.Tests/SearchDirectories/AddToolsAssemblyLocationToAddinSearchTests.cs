@@ -11,7 +11,7 @@ public class AddToolsAssemblyLocationToAddinSearchTests
         var path = Path.Combine(Directory.GetParent(AssemblyLocation.CurrentDirectory()).FullName, "Tools");
         Directory.CreateDirectory(path);
         var logger = new Mock<BuildLogger>().Object;
-        var processor = new Processor
+        var processor = new AddinFinder
             {
                 Logger = logger,
                 SolutionDir = "Solution"

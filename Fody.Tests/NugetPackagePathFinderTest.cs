@@ -10,7 +10,7 @@ public class NugetPackagePathFinderTest
     [Test]
     public void NoNugetConfig()
     {
-        var processor = new Processor
+        var processor = new AddinFinder
             {
                 SolutionDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../../NugetPackagePathFinder/FakeSolution")),
                 Logger = new Mock<BuildLogger>().Object

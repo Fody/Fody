@@ -76,10 +76,6 @@
       <Project>{2356DD30-B9AC-48ED-A0A1-103382A9CFC3}</Project>
       <Name>FodyVSPackage</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Fody\Fody.csproj">
-      <Project>{64880F43-E6C1-428E-B00A-E0374697B5CF}</Project>
-      <Name>Fody</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestProjects\ProjectWithNoWeaving.csproj">
