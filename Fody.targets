@@ -12,7 +12,6 @@
 	  AfterTargets="CopyFilesToOutputDirectory"
 	  Name="FodyTarget">
     <Fody.WeavingTask 
-      AddinSearchPaths="$(FodyAddinSearchPaths)"
 		  AssemblyPath="$(TargetPath)" 
 		  IntermediateDir="$(IntermediateDir)"
 		  KeyFilePath="$(KeyOriginatorFile)" 
