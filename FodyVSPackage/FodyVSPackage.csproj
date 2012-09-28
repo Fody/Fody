@@ -309,9 +309,9 @@
   <Import Project="$(VsSDKInstall)Microsoft.VsSDK.targets" />
   <UsingTask TaskName="FileUpdate" AssemblyFile="$(SolutionDir)Tools\SimpleMsBuildTasks.dll" />
   <UsingTask TaskName="EnvironmentVariable" AssemblyFile="$(SolutionDir)Tools\SimpleMsBuildTasks.dll" />
-  <UsingTask TaskName="PepitaGet.WeavingTask" AssemblyFile="$(SolutionDir)Tools\PepitaGet.dll" />
+  <Import Project="$(ProjectPath)\..\..\Tools\Pepita\PepitaGet.targets" />
   <Target Name="BeforeBuild" DependsOnTargets="ConfigureVsSDKBuild">
-    <PepitaGet.WeavingTask />
+
     <GetAssemblyIdentity AssemblyFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll">
       <Output TaskParameter="Assemblies" ItemName="WeaverAssembly" />
     </GetAssemblyIdentity>

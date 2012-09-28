@@ -69,8 +69,5 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <UsingTask TaskName="PepitaGet.RestorePackagesTask" AssemblyFile="$(SolutionDir)..\Tools\PepitaGet.dll" />
-  <Target Name="BeforeBuild">
-    <PepitaGet.RestorePackagesTask />
-  </Target>
+  <Import Project="$(ProjectPath)\..\..\Tools\Pepita\PepitaGet.targets" />
 </Project>
