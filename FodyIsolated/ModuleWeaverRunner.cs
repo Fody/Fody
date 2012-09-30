@@ -15,13 +15,9 @@ public class ModuleWeaverRunner
         {
             weaverInstance.Execute();
         }
-        catch (RuntimeBinderException exception)
+        catch (RuntimeBinderException)
         {
-            if (exception.IsIncorrectParams() || exception.IsNoDefinition())
-            {
                 throw new WeavingException("ModuleWeaver must contain a method with the signature 'public void Execute()'.");
-            }
-            throw;
         }
         finally
         {

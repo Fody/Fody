@@ -57,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContentsFinderTests.cs" />
-    <Compile Include="CrossThreadRunner.cs" />
     <Compile Include="CurrentVersionTests.cs" />
     <Compile Include="ExceptionExtensionsTests.cs" />
     <Compile Include="ExceptionWindowTests.cs" />

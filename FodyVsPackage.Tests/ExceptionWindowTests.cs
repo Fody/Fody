@@ -7,20 +7,16 @@ public class ExceptionWindowTests
 
     [Test]
     [Ignore]
+    [STAThread]
     public void Launch()
     {
         var exception = GetException();
         var model = new ExceptionWindowModel
-                                       {
-                                           ExceptionText = exception.ExceptionHierarchyToString(),
-                                       };
-        var runner = new CrossThreadRunner();
-        runner.RunInSta(() =>
-                            {
-                                var window = new ExceptionWindow(model);
-                                window.ShowDialog();
-                            });
-
+            {
+                ExceptionText = exception.ExceptionHierarchyToString(),
+            };
+        var window = new ExceptionWindow(model);
+        window.ShowDialog();
     }
 
     Exception GetException()

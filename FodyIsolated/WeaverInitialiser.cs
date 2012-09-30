@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using Microsoft.CSharp.RuntimeBinder;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
@@ -39,140 +38,28 @@ public class WeaverInitialiser
         if (weaverEntry.Element != null)
         {
             var weaverElement = XElement.Parse(weaverEntry.Element);
-            SetConfig(weaverInstance, weaverElement);
+            weaverInstance.SetProperty("Config",weaverElement);
         }
-        SetModule(weaverInstance);
-        SetAssemblyResolver(weaverInstance);
-        SetAssemblyPath(weaverInstance);
-        SetLogInfo(weaverInstance);
-        SetLogWarning(weaverInstance);
-        SetLogWarningPoint(weaverInstance);
-        SetLogError(weaverInstance);
-        SetLogErrorPoint(weaverInstance);
+        var type = weaverInstance.GetType();
+        SetModule(weaverInstance, type);
+        weaverInstance.SetProperty("AssemblyResolver", AssemblyResolver);
+        weaverInstance.SetProperty("AssemblyPath", InnerWeaver.AssemblyPath);
+        weaverInstance.SetProperty("LogInfo", new Action<string>(s => Logger.LogInfo(s)));
+        weaverInstance.SetProperty("LogWarning", new Action<string>(s => Logger.LogWarning(s)));
+        weaverInstance.SetProperty("LogWarningPoint", new Action<string, SequencePoint>(LogWarningPoint));
+        weaverInstance.SetProperty("LogError", new Action<string>(s => Logger.LogError(s)));
+        weaverInstance.SetProperty("LogErrorPoint", new Action<string, SequencePoint>(LogErrorPoint));
     }
 
-    void SetModule(dynamic instance)
+    void SetModule(object instance, Type type)
     {
-        try
+        var property = type.GetProperty<ModuleDefinition>("ModuleDefinition");
+        if (property == null)
         {
-            instance.ModuleDefinition = ModuleDefinition;
+            var message = string.Format("{0} must contain a public instance settable property named 'ModuleDefinition' of type 'Mono.Cecil.ModuleDefinition'.", type.GetTypeName());
+            throw new WeavingException(message);
         }
-        catch (RuntimeBinderException exception)
-        {
-            if (exception.IsNoDefinition())
-            {
-                throw new WeavingException(string.Format("{0} must contain a public property named 'ModuleDefinition' of type 'Mono.Cecil.ModuleDefinition'.", ((object) instance).GetTypeName()));
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'ModuleDefinition' of '{0}' must not be static.", ((object) instance).GetTypeName()));
-            }
-            if (exception.IsWrongType())
-            {
-                throw new WeavingException(string.Format("Property 'ModuleDefinition' of '{0}' has an incorrect type. Expected 'Mono.Cecil.ModuleDefinition'.", ((object) instance).GetTypeName()));
-            }
-            throw;
-        }
-        catch (RuntimeBinderInternalCompilerException)
-        {
-            var instanceAsObject = (object) instance;
-            var propertyInfo = instanceAsObject.GetType().GetProperty("ModuleDefinition");
-            if (propertyInfo == null)
-            {
-                throw;
-            }
-            var targetPropType = propertyInfo.PropertyType;
-            var actualModuleType = ModuleDefinition.GetType();
-            if (targetPropType != actualModuleType)
-            {
-                throw new WeavingException(string.Format("{0} should contain a 'ModuleDefinition' property of type '{1}', but instead contains one of type '{2}'.", instanceAsObject.GetTypeName(), actualModuleType.AssemblyQualifiedName, targetPropType.AssemblyQualifiedName));
-            }
-            throw;
-        }
-    }
-
-    void SetAssemblyResolver(dynamic instance)
-    {
-        try
-        {
-            instance.AssemblyResolver = AssemblyResolver;
-        }
-        catch (RuntimeBinderException exception)
-        {
-            if (exception.IsNoDefinition())
-            {
-                return;
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'AssemblyResolver' of '{0}' must not be static.", ((object) instance).GetTypeName()));
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'AssemblyResolver' of '{0}' must not be static.", ((object) instance).GetTypeName()));
-            }
-            if (exception.IsWrongType())
-            {
-                throw new WeavingException(string.Format("Property 'AssemblyResolver' of '{0}' has an incorrect type. Expected 'Mono.Cecil.IAssemblyResolver'.", ((object) instance).GetTypeName()));
-            }
-            throw;
-        }
-    }
-
-    void SetLogWarning(dynamic instance)
-    {
-        try
-        {
-            instance.LogWarning = new Action<string>(s => Logger.LogWarning(s));
-        }
-        catch (RuntimeBinderException exception)
-        {
-            if (exception.IsNoDefinition())
-            {
-                return;
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'LogWarning' of '{0}' must not be static.", ((object) instance).GetTypeName()));
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'LogWarning' of '{0}' must not be static.", ((object) instance).GetTypeName()));
-            }
-            if (exception.IsWrongType())
-            {
-                throw new WeavingException(string.Format("Property 'LogWarning' of '{0}' has an incorrect type. Expected 'Action<string>'.", ((object) instance).GetTypeName()));
-            }
-            throw;
-        }
-    }
-    
-    void SetLogWarningPoint(dynamic instance)
-    {
-        try
-        {
-            instance.LogWarningPoint = new Action<string, SequencePoint>(LogWarningPoint);
-        }
-        catch (RuntimeBinderException exception)
-        {
-            if (exception.IsNoDefinition())
-            {
-                return;
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'LogWarningPoint' of '{0}' must not be static.", ((object)instance).GetTypeName()));
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'LogWarningPoint' of '{0}' must not be static.", ((object)instance).GetTypeName()));
-            }
-            if (exception.IsWrongType())
-            {
-                throw new WeavingException(string.Format("Property 'LogWarningPoint' of '{0}' has an incorrect type. Expected 'Action<string, SequencePoint>'.", ((object)instance).GetTypeName()));
-            }
-            throw;
-        }
+        property.SetValue(instance, ModuleDefinition, null);
     }
 
     void LogWarningPoint(string message, SequencePoint point)
@@ -187,62 +74,6 @@ public class WeaverInitialiser
         }
     }
 
-    void SetLogError(dynamic instance)
-    {
-        try
-        {
-            instance.LogError = new Action<string>(s => Logger.LogError(s));
-        }
-        catch (RuntimeBinderException exception)
-        {
-            if (exception.IsNoDefinition())
-            {
-                return;
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'LogError' of '{0}' must not be static.", ((object) instance).GetTypeName()));
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'LogError' of '{0}' must not be static.", ((object)instance).GetTypeName()));
-            }
-            if (exception.IsWrongType())
-            {
-                throw new WeavingException(string.Format("Property 'LogError' of '{0}' has an incorrect type. Expected 'Action<string>'.", ((object)instance).GetTypeName()));
-            }
-            throw;
-        }
-    }
-
-    void SetLogErrorPoint(dynamic instance)
-    {
-        try
-        {
-            instance.LogErrorPoint = new Action<string, SequencePoint>(LogErrorPoint);
-        }
-        catch (RuntimeBinderException exception)
-        {
-            if (exception.IsNoDefinition())
-            {
-                return;
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'SetLogErrorPoint' of '{0}' must not be static.", ((object)instance).GetTypeName()));
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'SetLogErrorPoint' of '{0}' must not be static.", ((object)instance).GetTypeName()));
-            }
-            if (exception.IsWrongType())
-            {
-                throw new WeavingException(string.Format("Property 'SetLogErrorPoint' of '{0}' has an incorrect type. Expected 'Action<string, SequencePoint>'.", ((object)instance).GetTypeName()));
-            }
-            throw;
-        }
-    }
-
     void LogErrorPoint(string message, SequencePoint point)
     {
         if (point == null)
@@ -254,88 +85,4 @@ public class WeaverInitialiser
             Logger.LogError(message, point.Document.Url, point.StartLine, point.StartColumn, point.EndLine, point.EndColumn);
         }
     }
-
-    void SetAssemblyPath(dynamic instance)
-    {
-        try
-        {
-            instance.AssemblyPath = InnerWeaver.AssemblyPath;
-        }
-        catch (RuntimeBinderException exception)
-        {
-            if (exception.IsNoDefinition())
-            {
-                return;
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'AssemblyPath' of '{0}' must not be static.", ((object) instance).GetTypeName()));
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'AssemblyPath' of '{0}' must not be static.", ((object) instance).GetTypeName()));
-            }
-            if (exception.IsWrongType())
-            {
-                throw new WeavingException(string.Format("Property 'AssemblyPath' of '{0}' has an incorrect type. Expected 'string'.", ((object) instance).GetTypeName()));
-            }
-            throw;
-        }
-    }
-
-    void SetLogInfo(dynamic instance)
-    {
-        try
-        {
-            instance.LogInfo = new Action<string>(s => Logger.LogInfo(s));
-        }
-        catch (RuntimeBinderException exception)
-        {
-            if (exception.IsNoDefinition())
-            {
-                return;
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'LogInfo' of '{0}' must not be static.", ((object) instance).GetTypeName()));
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'LogInfo' of '{0}' must not be static.", ((object) instance).GetTypeName()));
-            }
-            if (exception.IsWrongType())
-            {
-                throw new WeavingException(string.Format("Property 'LogInfo' of '{0}' has an incorrect type. Expected 'Action<string>'.", ((object) instance).GetTypeName()));
-            }
-            throw;
-        }
-    }
-
-    void SetConfig(dynamic instance, XElement weaverConfig)
-    {
-        try
-        {
-            instance.Config = weaverConfig;
-        }
-        catch (RuntimeBinderException exception)
-        {
-            if (exception.IsNoDefinition())
-            {
-                return;
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'Config' of '{0}' must not be static.", ((object) instance).GetTypeName()));
-            }
-            if (exception.IsStatic())
-            {
-                throw new WeavingException(string.Format("Property 'Config' of '{0}' must not be static.", ((object) instance).GetTypeName()));
-            }
-            if (exception.IsWrongType())
-            {
-                throw new WeavingException(string.Format("Property 'Config' of '{0}' has an incorrect type. Expected 'XElement'.", ((object) instance).GetTypeName()));
-            }
-        }
-    }
-
 }
