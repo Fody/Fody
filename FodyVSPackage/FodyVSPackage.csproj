@@ -120,29 +120,8 @@
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Fody\AddinFinder\AddinFilesEnumerator.cs">
-      <Link>AddinFinder\AddinFilesEnumerator.cs</Link>
-    </Compile>
-    <Compile Include="..\Fody\AddinFinder\AddinSearchDirectories.cs">
-      <Link>AddinFinder\AddinSearchDirectories.cs</Link>
-    </Compile>
-    <Compile Include="..\Fody\AddinFinder\AddNugetDirectoryToAddinSearch.cs">
-      <Link>AddinFinder\AddNugetDirectoryToAddinSearch.cs</Link>
-    </Compile>
-    <Compile Include="..\Fody\AddinFinder\AddToolsAssemblyLocationToAddinSearch.cs">
-      <Link>AddinFinder\AddToolsAssemblyLocationToAddinSearch.cs</Link>
-    </Compile>
-    <Compile Include="..\Fody\AddinFinder\AddToolsDirectoryToAddinSearch.cs">
-      <Link>AddinFinder\AddToolsDirectoryToAddinSearch.cs</Link>
-    </Compile>
-    <Compile Include="..\Fody\AddinFinder\NugetPackagePathFinder.cs">
-      <Link>AddinFinder\NugetPackagePathFinder.cs</Link>
-    </Compile>
     <Compile Include="..\Fody\AssemblyLocation.cs">
       <Link>AssemblyLocation.cs</Link>
-    </Compile>
-    <Compile Include="..\NugetConfigReader.cs">
-      <Link>AddinFinder\NugetConfigReader.cs</Link>
     </Compile>
     <Compile Include="AllProjectFinder.cs" />
     <Compile Include="AssemblyVersionReader.cs" />
@@ -311,7 +290,6 @@
   <UsingTask TaskName="EnvironmentVariable" AssemblyFile="$(SolutionDir)Tools\SimpleMsBuildTasks.dll" />
   <Import Project="$(ProjectPath)\..\..\Tools\Pepita\PepitaGet.targets" />
   <Target Name="BeforeBuild" DependsOnTargets="ConfigureVsSDKBuild">
-
     <GetAssemblyIdentity AssemblyFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll">
       <Output TaskParameter="Assemblies" ItemName="WeaverAssembly" />
     </GetAssemblyIdentity>
