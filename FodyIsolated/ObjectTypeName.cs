@@ -16,7 +16,7 @@ public static class ObjectTypeName
 
     public static PropertyInfo GetProperty<TProperty>(this Type type, string propertyName)
     {
-        return type.GetProperty(propertyName, BindingFlags.SetProperty | BindingFlags.Instance, null, typeof (TProperty), null, null);
+        return type.GetProperty(propertyName, BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.Public, null, typeof (TProperty), new Type[]{}, null);
     }
 
     public static void SetProperty<TProperty>(this object instance, string propertyName, TProperty propertyValue)

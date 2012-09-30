@@ -50,7 +50,7 @@ public class WeaverInitialiserTests
         public Action<string> LogError { get; set; }
         public Action<string, SequencePoint> LogErrorPoint { get; set; }
         public IAssemblyResolver AssemblyResolver { get; set; }
-        public ModuleDefinition ModuleDefinition;
+        public ModuleDefinition ModuleDefinition { get; set; }
         public bool ExecuteCalled;
 
         public void Execute()
