@@ -123,6 +123,9 @@
     <Compile Include="..\Fody\AssemblyLocation.cs">
       <Link>AssemblyLocation.cs</Link>
     </Compile>
+    <Compile Include="..\NugetConfigReader.cs">
+      <Link>NugetConfigReader.cs</Link>
+    </Compile>
     <Compile Include="AllProjectFinder.cs" />
     <Compile Include="AssemblyVersionReader.cs" />
     <Compile Include="ConfigureMenuCallback.cs" />

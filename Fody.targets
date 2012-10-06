@@ -32,4 +32,11 @@
 		  DestinationFolder="$(IntermediateDir)" 
 		  Condition="Exists('$(TargetDir)$(TargetName).mdb')"/>
   </Target>
+
+
+  <!--Support for ncrunch-->
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)*.*" />
+  </ItemGroup>
+  
 </Project>

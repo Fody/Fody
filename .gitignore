@@ -10,6 +10,7 @@
 *.user
 *.sln.docstates
 *.pidb
+*.ncrunchsolution
 
 # Build results
 [Dd]ebug/
