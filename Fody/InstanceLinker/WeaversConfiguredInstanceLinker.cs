@@ -1,3 +1,5 @@
+using System;
+
 public partial class Processor
 {
 
@@ -25,7 +27,9 @@ public partial class Processor
         var assemblyPath = FindAssemblyPath(weaverConfig.AssemblyName);
         if (assemblyPath == null)
         {
-            throw new WeavingException(string.Format("Could not find a weaver named '{0}'.", weaverConfig.AssemblyName));
+            var searchPaths = string.Join(Environment.NewLine, addinFinder.AddinSearchPaths);
+            var message = string.Format("Could not find a weaver named '{0}'. Tried:{1}{2}.", weaverConfig.AssemblyName, Environment.NewLine, searchPaths);
+            throw new WeavingException(message);
         }
         weaverConfig.AssemblyPath = assemblyPath;
         weaverConfig.TypeName = "ModuleWeaver";

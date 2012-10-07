@@ -11,6 +11,7 @@
 *.sln.docstates
 *.pidb
 *.ncrunchsolution
+*.ncrunchproject
 
 # Build results
 [Dd]ebug/
