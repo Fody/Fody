@@ -6,7 +6,7 @@ public class ModuleWeaver
 
     public void Execute()
     {
-        var typeDefinition = new TypeDefinition(GetType().Assembly.GetName().Name, "TypeInjectedBy" + GetType().Name, TypeAttributes.Public, ModuleDefinition.Import(typeof (object)));
+        var typeDefinition = new TypeDefinition(GetType().Assembly.GetName().Name, "TypeInjectedBy" + GetType().Name, TypeAttributes.Public, ModuleDefinition.Import(typeof(object)));
         ModuleDefinition.Types.Add(typeDefinition);
     }
 }

@@ -45,11 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WithNugetWeaversTest.cs" />
-    <Compile Include="WithNugetAndInSolutionWeaversTest.cs" />
-    <Compile Include="WithOnlyInSolutionWeaverTest.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -67,6 +62,11 @@
       <Project>{4D1BF1C8-5C19-4A95-BEFF-6F8D67FF7B87}</Project>
       <Name>WithOnlyInSolutionWeaver</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="WithNugetAndInSolutionWeaversTest.cs" />
+    <Compile Include="WithNugetWeaversTest.cs" />
+    <Compile Include="WithOnlyInSolutionWeaverTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(ProjectPath)\..\..\..\Tools\Pepita\PepitaGet.targets" />

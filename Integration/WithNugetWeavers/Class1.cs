@@ -1,4 +1,5 @@
-﻿namespace WithNugetWeavers
+﻿
+namespace WithNugetWeavers
 {
     public class Class1
     {
@@ -7,5 +8,6 @@
             
         }
     }
+
 }
  

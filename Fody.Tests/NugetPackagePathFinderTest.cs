@@ -1,8 +1,8 @@
+#if(DEBUG)
 using System;
 using System.IO;
 using Moq;
 using NUnit.Framework;
-#if(DEBUG)
 
 [TestFixture]
 public class NugetPackagePathFinderTest

@@ -40,6 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Weavers\Weavers.csproj">
+      <Project>{3f4c62f3-f582-452f-b455-0cd5c89d96cf}</Project>
+      <Name>Weavers</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Class1.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

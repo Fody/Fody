@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using System.IO;
 using System.Linq;
 
@@ -9,9 +9,7 @@ public partial class Processor
 
     public void FindWeaverProjectFile()
     {
-        WeaverAssemblyPath = GetAllAssemblyFiles()
-            .OrderByDescending(File.GetLastWriteTime)
-            .FirstOrDefault();
+        GetValue();
         if (WeaverAssemblyPath == null)
         {
             Logger.LogInfo("No Weaver project file found.");
@@ -24,13 +22,21 @@ public partial class Processor
         }
     }
 
-    IEnumerable<string> GetAllAssemblyFiles()
+    void GetValue()
     {
         var weaversBin = Path.Combine(SolutionDir, @"Weavers\bin");
         if (Directory.Exists(weaversBin))
         {
-            return Directory.EnumerateFiles(weaversBin, "Weavers.dll", SearchOption.AllDirectories);
+            WeaverAssemblyPath = Directory.EnumerateFiles(weaversBin, "Weavers.dll", SearchOption.AllDirectories)
+                .OrderByDescending(File.GetLastWriteTime)
+                .FirstOrDefault();
+            return;
         }
-        return Enumerable.Empty<string>();
+
+        //Hack for ncrunch
+        //<Reference Include="...\AppData\Local\NCrunch\2544\1\Integration\Weavers\bin\Debug\Weavers.dll" />
+        WeaverAssemblyPath = References.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries)
+            .FirstOrDefault(x => x.EndsWith("Weavers.dll"));
     }
+
 }

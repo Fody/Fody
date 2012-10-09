@@ -50,6 +50,13 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Weavers\Weavers.csproj">
+      <Project>{3f4c62f3-f582-452f-b455-0cd5c89d96cf}</Project>
+      <Name>Weavers</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(ProjectPath)\..\..\..\Tools\Pepita\PepitaGet.targets" />
   <Import Project="$(SolutionDir)\..\ForSample\Fody.targets" />
