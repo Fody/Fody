@@ -24,6 +24,7 @@ public class WeaverProjectFileFinderTests
         loggerMock.Verify();
     }
 
+    //TODO: add tests where weavers is in references for ncrunch support
     [Test]
     public void NotFound()
     {
@@ -35,7 +36,8 @@ public class WeaverProjectFileFinderTests
         var processor = new Processor
             {
                 SolutionDir = combine,
-                Logger = loggerMock.Object
+                Logger = loggerMock.Object,
+                References = ""
             };
 
         processor.FindWeaverProjectFile();
