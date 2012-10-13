@@ -23,23 +23,21 @@ public class ModuleWeaver
     // Will log an error message to MSBuild at a specific point in the code. OPTIONAL
     public Action<string, SequencePoint> LogErrorPoint { get; set; }
 
-
     // An instance of Mono.Cecil.IAssemblyResolver for resolving assembly references. OPTIONAL
     public IAssemblyResolver AssemblyResolver { get; set; }
-
 
     // An instance of Mono.Cecil.ModuleDefinition for processing. REQUIRED
     public ModuleDefinition ModuleDefinition { get; set; }
 
-        // Init logging delegates to make testing easier
-        public ModuleWeaver()
-        {
-            LogInfo = m => { };
-            LogWarning = m => { };
-            LogWarningPoint = (m,p) => { };
-            LogError = m => { };
-            LogErrorPoint = (m, p) => { };
-        } 
+    // Init logging delegates to make testing easier
+    public ModuleWeaver()
+    {
+        LogInfo = m => { };
+        LogWarning = m => { };
+        LogWarningPoint = (m,p) => { };
+        LogError = m => { };
+        LogErrorPoint = (m, p) => { };
+    } 
 
     public void Execute()
     {
