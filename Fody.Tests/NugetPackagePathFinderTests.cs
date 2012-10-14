@@ -13,7 +13,7 @@ public class NugetPackagePathFinderTests
         var processor = new AddinFinder
             {
                 Logger = new Mock<BuildLogger>().Object,
-                SolutionDir = Environment.CurrentDirectory
+                SolutionDirectoryPath = Environment.CurrentDirectory
             };
         processor.FindNugetPackagePath();
         Assert.AreEqual(Path.Combine(Environment.CurrentDirectory, "Packages"), processor.PackagesPath);
@@ -25,7 +25,7 @@ public class NugetPackagePathFinderTests
         var processor = new AddinFinder
             {
                 Logger = new Mock<BuildLogger>().Object,
-                SolutionDir = "DirWithNugetConfig"
+                SolutionDirectoryPath = "DirWithNugetConfig"
             };
         processor.FindNugetPackagePath();
         Assert.AreEqual(Path.Combine("DirWithNugetConfig", "PathFromConfig"), processor.PackagesPath);
@@ -37,7 +37,7 @@ public class NugetPackagePathFinderTests
         var processor = new AddinFinder
             {
                 Logger = new Mock<BuildLogger>().Object,
-                SolutionDir = "DirWithNugetConfigAndNoPath"
+                SolutionDirectoryPath = "DirWithNugetConfigAndNoPath"
             };
         processor.FindNugetPackagePath();
         Assert.AreEqual(Path.Combine("DirWithNugetConfigAndNoPath", "Packages"), processor.PackagesPath);

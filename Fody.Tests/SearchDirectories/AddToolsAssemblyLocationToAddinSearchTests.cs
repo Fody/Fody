@@ -14,7 +14,7 @@ public class AddToolsAssemblyLocationToAddinSearchTests
         var processor = new AddinFinder
             {
                 Logger = logger,
-                SolutionDir = "Solution"
+                SolutionDirectoryPath = "Solution"
             };
         processor.AddToolsAssemblyLocationToAddinSearch();
         var searchPaths = processor.AddinSearchPaths;

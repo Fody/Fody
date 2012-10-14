@@ -39,7 +39,7 @@ public class StrongNameKeyFinder
        if (assemblyKeyFileAttribute != null)
        {
            var keyFileSuffix = (string) assemblyKeyFileAttribute.ConstructorArguments.First().Value;
-           var ketFilePath = Path.Combine(InnerWeaver.IntermediateDir, keyFileSuffix);
+           var ketFilePath = Path.Combine(InnerWeaver.IntermediateDirectoryPath, keyFileSuffix);
            Logger.LogInfo(string.Format("Using strong name key from [AssemblyKeyFileAttribute(\"{0}\")] '{1}'", keyFileSuffix, ketFilePath));
            return ketFilePath ;
        }

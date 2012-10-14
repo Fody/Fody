@@ -31,7 +31,7 @@ public class ModuleReader
 
     public void Execute()
     {
-        using (var symbolStream = GetSymbolReaderProvider(InnerWeaver.AssemblyPath))
+        using (var symbolStream = GetSymbolReaderProvider(InnerWeaver.AssemblyFilePath))
         {
             var readSymbols = symbolStream != null;
             var readerParameters = new ReaderParameters
@@ -40,7 +40,7 @@ public class ModuleReader
                 ReadSymbols = readSymbols,
                 SymbolStream = symbolStream,
             };
-            ModuleDefinition = ModuleDefinition.ReadModule(InnerWeaver.AssemblyPath, readerParameters);
+            ModuleDefinition = ModuleDefinition.ReadModule(InnerWeaver.AssemblyFilePath, readerParameters);
         }
     }
 }

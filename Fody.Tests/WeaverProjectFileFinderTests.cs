@@ -15,7 +15,7 @@ public class WeaverProjectFileFinderTests
 
         var processor = new Processor
             {
-                SolutionDir = combine,
+                SolutionDirectoryPath = combine,
                 Logger = loggerMock.Object
             };
 
@@ -35,7 +35,7 @@ public class WeaverProjectFileFinderTests
 
         var processor = new Processor
             {
-                SolutionDir = combine,
+                SolutionDirectoryPath = combine,
                 Logger = loggerMock.Object,
                 References = ""
             };

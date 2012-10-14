@@ -16,7 +16,9 @@ public class WeaverInitialiserTests
         var assemblyResolver = new Mock<IAssemblyResolver>().Object;
         var innerWeaver = new InnerWeaver
             {
-                AssemblyPath = "AssemblyPath"
+                AssemblyFilePath = "AssemblyFilePath",
+                ProjectFilePath = "ProjectFilePath",
+                SolutionDirectoryPath = "SolutionDirectoryPath"
             };
 
         var moduleWeaverRunner = new WeaverInitialiser
@@ -34,18 +36,18 @@ public class WeaverInitialiserTests
         Assert.IsNotNull(moduleWeaver.LogWarningPoint);
         Assert.IsNotNull(moduleWeaver.LogError);
         Assert.IsNotNull(moduleWeaver.LogErrorPoint);
-        Assert.IsNotNull(moduleWeaver.SolutionFile);
-        Assert.IsNotNull(moduleWeaver.ProjectFile);
         Assert.AreEqual(moduleDefinition, moduleWeaver.ModuleDefinition);
         Assert.AreEqual(assemblyResolver, moduleWeaver.AssemblyResolver);
-        Assert.AreEqual("AssemblyPath", moduleWeaver.AssemblyPath);
+        Assert.AreEqual("AssemblyFilePath", moduleWeaver.AssemblyFilePath);
+        Assert.AreEqual("SolutionDirectoryPath", moduleWeaver.SolutionDirectoryPath);
+        Assert.AreEqual("ProjectFilePath", moduleWeaver.ProjectFilePath);
     }
 
 
     public class ValidModuleWeaver
     {
         public XElement Config { get; set; }
-        public string AssemblyPath { get; set; }
+        public string AssemblyFilePath { get; set; }
         public Action<string> LogInfo { get; set; }
         public Action<string> LogWarning { get; set; }
         public Action<string, SequencePoint> LogWarningPoint { get; set; }
@@ -53,8 +55,8 @@ public class WeaverInitialiserTests
         public Action<string, SequencePoint> LogErrorPoint { get; set; }
         public IAssemblyResolver AssemblyResolver { get; set; }
         public ModuleDefinition ModuleDefinition { get; set; }
-        public string ProjectFile { get; set; }
-        public string SolutionFile { get; set; }
+        public string ProjectFilePath { get; set; }
+        public string SolutionDirectoryPath { get; set; }
 
         public bool ExecuteCalled;
 

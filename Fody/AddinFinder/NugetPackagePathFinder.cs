@@ -6,12 +6,12 @@ public partial class AddinFinder
 
     string GetPackagesPath()
     {
-        var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(SolutionDir);
+        var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(SolutionDirectoryPath);
         if (packagesPathFromConfig!= null)
         {
             return packagesPathFromConfig;
         }
-        return Path.Combine(SolutionDir, "Packages");
+        return Path.Combine(SolutionDirectoryPath, "Packages");
     }
 
 

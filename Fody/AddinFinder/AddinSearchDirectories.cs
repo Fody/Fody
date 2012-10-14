@@ -16,7 +16,7 @@ public partial class AddinFinder
     }
 
     public ILogger Logger;
-    public string SolutionDir;
+    public string SolutionDirectoryPath;
 
     public void LogAddinSearchPaths()
     {

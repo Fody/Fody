@@ -5,13 +5,13 @@ using Microsoft.Build.Framework;
 
 public partial class Processor
 {
-    public string AssemblyPath;
-    public string IntermediateDir;
+    public string AssemblyFilePath;
+    public string IntermediateDirectoryPath;
     public string KeyFilePath;
     public string MessageImportance = "Low";
-    public string ProjectPath;
+    public string ProjectFilePath;
     public string References;
-    public string SolutionDir;
+    public string SolutionDirectoryPath;
     public IBuildEngine BuildEngine;
 
     AddinFinder addinFinder;
@@ -103,7 +103,7 @@ public partial class Processor
         addinFinder = new AddinFinder
             {
                 Logger = Logger, 
-                SolutionDir = SolutionDir
+                SolutionDirectoryPath = SolutionDirectoryPath
             };
         addinFinder.FindAddinDirectories();
 
@@ -132,13 +132,14 @@ public partial class Processor
             appDomain = AppDomain.CreateDomain("Fody", null, appDomainSetup);
         }
         var innerWeaver = (IInnerWeaver) appDomain.CreateInstanceAndUnwrap("FodyIsolated", "InnerWeaver");
-        innerWeaver.AssemblyPath = AssemblyPath;
+        innerWeaver.AssemblyFilePath = AssemblyFilePath;
         innerWeaver.References = References;
         innerWeaver.KeyFilePath = KeyFilePath;
         innerWeaver.Logger = Logger;
-        innerWeaver.AssemblyPath = AssemblyPath;
+        innerWeaver.SolutionDirectoryPath = SolutionDirectoryPath;
+        innerWeaver.ProjectFilePath = ProjectFilePath;
         innerWeaver.Weavers = Weavers;
-        innerWeaver.IntermediateDir = IntermediateDir;
+        innerWeaver.IntermediateDirectoryPath = IntermediateDirectoryPath;
         innerWeaver.Execute();
     }
 }

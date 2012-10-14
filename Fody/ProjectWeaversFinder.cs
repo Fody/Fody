@@ -17,14 +17,14 @@ public partial class Processor
             Logger.LogInfo(string.Format("Found path to weavers file '{0}'.", fodyDirConfigFilePath));
         }
 
-        var solutionConfigFilePath = Path.Combine(SolutionDir, "FodyWeavers.xml");
+        var solutionConfigFilePath = Path.Combine(SolutionDirectoryPath, "FodyWeavers.xml");
         if (File.Exists(solutionConfigFilePath))
         {
             ConfigFiles.Add(solutionConfigFilePath);
             Logger.LogInfo(string.Format("Found path to weavers file '{0}'.", solutionConfigFilePath));
         }
 
-        var projectDirectory = Path.GetDirectoryName(ProjectPath);
+        var projectDirectory = Path.GetDirectoryName(ProjectFilePath);
         var projectConfigFilePath = Path.Combine(projectDirectory, "FodyWeavers.xml");
         if (File.Exists(projectConfigFilePath))
         {

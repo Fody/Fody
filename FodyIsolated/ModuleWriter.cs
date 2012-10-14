@@ -33,7 +33,7 @@ public class ModuleWriter
     public void Execute()
     {
         ModuleDefinition.Types.Add(new TypeDefinition(null, "ProcessedByFody", TypeAttributes.NotPublic | TypeAttributes.Abstract | TypeAttributes.Interface));
-        var assemblyPath = InnerWeaver.AssemblyPath;
+        var assemblyPath = InnerWeaver.AssemblyFilePath;
         Logger.LogInfo(string.Format("Saving assembly to '{0}'.", assemblyPath));
         var parameters = new WriterParameters
                              {

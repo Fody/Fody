@@ -16,7 +16,7 @@ public class SolutionPathValidatorTests
         var processor = new Processor
             {
                 Logger = buildLogger,
-                SolutionDir = Environment.CurrentDirectory
+                SolutionDirectoryPath = Environment.CurrentDirectory
             };
         processor.ValidateSolutionPath();
         loggerMock.Verify();
@@ -28,7 +28,7 @@ public class SolutionPathValidatorTests
     {
         var processor = new Processor
             {
-                SolutionDir = "baddir"
+                SolutionDirectoryPath = "baddir"
             };
         processor.ValidateSolutionPath();
     }

@@ -26,13 +26,13 @@ namespace Fody
         {
             return new Processor
                        {
-                           AssemblyPath = AssemblyPath,
-                           IntermediateDir = IntermediateDir,
+                           AssemblyFilePath = AssemblyPath,
+                           IntermediateDirectoryPath = IntermediateDir,
                            KeyFilePath = KeyFilePath,
                            MessageImportance = MessageImportance,
-                           ProjectPath = ProjectPath,
+                           ProjectFilePath = ProjectPath,
                            References = References,
-                           SolutionDir = SolutionDir,
+                           SolutionDirectoryPath = SolutionDir,
                            BuildEngine = BuildEngine
                        }.Execute();
         }

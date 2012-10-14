@@ -4,12 +4,14 @@ using System.Security.Permissions;
 
 public class InnerWeaver : MarshalByRefObject, IInnerWeaver
 {
-    public string AssemblyPath { get; set; }
+    public string AssemblyFilePath { get; set; }
+    public string ProjectFilePath { get; set; }
+    public string SolutionDirectoryPath { get; set; }
     public string References { get; set; }
     public List<WeaverEntry> Weavers { get; set; }
     public string KeyFilePath { get; set; }
     public ILogger Logger { get; set; }
-    public string IntermediateDir { get; set; }
+    public string IntermediateDirectoryPath { get; set; }
 
     public void Execute()
     {

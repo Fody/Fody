@@ -11,7 +11,7 @@ public class FileChangedCheckerTests
             {
                 ContainsTypeChecker = new Mock<ContainsTypeChecker>().Object,
                 Logger = new Mock<BuildLogger>().Object,
-                AssemblyPath = GetType().Assembly.Location
+                AssemblyFilePath = GetType().Assembly.Location
             };
         Assert.IsTrue(processor.ShouldStartSinceFileChanged());
     }

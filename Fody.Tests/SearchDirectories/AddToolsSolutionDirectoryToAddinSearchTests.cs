@@ -12,7 +12,7 @@ public class AddToolsSolutionDirectoryToAddinSearchTests
         var processor = new AddinFinder
             {
                 Logger = logger,
-                SolutionDir = "Solution"
+                SolutionDirectoryPath = "Solution"
             };
         processor.AddToolsSolutionDirectoryToAddinSearch();
         var searchPaths = processor.AddinSearchPaths;

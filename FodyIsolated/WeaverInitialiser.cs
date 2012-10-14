@@ -43,7 +43,9 @@ public class WeaverInitialiser
         var type = weaverInstance.GetType();
         SetModule(weaverInstance, type);
         weaverInstance.SetProperty("AssemblyResolver", AssemblyResolver);
-        weaverInstance.SetProperty("AssemblyPath", InnerWeaver.AssemblyPath);
+        weaverInstance.SetProperty("AssemblyFilePath", InnerWeaver.AssemblyFilePath);
+        weaverInstance.SetProperty("SolutionDirectoryPath", InnerWeaver.SolutionDirectoryPath);
+        weaverInstance.SetProperty("ProjectFilePath", InnerWeaver.ProjectFilePath);
         weaverInstance.SetProperty("LogInfo", new Action<string>(s => Logger.LogInfo(s)));
         weaverInstance.SetProperty("LogWarning", new Action<string>(s => Logger.LogWarning(s)));
         weaverInstance.SetProperty("LogWarningPoint", new Action<string, SequencePoint>(LogWarningPoint));

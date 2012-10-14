@@ -8,7 +8,7 @@ public class ShouldStartSinceFileChangedTests
     {
         var processor = new Processor
             {
-                AssemblyPath = GetType().Assembly.CodeBase.Replace("file:///", "")
+                AssemblyFilePath = GetType().Assembly.CodeBase.Replace("file:///", "")
             };
         Assert.IsTrue(processor.ShouldStartSinceFileChanged());
     }
