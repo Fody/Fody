@@ -68,7 +68,6 @@
     <Compile Include="InstanceLinker\NoWeaversConfiguredInstanceLinkerTests.cs" />
     <Compile Include="InstanceLinker\WeaversConfiguredInstanceLinkerTests.cs" />
     <Compile Include="NugetConfigReaderTest.cs" />
-    <Compile Include="NugetPackagePathFinderTest.cs" />
     <Compile Include="ProjectPathFinderTests.cs" />
     <Compile Include="ProjectWeaversFinderTests.cs" />
     <Compile Include="SearchDirectories\AddinDirectoriesTests.cs" />
@@ -81,7 +80,6 @@
     <Compile Include="AssemblyPathFinderTests.cs" />
     <Compile Include="DynamicTests.cs" />
     <Compile Include="FileChangedCheckerTests.cs" />
-    <Compile Include="NugetPackagePathFinderTests.cs" />
     <Compile Include="ProjectWeaversReaderTests\ProjectWeaversReaderTests.cs" />
     <Compile Include="SearchDirectories\AddNugetDirectoryToAddinSearchTests.cs" />
     <Compile Include="SearchDirectories\AddToolsSolutionDirectoryToAddinSearchTests.cs" />
@@ -108,11 +106,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DirWithNugetConfigAndNoPath\nuget.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="DirWithNugetConfig\nuget.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="NugetConfigWithKeyNodeEmpty.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NugetConfigWithRepoNodeEmpty.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NugetConfigWithKeyNode.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NugetConfigWithRepoNode.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NugetPackagePathFinder\FakeSolutionWithNesetdNugetConfig\.nuget\nuget.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="NugetPackagePathFinder\FakeSolutionWithNugetConfig\nuget.config" />
     <None Include="packages.config">
@@ -126,17 +133,13 @@
     <Content Include="BadAssembly.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="NugetPackagePathFinder\FakeSolutionWithNugetConfig\Solution.sln" />
-    <Content Include="NugetPackagePathFinder\FakeSolution\Solution.sln" />
+    <Content Include="NugetPackagePathFinder\FakeSolutionNoNugetConfig\placeholder.txt" />
     <Content Include="ProjectWeaversReaderTests\FodyWeavers1.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ProjectWeaversReaderTests\FodyWeavers2.xml">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="ProjectWithShortWeavingTask.csproj">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ProjectWeaversReaderTests\FodyWeavers3.xml">
@@ -146,9 +149,6 @@
     <Content Include="Packages\SampleTask.Fody.1.0.0.0\SampleTask.Fody.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <InProject>false</InProject>
-    </Content>
-    <Content Include="ProjectWithWeavingTask.csproj">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Solution\SearchPath1\TextFile1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

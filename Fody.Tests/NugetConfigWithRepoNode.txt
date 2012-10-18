@@ -1,0 +1,3 @@
+﻿<configuration>
+  <repositoryPath>repositoryPathValue</repositoryPath>
+</configuration>

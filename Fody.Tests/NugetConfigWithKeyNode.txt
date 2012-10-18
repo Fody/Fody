@@ -1,0 +1,5 @@
+﻿<configuration>
+  <config>
+    <add key="repositoryPath" value="repositoryPathValue" />
+  </config>
+</configuration>

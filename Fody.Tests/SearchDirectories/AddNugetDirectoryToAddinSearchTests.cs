@@ -1,5 +1,5 @@
 using System;
-using Moq;
+using System.IO;
 using NUnit.Framework;
 
 [TestFixture]
@@ -8,15 +8,14 @@ public class AddNugetDirectoryToAddinSearchTests
     [Test]
     public void Simple()
     {
-        var logger = new Mock<BuildLogger>().Object;
         var processor = new AddinFinder
                            {
-                               Logger = logger,
-                               PackagesPath = Environment.CurrentDirectory
+                               SolutionDirectoryPath = Environment.CurrentDirectory
                            };
         processor.AddNugetDirectoryToAddinSearch();
         var searchPaths = processor.AddinSearchPaths;
-        Assert.AreEqual(Environment.CurrentDirectory, searchPaths[0]);
+        var expected = Path.Combine(Environment.CurrentDirectory, "Packages");
+        Assert.AreEqual(expected , searchPaths[0]);
     }
 
 }

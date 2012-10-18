@@ -2,19 +2,18 @@ using System.IO;
 
 public partial class AddinFinder
 {
-
     public void AddToolsAssemblyLocationToAddinSearch()
     {
-        var parent = Directory.GetParent(AssemblyLocation.CurrentDirectory()).FullName;
-        var assemblyLocationToolsDirectory = Path.GetFullPath(Path.Combine(parent, "Tools"));
-        
-        if (Directory.Exists(assemblyLocationToolsDirectory))
+        var directoryInfo = new DirectoryInfo(AssemblyLocation.CurrentDirectory()).Parent;
+        if (directoryInfo == null)
         {
-            AddinSearchPaths.Add(assemblyLocationToolsDirectory);
+            return;
         }
-        else
+        directoryInfo = directoryInfo.Parent;
+        if (directoryInfo == null)
         {
-            Logger.LogInfo(string.Format("Could not search for addins in '{0}' because it does not exist", assemblyLocationToolsDirectory));
+            return;
         }
+        AddinSearchPaths.Add(directoryInfo.FullName);
     }
 }

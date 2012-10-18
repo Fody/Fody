@@ -1,49 +1,32 @@
 using System.IO;
+using System.Linq;
 using System.Xml.Linq;
 
 public static class NugetConfigReader
 {
 
-    public static string GetPackagesPathFromConfig(string solutionDir)
-    {
-        var nugetConfigPath = GetNugetConfigPath(solutionDir);
-
-        if (nugetConfigPath != null)
-        {
-            var xElement = XDocument.Load(nugetConfigPath).Root;
-            if (xElement != null)
-            {
-                var element = xElement.Element("repositoryPath");
-                if (element != null)
-                {
-                    var value = element.Value;
-                    if (!string.IsNullOrWhiteSpace(value))
-                    {
-                        return Path.Combine(Path.GetDirectoryName(nugetConfigPath), value);
-                    }
-                }
-            }
-        }
-        return null;
-    }
-
-    static string GetNugetConfigPath(string solutionDirectory)
+    public static string GetPackagesPathFromConfig(string currentDirectory)
     {
         while (true)
         {
-            var nugetConfigPath = Path.Combine(solutionDirectory, "nuget.config");
-            if (File.Exists(nugetConfigPath))
+            var packagePath = GetPackagePath(Path.Combine(currentDirectory, "nuget.config"));
+            if (packagePath != null)
             {
-                return nugetConfigPath;
+                return packagePath;
+            }
+            packagePath = GetPackagePath(Path.Combine(currentDirectory, ".nuget", "nuget.config"));
+            if (packagePath != null)
+            {
+                return packagePath;
             }
             try
             {
-                var directoryInfo = Directory.GetParent(solutionDirectory);
+                var directoryInfo = Directory.GetParent(currentDirectory);
                 if (directoryInfo == null)
                 {
                     return null;
                 }
-                solutionDirectory = directoryInfo.FullName;
+                currentDirectory = directoryInfo.FullName;
             }
             catch 
             {
@@ -53,4 +36,29 @@ public static class NugetConfigReader
         }
     }
 
+    public static string GetPackagePath(string nugetConfigPath)
+    {
+        if (File.Exists(nugetConfigPath))
+        {
+            var xDocument = XDocument.Load(nugetConfigPath);
+            var repositoryPath = xDocument.Descendants("repositoryPath")
+                .Select(x => x.Value)
+                .FirstOrDefault(x => !string.IsNullOrWhiteSpace(x));
+            if (repositoryPath != null)
+            {
+                return Path.Combine(Path.GetDirectoryName(nugetConfigPath), repositoryPath);
+            }
+            repositoryPath = xDocument.Descendants("add")
+                .Where(x => (string)x.Attribute("key") == "repositoryPath")
+                .Select(x => x.Attribute("value"))
+                .Where(x => x != null)
+                .Select(x => x.Value)
+                .FirstOrDefault();
+            if (repositoryPath != null)
+            {
+                return Path.Combine(Path.GetDirectoryName(nugetConfigPath), repositoryPath);
+            }
+        }
+        return null;
+    }
 }

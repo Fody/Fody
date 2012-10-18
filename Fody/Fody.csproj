@@ -61,15 +61,12 @@
     <Compile Include="AddinFinder\AddinSearchDirectories.cs" />
     <Compile Include="AssemblyVersionReader.cs" />
     <Compile Include="BuildLogger.cs" />
-    <Compile Include="AddinFinder\NugetPackagePathFinder.cs" />
     <Compile Include="FileChangedChecker.cs" />
     <Compile Include="ProjectPathFinder.cs" />
     <Compile Include="ProjectWeaversReader.cs" />
     <Compile Include="AssemblyPathValidator.cs" />
     <Compile Include="AddinFinder\AddToolsAssemblyLocationToAddinSearch.cs" />
     <Compile Include="WeaverAssemblyPathFinder.cs" />
-    <Compile Include="AddinFinder\AddNugetDirectoryToAddinSearch.cs" />
-    <Compile Include="AddinFinder\AddToolsDirectoryToAddinSearch.cs" />
     <Compile Include="SolutionPathValidator.cs" />
     <Compile Include="AddinFinder\AddinFilesEnumerator.cs" />
     <Compile Include="WeaverProjectContainsWeaverChecker.cs" />
