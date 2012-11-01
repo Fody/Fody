@@ -33,7 +33,7 @@ public class TaskFileProcessor
         }
         catch (Exception exception)
         {
-            messageDisplayer.ShowError(string.Format("Fody: An exception occured while trying to check for updates.\r\nException: {0}.", exception));
+            messageDisplayer.ShowError(string.Format("Fody: An exception occurred while trying to check for updates.\r\nException: {0}.", exception));
         }
     }
 

@@ -20,7 +20,7 @@ public class ToFriendlyStringTests
             var friendlyString = exception.ToFriendlyString().ToLowerInvariant();
             friendlyString = friendlyString
                 .Replace(currentDirectory, string.Empty);
-			var expected = @"an unhandled exception occured:
+			var expected = @"an unhandled exception occurred:
 exception:
 foo
 stacktrace:

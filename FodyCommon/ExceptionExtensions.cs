@@ -11,7 +11,7 @@ public static class ExceptionExtensions
         }
 
         var stringBuilder = new StringBuilder();
-		stringBuilder.Append("An unhandled exception occured:");
+		stringBuilder.Append("An unhandled exception occurred:");
         stringBuilder.Append(Environment.NewLine);
         stringBuilder.Append("Exception:");
         stringBuilder.Append(Environment.NewLine);
