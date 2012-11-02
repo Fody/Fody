@@ -21,9 +21,7 @@ public class InnerWeaver : MarshalByRefObject, IInnerWeaver
     {
         try
         {
-
-
-            AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => ResolveAssembly(args);
+            //  AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => ResolveAssembly(args);
             var referenceFinder = new AssemblyReferenceFinder(this, Logger);
             referenceFinder.Execute();
             var assemblyResolver = new AssemblyResolver(referenceFinder);
@@ -91,24 +89,24 @@ public class InnerWeaver : MarshalByRefObject, IInnerWeaver
         }
     }
 
-    Assembly ResolveAssembly(ResolveEventArgs resolveEventArgs)
-    {
-        var replace = resolveEventArgs.RequestingAssembly.GetName().Name.Replace(".Fody", string.Empty);
-        var weaverEntry = Weavers.FirstOrDefault(x => x.AssemblyName == replace);
-        if (weaverEntry == null)
-        {
-            return null;
-        }
-        var directoryName = Path.GetDirectoryName(weaverEntry.AssemblyPath);
+    //Assembly ResolveAssembly(ResolveEventArgs resolveEventArgs)
+    //{
+    //    var replace = resolveEventArgs.RequestingAssembly.GetName().Name.Replace(".Fody", string.Empty);
+    //    var weaverEntry = Weavers.FirstOrDefault(x => x.AssemblyName == replace);
+    //    if (weaverEntry == null)
+    //    {
+    //        return null;
+    //    }
+    //    var directoryName = Path.GetDirectoryName(weaverEntry.AssemblyPath);
 
-        var dllPathToLoad = Path.Combine(directoryName, new AssemblyName(resolveEventArgs.Name).Name+".dll");
-        if (File.Exists(dllPathToLoad))
-        {
-            var readAllBytes = File.ReadAllBytes(dllPathToLoad);
-            return Assembly.Load(readAllBytes);
-        }
-        return null;
-    }
+    //    var dllPathToLoad = Path.Combine(directoryName, new AssemblyName(resolveEventArgs.Name).Name+".dll");
+    //    if (File.Exists(dllPathToLoad))
+    //    {
+    //        var readAllBytes = File.ReadAllBytes(dllPathToLoad);
+    //        return Assembly.Load(readAllBytes);
+    //    }
+    //    return null;
+    //}
 
 
     [SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.Infrastructure)]
