@@ -28,7 +28,11 @@ public class WeaverInitialiserTests
                 AssemblyResolver = assemblyResolver,
                 InnerWeaver = innerWeaver
             };
-        var weaverEntry = new WeaverEntry {Element = "<foo/>"};
+        var weaverEntry = new WeaverEntry
+                              {
+                                  Element = "<foo/>",
+                                  AssemblyPath = @"c:\FakePath\Assembly.dll"
+                              };
         moduleWeaverRunner.SetProperties(weaverEntry, moduleWeaver);
 
         Assert.IsNotNull(moduleWeaver.LogInfo);
@@ -38,6 +42,7 @@ public class WeaverInitialiserTests
         Assert.IsNotNull(moduleWeaver.LogErrorPoint);
         Assert.AreEqual(moduleDefinition, moduleWeaver.ModuleDefinition);
         Assert.AreEqual(assemblyResolver, moduleWeaver.AssemblyResolver);
+        Assert.AreEqual(@"c:\FakePath",moduleWeaver.AddinDirectoryPath);
         Assert.AreEqual("AssemblyFilePath", moduleWeaver.AssemblyFilePath);
         Assert.AreEqual("SolutionDirectoryPath", moduleWeaver.SolutionDirectoryPath);
         Assert.AreEqual("ProjectFilePath", moduleWeaver.ProjectFilePath);
@@ -48,6 +53,7 @@ public class WeaverInitialiserTests
     {
         public XElement Config { get; set; }
         public string AssemblyFilePath { get; set; }
+        public string AddinDirectoryPath { get; set; }
         public Action<string> LogInfo { get; set; }
         public Action<string> LogWarning { get; set; }
         public Action<string, SequencePoint> LogWarningPoint { get; set; }

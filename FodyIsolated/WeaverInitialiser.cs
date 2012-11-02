@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
@@ -44,6 +45,7 @@ public class WeaverInitialiser
         SetModule(weaverInstance, type);
         weaverInstance.SetProperty("AssemblyResolver", AssemblyResolver);
         weaverInstance.SetProperty("AssemblyFilePath", InnerWeaver.AssemblyFilePath);
+        weaverInstance.SetProperty("AddinDirectoryPath", Path.GetDirectoryName(weaverEntry.AssemblyPath));
         weaverInstance.SetProperty("SolutionDirectoryPath", InnerWeaver.SolutionDirectoryPath);
         weaverInstance.SetProperty("ProjectFilePath", InnerWeaver.ProjectFilePath);
         weaverInstance.SetProperty("LogInfo", new Action<string>(s => Logger.LogInfo(s)));
