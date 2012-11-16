@@ -120,6 +120,7 @@ public partial class Processor
     {
         if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)) || appDomain == null)
         {
+			Logger.LogInfo("A Weaver HasChanged so loading a new AppDomian");
             if (appDomain != null)
             {
                 AppDomain.Unload(appDomain);
