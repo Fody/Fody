@@ -30,6 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -37,6 +38,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs" />
@@ -54,4 +56,5 @@
     <Copy SourceFiles="$(TargetDir)FodyCommon.dll" DestinationFolder="$(SolutionDir)ForSample" />
     <Copy SourceFiles="$(TargetDir)FodyCommon.pdb" DestinationFolder="$(SolutionDir)ForSample" />
   </Target>
+  <Import Project="$(ProjectPath)\..\..\Tools\Fody\Fody.targets" />
 </Project>
