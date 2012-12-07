@@ -6,13 +6,8 @@ using Mono.Cecil.Mdb;
 using Mono.Cecil.Pdb;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
 
-public class ModuleWriter
+public partial class InnerWeaver
 {
-    public ModuleDefinition ModuleDefinition;
-    public ILogger Logger;
-    public InnerWeaver InnerWeaver;
-    public StrongNameKeyFinder StrongNameKeyFinder;
-
 
     static ISymbolWriterProvider GetSymbolWriterProvider(string assemblyPath)
     {
@@ -30,14 +25,14 @@ public class ModuleWriter
         return null;
     }
 
-    public void Execute()
+    public void WriteModule()
     {
         ModuleDefinition.Types.Add(new TypeDefinition(null, "ProcessedByFody", TypeAttributes.NotPublic | TypeAttributes.Abstract | TypeAttributes.Interface));
-        var assemblyPath = InnerWeaver.AssemblyFilePath;
+        var assemblyPath = AssemblyFilePath;
         Logger.LogInfo(string.Format("Saving assembly to '{0}'.", assemblyPath));
         var parameters = new WriterParameters
                              {
-                                 StrongNameKeyPair = StrongNameKeyFinder.StrongNameKeyPair,
+                                 StrongNameKeyPair = StrongNameKeyPair,
                                  WriteSymbols = true,
                                  SymbolWriterProvider = GetSymbolWriterProvider(assemblyPath)
                              };

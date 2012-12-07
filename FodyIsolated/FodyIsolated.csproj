@@ -57,7 +57,6 @@
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="AssemblyReferenceFinder.cs" />
     <Compile Include="AssemblyResolver.cs" />
-    <Compile Include="DependencyLoader.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="InnerWeaver.cs" />
     <Compile Include="InstanceConstructor.cs" />

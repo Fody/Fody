@@ -5,16 +5,9 @@ using System.Linq;
 using System.Reflection;
 using Mono.Cecil;
 
-public class AssemblyResolver : IAssemblyResolver
+public partial class InnerWeaver : IAssemblyResolver
 {
-    Dictionary<string, AssemblyDefinition> assemblyDefinitionCache;
-    Dictionary<string, string> references;
-
-    public AssemblyResolver(AssemblyReferenceFinder assemblyReferenceFinder)
-    {
-        references= assemblyReferenceFinder.References;
-        assemblyDefinitionCache = new Dictionary<string, AssemblyDefinition>(StringComparer.InvariantCultureIgnoreCase);
-    }
+    Dictionary<string, AssemblyDefinition> assemblyDefinitionCache = new Dictionary<string, AssemblyDefinition>(StringComparer.InvariantCultureIgnoreCase);
 
     AssemblyDefinition GetAssembly(string file, ReaderParameters parameters)
     {
@@ -51,7 +44,7 @@ public class AssemblyResolver : IAssemblyResolver
         }
 
         string fileFromDerivedReferences;
-        if (references.TryGetValue(assemblyNameReference.Name, out fileFromDerivedReferences))
+        if (ReferenceDictionary.TryGetValue(assemblyNameReference.Name, out fileFromDerivedReferences))
         {
             return GetAssembly(fileFromDerivedReferences, parameters);
         }
@@ -75,14 +68,14 @@ public class AssemblyResolver : IAssemblyResolver
             return GetAssembly(filePath, parameters);
         }
 
-        var joinedReferences = String.Join(Environment.NewLine, references.Values.OrderBy(x => x));
+        var joinedReferences = String.Join(Environment.NewLine, SplitReferences.OrderBy(x => x));
         throw new Exception(string.Format("Can not find '{0}'.{1}Tried:{1}{2}", assemblyNameReference.FullName, Environment.NewLine, joinedReferences));
     }
 
     IEnumerable<string> SearchDirForMatchingName(AssemblyNameReference assemblyNameReference)
     {
         var fileName = assemblyNameReference.Name + ".dll";
-        return references.Values
+        return ReferenceDictionary.Values
             .Select(x => Path.Combine(Path.GetDirectoryName(x), fileName))
             .Where(File.Exists);
     }

@@ -13,8 +13,8 @@ public class ModuleWeaverRunnerTests
     public void Execute()
     {
         var moduleWeaver = new ValidModuleWeaver();
-        var moduleWeaverRunner = new ModuleWeaverRunner { Logger = new Mock<ILogger>().Object };
-        moduleWeaverRunner.Execute(moduleWeaver);
+        var moduleWeaverRunner = new InnerWeaver { Logger = new Mock<ILogger>().Object };
+        moduleWeaverRunner.RunWeaver(moduleWeaver);
     }
 
     [Test]
@@ -22,16 +22,16 @@ public class ModuleWeaverRunnerTests
     public void BadExecute()
     {
         var moduleWeaver = new BadExecuteWithParamsModuleWeaver();
-        var moduleWeaverRunner = new ModuleWeaverRunner { Logger = new Mock<ILogger>().Object };
-        moduleWeaverRunner.Execute( moduleWeaver);
+        var moduleWeaverRunner = new InnerWeaver { Logger = new Mock<ILogger>().Object };
+        moduleWeaverRunner.RunWeaver( moduleWeaver);
     }
 
     [Test]
     [ExpectedException(typeof (WeavingException))]
     public void NoExecute()
     {
-        var moduleWeaverRunner = new ModuleWeaverRunner { Logger = new Mock<ILogger>().Object };
-        moduleWeaverRunner.Execute("sdf");
+        var moduleWeaverRunner = new InnerWeaver { Logger = new Mock<ILogger>().Object };
+        moduleWeaverRunner.RunWeaver("sdf");
     }
 
     public class ValidModuleWeaver

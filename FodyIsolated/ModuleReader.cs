@@ -1,13 +1,9 @@
 using System.IO;
 using Mono.Cecil;
 
-public class ModuleReader
+public partial class InnerWeaver
 {
-    public IAssemblyResolver AssemblyResolver;
     public ModuleDefinition ModuleDefinition;
-    public ILogger Logger;
-    public InnerWeaver InnerWeaver;
-
 
     FileStream GetSymbolReaderProvider(string assemblyPath)
     {
@@ -29,18 +25,18 @@ public class ModuleReader
         return null;
     }
 
-    public void Execute()
+    public void ReadModule()
     {
-        using (var symbolStream = GetSymbolReaderProvider(InnerWeaver.AssemblyFilePath))
+        using (var symbolStream = GetSymbolReaderProvider(AssemblyFilePath))
         {
             var readSymbols = symbolStream != null;
             var readerParameters = new ReaderParameters
             {
-                AssemblyResolver = AssemblyResolver,
+                AssemblyResolver = this,
                 ReadSymbols = readSymbols,
                 SymbolStream = symbolStream,
             };
-            ModuleDefinition = ModuleDefinition.ReadModule(InnerWeaver.AssemblyFilePath, readerParameters);
+            ModuleDefinition = ModuleDefinition.ReadModule(AssemblyFilePath, readerParameters);
         }
     }
 }

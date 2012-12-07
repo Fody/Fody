@@ -5,18 +5,14 @@ using System.Xml.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
-public class WeaverInitialiser
+public partial class InnerWeaver
 {
-    public ModuleDefinition ModuleDefinition;
-    public ILogger Logger;
-    public IAssemblyResolver AssemblyResolver;
-    public InnerWeaver InnerWeaver;
     public List<dynamic> WeaverInstances = new List<dynamic>();
 
 
-    public void Execute()
+    public void SetWeaverProperties()
     {
-        foreach (var weaverConfig in InnerWeaver.Weavers)
+        foreach (var weaverConfig in Weavers)
         {
             SetProperties(weaverConfig);
         }
@@ -43,11 +39,12 @@ public class WeaverInitialiser
         }
         var type = weaverInstance.GetType();
         SetModule(weaverInstance, type);
-        weaverInstance.SetProperty("AssemblyResolver", AssemblyResolver);
-        weaverInstance.SetProperty("AssemblyFilePath", InnerWeaver.AssemblyFilePath);
+        weaverInstance.SetProperty("AssemblyResolver", (IAssemblyResolver)this);
+   //     weaverInstance.SetProperty("References", SplitReferences);
+        weaverInstance.SetProperty("AssemblyFilePath", AssemblyFilePath);
         weaverInstance.SetProperty("AddinDirectoryPath", Path.GetDirectoryName(weaverEntry.AssemblyPath));
-        weaverInstance.SetProperty("SolutionDirectoryPath", InnerWeaver.SolutionDirectoryPath);
-        weaverInstance.SetProperty("ProjectFilePath", InnerWeaver.ProjectFilePath);
+        weaverInstance.SetProperty("SolutionDirectoryPath", SolutionDirectoryPath);
+        weaverInstance.SetProperty("ProjectFilePath", ProjectFilePath);
         weaverInstance.SetProperty("LogInfo", new Action<string>(s => Logger.LogInfo(s)));
         weaverInstance.SetProperty("LogWarning", new Action<string>(s => Logger.LogWarning(s)));
         weaverInstance.SetProperty("LogWarningPoint", new Action<string, SequencePoint>(LogWarningPoint));

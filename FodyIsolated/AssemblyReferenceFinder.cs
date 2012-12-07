@@ -1,31 +1,28 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
-public class AssemblyReferenceFinder 
+public partial class InnerWeaver 
 {
-    InnerWeaver innerWeaver;
-    ILogger logger;
-    public Dictionary<string, string> References;
+    public Dictionary<string, string> ReferenceDictionary = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+    public List<string> SplitReferences;
 
-    public AssemblyReferenceFinder(InnerWeaver innerWeaver, ILogger logger)
+    public void SplitUpReferences()
     {
-        this.innerWeaver = innerWeaver;
-        this.logger = logger;
+        SplitReferences = References
+            .Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries)
+            .ToList();
+        SetRefDictionary(SplitReferences);
+        Logger.LogInfo("Reference count=" + ReferenceDictionary.Count);
     }
 
-    public void Execute()
-    {
-        References = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
-        SetRefDictionary(innerWeaver.References.Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries));
-        logger.LogInfo("Reference count=" + References.Count);
-    }
 
     void SetRefDictionary(IEnumerable<string> filePaths)
     {
         foreach (var filePath in filePaths)
         {
-            References[Path.GetFileNameWithoutExtension(filePath)] = filePath;
+            ReferenceDictionary[Path.GetFileNameWithoutExtension(filePath)] = filePath;
         }
     }
 

@@ -1,8 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
-using Moq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -11,37 +11,34 @@ public class WeaverInitialiserTests
     [Test]
     public void ValidProps()
     {
-        var moduleWeaver = new ValidModuleWeaver();
         var moduleDefinition = ModuleDefinition.CreateModule("Foo", ModuleKind.Dll);
-        var assemblyResolver = new Mock<IAssemblyResolver>().Object;
+        
         var innerWeaver = new InnerWeaver
             {
                 AssemblyFilePath = "AssemblyFilePath",
                 ProjectFilePath = "ProjectFilePath",
-                SolutionDirectoryPath = "SolutionDirectoryPath"
+                SolutionDirectoryPath = "SolutionDirectoryPath",
+                ReferenceDictionary = new Dictionary<string, string> { { "Ref1;Ref2","Path1" } },
+                ModuleDefinition = moduleDefinition,
+
             };
 
-        var moduleWeaverRunner = new WeaverInitialiser
-            {
-                ModuleDefinition = moduleDefinition,
-                Logger = new Mock<ILogger>().Object,
-                AssemblyResolver = assemblyResolver,
-                InnerWeaver = innerWeaver
-            };
         var weaverEntry = new WeaverEntry
                               {
                                   Element = "<foo/>",
                                   AssemblyPath = @"c:\FakePath\Assembly.dll"
                               };
-        moduleWeaverRunner.SetProperties(weaverEntry, moduleWeaver);
+        var moduleWeaver = new ValidModuleWeaver();
+        innerWeaver.SetProperties(weaverEntry, moduleWeaver);
 
         Assert.IsNotNull(moduleWeaver.LogInfo);
         Assert.IsNotNull(moduleWeaver.LogWarning);
         Assert.IsNotNull(moduleWeaver.LogWarningPoint);
         Assert.IsNotNull(moduleWeaver.LogError);
         Assert.IsNotNull(moduleWeaver.LogErrorPoint);
+       // Assert.IsNotEmpty(moduleWeaver.References); 
         Assert.AreEqual(moduleDefinition, moduleWeaver.ModuleDefinition);
-        Assert.AreEqual(assemblyResolver, moduleWeaver.AssemblyResolver);
+        Assert.AreEqual(innerWeaver, moduleWeaver.AssemblyResolver);
         Assert.AreEqual(@"c:\FakePath",moduleWeaver.AddinDirectoryPath);
         Assert.AreEqual("AssemblyFilePath", moduleWeaver.AssemblyFilePath);
         Assert.AreEqual("SolutionDirectoryPath", moduleWeaver.SolutionDirectoryPath);
@@ -52,6 +49,7 @@ public class WeaverInitialiserTests
     public class ValidModuleWeaver
     {
         public XElement Config { get; set; }
+     //   public List<string> References { get; set; }
         public string AssemblyFilePath { get; set; }
         public string AddinDirectoryPath { get; set; }
         public Action<string> LogInfo { get; set; }

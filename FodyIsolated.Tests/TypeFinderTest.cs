@@ -7,7 +7,7 @@ public class TypeFinderTest
     [Test]
     public void Valid()
     {
-        var assembly = typeof(ModuleReader).Assembly;
+        var assembly = typeof(InnerWeaver).Assembly;
         assembly.FindType("ModuleReader");
     }
 

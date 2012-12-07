@@ -2,11 +2,10 @@ using System;
 using System.Diagnostics;
 using Microsoft.CSharp.RuntimeBinder;
 
-public class ModuleWeaverRunner
+public partial class InnerWeaver
 {
-    public ILogger Logger;
 
-    public void Execute(dynamic weaverInstance)
+    public void RunWeaver(dynamic weaverInstance)
     {
         Logger.LogInfo(string.Format("Executing Weaver '{0}'.", ObjectTypeName.GetTypeName(weaverInstance)));
 
