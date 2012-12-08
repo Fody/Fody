@@ -21,7 +21,7 @@ public partial class InnerWeaver
     public void SetProperties(WeaverEntry weaverEntry)
     {
         Logger.LogInfo(string.Format("Loading weaver '{0}'.", weaverEntry.AssemblyPath));
-        var assembly = AssemblyLoader.Load(weaverEntry.AssemblyPath);
+        var assembly = LoadAssembly(weaverEntry.AssemblyPath);
         
         var weaverType = assembly.FindType(weaverEntry.TypeName);
         var weaverInstance = weaverType.ConstructInstance();

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.Build.Framework;
@@ -15,11 +16,11 @@ public partial class Processor
     public IBuildEngine BuildEngine;
 
     AddinFinder addinFinder;
+    static Dictionary<string, AppDomain> solutionDomains = new Dictionary<string, AppDomain>(StringComparer.OrdinalIgnoreCase);
 
     public BuildLogger Logger;
     static object locker;
 
-    static AppDomain appDomain;
     public ContainsTypeChecker ContainsTypeChecker = new ContainsTypeChecker();
 
     static Processor()
@@ -59,9 +60,14 @@ public partial class Processor
 
     void Inner()
     {
+
+
         ValidateProjectPath();
 
         ValidatorAssemblyPath();
+
+
+        
 
         FindProjectWeavers();
         
@@ -89,11 +95,11 @@ public partial class Processor
             Logger.LogWarning(string.Format("Could not find any weavers. Either add a project named 'Weavers' with a type named 'ModuleWeaver' or add some items to '{0}'.", "FodyWeavers.xml"));
             return;
         }
-
         lock (locker)
         {
             ExecuteInOwnAppDomain();
         }
+
         FlushWeaversXmlHistory();
     }
 
@@ -118,21 +124,23 @@ public partial class Processor
 
     void ExecuteInOwnAppDomain()
     {
-        if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)) || appDomain == null)
+        AppDomain appdomain;
+        if (solutionDomains.TryGetValue(SolutionDirectoryPath, out appdomain))
         {
-			Logger.LogInfo("A Weaver HasChanged so loading a new AppDomian");
-            if (appDomain != null)
+            if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
             {
-                AppDomain.Unload(appDomain);
+                Logger.LogInfo("A Weaver HasChanged so loading a new AppDomian");
+                AppDomain.Unload(appdomain);
+                appdomain = solutionDomains[SolutionDirectoryPath] = CreateDomain();
             }
-
-            var appDomainSetup = new AppDomainSetup
-                                     {
-                                         ApplicationBase = AssemblyLocation.CurrentDirectory(),
-                                     };
-            appDomain = AppDomain.CreateDomain("Fody", null, appDomainSetup);
         }
-        var innerWeaver = (IInnerWeaver) appDomain.CreateInstanceAndUnwrap("FodyIsolated", "InnerWeaver");
+        else
+        {
+            appdomain = solutionDomains[SolutionDirectoryPath] = CreateDomain();
+        }
+
+
+        var innerWeaver = (IInnerWeaver) appdomain.CreateInstanceAndUnwrap("FodyIsolated", "InnerWeaver");
         innerWeaver.AssemblyFilePath = AssemblyFilePath;
         innerWeaver.References = References;
         innerWeaver.KeyFilePath = KeyFilePath;
@@ -142,5 +150,15 @@ public partial class Processor
         innerWeaver.Weavers = Weavers;
         innerWeaver.IntermediateDirectoryPath = IntermediateDirectoryPath;
         innerWeaver.Execute();
+    }
+
+    AppDomain CreateDomain()
+    {
+        Logger.LogInfo("Creating a new AppDomian");
+        var appDomainSetup = new AppDomainSetup
+        {
+            ApplicationBase = AssemblyLocation.CurrentDirectory(),
+        };
+        return AppDomain.CreateDomain(string.Format("Fody Domain for '{0}'", SolutionDirectoryPath), null, appDomainSetup);
     }
 }

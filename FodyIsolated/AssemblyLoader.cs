@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
-public static class AssemblyLoader
+public partial class InnerWeaver
 {
 	static Dictionary<string, Assembly> assemblies = new Dictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
 
-	public static Assembly Load(string assemblyPath)
+	public Assembly LoadAssembly(string assemblyPath)
 	{
 		Assembly assembly;
 		if (assemblies.TryGetValue(assemblyPath, out assembly))
 		{
+            Logger.LogInfo(string.Format("Loading '{0}' from cache.", assemblyPath));
 			return assembly;
-		}
+        }
+        Logger.LogInfo(string.Format("Loading '{0}' from disk.", assemblyPath));
 		return assemblies[assemblyPath] = LoadFromFile(assemblyPath);
 	}
 

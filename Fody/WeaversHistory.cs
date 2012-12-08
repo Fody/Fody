@@ -4,13 +4,7 @@ using System.IO;
 
 public static class WeaversHistory
 {
-    public static Dictionary<string, DateTime> TimeStamps;
-
-
-    static WeaversHistory()
-    {
-        TimeStamps = new Dictionary<string, DateTime>();
-    }
+    public static Dictionary<string, DateTime> TimeStamps = new Dictionary<string, DateTime>(StringComparer.OrdinalIgnoreCase);
 
     public static bool HasChanged(IEnumerable<string> weaverPaths)
     {
