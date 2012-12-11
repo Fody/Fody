@@ -33,7 +33,7 @@
 		  KeyFilePath="$(KeyOriginatorFile)" 
 		  MessageImportance="$(FodyMessageImportance)"
 		  ProjectPath="$(ProjectPath)" 
-		  SolutionDir="$(SolutionDir)" 
+		  SolutionDir="$(FodySolutionDir)" 
 		  References="@(ReferencePath)" 
       />
     <Copy 
