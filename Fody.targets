@@ -1,7 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Choose>
+		<When Condition="$(NCrunchOriginalSolutionDir) != '' And $(NCrunchOriginalSolutionDir) != '*Undefined*'">
+			<PropertyGroup>
+				<FodySolutionDir>$(NCrunchOriginalSolutionDir)</FodySolutionDir>
+			</PropertyGroup>
+    </When>
+    <When Condition="$(SolutionDir) != '' And $(SolutionDir) != '*Undefined*'">
+      <PropertyGroup>
+		    <FodySolutionDir>$(SolutionDir)</FodySolutionDir>
+      </PropertyGroup>
+    </When>
+    <When Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">
+      <PropertyGroup>
+		    <FodySolutionDir>$(MSBuildProjectDirectory)\..\</FodySolutionDir>
+      </PropertyGroup>
+    </When>
+  </Choose>
   <PropertyGroup>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <IntermediateDir>$(ProjectDir)$(IntermediateOutputPath)</IntermediateDir>
     <FodyMessageImportance Condition="$(FodyMessageImportance) == '' Or $(FodyMessageImportance) == '*Undefined*'">Low</FodyMessageImportance>
   </PropertyGroup>
