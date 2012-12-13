@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{63786CE5-D899-43DF-AD4E-C2CA3BAC3FC2}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <ConfigurationName>Debug</ConfigurationName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <ConfigurationName>Release</ConfigurationName>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Fody.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="chocolateyInstall.ps1" />
+  </ItemGroup>
+  <Target Name="Clean">
+    <RemoveDir Directories="$(SolutionDir)ChocolateyNuGetBuild" />
+  </Target>
+  <Target Name="Build" DependsOnTargets="ChocolateyNuGetBuild" />
+  <Target Name="ReBuild" DependsOnTargets="ChocolateyNuGetBuild" />
+  <UsingTask TaskName="PepitaPackage.WeavingTask" AssemblyFile="$(SolutionDir)Tools\Pepita\PepitaPackage.dll" />
+  <Target Name="ChocolateyNuGetBuild" DependsOnTargets="Clean">
+    <MakeDir Directories="$(SolutionDir)ChocolateyNuGetBuild" />
+    <Copy SourceFiles="$(ProjectDir)Fody.nuspec" DestinationFolder="$(SolutionDir)ChocolateyNuGetBuild" />
+    <Copy SourceFiles="$(ProjectDir)chocolateyInstall.ps1" DestinationFolder="$(SolutionDir)ChocolateyNuGetBuild\Tools" />
+    <PepitaPackage.WeavingTask NuGetBuildDirectory="$(SolutionDir)ChocolateyNuGetBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll" />
+  </Target>
+  <ItemGroup>
+    <ProjectReference Include="..\Fody\Fody.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <Name>Fody</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
