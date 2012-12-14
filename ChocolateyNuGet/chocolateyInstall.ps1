@@ -11,20 +11,18 @@
 		throw "Could not find VS100COMNTOOLS or VS110COMNTOOLS environment variables"
 }
 
+function Get-Script-Directory
+{
+    $scriptInvocation = (Get-Variable MyInvocation -Scope 1).Value
+    return Split-Path $scriptInvocation.MyCommand.Path
+}
 try 
 {
 		echo "Installing Fody"
-		$tempVsixPath = join-path $env:temp FodyVsPackage.vsix
+		$vsixPath = join-path Get-Script-Directory FodyVsPackage.vsix
 
-		if( test-path $tempVsixPath ) 
-		{
-				rm -force $tempVsixPath 
-		}
-			
-		(new-object net.webclient).DownloadFile("http://visualstudiogallery.msdn.microsoft.com/074a2a26-d034-46f1-8fe1-0da97265eb7a/file/62042/32/FodyVsPackage.vsix", $tempVsixPath)
-		
 		$vsixInstallerPath = GetVSIXInstallerPath
-		Start-Process -FilePath $vsixInstallerPath -ArgumentList "/q $tempVsixPath" -Wait -PassThru;
+		Start-Process -FilePath $vsixInstallerPath -ArgumentList "/q $vsixPath" -Wait -PassThru;
 
 		Write-ChocolateySuccess "Fody"
 } 
