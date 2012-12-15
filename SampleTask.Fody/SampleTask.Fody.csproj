@@ -64,5 +64,5 @@
     <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(SolutionDir)Fody.Tests\Packages\SampleTask.Fody.1.0.0.0\SampleTask.Fody.dll" />
   </Target>
   <Import Project="$(ProjectDir)\..\Tools\Pepita\PepitaGet.targets" />
-  <Import Project="$(ProjectDir)\..\Tools\Fody\Fody.targets" />
+  
 </Project>
