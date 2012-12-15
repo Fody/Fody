@@ -34,6 +34,8 @@
 *.vspscc
 .builds
 *.dotCover
+*test-results*
+
 
 ##  If you have NuGet Package Restore enabled, uncomment this
 packages/
@@ -76,3 +78,9 @@ Thumbs.db
 # Folder config file
 Desktop.ini
 
+
+Fody/.DS_Store
+
+.DS_Store
+
+*.userprefs
