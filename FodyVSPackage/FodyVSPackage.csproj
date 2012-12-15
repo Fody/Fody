@@ -117,9 +117,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WindowsBase" />
-    <None Include="FodyWeavers.xml">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Fody\AssemblyLocation.cs">
@@ -294,7 +292,6 @@
   <Import Project="$(VsSDKInstall)Microsoft.VsSDK.targets" />
   <UsingTask TaskName="FileUpdate" AssemblyFile="$(SolutionDir)Tools\SimpleMsBuildTasks.dll" />
   <UsingTask TaskName="EnvironmentVariable" AssemblyFile="$(SolutionDir)Tools\SimpleMsBuildTasks.dll" />
-  <Import Project="$(ProjectPath)\..\..\Tools\Pepita\PepitaGet.targets" />
   <Target Name="BeforeBuild" DependsOnTargets="ConfigureVsSDKBuild">
     <GetAssemblyIdentity AssemblyFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll">
       <Output TaskParameter="Assemblies" ItemName="WeaverAssembly" />
@@ -304,5 +301,6 @@
   <Target Name="ConfigureVsSDKBuild">
     <EnvironmentVariable Variable="VsSDKToolsPath" Value="$(VsSDKInstall)" />
   </Target>
-  <Import Project="$(ProjectPath)\..\..\Tools\Fody\Fody.targets" />
+  <Import Project="$(ProjectDir)\..\Tools\Pepita\PepitaGet.targets" />
+  <Import Project="$(ProjectDir)\..\Tools\Fody\Fody.targets" />
 </Project>
