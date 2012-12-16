@@ -89,7 +89,7 @@
   <Target Name="AfterBuild">
     <MakeDir Directories="$(SolutionDir)ForSample" />
     <Copy SourceFiles="$(TargetDir)Fody.dll" DestinationFolder="$(SolutionDir)ForSample" />
-    <Copy SourceFiles="$(TargetDir)Fody.pdb" DestinationFolder="$(SolutionDir)ForSample" />
+    <Copy SourceFiles="$(TargetDir)Fody.pdb" DestinationFolder="$(SolutionDir)ForSample"  SkipUnchangedFiles="true"/>
     <Copy SourceFiles="$(SolutionDir)Fody.targets" DestinationFolder="$(SolutionDir)ForSample" />
   </Target>
   <Import Project="$(ProjectDir)\..\Tools\Pepita\PepitaGet.targets" />
