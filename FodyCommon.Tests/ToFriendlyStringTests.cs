@@ -5,6 +5,7 @@ using NUnit.Framework;
 public class ToFriendlyStringTests
 {
     [Test]
+	[Ignore]
     public void ToFriendlyName()
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory().ToLowerInvariant()
