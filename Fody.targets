@@ -51,11 +51,11 @@
   </Target>
 
   <Target 
-	  AfterTargets="AfterCompile"
+	  AfterTargets="AfterBuild"
 	  Name="NonWinFodyTarget"
 	  Condition=" '$(OS)' != 'Windows_NT'">
     <Fody.WeavingTask 
-		  AssemblyPath="$(IntermediateAssembly)" 
+		  AssemblyPath="$(TargetPath)" 
 		  IntermediateDir="$(IntermediateDir)"
 		  KeyFilePath="$(KeyOriginatorFile)" 
 		  MessageImportance="$(FodyMessageImportance)"
