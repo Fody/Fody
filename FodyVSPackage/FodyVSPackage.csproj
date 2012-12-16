@@ -269,18 +269,6 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj">
-      <Project>{89681581-a390-4761-9c27-1f274fe506e7}</Project>
-      <Name>FodyIsolated</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-    <ProjectReference Include="..\Fody\Fody.csproj">
-      <Project>{64880f43-e6c1-428e-b00a-e0374697b5cf}</Project>
-      <Name>Fody</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>
