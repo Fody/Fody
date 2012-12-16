@@ -11,12 +11,12 @@
     <AssemblyName>FodyVSPackage</AssemblyName>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\Key.snk</AssemblyOriginatorKeyFile>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProductVersion>12.0.0</ProductVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -24,7 +24,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -187,66 +187,6 @@
     <None Include="Resources\Images_32bit.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll">
-      <Link>ContentFiles\Fody\Fody.dll</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
-    <Content Include="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.pdb">
-      <Link>ContentFiles\Fody\Fody.pdb</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
-    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\FodyIsolated.dll">
-      <Link>ContentFiles\Fody\FodyIsolated.dll</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
-    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\FodyIsolated.pdb">
-      <Link>ContentFiles\Fody\FodyIsolated.pdb</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
-    <Content Include="$(SolutionDir)FodyCommon\bin\$(ConfigurationName)\FodyCommon.dll">
-      <Link>ContentFiles\Fody\FodyCommon.dll</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
-    <Content Include="$(SolutionDir)FodyCommon\bin\$(ConfigurationName)\FodyCommon.pdb">
-      <Link>ContentFiles\Fody\FodyCommon.pdb</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
-    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\Mono.Cecil.dll">
-      <Link>ContentFiles\Fody\Mono.Cecil.dll</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
-    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\Mono.Cecil.Mdb.dll">
-      <Link>ContentFiles\Fody\Mono.Cecil.Mdb.dll</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
-    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\Mono.Cecil.Pdb.dll">
-      <Link>ContentFiles\Fody\Mono.Cecil.Pdb.dll</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
-    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\Mono.Cecil.Rocks.dll">
-      <Link>ContentFiles\Fody\Mono.Cecil.Rocks.dll</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
-    <Content Include="$(SolutionDir)Fody.targets">
-      <Link>ContentFiles\Fody\Fody.targets</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="$(TargetDir)FodyVSPackage.pdb">
-      <Link>FodyVSPackage.pdb</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
     <Content Include="ContentFiles\FodyWeavers.xml">
       <IncludeInVSIX>true</IncludeInVSIX>
       <SubType>Designer</SubType>
@@ -256,6 +196,43 @@
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="Resources\Package.ico" />
+    <Content Include="%24%28SolutionDir%29Fody\bin\%24%28ConfigurationName%29\Fody.dll">
+      <Link>ContentFiles\Fody\Fody.dll</Link>
+    </Content>
+    <Content Include="%24%28SolutionDir%29Fody\bin\%24%28ConfigurationName%29\Fody.pdb">
+      <Link>ContentFiles\Fody\Fody.pdb</Link>
+    </Content>
+    <Content Include="%24%28SolutionDir%29FodyIsolated\bin\%24%28ConfigurationName%29\FodyIsolated.dll">
+      <Link>ContentFiles\Fody\FodyIsolated.dll</Link>
+    </Content>
+    <Content Include="%24%28SolutionDir%29FodyIsolated\bin\%24%28ConfigurationName%29\FodyIsolated.pdb">
+      <Link>ContentFiles\Fody\FodyIsolated.pdb</Link>
+    </Content>
+    <Content Include="%24%28SolutionDir%29FodyCommon\bin\%24%28ConfigurationName%29\FodyCommon.dll">
+      <Link>ContentFiles\Fody\FodyCommon.dll</Link>
+    </Content>
+    <Content Include="%24%28SolutionDir%29FodyCommon\bin\%24%28ConfigurationName%29\FodyCommon.pdb">
+      <Link>ContentFiles\Fody\FodyCommon.pdb</Link>
+    </Content>
+    <Content Include="%24%28SolutionDir%29FodyIsolated\bin\%24%28ConfigurationName%29\Mono.Cecil.dll">
+      <Link>ContentFiles\Fody\Mono.Cecil.dll</Link>
+    </Content>
+    <Content Include="%24%28SolutionDir%29FodyIsolated\bin\%24%28ConfigurationName%29\Mono.Cecil.Mdb.dll">
+      <Link>ContentFiles\Fody\Mono.Cecil.Mdb.dll</Link>
+    </Content>
+    <Content Include="%24%28SolutionDir%29FodyIsolated\bin\%24%28ConfigurationName%29\Mono.Cecil.Pdb.dll">
+      <Link>ContentFiles\Fody\Mono.Cecil.Pdb.dll</Link>
+    </Content>
+    <Content Include="%24%28SolutionDir%29FodyIsolated\bin\%24%28ConfigurationName%29\Mono.Cecil.Rocks.dll">
+      <Link>ContentFiles\Fody\Mono.Cecil.Rocks.dll</Link>
+    </Content>
+    <Content Include="%24%28SolutionDir%29Fody.targets">
+      <SubType>Designer</SubType>
+      <Link>ContentFiles\Fody\Fody.targets</Link>
+    </Content>
+    <Content Include="%24%28TargetDir%29FodyVSPackage.pdb">
+      <Link>FodyVSPackage.pdb</Link>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Page Include="ExceptionHandling\ExceptionWindow.xaml">
@@ -269,12 +246,12 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj">
-      <Project>{89681581-a390-4761-9c27-1f274fe506e7}</Project>
+      <Project>{89681581-A390-4761-9C27-1F274FE506E7}</Project>
       <Name>FodyIsolated</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\Fody\Fody.csproj">
-      <Project>{64880f43-e6c1-428e-b00a-e0374697b5cf}</Project>
+      <Project>{64880F43-E6C1-428E-B00A-E0374697B5CF}</Project>
       <Name>Fody</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
@@ -302,4 +279,5 @@
     <EnvironmentVariable Variable="VsSDKToolsPath" Value="$(VsSDKInstall)" />
   </Target>
   <Import Project="$(ProjectDir)\..\Tools\Pepita\PepitaGet.targets" />
+  <Import Project="$(ProjectDir)\..\Tools\Fody\Fody.targets" />
 </Project>

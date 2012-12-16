@@ -26,13 +26,14 @@
 	  AssemblyFile="$(MSBuildThisFileDirectory)Fody.dll" />
   <Target 
 	  AfterTargets="CopyFilesToOutputDirectory"
-	  Name="FodyTarget">
+	  Name="WinFodyTarget"
+	  Condition=" '$(OS)' == 'Windows_NT'">
     <Fody.WeavingTask 
 		  AssemblyPath="$(TargetPath)" 
 		  IntermediateDir="$(IntermediateDir)"
 		  KeyFilePath="$(KeyOriginatorFile)" 
 		  MessageImportance="$(FodyMessageImportance)"
-		  ProjectPath="$(ProjectPath)" 
+		  ProjectDirectory="$(ProjectDir)" 
 		  SolutionDir="$(FodySolutionDir)" 
 		  References="@(ReferencePath)" 
       />
@@ -47,6 +48,21 @@
 		  SourceFiles="$(TargetDir)$(TargetName).mdb" 
 		  DestinationFolder="$(IntermediateDir)" 
 		  Condition="Exists('$(TargetDir)$(TargetName).mdb')"/>
+  </Target>
+
+  <Target 
+	  AfterTargets="AfterCompile"
+	  Name="NonWinFodyTarget"
+	  Condition=" '$(OS)' != 'Windows_NT'">
+    <Fody.WeavingTask 
+		  AssemblyPath="$(IntermediateAssembly)" 
+		  IntermediateDir="$(IntermediateDir)"
+		  KeyFilePath="$(KeyOriginatorFile)" 
+		  MessageImportance="$(FodyMessageImportance)"
+		  ProjectDirectory="$(ProjectDir)" 
+		  SolutionDir="$(FodySolutionDir)" 
+		  References="@(ReferencePath)" 
+      />
   </Target>
 
 

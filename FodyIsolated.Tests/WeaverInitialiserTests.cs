@@ -16,7 +16,6 @@ public class WeaverInitialiserTests
         var innerWeaver = new InnerWeaver
             {
                 AssemblyFilePath = "AssemblyFilePath",
-                ProjectFilePath = "ProjectFilePath",
                 SolutionDirectoryPath = "SolutionDirectoryPath",
                 ReferenceDictionary = new Dictionary<string, string> { { "Ref1;Ref2","Path1" } },
                 ModuleDefinition = moduleDefinition,
@@ -42,7 +41,6 @@ public class WeaverInitialiserTests
         Assert.AreEqual(@"c:\FakePath",moduleWeaver.AddinDirectoryPath);
         Assert.AreEqual("AssemblyFilePath", moduleWeaver.AssemblyFilePath);
         Assert.AreEqual("SolutionDirectoryPath", moduleWeaver.SolutionDirectoryPath);
-        Assert.AreEqual("ProjectFilePath", moduleWeaver.ProjectFilePath);
     }
 
 
@@ -59,7 +57,6 @@ public class WeaverInitialiserTests
         public Action<string, SequencePoint> LogErrorPoint { get; set; }
         public IAssemblyResolver AssemblyResolver { get; set; }
         public ModuleDefinition ModuleDefinition { get; set; }
-        public string ProjectFilePath { get; set; }
         public string SolutionDirectoryPath { get; set; }
 
         public bool ExecuteCalled;

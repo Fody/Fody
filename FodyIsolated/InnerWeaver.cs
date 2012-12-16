@@ -5,7 +5,6 @@ using System.Security.Permissions;
 public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 {
     public string AssemblyFilePath { get; set; }
-    public string ProjectFilePath { get; set; }
     public string SolutionDirectoryPath { get; set; }
     public string References { get; set; }
     public List<WeaverEntry> Weavers { get; set; }

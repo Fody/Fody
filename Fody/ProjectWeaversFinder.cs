@@ -24,8 +24,7 @@ public partial class Processor
             Logger.LogInfo(string.Format("Found path to weavers file '{0}'.", solutionConfigFilePath));
         }
 
-        var projectDirectory = Path.GetDirectoryName(ProjectFilePath);
-        var projectConfigFilePath = Path.Combine(projectDirectory, "FodyWeavers.xml");
+		var projectConfigFilePath = Path.Combine(ProjectDirectory, "FodyWeavers.xml");
         if (File.Exists(projectConfigFilePath))
         {
             ConfigFiles.Add(projectConfigFilePath);

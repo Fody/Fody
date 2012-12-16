@@ -14,7 +14,7 @@ namespace Fody
         public string MessageImportance { set; get; }
 
         [Required]
-        public string ProjectPath { get; set; }
+		public string ProjectDirectory { get; set; }
 
         [Required]
         public string References { get; set; }
@@ -30,7 +30,7 @@ namespace Fody
                            IntermediateDirectoryPath = IntermediateDir,
                            KeyFilePath = KeyFilePath,
                            MessageImportance = MessageImportance,
-                           ProjectFilePath = ProjectPath,
+						   ProjectDirectory = ProjectDirectory,
                            References = References,
                            SolutionDirectoryPath = SolutionDir,
                            BuildEngine = BuildEngine

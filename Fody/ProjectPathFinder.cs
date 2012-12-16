@@ -4,11 +4,11 @@ public partial class Processor
 {
     public void ValidateProjectPath()
     {
-        if (!File.Exists(ProjectFilePath))
+		if (!Directory.Exists(ProjectDirectory))
         {
-            throw new WeavingException(string.Format("ProjectPath \"{0}\" does not exist.", ProjectFilePath));
+			throw new WeavingException(string.Format("ProjectDirectory \"{0}\" does not exist.", ProjectDirectory));
         }
-        Logger.LogInfo(string.Format("ProjectFilePath path is '{0}.'", ProjectFilePath));
+		Logger.LogInfo(string.Format("ProjectDirectory path is '{0}.'", ProjectDirectory));
     }
 
 }

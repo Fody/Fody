@@ -10,13 +10,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Fody</RootNamespace>
     <AssemblyName>Fody</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -24,7 +23,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -89,7 +88,7 @@
   <Target Name="AfterBuild">
     <MakeDir Directories="$(SolutionDir)ForSample" />
     <Copy SourceFiles="$(TargetDir)Fody.dll" DestinationFolder="$(SolutionDir)ForSample" />
-    <Copy SourceFiles="$(TargetDir)Fody.pdb" DestinationFolder="$(SolutionDir)ForSample"   Condition="Exists('$(TargetDir)Fody.pdb')"/>
+    <Copy SourceFiles="$(TargetDir)Fody.pdb" DestinationFolder="$(SolutionDir)ForSample" Condition="Exists('$(TargetDir)Fody.pdb')" />
     <Copy SourceFiles="$(SolutionDir)Fody.targets" DestinationFolder="$(SolutionDir)ForSample" />
   </Target>
   <Import Project="$(ProjectDir)\..\Tools\Pepita\PepitaGet.targets" />

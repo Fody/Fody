@@ -13,7 +13,7 @@ public class ProjectWeaversFinderTests
         var logger = loggerMock.Object;
         var processor = new Processor
                                        {
-                                           ProjectFilePath = Environment.CurrentDirectory,
+										   ProjectDirectory = Environment.CurrentDirectory,
                                            Logger = logger,
                                            SolutionDirectoryPath = Environment.CurrentDirectory
                                        };

@@ -10,7 +10,7 @@ public partial class Processor
     public string IntermediateDirectoryPath;
     public string KeyFilePath;
     public string MessageImportance = "Low";
-    public string ProjectFilePath;
+    public string ProjectDirectory;
     public string References;
     public string SolutionDirectoryPath;
     public IBuildEngine BuildEngine;
@@ -146,7 +146,6 @@ public partial class Processor
         innerWeaver.KeyFilePath = KeyFilePath;
         innerWeaver.Logger = Logger;
         innerWeaver.SolutionDirectoryPath = SolutionDirectoryPath;
-        innerWeaver.ProjectFilePath = ProjectFilePath;
         innerWeaver.Weavers = Weavers;
         innerWeaver.IntermediateDirectoryPath = IntermediateDirectoryPath;
         innerWeaver.Execute();
