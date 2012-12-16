@@ -60,14 +60,10 @@ public partial class Processor
 
     void Inner()
     {
-
-
         ValidateProjectPath();
 
         ValidatorAssemblyPath();
 
-
-        
 
         FindProjectWeavers();
         

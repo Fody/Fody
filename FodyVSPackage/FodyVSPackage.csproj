@@ -189,18 +189,8 @@
     <None Include="Resources\Images_32bit.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll">
-      <Link>ContentFiles\Fody\Fody.dll</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
     <Content Include="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.pdb">
       <Link>ContentFiles\Fody\Fody.pdb</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
-    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\FodyIsolated.dll">
-      <Link>ContentFiles\Fody\FodyIsolated.dll</Link>
       <IncludeInVSIX>true</IncludeInVSIX>
       <InProject>false</InProject>
     </Content>
@@ -209,33 +199,8 @@
       <IncludeInVSIX>true</IncludeInVSIX>
       <InProject>false</InProject>
     </Content>
-    <Content Include="$(SolutionDir)FodyCommon\bin\$(ConfigurationName)\FodyCommon.dll">
-      <Link>ContentFiles\Fody\FodyCommon.dll</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
     <Content Include="$(SolutionDir)FodyCommon\bin\$(ConfigurationName)\FodyCommon.pdb">
       <Link>ContentFiles\Fody\FodyCommon.pdb</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
-    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\Mono.Cecil.dll">
-      <Link>ContentFiles\Fody\Mono.Cecil.dll</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
-    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\Mono.Cecil.Mdb.dll">
-      <Link>ContentFiles\Fody\Mono.Cecil.Mdb.dll</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
-    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\Mono.Cecil.Pdb.dll">
-      <Link>ContentFiles\Fody\Mono.Cecil.Pdb.dll</Link>
-      <IncludeInVSIX>true</IncludeInVSIX>
-      <InProject>false</InProject>
-    </Content>
-    <Content Include="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\Mono.Cecil.Rocks.dll">
-      <Link>ContentFiles\Fody\Mono.Cecil.Rocks.dll</Link>
       <IncludeInVSIX>true</IncludeInVSIX>
       <InProject>false</InProject>
     </Content>
@@ -269,6 +234,21 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+	  <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj">
+		<Project>{89681581-a390-4761-9c27-1f274fe506e7}</Project>
+		<Name>FodyIsolated</Name>
+		<ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+		<VSIXSubPath>ContentFiles\Fody</VSIXSubPath>
+	  </ProjectReference>
+	  <ProjectReference Include="..\Fody\Fody.csproj">
+		<Project>{64880f43-e6c1-428e-b00a-e0374697b5cf}</Project>
+		<Name>Fody</Name>
+		<ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+		<VSIXSubPath>ContentFiles\Fody</VSIXSubPath>
+	  </ProjectReference>
+	</ItemGroup>
+
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>
   </PropertyGroup>
