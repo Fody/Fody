@@ -5,6 +5,7 @@ public partial class Processor
 
     public void ValidateSolutionPath()
     {
+	    SolutionDirectoryPath = Path.GetFullPath(SolutionDirectoryPath);
         if (!Directory.Exists(SolutionDirectoryPath))
         {
             throw new WeavingException(string.Format("SolutionDir \"{0}\" does not exist.", SolutionDirectoryPath));

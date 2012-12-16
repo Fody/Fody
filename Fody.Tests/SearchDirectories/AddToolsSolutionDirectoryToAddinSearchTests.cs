@@ -13,6 +13,6 @@ public class AddToolsSolutionDirectoryToAddinSearchTests
             };
         processor.AddToolsSolutionDirectoryToAddinSearch();
         var searchPaths = processor.AddinSearchPaths;
-        Assert.AreEqual(Path.GetFullPath(@"Solution\Tools"), searchPaths[0]);
+        Assert.AreEqual(@"Solution\Tools", searchPaths[0]);
     }
 }

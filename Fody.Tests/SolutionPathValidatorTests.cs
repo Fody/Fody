@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Moq;
 using NUnit.Framework;
 
@@ -23,13 +24,16 @@ public class SolutionPathValidatorTests
     }
 
     [Test]
-    [ExpectedException(ExpectedException = typeof (WeavingException), ExpectedMessage = "SolutionDir \"baddir\" does not exist.")]
     public void InValid()
     {
-        var processor = new Processor
-            {
-                SolutionDirectoryPath = "baddir"
-            };
-        processor.ValidateSolutionPath();
+	    Assert.Throws<WeavingException>(() =>
+		    {
+
+			    var processor = new Processor
+				    {
+					    SolutionDirectoryPath = "baddir"
+				    };
+			    processor.ValidateSolutionPath();
+			}, string.Format("SolutionDir \"{0}baddir\" does not exist.", Path.GetFullPath("baddir")));
     }
 }

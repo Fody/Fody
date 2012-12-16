@@ -10,7 +10,7 @@ public partial class AddinFinder
     public void CacheAllFodyAddinDlls()
     {
         fodyFiles = AddinSearchPaths
-            .SelectMany(x => Directory.EnumerateFiles(x, "*.Fody.dll", SearchOption.AllDirectories))
+            .SelectMany(x => Directory.GetFiles(x, "*.Fody.dll", SearchOption.AllDirectories))
             .ToList();
     }
 
