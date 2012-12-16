@@ -63,6 +63,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
  * [TaskCouldNotBeLoaded](https://github.com/SimonCropp/Fody/wiki/TaskCouldNotBeLoaded)
  * [VSIXPackage](https://github.com/SimonCropp/Fody/wiki/VSIXPackage)
  * [WeavingTaskOptions](https://github.com/SimonCropp/Fody/wiki/WeavingTaskOptions)
+ * [Mono Support](https://github.com/SimonCropp/Fody/wiki/Mono)
 
 ## With thanks to
 
@@ -86,7 +87,3 @@ For supplying a build server
 http://codebetter.com/
 
 ![CodeBetter.png](https://raw.github.com/wiki/SimonCropp/Fody/CodeBetter.png)
-
-## License
-
-Fody is licensed under MIT. Refer to license.txt for more information.
