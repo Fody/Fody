@@ -17,7 +17,7 @@ public partial class AddinFinder
 
     public void AddToolsSolutionDirectoryToAddinSearch()
     {
-        var solutionDirToolsDirectory = Path.GetFullPath(Path.Combine(SolutionDirectoryPath, "Tools"));
+        var solutionDirToolsDirectory =Path.Combine(SolutionDirectoryPath, "Tools");
         AddinSearchPaths.Add(solutionDirToolsDirectory);
     }
 
