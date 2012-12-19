@@ -19,6 +19,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             //  AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => ResolveAssembly(args);
             SplitUpReferences();
             
+            GetSymbolProviders();
             ReadModule();
 
             SetWeaverProperties();
