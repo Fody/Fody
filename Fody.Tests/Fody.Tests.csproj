@@ -33,16 +33,16 @@
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="Mono.Cecil">
-      <HintPath>..\Lib\Mono.Cecil.dll</HintPath>
+      <HintPath>..\Lib\Cecil\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>..\Lib\Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>..\Lib\Cecil\Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>..\Lib\Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>..\Lib\Cecil\Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Rocks">
-      <HintPath>..\Lib\Mono.Cecil.Rocks.dll</HintPath>
+      <HintPath>..\Lib\Cecil\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
