@@ -8,7 +8,8 @@ Manipulating the IL of an assembly as part of a build requires a significant amo
 
 This technique of "weaving" in new instructions is fantastically powerful. You can turn simple public properties into full [INotifyPropertyChanged implementations](https://github.com/SimonCropp/PropertyChanged), add [checks for null arguments](https://github.com/SimonCropp/NullGuard.Fody), add [Git hashs to your Assemblies](https://github.com/SimonCropp/Stamp), even [make all your string comparisons case insensitive](https://github.com/SimonCropp/Caseless). 
 
-### Note: Users of the INotifyPropertyWeaver extension who are migrating to Fody will want to NuGet Install the PropertyChanged.Fody package along with the Fody package itself to get the same functionality as before. This is because Fody is a general purpose weaver with plugins while INotifyPropertyWeaver was specific to one scenario. That scenario now lifes in the [PropertyChanged addin](https://github.com/SimonCropp/PropertyChanged).
+### Note: 
+Users of the INotifyPropertyWeaver extension who are migrating to Fody will want to NuGet Install the PropertyChanged.Fody package along with the Fody package itself to get the same functionality as before. This is because Fody is a general purpose weaver with plugins while INotifyPropertyWeaver was specific to one scenario. That scenario now lives in the [PropertyChanged addin](https://github.com/SimonCropp/PropertyChanged).
 
 ## The plumbing tasks Fody handles 
 
