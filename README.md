@@ -68,7 +68,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [MethodTimer](https://github.com/SimonCropp/MethodTimer) Injects method timing code.
   * [Mixins](https://bitbucket.org/skwasiborski/mixins.fody/wiki/Home) A mixin is a class that provides a certain functionality to be inherited or just reused by a subclass.
   * [ModuleInit](https://github.com/SimonCropp/ModuleInit) Adds a module initializer to an assembly.
-  * [NullGuard.Fody](https://github.com/SimonCropp/NullGuard.Fody) Adds null argument checks to an assembly
+  * [NullGuard](https://github.com/SimonCropp/NullGuard.Fody) Adds null argument checks to an assembly
   * [Obsolete](https://github.com/SimonCropp/Obsolete) Helps keep usages of [ObsoleteAttribute]([http://msdn.microsoft.com/en-us/library/fwz0y5c2 ) consistent.
   * [PropertyChanged](https://github.com/SimonCropp/PropertyChanged) Injects INotifyPropertyChanged code into properties.
   * [PropertyChanging](https://github.com/SimonCropp/PropertyChanging) Injects INotifyPropertyChanging code into properties.
