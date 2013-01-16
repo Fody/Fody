@@ -42,11 +42,11 @@
       TaskName="Fody.WeavingTask"
       AssemblyFile="$(MSBuildThisFileDirectory)Fody.dll" />
   <Target
-      AfterTargets="CopyFilesToOutputDirectory"
+      AfterTargets="AfterCompile"
       Name="WinFodyTarget"
       Condition=" '$(OS)' == 'Windows_NT'">
     <Fody.WeavingTask
-          AssemblyPath="$(TargetPath)"
+          AssemblyPath="@(IntermediateAssembly)"
           IntermediateDir="$(IntermediateDir)"
           KeyFilePath="$(FodyKeyFilePath)"
           MessageImportance="$(FodyMessageImportance)"
@@ -54,17 +54,6 @@
           SolutionDir="$(FodySolutionDir)"
           References="@(ReferencePath)"
       />
-    <Copy
-          SourceFiles="$(TargetPath)"
-          DestinationFolder="$(IntermediateDir)" />
-    <Copy
-          SourceFiles="$(TargetDir)$(TargetName).pdb"
-          DestinationFolder="$(IntermediateDir)"
-          Condition="Exists('$(TargetDir)$(TargetName).pdb')"/>
-    <Copy
-          SourceFiles="$(TargetDir)$(TargetName).mdb"
-          DestinationFolder="$(IntermediateDir)"
-          Condition="Exists('$(TargetDir)$(TargetName).mdb')"/>
   </Target>
 
   <Target
