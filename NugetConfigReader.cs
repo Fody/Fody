@@ -1,5 +1,7 @@
+using System;
 using System.IO;
 using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
 
 public static class NugetConfigReader
@@ -40,7 +42,15 @@ public static class NugetConfigReader
     {
         if (File.Exists(nugetConfigPath))
         {
-            var xDocument = XDocument.Load(nugetConfigPath);
+            XDocument xDocument;
+            try
+            {
+                xDocument = XDocument.Load(nugetConfigPath);
+            }
+            catch (XmlException)
+            {
+                return null;
+            }
             var repositoryPath = xDocument.Descendants("repositoryPath")
                 .Select(x => x.Value)
                 .FirstOrDefault(x => !string.IsNullOrWhiteSpace(x));
