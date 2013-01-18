@@ -9,6 +9,7 @@ public partial class Processor
     public string AssemblyFilePath;
     public string IntermediateDirectoryPath;
     public string KeyFilePath;
+    public bool SignAssembly;
     public string MessageImportance = "Low";
     public string ProjectDirectory;
     public string References;
@@ -140,6 +141,7 @@ public partial class Processor
         innerWeaver.AssemblyFilePath = AssemblyFilePath;
         innerWeaver.References = References;
         innerWeaver.KeyFilePath = KeyFilePath;
+        innerWeaver.SignAssembly = SignAssembly;
         innerWeaver.Logger = Logger;
         innerWeaver.SolutionDirectoryPath = SolutionDirectoryPath;
         innerWeaver.Weavers = Weavers;

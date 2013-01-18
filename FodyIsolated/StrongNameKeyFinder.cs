@@ -8,6 +8,10 @@ public partial class InnerWeaver
 
     public void FindStrongNameKey()
     {
+        if (!SignAssembly)
+        {
+            return;
+        }
         var keyFilePath = GetKeyFilePath();
         if (keyFilePath != null)
         {
@@ -28,7 +32,7 @@ public partial class InnerWeaver
            Logger.LogInfo(string.Format("Using strong name key from KeyFilePath '{0}'.", KeyFilePath));
            return KeyFilePath;
        }
-       //public AssemblyKeyFileAttribute(string keyFile)
+
        var assemblyKeyFileAttribute = ModuleDefinition
            .Assembly
            .CustomAttributes
