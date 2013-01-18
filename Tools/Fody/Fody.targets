@@ -17,27 +17,22 @@
       </PropertyGroup>
     </When>
   </Choose>
-
   <Choose>
-    <When Condition="'$(SignAssembly)'=='True'">
-      <Choose>
-        <When Condition="$(KeyOriginatorFile) != '' And $(KeyOriginatorFile) != '*Undefined*'">
-          <PropertyGroup>
-            <FodyKeyFilePath>$(KeyOriginatorFile)</FodyKeyFilePath>
-          </PropertyGroup>
-        </When>
-        <When Condition="$(AssemblyOriginatorKeyFile) != '' And $(AssemblyOriginatorKeyFile) != '*Undefined*'">
-          <PropertyGroup>
-            <FodyKeyFilePath>$(AssemblyOriginatorKeyFile)</FodyKeyFilePath>
-          </PropertyGroup>
-        </When>
-        <Otherwise >
-          <PropertyGroup>
-            <FodyKeyFilePath></FodyKeyFilePath>
-          </PropertyGroup>
-        </Otherwise>
-      </Choose>
+    <When Condition="$(KeyOriginatorFile) != '' And $(KeyOriginatorFile) != '*Undefined*'">
+      <PropertyGroup>
+        <FodyKeyFilePath>$(KeyOriginatorFile)</FodyKeyFilePath>
+      </PropertyGroup>
     </When>
+    <When Condition="$(AssemblyOriginatorKeyFile) != '' And $(AssemblyOriginatorKeyFile) != '*Undefined*'">
+      <PropertyGroup>
+        <FodyKeyFilePath>$(AssemblyOriginatorKeyFile)</FodyKeyFilePath>
+      </PropertyGroup>
+    </When>
+    <Otherwise >
+      <PropertyGroup>
+        <FodyKeyFilePath></FodyKeyFilePath>
+      </PropertyGroup>
+    </Otherwise>
   </Choose>
   <PropertyGroup>
     <IntermediateDir>$(ProjectDir)$(IntermediateOutputPath)</IntermediateDir>
@@ -58,6 +53,7 @@
           ProjectDirectory="$(ProjectDir)"
           SolutionDir="$(FodySolutionDir)"
           References="@(ReferencePath)"
+          SignAssembly="$(SignAssembly)"
       />
   </Target>
 
