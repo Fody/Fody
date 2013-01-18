@@ -24,6 +24,7 @@ public partial class InnerWeaver
    {
        if (KeyFilePath != null)
        {
+           KeyFilePath = Path.GetFullPath(KeyFilePath);
            Logger.LogInfo(string.Format("Using strong name key from KeyFilePath '{0}'.", KeyFilePath));
            return KeyFilePath;
        }
