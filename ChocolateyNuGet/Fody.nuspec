@@ -7,7 +7,7 @@
     <authors>Simon Cropp</authors>
     <owners>Simon Cropp</owners>
     <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
-    <projectUrl>http://github.com/SimonCropp/Fody</projectUrl>
+    <projectUrl>http://github.com/Fody/Fody</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Extensible tool for weaving .net assemblies.</description>
     <summary />
