@@ -9,7 +9,8 @@ public class AddToolsAssemblyLocationToAddinSearchTests
     {
         var processor = new AddinFinder();
         processor.AddToolsAssemblyLocationToAddinSearch();
-        var expected = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory(), @"..\..\"));
+        var currentDirectory = AssemblyLocation.CurrentDirectory();
+        var expected = Path.GetFullPath(Path.Combine(currentDirectory, @"..\"));
         Assert.AreEqual(expected, processor.AddinSearchPaths[0]+@"\");
     }
 }
