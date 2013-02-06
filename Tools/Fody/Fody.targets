@@ -36,7 +36,7 @@
   </Choose>
   <PropertyGroup>
     <IntermediateDir>$(ProjectDir)$(IntermediateOutputPath)</IntermediateDir>
-    <FodyMessageImportance Condition="$(FodyMessageImportance) == '' Or $(FodyMessageImportance) == '*Undefined*'">Low</FodyMessageImportance>
+    <FodyMessageImportance Condition="$(FodyMessageImportance) == '' Or $(FodyMessageImportance) == '*Undefined*'">High</FodyMessageImportance>
   </PropertyGroup>
   <UsingTask
       TaskName="Fody.WeavingTask"

@@ -34,13 +34,13 @@
   </Target>
   <Target Name="Build" DependsOnTargets="ChocolateyNuGetBuild" />
   <Target Name="ReBuild" DependsOnTargets="ChocolateyNuGetBuild" />
-  <UsingTask TaskName="PepitaPackage.WeavingTask" AssemblyFile="$(SolutionDir)Tools\Pepita\PepitaPackage.dll" />
+  <UsingTask TaskName="PepitaPackage.CreatePackageTask" AssemblyFile="$(SolutionDir)Tools\Pepita\PepitaPackage.dll" />
   <Target Name="ChocolateyNuGetBuild" DependsOnTargets="Clean">
     <MakeDir Directories="$(SolutionDir)ChocolateyNuGetBuild" />
     <Copy SourceFiles="$(ProjectDir)Fody.nuspec" DestinationFolder="$(SolutionDir)ChocolateyNuGetBuild" />
     <Copy SourceFiles="$(ProjectDir)chocolateyInstall.ps1" DestinationFolder="$(SolutionDir)ChocolateyNuGetBuild\Tools" />
     <Copy SourceFiles="$(SolutionDir)FodyVSPackage\bin\$(ConfigurationName)\FodyVSPackage.vsix" DestinationFolder="$(SolutionDir)ChocolateyNuGetBuild\Tools" />
-    <PepitaPackage.WeavingTask NuGetBuildDirectory="$(SolutionDir)ChocolateyNuGetBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll" />
+    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)ChocolateyNuGetBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll" />
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\FodyVSPackage\FodyVSPackage.csproj">
