@@ -9,11 +9,6 @@ public partial class AddinFinder
         {
             return;
         }
-        directoryInfo = directoryInfo.Parent;
-        if (directoryInfo == null)
-        {
-            return;
-        }
         AddinSearchPaths.Add(directoryInfo.FullName);
     }
 }
