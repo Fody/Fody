@@ -18,7 +18,7 @@ public class ModuleWeaverRunnerTests
     }
 
     [Test]
-    [ExpectedException(typeof(WeavingException), ExpectedMessage = "ModuleWeaver must contain a method with the signature 'public void Execute()'.")]
+    [ExpectedException(typeof(WeavingException), ExpectedMessage = "ModuleWeaver 'ModuleWeaverRunnerTests+BadExecuteWithParamsModuleWeaver, FodyIsolated.Tests' must contain a method with the signature 'public void Execute()'.")]
     public void BadExecute()
     {
         var moduleWeaver = new BadExecuteWithParamsModuleWeaver();

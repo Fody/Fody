@@ -19,7 +19,6 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         {
             //  AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => ResolveAssembly(args);
             SplitUpReferences();
-            
             GetSymbolProviders();
             ReadModule();
 
@@ -47,7 +46,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
             FindStrongNameKey();
             WriteModule();
-
+            DisposeWeavers();
         }
         catch (Exception exception)
         {

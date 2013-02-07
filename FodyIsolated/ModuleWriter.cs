@@ -1,9 +1,5 @@
 using System.Diagnostics;
-using System.IO;
 using Mono.Cecil;
-using Mono.Cecil.Cil;
-using Mono.Cecil.Mdb;
-using Mono.Cecil.Pdb;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 public partial class InnerWeaver

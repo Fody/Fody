@@ -7,7 +7,8 @@ public partial class InnerWeaver
 
     public void RunWeaver(dynamic weaverInstance)
     {
-        Logger.LogInfo(string.Format("Executing Weaver '{0}'.", ObjectTypeName.GetTypeName(weaverInstance)));
+        var weaverName = ObjectTypeName.GetTypeName(weaverInstance);
+        Logger.LogInfo(string.Format("Executing Weaver '{0}'.", weaverName));
 
         var stopwatch = Stopwatch.StartNew();
         try
@@ -16,7 +17,13 @@ public partial class InnerWeaver
         }
         catch (RuntimeBinderException)
         {
-                throw new WeavingException("ModuleWeaver must contain a method with the signature 'public void Execute()'.");
+            var message = String.Format("ModuleWeaver '{0}' must contain a method with the signature 'public void Execute()'.", weaverName);
+            throw new WeavingException(message);
+        }
+        catch (Exception exception)
+        {
+            var message = String.Format("An error occurred processing ModuleWeaver '{0}'.", weaverName);
+            throw new Exception(message, exception);
         }
         finally
         {
