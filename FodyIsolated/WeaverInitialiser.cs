@@ -43,6 +43,7 @@ public partial class InnerWeaver
    //     weaverInstance.SetProperty("References", SplitReferences);
         weaverInstance.SetProperty("AssemblyFilePath", AssemblyFilePath);
         weaverInstance.SetProperty("AddinDirectoryPath", Path.GetDirectoryName(weaverEntry.AssemblyPath));
+        weaverInstance.SetProperty("ReferenceCopyLocalPaths", ReferenceCopyLocalPaths);
         weaverInstance.SetProperty("SolutionDirectoryPath", SolutionDirectoryPath);
         weaverInstance.SetProperty("LogInfo", new Action<string>(s => Logger.LogInfo(s)));
         weaverInstance.SetProperty("LogWarning", new Action<string>(s => Logger.LogWarning(s)));

@@ -12,6 +12,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     public bool SignAssembly { get; set; }
     public ILogger Logger { get; set; }
     public string IntermediateDirectoryPath { get; set; }
+    public List<string> ReferenceCopyLocalPaths { get; set; }
 
     public void Execute()
     {

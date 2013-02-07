@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
@@ -18,6 +19,7 @@ public class WeaverInitialiserTests
                 AssemblyFilePath = "AssemblyFilePath",
                 SolutionDirectoryPath = "SolutionDirectoryPath",
                 ReferenceDictionary = new Dictionary<string, string> { { "Ref1;Ref2","Path1" } },
+                ReferenceCopyLocalPaths = new List<string>{"Ref1"},
                 ModuleDefinition = moduleDefinition,
 
             };
@@ -35,6 +37,8 @@ public class WeaverInitialiserTests
         Assert.IsNotNull(moduleWeaver.LogWarningPoint);
         Assert.IsNotNull(moduleWeaver.LogError);
         Assert.IsNotNull(moduleWeaver.LogErrorPoint);
+        Assert.AreEqual("Ref1",moduleWeaver.ReferenceCopyLocalPaths.First());
+        
        // Assert.IsNotEmpty(moduleWeaver.References); 
         Assert.AreEqual(moduleDefinition, moduleWeaver.ModuleDefinition);
         Assert.AreEqual(innerWeaver, moduleWeaver.AssemblyResolver);
@@ -58,6 +62,8 @@ public class WeaverInitialiserTests
         public IAssemblyResolver AssemblyResolver { get; set; }
         public ModuleDefinition ModuleDefinition { get; set; }
         public string SolutionDirectoryPath { get; set; }
+
+        public List<string> ReferenceCopyLocalPaths { get; set; }
 
         public bool ExecuteCalled;
 

@@ -15,6 +15,7 @@ public partial class Processor
     public string References;
     public string SolutionDirectoryPath;
     public IBuildEngine BuildEngine;
+    public List<string> ReferenceCopyLocalPaths;
 
     AddinFinder addinFinder;
     static Dictionary<string, AppDomain> solutionDomains = new Dictionary<string, AppDomain>(StringComparer.OrdinalIgnoreCase);
@@ -141,6 +142,7 @@ public partial class Processor
         innerWeaver.AssemblyFilePath = AssemblyFilePath;
         innerWeaver.References = References;
         innerWeaver.KeyFilePath = KeyFilePath;
+        innerWeaver.ReferenceCopyLocalPaths = ReferenceCopyLocalPaths;
         innerWeaver.SignAssembly = SignAssembly;
         innerWeaver.Logger = Logger;
         innerWeaver.SolutionDirectoryPath = SolutionDirectoryPath;

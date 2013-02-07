@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -19,6 +20,10 @@ namespace Fody
 
         [Required]
         public string References { get; set; }
+        
+        //TODO: make this required on the next release
+        //[Required]
+        public ITaskItem[] ReferenceCopyLocalPaths { get; set; }
 
         [Required]
         public string SolutionDir { get; set; }
@@ -35,7 +40,8 @@ namespace Fody
 						   ProjectDirectory = ProjectDirectory,
                            References = References,
                            SolutionDirectoryPath = SolutionDir,
-                           BuildEngine = BuildEngine
+                           BuildEngine = BuildEngine,
+                           ReferenceCopyLocalPaths = ReferenceCopyLocalPaths.Select(x=>x.ItemSpec).ToList()
                        }.Execute();
         }
 
