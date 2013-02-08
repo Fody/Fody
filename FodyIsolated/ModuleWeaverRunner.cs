@@ -20,11 +20,6 @@ public partial class InnerWeaver
             var message = String.Format("ModuleWeaver '{0}' must contain a method with the signature 'public void Execute()'.", weaverName);
             throw new WeavingException(message);
         }
-        catch (Exception exception)
-        {
-            var message = String.Format("An error occurred processing ModuleWeaver '{0}'.", weaverName);
-            throw new Exception(message, exception);
-        }
         finally
         {
             stopwatch.Stop();
