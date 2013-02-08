@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
@@ -30,6 +31,11 @@ namespace Fody
 
         public override bool Execute()
         {
+            List<string> referenceCopyLocalPaths = null;
+            if (ReferenceCopyLocalPaths != null)
+            {
+                referenceCopyLocalPaths = ReferenceCopyLocalPaths.Select(x => x.ItemSpec).ToList();
+            }
             return new Processor
                        {
                            AssemblyFilePath = AssemblyPath,
@@ -41,10 +47,9 @@ namespace Fody
                            References = References,
                            SolutionDirectoryPath = SolutionDir,
                            BuildEngine = BuildEngine,
-                           ReferenceCopyLocalPaths = ReferenceCopyLocalPaths.Select(x=>x.ItemSpec).ToList()
+                           ReferenceCopyLocalPaths = referenceCopyLocalPaths
                        }.Execute();
         }
-
     }
 }
 

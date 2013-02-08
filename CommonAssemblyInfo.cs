@@ -2,5 +2,5 @@
 
 [assembly: AssemblyTitle("Fody")]
 [assembly: AssemblyProduct("Fody")]
-[assembly: AssemblyVersion("1.9.7.0")]
-[assembly: AssemblyFileVersion("1.9.7.0")]
+[assembly: AssemblyVersion("1.9.8.0")]
+[assembly: AssemblyFileVersion("1.9.8.0")]

@@ -36,7 +36,7 @@
   </Choose>
   <PropertyGroup>
     <IntermediateDir>$(ProjectDir)$(IntermediateOutputPath)</IntermediateDir>
-    <FodyMessageImportance Condition="$(FodyMessageImportance) == '' Or $(FodyMessageImportance) == '*Undefined*'">High</FodyMessageImportance>
+    <FodyMessageImportance Condition="$(FodyMessageImportance) == '' Or $(FodyMessageImportance) == '*Undefined*'">Low</FodyMessageImportance>
   </PropertyGroup>
   <UsingTask
       TaskName="Fody.WeavingTask"
@@ -54,6 +54,7 @@
           SolutionDir="$(FodySolutionDir)"
           References="@(ReferencePath)"
           SignAssembly="$(SignAssembly)"
+          ReferenceCopyLocalPaths="@(ReferenceCopyLocalPaths)"
       />
   </Target>
 
@@ -70,6 +71,7 @@
           SolutionDir="$(FodySolutionDir)"
           References="@(ReferencePath)"
           SignAssembly="$(SignAssembly)"
+          ReferenceCopyLocalPaths="$(ReferenceCopyLocalPaths)"
       />
   </Target>
 
