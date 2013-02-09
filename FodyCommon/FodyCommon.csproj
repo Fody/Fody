@@ -41,6 +41,12 @@
     <Reference Include="System.Xml" />
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs" />
     <Compile Include="ExceptionExtensions.cs" />
