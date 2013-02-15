@@ -59,6 +59,10 @@ public class BuildLogger : MarshalByRefObject, ILogger
     {
         stringBuilder.AppendLine("  " + message);
     }
+    public void LogDebug(string message)
+    {
+        stringBuilder.AppendLine("  " + message);
+    }
 
     public void LogError(string message)
     {

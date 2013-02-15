@@ -30,13 +30,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MethodTimer">
+      <HintPath>..\packages\MethodTimer.Fody.1.10.0.0\lib\portable-net4+sl4+wp7+win8\MethodTimer.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>..\Lib\Cecil\Mono.Cecil.dll</HintPath>
     </Reference>
@@ -63,18 +60,18 @@
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="AssemblyReferenceFinder.cs" />
     <Compile Include="AssemblyResolver.cs" />
-    <Compile Include="WeaverDisposer.cs" />
+    <Compile Include="MethodTimeLogger.cs" />
+    <Compile Include="PropertyDelegateBuilder.cs" />
     <Compile Include="SymbolsFinder.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="InnerWeaver.cs" />
     <Compile Include="InstanceConstructor.cs" />
     <Compile Include="IsolatedContainsTypeChecker.cs" />
     <Compile Include="ModuleReader.cs" />
-    <Compile Include="ModuleWeaverRunner.cs" />
     <Compile Include="ModuleWriter.cs" />
-    <Compile Include="ObjectTypeName.cs" />
     <Compile Include="StrongNameKeyFinder.cs" />
     <Compile Include="TypeFinder.cs" />
+    <Compile Include="WeaverDelegateHolder.cs" />
     <Compile Include="WeaverInitialiser.cs" />
   </ItemGroup>
   <ItemGroup>

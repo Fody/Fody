@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Security.Permissions;
+using FodyIsolated;
 
 public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 {
     public string AssemblyFilePath { get; set; }
     public string SolutionDirectoryPath { get; set; }
+    public bool DebugLoggingEnabled { get; set; }
     public string References { get; set; }
     public List<WeaverEntry> Weavers { get; set; }
     public string KeyFilePath { get; set; }
@@ -16,24 +19,41 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
     public void Execute()
     {
+        if (DebugLoggingEnabled)
+        {
+            MethodTimeLogger.LogDebug = s => Logger.LogInfo(s);
+        }
         try
         {
             SplitUpReferences();
             GetSymbolProviders();
             ReadModule();
-            SetWeaverProperties();
 
-            Logger.LogInfo("");
-            try
+            foreach (var weaverConfig in Weavers)
             {
 
-                foreach (var weaverInstance in WeaverInstances)
+                Logger.LogInfo(string.Format("Loading weaver '{0}'.", weaverConfig.AssemblyPath));
+                var assembly = LoadAssembly(weaverConfig.AssemblyPath);
+
+                var weaverType = assembly.FindType(weaverConfig.TypeName);
+
+                object weaverInstance = null;
+                try
                 {
-                    var weaverName = ObjectTypeName.GetAssemblyName(weaverInstance);
-                    Logger.SetCurrentWeaverName(weaverName);
+                    weaverInstance = weaverType.ConstructInstance();
+
+                    var delegateHolder = GetDelegateHolderFromCache(weaverType);
+
+                    SetProperties(weaverConfig, weaverInstance, delegateHolder);
+
+                    Logger.SetCurrentWeaverName(weaverConfig.AssemblyName);
                     try
                     {
-                        RunWeaver(weaverInstance);
+                        var startNew = Stopwatch.StartNew();
+                        Logger.LogInfo(string.Format("Executing Weaver '{0}'.", weaverConfig.AssemblyName));
+                        delegateHolder.Execute(weaverInstance);
+                        var message = string.Format("Finished '{0}' in {1}ms {2}", weaverConfig.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
+                        Logger.LogInfo(message);
                     }
                     catch (Exception exception)
                     {
@@ -44,20 +64,38 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
                     {
                         Logger.ClearWeaverName();
                     }
-                }
 
-                FindStrongNameKey();
-                WriteModule();
+                }
+                finally
+                {
+                    if (weaverInstance != null)
+                    {
+                        var disposable = weaverInstance as IDisposable;
+                        if (disposable != null)
+                        {
+                            disposable.Dispose();
+                        }
+                    }
+                }
             }
-            finally
-            {
-                DisposeWeavers();
-            }
+
+            FindStrongNameKey();
+            WriteModule();
         }
         catch (Exception exception)
         {
             Logger.LogError(exception.ToFriendlyString());
         }
+    }
+
+    public static WeaverDelegateHolder GetDelegateHolderFromCache(Type weaverType)
+    {
+        WeaverDelegateHolder delegateHolder;
+        if (!weaverDelegates.TryGetValue(weaverType.TypeHandle, out delegateHolder))
+        {
+            weaverDelegates[weaverType.TypeHandle] = delegateHolder = BuildDelegateHolder(weaverType);
+        }
+        return delegateHolder;
     }
 
     [SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.Infrastructure)]

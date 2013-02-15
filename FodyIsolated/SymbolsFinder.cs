@@ -30,6 +30,7 @@ public partial class InnerWeaver
 		    debugReaderProvider = new MdbReaderProvider();
             debugWriterProvider = new MdbWriterProvider();
 		    Logger.LogInfo(string.Format("Found debug symbols at '{0}'.", mdbPath));
+            return;
 		}
 
 		Logger.LogInfo("Found no debug symbols.");

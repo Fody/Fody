@@ -60,8 +60,7 @@
   <ItemGroup>
     <Compile Include="IsolatedContainsTypeCheckerTests.cs" />
     <Compile Include="InstanceConstructorTests.cs" />
-    <Compile Include="ModuleWeaverRunnerTests.cs" />
-    <Compile Include="ObjectTypeNameTests.cs" />
+    <Compile Include="ReflectionTests.cs" />
     <Compile Include="TypeFinderTest.cs" />
     <Compile Include="WeaverInitialiserTests.cs" />
   </ItemGroup>

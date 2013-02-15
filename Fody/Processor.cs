@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Fody;
+using MethodTimer;
 using Microsoft.Build.Framework;
 
 public partial class Processor
@@ -16,6 +18,7 @@ public partial class Processor
     public string SolutionDirectoryPath;
     public IBuildEngine BuildEngine;
     public List<string> ReferenceCopyLocalPaths;
+    public bool DebugLoggingEnabled ;
 
     AddinFinder addinFinder;
     static Dictionary<string, AppDomain> solutionDomains = new Dictionary<string, AppDomain>(StringComparer.OrdinalIgnoreCase);
@@ -42,6 +45,10 @@ public partial class Processor
                          BuildEngine = BuildEngine,
                      };
 
+        if (DebugLoggingEnabled)
+        {
+            MethodTimeLogger.LogDebug = s => Logger.LogInfo(s);
+        }
         try
         {
             Inner();
@@ -101,6 +108,7 @@ public partial class Processor
         FlushWeaversXmlHistory();
     }
 
+    [Time]
     void FindWeavers()
     {
         ReadProjectWeavers();
@@ -119,7 +127,7 @@ public partial class Processor
         ConfigureWhenNoWeaversFound();
     }
 
-
+    [Time]
     void ExecuteInOwnAppDomain()
     {
         AppDomain appdomain;

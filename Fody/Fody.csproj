@@ -28,14 +28,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
     <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
+    <FodySignAssembly>true</FodySignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MethodTimer">
+      <HintPath>..\packages\MethodTimer.Fody.1.10.0.0\lib\portable-net4+sl4+wp7+win8\MethodTimer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Tasks.v4.0" />
@@ -57,6 +56,7 @@
     <Compile Include="AssemblyLocation.cs" />
     <Compile Include="ContainsTypeChecker.cs" />
     <Compile Include="DomainAssemblyResolver.cs" />
+    <Compile Include="MethodTimeLogger.cs" />
     <Compile Include="Processor.cs" />
     <Compile Include="InstanceLinker\WeaversConfiguredInstanceLinker.cs" />
     <Compile Include="InstanceLinker\NoWeaversConfiguredInstanceLinker.cs" />
@@ -68,7 +68,6 @@
     <Compile Include="ProjectPathFinder.cs" />
     <Compile Include="ProjectWeaversReader.cs" />
     <Compile Include="AssemblyPathValidator.cs" />
-    <Compile Include="AddinFinder\AddToolsAssemblyLocationToAddinSearch.cs" />
     <Compile Include="WeaverAssemblyPathFinder.cs" />
     <Compile Include="SolutionPathValidator.cs" />
     <Compile Include="AddinFinder\AddinFilesEnumerator.cs" />

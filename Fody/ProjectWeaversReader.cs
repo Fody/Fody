@@ -2,11 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
+using MethodTimer;
 
 public partial class Processor
 {
     public List<WeaverEntry> Weavers;
 
+    [Time]
     public void ReadProjectWeavers()
     {
         if (Weavers != null)

@@ -57,6 +57,7 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyVersionReaderTests.cs" />
@@ -65,11 +66,10 @@
     <Compile Include="DomainAssemblyResolverTests.cs" />
     <Compile Include="InstanceLinker\NoWeaversConfiguredInstanceLinkerTests.cs" />
     <Compile Include="InstanceLinker\WeaversConfiguredInstanceLinkerTests.cs" />
+    <Compile Include="ModuleIitializer.cs" />
     <Compile Include="NugetConfigReaderTest.cs" />
     <Compile Include="ProjectPathFinderTests.cs" />
     <Compile Include="ProjectWeaversFinderTests.cs" />
-    <Compile Include="SearchDirectories\AddinDirectoriesTests.cs" />
-    <Compile Include="SearchDirectories\AddToolsAssemblyLocationToAddinSearchTests.cs" />
     <Compile Include="ShouldStartSinceFileChangedTests.cs" />
     <Compile Include="WeaverAssemblyPathFinderTests.cs" />
     <Compile Include="WeaverProjectFileFinderTests.cs" />
@@ -79,10 +79,7 @@
     <Compile Include="DynamicTests.cs" />
     <Compile Include="FileChangedCheckerTests.cs" />
     <Compile Include="ProjectWeaversReaderTests\ProjectWeaversReaderTests.cs" />
-    <Compile Include="SearchDirectories\AddNugetDirectoryToAddinSearchTests.cs" />
-    <Compile Include="SearchDirectories\AddToolsSolutionDirectoryToAddinSearchTests.cs" />
     <Compile Include="SolutionPathValidatorTests.cs" />
-    <Compile Include="AddinFilesEnumeratorTests.cs" />
     <Compile Include="XmlExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,7 +88,7 @@
       <Name>FodyCommon</Name>
     </ProjectReference>
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj">
-      <Project>{89681581-A390-4761-9C27-1F274FE506E7}</Project>
+      <Project>{89681581-a390-4761-9c27-1f274fe506e7}</Project>
       <Name>FodyIsolated</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fody\Fody.csproj">
@@ -161,4 +158,5 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(ProjectDir)\..\Tools\Pepita\PepitaGet.targets" />
+  <Import Project="$(ProjectDir)\..\Tools\Fody\Fody.targets" />
 </Project>

@@ -1,8 +1,9 @@
 using System;
+using MethodTimer;
 
 public partial class Processor
 {
-
+    [Time]
     public void ConfigureWhenWeaversFound()
     {
 
@@ -27,7 +28,7 @@ public partial class Processor
         var assemblyPath = FindAssemblyPath(weaverConfig.AssemblyName);
         if (assemblyPath == null)
         {
-            var searchPaths = string.Join(Environment.NewLine, addinFinder.AddinSearchPaths);
+            var searchPaths = string.Join(Environment.NewLine, addinFinder.FodyFiles);
             var message = string.Format("Could not find a weaver named '{0}'. Tried:{1}{2}.", weaverConfig.AssemblyName, Environment.NewLine, searchPaths);
             throw new WeavingException(message);
         }

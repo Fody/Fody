@@ -1,6 +1,8 @@
+using MethodTimer;
+
 public partial class Processor
 {
-
+    [Time]
     public void ConfigureWhenNoWeaversFound()
     {
         if (!FoundWeaverProjectFile)
@@ -18,7 +20,8 @@ public partial class Processor
             var weaverEntry = new WeaverEntry
                                   {
                                       AssemblyPath = WeaverAssemblyPath,
-                                      TypeName = "ModuleWeaver"
+                                      TypeName = "ModuleWeaver",
+                                      AssemblyName = "Weavers"
                                   };
             Weavers.Add(weaverEntry);
         }

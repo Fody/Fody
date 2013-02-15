@@ -4,4 +4,5 @@
   <Virtuosity />
   <Stamp />
   <EmptyConstructor />
+  <MethodTimer />
 </Weavers>

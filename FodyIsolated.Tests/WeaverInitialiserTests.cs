@@ -4,6 +4,7 @@ using System.Linq;
 using System.Xml.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
+using Moq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -15,7 +16,8 @@ public class WeaverInitialiserTests
         var moduleDefinition = ModuleDefinition.CreateModule("Foo", ModuleKind.Dll);
         
         var innerWeaver = new InnerWeaver
-            {
+        {
+            Logger = new Mock<ILogger>().Object,
                 AssemblyFilePath = "AssemblyFilePath",
                 SolutionDirectoryPath = "SolutionDirectoryPath",
                 ReferenceDictionary = new Dictionary<string, string> { { "Ref1;Ref2","Path1" } },
@@ -30,7 +32,7 @@ public class WeaverInitialiserTests
                                   AssemblyPath = @"c:\FakePath\Assembly.dll"
                               };
         var moduleWeaver = new ValidModuleWeaver();
-        innerWeaver.SetProperties(weaverEntry, moduleWeaver);
+        innerWeaver.SetProperties(weaverEntry, moduleWeaver, InnerWeaver.BuildDelegateHolder(typeof(ValidModuleWeaver)));
 
         Assert.IsNotNull(moduleWeaver.LogInfo);
         Assert.IsNotNull(moduleWeaver.LogWarning);

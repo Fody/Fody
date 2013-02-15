@@ -1,5 +1,8 @@
+using MethodTimer;
+
 public partial class Processor
 {
+    [Time]
     public string FindAssemblyPath(string weaverName)
     {
         var assemblyPath = addinFinder.FindAddinAssembly(weaverName);
