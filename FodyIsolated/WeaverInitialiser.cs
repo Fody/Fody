@@ -1,67 +1,70 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using System.Xml.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
 public partial class InnerWeaver
 {
-    public List<dynamic> WeaverInstances = new List<dynamic>();
 
+    static Dictionary<RuntimeTypeHandle, WeaverDelegateHolder> weaverDelegates = new Dictionary<RuntimeTypeHandle, WeaverDelegateHolder>();
 
-    public void SetWeaverProperties()
+    public static WeaverDelegateHolder BuildDelegateHolder(Type weaverType)
     {
-        foreach (var weaverConfig in Weavers)
+        var delegateHolder = new WeaverDelegateHolder();
+        var moduleDefinitionProperty = weaverType.GetProperty<ModuleDefinition>("ModuleDefinition");
+        if (moduleDefinitionProperty == null)
         {
-            SetProperties(weaverConfig);
+            var message = string.Format("{0} must contain a public instance settable property named 'ModuleDefinition' of type 'Mono.Cecil.ModuleDefinition'.", weaverType.FullName);
+            throw new WeavingException(message);
         }
+
+        var executeMethod = weaverType.GetMethod("Execute", BindingFlags.Instance | BindingFlags.Public, null, new Type[] {}, null);
+        if (executeMethod == null)
+        {
+            var message = string.Format("{0} must contain a public instance method named 'Execute'.", weaverType.FullName);
+            throw new WeavingException(message);
+        }
+
+        delegateHolder.Execute = o => executeMethod.Invoke(o, null);
+        delegateHolder.SetModuleDefinition = weaverType.BuildPropertyGetter<ModuleDefinition>(moduleDefinitionProperty);
+        delegateHolder.SetConfig = weaverType.BuildPropertyGetter<XElement>("SetConfig");
+        delegateHolder.SetAddinDirectoryPath = weaverType.BuildPropertyGetter<string>("SetAddinDirectoryPath");
+        delegateHolder.SetAssemblyFilePath = weaverType.BuildPropertyGetter<string>("SetAssemblyFilePath");
+        delegateHolder.SetAssemblyResolver = weaverType.BuildPropertyGetter<IAssemblyResolver>("SetAssemblyResolver");
+        delegateHolder.SetLogError = weaverType.BuildPropertyGetter<Action<string>>("SetLogError");
+        delegateHolder.SetLogErrorPoint = weaverType.BuildPropertyGetter<Action<string, SequencePoint>>("SetLogErrorPoint");
+        delegateHolder.SetLogInfo = weaverType.BuildPropertyGetter<Action<string>>("SetLogInfo");
+        delegateHolder.SetLogWarning = weaverType.BuildPropertyGetter<Action<string>>("SetLogWarning");
+        delegateHolder.SetLogWarningPoint = weaverType.BuildPropertyGetter<Action<string, SequencePoint>>("SetLogWarningPoint");
+        delegateHolder.SetReferenceCopyLocalPaths = weaverType.BuildPropertyGetter<List<string>>("SetReferenceCopyLocalPaths");
+        delegateHolder.SetSolutionDirectoryPath = weaverType.BuildPropertyGetter<string>("SetSolutionDirectoryPath");
+        delegateHolder.SetSolutionDirectoryPath = weaverType.BuildPropertyGetter<string>("SetSolutionDirectoryPath");
+        return delegateHolder;
     }
 
-    public void SetProperties(WeaverEntry weaverEntry)
-    {
-        Logger.LogInfo(string.Format("Loading weaver '{0}'.", weaverEntry.AssemblyPath));
-        var assembly = LoadAssembly(weaverEntry.AssemblyPath);
-        
-        var weaverType = assembly.FindType(weaverEntry.TypeName);
-        var weaverInstance = weaverType.ConstructInstance();
-
-        SetProperties(weaverEntry, weaverInstance);
-        WeaverInstances.Add(weaverInstance);
-    }
-
-    public void SetProperties(WeaverEntry weaverEntry, object weaverInstance)
+    public void SetProperties(WeaverEntry weaverEntry, object weaverInstance, WeaverDelegateHolder delegateHolder)
     {
         if (weaverEntry.Element != null)
         {
             var weaverElement = XElement.Parse(weaverEntry.Element);
-            weaverInstance.SetProperty("Config",weaverElement);
+            delegateHolder.SetConfig(weaverInstance, weaverElement);
         }
-        var type = weaverInstance.GetType();
-        SetModule(weaverInstance, type);
-        weaverInstance.SetProperty("AssemblyResolver", (IAssemblyResolver)this);
-   //     weaverInstance.SetProperty("References", SplitReferences);
-        weaverInstance.SetProperty("AssemblyFilePath", AssemblyFilePath);
-        weaverInstance.SetProperty("AddinDirectoryPath", Path.GetDirectoryName(weaverEntry.AssemblyPath));
-        weaverInstance.SetProperty("ReferenceCopyLocalPaths", ReferenceCopyLocalPaths);
-        weaverInstance.SetProperty("SolutionDirectoryPath", SolutionDirectoryPath);
-        weaverInstance.SetProperty("LogInfo", new Action<string>(s => Logger.LogInfo(s)));
-        weaverInstance.SetProperty("LogWarning", new Action<string>(s => Logger.LogWarning(s)));
-        weaverInstance.SetProperty("LogWarningPoint", new Action<string, SequencePoint>(LogWarningPoint));
-        weaverInstance.SetProperty("LogError", new Action<string>(s => Logger.LogError(s)));
-        weaverInstance.SetProperty("LogErrorPoint", new Action<string, SequencePoint>(LogErrorPoint));
+        delegateHolder.SetModuleDefinition(weaverInstance, ModuleDefinition);
+        delegateHolder.SetAssemblyResolver(weaverInstance, this);
+        delegateHolder.SetAssemblyFilePath(weaverInstance, AssemblyFilePath);
+        delegateHolder.SetAddinDirectoryPath(weaverInstance, Path.GetDirectoryName(weaverEntry.AssemblyPath));
+        delegateHolder.SetReferenceCopyLocalPaths(weaverInstance, ReferenceCopyLocalPaths);
+        delegateHolder.SetSolutionDirectoryPath(weaverInstance, SolutionDirectoryPath);
+        delegateHolder.SetLogWarning(weaverInstance, Logger.LogWarning);
+        delegateHolder.SetLogWarningPoint(weaverInstance, LogWarningPoint);
+        delegateHolder.SetLogInfo(weaverInstance, Logger.LogInfo);
+        delegateHolder.SetLogError(weaverInstance, Logger.LogInfo);
+        delegateHolder.SetLogErrorPoint(weaverInstance, LogErrorPoint);
     }
 
-    void SetModule(object instance, Type type)
-    {
-        var property = type.GetProperty<ModuleDefinition>("ModuleDefinition");
-        if (property == null)
-        {
-            var message = string.Format("{0} must contain a public instance settable property named 'ModuleDefinition' of type 'Mono.Cecil.ModuleDefinition'.", type.GetTypeName());
-            throw new WeavingException(message);
-        }
-        property.SetValue(instance, ModuleDefinition, null);
-    }
 
     void LogWarningPoint(string message, SequencePoint point)
     {

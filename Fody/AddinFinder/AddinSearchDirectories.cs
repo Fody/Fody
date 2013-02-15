@@ -1,56 +1,65 @@
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using MethodTimer;
 
+    [Time]
 public partial class AddinFinder
 {
-    public List<string> AddinSearchPaths = new List<string>();
 
     public void FindAddinDirectories()
     {
         AddNugetDirectoryToAddinSearch();
         AddToolsSolutionDirectoryToAddinSearch();
-        AddToolsAssemblyLocationToAddinSearch();
-        LogAddinSearchPaths();
-        CacheAllFodyAddinDlls();
     }
 
     public void AddToolsSolutionDirectoryToAddinSearch()
     {
-        var solutionDirToolsDirectory =Path.Combine(SolutionDirectoryPath, "Tools");
-        AddinSearchPaths.Add(solutionDirToolsDirectory);
+        var solutionDirToolsDirectory = Path.Combine(SolutionDirectoryPath, "Tools");
+
+        if (!Directory.Exists(solutionDirToolsDirectory))
+        {
+            return;
+        }
+        Logger.LogInfo(string.Format("Adding weaver dlls from '{0}'.", solutionDirToolsDirectory));
+
+        AddFiles(Directory.EnumerateFiles(solutionDirToolsDirectory, "*.Fody.dll", SearchOption.AllDirectories));
     }
 
-    public void AddNugetDirectoryToAddinSearch()
+        void AddFiles(IEnumerable<string> files)
+        {
+            foreach (var file in files)
+            {
+                Logger.LogInfo(string.Format("Fody weaver file added '{0}'", file));
+                FodyFiles.Add(file);
+            }
+        }
+
+        public void AddNugetDirectoryToAddinSearch()
     {
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(SolutionDirectoryPath);
         if (packagesPathFromConfig != null)
         {
-            AddinSearchPaths.Add(packagesPathFromConfig);
+            Logger.LogInfo(string.Format("Adding weaver dlls from '{0}'.", packagesPathFromConfig));
+            foreach (var packageDir in Directory.GetDirectories(packagesPathFromConfig))
+            {
+                AddFiles(Directory.EnumerateFiles(packageDir, "*.Fody.dll"));
+            }
         }
-        AddinSearchPaths.Add(Path.Combine(SolutionDirectoryPath, "Packages"));
+        var solutionPackages = Path.Combine(SolutionDirectoryPath, "Packages");
+        if (!Directory.Exists(solutionPackages))
+        {
+            return;
+        }
+        Logger.LogInfo(string.Format("Adding weaver dlls from '{0}'.", solutionPackages));
+        foreach (var packageDir in Directory.GetDirectories(solutionPackages))
+        {
+            AddFiles(Directory.EnumerateFiles(packageDir, "*.Fody.dll"));
+        }
     }
 
 
     public ILogger Logger;
     public string SolutionDirectoryPath;
 
-    public void LogAddinSearchPaths()
-    {
-        AddinSearchPaths = AddinSearchPaths.Distinct().ToList();
-        foreach (var searchPath in AddinSearchPaths.ToList())
-        {
-            if (Directory.Exists(searchPath))
-            {
-                Logger.LogInfo(string.Format("Directory added to addin search paths '{0}'.", searchPath));
-            }
-            else
-            {
-                AddinSearchPaths.Remove(searchPath);
-                Logger.LogInfo(string.Format("Could not search for addins in '{0}' because it does not exist", searchPath));
-            }
-
-        }
-    }
 
 }
