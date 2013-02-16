@@ -21,6 +21,25 @@ public partial class InnerWeaver
             throw new WeavingException(message);
         }
 
+        var execute = GetExecuteMethod(weaverType);
+        delegateHolder.Execute = execute;
+        delegateHolder.SetModuleDefinition = weaverType.BuildPropertyGetter<ModuleDefinition>(moduleDefinitionProperty);
+        delegateHolder.SetConfig = weaverType.BuildPropertyGetter<XElement>("Config");
+        delegateHolder.SetAddinDirectoryPath = weaverType.BuildPropertyGetter<string>("AddinDirectoryPath");
+        delegateHolder.SetAssemblyFilePath = weaverType.BuildPropertyGetter<string>("AssemblyFilePath");
+        delegateHolder.SetAssemblyResolver = weaverType.BuildPropertyGetter<IAssemblyResolver>("AssemblyResolver");
+        delegateHolder.SetLogError = weaverType.BuildPropertyGetter<Action<string>>("LogError");
+        delegateHolder.SetLogErrorPoint = weaverType.BuildPropertyGetter<Action<string, SequencePoint>>("LogErrorPoint");
+        delegateHolder.SetLogInfo = weaverType.BuildPropertyGetter<Action<string>>("LogInfo");
+        delegateHolder.SetLogWarning = weaverType.BuildPropertyGetter<Action<string>>("LogWarning");
+        delegateHolder.SetLogWarningPoint = weaverType.BuildPropertyGetter<Action<string, SequencePoint>>("LogWarningPoint");
+        delegateHolder.SetReferenceCopyLocalPaths = weaverType.BuildPropertyGetter<List<string>>("ReferenceCopyLocalPaths");
+        delegateHolder.SetSolutionDirectoryPath = weaverType.BuildPropertyGetter<string>("SolutionDirectoryPath");
+        return delegateHolder;
+    }
+
+    static Action<object> GetExecuteMethod(Type weaverType)
+    {
         var executeMethod = weaverType.GetMethod("Execute", BindingFlags.Instance | BindingFlags.Public, null, new Type[] {}, null);
         if (executeMethod == null)
         {
@@ -28,21 +47,17 @@ public partial class InnerWeaver
             throw new WeavingException(message);
         }
 
-        delegateHolder.Execute = o => executeMethod.Invoke(o, null);
-        delegateHolder.SetModuleDefinition = weaverType.BuildPropertyGetter<ModuleDefinition>(moduleDefinitionProperty);
-        delegateHolder.SetConfig = weaverType.BuildPropertyGetter<XElement>("SetConfig");
-        delegateHolder.SetAddinDirectoryPath = weaverType.BuildPropertyGetter<string>("SetAddinDirectoryPath");
-        delegateHolder.SetAssemblyFilePath = weaverType.BuildPropertyGetter<string>("SetAssemblyFilePath");
-        delegateHolder.SetAssemblyResolver = weaverType.BuildPropertyGetter<IAssemblyResolver>("SetAssemblyResolver");
-        delegateHolder.SetLogError = weaverType.BuildPropertyGetter<Action<string>>("SetLogError");
-        delegateHolder.SetLogErrorPoint = weaverType.BuildPropertyGetter<Action<string, SequencePoint>>("SetLogErrorPoint");
-        delegateHolder.SetLogInfo = weaverType.BuildPropertyGetter<Action<string>>("SetLogInfo");
-        delegateHolder.SetLogWarning = weaverType.BuildPropertyGetter<Action<string>>("SetLogWarning");
-        delegateHolder.SetLogWarningPoint = weaverType.BuildPropertyGetter<Action<string, SequencePoint>>("SetLogWarningPoint");
-        delegateHolder.SetReferenceCopyLocalPaths = weaverType.BuildPropertyGetter<List<string>>("SetReferenceCopyLocalPaths");
-        delegateHolder.SetSolutionDirectoryPath = weaverType.BuildPropertyGetter<string>("SetSolutionDirectoryPath");
-        delegateHolder.SetSolutionDirectoryPath = weaverType.BuildPropertyGetter<string>("SetSolutionDirectoryPath");
-        return delegateHolder;
+        return o =>
+            {
+                try
+                {
+                    executeMethod.Invoke(o, null);
+                }
+                catch (TargetInvocationException invocationException)
+                {
+                    throw invocationException.InnerException;
+                }
+            };
     }
 
     public void SetProperties(WeaverEntry weaverEntry, object weaverInstance, WeaverDelegateHolder delegateHolder)

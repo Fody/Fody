@@ -28,59 +28,51 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             SplitUpReferences();
             GetSymbolProviders();
             ReadModule();
-
+            var disposableWeavers = new List<IDisposable>();
             foreach (var weaverConfig in Weavers)
             {
-
                 Logger.LogInfo(string.Format("Loading weaver '{0}'.", weaverConfig.AssemblyPath));
                 var assembly = LoadAssembly(weaverConfig.AssemblyPath);
 
                 var weaverType = assembly.FindType(weaverConfig.TypeName);
 
-                object weaverInstance = null;
+                var weaverInstance = weaverType.ConstructInstance();
+                var disposable = weaverInstance as IDisposable;
+                if (disposable != null)
+                {
+                    disposableWeavers.Add(disposable);
+                }
+                var delegateHolder = GetDelegateHolderFromCache(weaverType);
+
+                SetProperties(weaverConfig, weaverInstance, delegateHolder);
+
+                Logger.SetCurrentWeaverName(weaverConfig.AssemblyName);
                 try
                 {
-                    weaverInstance = weaverType.ConstructInstance();
-
-                    var delegateHolder = GetDelegateHolderFromCache(weaverType);
-
-                    SetProperties(weaverConfig, weaverInstance, delegateHolder);
-
-                    Logger.SetCurrentWeaverName(weaverConfig.AssemblyName);
-                    try
-                    {
-                        var startNew = Stopwatch.StartNew();
-                        Logger.LogInfo(string.Format("Executing Weaver '{0}'.", weaverConfig.AssemblyName));
-                        delegateHolder.Execute(weaverInstance);
-                        var message = string.Format("Finished '{0}' in {1}ms {2}", weaverConfig.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
-                        Logger.LogInfo(message);
-                    }
-                    catch (Exception exception)
-                    {
-                        Logger.LogError(exception.ToFriendlyString());
-                        return;
-                    }
-                    finally
-                    {
-                        Logger.ClearWeaverName();
-                    }
-
+                    var startNew = Stopwatch.StartNew();
+                    Logger.LogInfo(string.Format("Executing Weaver '{0}'.", weaverConfig.AssemblyName));
+                    delegateHolder.Execute(weaverInstance);
+                    var message = string.Format("Finished '{0}' in {1}ms {2}", weaverConfig.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
+                    Logger.LogInfo(message);
+                }
+                catch (Exception exception)
+                {
+                    Logger.LogError(exception.ToFriendlyString());
+                    return;
                 }
                 finally
                 {
-                    if (weaverInstance != null)
-                    {
-                        var disposable = weaverInstance as IDisposable;
-                        if (disposable != null)
-                        {
-                            disposable.Dispose();
-                        }
-                    }
+                    Logger.ClearWeaverName();
                 }
+
             }
 
             FindStrongNameKey();
             WriteModule();
+            foreach (var disposable in disposableWeavers)
+            {
+                disposable.Dispose();
+            }
         }
         catch (Exception exception)
         {

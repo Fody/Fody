@@ -2,16 +2,17 @@ using System.Collections.Generic;
 using System.IO;
 using MethodTimer;
 
-    [Time]
 public partial class AddinFinder
 {
 
+    [Time]
     public void FindAddinDirectories()
     {
         AddNugetDirectoryToAddinSearch();
         AddToolsSolutionDirectoryToAddinSearch();
     }
 
+    [Time]
     public void AddToolsSolutionDirectoryToAddinSearch()
     {
         var solutionDirToolsDirectory = Path.Combine(SolutionDirectoryPath, "Tools");
@@ -34,6 +35,7 @@ public partial class AddinFinder
             }
         }
 
+    [Time]
         public void AddNugetDirectoryToAddinSearch()
     {
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(SolutionDirectoryPath);
