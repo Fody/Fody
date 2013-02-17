@@ -12,6 +12,7 @@ public interface IInnerWeaver
     string SolutionDirectoryPath { get; set; }
     bool DebugLoggingEnabled { get; set; }
     List<string> ReferenceCopyLocalPaths { get; set; }
+    string DefineConstants { get; set; }
 
     void Execute();
 }

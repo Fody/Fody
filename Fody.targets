@@ -57,6 +57,7 @@
           References="@(ReferencePath)"
           SignAssembly="$(FodySignAssembly)"
           ReferenceCopyLocalPaths="@(ReferenceCopyLocalPaths)"
+          DefineConstants="$(DefineConstants)"
       />
   </Target>
 
@@ -74,6 +75,7 @@
           References="@(ReferencePath)"
           SignAssembly="$(FodySignAssembly)"
           ReferenceCopyLocalPaths="$(ReferenceCopyLocalPaths)"
+          DefineConstants="$(DefineConstants)"
       />
   </Target>
 

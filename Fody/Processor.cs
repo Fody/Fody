@@ -18,7 +18,8 @@ public partial class Processor
     public string SolutionDirectoryPath;
     public IBuildEngine BuildEngine;
     public List<string> ReferenceCopyLocalPaths;
-    public bool DebugLoggingEnabled ;
+    public bool DebugLoggingEnabled;
+    public string DefineConstants;
 
     AddinFinder addinFinder;
     static Dictionary<string, AppDomain> solutionDomains = new Dictionary<string, AppDomain>(StringComparer.OrdinalIgnoreCase);
@@ -156,6 +157,7 @@ public partial class Processor
         innerWeaver.SolutionDirectoryPath = SolutionDirectoryPath;
         innerWeaver.Weavers = Weavers;
         innerWeaver.IntermediateDirectoryPath = IntermediateDirectoryPath;
+        innerWeaver.DefineConstants = DefineConstants;
         innerWeaver.Execute();
     }
 

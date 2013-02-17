@@ -30,6 +30,8 @@ namespace Fody
         [Required]
         public string SolutionDir { get; set; }
 
+        public string DefineConstants { get; set; }
+
         public override bool Execute()
         {
             List<string> referenceCopyLocalPaths = null;
@@ -49,7 +51,8 @@ namespace Fody
                            SolutionDirectoryPath = SolutionDir,
                            BuildEngine = BuildEngine,
                            ReferenceCopyLocalPaths = referenceCopyLocalPaths,
-                           DebugLoggingEnabled = DebugLoggingEnabled
+                           DebugLoggingEnabled = DebugLoggingEnabled,
+                           DefineConstants = DefineConstants
                        }.Execute();
         }
     }
