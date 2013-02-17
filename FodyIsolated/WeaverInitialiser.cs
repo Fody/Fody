@@ -14,7 +14,7 @@ public partial class InnerWeaver
     public static WeaverDelegateHolder BuildDelegateHolder(Type weaverType)
     {
         var delegateHolder = new WeaverDelegateHolder();
-        var moduleDefinitionProperty = weaverType.GetProperty<ModuleDefinition>("ModuleDefinition");
+        var moduleDefinitionProperty = weaverType.GetPropertySetMethod<ModuleDefinition>("ModuleDefinition");
         if (moduleDefinitionProperty == null)
         {
             var message = string.Format("{0} must contain a public instance settable property named 'ModuleDefinition' of type 'Mono.Cecil.ModuleDefinition'.", weaverType.FullName);
@@ -23,7 +23,7 @@ public partial class InnerWeaver
 
         var execute = GetExecuteMethod(weaverType);
         delegateHolder.Execute = execute;
-        delegateHolder.SetModuleDefinition = weaverType.BuildPropertyGetter<ModuleDefinition>(moduleDefinitionProperty);
+		delegateHolder.SetModuleDefinition = weaverType.BuildPropertyGetter<ModuleDefinition>("ModuleDefinition");
         delegateHolder.SetConfig = weaverType.BuildPropertyGetter<XElement>("Config");
         delegateHolder.SetAddinDirectoryPath = weaverType.BuildPropertyGetter<string>("AddinDirectoryPath");
         delegateHolder.SetAssemblyFilePath = weaverType.BuildPropertyGetter<string>("AssemblyFilePath");
@@ -36,6 +36,7 @@ public partial class InnerWeaver
         delegateHolder.SetReferenceCopyLocalPaths = weaverType.BuildPropertyGetter<List<string>>("ReferenceCopyLocalPaths");
         delegateHolder.SetSolutionDirectoryPath = weaverType.BuildPropertyGetter<string>("SolutionDirectoryPath");
         delegateHolder.SetDefineConstants = weaverType.BuildPropertyGetter<string>("DefineConstants");
+	    delegateHolder.ConstructInstance = weaverType.ConstructInstance();
         return delegateHolder;
     }
 

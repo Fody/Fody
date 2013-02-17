@@ -37,13 +37,13 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
                 var weaverType = assembly.FindType(weaverConfig.TypeName);
 
-                var weaverInstance = weaverType.ConstructInstance();
+                var delegateHolder = GetDelegateHolderFromCache(weaverType);
+				var weaverInstance = delegateHolder.ConstructInstance();
                 var disposable = weaverInstance as IDisposable;
                 if (disposable != null)
                 {
                     disposableWeavers.Add(disposable);
                 }
-                var delegateHolder = GetDelegateHolderFromCache(weaverType);
 
                 SetProperties(weaverConfig, weaverInstance, delegateHolder);
 

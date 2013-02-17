@@ -6,7 +6,7 @@ public class WeaversConfiguredInstanceLinkerTests
 {
 
     [Test]
-    public void CustomWeaverInWeaversProject()
+    public void Should_use_Custom_weaver_from_weaver_project_When_added_to_configured_weavers()
     {
         var mock = new Mock<Processor>();
         mock.Setup(x => x.WeaverProjectContainsType("CustomWeaver"))
@@ -26,8 +26,8 @@ public class WeaversConfiguredInstanceLinkerTests
         Assert.AreEqual("Path",weaverConfig.AssemblyPath);
     }
 
-    [Test]
-    public void WeaverInAddin()
+	[Test]
+	public void Should_use_named_weaver_When_added_to_configured_weavers()
     {
         var mock = new Mock<Processor>();
         mock.Setup(x => x.WeaverProjectContainsType("AddinName"))
