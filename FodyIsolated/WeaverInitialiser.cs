@@ -35,6 +35,7 @@ public partial class InnerWeaver
         delegateHolder.SetLogWarningPoint = weaverType.BuildPropertyGetter<Action<string, SequencePoint>>("LogWarningPoint");
         delegateHolder.SetReferenceCopyLocalPaths = weaverType.BuildPropertyGetter<List<string>>("ReferenceCopyLocalPaths");
         delegateHolder.SetSolutionDirectoryPath = weaverType.BuildPropertyGetter<string>("SolutionDirectoryPath");
+        delegateHolder.SetDefineConstants = weaverType.BuildPropertyGetter<string>("DefineConstants");
         return delegateHolder;
     }
 
@@ -78,6 +79,7 @@ public partial class InnerWeaver
         delegateHolder.SetLogInfo(weaverInstance, Logger.LogInfo);
         delegateHolder.SetLogError(weaverInstance, Logger.LogInfo);
         delegateHolder.SetLogErrorPoint(weaverInstance, LogErrorPoint);
+        delegateHolder.SetDefineConstants(weaverInstance, DefineConstants);
     }
 
 
