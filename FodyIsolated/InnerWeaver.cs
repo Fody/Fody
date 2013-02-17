@@ -16,7 +16,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     public ILogger Logger { get; set; }
     public string IntermediateDirectoryPath { get; set; }
     public List<string> ReferenceCopyLocalPaths { get; set; }
-    public string DefineConstants { get; set; }
+    public string[] DefineConstants { get; set; }
 
     public void Execute()
     {

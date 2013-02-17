@@ -19,7 +19,7 @@ public partial class Processor
     public IBuildEngine BuildEngine;
     public List<string> ReferenceCopyLocalPaths;
     public bool DebugLoggingEnabled;
-    public string DefineConstants;
+    public string[] DefineConstants;
 
     AddinFinder addinFinder;
     static Dictionary<string, AppDomain> solutionDomains = new Dictionary<string, AppDomain>(StringComparer.OrdinalIgnoreCase);
