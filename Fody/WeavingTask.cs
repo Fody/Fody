@@ -39,6 +39,11 @@ namespace Fody
             {
                 referenceCopyLocalPaths = ReferenceCopyLocalPaths.Select(x => x.ItemSpec).ToList();
             }
+            string[] defineConstants = new string[0];
+            if (DefineConstants != null)
+            {
+                defineConstants = DefineConstants.Split(';');
+            }
             return new Processor
                        {
                            AssemblyFilePath = AssemblyPath,
@@ -52,7 +57,7 @@ namespace Fody
                            BuildEngine = BuildEngine,
                            ReferenceCopyLocalPaths = referenceCopyLocalPaths,
                            DebugLoggingEnabled = DebugLoggingEnabled,
-                           DefineConstants = DefineConstants
+                           DefineConstants = defineConstants
                        }.Execute();
         }
     }
