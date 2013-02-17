@@ -19,5 +19,6 @@ public class WeaverDelegateHolder
     public Action<object, Action<string, SequencePoint>> SetLogErrorPoint;
     public Action<object, Action<string>> SetLogWarning;
     public Action<object, Action<string, SequencePoint>> SetLogWarningPoint;
+    public Action<object, string> SetDefineConstants;
 
 }
