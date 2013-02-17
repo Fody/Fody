@@ -43,7 +43,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         delegateHolder.SetLogWarningPoint = weaverType.BuildPropertySetDelegate<Action<string, SequencePoint>>("LogWarningPoint");
         delegateHolder.SetReferenceCopyLocalPaths = weaverType.BuildPropertySetDelegate<List<string>>("ReferenceCopyLocalPaths");
         delegateHolder.SetSolutionDirectoryPath = weaverType.BuildPropertySetDelegate<string>("SolutionDirectoryPath");
-        delegateHolder.SetDefineConstants = weaverType.BuildPropertySetDelegate<string>("DefineConstants");
+        delegateHolder.SetDefineConstants = weaverType.BuildPropertySetDelegate<string[]>("DefineConstants");
         delegateHolder.ConstructInstance = weaverType.BuildConstructorDelegate();
         return delegateHolder;
     }
