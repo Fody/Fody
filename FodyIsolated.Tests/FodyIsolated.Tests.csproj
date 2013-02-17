@@ -58,9 +58,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DelegateBuilders\ConstructorDelegateBuilderTests.cs" />
+    <Compile Include="DelegateBuilders\ExecuteDelegateBuilderTests.cs" />
     <Compile Include="IsolatedContainsTypeCheckerTests.cs" />
-    <Compile Include="InstanceConstructorTests.cs" />
-    <Compile Include="ReflectionTests.cs" />
+    <Compile Include="DelegateBuilders\PropertyDelegateBuilderTests.cs" />
     <Compile Include="TypeFinderTest.cs" />
     <Compile Include="WeaverInitialiserTests.cs" />
   </ItemGroup>

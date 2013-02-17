@@ -8,7 +8,7 @@ public class PropertyDelegateBuilderTests
     [Test]
     public void Should_be_able_to_set_a_public_property_via_a_contructed_delegate()
     {
-        var makeSetterDelegate = GetType().BuildPropertyGetter<string>("Property");
+        var makeSetterDelegate = GetType().BuildPropertySetDelegate<string>("Property");
         makeSetterDelegate(this, "sdfsdf");
         Assert.AreEqual("sdfsdf",Property);
     }

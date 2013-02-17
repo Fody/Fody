@@ -4,7 +4,7 @@ using System.Reflection;
 
 public static class PropertyDelegateBuilder
 {
-    public static Action<object, T> BuildPropertyGetter<T>(this Type type, string propertyName)
+    public static Action<object, T> BuildPropertySetDelegate<T>(this Type type, string propertyName)
     {
         var setMethod = type.GetPropertySetMethod<T>(propertyName);
 	    if (setMethod == null)

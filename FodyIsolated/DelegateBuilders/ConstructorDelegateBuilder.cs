@@ -1,9 +1,9 @@
 using System;
 using System.Reflection;
 
-public static class InstanceConstructor
+public static class ConstructorDelegateBuilder
 {
-    public static Func<object> ConstructInstance(this Type weaverType)
+    public static Func<object> BuildConstructorDelegate(this Type weaverType)
     {
         if (weaverType.IsNested)
         {

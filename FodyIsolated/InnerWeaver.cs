@@ -81,15 +81,6 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         }
     }
 
-    public static WeaverDelegateHolder GetDelegateHolderFromCache(Type weaverType)
-    {
-        WeaverDelegateHolder delegateHolder;
-        if (!weaverDelegates.TryGetValue(weaverType.TypeHandle, out delegateHolder))
-        {
-            weaverDelegates[weaverType.TypeHandle] = delegateHolder = BuildDelegateHolder(weaverType);
-        }
-        return delegateHolder;
-    }
 
     [SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.Infrastructure)]
     public override object InitializeLifetimeService()

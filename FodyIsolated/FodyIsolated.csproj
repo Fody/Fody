@@ -60,18 +60,20 @@
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="AssemblyReferenceFinder.cs" />
     <Compile Include="AssemblyResolver.cs" />
+    <Compile Include="DelegateBuilder.cs" />
+    <Compile Include="DelegateBuilders\ExecuteDelegateBuilder.cs" />
     <Compile Include="MethodTimeLogger.cs" />
-    <Compile Include="PropertyDelegateBuilder.cs" />
+    <Compile Include="DelegateBuilders\PropertyDelegateBuilder.cs" />
     <Compile Include="SymbolsFinder.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="InnerWeaver.cs" />
-    <Compile Include="InstanceConstructor.cs" />
+    <Compile Include="DelegateBuilders\ConstructorDelegateBuilder.cs" />
     <Compile Include="IsolatedContainsTypeChecker.cs" />
     <Compile Include="ModuleReader.cs" />
     <Compile Include="ModuleWriter.cs" />
     <Compile Include="StrongNameKeyFinder.cs" />
     <Compile Include="TypeFinder.cs" />
-    <Compile Include="WeaverDelegateHolder.cs" />
+    <Compile Include="WeaverDelegate.cs" />
     <Compile Include="WeaverInitialiser.cs" />
   </ItemGroup>
   <ItemGroup>

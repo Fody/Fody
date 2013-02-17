@@ -4,7 +4,7 @@ using System.Xml.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
-public class WeaverDelegateHolder
+public class WeaverDelegate
 {
     public Action<object> Execute;
     public Action<object, XElement> SetConfig;

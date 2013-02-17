@@ -2,7 +2,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-public partial class InnerWeaver 
+public partial class InnerWeaver
 {
     public StrongNameKeyPair StrongNameKeyPair;
 
@@ -25,30 +25,26 @@ public partial class InnerWeaver
 
 
     string GetKeyFilePath()
-   {
-       if (KeyFilePath != null)
-       {
-           KeyFilePath = Path.GetFullPath(KeyFilePath);
-           Logger.LogInfo(string.Format("Using strong name key from KeyFilePath '{0}'.", KeyFilePath));
-           return KeyFilePath;
-       }
+    {
+        if (KeyFilePath != null)
+        {
+            KeyFilePath = Path.GetFullPath(KeyFilePath);
+            Logger.LogInfo(string.Format("Using strong name key from KeyFilePath '{0}'.", KeyFilePath));
+            return KeyFilePath;
+        }
 
-       var assemblyKeyFileAttribute = ModuleDefinition
-           .Assembly
-           .CustomAttributes
-           .FirstOrDefault(x => x.AttributeType.Name == "AssemblyKeyFileAttribute");
-       if (assemblyKeyFileAttribute != null)
-       {
-           var keyFileSuffix = (string) assemblyKeyFileAttribute.ConstructorArguments.First().Value;
-           var ketFilePath = Path.Combine(IntermediateDirectoryPath, keyFileSuffix);
-           Logger.LogInfo(string.Format("Using strong name key from [AssemblyKeyFileAttribute(\"{0}\")] '{1}'", keyFileSuffix, ketFilePath));
-           return ketFilePath ;
-       }
-       Logger.LogInfo("No strong name key found");
-       return null;
-   }
-
-
-
-
+        var assemblyKeyFileAttribute = ModuleDefinition
+            .Assembly
+            .CustomAttributes
+            .FirstOrDefault(x => x.AttributeType.Name == "AssemblyKeyFileAttribute");
+        if (assemblyKeyFileAttribute != null)
+        {
+            var keyFileSuffix = (string) assemblyKeyFileAttribute.ConstructorArguments.First().Value;
+            var ketFilePath = Path.Combine(IntermediateDirectoryPath, keyFileSuffix);
+            Logger.LogInfo(string.Format("Using strong name key from [AssemblyKeyFileAttribute(\"{0}\")] '{1}'", keyFileSuffix, ketFilePath));
+            return ketFilePath;
+        }
+        Logger.LogInfo("No strong name key found");
+        return null;
+    }
 }
