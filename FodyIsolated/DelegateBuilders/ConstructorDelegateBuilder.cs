@@ -1,4 +1,5 @@
 using System;
+using System.Linq.Expressions;
 using System.Reflection;
 
 public static class ConstructorDelegateBuilder
@@ -7,26 +8,19 @@ public static class ConstructorDelegateBuilder
     {
         if (weaverType.IsNested)
         {
-            throw new WeavingException(String.Format("'{0}' is a nested class which is not supported.",  weaverType.FullName));
+            throw new WeavingException(String.Format("'{0}' is a nested class which is not supported.", weaverType.FullName));
         }
         if (weaverType.IsAbstract || !weaverType.IsClass || !weaverType.IsPublic)
         {
-            throw new WeavingException(String.Format("'{0}' is not a public instance class.",  weaverType.FullName));
+            throw new WeavingException(String.Format("'{0}' is not a public instance class.", weaverType.FullName));
         }
-        if (weaverType.GetConstructor(BindingFlags.Instance| BindingFlags.Public,null,new Type[]{}, null) == null)
+        var constructorInfo = weaverType.GetConstructor(BindingFlags.Instance | BindingFlags.Public, null, new Type[] {}, null);
+        if (constructorInfo == null)
         {
-            throw new WeavingException(String.Format("'{0}' does not have a public instance constructor with no parameters.",  weaverType.FullName));
+            var message = String.Format("'{0}' does not have a public instance constructor with no parameters.", weaverType.FullName);
+            throw new WeavingException(message);
         }
-	    return () =>
-		    {
-			    try
-			    {
-				    return Activator.CreateInstance(weaverType);
-			    }
-			    catch (Exception exception)
-			    {
-				    throw new Exception(String.Format("Could not construct instance of '{0}'.", weaverType.FullName), exception);
-			    }
-		    };
+        return (Func<object>) Expression.Lambda(Expression.Convert(Expression.New(constructorInfo), weaverType))
+                                .Compile();
     }
 }

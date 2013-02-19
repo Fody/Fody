@@ -1,5 +1,6 @@
 using System.IO;
 using System.Xml.Linq;
+using Mono.Cecil.Cil;
 
 public partial class InnerWeaver
 {
@@ -26,4 +27,27 @@ public partial class InnerWeaver
     }
 
 
+    void LogWarningPoint(string message, SequencePoint point)
+    {
+        if (point == null)
+        {
+            Logger.LogWarning(message);
+        }
+        else
+        {
+            Logger.LogWarning(message, point.Document.Url, point.StartLine, point.StartColumn, point.EndLine, point.EndColumn);
+        }
+    }
+
+    void LogErrorPoint(string message, SequencePoint point)
+    {
+        if (point == null)
+        {
+            Logger.LogError(message);
+        }
+        else
+        {
+            Logger.LogError(message, point.Document.Url, point.StartLine, point.StartColumn, point.EndLine, point.EndColumn);
+        }
+    }
 }

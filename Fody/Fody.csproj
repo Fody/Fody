@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="MethodTimer">
       <HintPath>..\packages\MethodTimer.Fody.1.10.0.0\lib\portable-net4+sl4+wp7+win8\MethodTimer.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Framework" />

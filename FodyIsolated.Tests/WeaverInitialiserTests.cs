@@ -23,6 +23,7 @@ public class WeaverInitialiserTests
 				ReferenceDictionary = new Dictionary<string, string> {{"Ref1;Ref2", "Path1"}},
 				ReferenceCopyLocalPaths = new List<string> {"Ref1"},
 				ModuleDefinition = moduleDefinition,
+                DefineConstants = new List<string>{"Debug", "Release"}
 
 			};
 
@@ -32,7 +33,7 @@ public class WeaverInitialiserTests
 				AssemblyPath = @"c:\FakePath\Assembly.dll"
 			};
 		var moduleWeaver = new ValidModuleWeaver();
-		innerWeaver.SetProperties(weaverEntry, moduleWeaver, InnerWeaver.BuildDelegateHolder(typeof (ValidModuleWeaver)));
+        innerWeaver.SetProperties(weaverEntry, moduleWeaver, (typeof(ValidModuleWeaver)).BuildDelegateHolder());
 
 		Assert.IsNotNull(moduleWeaver.LogInfo);
 		Assert.IsNotNull(moduleWeaver.LogWarning);
@@ -40,6 +41,8 @@ public class WeaverInitialiserTests
 		Assert.IsNotNull(moduleWeaver.LogError);
 		Assert.IsNotNull(moduleWeaver.LogErrorPoint);
 		Assert.AreEqual("Ref1", moduleWeaver.ReferenceCopyLocalPaths.First());
+		Assert.AreEqual("Debug", moduleWeaver.DefineConstants[0]);
+		Assert.AreEqual("Release", moduleWeaver.DefineConstants[1]);
 
 		// Assert.IsNotEmpty(moduleWeaver.References); 
 		Assert.AreEqual(moduleDefinition, moduleWeaver.ModuleDefinition);
@@ -65,6 +68,7 @@ public class ValidModuleWeaver
 	public IAssemblyResolver AssemblyResolver { get; set; }
 	public ModuleDefinition ModuleDefinition { get; set; }
 	public string SolutionDirectoryPath { get; set; }
+    public List<string> DefineConstants { get; set; }
 
 	public List<string> ReferenceCopyLocalPaths { get; set; }
 

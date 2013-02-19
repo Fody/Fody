@@ -4,21 +4,59 @@ using NUnit.Framework;
 public class PropertyDelegateBuilderTests
 {
     public string Property { get; set; }
+#pragma warning disable 169
+    string privateField;
+#pragma warning restore 169
+// ReSharper disable UnusedMember.Local
+    string PrivateProperty { get; set; }
+// ReSharper restore UnusedMember.Local
+// ReSharper disable UnassignedField.Global
+    public string Field;
+// ReSharper restore UnassignedField.Global
+    public static string StaticField;
 
     [Test]
     public void Should_be_able_to_set_a_public_property_via_a_contructed_delegate()
     {
-        var makeSetterDelegate = GetType().BuildPropertySetDelegate<string>("Property");
-        makeSetterDelegate(this, "sdfsdf");
+        var setterDelegate = GetType().BuildPropertySetDelegate<string>("Property");
+        setterDelegate(this, "sdfsdf");
         Assert.AreEqual("sdfsdf",Property);
     }
 
     [Test]
-    public void Should_return_null_When_property_doesnt_exist()
+    public void Should_be_able_to_set_a_public_field_via_a_contructed_delegate()
     {
-		var setMEthod = GetType().GetPropertySetMethod<string>("BadProperty");
-        Assert.IsNull(setMEthod);
+        var setterDelegate = GetType().BuildPropertySetDelegate<string>("Field");
+        setterDelegate(this, "sdfsdf");
+        Assert.AreEqual("sdfsdf",Field);
     }
 
+    [Test]
+    public void Should_be_a_null_delegate_When_member_doesnt_exist()
+    {
+        var setterDelegate = GetType().BuildPropertySetDelegate<string>("BadProperty");
+        Assert.IsNull(setterDelegate.Target);
+    }
+
+    [Test]
+    public void Should_be_a_null_delegate_When_private_property()
+    {
+        var setterDelegate = GetType().BuildPropertySetDelegate<string>("privateField");
+        Assert.IsNull(setterDelegate.Target);
+    }
+
+    [Test]
+    public void Should_be_a_null_delegate_When_static_field()
+    {
+        var setterDelegate = GetType().BuildPropertySetDelegate<string>("StaticField");
+        Assert.IsNull(setterDelegate.Target);
+    }
+
+    [Test]
+    public void Should_be_a_null_delegate_When_private_field()
+    {
+        var setterDelegate = GetType().BuildPropertySetDelegate<string>("PrivateProperty");
+        Assert.IsNull(setterDelegate.Target);
+    }
 
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using Fody;
 using MethodTimer;
 using Microsoft.Build.Framework;
+using MSMessageEnum = Microsoft.Build.Framework.MessageImportance;
 
 public partial class Processor
 {
@@ -19,7 +20,7 @@ public partial class Processor
     public IBuildEngine BuildEngine;
     public List<string> ReferenceCopyLocalPaths;
     public bool DebugLoggingEnabled;
-    public string[] DefineConstants;
+    public List<string> DefineConstants;
 
     AddinFinder addinFinder;
     static Dictionary<string, AppDomain> solutionDomains = new Dictionary<string, AppDomain>(StringComparer.OrdinalIgnoreCase);
@@ -37,7 +38,8 @@ public partial class Processor
 
     public bool Execute()
     {
-        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(string.Format("Fody (version {0}) Executing", GetType().Assembly.GetName().Version), "", "Fody", Microsoft.Build.Framework.MessageImportance.High));
+        var executingMessage = string.Format("Fody (version {0}) Executing", typeof (Processor).Assembly.GetName().Version);
+        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(executingMessage, "", "Fody", MSMessageEnum.High));
 
         var stopwatch = Stopwatch.StartNew();
 
@@ -62,9 +64,9 @@ public partial class Processor
         }
         finally
         {
-            stopwatch.Stop();
+            var finishedMessage = string.Format("\tFinished Fody {0}ms.", stopwatch.ElapsedMilliseconds);
             Logger.Flush();
-            BuildEngine.LogMessageEvent(new BuildMessageEventArgs(string.Format("\tFinished Fody {0}ms.", stopwatch.ElapsedMilliseconds), "", "Fody", Microsoft.Build.Framework.MessageImportance.High));
+            BuildEngine.LogMessageEvent(new BuildMessageEventArgs(finishedMessage, "", "Fody", MSMessageEnum.High));
         }
     }
 
@@ -73,7 +75,6 @@ public partial class Processor
         ValidateProjectPath();
 
         ValidatorAssemblyPath();
-
 
         FindProjectWeavers();
         
@@ -109,9 +110,10 @@ public partial class Processor
         FlushWeaversXmlHistory();
     }
 
-    [Time]
     void FindWeavers()
     {
+        var stopwatch = Stopwatch.StartNew();
+        Logger.LogInfo("Finding weavers");
         ReadProjectWeavers();
         addinFinder = new AddinFinder
             {
@@ -126,6 +128,8 @@ public partial class Processor
         ConfigureWhenWeaversFound();
 
         ConfigureWhenNoWeaversFound();
+
+        Logger.LogInfo(string.Format("Finished finding weavers {0}ms", stopwatch.ElapsedMilliseconds));
     }
 
     [Time]
@@ -145,7 +149,6 @@ public partial class Processor
         {
             appdomain = solutionDomains[SolutionDirectoryPath] = CreateDomain();
         }
-
 
         var innerWeaver = (IInnerWeaver) appdomain.CreateInstanceAndUnwrap("FodyIsolated", "InnerWeaver");
         innerWeaver.AssemblyFilePath = AssemblyFilePath;

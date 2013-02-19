@@ -6,7 +6,7 @@ public class ExecuteDelegateBuilderTests
 {
 
     [Test]
-    [ExpectedException(ExpectedMessage = "ExecuteDelegateBuilderTests+NoExecuteClass must contain a public instance method named 'Execute'.")]
+    [ExpectedException(ExpectedMessage = "'ExecuteDelegateBuilderTests+NoExecuteClass' must contain a public instance method named 'Execute'.")]
     public void Should_throw_When_no_execute_method()
     {
         typeof(NoExecuteClass).BuildExecuteDelegate();
@@ -30,7 +30,7 @@ public class ExecuteDelegateBuilderTests
     }
 
     [Test]
-    [ExpectedException(ExpectedMessage = "ExecuteDelegateBuilderTests+NonPublicClass must contain a public instance method named 'Execute'.")]
+    [ExpectedException(ExpectedMessage = "'ExecuteDelegateBuilderTests+NonPublicClass' must contain a public instance method named 'Execute'.")]
     public void Should_throw_When_execute_is_not_public()
     {
         typeof(NonPublicClass).BuildExecuteDelegate();
@@ -38,13 +38,15 @@ public class ExecuteDelegateBuilderTests
 
     public class NonPublicClass
     {
+// ReSharper disable UnusedMember.Local
         void Execute()
+// ReSharper restore UnusedMember.Local
         {
         }
     }
 
     [Test]
-    [ExpectedException(ExpectedMessage = "ExecuteDelegateBuilderTests+StaticExecuteClass must contain a public instance method named 'Execute'.")]
+    [ExpectedException(ExpectedMessage = "'ExecuteDelegateBuilderTests+StaticExecuteClass' must contain a public instance method named 'Execute'.")]
     public void Should_thrown_When_method_is_static()
     {
         typeof(StaticExecuteClass).BuildExecuteDelegate();
@@ -56,6 +58,7 @@ public class ExecuteDelegateBuilderTests
         {
         }
     }
+
     [Test]
     [ExpectedException(ExpectedException = typeof(NullReferenceException))]
     public void Should_thrown_inner_exception_When_delegate_is_executed()

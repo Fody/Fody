@@ -16,7 +16,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     public ILogger Logger { get; set; }
     public string IntermediateDirectoryPath { get; set; }
     public List<string> ReferenceCopyLocalPaths { get; set; }
-    public string[] DefineConstants { get; set; }
+    public List<string> DefineConstants { get; set; }
 
     public void Execute()
     {
@@ -32,12 +32,14 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             var disposableWeavers = new List<IDisposable>();
             foreach (var weaverConfig in Weavers)
             {
-                Logger.LogInfo(string.Format("Loading weaver '{0}'.", weaverConfig.AssemblyPath));
+                var startNew = Stopwatch.StartNew();
+                Logger.LogInfo(string.Format("Weaver '{0}'.", weaverConfig.AssemblyPath));
+                Logger.LogInfo("\tInitializing weaver");
                 var assembly = LoadAssembly(weaverConfig.AssemblyPath);
 
                 var weaverType = assembly.FindType(weaverConfig.TypeName);
 
-                var delegateHolder = GetDelegateHolderFromCache(weaverType);
+                var delegateHolder = weaverType.GetDelegateHolderFromCache();
 				var weaverInstance = delegateHolder.ConstructInstance();
                 var disposable = weaverInstance as IDisposable;
                 if (disposable != null)
@@ -50,11 +52,10 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
                 Logger.SetCurrentWeaverName(weaverConfig.AssemblyName);
                 try
                 {
-                    var startNew = Stopwatch.StartNew();
-                    Logger.LogInfo(string.Format("Executing Weaver '{0}'.", weaverConfig.AssemblyName));
+                    Logger.LogInfo("\tExecuting Weaver ");
                     delegateHolder.Execute(weaverInstance);
-                    var message = string.Format("Finished '{0}' in {1}ms {2}", weaverConfig.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
-                    Logger.LogInfo(message);
+                    var finishedMessage = string.Format("\tFinished '{0}' in {1}ms {2}", weaverConfig.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
+                    Logger.LogInfo(finishedMessage);
                 }
                 catch (Exception exception)
                 {

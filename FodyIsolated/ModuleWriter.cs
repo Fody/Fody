@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using MethodTimer;
 using Mono.Cecil;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
@@ -9,7 +10,8 @@ public partial class InnerWeaver
     {
         ModuleDefinition.Types.Add(new TypeDefinition(null, "ProcessedByFody", TypeAttributes.NotPublic | TypeAttributes.Abstract | TypeAttributes.Interface));
         var assemblyPath = AssemblyFilePath;
-        Logger.LogInfo(string.Format("Saving assembly to '{0}'.", assemblyPath));
+        var stopwatch = Stopwatch.StartNew();
+        Logger.LogInfo(string.Format("\tWriting assembly to '{0}'.", assemblyPath));
 
         var parameters = new WriterParameters
             {
@@ -18,6 +20,7 @@ public partial class InnerWeaver
                 SymbolWriterProvider = debugWriterProvider,
             };
         ModuleDefinition.Write(assemblyPath, parameters);
+        Logger.LogInfo(string.Format("\tFinished writing assembly {0}ms.", stopwatch.ElapsedMilliseconds));
     }
 
 }

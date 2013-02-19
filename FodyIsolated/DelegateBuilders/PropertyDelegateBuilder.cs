@@ -6,27 +6,51 @@ public static class PropertyDelegateBuilder
 {
     public static Action<object, T> BuildPropertySetDelegate<T>(this Type type, string propertyName)
     {
-        var setMethod = type.GetPropertySetMethod<T>(propertyName);
-	    if (setMethod == null)
-	    {
-		    return (o, arg2) => { };
-	    }
-	    var target = Expression.Parameter(typeof (object));
-	    var value = Expression.Parameter(typeof (T));
-	    var body = Expression.Assign(
-		    Expression.Property(Expression.Convert(target, type), setMethod),
-		    value);
-	    return Expression.Lambda<Action<object, T>>(body, target, value)
-	                     .Compile();
+        var propertyInfo = type.GetProperty(propertyName, BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.Public, null, typeof (T), new Type[] {}, null);
+        if (propertyInfo != null)
+        {
+            var setMethod = propertyInfo.GetSetMethod();
+            var target = Expression.Parameter(typeof (object));
+            var value = Expression.Parameter(typeof (T));
+            var property = Expression.Property(Expression.Convert(target, type), setMethod);
+            var body = Expression.Assign(property, value);
+            return Expression.Lambda<Action<object, T>>(body, target, value)
+                             .Compile();
+        }
+        var fieldInfo = GetField<T>(type, propertyName);
+        if (fieldInfo != null)
+        {
+            var target = Expression.Parameter(typeof (object), "target");
+            var value = Expression.Parameter(typeof (T), "value");
+            var fieldExp = Expression.Field(Expression.Convert(target, type), fieldInfo);
+            var body = Expression.Assign(fieldExp, value);
+            return Expression.Lambda<Action<object, T>>(body, target, value)
+                             .Compile();
+
+        }
+        return (x, y) => { };
     }
 
-    public static MethodInfo GetPropertySetMethod<TProperty>(this Type type, string propertyName)
+    //http://stackoverflow.com/questions/321650/how-do-i-set-a-field-value-in-an-c-sharp-expression-tree
+    public static FieldInfo GetField<TField>(this Type type, string propertyName)
     {
-        var propertyInfo = type.GetProperty(propertyName, BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.Public, null, typeof(TProperty), new Type[] { }, null);
-        if (propertyInfo == null)
+        var fieldInfo = type.GetField(propertyName);
+        if (fieldInfo == null)
         {
             return null;
         }
-        return propertyInfo.GetSetMethod();
+        if (!fieldInfo.IsPublic)
+        {
+            return null;
+        }
+        if (fieldInfo.IsStatic)
+        {
+            return null;
+        }
+        if (!typeof(TField).IsAssignableFrom(fieldInfo.FieldType))
+        {
+            return null;
+        }
+        return fieldInfo;
     }
 }

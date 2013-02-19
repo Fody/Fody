@@ -3,6 +3,7 @@ using NUnit.Framework;
 [TestFixture]
 public class IsolatedContainsTypeCheckerTests
 {
+
     [Test]
     public void Exists()
     {
@@ -18,4 +19,5 @@ public class IsolatedContainsTypeCheckerTests
         var check = checker.Check(GetType().Assembly.Location, "BadType");
         Assert.IsFalse(check);
     }
+
 }

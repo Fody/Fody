@@ -18,11 +18,11 @@ namespace Fody
         public string MessageImportance { set; get; }
 
         [Required]
-		public string ProjectDirectory { get; set; }
+        public string ProjectDirectory { get; set; }
 
         [Required]
         public string References { get; set; }
-        
+
         //TODO: make this required on the next release
         //[Required]
         public ITaskItem[] ReferenceCopyLocalPaths { get; set; }
@@ -39,27 +39,27 @@ namespace Fody
             {
                 referenceCopyLocalPaths = ReferenceCopyLocalPaths.Select(x => x.ItemSpec).ToList();
             }
-            string[] defineConstants = new string[0];
+            var defineConstants = new List<string>();
+
             if (DefineConstants != null)
             {
-                defineConstants = DefineConstants.Split(';');
+                defineConstants = DefineConstants.Split(';').ToList();
             }
             return new Processor
-                       {
-                           AssemblyFilePath = AssemblyPath,
-                           IntermediateDirectoryPath = IntermediateDir,
-                           KeyFilePath = KeyFilePath,
-                           SignAssembly = SignAssembly,
-                           MessageImportance = MessageImportance,
-						   ProjectDirectory = ProjectDirectory,
-                           References = References,
-                           SolutionDirectoryPath = SolutionDir,
-                           BuildEngine = BuildEngine,
-                           ReferenceCopyLocalPaths = referenceCopyLocalPaths,
-                           DebugLoggingEnabled = DebugLoggingEnabled,
-                           DefineConstants = defineConstants
-                       }.Execute();
+                {
+                    AssemblyFilePath = AssemblyPath,
+                    IntermediateDirectoryPath = IntermediateDir,
+                    KeyFilePath = KeyFilePath,
+                    SignAssembly = SignAssembly,
+                    MessageImportance = MessageImportance,
+                    ProjectDirectory = ProjectDirectory,
+                    References = References,
+                    SolutionDirectoryPath = SolutionDir,
+                    BuildEngine = BuildEngine,
+                    ReferenceCopyLocalPaths = referenceCopyLocalPaths,
+                    DebugLoggingEnabled = DebugLoggingEnabled,
+                    DefineConstants = defineConstants
+                }.Execute();
         }
     }
 }
-

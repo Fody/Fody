@@ -49,17 +49,20 @@ public class ConstructorDelegateBuilderTests
     }
 
     [Test]
-    [ExpectedException(typeof(WeavingException), ExpectedMessage = "'InstanceConstructorTests+ConstructorDelegateBuilderTests' is a nested class which is not supported.")]
+    [ExpectedException(typeof(WeavingException), ExpectedMessage = "'ConstructorDelegateBuilderTests+NestedPublicClass' is a nested class which is not supported.")]
     public void Should_throw_When_is_nested()
     {
         var type = typeof(NestedPublicClass);
         type.BuildConstructorDelegate();
     }
+
     [Test]
     public void Should_construct_When_is_Valid()
     {
         var type = typeof(ValidClass);
-        Assert.IsNotNull(type.BuildConstructorDelegate()());
+        var anObject = type.BuildConstructorDelegate()();
+        Assert.IsNotNull(anObject);
+        Assert.AreEqual(type,anObject.GetType());
     }
 
     public class NestedPublicClass
@@ -67,6 +70,7 @@ public class ConstructorDelegateBuilderTests
     }
 
 }
+
 public class WithParamsClass
 {
     public WithParamsClass(string foo)
@@ -74,12 +78,15 @@ public class WithParamsClass
 
     }
 }
+
 public class ValidClass
 {
 }
+
 internal class InternalClass
 {
 }
+
 class PrivateClass
 {
 }
