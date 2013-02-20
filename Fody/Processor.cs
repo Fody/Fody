@@ -99,7 +99,7 @@ public partial class Processor
 
         if (Weavers.Count == 0)
         {
-            Logger.LogWarning(string.Format("Could not find any weavers. Either add a project named 'Weavers' with a type named 'ModuleWeaver' or add some items to '{0}'.", "FodyWeavers.xml"));
+            Logger.LogError(string.Format("You don't seem to have configured any weavers. Try adding a Fody nuget package to '{0}'. Have a look here for the list of available packages.", "FodyWeavers.xml"));
             return;
         }
         lock (locker)
