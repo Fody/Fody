@@ -34,13 +34,12 @@ namespace Fody
 
         public override bool Execute()
         {
-            List<string> referenceCopyLocalPaths = null;
+            var referenceCopyLocalPaths = new List<string>();
             if (ReferenceCopyLocalPaths != null)
             {
                 referenceCopyLocalPaths = ReferenceCopyLocalPaths.Select(x => x.ItemSpec).ToList();
             }
             var defineConstants = new List<string>();
-
             if (DefineConstants != null)
             {
                 defineConstants = DefineConstants.Split(';').ToList();
