@@ -1,15 +1,18 @@
 ﻿param($installPath, $toolsPath, $package, $project)
 
+
 function RemoveForceProjectLevelHack($project)
 {
-	$itemToRemove = $project.ProjectItems.Item("Fody_ToBeDeleted.txt")
-	if ($itemToRemove) {
+	if (Test-Path "content/Fody_ToBeDeleted.txt")
+	{
+		$itemToRemove = $project.ProjectItems.Item("Fody_ToBeDeleted.txt")	
 		$itemToRemove.Delete()
-	}
+	}	
 }
 
 function Update-FodyConfig($addinName, $project)
 {
+	
     $fodyWeaversPath = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($project.FullName), "FodyWeavers.xml")
 
     if (!(Test-Path ($fodyWeaversPath)))
@@ -17,6 +20,18 @@ function Update-FodyConfig($addinName, $project)
         Throw "Could not find FodyWeavers.xml in this project. Please enable Fody for this projet http://visualstudiogallery.msdn.microsoft.com/074a2a26-d034-46f1-8fe1-0da97265eb7a"
     }   
 
+	$FodyLastProjectPath = $env:FodyLastProjectPath
+	$FodyLastWeaverName = $env:FodyLastWeaverName
+	$FodyLastXmlContents = $env:FodyLastXmlContents
+	
+	if (
+		($FodyLastProjectPath -eq $project.FullName) -and 
+		($FodyLastWeaverName -eq $addinName))
+	{
+		$FodyLastXmlContents > $fodyWeaversPath
+		return
+	}
+	
     $xml = [xml](get-content $fodyWeaversPath)
 
     $weavers = $xml["Weavers"]

@@ -3,18 +3,57 @@
   <PropertyGroup>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
   </PropertyGroup>
-  <UsingTask 
-	  TaskName="PepitaGet.RestorePackagesTask" 
-	  AssemblyFile="$(MSBuildThisFileDirectory)PepitaGet.dll" />
-  <Target 
-	  AfterTargets="BeforeBuild"
-	  Name="PepitaGetTarget">
-    <PepitaGet.RestorePackagesTask
-		  SolutionDirectory="$(SolutionDir)" 
-		  ProjectDirectory="$(ProjectDir)" 
-      />
-  </Target>
 
+	<UsingTask TaskName="PepitaGetRestorePackagesTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+		<Task>
+
+			<Reference Include="Microsoft.Build.Framework" />
+			<Reference Include="Microsoft.Build.Utilities.v4.0" />
+			<Reference Include="Microsoft.Build.Tasks.v4.0" />
+			<Reference Include="Microsoft.CSharp" />
+
+			<Code Type="Class" Language="cs">
+				<![CDATA[ 
+using System;
+using System.IO;
+using System.Reflection;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
+
+	public class PepitaGetRestorePackagesTask : Task
+	{
+		static Type type;
+		
+		static PepitaGetRestorePackagesTask()
+		{
+			var assembly = Assembly.Load(File.ReadAllBytes(@"$(MSBuildThisFileDirectory)PepitaGet.dll"), File.ReadAllBytes(@"$(MSBuildThisFileDirectory)PepitaGet.pdb"));
+			type = assembly.GetType("Runner");
+		}
+		
+		public override bool Execute()
+		{
+			dynamic instance = Activator.CreateInstance(type);
+			instance.WriteError = new Action<string>(s => BuildEngine.LogErrorEvent(new BuildErrorEventArgs("", "", "", 0, 0, 0, 0, string.Format("Pepita: {0}", s), "", "Pepita")));
+			instance.SolutionDirectory = @"$(SolutionDir)";
+			instance.WriteInfo = new Action<string>(s => BuildEngine.LogMessageEvent(new BuildMessageEventArgs(s, "", "Pepita", MessageImportance.High)));
+			instance.ProjectDirectory = @"$(ProjectDir)";
+			return instance.Execute();
+		}
+
+	}
+
+
+]]>
+			</Code>
+		</Task>
+	</UsingTask>
+	<Target
+		AfterTargets="BeforeBuild"
+		Name="PepitaGetTarget">
+		<PepitaGetRestorePackagesTask/>
+	</Target>
+	
+	
   <!--Support for ncrunch-->
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)PepitaGet.dll" />
