@@ -28,7 +28,7 @@ function Update-FodyConfig($addinName, $project)
 		($FodyLastProjectPath -eq $project.FullName) -and 
 		($FodyLastWeaverName -eq $addinName))
 	{
-		$FodyLastXmlContents > $fodyWeaversPath
+		[System.IO.File]::WriteAllText($fodyWeaversPath, $FodyLastXmlContents)
 		return
 	}
 	
