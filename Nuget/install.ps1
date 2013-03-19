@@ -62,8 +62,6 @@ function Fix-ReferencesCopyLocal($package, $project)
     }
 }
 
-$OutputEncoding = New-Object -typename System.Text.UTF8Encoding
-
 RemoveForceProjectLevelHack $project
 
 Update-FodyConfig $package.Id.Replace(".Fody", "") $project
