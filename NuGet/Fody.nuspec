@@ -12,6 +12,6 @@
     <description>Extensible tool for weaving .net assemblies.</description>
     <summary />
     <language>en-AU</language>
-    <tags>ILWeaving, Fody, Cecil</tags>
+    <tags>ILWeaving, Fody, Cecil, AOP</tags>
   </metadata>
 </package>

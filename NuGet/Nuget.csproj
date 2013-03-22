@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{66DDADC1-1631-4EC7-8CB2-DD8080188234}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <ConfigurationName>Debug</ConfigurationName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <ConfigurationName>Release</ConfigurationName>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="init.ps1" />
+    <None Include="Fody.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="install.ps1" />
+    <None Include="uninstall.ps1" />
+    <Content Include="FodyWeavers.xml" />
+    <Content Include="Fody_ToBeDeleted.txt" />
+  </ItemGroup>
+  <Target Name="Clean">
+    <RemoveDir Directories="$(SolutionDir)NuGetBuild" />
+  </Target>
+  <Target Name="Build" DependsOnTargets="NuGetBuild" />
+  <Target Name="ReBuild" DependsOnTargets="NuGetBuild" />
+  <UsingTask TaskName="PepitaPackage.WeavingTask" AssemblyFile="$(SolutionDir)Tools\Pepita\PepitaPackage.dll" />
+  <Target Name="NuGetBuild" DependsOnTargets="Clean">
+    <MakeDir Directories="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)NuGet\Fody.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)NuGet\FodyWeavers.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Content" />
+    <Copy SourceFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)FodyCommon\bin\$(ConfigurationName)\FodyCommon.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)FodyCommon\bin\$(ConfigurationName)\FodyCommon.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\FodyIsolated.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\FodyIsolated.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Mdb.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Mdb.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Pdb.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Pdb.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Rocks.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Rocks.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)Fody.targets" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)NuGet\Fody_ToBeDeleted.txt" DestinationFolder="$(SolutionDir)NuGetBuild\Content" />
+    <Copy SourceFiles="$(ProjectDir)install.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
+    <Copy SourceFiles="$(ProjectDir)init.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
+    <Copy SourceFiles="$(ProjectDir)uninstall.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
+    <PepitaPackage.WeavingTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll" />
+  </Target>
+  <ItemGroup>
+    <ProjectReference Include="..\Fody\Fody.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <Name>Fody</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <Name>FodyIsolated</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

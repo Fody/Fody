@@ -33,31 +33,7 @@ function InjectTargets($installPath, $project)
 	$importElement.Condition = "Exists('" + $relativePath + "')"
 }
 
-function UninstallVs10Vsix()
-{
-	$path = "${env:VS100COMNTOOLS}\IDE\VSIXInstaller.exe"
-	if (test-path -path $path) 
-	{
-		[Array]$arguments = "/q /uninstall:16486db9-230d-4ab0-bef3-e5f81d4175eb"
-		&$path $arguments | out-null	
-	}
-}
-
-function UninstallVs11Vsix()
-{
-	$path = "${env:VS110COMNTOOLS}\IDE\VSIXInstaller.exe"
-	if (test-path -path $path) 
-	{
-		[Array]$arguments = " /uninstall:16486db9-230d-4ab0-bef3-e5f81d4175eb"
-		&$path $arguments	
-	}
-}
-
-
-
 RemoveForceProjectLevelHack $project
-UninstallVs10Vsix
-UninstallVs11Vsix
 InjectTargets $installPath $project
 
 $project.Save()

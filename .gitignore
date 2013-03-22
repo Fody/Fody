@@ -40,6 +40,7 @@
 ##  If you have NuGet Package Restore enabled, uncomment this
 packages/
 ForSample/
+NugetBuild/
 ChocolateyNuGetBuild/
 
 # Visual Studio profiler
