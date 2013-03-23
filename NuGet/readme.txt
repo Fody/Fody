@@ -8,4 +8,4 @@ Steps you should follow
 * Manually delete `Tools/Fody` from both your local copy and source control. 
   You will need to close Visual Studio beforehand since the files will be locked.
 
-For more information https://github.com/Fody/Fody/wiki/NugetConvert
+For the latest version of this file go here https://github.com/Fody/Fody/blob/master/NuGet/readme.txt
