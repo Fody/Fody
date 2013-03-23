@@ -26,11 +26,7 @@ Fody Uses [Mono.Cecil](http://www.mono-project.com/Cecil)  and an add-in based a
  * No install required to build
  * No attributes required
  * No references required
- * Supports .net 3.5, .net 4, .net 4.5, Silverlight 4, Silverlight 5, Windows Phone 7, Windows Phone 8, Metro on Windows 8, Mono, MonoTouch, MonoDroid and PCL
-
-## Visual Studio Addin
-
-There is a  [Visual Studio addin](http://visualstudiogallery.msdn.microsoft.com/074a2a26-d034-46f1-8fe1-0da97265eb7a) 
+ * Supports .net 3.5, .net 4, .net 4.5, Silverlight 4, Silverlight 5, Windows Phone 7, Windows Phone 8, Metro on Windows 8, Mono, MonoTouch, MonoDroid and PCL 
 
 ## Usage
 
@@ -94,7 +90,6 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
  * [SupportedRuntimesAndIde](https://github.com/Fody/Fody/wiki/SupportedRuntimesAndIde)
  * [TaskAddsAFlagInterface](https://github.com/Fody/Fody/wiki/TaskAddsAFlagInterface)
  * [TaskCouldNotBeLoaded](https://github.com/Fody/Fody/wiki/TaskCouldNotBeLoaded)
- * [VSIXPackage](https://github.com/Fody/Fody/wiki/VSIXPackage)
  * [WeavingTaskOptions](https://github.com/Fody/Fody/wiki/WeavingTaskOptions)
  * [Mono Support](https://github.com/Fody/Fody/wiki/Mono)
 
