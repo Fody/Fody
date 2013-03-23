@@ -17,6 +17,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FodyCommon.Tests", "FodyCom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuget", "NuGet\Nuget.csproj", "{66DDADC1-1631-4EC7-8CB2-DD8080188234}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WeaverNugetTemplates", "WeaverNugetTemplates", "{215FCA55-BC62-4BAD-98EF-7E42079B04CF}"
+	ProjectSection(SolutionItems) = preProject
+		WeaverNugetTemplates\install.ps1 = WeaverNugetTemplates\install.ps1
+		WeaverNugetTemplates\uninstall.ps1 = WeaverNugetTemplates\uninstall.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
