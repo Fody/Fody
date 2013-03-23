@@ -107,11 +107,3 @@ http://www.jetbrains.com/resharper/
 http://www.jetbrains.com/TeamCity/
 
 ![TeamCity.png](https://raw.github.com/wiki/Fody/Fody/TeamCity.png)
-
-### Codebetter
-
-For supplying a build server
-
-http://codebetter.com/
-
-![CodeBetter.png](https://raw.github.com/wiki/Fody/Fody/CodeBetter.png)
