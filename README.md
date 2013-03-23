@@ -88,7 +88,6 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
  * [InSolutionWeaving](https://github.com/Fody/Fody/wiki/InSolutionWeaving)
  * [ModuleWeaver](https://github.com/Fody/Fody/wiki/ModuleWeaver)
  * [PdbReWritingAndDebugging](https://github.com/Fody/Fody/wiki/PdbReWritingAndDebugging)
- * [ReleaseNotes](https://github.com/Fody/Fody/wiki/ReleaseNotes)
  * [SampleUsage](https://github.com/Fody/Fody/wiki/SampleUsage)
  * [Setup](https://github.com/Fody/Fody/wiki/Setup)
  * [SignedAssemblies](https://github.com/Fody/Fody/wiki/SignedAssemblies)
