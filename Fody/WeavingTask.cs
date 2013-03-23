@@ -14,7 +14,6 @@ namespace Fody
         public string IntermediateDir { get; set; }
         public string KeyFilePath { get; set; }
         public bool SignAssembly { get; set; }
-        public bool DebugLoggingEnabled { get; set; }
         public string MessageImportance { set; get; }
 
         [Required]
@@ -56,7 +55,6 @@ namespace Fody
                     SolutionDirectoryPath = SolutionDir,
                     BuildEngine = BuildEngine,
                     ReferenceCopyLocalPaths = referenceCopyLocalPaths,
-                    DebugLoggingEnabled = DebugLoggingEnabled,
                     DefineConstants = defineConstants
                 }.Execute();
         }

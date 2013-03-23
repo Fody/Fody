@@ -10,7 +10,6 @@ public interface IInnerWeaver
     ILogger Logger { get; set; }
     string IntermediateDirectoryPath { get; set; }
     string SolutionDirectoryPath { get; set; }
-    bool DebugLoggingEnabled { get; set; }
     List<string> ReferenceCopyLocalPaths { get; set; }
     List<string> DefineConstants { get; set; }
 

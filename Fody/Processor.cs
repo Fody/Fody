@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Fody;
 using MethodTimer;
 using Microsoft.Build.Framework;
 using MSMessageEnum = Microsoft.Build.Framework.MessageImportance;
@@ -19,7 +18,6 @@ public partial class Processor
     public string SolutionDirectoryPath;
     public IBuildEngine BuildEngine;
     public List<string> ReferenceCopyLocalPaths;
-    public bool DebugLoggingEnabled;
     public List<string> DefineConstants;
 
     AddinFinder addinFinder;
@@ -48,10 +46,6 @@ public partial class Processor
                          BuildEngine = BuildEngine,
                      };
 
-        if (DebugLoggingEnabled)
-        {
-            MethodTimeLogger.LogDebug = s => Logger.LogInfo(s);
-        }
         try
         {
             Inner();

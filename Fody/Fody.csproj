@@ -57,7 +57,6 @@
     <Compile Include="AssemblyLocation.cs" />
     <Compile Include="ContainsTypeChecker.cs" />
     <Compile Include="DomainAssemblyResolver.cs" />
-    <Compile Include="MethodTimeLogger.cs" />
     <Compile Include="Processor.cs" />
     <Compile Include="InstanceLinker\WeaversConfiguredInstanceLinker.cs" />
     <Compile Include="InstanceLinker\NoWeaversConfiguredInstanceLinker.cs" />

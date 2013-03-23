@@ -57,7 +57,6 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyVersionReaderTests.cs" />
@@ -66,7 +65,6 @@
     <Compile Include="DomainAssemblyResolverTests.cs" />
     <Compile Include="InstanceLinker\NoWeaversConfiguredInstanceLinkerTests.cs" />
     <Compile Include="InstanceLinker\WeaversConfiguredInstanceLinkerTests.cs" />
-    <Compile Include="ModuleIitializer.cs" />
     <Compile Include="NugetConfigReaderTest.cs" />
     <Compile Include="ProjectPathFinderTests.cs" />
     <Compile Include="ProjectWeaversFinderTests.cs" />
@@ -158,5 +156,4 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(ProjectDir)\..\Tools\Pepita\PepitaGet.targets" />
-  <Import Project="$(ProjectDir)\..\Tools\Fody\Fody.targets" />
 </Project>

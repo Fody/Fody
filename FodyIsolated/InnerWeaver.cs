@@ -2,13 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Permissions;
-using FodyIsolated;
 
 public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 {
     public string AssemblyFilePath { get; set; }
     public string SolutionDirectoryPath { get; set; }
-    public bool DebugLoggingEnabled { get; set; }
     public string References { get; set; }
     public List<WeaverEntry> Weavers { get; set; }
     public string KeyFilePath { get; set; }
@@ -20,10 +18,6 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
     public void Execute()
     {
-        if (DebugLoggingEnabled)
-        {
-            MethodTimeLogger.LogDebug = s => Logger.LogInfo(s);
-        }
         try
         {
             SplitUpReferences();

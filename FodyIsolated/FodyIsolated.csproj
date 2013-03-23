@@ -63,7 +63,6 @@
     <Compile Include="AssemblyResolver.cs" />
     <Compile Include="DelegateBuilders\DelegateBuilder.cs" />
     <Compile Include="DelegateBuilders\ExecuteDelegateBuilder.cs" />
-    <Compile Include="MethodTimeLogger.cs" />
     <Compile Include="DelegateBuilders\PropertyDelegateBuilder.cs" />
     <Compile Include="SymbolsFinder.cs" />
     <Compile Include="ExceptionExtensions.cs" />
