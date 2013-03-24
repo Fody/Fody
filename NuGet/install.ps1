@@ -19,8 +19,11 @@ function InjectTargets($installPath, $project)
   
 	# remove existing imports
 	Foreach ($importToRemove in $importsToRemove) 
-	{
-		$buildProject.Xml.RemoveChild($importToRemove) | out-null
+	{ 
+		if ($importToRemove)
+		{
+			$buildProject.Xml.RemoveChild($importToRemove) | out-null
+		}
 	}
 
     # Make the path to the targets file relative.
