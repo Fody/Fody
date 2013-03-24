@@ -3,11 +3,13 @@
 
 function RemoveForceProjectLevelHack($project)
 {
-	if (Test-Path "content/Fody_ToBeDeleted.txt")
+	Foreach ($item in $project.ProjectItems) 
 	{
-		$itemToRemove = $project.ProjectItems.Item("Fody_ToBeDeleted.txt")	
-		$itemToRemove.Delete()
-	}	
+		if ($item.Name -eq "Fody_ToBeDeleted.txt")
+		{
+			$item.Delete()
+		}
+	}
 }
 
 function Update-FodyConfig($addinName, $project)
