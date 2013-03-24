@@ -13,14 +13,14 @@ function InjectTargets($installPath, $project)
     # Need to load MSBuild assembly if it's not loaded yet.
     Add-Type -AssemblyName 'Microsoft.Build, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'
     # Grab the loaded MSBuild project for the project
-    $msbuild = [Microsoft.Build.Evaluation.ProjectCollection]::GlobalProjectCollection.GetLoadedProjects($project.FullName) | Select-Object -First 1
+    $buildProject = [Microsoft.Build.Evaluation.ProjectCollection]::GlobalProjectCollection.GetLoadedProjects($project.FullName) | Select-Object -First 1
  
-	$importsToRemove = $msbuild.Xml.Imports | Where-Object { $_.Project.Endswith('Fody.targets') }
+	$importsToRemove = $buildProject.Xml.Imports | Where-Object { $_.Project.Endswith('Fody.targets') }
   
 	# remove existing imports
 	Foreach ($importToRemove in $importsToRemove) 
 	{
-		$msbuild.Xml.RemoveChild($importToRemove) | out-null
+		$buildProject.Xml.RemoveChild($importToRemove) | out-null
 	}
 
     # Make the path to the targets file relative.
@@ -29,8 +29,15 @@ function InjectTargets($installPath, $project)
     $relativePath = $projectUri.MakeRelativeUri($targetUri).ToString().Replace([System.IO.Path]::AltDirectorySeparatorChar, [System.IO.Path]::DirectorySeparatorChar)
  
     # Add the import and save the project
-	$importElement = $msbuild.Xml.AddImport($relativePath) 
+	$importElement = $buildProject.Xml.AddImport($relativePath)
 	$importElement.Condition = "Exists('" + $relativePath + "')"
+	
+	$beforeBuild = $buildProject.Xml.AddTarget("FodyTargetsCheck")
+	$beforeBuild.BeforeTargets = "BeforeBuild"
+	$errorTask = $beforeBuild.AddTask("Error")
+	$errorTask.Condition = "!Exists('" + $relativePath + "')"
+	$errorTask.SetParameter("Text", "Could not find Fody.targets. You either forget to check in the package or forgot to enable package restore.")
+
 }
 
 RemoveForceProjectLevelHack $project

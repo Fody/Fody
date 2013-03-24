@@ -4,12 +4,20 @@
 Add-Type -AssemblyName 'Microsoft.Build, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'
   
 # Grab the loaded MSBuild project for the project
-$msbuild = [Microsoft.Build.Evaluation.ProjectCollection]::GlobalProjectCollection.GetLoadedProjects($project.FullName) | Select-Object -First 1
-$importsToRemove = $msbuild.Xml.Imports | Where-Object { $_.Project.Endswith('Fody.targets') }
+$buildProject = [Microsoft.Build.Evaluation.ProjectCollection]::GlobalProjectCollection.GetLoadedProjects($project.FullName) | Select-Object -First 1
+$importsToRemove = $buildProject.Xml.Imports | 
+					Where-Object { $_.Project.Endswith('Fody.targets') }
   
 # remove existing imports
 Foreach ($importToRemove in $importsToRemove) 
 {
-	$msbuild.Xml.RemoveChild($importToRemove) | out-null
+	$buildProject.Xml.RemoveChild($importToRemove) | out-null
+}
+
+$targets = $buildProject.Xml.Targets | 
+                   where { $_.Name -eq "FodyTargetsCheck" }
+Foreach ($target in $targets) 
+{
+	$buildProject.Xml.RemoveChild($target) | out-null
 }
 $project.Save()
