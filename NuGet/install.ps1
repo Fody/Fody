@@ -33,7 +33,7 @@ function InjectTargets($installPath, $project)
 	$importElement.Condition = "Exists('" + $relativePath + "')"
 	
 	$beforeBuild = $buildProject.Xml.AddTarget("FodyTargetsCheck")
-	$beforeBuild.BeforeTargets = "BeforeBuild"
+	$beforeBuild.BeforeTargets = "BeforeCompile"
 	$errorTask = $beforeBuild.AddTask("Error")
 	$errorTask.Condition = "!Exists('" + $relativePath + "')"
 	$errorTask.SetParameter("Text", "Could not find Fody.targets. You either forget to check in the package or forgot to enable package restore.")
