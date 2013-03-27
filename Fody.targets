@@ -38,10 +38,11 @@
     <IntermediateDir>$(ProjectDir)$(IntermediateOutputPath)</IntermediateDir>
     <FodyMessageImportance Condition="$(FodyMessageImportance) == '' Or $(FodyMessageImportance) == '*Undefined*'">Low</FodyMessageImportance>
     <FodySignAssembly Condition="$(FodySignAssembly) == '' Or $(FodySignAssembly) == '*Undefined*'">$(SignAssembly)</FodySignAssembly>
+    <FodyPath Condition="$(FodyPath) == '' Or $(FodyPath) == '*Undefined*'">$(MSBuildThisFileDirectory)</FodyPath>
   </PropertyGroup>
   <UsingTask
       TaskName="Fody.WeavingTask"
-      AssemblyFile="$(MSBuildThisFileDirectory)Fody.dll" />
+      AssemblyFile="$(FodyPath)\Fody.dll" />
   <Target
       AfterTargets="AfterCompile"
       Name="WinFodyTarget"
@@ -82,7 +83,7 @@
 
   <!--Support for ncrunch-->
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)*.*" />
+    <None Include="$(FodyPath)\*.*" />
   </ItemGroup>
 
 </Project>
