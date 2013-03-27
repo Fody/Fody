@@ -45,7 +45,7 @@
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Pdb.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Rocks.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Rocks.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)Fody.targets" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)Fody.targets" DestinationFolder="$(SolutionDir)NuGetBuild\Content" />
     <Copy SourceFiles="$(SolutionDir)NuGet\Fody_ToBeDeleted.txt" DestinationFolder="$(SolutionDir)NuGetBuild\Content" />
     <Copy SourceFiles="$(ProjectDir)install.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
     <Copy SourceFiles="$(ProjectDir)readme.txt" DestinationFolder="$(SolutionDir)NuGetBuild" />
