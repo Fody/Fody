@@ -1,11 +1,5 @@
 ﻿param($installPath, $toolsPath, $package, $project)
 
-function RemoveForceProjectLevelHack($project)
-{
-	$itemToRemove = $project.ProjectItems.Item("Fody_ToBeDeleted.txt")	
-	$itemToRemove.Delete()	
-}
-
 function InjectTargets($installPath, $project)
 {
 	$targetsFile = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($project.FullName), 'Fody.targets')
@@ -40,7 +34,6 @@ function InjectTargets($installPath, $project)
 	$buildProject.SetProperty("FodyPath", $fodyPath) | out-null
 }
 
-RemoveForceProjectLevelHack $project
 InjectTargets $installPath $project
 
 $project.Save()

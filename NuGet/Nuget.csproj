@@ -19,7 +19,6 @@
     <None Include="uninstall.ps1" />
     <Content Include="readme.txt" />
     <Content Include="FodyWeavers.xml" />
-    <Content Include="Fody_ToBeDeleted.txt" />
   </ItemGroup>
   <Target Name="Clean">
     <RemoveDir Directories="$(SolutionDir)NuGetBuild" />
