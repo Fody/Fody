@@ -41,7 +41,7 @@
   </PropertyGroup>
   <UsingTask
       TaskName="Fody.WeavingTask"
-      AssemblyFile="$(MSBuildThisFileDirectory)Fody.dll" />
+      AssemblyFile="$(FodyPath)\Fody.dll" />
   <Target
       AfterTargets="AfterCompile"
       Name="WinFodyTarget"
@@ -82,7 +82,7 @@
 
   <!--Support for ncrunch-->
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)*.*" />
+    <None Include="$(FodyPath)\*.*" />
   </ItemGroup>
 
 </Project>

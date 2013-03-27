@@ -14,10 +14,4 @@ Foreach ($importToRemove in $importsToRemove)
 	$buildProject.Xml.RemoveChild($importToRemove) | out-null
 }
 
-$targets = $buildProject.Xml.Targets | 
-                   where { $_.Name -eq "FodyTargetsCheck" }
-Foreach ($target in $targets) 
-{
-	$buildProject.Xml.RemoveChild($target) | out-null
-}
 $project.Save()
