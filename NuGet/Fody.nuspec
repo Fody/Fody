@@ -9,6 +9,7 @@
     <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
     <projectUrl>http://github.com/Fody/Fody</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>https://raw.github.com/Fody/Fody/master/Icons/icon_100x100.png</iconUrl>
     <description>Extensible tool for weaving .net assemblies.</description>
     <summary />
     <language>en-AU</language>
