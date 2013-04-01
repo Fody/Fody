@@ -78,6 +78,10 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Stamp](https://github.com/Fody/Stamp) Stamps an assembly with git data.
   * [Validar](https://github.com/Fody/Validar) Injects [IDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.IDataErrorInfo.aspx) or [INotifyDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.INotifyDataErrorInfo.aspx ) code into a class at compile time.
   * [Virtuosity](https://github.com/Fody/Virtuosity) Change all members to virtual.
+    
+## Icon
+
+Icon courtesy of [The Noun Project](http://thenounproject.com)
 
 ## More Info
 
