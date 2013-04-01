@@ -20,3 +20,4 @@
 *.ico binary
 *.snk binary
 *.pdb binary
+*.svg binary
