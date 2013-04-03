@@ -81,7 +81,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
     
 ## Icon
 
-Icon courtesy of [The Noun Project](http://thenounproject.com)
+<a href="http://thenounproject.com/noun/bird/#icon-No6726" target="_blank">Bird</a> designed by <a href="http://thenounproject.com/MARCOHS" target="_blank">Marco Hernandez</a> from The Noun Project
 
 ## More Info
 
