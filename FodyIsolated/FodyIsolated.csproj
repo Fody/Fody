@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <ProductVersion>12.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
+    <FodyPath>..\packages\Fody.1.13.6.1</FodyPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -32,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MethodTimer">
-      <HintPath>..\packages\MethodTimer.Fody.1.10.0.0\lib\portable-net4+sl4+wp7+win8\MethodTimer.dll</HintPath>
+      <HintPath>..\packages\MethodTimer.Fody.1.11.1.2\lib\portable-net4+sl4+wp7+win8\MethodTimer.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil">
@@ -54,6 +55,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <None Include="Fody.targets" />
     <None Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -96,5 +98,5 @@
     <Copy SourceFiles="$(TargetDir)Mono.Cecil.Rocks.dll" DestinationFolder="$(SolutionDir)ForSample" />
   </Target>
   <Import Project="$(ProjectDir)\..\Tools\Pepita\PepitaGet.targets" />
-  <Import Project="$(ProjectDir)\..\Tools\Fody\Fody.targets" />
+  <Import Project="Fody.targets" />
 </Project>

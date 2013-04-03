@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Weavers>
-  <Caseless />
   <Virtuosity />
-  <Stamp />
+  <Caseless />
   <MethodTimer />
+  <Stamp />
 </Weavers>
