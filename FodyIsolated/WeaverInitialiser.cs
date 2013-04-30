@@ -17,11 +17,11 @@ public partial class InnerWeaver
         @delegate.SetAssemblyFilePath(weaverInstance, AssemblyFilePath);
         @delegate.SetAddinDirectoryPath(weaverInstance, Path.GetDirectoryName(weaverEntry.AssemblyPath));
         @delegate.SetReferenceCopyLocalPaths(weaverInstance, ReferenceCopyLocalPaths);
-        @delegate.SetSolutionDirectoryPath(weaverInstance, SolutionDirectoryPath);
+		@delegate.SetSolutionDirectoryPath(weaverInstance, SolutionDirectoryPath);
+		@delegate.SetLogInfo(weaverInstance, Logger.LogInfo);
         @delegate.SetLogWarning(weaverInstance, Logger.LogWarning);
         @delegate.SetLogWarningPoint(weaverInstance, LogWarningPoint);
-        @delegate.SetLogInfo(weaverInstance, Logger.LogInfo);
-        @delegate.SetLogError(weaverInstance, Logger.LogInfo);
+        @delegate.SetLogError(weaverInstance, Logger.LogError);
         @delegate.SetLogErrorPoint(weaverInstance, LogErrorPoint);
         @delegate.SetDefineConstants(weaverInstance, DefineConstants);
     }
