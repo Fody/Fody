@@ -65,6 +65,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Freezable](https://github.com/Fody/Freezable) Implements the Freezable pattern.
   * [InfoOf](https://github.com/Fody/InfoOf) Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http://msdn.microsoft.com/en-us/library/58918ffs.aspx) .
   * [JetBrainsAnnotations](https://github.com/Fody/JetBrainsAnnotations) Modifies an assembly so you can leverage JetBrains Annotations but don't need to deploy JetBrainsAnnotations.dll. 
+  * [MethodCache](https://github.com/Dresel/MethodCache) Caches return values of methods decorated with a `CacheAttribute`.
   * [MethodDecorator](http://github.com/Fody/MethodDecorator) Decorate arbitrary methods to run code before and after invocation.
   * [MethodTimer](https://github.com/Fody/MethodTimer) Injects method timing code.
   * [Mixins](https://bitbucket.org/skwasiborski/mixins.fody/wiki/Home) A mixin is a class that provides a certain functionality to be inherited or just reused by a subclass.
