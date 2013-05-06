@@ -75,6 +75,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [PropertyChanged](https://github.com/Fody/PropertyChanged) Injects INotifyPropertyChanged code into properties.
   * [PropertyChanging](https://github.com/Fody/PropertyChanging) Injects INotifyPropertyChanging code into properties.
   * [Publicize](https://github.com/Fody/Publicize) Converts non-public members to public hidden members.
+  * [Resourcer](https://github.com/Fody/Resourcer) Simplifies reading embedded resources from an Assembly.
   * [Scalpel](https://github.com/Fody/Scalpel) Strips tests from an assembly. 
   * [Stamp](https://github.com/Fody/Stamp) Stamps an assembly with git data.
   * [Validar](https://github.com/Fody/Validar) Injects [IDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.IDataErrorInfo.aspx) or [INotifyDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.INotifyDataErrorInfo.aspx ) code into a class at compile time.
