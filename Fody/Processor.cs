@@ -155,6 +155,8 @@ public partial class Processor
         innerWeaver.Weavers = Weavers;
         innerWeaver.IntermediateDirectoryPath = IntermediateDirectoryPath;
         innerWeaver.DefineConstants = DefineConstants;
+        innerWeaver.ProjectDirectoryPath = ProjectDirectory;
+        
         innerWeaver.Execute();
     }
 

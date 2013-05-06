@@ -18,6 +18,7 @@ public partial class InnerWeaver
         @delegate.SetAddinDirectoryPath(weaverInstance, Path.GetDirectoryName(weaverEntry.AssemblyPath));
         @delegate.SetReferenceCopyLocalPaths(weaverInstance, ReferenceCopyLocalPaths);
 		@delegate.SetSolutionDirectoryPath(weaverInstance, SolutionDirectoryPath);
+        @delegate.SetProjectDirectoryPath(weaverInstance, ProjectDirectoryPath);
 		@delegate.SetLogInfo(weaverInstance, Logger.LogInfo);
         @delegate.SetLogWarning(weaverInstance, Logger.LogWarning);
         @delegate.SetLogWarningPoint(weaverInstance, LogWarningPoint);

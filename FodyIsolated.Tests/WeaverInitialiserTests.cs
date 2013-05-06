@@ -19,11 +19,13 @@ public class WeaverInitialiserTests
 			{
 				Logger = new Mock<ILogger>().Object,
 				AssemblyFilePath = "AssemblyFilePath",
+				ProjectDirectoryPath = "ProjectDirectoryPath",
 				SolutionDirectoryPath = "SolutionDirectoryPath",
 				ReferenceDictionary = new Dictionary<string, string> {{"Ref1;Ref2", "Path1"}},
 				ReferenceCopyLocalPaths = new List<string> {"Ref1"},
 				ModuleDefinition = moduleDefinition,
                 DefineConstants = new List<string>{"Debug", "Release"}
+
 
 			};
 
@@ -49,6 +51,7 @@ public class WeaverInitialiserTests
 		Assert.AreEqual(innerWeaver, moduleWeaver.AssemblyResolver);
 		Assert.AreEqual(@"c:\FakePath", moduleWeaver.AddinDirectoryPath);
 		Assert.AreEqual("AssemblyFilePath", moduleWeaver.AssemblyFilePath);
+        Assert.AreEqual("ProjectDirectoryPath", moduleWeaver.ProjectDirectoryPath);
 		Assert.AreEqual("SolutionDirectoryPath", moduleWeaver.SolutionDirectoryPath);
 	}
 
@@ -59,6 +62,7 @@ public class ValidModuleWeaver
 	public XElement Config { get; set; }
 	//   public List<string> References { get; set; }
 	public string AssemblyFilePath { get; set; }
+    public string ProjectDirectoryPath { get; set; }
 	public string AddinDirectoryPath { get; set; }
 	public Action<string> LogInfo { get; set; }
 	public Action<string> LogWarning { get; set; }

@@ -14,6 +14,7 @@ public class WeaverDelegate
     public Action<object, string> SetAddinDirectoryPath;
     public Action<object, List<string>> SetReferenceCopyLocalPaths;
     public Action<object, string> SetSolutionDirectoryPath;
+    public Action<object, string> SetProjectDirectoryPath;
     public Action<object, Action<string>> SetLogInfo;
     public Action<object, Action<string>> SetLogError;
     public Action<object, Action<string, SequencePoint>> SetLogErrorPoint;
