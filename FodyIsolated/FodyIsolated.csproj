@@ -77,6 +77,7 @@
     <Compile Include="TypeFinder.cs" />
     <Compile Include="WeaverDelegate.cs" />
     <Compile Include="WeaverInitialiser.cs" />
+    <Compile Include="WeaverDependencyResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj">
