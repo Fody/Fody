@@ -28,40 +28,50 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             foreach (var weaverConfig in Weavers)
             {
                 var startNew = Stopwatch.StartNew();
-                Logger.LogInfo(string.Format("Weaver '{0}'.", weaverConfig.AssemblyPath));
-                Logger.LogInfo("\tInitializing weaver");
-                var assembly = LoadAssembly(weaverConfig.AssemblyPath);
 
-                var weaverType = assembly.FindType(weaverConfig.TypeName);
-
-                var delegateHolder = weaverType.GetDelegateHolderFromCache();
-				var weaverInstance = delegateHolder.ConstructInstance();
-                var disposable = weaverInstance as IDisposable;
-                if (disposable != null)
-                {
-                    disposableWeavers.Add(disposable);
-                }
-
-                SetProperties(weaverConfig, weaverInstance, delegateHolder);
-
-                Logger.SetCurrentWeaverName(weaverConfig.AssemblyName);
+                var assemblyResolveHandler = CreateAssemblyResolveHandler(weaverConfig.AssemblyPath);
                 try
                 {
-                    Logger.LogInfo("\tExecuting Weaver ");
-                    delegateHolder.Execute(weaverInstance);
-                    var finishedMessage = string.Format("\tFinished '{0}' in {1}ms {2}", weaverConfig.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
-                    Logger.LogInfo(finishedMessage);
-                }
-                catch (Exception exception)
-                {
-                    Logger.LogError(exception.ToFriendlyString());
-                    return;
+                    AppDomain.CurrentDomain.AssemblyResolve += assemblyResolveHandler;
+
+                    Logger.LogInfo(string.Format("Weaver '{0}'.", weaverConfig.AssemblyPath));
+                    Logger.LogInfo("\tInitializing weaver");
+                    var assembly = LoadAssembly(weaverConfig.AssemblyPath);
+
+                    var weaverType = assembly.FindType(weaverConfig.TypeName);
+
+                    var delegateHolder = weaverType.GetDelegateHolderFromCache();
+                    var weaverInstance = delegateHolder.ConstructInstance();
+                    var disposable = weaverInstance as IDisposable;
+                    if (disposable != null)
+                    {
+                        disposableWeavers.Add(disposable);
+                    }
+
+                    SetProperties(weaverConfig, weaverInstance, delegateHolder);
+
+                    Logger.SetCurrentWeaverName(weaverConfig.AssemblyName);
+                    try
+                    {
+                        Logger.LogInfo("\tExecuting Weaver ");
+                        delegateHolder.Execute(weaverInstance);
+                        var finishedMessage = string.Format("\tFinished '{0}' in {1}ms {2}", weaverConfig.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
+                        Logger.LogInfo(finishedMessage);
+                    }
+                    catch (Exception exception)
+                    {
+                        Logger.LogError(exception.ToFriendlyString());
+                        return;
+                    }
+                    finally
+                    {
+                        Logger.ClearWeaverName();
+                    }
                 }
                 finally
                 {
-                    Logger.ClearWeaverName();
+                    AppDomain.CurrentDomain.AssemblyResolve -= assemblyResolveHandler;
                 }
-
             }
 
             FindStrongNameKey();
