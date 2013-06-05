@@ -12,7 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <ProductVersion>12.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <FodyPath>..\packages\Fody.1.13.6.1</FodyPath>
+    <FodyPath>..\packages\Fody.1.13.8.0</FodyPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -34,6 +34,7 @@
     <FodySignAssembly>true</FodySignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="Fody.targets" />
     <None Include="packages.config" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -42,7 +43,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <None Include="Fody.targets" />
     <None Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </None>
