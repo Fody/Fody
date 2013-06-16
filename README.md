@@ -1,3 +1,5 @@
+![Icon](https://raw.github.com/Fody/Fody/master/Icons/package_icon.png)
+
 ## Extensible tool for weaving .net assemblies
 
 ## Introduction 
