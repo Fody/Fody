@@ -59,12 +59,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppDomainAssemblyFinder.cs" />
     <Compile Include="AssemblyVersionReaderTests.cs" />
     <Compile Include="BuildLoggerTests.cs" />
     <Compile Include="ContainsTypeCheckerTests.cs" />
     <Compile Include="DomainAssemblyResolverTests.cs" />
     <Compile Include="InstanceLinker\NoWeaversConfiguredInstanceLinkerTests.cs" />
     <Compile Include="InstanceLinker\WeaversConfiguredInstanceLinkerTests.cs" />
+    <Compile Include="ModuleInitializer.cs" />
     <Compile Include="NugetConfigReaderTest.cs" />
     <Compile Include="ProjectPathFinderTests.cs" />
     <Compile Include="ProjectWeaversFinderTests.cs" />

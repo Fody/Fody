@@ -4,9 +4,8 @@ using System.Xml.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
-public static partial class DelegateBuilder
+public static class DelegateBuilder
 {
-
 
     public static WeaverDelegate GetDelegateHolderFromCache(this Type weaverType)
     {

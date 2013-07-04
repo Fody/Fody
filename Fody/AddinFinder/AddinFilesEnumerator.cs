@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 public partial class AddinFinder
@@ -9,7 +10,7 @@ public partial class AddinFinder
     public string FindAddinAssembly(string packageName)
     {
         var packageFileName = packageName + ".Fody.dll";
-        return FodyFiles.Where(x => x == packageFileName)
+        return FodyFiles.Where(x => Path.GetFileName(x) == packageFileName)
             .OrderByDescending(AssemblyVersionReader.GetAssemblyVersion)
             .FirstOrDefault();
     }
