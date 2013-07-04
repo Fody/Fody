@@ -11,6 +11,7 @@
     <RootNamespace>Fody.Tests</RootNamespace>
     <AssemblyName>Fody.Tests</AssemblyName>
     <FileAlignment>512</FileAlignment>
+    <FodyPath>..\packages\Fody.1.13.8.0</FodyPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -113,6 +114,7 @@
     <Content Include="NugetConfigWithRepoNode.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Fody.targets" />
     <None Include="NugetPackagePathFinder\FakeSolutionWithNesetdNugetConfig\.nuget\nuget.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
