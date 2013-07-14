@@ -82,6 +82,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Publicize](https://github.com/Fody/Publicize) Converts non-public members to public hidden members.
   * [Resourcer](https://github.com/Fody/Resourcer) Simplifies reading embedded resources from an Assembly.
   * [Scalpel](https://github.com/Fody/Scalpel) Strips tests from an assembly. 
+  * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration. 
   * [Stamp](https://github.com/Fody/Stamp) Stamps an assembly with git data.
   * [Stiletto](https://github.com/benjamin-bader/stiletto) Compile-time static analysis and optimization for the Stiletto IoC library.  
   * [ToString](https://github.com/Fody/ToString) Generate ToString method from public properties.
