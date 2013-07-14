@@ -66,8 +66,9 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [ExtraConstraints](https://github.com/Fody/ExtraConstraints) Facilitates adding constraints for Enum and Delegate to types and methods.
   * [Fielder](https://github.com/Fody/Fielder) Converts public fields to public properties.
   * [Freezable](https://github.com/Fody/Freezable) Implements the Freezable pattern.
-  * [InfoOf](https://github.com/Fody/InfoOf) Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http://msdn.microsoft.com/en-us/library/58918ffs.aspx) .
+  * [InfoOf](https://github.com/Fody/InfoOf) Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http://msdn.microsoft.com/en-us/library/58918ffs.aspx).
   * [Ionad](https://github.com/Fody/Ionad) Replaces static method calls. 
+  * [Janitor](https://github.com/Fody/Janitor) Simplifies the implementation of [IDisposable](http://msdn.microsoft.com/en-us/library/system.idisposable.aspx).
   * [JetBrainsAnnotations](https://github.com/Fody/JetBrainsAnnotations) Modifies an assembly so you can leverage JetBrains Annotations but don't need to deploy JetBrainsAnnotations.dll. 
   * [MethodCache](https://github.com/Dresel/MethodCache) Caches return values of methods decorated with a `CacheAttribute`.
   * [MethodDecorator](http://github.com/Fody/MethodDecorator) Decorate arbitrary methods to run code before and after invocation.
