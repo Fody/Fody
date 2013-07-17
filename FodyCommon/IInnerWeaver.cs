@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using System;
 
-public interface IInnerWeaver
+public interface IInnerWeaver : IDisposable
 {
     string AssemblyFilePath { get; set; }
     string References { get; set; }
