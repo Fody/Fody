@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Permissions;
+using System.Runtime.Remoting;
 
-public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
+public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver, IDisposable
 {
+    private bool Disposed;
+
     public string ProjectDirectoryPath { get; set; }
     public string AssemblyFilePath { get; set; }
     public string SolutionDirectoryPath { get; set; }
@@ -35,7 +38,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
                 var weaverType = assembly.FindType(weaverConfig.TypeName);
 
                 var delegateHolder = weaverType.GetDelegateHolderFromCache();
-				var weaverInstance = delegateHolder.ConstructInstance();
+                var weaverInstance = delegateHolder.ConstructInstance();
                 var disposable = weaverInstance as IDisposable;
                 if (disposable != null)
                 {
@@ -76,11 +79,45 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             Logger.LogError(exception.ToFriendlyString());
         }
     }
-
-
-    [SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.Infrastructure)]
-    public override object InitializeLifetimeService()
+    
+    /// <summary>
+    /// Disconnects the remoting channel(s) of this object and all nested objects.
+    /// </summary>
+    private void Disconnect()
     {
+        RemotingServices.Disconnect(this);
+    }
+
+    public sealed override object InitializeLifetimeService()
+    {
+        //
+        // Returning null designates an infinite non-expiring lease.
+        // We must therefore ensure that RemotingServices.Disconnect() is called when
+        // it's no longer needed otherwise there will be a memory leak.
+        //
         return null;
+    }
+
+    public void Dispose()
+    {
+        GC.SuppressFinalize(this);
+        Dispose(true);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (Disposed)
+            return;
+
+        Disconnect();
+        Disposed = true;
+    }
+
+    /// <summary>
+    /// Be sure Dispose is called!
+    /// </summary>
+    ~InnerWeaver()
+    {
+        Dispose(false);
     }
 }
