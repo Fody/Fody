@@ -144,20 +144,22 @@ public partial class Processor
             appdomain = solutionDomains[SolutionDirectoryPath] = CreateDomain();
         }
 
-        var innerWeaver = (IInnerWeaver) appdomain.CreateInstanceAndUnwrap("FodyIsolated", "InnerWeaver");
-        innerWeaver.AssemblyFilePath = AssemblyFilePath;
-        innerWeaver.References = References;
-        innerWeaver.KeyFilePath = KeyFilePath;
-        innerWeaver.ReferenceCopyLocalPaths = ReferenceCopyLocalPaths;
-        innerWeaver.SignAssembly = SignAssembly;
-        innerWeaver.Logger = Logger;
-        innerWeaver.SolutionDirectoryPath = SolutionDirectoryPath;
-        innerWeaver.Weavers = Weavers;
-        innerWeaver.IntermediateDirectoryPath = IntermediateDirectoryPath;
-        innerWeaver.DefineConstants = DefineConstants;
-        innerWeaver.ProjectDirectoryPath = ProjectDirectory;
-        
-        innerWeaver.Execute();
+        using (var innerWeaver = (IInnerWeaver)appdomain.CreateInstanceAndUnwrap("FodyIsolated", "InnerWeaver"))
+        {
+            innerWeaver.AssemblyFilePath = AssemblyFilePath;
+            innerWeaver.References = References;
+            innerWeaver.KeyFilePath = KeyFilePath;
+            innerWeaver.ReferenceCopyLocalPaths = ReferenceCopyLocalPaths;
+            innerWeaver.SignAssembly = SignAssembly;
+            innerWeaver.Logger = Logger;
+            innerWeaver.SolutionDirectoryPath = SolutionDirectoryPath;
+            innerWeaver.Weavers = Weavers;
+            innerWeaver.IntermediateDirectoryPath = IntermediateDirectoryPath;
+            innerWeaver.DefineConstants = DefineConstants;
+            innerWeaver.ProjectDirectoryPath = ProjectDirectory;
+
+            innerWeaver.Execute();
+        }
     }
 
     AppDomain CreateDomain()
