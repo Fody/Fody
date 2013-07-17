@@ -48,16 +48,16 @@ using Microsoft.Build.Utilities;
     </Task>
   </UsingTask>
 
-       <UsingTask Condition="'$(MSBuildToolsVersion)' == '12.0'" TaskName="PepitaGetRestorePackagesTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
-             <Task>
+  <UsingTask Condition="'$(MSBuildToolsVersion)' == '12.0'" TaskName="PepitaGetRestorePackagesTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
+    <Task>
 
-                    <Reference Include="Microsoft.Build.Framework" />
-                    <Reference Include="Microsoft.Build.Utilities.v12.0" />
-                    <Reference Include="Microsoft.Build.Tasks.v12.0" />
-                    <Reference Include="Microsoft.CSharp" />
+      <Reference Include="Microsoft.Build.Framework" />
+      <Reference Include="Microsoft.Build.Utilities.v12.0" />
+      <Reference Include="Microsoft.Build.Tasks.v12.0" />
+      <Reference Include="Microsoft.CSharp" />
 
-                    <Code Type="Class" Language="cs">
-                           <![CDATA[
+      <Code Type="Class" Language="cs">
+        <![CDATA[
 using System;
 using System.IO;
 using System.Reflection;
@@ -88,22 +88,21 @@ using Microsoft.Build.Utilities;
 
 
 ]]>
-                    </Code>
-             </Task>
-       </UsingTask>
+      </Code>
+    </Task>
+  </UsingTask>
 
-       <Target AfterTargets="BeforeBuild" Name="PepitaGetTarget">
-    <Message Importance="high" Text="Using MsBuild v$(MSBuildToolsVersion)"/>
+  <Target AfterTargets="BeforeBuild" Name="PepitaGetTarget">
     <PepitaGetRestorePackagesTask />
-       </Target>
+  </Target>
 
-	
+
   <!--Support for ncrunch-->
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)PepitaGet.dll" />
   </ItemGroup>
-  
-  
+
+
 </Project>
 
 

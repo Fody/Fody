@@ -129,22 +129,22 @@ public partial class Processor
     [Time]
     void ExecuteInOwnAppDomain()
     {
-        AppDomain appdomain;
-        if (solutionDomains.TryGetValue(SolutionDirectoryPath, out appdomain))
+        AppDomain appDomain;
+        if (solutionDomains.TryGetValue(SolutionDirectoryPath, out appDomain))
         {
             if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
             {
-                Logger.LogInfo("A Weaver HasChanged so loading a new AppDomian");
-                AppDomain.Unload(appdomain);
-                appdomain = solutionDomains[SolutionDirectoryPath] = CreateDomain();
+                Logger.LogInfo("A Weaver HasChanged so loading a new AppDomain");
+                AppDomain.Unload(appDomain);
+                appDomain = solutionDomains[SolutionDirectoryPath] = CreateDomain();
             }
         }
         else
         {
-            appdomain = solutionDomains[SolutionDirectoryPath] = CreateDomain();
+            appDomain = solutionDomains[SolutionDirectoryPath] = CreateDomain();
         }
 
-        using (var innerWeaver = (IInnerWeaver)appdomain.CreateInstanceAndUnwrap("FodyIsolated", "InnerWeaver"))
+        using (var innerWeaver = (IInnerWeaver)appDomain.CreateInstanceAndUnwrap("FodyIsolated", "InnerWeaver"))
         {
             innerWeaver.AssemblyFilePath = AssemblyFilePath;
             innerWeaver.References = References;
@@ -164,7 +164,7 @@ public partial class Processor
 
     AppDomain CreateDomain()
     {
-        Logger.LogInfo("Creating a new AppDomian");
+        Logger.LogInfo("Creating a new AppDomain");
         var appDomainSetup = new AppDomainSetup
         {
             ApplicationBase = AssemblyLocation.CurrentDirectory(),

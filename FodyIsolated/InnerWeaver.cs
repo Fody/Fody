@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Security.Permissions;
 using System.Runtime.Remoting;
 
-public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver, IDisposable
+public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 {
-    private bool Disposed;
+    bool disposed;
 
     public string ProjectDirectoryPath { get; set; }
     public string AssemblyFilePath { get; set; }
@@ -90,11 +89,9 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver, IDisposable
 
     public sealed override object InitializeLifetimeService()
     {
-        //
         // Returning null designates an infinite non-expiring lease.
         // We must therefore ensure that RemotingServices.Disconnect() is called when
         // it's no longer needed otherwise there will be a memory leak.
-        //
         return null;
     }
 
@@ -106,11 +103,13 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver, IDisposable
 
     protected virtual void Dispose(bool disposing)
     {
-        if (Disposed)
+        if (disposed)
+        {
             return;
+        }
 
         Disconnect();
-        Disposed = true;
+        disposed = true;
     }
 
     /// <summary>
