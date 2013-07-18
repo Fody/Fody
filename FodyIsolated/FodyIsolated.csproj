@@ -12,7 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <ProductVersion>12.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <FodyPath>..\packages\Fody.1.13.11.1</FodyPath>
+    <FodyPath>..\packages\Fody.1.13.12</FodyPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MethodTimer">
-      <HintPath>..\packages\MethodTimer.Fody.1.11.2.0\Lib\portable-net4+sl4+wp7+win8+MonoAndroid16+MonoTouch40\MethodTimer.dll</HintPath>
+      <HintPath>..\packages\MethodTimer.Fody.1.11.4\Lib\portable-net4+sl4+wp7+win8+MonoAndroid16+MonoTouch40\MethodTimer.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.Cecil">
