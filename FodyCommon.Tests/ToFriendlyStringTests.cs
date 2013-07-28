@@ -21,6 +21,7 @@ public class ToFriendlyStringTests
             var friendlyString = exception.ToFriendlyString().ToLowerInvariant();
             friendlyString = friendlyString
                 .Replace(currentDirectory, string.Empty);
+// ReSharper disable StringLiteralTypo
 			var expected = @"an unhandled exception occurred:
 exception:
 foo
@@ -33,6 +34,7 @@ fodycommon.tests
 targetsite:
 void throwexception2()
 ";
+// ReSharper restore StringLiteralTypo
             Assert.AreEqual(expected, friendlyString);
         }
     }

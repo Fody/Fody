@@ -118,7 +118,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Fody.targets" />
-    <None Include="NugetPackagePathFinder\FakeSolutionWithNesetdNugetConfig\.nuget\nuget.config">
+    <None Include="NugetPackagePathFinder\FakeSolutionWithNestedNugetConfig\.nuget\nuget.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="NugetPackagePathFinder\FakeSolutionWithNugetConfig\nuget.config" />

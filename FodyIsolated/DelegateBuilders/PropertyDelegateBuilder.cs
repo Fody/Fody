@@ -31,7 +31,6 @@ public static class PropertyDelegateBuilder
         return (x, y) => { };
     }
 
-    //http://stackoverflow.com/questions/321650/how-do-i-set-a-field-value-in-an-c-sharp-expression-tree
     public static FieldInfo GetField<TField>(this Type type, string propertyName)
     {
         var fieldInfo = type.GetField(propertyName);

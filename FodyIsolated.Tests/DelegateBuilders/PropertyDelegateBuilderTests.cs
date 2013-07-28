@@ -16,19 +16,19 @@ public class PropertyDelegateBuilderTests
     public static string StaticField;
 
     [Test]
-    public void Should_be_able_to_set_a_public_property_via_a_contructed_delegate()
+    public void Should_be_able_to_set_a_public_property_via_a_constructed_delegate()
     {
         var setterDelegate = GetType().BuildPropertySetDelegate<string>("Property");
-        setterDelegate(this, "sdfsdf");
-        Assert.AreEqual("sdfsdf",Property);
+        setterDelegate(this, "aString");
+        Assert.AreEqual("aString",Property);
     }
 
     [Test]
-    public void Should_be_able_to_set_a_public_field_via_a_contructed_delegate()
+    public void Should_be_able_to_set_a_public_field_via_a_constructed_delegate()
     {
         var setterDelegate = GetType().BuildPropertySetDelegate<string>("Field");
-        setterDelegate(this, "sdfsdf");
-        Assert.AreEqual("sdfsdf",Field);
+        setterDelegate(this, "aString");
+        Assert.AreEqual("aString",Field);
     }
 
     [Test]

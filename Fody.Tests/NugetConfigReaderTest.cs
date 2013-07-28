@@ -14,9 +14,9 @@ public class NugetConfigReaderTest
     }
 
     [Test]
-    public void FakeSolutionWithNesetdNugetConfig()
+    public void FakeSolutionWithNestedNugetConfig()
     {
-        var solutionDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../../NugetPackagePathFinder/FakeSolutionWithNesetdNugetConfig"));
+        var solutionDir = Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, "../../NugetPackagePathFinder/FakeSolutionWithNestedNugetConfig"));
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(solutionDir);
         Assert.IsTrue(packagesPathFromConfig.EndsWith("FromNugetConfig"));
     }

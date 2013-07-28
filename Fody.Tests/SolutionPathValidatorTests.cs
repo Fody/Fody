@@ -31,9 +31,9 @@ public class SolutionPathValidatorTests
 
 			    var processor = new Processor
 				    {
-					    SolutionDirectoryPath = "baddir"
+					    SolutionDirectoryPath = "aString"
 				    };
 			    processor.ValidateSolutionPath();
-			}, string.Format("SolutionDir \"{0}baddir\" does not exist.", Path.GetFullPath("baddir")));
+			}, string.Format("SolutionDir \"{0}aString\" does not exist.", Path.GetFullPath("baddir")));
     }
 }

@@ -9,8 +9,8 @@ public class DynamicTests
     [Ignore]
     public void NoProperty()
     {
-        dynamic x = "sdfsdf";
-        x.Foo = "sdfsdf";
+        dynamic x = "aString";
+        x.Foo = "aString";
     }
     [Test]
     [Ignore]
