@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.Remoting;
 
 public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 {
-    bool disposed;
-
     public string ProjectDirectoryPath { get; set; }
     public string AssemblyFilePath { get; set; }
     public string SolutionDirectoryPath { get; set; }
@@ -26,66 +25,93 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             SplitUpReferences();
             GetSymbolProviders();
             ReadModule();
-            var disposableWeavers = new List<IDisposable>();
-            foreach (var weaverConfig in Weavers)
-            {
-                var startNew = Stopwatch.StartNew();
-                Logger.LogInfo(string.Format("Weaver '{0}'.", weaverConfig.AssemblyPath));
-                Logger.LogInfo("\tInitializing weaver");
-                var assembly = LoadAssembly(weaverConfig.AssemblyPath);
-
-                var weaverType = assembly.FindType(weaverConfig.TypeName);
-
-                var delegateHolder = weaverType.GetDelegateHolderFromCache();
-                var weaverInstance = delegateHolder.ConstructInstance();
-                var disposable = weaverInstance as IDisposable;
-                if (disposable != null)
-                {
-                    disposableWeavers.Add(disposable);
-                }
-
-                SetProperties(weaverConfig, weaverInstance, delegateHolder);
-
-                Logger.SetCurrentWeaverName(weaverConfig.AssemblyName);
-                try
-                {
-                    Logger.LogInfo("\tExecuting Weaver ");
-                    delegateHolder.Execute(weaverInstance);
-                    var finishedMessage = string.Format("\tFinished '{0}' in {1}ms {2}", weaverConfig.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
-                    Logger.LogInfo(finishedMessage);
-                }
-                catch (Exception exception)
-                {
-                    Logger.LogError(exception.ToFriendlyString());
-                    return;
-                }
-                finally
-                {
-                    Logger.ClearWeaverName();
-                }
-
-            }
-
+            var weaverInstances = new List<WeaverHolder>();
+            InitialiseWeavers(weaverInstances);
+            ExecuteWeavers(weaverInstances);
             FindStrongNameKey();
             WriteModule();
-            foreach (var disposable in disposableWeavers)
-            {
-                disposable.Dispose();
-            }
+            DisposeWeavers(weaverInstances);
         }
         catch (Exception exception)
         {
             Logger.LogError(exception.ToFriendlyString());
         }
+
     }
-    
-    /// <summary>
-    /// Disconnects the remoting channel(s) of this object and all nested objects.
-    /// </summary>
-    private void Disconnect()
+
+    void InitialiseWeavers(List<WeaverHolder> weaverInstances)
     {
-        RemotingServices.Disconnect(this);
+        foreach (var weaverConfig in Weavers)
+        {
+            Logger.LogInfo(string.Format("Weaver '{0}'.", weaverConfig.AssemblyPath));
+            Logger.LogInfo("\tInitializing weaver");
+            var assembly = LoadAssembly(weaverConfig.AssemblyPath);
+
+            var weaverType = assembly.FindType(weaverConfig.TypeName);
+
+            var delegateHolder = weaverType.GetDelegateHolderFromCache();
+            var weaverInstance = delegateHolder.ConstructInstance();
+            var weaverHolder = new WeaverHolder
+                               {
+                                   Instance = weaverInstance,
+                                   WeaverDelegate = delegateHolder,
+                                   Config = weaverConfig
+                               };
+            weaverInstances.Add(weaverHolder);
+
+            SetProperties(weaverConfig, weaverInstance, delegateHolder);
+        }
     }
+
+    void ExecuteWeavers(List<WeaverHolder> weaverInstances)
+    {
+        foreach (var weaver in weaverInstances)
+        {
+            try
+            {
+                Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
+                var startNew = Stopwatch.StartNew();
+                Logger.LogInfo("\tExecuting Weaver ");
+                weaver.WeaverDelegate.Execute(weaver.Instance);
+                var finishedMessage = string.Format("\tFinished '{0}' in {1}ms {2}", weaver.Config.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
+                Logger.LogInfo(finishedMessage);
+            }
+            finally
+            {
+                Logger.ClearWeaverName();
+            }
+        }
+    }
+    void ExecuteAfterWeavers(List<WeaverHolder> weaverInstances)
+    {
+        foreach (var weaver in weaverInstances
+            .Where(_ => _.WeaverDelegate.AfterWeavingExecute != null))
+        {
+            try
+            {
+                Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
+                var startNew = Stopwatch.StartNew();
+                Logger.LogInfo("\tExecuting After Weaver");
+                weaver.WeaverDelegate.AfterWeavingExecute(weaver.Instance);
+                var finishedMessage = string.Format("\tFinished '{0}' in {1}ms {2}", weaver.Config.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
+                Logger.LogInfo(finishedMessage);
+            }
+            finally
+            {
+                Logger.ClearWeaverName();
+            }
+        }
+    }
+
+    static void DisposeWeavers(List<WeaverHolder> weaverInstances)
+    {
+        foreach (var disposable in weaverInstances.Select(x => x.Instance)
+            .OfType<IDisposable>())
+        {
+            disposable.Dispose();
+        }
+    }
+
 
     public sealed override object InitializeLifetimeService()
     {
@@ -97,26 +123,8 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
     public void Dispose()
     {
-        GC.SuppressFinalize(this);
-        Dispose(true);
+        //Disconnects the remoting channel(s) of this object and all nested objects.
+        RemotingServices.Disconnect(this);
     }
 
-    protected virtual void Dispose(bool disposing)
-    {
-        if (disposed)
-        {
-            return;
-        }
-
-        Disconnect();
-        disposed = true;
-    }
-
-    /// <summary>
-    /// Be sure Dispose is called!
-    /// </summary>
-    ~InnerWeaver()
-    {
-        Dispose(false);
-    }
 }

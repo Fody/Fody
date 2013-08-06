@@ -31,6 +31,7 @@ public static class DelegateBuilder
         return new WeaverDelegate
             {
                 Execute = weaverType.BuildExecuteDelegate(),
+                AfterWeavingExecute = weaverType.BuildAfterWeavingDelegate(),
                 SetModuleDefinition = moduleDefinitionDelegate,
                 SetConfig = weaverType.BuildPropertySetDelegate<XElement>("Config"),
                 SetAddinDirectoryPath = weaverType.BuildPropertySetDelegate<string>("AddinDirectoryPath"),

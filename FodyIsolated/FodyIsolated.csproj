@@ -63,6 +63,7 @@
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="AssemblyReferenceFinder.cs" />
     <Compile Include="AssemblyResolver.cs" />
+    <Compile Include="DelegateBuilders\AfterWeavingDelegateBuilder.cs" />
     <Compile Include="DelegateBuilders\DelegateBuilder.cs" />
     <Compile Include="DelegateBuilders\ExecuteDelegateBuilder.cs" />
     <Compile Include="DelegateBuilders\PropertyDelegateBuilder.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="StrongNameKeyFinder.cs" />
     <Compile Include="TypeFinder.cs" />
     <Compile Include="WeaverDelegate.cs" />
+    <Compile Include="WeaverHolder.cs" />
     <Compile Include="WeaverInitialiser.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@ using Mono.Cecil.Cil;
 public class WeaverDelegate
 {
     public Action<object> Execute;
+    public Action<object> AfterWeavingExecute;
     public Action<object, XElement> SetConfig;
     public Action<object, ModuleDefinition> SetModuleDefinition;
     public Action<object, IAssemblyResolver> SetAssemblyResolver;

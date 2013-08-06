@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DelegateBuilders\ConstructorDelegateBuilderTests.cs" />
+    <Compile Include="DelegateBuilders\AfterExecuteDelegateBuilderTests.cs" />
     <Compile Include="DelegateBuilders\ExecuteDelegateBuilderTests.cs" />
     <Compile Include="IsolatedContainsTypeCheckerTests.cs" />
     <Compile Include="DelegateBuilders\PropertyDelegateBuilderTests.cs" />
