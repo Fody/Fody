@@ -7,7 +7,7 @@ public static class AfterWeavingDelegateBuilder
 
     public static Action<object> BuildAfterWeavingDelegate(this Type weaverType)
     {
-        var afterWeavingMethod = weaverType.GetMethod("AfterWeavingExecute", BindingFlags.Instance | BindingFlags.Public, null, new Type[] { }, null);
+        var afterWeavingMethod = weaverType.GetMethod("AfterWeaving", BindingFlags.Instance | BindingFlags.Public, null, new Type[] { }, null);
         if (afterWeavingMethod == null)
         {
             return null;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Remoting;
+using Mono.Cecil;
 
 public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 {
@@ -28,15 +29,29 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             var weaverInstances = new List<WeaverHolder>();
             InitialiseWeavers(weaverInstances);
             ExecuteWeavers(weaverInstances);
+            AddProcessedFlag();
             FindStrongNameKey();
             WriteModule();
+            ExecuteAfterWeavers(weaverInstances);
             DisposeWeavers(weaverInstances);
+
+            if (weaverInstances
+                .Any(_ => _.WeaverDelegate.AfterWeavingExecute != null))
+            {
+                ReadModule();
+                WriteModule();
+            }
         }
         catch (Exception exception)
         {
             Logger.LogError(exception.ToFriendlyString());
         }
 
+    }
+
+    void AddProcessedFlag()
+    {
+        ModuleDefinition.Types.Add(new TypeDefinition(null, "ProcessedByFody", TypeAttributes.NotPublic | TypeAttributes.Abstract | TypeAttributes.Interface));
     }
 
     void InitialiseWeavers(List<WeaverHolder> weaverInstances)
@@ -82,6 +97,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             }
         }
     }
+
     void ExecuteAfterWeavers(List<WeaverHolder> weaverInstances)
     {
         foreach (var weaver in weaverInstances
@@ -105,7 +121,8 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
     static void DisposeWeavers(List<WeaverHolder> weaverInstances)
     {
-        foreach (var disposable in weaverInstances.Select(x => x.Instance)
+        foreach (var disposable in weaverInstances
+            .Select(x => x.Instance)
             .OfType<IDisposable>())
         {
             disposable.Dispose();

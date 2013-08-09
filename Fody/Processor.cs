@@ -68,7 +68,7 @@ public partial class Processor
     {
         ValidateProjectPath();
 
-        ValidatorAssemblyPath();
+        ValidateAssemblyPath();
 
         FindProjectWeavers();
         
@@ -117,7 +117,6 @@ public partial class Processor
         addinFinder.FindAddinDirectories();
 
         FindWeaverProjectFile();
-
 
         ConfigureWhenWeaversFound();
 

@@ -23,7 +23,7 @@ public class AfterExecuteDelegateBuilderTests
 
     public class ValidClass
     {
-        public void AfterWeavingExecute()
+        public void AfterWeaving()
         {
         }
     }
@@ -51,7 +51,7 @@ public class AfterExecuteDelegateBuilderTests
 
     public class StaticExecuteClass
     {
-        public static void AfterWeavingExecute()
+        public static void AfterWeaving()
         {
         }
     }
@@ -66,7 +66,7 @@ public class AfterExecuteDelegateBuilderTests
 
     public class ThrowFromExecuteClass
     {
-        public void AfterWeavingExecute()
+        public void AfterWeaving()
         {
             throw new NullReferenceException();
         }
