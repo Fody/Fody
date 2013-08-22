@@ -76,6 +76,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [MethodTimer](https://github.com/Fody/MethodTimer) Injects method timing code.
   * [Mixins](https://bitbucket.org/skwasiborski/mixins.fody/wiki/Home) A mixin is a class that provides a certain functionality to be inherited or just reused by a subclass.
   * [ModuleInit](https://github.com/Fody/ModuleInit) Adds a module initializer to an assembly.
+  * [Mutable](https://github.com/ndamjan/Mutable.Fody) Use this addin for F# to make setters for union types and eliminate need for `CLIMutable` attribute for records.
   * [NullGuard](https://github.com/Fody/NullGuard) Adds null argument checks to an assembly
   * [Obsolete](https://github.com/Fody/Obsolete) Helps keep usages of [ObsoleteAttribute]([http://msdn.microsoft.com/en-us/library/fwz0y5c2 ) consistent.
   * [PropertyChanged](https://github.com/Fody/PropertyChanged) Injects INotifyPropertyChanged code into properties.
