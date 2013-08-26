@@ -26,7 +26,17 @@ public partial class InnerWeaver
         mdbPath = AssemblyFilePath + ".mdb";
 		if (File.Exists(mdbPath))
 		{
-		    mdbFound = true;
+			if (pdbFound)
+			{
+				if (File.GetLastWriteTimeUtc(pdbPath) >= File.GetLastWriteTimeUtc(mdbPath))
+				{
+					Logger.LogInfo("Found mdb and pdb debug symbols. Selected pdb (newer).");
+					return;
+				}
+				pdbFound = false;
+				Logger.LogInfo("Found mdb and pdb debug symbols. Selected mdb (newer).");
+			}
+			mdbFound = true;
 		    debugReaderProvider = new MdbReaderProvider();
             debugWriterProvider = new MdbWriterProvider();
 		    Logger.LogInfo(string.Format("Found debug symbols at '{0}'.", mdbPath));
