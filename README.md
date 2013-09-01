@@ -64,6 +64,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Costura](https://github.com/Fody/Costura/) For embedding references as resources.
   * [DependencyInjection](https://github.com/jorgehmv/FodyDependencyInjection) automatic dependency injection for [Ninject](http://www.ninject.org/), [Autofac](http://autofac.org/) and [Spring](http://www.springframework.net/).
   * [EmptyConstructor](https://github.com/Fody/EmptyConstructor) Adds an empty constructor to classes even if a non empty one is defined.
+  * [EnableFaking](https://github.com/philippdolder/EnableFaking.Fody) Allows faking your types without writing interfaces for testing purposes only.
   * [ExtraConstraints](https://github.com/Fody/ExtraConstraints) Facilitates adding constraints for Enum and Delegate to types and methods.
   * [Fielder](https://github.com/Fody/Fielder) Converts public fields to public properties.
   * [Freezable](https://github.com/Fody/Freezable) Implements the Freezable pattern.
