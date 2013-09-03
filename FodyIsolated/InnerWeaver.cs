@@ -19,6 +19,11 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     public List<string> ReferenceCopyLocalPaths { get; set; }
     public List<string> DefineConstants { get; set; }
 
+    static InnerWeaver()
+    {
+        DomainAssemblyResolver.Connect();
+    }
+
     public void Execute()
     {
         try

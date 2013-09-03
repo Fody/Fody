@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs" />
+    <Compile Include="DomainAssemblyResolver.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="IContainsTypeChecker.cs" />
     <Compile Include="IInnerWeaver.cs" />
