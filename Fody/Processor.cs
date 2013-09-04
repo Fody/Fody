@@ -142,7 +142,6 @@ public partial class Processor
             appDomain = solutionDomains[SolutionDirectoryPath] = CreateDomain();
         }
 
-        using (new DomainAssemblyResolver())
         using (var innerWeaver = (IInnerWeaver)appDomain.CreateInstanceAndUnwrap("FodyIsolated", "InnerWeaver"))
         {
             innerWeaver.AssemblyFilePath = AssemblyFilePath;
