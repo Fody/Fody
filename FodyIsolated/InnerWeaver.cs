@@ -19,39 +19,36 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     public List<string> ReferenceCopyLocalPaths { get; set; }
     public List<string> DefineConstants { get; set; }
 
-    static InnerWeaver()
-    {
-        DomainAssemblyResolver.Connect();
-    }
-
     public void Execute()
     {
-        try
+        using (new DomainAssemblyResolver())
         {
-            SplitUpReferences();
-            GetSymbolProviders();
-            ReadModule();
-            var weaverInstances = new List<WeaverHolder>();
-            InitialiseWeavers(weaverInstances);
-            ExecuteWeavers(weaverInstances);
-            AddProcessedFlag();
-            FindStrongNameKey();
-            WriteModule();
-            ExecuteAfterWeavers(weaverInstances);
-            DisposeWeavers(weaverInstances);
-
-            if (weaverInstances
-                .Any(_ => _.WeaverDelegate.AfterWeavingExecute != null))
+            try
             {
+                SplitUpReferences();
+                GetSymbolProviders();
                 ReadModule();
+                var weaverInstances = new List<WeaverHolder>();
+                InitialiseWeavers(weaverInstances);
+                ExecuteWeavers(weaverInstances);
+                AddProcessedFlag();
+                FindStrongNameKey();
                 WriteModule();
+                ExecuteAfterWeavers(weaverInstances);
+                DisposeWeavers(weaverInstances);
+
+                if (weaverInstances
+                    .Any(_ => _.WeaverDelegate.AfterWeavingExecute != null))
+                {
+                    ReadModule();
+                    WriteModule();
+                }
+            }
+            catch (Exception exception)
+            {
+                Logger.LogError(exception.ToFriendlyString());
             }
         }
-        catch (Exception exception)
-        {
-            Logger.LogError(exception.ToFriendlyString());
-        }
-
     }
 
     void AddProcessedFlag()

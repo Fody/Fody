@@ -2,15 +2,25 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-public static class DomainAssemblyResolver
+public class DomainAssemblyResolver: IDisposable
 {
-    public static void Connect()
+    ResolveEventHandler domainOnAssemblyResolve;
+    public DomainAssemblyResolver()
     {
-        AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => GetAssembly(args.Name);
+        domainOnAssemblyResolve = (sender, args) => GetAssembly(args.Name);
+        AppDomain.CurrentDomain.AssemblyResolve += domainOnAssemblyResolve;
     }
 
     public static Assembly GetAssembly(string name)
     {
         return AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(x => x.FullName == name);
+    }
+
+    public void Dispose()
+    {
+        if (domainOnAssemblyResolve != null)
+        {
+            AppDomain.CurrentDomain.AssemblyResolve -= domainOnAssemblyResolve;
+        }
     }
 }
