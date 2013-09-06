@@ -67,5 +67,21 @@ public class NugetConfigReaderTest
         var packagesPathFromConfig = NugetConfigReader.GetPackagePath(configPath);
         Assert.AreEqual(Path.Combine(Environment.CurrentDirectory,"repositoryPathValue"), packagesPathFromConfig);
     }
+
+    [Test]
+    public void NugetConfigWithPlaceholderRemovesToken()
+    {
+        var configPath = Path.Combine(Environment.CurrentDirectory, "NugetConfigWithPlaceholder.txt");
+        var packagesPathFromConfig = NugetConfigReader.GetPackagePath(configPath);
+        Assert.False(packagesPathFromConfig.Contains("$"));
+    }
+
+    [Test]
+    public void NugetConfigWithPlaceholderUsesDirectory()
+    {
+        var configPath = Path.Combine(Environment.CurrentDirectory, "NugetConfigWithPlaceholder.txt");
+        var packagesPathFromConfig = NugetConfigReader.GetPackagePath(configPath);
+        Assert.AreEqual(Path.Combine(Environment.CurrentDirectory, "Packages"), packagesPathFromConfig);
+    }
     
 }
