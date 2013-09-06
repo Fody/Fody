@@ -102,6 +102,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="NugetConfigWithPlaceholder.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </Content>
