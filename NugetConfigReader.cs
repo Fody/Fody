@@ -65,6 +65,11 @@ public static class NugetConfigReader
                 .FirstOrDefault();
             if (repositoryPath != null)
             {
+                if (repositoryPath.StartsWith("$\\"))
+                {
+                    return repositoryPath.Replace("$", Path.Combine(Path.GetDirectoryName(nugetConfigPath)));
+                }
+
                 return Path.Combine(Path.GetDirectoryName(nugetConfigPath), repositoryPath);
             }
         }
