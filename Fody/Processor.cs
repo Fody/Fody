@@ -31,6 +31,7 @@ public partial class Processor
     static Processor()
     {
         locker = new object();
+        DomainAssemblyResolver.Connect();
     }
 
     public bool Execute()

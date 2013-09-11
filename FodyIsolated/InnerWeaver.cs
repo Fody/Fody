@@ -21,34 +21,32 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
     public void Execute()
     {
-        using (new DomainAssemblyResolver())
+        try
         {
-            try
-            {
-                SplitUpReferences();
-                GetSymbolProviders();
-                ReadModule();
-                var weaverInstances = new List<WeaverHolder>();
-                InitialiseWeavers(weaverInstances);
-                ExecuteWeavers(weaverInstances);
-                AddProcessedFlag();
-                FindStrongNameKey();
-                WriteModule();
-                ExecuteAfterWeavers(weaverInstances);
-                DisposeWeavers(weaverInstances);
+            SplitUpReferences();
+            GetSymbolProviders();
+            ReadModule();
+            var weaverInstances = new List<WeaverHolder>();
+            InitialiseWeavers(weaverInstances);
+            ExecuteWeavers(weaverInstances);
+            AddProcessedFlag();
+            FindStrongNameKey();
+            WriteModule();
+            ExecuteAfterWeavers(weaverInstances);
+            DisposeWeavers(weaverInstances);
 
-                if (weaverInstances
-                    .Any(_ => _.WeaverDelegate.AfterWeavingExecute != null))
-                {
-                    ReadModule();
-                    WriteModule();
-                }
-            }
-            catch (Exception exception)
+            if (weaverInstances
+                .Any(_ => _.WeaverDelegate.AfterWeavingExecute != null))
             {
-                Logger.LogError(exception.ToFriendlyString());
+                ReadModule();
+                WriteModule();
             }
         }
+        catch (Exception exception)
+        {
+            Logger.LogError(exception.ToFriendlyString());
+        }
+
     }
 
     void AddProcessedFlag()

@@ -43,23 +43,20 @@ namespace Fody
             {
                 defineConstants = DefineConstants.Split(';').ToList();
             }
-            using (new DomainAssemblyResolver())
-            {
-                return new Processor
-                       {
-                           AssemblyFilePath = AssemblyPath,
-                           IntermediateDirectoryPath = IntermediateDir,
-                           KeyFilePath = KeyFilePath,
-                           SignAssembly = SignAssembly,
-                           MessageImportance = MessageImportance,
-                           ProjectDirectory = ProjectDirectory,
-                           References = References,
-                           SolutionDirectoryPath = SolutionDir,
-                           BuildEngine = BuildEngine,
-                           ReferenceCopyLocalPaths = referenceCopyLocalPaths,
-                           DefineConstants = defineConstants
-                       }.Execute();
-            }
+            return new Processor
+                {
+                    AssemblyFilePath = AssemblyPath,
+                    IntermediateDirectoryPath = IntermediateDir,
+                    KeyFilePath = KeyFilePath,
+                    SignAssembly = SignAssembly,
+                    MessageImportance = MessageImportance,
+                    ProjectDirectory = ProjectDirectory,
+                    References = References,
+                    SolutionDirectoryPath = SolutionDir,
+                    BuildEngine = BuildEngine,
+                    ReferenceCopyLocalPaths = referenceCopyLocalPaths,
+                    DefineConstants = defineConstants
+                }.Execute();
         }
     }
 }

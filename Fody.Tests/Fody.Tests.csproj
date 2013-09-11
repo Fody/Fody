@@ -11,7 +11,7 @@
     <RootNamespace>Fody.Tests</RootNamespace>
     <AssemblyName>Fody.Tests</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <FodyPath>..\packages\Fody.1.16.0.0</FodyPath>
+    <FodyPath>..\packages\Fody.1.14.0</FodyPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -102,13 +102,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NugetConfigWithPlaceholder.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="NugetConfigWithKeyNodeEmpty.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NugetConfigWithPlaceholder.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="NugetConfigWithRepoNodeEmpty.txt">

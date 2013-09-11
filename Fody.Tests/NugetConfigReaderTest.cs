@@ -67,7 +67,7 @@ public class NugetConfigReaderTest
         var packagesPathFromConfig = NugetConfigReader.GetPackagePath(configPath);
         Assert.AreEqual(Path.Combine(Environment.CurrentDirectory,"repositoryPathValue"), packagesPathFromConfig);
     }
-
+    
     [Test]
     public void NugetConfigWithPlaceholderRemovesToken()
     {
@@ -83,5 +83,5 @@ public class NugetConfigReaderTest
         var packagesPathFromConfig = NugetConfigReader.GetPackagePath(configPath);
         Assert.AreEqual(Path.Combine(Environment.CurrentDirectory, "Packages"), packagesPathFromConfig);
     }
-    
+
 }
