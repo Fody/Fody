@@ -7,7 +7,7 @@ public static class AssemblyLocation
     {
         //Use codebase because location fails for unit tests.
 		var assembly = typeof(AssemblyLocation).Assembly;
-		var uri = new UriBuilder(assembly.CodeBase);
+		var uri = new UriBuilder(string.IsNullOrEmpty(assembly.CodeBase) ? assembly.Location : assembly.CodeBase);
 		var path = Uri.UnescapeDataString(uri.Path);
 
         return Path.GetDirectoryName(path);
