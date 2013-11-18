@@ -90,6 +90,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Scalpel](https://github.com/Fody/Scalpel) Strips tests from an assembly. 
   * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration. 
   * [Stamp](https://github.com/Fody/Stamp) Stamps an assembly with git data.
+  * [StampSvn](https://github.com/krk/Stamp) Stamps an assembly with svn data.
   * [Stiletto](https://github.com/benjamin-bader/stiletto) Compile-time static analysis and optimization for the Stiletto IoC library.  
   * [ToString](https://github.com/Fody/ToString) Generate ToString method from public properties.
   * [Usable](https://github.com/Fody/Usable) Adds using statements for local variables that have been created, and implement [IDisposable](http://msdn.microsoft.com/en-au/library/system.idisposable.aspx).
