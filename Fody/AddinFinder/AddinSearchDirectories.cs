@@ -77,7 +77,7 @@ public partial class AddinFinder
     void AddWeaversFromDir(string directory)
     {
         Logger.LogInfo(string.Format("Adding weaver dlls from '{0}'.", directory));
-        foreach (var packageDir in Directory.GetDirectories(directory, "*.Fody"))
+        foreach (var packageDir in Directory.GetDirectories(directory, "*.Fody*"))
         {
             AddFiles(Directory.EnumerateFiles(packageDir, "*.Fody.dll"));
         }
