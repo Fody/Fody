@@ -34,6 +34,18 @@ function InjectTargets($installPath, $project)
 	$buildProject.SetProperty("FodyPath", $fodyPath) | out-null
 }
 
+function Set-NugetPackageRefAsDevelopmentDependency($package, $project)
+{
+	Write-Host "Set-NugetPackageRefAsDevelopmentDependency" 
+    $packagesconfigPath = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($project.FullName), "packages.config")
+	$packagesconfig = [xml](get-content $packagesconfigPath)
+	$packagenode = $packagesconfig.SelectSingleNode("//package[@id=`'$($package.id)`']")
+	$packagenode.SetAttribute('developmentDependency','true')
+	$packagesconfig.Save($packagesconfigPath)
+}
+
 InjectTargets $installPath $project
 
 $project.Save()
+
+Set-NugetPackageRefAsDevelopmentDependency $package $project
