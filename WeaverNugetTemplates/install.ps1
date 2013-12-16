@@ -59,7 +59,7 @@ function Update-FodyConfig($addinName, $project)
 
 function Fix-ReferencesCopyLocal($package, $project)
 {
-    Write-Host "Fix-ReferencesCopyLocal $addinName"
+    Write-Host "Fix-ReferencesCopyLocal $($package.Id)"
     $asms = $package.AssemblyReferences | %{$_.Name}
 
     foreach ($reference in $project.Object.References)
@@ -84,6 +84,16 @@ function UnlockWeaversXml($project)
     }   
 }
 
+function Set-NugetPackageRefAsDevelopmentDependency($package, $project)
+{
+	Write-Host "Set-NugetPackageRefAsDevelopmentDependency" 
+    $packagesconfigPath = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($project.FullName), "packages.config")
+	$packagesconfig = [xml](get-content $packagesconfigPath)
+	$packagenode = $packagesconfig.SelectSingleNode("//package[@id=`'$($package.id)`']")
+	$packagenode.SetAttribute('developmentDependency','true')
+	$packagesconfig.Save($packagesconfigPath)
+}
+
 UnlockWeaversXml($project)
 
 RemoveForceProjectLevelHack $project
@@ -91,3 +101,5 @@ RemoveForceProjectLevelHack $project
 Update-FodyConfig $package.Id.Replace(".Fody", "") $project
 
 Fix-ReferencesCopyLocal $package $project
+
+Set-NugetPackageRefAsDevelopmentDependency $package $project
