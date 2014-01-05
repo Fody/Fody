@@ -56,6 +56,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
 ## Addins List
 
   * [Anotar](https://github.com/Fody/Anotar) Simplifies logging through a static class and some IL manipulation.
+  * [AssertMessage](https://github.com/Fody/AssertMessage) Generates 'message' from sourcecode and adds it to assertion.
   * [AsyncErrorHandler](https://github.com/Fody/AsyncErrorHandler) Integrates error handling into async and TPL code.
   * [BasicFodyAddin](https://github.com/Fody/BasicFodyAddin) A simple project meant to illustrate how to build an addin.
   * [Caseless](https://github.com/Fody/Caseless) Change string comparisons to be case insensitive.
