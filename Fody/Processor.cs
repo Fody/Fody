@@ -12,7 +12,6 @@ public partial class Processor
     public string IntermediateDirectoryPath;
     public string KeyFilePath;
     public bool SignAssembly;
-    public string MessageImportance = "Low";
     public string ProjectDirectory;
     public string References;
     public string SolutionDirectoryPath;
@@ -41,7 +40,7 @@ public partial class Processor
 
         var stopwatch = Stopwatch.StartNew();
 
-        Logger = new BuildLogger(MessageImportance)
+        Logger = new BuildLogger
                      {
                          BuildEngine = BuildEngine,
                      };
@@ -59,7 +58,6 @@ public partial class Processor
         finally
         {
             var finishedMessage = string.Format("\tFinished Fody {0}ms.", stopwatch.ElapsedMilliseconds);
-            Logger.Flush();
             BuildEngine.LogMessageEvent(new BuildMessageEventArgs(finishedMessage, "", "Fody", MSMessageEnum.High));
         }
     }
