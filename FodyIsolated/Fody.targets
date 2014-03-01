@@ -36,7 +36,6 @@
   </Choose>
   <PropertyGroup>
     <IntermediateDir>$(ProjectDir)$(IntermediateOutputPath)</IntermediateDir>
-    <FodyMessageImportance Condition="$(FodyMessageImportance) == '' Or $(FodyMessageImportance) == '*Undefined*'">Low</FodyMessageImportance>
     <FodySignAssembly Condition="$(FodySignAssembly) == '' Or $(FodySignAssembly) == '*Undefined*'">$(SignAssembly)</FodySignAssembly>
     <FodyPath Condition="$(FodyPath) == '' Or $(FodyPath) == '*Undefined*'">$(MSBuildThisFileDirectory)</FodyPath>
   </PropertyGroup>
@@ -52,7 +51,6 @@
           AssemblyPath="@(IntermediateAssembly)"
           IntermediateDir="$(IntermediateDir)"
           KeyFilePath="$(FodyKeyFilePath)"
-          MessageImportance="$(FodyMessageImportance)"
           ProjectDirectory="$(ProjectDir)"
           SolutionDir="$(FodySolutionDir)"
           References="@(ReferencePath)"
@@ -70,7 +68,6 @@
           AssemblyPath="$(TargetPath)"
           IntermediateDir="$(IntermediateDir)"
           KeyFilePath="$(FodyKeyFilePath)"
-          MessageImportance="$(FodyMessageImportance)"
           ProjectDirectory="$(ProjectDir)"
           SolutionDir="$(FodySolutionDir)"
           References="@(ReferencePath)"
