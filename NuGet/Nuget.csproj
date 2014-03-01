@@ -11,11 +11,19 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <ConfigurationName>Release</ConfigurationName>
   </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <None Include="Fody.nuspec">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Fody.targets" />
+    <None Include="Fody.targets">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="install.ps1" />
     <None Include="uninstall.ps1" />
     <Content Include="FodyWeavers.xml" />
