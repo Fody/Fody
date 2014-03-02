@@ -9,10 +9,12 @@ $buildProject = [Microsoft.Build.Evaluation.ProjectCollection]::GlobalProjectCol
 
 $fodyPathProperty = $buildProject.GetProperty("FodyPath") 
 
-if ($fodyPathProperty)
+# Dont do a null check since is teems evaluating the value causes powershit to have a conniption 
+try	
 {
 	$buildProject.RemoveProperty($fodyPathProperty);
 }
+catch{}
 
 $project.Save()
 
