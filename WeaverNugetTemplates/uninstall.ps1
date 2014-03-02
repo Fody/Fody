@@ -4,7 +4,7 @@
 function Update-FodyConfig($addinName, $project)
 {
     $fodyWeaversPath = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($project.FullName), "FodyWeavers.xml")
-
+ 
     if (!(Test-Path ($fodyWeaversPath)))
     {
         return
