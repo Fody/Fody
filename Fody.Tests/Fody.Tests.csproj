@@ -11,7 +11,6 @@
     <RootNamespace>Fody.Tests</RootNamespace>
     <AssemblyName>Fody.Tests</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <FodyPath>..\packages\Fody.1.20.0.0</FodyPath>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -133,7 +132,6 @@
     <Content Include="NugetConfigWithRepoNode.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Fody.targets" />
     <None Include="NugetPackagePathFinder\FakeSolutionWithNestedNugetConfig\.nuget\nuget.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -178,5 +176,11 @@
     <Content Include="WeaversProjectFileFinder\WithWeaver\Weavers\bin\Debug\Weavers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="Fody.targets" />
+  <Import Project="..\packages\Fody.1.21.0\build\Fody.targets" Condition="Exists('..\packages\Fody.1.21.0\build\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.1.21.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.21.0\build\Fody.targets'))" />
+  </Target>
 </Project>
