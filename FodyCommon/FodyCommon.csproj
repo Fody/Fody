@@ -34,6 +34,10 @@
     <FodySignAssembly>true</FodySignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MethodTimer">
+      <HintPath>..\packages\MethodTimer.Fody.1.13.1.0\Lib\portable-net4+sl4+wp7+win8+MonoAndroid16+MonoTouch40\MethodTimer.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,10 +55,18 @@
     <Compile Include="WeaverEntry.cs" />
     <Compile Include="WeavingException.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Fody.targets" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterBuild">
     <MakeDir Directories="$(SolutionDir)ForSample" />
     <Copy SourceFiles="$(TargetDir)FodyCommon.dll" DestinationFolder="$(SolutionDir)ForSample" />
     <Copy SourceFiles="$(TargetDir)FodyCommon.pdb" DestinationFolder="$(SolutionDir)ForSample" Condition="Exists('$(TargetDir)FodyCommon.pdb')" />
   </Target>
+  <Import Project="Fody.targets" />
 </Project>
