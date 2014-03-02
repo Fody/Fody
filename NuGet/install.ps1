@@ -1,16 +1,18 @@
 ﻿param($installPath, $toolsPath, $package, $project)
 
 
-function Set-NugetPackageRefAsDevelopmentDependency($package, $project)
+# Need to load MSBuild assembly if it's not loaded yet.
+Add-Type -AssemblyName 'Microsoft.Build, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'
+  
+# Grab the loaded MSBuild project for the project
+$buildProject = [Microsoft.Build.Evaluation.ProjectCollection]::GlobalProjectCollection.GetLoadedProjects($project.FullName) | Select-Object -First 1
+
+$fodyPathProperty = $buildProject.GetProperty("FodyPath") 
+
+if ($fodyPathProperty)
 {
-	Write-Host "Set-NugetPackageRefAsDevelopmentDependency" 
-    $packagesconfigPath = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($project.FullName), "packages.config")
-	$packagesconfig = [xml](get-content $packagesconfigPath)
-	$packagenode = $packagesconfig.SelectSingleNode("//package[@id=`'$($package.id)`']")
-	$packagenode.SetAttribute('developmentDependency','true')
-	$packagesconfig.Save($packagesconfigPath)
+	$buildProject.RemoveProperty($fodyPathProperty);
 }
 
 $project.Save()
 
-Set-NugetPackageRefAsDevelopmentDependency $package $project
