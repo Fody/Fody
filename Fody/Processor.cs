@@ -52,7 +52,7 @@ public partial class Processor
         }
         catch (Exception exception)
         {
-            Logger.LogError(exception.ToFriendlyString());
+            Logger.LogException(exception);
             return false;
         }
         finally
