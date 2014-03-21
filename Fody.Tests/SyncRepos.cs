@@ -9,24 +9,24 @@ using SyncOMatic;
 public class SyncRepos
 {
 
-    [Test]
-    public void Sync()
-    {
-        using (var syncer = new Syncer(GetCredentials(),null, ConsoleLogger))
-        {
-            foreach (var map in Mapper())
-            {
-                var diff = syncer.Diff(map);
-                foreach (var output in  syncer.Sync(diff, SyncOutput.CreatePullRequest))
-                {
-                    if (!string.IsNullOrEmpty(output))
-                    {
-                        Console.Out.WriteLine("Done " + output);
-                    }
-                }
-            }
-        }
-    }
+    //[Test]
+    //public void Sync()
+    //{
+    //    using (var syncer = new Syncer(GetCredentials(),null, ConsoleLogger))
+    //    {
+    //        foreach (var map in Mapper())
+    //        {
+    //            var diff = syncer.Diff(map);
+    //            foreach (var output in  syncer.Sync(diff, SyncOutput.CreatePullRequest))
+    //            {
+    //                if (!string.IsNullOrEmpty(output))
+    //                {
+    //                    Console.Out.WriteLine("Done " + output);
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 
     static IEnumerable<Mapper> Mapper()
     {
