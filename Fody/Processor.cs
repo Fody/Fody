@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using MethodTimer;
 using Microsoft.Build.Framework;
@@ -141,7 +142,8 @@ public partial class Processor
             appDomain = solutionDomains[SolutionDirectoryPath] = CreateDomain();
         }
 
-        using (var innerWeaver = (IInnerWeaver)appDomain.CreateInstanceAndUnwrap("FodyIsolated", "InnerWeaver"))
+        var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory(), "FodyIsolated.dll");
+        using (var innerWeaver = (IInnerWeaver)appDomain.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver"))
         {
             innerWeaver.AssemblyFilePath = AssemblyFilePath;
             innerWeaver.References = References;

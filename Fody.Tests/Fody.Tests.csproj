@@ -56,8 +56,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Octokit">
-      <HintPath>..\packages\Octokit.0.2.1\lib\net45\Octokit.dll</HintPath>
+    <Reference Include="Octokit, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Octokit.0.3.0\lib\net45\Octokit.dll</HintPath>
     </Reference>
     <Reference Include="SyncOMatic">
       <HintPath>..\packages\SyncOMatic.0.1.1.0\Lib\net45\SyncOMatic.dll</HintPath>
@@ -75,7 +76,7 @@
     <Compile Include="AppDomainAssemblyFinder.cs" />
     <Compile Include="AssemblyVersionReaderTests.cs" />
     <Compile Include="ContainsTypeCheckerTests.cs" />
-    <Compile Include="SyncRepos.cs" />
+    <Compile Include="SyncRepositories.cs" />
     <Compile Include="DomainAssemblyResolverTests.cs" />
     <Compile Include="InstanceLinker\NoWeaversConfiguredInstanceLinkerTests.cs" />
     <Compile Include="InstanceLinker\WeaversConfiguredInstanceLinkerTests.cs" />
@@ -176,11 +177,11 @@
     <Content Include="WeaversProjectFileFinder\WithWeaver\Weavers\bin\Debug\Weavers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Fody.1.21.0\build\Fody.targets" Condition="Exists('..\packages\Fody.1.21.0\build\Fody.targets')" />
+  <Import Project="..\packages\Fody.1.22.1\build\Fody.targets" Condition="Exists('..\packages\Fody.1.22.1\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.1.21.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.21.0\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.1.22.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.22.1\build\Fody.targets'))" />
   </Target>
 </Project>

@@ -5,15 +5,17 @@ public static class AssemblyLocation
 {
     public static string CurrentDirectory()
     {
-        //Use codebase because location fails for unit tests.
         var assembly = typeof(AssemblyLocation).Assembly;
-        var uri = new UriBuilder(string.IsNullOrEmpty(assembly.CodeBase) ? assembly.Location : assembly.CodeBase);
-        if (uri.ToString().Contains("#"))
+        if (assembly.Location.Contains("#"))
         {
             throw new NotSupportedException("'#' character in path is not supported while building projects containing Fody.");
         }
 
-        var path = Uri.UnescapeDataString(uri.Path);
+        var path = assembly.Location
+            .Replace("file:///", "")
+            .Replace("file://", "")
+            .Replace(@"file:\\\", "")
+            .Replace(@"file:\\", "");
 
         return Path.GetDirectoryName(path);
     }

@@ -32,7 +32,7 @@ public class PropertyDelegateBuilderTests
     }
 
     [Test]
-    public void Should_be_a_null_delegate_When_member_doesnt_exist()
+    public void Should_be_a_null_delegate_When_member_does_not_exist()
     {
         var setterDelegate = GetType().BuildPropertySetDelegate<string>("BadProperty");
         Assert.IsNull(setterDelegate.Target);

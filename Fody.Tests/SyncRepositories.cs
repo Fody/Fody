@@ -6,7 +6,7 @@ using SyncOMatic;
 
 [TestFixture]
 [Explicit]
-public class SyncRepos
+public class SyncRepositories
 {
 
     //[Test]

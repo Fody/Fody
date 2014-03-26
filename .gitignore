@@ -12,7 +12,6 @@
 *.pidb
 *.ncrunchsolution
 *.ncrunchproject
-*.DotSettings
 
 # Build results
 [Dd]ebug/

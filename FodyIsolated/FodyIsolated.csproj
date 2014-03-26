@@ -12,6 +12,8 @@
     <FileAlignment>512</FileAlignment>
     <ProductVersion>12.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
+    <FodySignAssembly>true</FodySignAssembly>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -97,11 +99,11 @@
     <Copy SourceFiles="$(TargetDir)Mono.Cecil.Pdb.dll" DestinationFolder="$(SolutionDir)ForSample" />
     <Copy SourceFiles="$(TargetDir)Mono.Cecil.Rocks.dll" DestinationFolder="$(SolutionDir)ForSample" />
   </Target>
-  <Import Project="..\packages\Fody.1.21.0\build\Fody.targets" Condition="Exists('..\packages\Fody.1.21.0\build\Fody.targets')" />
+  <Import Project="..\packages\Fody.1.22.1\build\Fody.targets" Condition="Exists('..\packages\Fody.1.22.1\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.1.21.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.21.0\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.1.22.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.22.1\build\Fody.targets'))" />
   </Target>
 </Project>
