@@ -8,7 +8,7 @@ public class ToFriendlyStringTests
 	[Ignore]
     public void ToFriendlyName()
     {
-        var currentDirectory = AssemblyLocation.CurrentDirectory().ToLowerInvariant()
+        var currentDirectory = AssemblyLocation.CurrentDirectory.ToLowerInvariant()
                 .Replace(@"bin\debug", string.Empty)
                 .Replace(@"bin\release", string.Empty);
         try

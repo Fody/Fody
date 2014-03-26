@@ -11,7 +11,7 @@ public partial class Processor
     [Time]
     public void FindProjectWeavers()
     {
-        var fodyDirConfigFilePath = Path.Combine(AssemblyLocation.CurrentDirectory(), "FodyWeavers.xml");
+        var fodyDirConfigFilePath = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyWeavers.xml");
         if (File.Exists(fodyDirConfigFilePath))
         {
             ConfigFiles.Add(fodyDirConfigFilePath);

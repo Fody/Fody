@@ -3,7 +3,7 @@ using System.IO;
 
 public static class AssemblyLocation
 {
-    public static string CurrentDirectory()
+    static AssemblyLocation()
     {
         var assembly = typeof(AssemblyLocation).Assembly;
         if (assembly.Location.Contains("#"))
@@ -17,6 +17,8 @@ public static class AssemblyLocation
             .Replace(@"file:\\\", "")
             .Replace(@"file:\\", "");
 
-        return Path.GetDirectoryName(path);
+        CurrentDirectory = Path.GetDirectoryName(path);
     }
+
+    public static string CurrentDirectory;
 }

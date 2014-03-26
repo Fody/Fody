@@ -33,7 +33,7 @@ public partial class AddinFinder
     public void AddCurrentFodyDirectoryToAddinSearch()
     {
         Logger.LogInfo(string.Format("SolutionDirectoryPath: {0}", SolutionDirectoryPath));
-        var fodyParentDirectory = Directory.GetParent(AssemblyLocation.CurrentDirectory()).FullName;
+        var fodyParentDirectory = Directory.GetParent(AssemblyLocation.CurrentDirectory).FullName;
 
         if (!Directory.Exists(fodyParentDirectory))
         {

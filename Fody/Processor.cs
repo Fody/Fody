@@ -142,7 +142,7 @@ public partial class Processor
             appDomain = solutionDomains[SolutionDirectoryPath] = CreateDomain();
         }
 
-        var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory(), "FodyIsolated.dll");
+        var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
         using (var innerWeaver = (IInnerWeaver)appDomain.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver"))
         {
             innerWeaver.AssemblyFilePath = AssemblyFilePath;
@@ -166,7 +166,7 @@ public partial class Processor
         Logger.LogInfo("Creating a new AppDomain");
         var appDomainSetup = new AppDomainSetup
         {
-            ApplicationBase = AssemblyLocation.CurrentDirectory(),
+            ApplicationBase = AssemblyLocation.CurrentDirectory,
         };
         return AppDomain.CreateDomain(string.Format("Fody Domain for '{0}'", SolutionDirectoryPath), null, appDomainSetup);
     }
