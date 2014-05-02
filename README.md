@@ -138,6 +138,3 @@ http://www.jetbrains.com/resharper/
 http://www.jetbrains.com/TeamCity/
 
 ![TeamCity.png](https://raw.github.com/wiki/Fody/Fody/TeamCity.png)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/krk/stamp/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
