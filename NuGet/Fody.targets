@@ -42,10 +42,31 @@
   <UsingTask
       TaskName="Fody.WeavingTask"
       AssemblyFile="$(FodyPath)\Fody.dll" />
+
+  <!-- If Fody runs before CodeContracts rewriter, we will get an error. -->
   <Target
       AfterTargets="AfterCompile"
-      Name="WinFodyTarget"
-      Condition=" '$(OS)' == 'Windows_NT'">
+      DependsOnTargets="CodeContractRewrite"
+	  Name="WinFodyTarget"
+      Condition=" '$(OS)' == 'Windows_NT' AND '$(CodeContractsEnableRuntimeChecking)' == 'true'">
+
+    <Fody.WeavingTask
+          AssemblyPath="@(IntermediateAssembly)"
+          IntermediateDir="$(IntermediateDir)"
+          KeyFilePath="$(FodyKeyFilePath)"
+          ProjectDirectory="$(ProjectDir)"
+          SolutionDir="$(FodySolutionDir)"
+          References="@(ReferencePath)"
+          SignAssembly="$(FodySignAssembly)"
+          ReferenceCopyLocalPaths="@(ReferenceCopyLocalPaths)"
+          DefineConstants="$(DefineConstants)"
+      />
+  </Target>
+
+  <Target
+      AfterTargets="AfterCompile"
+	  Name="WinFodyTarget"
+      Condition=" '$(OS)' == 'Windows_NT' AND '$(CodeContractsEnableRuntimeChecking)' != 'true'">
 
     <Fody.WeavingTask
           AssemblyPath="@(IntermediateAssembly)"
