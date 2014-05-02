@@ -11,7 +11,8 @@
     <RootNamespace>Fody</RootNamespace>
     <AssemblyName>Fody</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <FodyPath>..\packages\Fody.1.14.0</FodyPath>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
+    <FodySignAssembly>true</FodySignAssembly>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -29,12 +30,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
-    <FodySignAssembly>true</FodySignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MethodTimer">
-      <HintPath>..\packages\MethodTimer.Fody.1.11.4\Lib\portable-net4+sl4+wp7+win8+MonoAndroid16+MonoTouch40\MethodTimer.dll</HintPath>
+      <HintPath>..\packages\MethodTimer.Fody.1.13.1.0\Lib\portable-net4+sl4+wp7+win8+MonoAndroid16+MonoTouch40\MethodTimer.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Build" />
@@ -48,7 +47,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <None Include="Fody.targets" />
     <None Include="FodyWeavers.xml">
       <SubType>Designer</SubType>
     </None>
@@ -98,8 +96,12 @@
     <MakeDir Directories="$(SolutionDir)ForSample" />
     <Copy SourceFiles="$(TargetDir)Fody.dll" DestinationFolder="$(SolutionDir)ForSample" />
     <Copy SourceFiles="$(TargetDir)Fody.pdb" DestinationFolder="$(SolutionDir)ForSample" Condition="Exists('$(TargetDir)Fody.pdb')" />
-    <Copy SourceFiles="$(SolutionDir)Fody.targets" DestinationFolder="$(SolutionDir)ForSample" />
   </Target>
-  <Import Project="$(ProjectDir)\..\Tools\Pepita\PepitaGet.targets" />
-  <Import Project="Fody.targets" />
+  <Import Project="..\packages\Fody.1.22.1\build\Fody.targets" Condition="Exists('..\packages\Fody.1.22.1\build\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.1.22.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.22.1\build\Fody.targets'))" />
+  </Target>
 </Project>

@@ -69,7 +69,8 @@ public partial class InnerWeaver : IAssemblyResolver
         }
 
         var joinedReferences = String.Join(Environment.NewLine, SplitReferences.OrderBy(x => x));
-        throw new Exception(string.Format("Can not find '{0}'.{1}Tried:{1}{2}", assemblyNameReference.FullName, Environment.NewLine, joinedReferences));
+        Logger.LogInfo(string.Format("Can not find '{0}'.{1}Tried:{1}{2}", assemblyNameReference.FullName, Environment.NewLine, joinedReferences));
+        return null;
     }
 
     IEnumerable<string> SearchDirForMatchingName(AssemblyNameReference assemblyNameReference)

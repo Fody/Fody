@@ -8,7 +8,7 @@ public class WeaverProjectFileFinderTests
     [Test]
     public void Found()
     {
-        var currentDirectory = AssemblyLocation.CurrentDirectory();
+        var currentDirectory = AssemblyLocation.CurrentDirectory;
         var combine = Path.Combine(currentDirectory, @"..\..\WeaversProjectFileFinder\WithWeaver");
         var loggerMock = new Mock<BuildLogger>();
         loggerMock.Setup(x => x.LogInfo(It.IsAny<string>()));
@@ -28,7 +28,7 @@ public class WeaverProjectFileFinderTests
     [Test]
     public void NotFound()
     {
-        var currentDirectory = AssemblyLocation.CurrentDirectory();
+        var currentDirectory = AssemblyLocation.CurrentDirectory;
         var combine = Path.Combine(currentDirectory, @"..\..\WeaversProjectFileFinder\WithNoWeaver");
         var loggerMock = new Mock<BuildLogger>();
         loggerMock.Setup(x => x.LogInfo(It.IsAny<string>()));

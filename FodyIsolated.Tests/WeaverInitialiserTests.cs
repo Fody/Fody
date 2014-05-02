@@ -25,8 +25,6 @@ public class WeaverInitialiserTests
 				ReferenceCopyLocalPaths = new List<string> {"Ref1"},
 				ModuleDefinition = moduleDefinition,
                 DefineConstants = new List<string>{"Debug", "Release"}
-
-
 			};
 
 		var weaverEntry = new WeaverEntry
@@ -38,6 +36,7 @@ public class WeaverInitialiserTests
         innerWeaver.SetProperties(weaverEntry, moduleWeaver, (typeof(ValidModuleWeaver)).BuildDelegateHolder());
 
 		Assert.IsNotNull(moduleWeaver.LogInfo);
+		Assert.IsNotNull(moduleWeaver.LogDebug);
 		Assert.IsNotNull(moduleWeaver.LogWarning);
 		Assert.IsNotNull(moduleWeaver.LogWarningPoint);
 		Assert.IsNotNull(moduleWeaver.LogError);
@@ -65,6 +64,7 @@ public class ValidModuleWeaver
     public string ProjectDirectoryPath { get; set; }
 	public string AddinDirectoryPath { get; set; }
 	public Action<string> LogInfo { get; set; }
+	public Action<string> LogDebug { get; set; }
 	public Action<string> LogWarning { get; set; }
 	public Action<string, SequencePoint> LogWarningPoint { get; set; }
 	public Action<string> LogError { get; set; }

@@ -8,7 +8,7 @@ public class ToFriendlyStringTests
 	[Ignore]
     public void ToFriendlyName()
     {
-        var currentDirectory = AssemblyLocation.CurrentDirectory().ToLowerInvariant()
+        var currentDirectory = AssemblyLocation.CurrentDirectory.ToLowerInvariant()
                 .Replace(@"bin\debug", string.Empty)
                 .Replace(@"bin\release", string.Empty);
         try
@@ -38,21 +38,6 @@ void throwexception2()
             Assert.AreEqual(expected, friendlyString);
         }
     }
-    [Test]
-    public void ToFriendlyNameWeaverException()
-    {
-        try
-        {
-            throw new WeavingException("Foo");
-
-        }
-        catch (Exception exception)
-        {
-            var friendlyString = exception.ToFriendlyString();
-            Assert.AreEqual("Foo", friendlyString);
-        }
-    }
-
     void ThrowException1()
     {
         ThrowException2();

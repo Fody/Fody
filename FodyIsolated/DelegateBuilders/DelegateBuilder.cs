@@ -39,6 +39,7 @@ public static class DelegateBuilder
                 SetAssemblyResolver = weaverType.BuildPropertySetDelegate<IAssemblyResolver>("AssemblyResolver"),
                 SetLogError = weaverType.BuildPropertySetDelegate<Action<string>>("LogError"),
                 SetLogErrorPoint = weaverType.BuildPropertySetDelegate<Action<string, SequencePoint>>("LogErrorPoint"),
+                SetLogDebug = weaverType.BuildPropertySetDelegate<Action<string>>("LogDebug"),
                 SetLogInfo = weaverType.BuildPropertySetDelegate<Action<string>>("LogInfo"),
                 SetLogWarning = weaverType.BuildPropertySetDelegate<Action<string>>("LogWarning"),
                 SetLogWarningPoint = weaverType.BuildPropertySetDelegate<Action<string, SequencePoint>>("LogWarningPoint"),

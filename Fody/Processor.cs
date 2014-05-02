@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using MethodTimer;
 using Microsoft.Build.Framework;
@@ -12,7 +13,6 @@ public partial class Processor
     public string IntermediateDirectoryPath;
     public string KeyFilePath;
     public bool SignAssembly;
-    public string MessageImportance = "Low";
     public string ProjectDirectory;
     public string References;
     public string SolutionDirectoryPath;
@@ -41,7 +41,7 @@ public partial class Processor
 
         var stopwatch = Stopwatch.StartNew();
 
-        Logger = new BuildLogger(MessageImportance)
+        Logger = new BuildLogger
                      {
                          BuildEngine = BuildEngine,
                      };
@@ -53,13 +53,12 @@ public partial class Processor
         }
         catch (Exception exception)
         {
-            Logger.LogError(exception.ToFriendlyString());
+            Logger.LogException(exception);
             return false;
         }
         finally
         {
             var finishedMessage = string.Format("\tFinished Fody {0}ms.", stopwatch.ElapsedMilliseconds);
-            Logger.Flush();
             BuildEngine.LogMessageEvent(new BuildMessageEventArgs(finishedMessage, "", "Fody", MSMessageEnum.High));
         }
     }
@@ -143,7 +142,8 @@ public partial class Processor
             appDomain = solutionDomains[SolutionDirectoryPath] = CreateDomain();
         }
 
-        using (var innerWeaver = (IInnerWeaver)appDomain.CreateInstanceAndUnwrap("FodyIsolated", "InnerWeaver"))
+        var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
+        using (var innerWeaver = (IInnerWeaver)appDomain.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver"))
         {
             innerWeaver.AssemblyFilePath = AssemblyFilePath;
             innerWeaver.References = References;
@@ -166,7 +166,7 @@ public partial class Processor
         Logger.LogInfo("Creating a new AppDomain");
         var appDomainSetup = new AppDomainSetup
         {
-            ApplicationBase = AssemblyLocation.CurrentDirectory(),
+            ApplicationBase = AssemblyLocation.CurrentDirectory,
         };
         return AppDomain.CreateDomain(string.Format("Fody Domain for '{0}'", SolutionDirectoryPath), null, appDomainSetup);
     }

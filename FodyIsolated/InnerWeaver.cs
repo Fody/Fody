@@ -44,7 +44,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         }
         catch (Exception exception)
         {
-            Logger.LogError(exception.ToFriendlyString());
+            Logger.LogException(exception);
         }
 
     }

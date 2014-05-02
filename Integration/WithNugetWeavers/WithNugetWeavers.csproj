@@ -49,6 +49,5 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(ProjectPath)\..\..\..\Tools\Pepita\PepitaGet.targets" />
-  <Import Project="$(SolutionDir)\..\ForSample\Fody.targets" />
+  <Import Project="$(SolutionDir)\..\ForSample\build\Fody.targets" />
 </Project>
