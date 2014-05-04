@@ -45,7 +45,6 @@
   <Target
       AfterTargets="AfterCompile"
       Name="WinFodyTarget"
-      Condition=" '$(OS)' == 'Windows_NT'"
       DependsOnTargets="$(FodyDependsOnTargets)">
 
     <Fody.WeavingTask
@@ -60,24 +59,6 @@
           DefineConstants="$(DefineConstants)"
       />
   </Target>
-
-  <Target
-      AfterTargets="AfterBuild"
-      Name="NonWinFodyTarget"
-      Condition=" '$(OS)' != 'Windows_NT'">
-    <Fody.WeavingTask
-          AssemblyPath="$(TargetPath)"
-          IntermediateDir="$(IntermediateDir)"
-          KeyFilePath="$(FodyKeyFilePath)"
-          ProjectDirectory="$(ProjectDir)"
-          SolutionDir="$(FodySolutionDir)"
-          References="@(ReferencePath)"
-          SignAssembly="$(FodySignAssembly)"
-          ReferenceCopyLocalPaths="$(ReferenceCopyLocalPaths)"
-          DefineConstants="$(DefineConstants)"
-      />
-  </Target>
-
 
   <!--Support for ncrunch-->
   <ItemGroup>
