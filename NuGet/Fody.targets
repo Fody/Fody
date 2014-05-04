@@ -43,9 +43,10 @@
       TaskName="Fody.WeavingTask"
       AssemblyFile="$(FodyPath)\Fody.dll" />
   <Target
-      AfterTargets="AfterCompile;CodeContractRewrite"
+      AfterTargets="AfterCompile"
       Name="WinFodyTarget"
-      Condition=" '$(OS)' == 'Windows_NT'">
+      Condition=" '$(OS)' == 'Windows_NT'"
+      DependsOnTargets="$(FodyDependsOnTargets)">
 
     <Fody.WeavingTask
           AssemblyPath="@(IntermediateAssembly)"
