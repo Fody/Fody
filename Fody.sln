@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fody", "Fody\Fody.csproj", "{64880F43-E6C1-428E-B00A-E0374697B5CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleTask.Fody", "SampleTask.Fody\SampleTask.Fody.csproj", "{2C10CBD1-5913-46D5-B705-0F3B46E68DD1}"
@@ -22,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WeaverNugetTemplates", "Wea
 		WeaverNugetTemplates\install.ps1 = WeaverNugetTemplates\install.ps1
 		WeaverNugetTemplates\uninstall.ps1 = WeaverNugetTemplates\uninstall.ps1
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetCecil", "NuGetCecil\NugetCecil.csproj", "{4D267DED-10CA-4CF4-84E9-C7945393F86F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -156,6 +160,21 @@ Global
 		{66DDADC1-1631-4EC7-8CB2-DD8080188234}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{66DDADC1-1631-4EC7-8CB2-DD8080188234}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{66DDADC1-1631-4EC7-8CB2-DD8080188234}.Release|x86.ActiveCfg = Release|Any CPU
+		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.DebugMono|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.DebugMono|Any CPU.Build.0 = Debug|Any CPU
+		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.DebugMono|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.DebugMono|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.DebugMono|x86.ActiveCfg = Debug|Any CPU
+		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

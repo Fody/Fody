@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata minClientVersion="2.8" >
+    <id>FodyCecil</id>
+    <version>$version$-beta2</version>
+    <title>FodyCecil</title>
+    <authors>Simon Cropp</authors>
+    <owners>Simon Cropp</owners>
+    <developmentDependency>true</developmentDependency>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <projectUrl>http://github.com/Fody/Fody</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>https://raw.github.com/Fody/Fody/master/Icons/package_icon.png</iconUrl>
+    <description>Custom Cecil version used by Fody.</description>
+    <summary />
+    <language>en-AU</language>
+    <tags>ILWeaving, Fody, Cecil, AOP</tags>
+  </metadata>
+</package>

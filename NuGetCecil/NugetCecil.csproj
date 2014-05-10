@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4D267DED-10CA-4CF4-84E9-C7945393F86F}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <ConfigurationName>Debug</ConfigurationName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <ConfigurationName>Release</ConfigurationName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="FodyCecil.nuspec">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Target Name="Clean">
+    <RemoveDir Directories="$(SolutionDir)NuGetCecilBuild" />
+  </Target>
+  <Target Name="Build" DependsOnTargets="NuGetCecilBuild" />
+  <Target Name="ReBuild" DependsOnTargets="NuGetCecilBuild" />
+  <UsingTask TaskName="PepitaPackage.CreatePackageTask" AssemblyFile="$(SolutionDir)Tools\Pepita\PepitaPackage.dll" />
+  <Target Name="NuGetCecilBuild" DependsOnTargets="Clean">
+    <MakeDir Directories="$(SolutionDir)NuGetCecilBuild" />
+    <Copy SourceFiles="$(SolutionDir)NugetCecil\FodyCecil.nuspec" DestinationFolder="$(SolutionDir)NuGetCecilBuild" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.dll" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.pdb" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Mdb.dll" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Mdb.pdb" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Pdb.dll" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Pdb.pdb" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Rocks.dll" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Rocks.pdb" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
+    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetCecilBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll" />
+    <MakeDir Directories="$(SolutionDir)ForSample\build" />
+  </Target>
+  <ItemGroup>
+    <ProjectReference Include="..\Fody\Fody.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <Name>Fody</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <Name>FodyIsolated</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
