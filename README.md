@@ -14,10 +14,6 @@ https://nuget.org/packages/Fody/
 
 This technique of "weaving" in new instructions is fantastically powerful. You can turn simple public properties into full [INotifyPropertyChanged implementations](https://github.com/Fody/PropertyChanged), add [checks for null arguments](https://github.com/Fody/NullGuard), add [Git hashes to your Assemblies](https://github.com/Fody/Stamp), even [make all your string comparisons case insensitive](https://github.com/Fody/Caseless). 
 
-### Note: NotifyPropertyWeaver
-
-Users of the [NotifyPropertyWeaver](https://github.com/SimonCropp/NotifyPropertyWeaver) extension who are migrating to [Fody](https://github.com/Fody/fody) will want to use NuGet to Install the PropertyChanged.Fody package along with Fody itself to get the same functionality as before. This is because Fody is a general purpose weaver with plugins while NotifyPropertyWeaver was specific to one scenario. That scenario now lives in the [PropertyChanged addin](https://github.com/Fody/PropertyChanged). See [Converting from NotifyPropertyWeaver](https://github.com/Fody/PropertyChanged/wiki/ConvertingFromNotifyPropertyWeaver) for more information. 
-
 ## The plumbing tasks Fody handles 
 
   * Injection of the MSBuild task into the build pipeline
@@ -64,11 +60,13 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Catel](https://github.com/Catel/Catel.Fody) For transforming automatic properties into [Catel](https://github.com/Catel/Catel) properties.
   * [Commander](https://github.com/DamianReeves/Commander.Fody) Injects ICommand properties and implementations for use in MVVM applications.
   * [Costura](https://github.com/Fody/Costura/) For embedding references as resources.
+  * [CryptStr](https://cryptstr.codeplex.com/) Encrypts literal strings in your .NET assemblies.
   * [DependencyInjection](https://github.com/jorgehmv/FodyDependencyInjection) automatic dependency injection for [Ninject](http://www.ninject.org/), [Autofac](http://autofac.org/) and [Spring](http://www.springframework.net/).
   * [EmptyConstructor](https://github.com/Fody/EmptyConstructor) Adds an empty constructor to classes even if a non empty one is defined.
   * [EmptyStringGuard](https://github.com/thirkcircus/EmptyStringGuard) Adds empty string argument checks to an assembly.
   * [EnableFaking](https://github.com/philippdolder/EnableFaking.Fody) Allows faking your types without writing interfaces for testing purposes only.
-  * [Equals] (https://github.com/Fody/Equals) Generate Equals, GetHashCode and operators methods from properties.
+  * [Equals](https://github.com/Fody/Equals) Generate Equals, GetHashCode and operators methods from properties.
+  * [Expose](https://github.com/kedarvaidya/Expose.Fody) Exposes members and optionally implements interface of a field declared in class.
   * [ExtraConstraints](https://github.com/Fody/ExtraConstraints) Facilitates adding constraints for Enum and Delegate to types and methods.
   * [Fielder](https://github.com/Fody/Fielder) Converts public fields to public properties.
   * [Freezable](https://github.com/Fody/Freezable) Implements the Freezable pattern.
@@ -76,12 +74,14 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Ionad](https://github.com/Fody/Ionad) Replaces static method calls. 
   * [Janitor](https://github.com/Fody/Janitor) Simplifies the implementation of [IDisposable](http://msdn.microsoft.com/en-us/library/system.idisposable.aspx).
   * [JetBrainsAnnotations](https://github.com/Fody/JetBrainsAnnotations) Modifies an assembly so you can leverage JetBrains Annotations but don't need to deploy JetBrainsAnnotations.dll. 
+  * [LoadAssembliesOnStartup](https://github.com/Fody/LoadAssembliesOnStartup) Loads all the references on startup by actually using the types in the module initializer
   * [MethodCache](https://github.com/Dresel/MethodCache) Caches return values of methods decorated with a `CacheAttribute`.
   * [MethodDecorator](http://github.com/Fody/MethodDecorator) Decorate arbitrary methods to run code before and after invocation.
   * [MethodTimer](https://github.com/Fody/MethodTimer) Injects method timing code.
   * [Mixins](https://bitbucket.org/skwasiborski/mixins.fody/wiki/Home) A mixin is a class that provides a certain functionality to be inherited or just reused by a subclass.
   * [ModuleInit](https://github.com/Fody/ModuleInit) Adds a module initializer to an assembly.
   * [Mutable](https://github.com/ndamjan/Mutable.Fody) Use this addin for F# to make setters for union types and eliminate need for `CLIMutable` attribute for records.
+  * [Nancy.ModelPostprocess](https://bitbucket.org/tpluscode/nancy.modelpostprocess) Extends Nancy with a way to modify models after a route has been executed, but before they are serialized
   * [NullGuard](https://github.com/Fody/NullGuard) Adds null argument checks to an assembly
   * [Obsolete](https://github.com/Fody/Obsolete) Helps keep usages of [ObsoleteAttribute]([http://msdn.microsoft.com/en-us/library/fwz0y5c2 ) consistent.
   * [PropertyChanged](https://github.com/Fody/PropertyChanged) Injects INotifyPropertyChanged code into properties.
@@ -93,12 +93,14 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration. 
   * [Stamp](https://github.com/Fody/Stamp) Stamps an assembly with git data.
   * [StampSvn](https://github.com/krk/Stamp) Stamps an assembly with svn data.
+  * [StaticProxy](https://github.com/BrunoJuchli/StaticProxy.Fody) Very cool utilities have been created by the help of proxying by dynamic code emitting: Moq, FakeItEasy, Castle Dynamic Proxy, LinFu Proxy,.. and many more.
   * [Stiletto](https://github.com/benjamin-bader/stiletto) Compile-time static analysis and optimization for the Stiletto IoC library.  
   * [ToString](https://github.com/Fody/ToString) Generate ToString method from public properties.
   * [Usable](https://github.com/Fody/Usable) Adds using statements for local variables that have been created, and implement [IDisposable](http://msdn.microsoft.com/en-au/library/system.idisposable.aspx).
   * [Validar](https://github.com/Fody/Validar) Injects [IDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.IDataErrorInfo.aspx) or [INotifyDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.INotifyDataErrorInfo.aspx ) code into a class at compile time.
   * [Visualize](https://github.com/Fody/Visualize) Adds debugger attributes to help visualize objects.
   * [Virtuosity](https://github.com/Fody/Virtuosity) Change all members to virtual.
+  * [YALF](https://github.com/sharpmonkey/YALF) Yet Another Logging Framework.
     
 ## Icon
 
