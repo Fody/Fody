@@ -73,15 +73,15 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [InfoOf](https://github.com/Fody/InfoOf) Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http://msdn.microsoft.com/en-us/library/58918ffs.aspx).
   * [Ionad](https://github.com/Fody/Ionad) Replaces static method calls. 
   * [Janitor](https://github.com/Fody/Janitor) Simplifies the implementation of [IDisposable](http://msdn.microsoft.com/en-us/library/system.idisposable.aspx).
-  * [JetBrainsAnnotations](https://github.com/Fody/JetBrainsAnnotations) Modifies an assembly so you can leverage JetBrains Annotations but don't need to deploy JetBrainsAnnotations.dll. 
-  * [LoadAssembliesOnStartup](https://github.com/Fody/LoadAssembliesOnStartup) Loads all the references on startup by actually using the types in the module initializer
+  * [JetBrainsAnnotations](https://github.com/Fody/JetBrainsAnnotations) So you can leverage JetBrains Annotations but don't need to deploy JetBrainsAnnotations.dll. 
+  * [LoadAssembliesOnStartup](https://github.com/Fody/LoadAssembliesOnStartup) Loads references on startup by actually using the types in the module initializer
   * [MethodCache](https://github.com/Dresel/MethodCache) Caches return values of methods decorated with a `CacheAttribute`.
   * [MethodDecorator](http://github.com/Fody/MethodDecorator) Decorate arbitrary methods to run code before and after invocation.
   * [MethodTimer](https://github.com/Fody/MethodTimer) Injects method timing code.
   * [Mixins](https://bitbucket.org/skwasiborski/mixins.fody/wiki/Home) A mixin is a class that provides a certain functionality to be inherited or just reused by a subclass.
   * [ModuleInit](https://github.com/Fody/ModuleInit) Adds a module initializer to an assembly.
-  * [Mutable](https://github.com/ndamjan/Mutable.Fody) Use this addin for F# to make setters for union types and eliminate need for `CLIMutable` attribute for records.
-  * [Nancy.ModelPostprocess](https://bitbucket.org/tpluscode/nancy.modelpostprocess) Extends Nancy with a way to modify models after a route has been executed, but before they are serialized
+  * [Mutable](https://github.com/ndamjan/Mutable.Fody) Make F# setters for union types and eliminate need for `CLIMutable` attribute for records.
+  * [Nancy.ModelPostprocess](https://bitbucket.org/tpluscode/nancy.modelpostprocess) Modify Nancy models after a route has been executed, but before they are serialized
   * [NullGuard](https://github.com/Fody/NullGuard) Adds null argument checks to an assembly
   * [Obsolete](https://github.com/Fody/Obsolete) Helps keep usages of [ObsoleteAttribute]([http://msdn.microsoft.com/en-us/library/fwz0y5c2 ) consistent.
   * [PropertyChanged](https://github.com/Fody/PropertyChanged) Injects INotifyPropertyChanged code into properties.
@@ -93,7 +93,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration. 
   * [Stamp](https://github.com/Fody/Stamp) Stamps an assembly with git data.
   * [StampSvn](https://github.com/krk/Stamp) Stamps an assembly with svn data.
-  * [StaticProxy](https://github.com/BrunoJuchli/StaticProxy.Fody) Very cool utilities have been created by the help of proxying by dynamic code emitting: Moq, FakeItEasy, Castle Dynamic Proxy, LinFu Proxy,.. and many more.
+  * [StaticProxy](https://github.com/BrunoJuchli/StaticProxy.Fody) Helps proxy dynamic code emitting: Moq, FakeItEasy, Castle Dynamic Proxy, LinFu Proxy etc.
   * [Stiletto](https://github.com/benjamin-bader/stiletto) Compile-time static analysis and optimization for the Stiletto IoC library.  
   * [ToString](https://github.com/Fody/ToString) Generate ToString method from public properties.
   * [Usable](https://github.com/Fody/Usable) Adds using statements for local variables that have been created, and implement [IDisposable](http://msdn.microsoft.com/en-au/library/system.idisposable.aspx).
