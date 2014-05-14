@@ -137,6 +137,4 @@ http://www.jetbrains.com/resharper/
 
 ### TeamCity from Jetbrains
 
-http://www.jetbrains.com/TeamCity/
-
-![TeamCity.png](https://raw.github.com/wiki/Fody/Fody/TeamCity.png)
+http://www.jetbrains.com/teamcity/
