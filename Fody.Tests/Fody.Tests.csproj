@@ -13,6 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>8f87bb65</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -56,9 +57,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Octokit, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Octokit, Version=0.3.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Octokit.0.3.0\lib\net45\Octokit.dll</HintPath>
+      <HintPath>..\packages\Octokit.0.3.4\lib\net45\Octokit.dll</HintPath>
     </Reference>
     <Reference Include="SyncOMatic">
       <HintPath>..\packages\SyncOMatic.0.1.1.0\Lib\net45\SyncOMatic.dll</HintPath>
@@ -86,6 +87,7 @@
     <Compile Include="ProjectWeaversFinderTests.cs" />
     <Compile Include="ShouldStartSinceFileChangedTests.cs" />
     <Compile Include="WeaverAssemblyPathFinderTests.cs" />
+    <Compile Include="AdHocCecilTests.cs" />
     <Compile Include="WeaverProjectFileFinderTests.cs" />
     <Compile Include="WeaversHistoryTests.cs" />
     <Compile Include="WeaversXmlHistoryTests.cs" />
@@ -177,11 +179,11 @@
     <Content Include="WeaversProjectFileFinder\WithWeaver\Weavers\bin\Debug\Weavers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Fody.1.22.1\build\Fody.targets" Condition="Exists('..\packages\Fody.1.22.1\build\Fody.targets')" />
+  <Import Project="..\packages\Fody.1.24.0-beta3\build\Fody.targets" Condition="Exists('..\packages\Fody.1.24.0-beta3\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.1.22.1\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.22.1\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.1.24.0-beta3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.24.0-beta3\build\Fody.targets'))" />
   </Target>
 </Project>

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata minClientVersion="2.8" >
     <id>FodyCecil</id>
-    <version>$version$-beta3</version>
+    <version>$version$-beta4</version>
     <title>FodyCecil</title>
     <authors>Simon Cropp</authors>
     <owners>Simon Cropp</owners>

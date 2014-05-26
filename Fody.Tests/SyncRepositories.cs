@@ -28,6 +28,7 @@ public class SyncRepositories
     //    }
     //}
 
+// ReSharper disable once UnusedMember.Local
     static IEnumerable<Mapper> Mapper()
     {
         yield return new Mapper()
@@ -134,6 +135,7 @@ public class SyncRepositories
         Console.WriteLine("{0}\t{1}", obj.At.ToString("o"), obj.What);
     }
 
+// ReSharper disable once UnusedMember.Local
     static Credentials GetCredentials()
     {
         var githubUsername = Environment.GetEnvironmentVariable("OCTOKIT_GITHUBUSERNAME");
