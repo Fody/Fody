@@ -4,10 +4,10 @@ using Mono.Cecil.Pdb;
 using NUnit.Framework;
 
 [TestFixture]
-[Explicit]
 public class AdHocCecilTests
 {
     [Test]
+    [Explicit]
     public void Foo()
     {
         ModuleDefinition moduleDefinition;
