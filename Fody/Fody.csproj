@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
     <FodySignAssembly>true</FodySignAssembly>
-    <NuGetPackageImportStamp>17fdeffc</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>3581f2c2</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -98,11 +98,11 @@
     <Copy SourceFiles="$(TargetDir)Fody.dll" DestinationFolder="$(SolutionDir)ForSample" />
     <Copy SourceFiles="$(TargetDir)Fody.pdb" DestinationFolder="$(SolutionDir)ForSample" Condition="Exists('$(TargetDir)Fody.pdb')" />
   </Target>
-  <Import Project="..\packages\Fody.1.24.0-beta3\build\Fody.targets" Condition="Exists('..\packages\Fody.1.24.0-beta3\build\Fody.targets')" />
+  <Import Project="..\packages\Fody.1.24.0\build\Fody.targets" Condition="Exists('..\packages\Fody.1.24.0\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.1.24.0-beta3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.24.0-beta3\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.1.24.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.24.0\build\Fody.targets'))" />
   </Target>
 </Project>
