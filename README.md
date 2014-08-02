@@ -94,7 +94,8 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Stamp](https://github.com/Fody/Stamp) Stamps an assembly with git data.
   * [StampSvn](https://github.com/krk/Stamp) Stamps an assembly with svn data.
   * [StaticProxy](https://github.com/BrunoJuchli/StaticProxy.Fody) Helps proxy dynamic code emitting: Moq, FakeItEasy, Castle Dynamic, LinFu.
-  * [Stiletto](https://github.com/benjamin-bader/stiletto) Compile-time static analysis and optimization for the Stiletto IoC library.  
+  * [Stiletto](https://github.com/benjamin-bader/stiletto) Compile-time static analysis and optimization for the Stiletto IoC library.
+  * [SwallowExceptions](https://github.com/duaneedwards/SwallowExceptions) Swallow Exceptions in targeted methods.
   * [ToString](https://github.com/Fody/ToString) Generate ToString method from public properties.
   * [Usable](https://github.com/Fody/Usable) Adds using statements for local variables that have been created, and implement [IDisposable](http://msdn.microsoft.com/en-au/library/system.idisposable.aspx).
   * [Validar](https://github.com/Fody/Validar) Injects [IDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.IDataErrorInfo.aspx) or [INotifyDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.INotifyDataErrorInfo.aspx ) code into a class at compile time.
