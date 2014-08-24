@@ -29,8 +29,9 @@ public class BuildLogger : MarshalByRefObject, ILogger
 
     public void LogInfo(string message)
     {
-        BuildEngine.LogMessageEvent(new BuildMessageEventArgs("  " + message, "", "Fody", MessageImportance.Low));
+        BuildEngine.LogMessageEvent(new BuildMessageEventArgs("  " + message, "", "Fody", MessageImportance.Normal));
     }
+
     public void LogDebug(string message)
     {
         BuildEngine.LogMessageEvent(new BuildMessageEventArgs("  " + message, "", "Fody", MessageImportance.Low));
