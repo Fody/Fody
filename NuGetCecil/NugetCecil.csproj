@@ -4,6 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4D267DED-10CA-4CF4-84E9-C7945393F86F}</ProjectGuid>
+    <NuGetPackageImportStamp>8eb662e4</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <ConfigurationName>Debug</ConfigurationName>
@@ -21,13 +22,13 @@
     <None Include="FodyCecil.nuspec">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <Target Name="Clean">
     <RemoveDir Directories="$(SolutionDir)NuGetCecilBuild" />
   </Target>
   <Target Name="Build" DependsOnTargets="NuGetCecilBuild" />
   <Target Name="ReBuild" DependsOnTargets="NuGetCecilBuild" />
-  <UsingTask TaskName="PepitaPackage.CreatePackageTask" AssemblyFile="$(SolutionDir)Tools\Pepita\PepitaPackage.dll" />
   <Target Name="NuGetCecilBuild" DependsOnTargets="Clean">
     <MakeDir Directories="$(SolutionDir)NuGetCecilBuild" />
     <Copy SourceFiles="$(SolutionDir)NugetCecil\FodyCecil.nuspec" DestinationFolder="$(SolutionDir)NuGetCecilBuild" />
@@ -52,4 +53,11 @@
       <Name>FodyIsolated</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\packages\PepitaPackage.1.21.2\build\PepitaPackage.targets" Condition="Exists('..\packages\PepitaPackage.1.21.2\build\PepitaPackage.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\PepitaPackage.1.21.2\build\PepitaPackage.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PepitaPackage.1.21.2\build\PepitaPackage.targets'))" />
+  </Target>
 </Project>
