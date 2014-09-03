@@ -58,7 +58,7 @@ public partial class Processor
         }
         finally
         {
-            var finishedMessage = string.Format("\tFinished Fody {0}ms.", stopwatch.ElapsedMilliseconds);
+            var finishedMessage = string.Format("  Finished Fody {0}ms.", stopwatch.ElapsedMilliseconds);
             BuildEngine.LogMessageEvent(new BuildMessageEventArgs(finishedMessage, "", "Fody", MSMessageEnum.High));
         }
     }

@@ -59,7 +59,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         foreach (var weaverConfig in Weavers)
         {
             Logger.LogInfo(string.Format("Weaver '{0}'.", weaverConfig.AssemblyPath));
-            Logger.LogInfo("\tInitializing weaver");
+            Logger.LogInfo("  Initializing weaver");
             var assembly = LoadAssembly(weaverConfig.AssemblyPath);
 
             var weaverType = assembly.FindType(weaverConfig.TypeName);
@@ -86,9 +86,9 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             {
                 Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
                 var startNew = Stopwatch.StartNew();
-                Logger.LogInfo("\tExecuting Weaver ");
+                Logger.LogInfo("  Executing Weaver ");
                 weaver.WeaverDelegate.Execute(weaver.Instance);
-                var finishedMessage = string.Format("\tFinished '{0}' in {1}ms {2}", weaver.Config.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
+                var finishedMessage = string.Format("  Finished '{0}' in {1}ms {2}", weaver.Config.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
                 Logger.LogInfo(finishedMessage);
             }
             finally
@@ -107,9 +107,9 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             {
                 Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
                 var startNew = Stopwatch.StartNew();
-                Logger.LogInfo("\tExecuting After Weaver");
+                Logger.LogInfo("  Executing After Weaver");
                 weaver.WeaverDelegate.AfterWeavingExecute(weaver.Instance);
-                var finishedMessage = string.Format("\tFinished '{0}' in {1}ms {2}", weaver.Config.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
+                var finishedMessage = string.Format("  Finished '{0}' in {1}ms {2}", weaver.Config.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
                 Logger.LogInfo(finishedMessage);
             }
             finally

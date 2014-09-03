@@ -9,7 +9,7 @@ public partial class InnerWeaver
     {
         var assemblyPath = AssemblyFilePath;
         var stopwatch = Stopwatch.StartNew();
-        Logger.LogInfo(string.Format("\tWriting assembly to '{0}'.", assemblyPath));
+        Logger.LogInfo(string.Format("  Writing assembly to '{0}'.", assemblyPath));
 
         var parameters = new WriterParameters
             {
@@ -18,7 +18,7 @@ public partial class InnerWeaver
                 SymbolWriterProvider = debugWriterProvider,
             };
         ModuleDefinition.Write(assemblyPath, parameters);
-        Logger.LogInfo(string.Format("\tFinished writing assembly {0}ms.", stopwatch.ElapsedMilliseconds));
+        Logger.LogInfo(string.Format(" Finished writing assembly {0}ms.", stopwatch.ElapsedMilliseconds));
     }
 
 }

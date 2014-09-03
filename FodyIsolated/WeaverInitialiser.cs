@@ -19,9 +19,9 @@ public partial class InnerWeaver
         @delegate.SetReferenceCopyLocalPaths(weaverInstance, ReferenceCopyLocalPaths);
 		@delegate.SetSolutionDirectoryPath(weaverInstance, SolutionDirectoryPath);
         @delegate.SetProjectDirectoryPath(weaverInstance, ProjectDirectoryPath);
-		@delegate.SetLogDebug(weaverInstance, Logger.LogDebug);
-		@delegate.SetLogInfo(weaverInstance, Logger.LogInfo);
-		@delegate.SetLogMessage(weaverInstance, Logger.LogMessage);
+		@delegate.SetLogDebug(weaverInstance, s => Logger.LogDebug("  " + s));
+		@delegate.SetLogInfo(weaverInstance, s => Logger.LogInfo("  " + s));
+        @delegate.SetLogMessage(weaverInstance, (s, importance) => Logger.LogMessage("  " + s, importance));
         @delegate.SetLogWarning(weaverInstance, Logger.LogWarning);
         @delegate.SetLogWarningPoint(weaverInstance, LogWarningPoint);
         @delegate.SetLogError(weaverInstance, Logger.LogError);
