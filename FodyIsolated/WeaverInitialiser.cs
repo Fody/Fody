@@ -21,6 +21,7 @@ public partial class InnerWeaver
         @delegate.SetProjectDirectoryPath(weaverInstance, ProjectDirectoryPath);
 		@delegate.SetLogDebug(weaverInstance, Logger.LogDebug);
 		@delegate.SetLogInfo(weaverInstance, Logger.LogInfo);
+		@delegate.SetLogMessage(weaverInstance, Logger.LogMessage);
         @delegate.SetLogWarning(weaverInstance, Logger.LogWarning);
         @delegate.SetLogWarningPoint(weaverInstance, LogWarningPoint);
         @delegate.SetLogError(weaverInstance, Logger.LogError);

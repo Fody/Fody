@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml.Linq;
+using Microsoft.Build.Framework;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
@@ -10,6 +11,9 @@ public class ModuleWeaver
 
     // Will log an informational message to MSBuild. OPTIONAL
     public Action<string> LogInfo  { get; set; }
+
+    // Will log an informational message to MSBuild. OPTIONAL
+    public Action<string, MessageImportance> LogMessage  { get; set; }
 
     // Will log an warning message to MSBuild. OPTIONAL
     public Action<string> LogWarning  { get; set; }

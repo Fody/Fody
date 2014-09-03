@@ -40,6 +40,7 @@
       <HintPath>..\packages\MethodTimer.Fody.1.14.1.0\Lib\portable-net4+sl4+wp7+win8+MonoAndroid16+MonoTouch40\MethodTimer.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Mono.Cecil, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />

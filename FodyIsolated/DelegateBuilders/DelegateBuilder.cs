@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using Microsoft.Build.Framework;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
@@ -41,6 +42,7 @@ public static class DelegateBuilder
                 SetLogErrorPoint = weaverType.BuildPropertySetDelegate<Action<string, SequencePoint>>("LogErrorPoint"),
                 SetLogDebug = weaverType.BuildPropertySetDelegate<Action<string>>("LogDebug"),
                 SetLogInfo = weaverType.BuildPropertySetDelegate<Action<string>>("LogInfo"),
+                SetLogMessage = weaverType.BuildPropertySetDelegate<Action<string, MessageImportance>>("LogMessage"),
                 SetLogWarning = weaverType.BuildPropertySetDelegate<Action<string>>("LogWarning"),
                 SetLogWarningPoint = weaverType.BuildPropertySetDelegate<Action<string, SequencePoint>>("LogWarningPoint"),
                 SetReferenceCopyLocalPaths = weaverType.BuildPropertySetDelegate<List<string>>("ReferenceCopyLocalPaths"),

@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 
 public static class AssemblyLocation

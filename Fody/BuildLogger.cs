@@ -32,6 +32,11 @@ public class BuildLogger : MarshalByRefObject, ILogger
         BuildEngine.LogMessageEvent(new BuildMessageEventArgs("  " + message, "", "Fody", MessageImportance.Normal));
     }
 
+    public void LogMessage(string message, MessageImportance level = MessageImportance.Normal)
+    {
+        BuildEngine.LogMessageEvent(new BuildMessageEventArgs("  " + message, "", "Fody", level));
+    }
+
     public void LogDebug(string message)
     {
         BuildEngine.LogMessageEvent(new BuildMessageEventArgs("  " + message, "", "Fody", MessageImportance.Low));
