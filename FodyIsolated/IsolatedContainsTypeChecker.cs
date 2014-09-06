@@ -12,7 +12,7 @@ public class IsolatedContainsTypeChecker : MarshalByRefObject, IContainsTypeChec
     {
         var module = ModuleDefinition.ReadModule(assemblyPath);
         var types = module.Types;
-        return types.Any(x => x.Name == typeName);
+        return types.Any(x => string.Equals(x.Name, typeName,StringComparison.OrdinalIgnoreCase));
     }
 
     [SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.Infrastructure)]

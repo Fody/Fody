@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using MethodTimer;
 
 public partial class Processor
 { 
@@ -8,8 +7,7 @@ public partial class Processor
 
     public string SolutionConfigFilePath;
 
-    [Time]
-    public void FindProjectWeavers()
+    public virtual void FindProjectWeavers()
     {
         var fodyDirConfigFilePath = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyWeavers.xml");
         if (File.Exists(fodyDirConfigFilePath))

@@ -7,7 +7,7 @@ public partial class InnerWeaver
 {
 	static Dictionary<string, Assembly> assemblies = new Dictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
 
-	public Assembly LoadAssembly(string assemblyPath)
+    public virtual Assembly LoadAssembly(string assemblyPath)
 	{
 		Assembly assembly;
 		if (assemblies.TryGetValue(assemblyPath, out assembly))

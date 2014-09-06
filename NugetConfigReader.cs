@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Xml;
@@ -58,7 +59,7 @@ public static class NugetConfigReader
                 return Path.Combine(Path.GetDirectoryName(nugetConfigPath), repositoryPath);
             }
             repositoryPath = xDocument.Descendants("add")
-                .Where(x => (string)x.Attribute("key") == "repositoryPath")
+                .Where(x =>   string.Equals((string)x.Attribute("key"), "repositoryPath",StringComparison.OrdinalIgnoreCase))
                 .Select(x => x.Attribute("value"))
                 .Where(x => x != null)
                 .Select(x => x.Value)

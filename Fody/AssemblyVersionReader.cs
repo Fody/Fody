@@ -1,10 +1,8 @@
 using System;
 using System.Reflection;
-using MethodTimer;
 
 public class AssemblyVersionReader
 {
-    [Time]
     public static Version GetAssemblyVersion(string path)
     {
         try

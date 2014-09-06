@@ -2,7 +2,7 @@ public partial class Processor
 {
     public bool WeaverProjectUsed;
 
-    public bool WeaverProjectContainsType(string weaverName)
+    public virtual bool WeaverProjectContainsType(string weaverName)
     {
         if (FoundWeaverProjectFile)
         {

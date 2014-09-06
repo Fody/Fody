@@ -8,7 +8,7 @@ public partial class InnerWeaver
     public Dictionary<string, string> ReferenceDictionary = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
     public List<string> SplitReferences;
 
-    public void SplitUpReferences()
+    public virtual void SplitUpReferences()
     {
         SplitReferences = References
             .Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries)

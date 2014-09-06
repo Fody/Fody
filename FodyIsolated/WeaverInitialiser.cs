@@ -5,7 +5,7 @@ using Mono.Cecil.Cil;
 public partial class InnerWeaver
 {
 
-    public void SetProperties(WeaverEntry weaverEntry, object weaverInstance, WeaverDelegate @delegate)
+    public virtual void SetProperties(WeaverEntry weaverEntry, object weaverInstance, WeaverDelegate @delegate)
     {
         if (weaverEntry.Element != null)
         {

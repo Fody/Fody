@@ -1,8 +1,6 @@
-using MethodTimer;
 
 public partial class Processor
 {
-    [Time]
     public void ConfigureWhenWeaversFound()
     {
 

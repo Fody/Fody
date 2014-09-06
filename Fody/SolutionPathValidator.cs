@@ -3,7 +3,7 @@ using System.IO;
 public partial class Processor
 {
 
-    public void ValidateSolutionPath()
+    public virtual void ValidateSolutionPath()
     {
 	    SolutionDirectoryPath = Path.GetFullPath(SolutionDirectoryPath);
         if (!Directory.Exists(SolutionDirectoryPath))

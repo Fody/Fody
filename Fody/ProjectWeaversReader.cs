@@ -1,15 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
-using MethodTimer;
 
 public partial class Processor
 {
     public List<WeaverEntry> Weavers;
 
-    [Time]
-    public void ReadProjectWeavers()
+    public virtual void ReadProjectWeavers()
     {
         if (Weavers != null)
         {
@@ -22,7 +21,7 @@ public partial class Processor
             foreach (var element in xDocument.Root.Elements())
             {
                 var assemblyName = element.Name.LocalName;
-                var existing = Weavers.FirstOrDefault(x => x.AssemblyName == assemblyName);
+                var existing = Weavers.FirstOrDefault(x => string.Equals(x.AssemblyName, assemblyName,StringComparison.OrdinalIgnoreCase));
                 var index = Weavers.Count;
                 if (existing != null)
                 {

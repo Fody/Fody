@@ -19,7 +19,7 @@ public class ContainsTypeChecker
 
 
     //TODO: possibly cache based on file stamp to avoid cross domain call. need to profile.
-    public bool Check(string assemblyPath, string typeName)
+    public virtual bool Check(string assemblyPath, string typeName)
     {
         return containsTypeChecker.Check(assemblyPath, typeName);
     }

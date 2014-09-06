@@ -7,47 +7,47 @@ public class BuildLogger : MarshalByRefObject, ILogger
     public bool ErrorOccurred;
     string currentWeaverName;
 
-    public void LogWarning(string message)
+    public virtual void LogWarning(string message)
     {
         LogWarning(message, null, 0, 0, 0, 0);
     }
 
-    public void LogWarning(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
+    public virtual void LogWarning(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
     {
         BuildEngine.LogWarningEvent(new BuildWarningEventArgs("", "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber, PrependMessage(message), "", "Fody"));
     }
 
-    public void SetCurrentWeaverName(string weaverName)
+    public virtual void SetCurrentWeaverName(string weaverName)
     {
         currentWeaverName = weaverName;
     }
 
-    public void ClearWeaverName()
+    public virtual void ClearWeaverName()
     {
         currentWeaverName = null;
     }
 
-    public void LogInfo(string message)
+    public virtual void LogInfo(string message)
     {
         BuildEngine.LogMessageEvent(new BuildMessageEventArgs("  " + message, "", "Fody", MessageImportance.Normal));
     }
 
-    public void LogMessage(string message, MessageImportance level = MessageImportance.Normal)
+    public virtual void LogMessage(string message, MessageImportance level = MessageImportance.Normal)
     {
         BuildEngine.LogMessageEvent(new BuildMessageEventArgs("  " + message, "", "Fody", level));
     }
 
-    public void LogDebug(string message)
+    public virtual void LogDebug(string message)
     {
         BuildEngine.LogMessageEvent(new BuildMessageEventArgs("  " + message, "", "Fody", MessageImportance.Low));
     }
 
-    public void LogError(string message)
+    public virtual void LogError(string message)
     {
         LogError(message, null, 0, 0, 0, 0);
     }
 
-    public void LogError(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
+    public virtual void LogError(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
     {
         ErrorOccurred = true;
         BuildEngine.LogErrorEvent(new BuildErrorEventArgs("", "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber,PrependMessage( message), "", "Fody"));

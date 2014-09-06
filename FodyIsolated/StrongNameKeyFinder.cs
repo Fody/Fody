@@ -6,7 +6,7 @@ public partial class InnerWeaver
 {
     public StrongNameKeyPair StrongNameKeyPair;
 
-    public void FindStrongNameKey()
+    public virtual void FindStrongNameKey()
     {
         if (!SignAssembly)
         {

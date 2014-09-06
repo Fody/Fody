@@ -1,11 +1,9 @@
 using System.Diagnostics;
-using MethodTimer;
 using Mono.Cecil;
 
 public partial class InnerWeaver
 {
-    [Time]
-    public void WriteModule()
+    public virtual void WriteModule()
     {
         var assemblyPath = AssemblyFilePath;
         var stopwatch = Stopwatch.StartNew();

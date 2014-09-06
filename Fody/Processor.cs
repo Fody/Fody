@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using MethodTimer;
 using Microsoft.Build.Framework;
 using MSMessageEnum = Microsoft.Build.Framework.MessageImportance;
 
@@ -34,7 +33,7 @@ public partial class Processor
         DomainAssemblyResolver.Connect();
     }
 
-    public bool Execute()
+    public virtual bool Execute()
     {
         var executingMessage = string.Format("Fody (version {0}) Executing", typeof (Processor).Assembly.GetName().Version);
         BuildEngine.LogMessageEvent(new BuildMessageEventArgs(executingMessage, "", "Fody", MSMessageEnum.High));
@@ -124,7 +123,6 @@ public partial class Processor
         Logger.LogInfo(string.Format("Finished finding weavers {0}ms", stopwatch.ElapsedMilliseconds));
     }
 
-    [Time]
     void ExecuteInOwnAppDomain()
     {
         AppDomain appDomain;

@@ -21,8 +21,13 @@ public class ShouldStartSinceFileChangedTests
         var processor = new Processor
             {
                 Logger = new Mock<BuildLogger>().Object,
-                AssemblyFilePath = typeof(Processor).Assembly.CodeBase.Replace("file:///", "")
+                AssemblyFilePath = GetType().Assembly.CodeBase.Replace("file:///", "")
             };
         Assert.IsFalse(processor.ShouldStartSinceFileChanged());
     }
+}
+
+public interface ProcessedByFody
+{
+    
 }

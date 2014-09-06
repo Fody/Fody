@@ -2,7 +2,7 @@ using System.IO;
 
 public partial class Processor
 {
-    public void ValidateProjectPath()
+    public virtual void ValidateProjectPath()
     {
 		if (!Directory.Exists(ProjectDirectory))
         {

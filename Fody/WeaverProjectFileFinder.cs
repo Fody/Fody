@@ -1,15 +1,13 @@
 using System;
 using System.IO;
 using System.Linq;
-using MethodTimer;
 
 public partial class Processor
 {
     public string WeaverAssemblyPath;
     public bool FoundWeaverProjectFile;
 
-    [Time]
-    public void FindWeaverProjectFile()
+    public virtual void FindWeaverProjectFile()
     {
         GetValue();
         if (WeaverAssemblyPath == null)

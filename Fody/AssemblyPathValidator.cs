@@ -3,7 +3,7 @@ using System.IO;
 public partial class Processor
 {
 
-    public void ValidateAssemblyPath()
+    public virtual void ValidateAssemblyPath()
     {
         AssemblyFilePath = Path.Combine(ProjectDirectory, AssemblyFilePath);
         if (!File.Exists(AssemblyFilePath))

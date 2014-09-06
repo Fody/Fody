@@ -1,10 +1,14 @@
 using System;
 using System.Reflection;
+using NUnit.Framework;
 
-public static class AppDomainAssemblyFinder
+
+[SetUpFixture]
+public class AppDomainAssemblyFinder
 {
 
-    public static void Attach()
+    [SetUp]
+    public void Attach()
     {
         AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
     }
@@ -13,7 +17,7 @@ public static class AppDomainAssemblyFinder
     {
         foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
         {
-            if (assembly.FullName == args.Name)
+            if (string.Equals(assembly.FullName, args.Name, StringComparison.OrdinalIgnoreCase))
             {
                 return assembly;
             }

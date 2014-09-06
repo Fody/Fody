@@ -11,6 +11,6 @@ public static class DomainAssemblyResolver
 
     public static Assembly GetAssembly(string name)
     {
-        return AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(x => x.FullName == name);
+        return AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(x => string.Equals(x.FullName, name, StringComparison.OrdinalIgnoreCase));
     }
 }

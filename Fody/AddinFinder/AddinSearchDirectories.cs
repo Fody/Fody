@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System.IO;
-using MethodTimer;
 
 public partial class AddinFinder
 {
-    [Time]
     public void FindAddinDirectories()
     {
         AddNugetDirectoryFromConvention();
@@ -13,7 +11,6 @@ public partial class AddinFinder
         AddToolsSolutionDirectoryToAddinSearch();
     }
 
-    [Time]
     public void AddToolsSolutionDirectoryToAddinSearch()
     {
         Logger.LogInfo(string.Format("SolutionDirectoryPath: {0}", SolutionDirectoryPath));
@@ -29,7 +26,6 @@ public partial class AddinFinder
         AddFiles(Directory.EnumerateFiles(solutionDirToolsDirectory, "*.Fody.dll", SearchOption.AllDirectories));
     }
 
-    [Time]
     public void AddCurrentFodyDirectoryToAddinSearch()
     {
         Logger.LogInfo(string.Format("SolutionDirectoryPath: {0}", SolutionDirectoryPath));
@@ -45,7 +41,6 @@ public partial class AddinFinder
     }
 
 
-    [Time]
     public void AddNugetDirectoryFromNugetConfig()
     {
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(SolutionDirectoryPath);
@@ -62,7 +57,6 @@ public partial class AddinFinder
         AddWeaversFromDir(packagesPathFromConfig);
     }
 
-    [Time]
     public void AddNugetDirectoryFromConvention()
     {
         var solutionPackages = Path.Combine(SolutionDirectoryPath, "Packages");

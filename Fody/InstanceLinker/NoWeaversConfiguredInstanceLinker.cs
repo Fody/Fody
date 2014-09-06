@@ -1,8 +1,5 @@
-using MethodTimer;
-
 public partial class Processor
 {
-    [Time]
     public void ConfigureWhenNoWeaversFound()
     {
         if (!FoundWeaverProjectFile)

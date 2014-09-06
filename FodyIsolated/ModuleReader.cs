@@ -1,13 +1,11 @@
 using System.IO;
-using MethodTimer;
 using Mono.Cecil;
 
 public partial class InnerWeaver
 {
     public ModuleDefinition ModuleDefinition;
 
-    [Time]
-    public void ReadModule()
+    public virtual void ReadModule()
     {
         if (pdbFound)
         {

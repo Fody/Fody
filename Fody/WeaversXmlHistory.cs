@@ -6,7 +6,7 @@ public partial class Processor
 {
     public static Dictionary<string, DateTime> TimeStamps = new Dictionary<string, DateTime>();
 
-    public bool CheckForWeaversXmlChanged()
+    public virtual bool CheckForWeaversXmlChanged()
     {
         var changed = false;
         foreach (var configFile in ConfigFiles)
@@ -29,7 +29,7 @@ public partial class Processor
         return changed;
     }
 
-    public void FlushWeaversXmlHistory()
+    public virtual void FlushWeaversXmlHistory()
     {
         foreach (var configFile in ConfigFiles)
         {
