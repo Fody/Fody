@@ -12,12 +12,12 @@ public partial class Processor
         GetValue();
         if (WeaverAssemblyPath == null)
         {
-            Logger.LogInfo("No Weaver project file found.");
+            Logger.LogDebug("No Weaver project file found.");
             FoundWeaverProjectFile = false;
         }
         else
         {
-            Logger.LogInfo(string.Format("Weaver project file found at '{0}'.", WeaverAssemblyPath));
+            Logger.LogDebug(string.Format("Weaver project file found at '{0}'.", WeaverAssemblyPath));
             FoundWeaverProjectFile = true;
         }
     }

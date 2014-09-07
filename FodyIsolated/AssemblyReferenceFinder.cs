@@ -14,7 +14,7 @@ public partial class InnerWeaver
             .Split(new[] {';'}, StringSplitOptions.RemoveEmptyEntries)
             .ToList();
         SetRefDictionary(SplitReferences);
-        Logger.LogInfo("Reference count=" + ReferenceDictionary.Count);
+        Logger.LogDebug("Reference count=" + ReferenceDictionary.Count);
     }
 
 

@@ -13,7 +13,7 @@ public partial class Processor
         var weaverProjectContainsType = WeaverProjectContainsType("ModuleWeaver");
         if (weaverProjectContainsType)
         {
-            Logger.LogInfo("Found 'ModuleWeaver' in project 'Weavers' so will run that one.");
+            Logger.LogDebug("Found 'ModuleWeaver' in project 'Weavers' so will run that one.");
             var weaverEntry = new WeaverEntry
                                   {
                                       AssemblyPath = WeaverAssemblyPath,

@@ -58,8 +58,8 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     {
         foreach (var weaverConfig in Weavers)
         {
-            Logger.LogInfo(string.Format("Weaver '{0}'.", weaverConfig.AssemblyPath));
-            Logger.LogInfo("  Initializing weaver");
+            Logger.LogDebug(string.Format("Weaver '{0}'.", weaverConfig.AssemblyPath));
+            Logger.LogDebug("  Initializing weaver");
             var assembly = LoadAssembly(weaverConfig.AssemblyPath);
 
             var weaverType = assembly.FindType(weaverConfig.TypeName);
@@ -86,10 +86,10 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             {
                 Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
                 var startNew = Stopwatch.StartNew();
-                Logger.LogInfo("  Executing Weaver ");
+                Logger.LogDebug("  Executing Weaver ");
                 weaver.WeaverDelegate.Execute(weaver.Instance);
                 var finishedMessage = string.Format("  Finished '{0}' in {1}ms {2}", weaver.Config.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
-                Logger.LogInfo(finishedMessage);
+                Logger.LogDebug(finishedMessage);
             }
             finally
             {
@@ -107,10 +107,10 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             {
                 Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
                 var startNew = Stopwatch.StartNew();
-                Logger.LogInfo("  Executing After Weaver");
+                Logger.LogDebug("  Executing After Weaver");
                 weaver.WeaverDelegate.AfterWeavingExecute(weaver.Instance);
                 var finishedMessage = string.Format("  Finished '{0}' in {1}ms {2}", weaver.Config.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
-                Logger.LogInfo(finishedMessage);
+                Logger.LogDebug(finishedMessage);
             }
             finally
             {

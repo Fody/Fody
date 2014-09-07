@@ -11,7 +11,7 @@ public class SolutionPathValidatorTests
     {
         var loggerMock = new Mock<BuildLogger>();
 
-        loggerMock.Setup(x => x.LogInfo(It.Is<string>(y => y.Contains(Environment.CurrentDirectory))));
+        loggerMock.Setup(x => x.LogDebug(It.Is<string>(y => y.Contains(Environment.CurrentDirectory))));
         var buildLogger = loggerMock.Object;
 
         var processor = new Processor

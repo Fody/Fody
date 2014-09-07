@@ -5,7 +5,7 @@ public partial class Processor
     {
         if (ContainsTypeChecker.Check(AssemblyFilePath, "ProcessedByFody"))
         {
-            Logger.LogInfo("Did not process because file has already been processed.");
+            Logger.LogDebug("Did not process because file has already been processed.");
             return false;
         }
         return true;

@@ -18,14 +18,14 @@ public partial class InnerWeaver
 		if (File.Exists(pdbPath))
 		{
             pdbFound = true;
-            Logger.LogInfo(string.Format("Found debug symbols at '{0}'.", pdbPath));
+            Logger.LogDebug(string.Format("Found debug symbols at '{0}'.", pdbPath));
 		}
 
         mdbPath = AssemblyFilePath + ".mdb";
 		if (File.Exists(mdbPath))
 		{
             mdbFound = true;
-            Logger.LogInfo(string.Format("Found debug symbols at '{0}'.", mdbPath));
+            Logger.LogDebug(string.Format("Found debug symbols at '{0}'.", mdbPath));
 		}
 
         if (pdbFound && mdbFound)
@@ -33,12 +33,12 @@ public partial class InnerWeaver
             if (File.GetLastWriteTimeUtc(pdbPath) >= File.GetLastWriteTimeUtc(mdbPath))
             {
                 mdbFound = false;
-                Logger.LogInfo("Found mdb and pdb debug symbols. Selected pdb (newer).");
+                Logger.LogDebug("Found mdb and pdb debug symbols. Selected pdb (newer).");
             }
             else
             {
                 pdbFound = false;
-                Logger.LogInfo("Found mdb and pdb debug symbols. Selected mdb (newer).");
+                Logger.LogDebug("Found mdb and pdb debug symbols. Selected mdb (newer).");
             }
         }
 
@@ -57,7 +57,7 @@ public partial class InnerWeaver
 		}
 
 
-		Logger.LogInfo("Found no debug symbols.");
+        Logger.LogDebug("Found no debug symbols.");
 	}
 
 }

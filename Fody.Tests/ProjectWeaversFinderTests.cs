@@ -9,7 +9,7 @@ public class ProjectWeaversFinderTests
     public void NotFound()
     {
         var loggerMock = new Mock<BuildLogger>();
-        loggerMock.Setup(x => x.LogInfo(It.IsAny<string>()));
+        loggerMock.Setup(x => x.LogDebug(It.IsAny<string>()));
         var logger = loggerMock.Object;
         var processor = new Processor
                                        {

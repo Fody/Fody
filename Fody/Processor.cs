@@ -35,15 +35,14 @@ public partial class Processor
 
     public virtual bool Execute()
     {
-        var executingMessage = string.Format("Fody (version {0}) Executing", typeof (Processor).Assembly.GetName().Version);
-        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(executingMessage, "", "Fody", MSMessageEnum.High));
+        Logger = new BuildLogger
+        {
+            BuildEngine = BuildEngine,
+        };
+
+        Logger.LogInfo(string.Format("Fody (version {0}) Executing", typeof (Processor).Assembly.GetName().Version));
 
         var stopwatch = Stopwatch.StartNew();
-
-        Logger = new BuildLogger
-                     {
-                         BuildEngine = BuildEngine,
-                     };
 
         try
         {
@@ -57,8 +56,7 @@ public partial class Processor
         }
         finally
         {
-            var finishedMessage = string.Format("  Finished Fody {0}ms.", stopwatch.ElapsedMilliseconds);
-            BuildEngine.LogMessageEvent(new BuildMessageEventArgs(finishedMessage, "", "Fody", MSMessageEnum.High));
+            Logger.LogInfo(string.Format("  Finished Fody {0}ms.", stopwatch.ElapsedMilliseconds));
         }
     }
 
@@ -105,7 +103,7 @@ public partial class Processor
     void FindWeavers()
     {
         var stopwatch = Stopwatch.StartNew();
-        Logger.LogInfo("Finding weavers");
+        Logger.LogDebug("Finding weavers");
         ReadProjectWeavers();
         addinFinder = new AddinFinder
             {
@@ -120,7 +118,7 @@ public partial class Processor
 
         ConfigureWhenNoWeaversFound();
 
-        Logger.LogInfo(string.Format("Finished finding weavers {0}ms", stopwatch.ElapsedMilliseconds));
+        Logger.LogDebug(string.Format("Finished finding weavers {0}ms", stopwatch.ElapsedMilliseconds));
     }
 
     void ExecuteInOwnAppDomain()
@@ -130,7 +128,7 @@ public partial class Processor
         {
             if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
             {
-                Logger.LogInfo("A Weaver HasChanged so loading a new AppDomain");
+                Logger.LogDebug("A Weaver HasChanged so loading a new AppDomain");
                 AppDomain.Unload(appDomain);
                 appDomain = solutionDomains[SolutionDirectoryPath] = CreateDomain();
             }
@@ -161,7 +159,7 @@ public partial class Processor
 
     AppDomain CreateDomain()
     {
-        Logger.LogInfo("Creating a new AppDomain");
+        Logger.LogDebug("Creating a new AppDomain");
         var appDomainSetup = new AppDomainSetup
         {
             ApplicationBase = AssemblyLocation.CurrentDirectory,

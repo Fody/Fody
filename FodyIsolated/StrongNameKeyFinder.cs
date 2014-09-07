@@ -29,7 +29,7 @@ public partial class InnerWeaver
         if (KeyFilePath != null)
         {
             KeyFilePath = Path.GetFullPath(KeyFilePath);
-            Logger.LogInfo(string.Format("Using strong name key from KeyFilePath '{0}'.", KeyFilePath));
+            Logger.LogDebug(string.Format("Using strong name key from KeyFilePath '{0}'.", KeyFilePath));
             return KeyFilePath;
         }
 
@@ -41,10 +41,10 @@ public partial class InnerWeaver
         {
             var keyFileSuffix = (string) assemblyKeyFileAttribute.ConstructorArguments.First().Value;
             var keyFilePath = Path.Combine(IntermediateDirectoryPath, keyFileSuffix);
-            Logger.LogInfo(string.Format("Using strong name key from [AssemblyKeyFileAttribute(\"{0}\")] '{1}'", keyFileSuffix, keyFilePath));
+            Logger.LogDebug(string.Format("Using strong name key from [AssemblyKeyFileAttribute(\"{0}\")] '{1}'", keyFileSuffix, keyFilePath));
             return keyFilePath;
         }
-        Logger.LogInfo("No strong name key found");
+        Logger.LogDebug("No strong name key found");
         return null;
     }
 }

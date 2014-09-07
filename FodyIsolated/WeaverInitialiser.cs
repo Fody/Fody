@@ -12,6 +12,7 @@ public partial class InnerWeaver
             var weaverElement = XElement.Parse(weaverEntry.Element);
             @delegate.SetConfig(weaverInstance, weaverElement);
         }
+
         @delegate.SetModuleDefinition(weaverInstance, ModuleDefinition);
         @delegate.SetAssemblyResolver(weaverInstance, this);
         @delegate.SetAssemblyFilePath(weaverInstance, AssemblyFilePath);
