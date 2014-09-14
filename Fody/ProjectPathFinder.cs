@@ -8,7 +8,7 @@ public partial class Processor
         {
 			throw new WeavingException(string.Format("ProjectDirectory \"{0}\" does not exist.", ProjectDirectory));
         }
-        Logger.LogInfo(string.Format("ProjectDirectory: '{0}'.", ProjectDirectory));
+        Logger.LogDebug(string.Format("ProjectDirectory: '{0}'.", ProjectDirectory));
     }
 
 }

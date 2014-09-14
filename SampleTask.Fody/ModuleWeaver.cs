@@ -10,6 +10,9 @@ public class ModuleWeaver
     public XElement Config { get; set; }
 
     // Will log an informational message to MSBuild. OPTIONAL
+    public Action<string> LogDebug { get; set; }
+
+    // Will log an informational message to MSBuild. OPTIONAL
     public Action<string> LogInfo  { get; set; }
 
     // Will log an informational message to MSBuild. OPTIONAL
@@ -36,6 +39,7 @@ public class ModuleWeaver
     // Init logging delegates to make testing easier
     public ModuleWeaver()
     {
+        LogDebug = m => { };
         LogInfo = m => { };
         LogWarning = m => { };
         LogWarningPoint = (m,p) => { };

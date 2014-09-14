@@ -54,7 +54,7 @@ public class WeaversXmlHistoryTests
         {
             var expected = File.GetLastWriteTimeUtc(fileName);
             var loggerMock = new Mock<BuildLogger>();
-            loggerMock.Setup(x => x.LogInfo(It.IsAny<string>()));
+            loggerMock.Setup(x => x.LogDebug(It.IsAny<string>()));
 
             var processor = new Processor
                 {

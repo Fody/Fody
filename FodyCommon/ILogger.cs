@@ -4,6 +4,7 @@ public interface ILogger
 {
     void SetCurrentWeaverName(string weaverName);
     void ClearWeaverName();
+
     void LogDebug(string message);
     void LogInfo(string message);
     void LogMessage(string message, MessageImportance level = MessageImportance.Normal);
