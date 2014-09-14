@@ -7,8 +7,8 @@ public class BuildLogger : MarshalByRefObject, ILogger
     public bool ErrorOccurred;
     string currentWeaverName;
 
-    private const MessageImportance DebugMessageImportant = MessageImportance.Normal;
-    private const MessageImportance InfoMessageImportant = MessageImportance.High;
+    MessageImportance DebugMessageImportant = MessageImportance.Normal;
+    MessageImportance InfoMessageImportant = MessageImportance.High;
 
     public virtual void SetCurrentWeaverName(string weaverName)
     {
@@ -20,7 +20,7 @@ public class BuildLogger : MarshalByRefObject, ILogger
         currentWeaverName = null;
     }
 
-    public virtual void LogMessage(string message, MessageImportance level = InfoMessageImportant)
+    public virtual void LogMessage(string message, MessageImportance level)
     {
         BuildEngine.LogMessageEvent(new BuildMessageEventArgs("  " + message, "", "Fody", level));
     }
