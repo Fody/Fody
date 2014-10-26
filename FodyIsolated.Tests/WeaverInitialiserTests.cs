@@ -22,7 +22,8 @@ public class WeaverInitialiserTests
 				ProjectDirectoryPath = "ProjectDirectoryPath",
 				SolutionDirectoryPath = "SolutionDirectoryPath",
 				ReferenceDictionary = new Dictionary<string, string> {{"Ref1;Ref2", "Path1"}},
-				ReferenceCopyLocalPaths = new List<string> {"Ref1"},
+				ReferenceCopyLocalPaths = new List<string> {"CopyRef1","CopyRef2"},
+				References ="Ref1;Ref2",
 				ModuleDefinition = moduleDefinition,
                 DefineConstants = new List<string>{"Debug", "Release"}
 			};
@@ -41,7 +42,9 @@ public class WeaverInitialiserTests
 		Assert.IsNotNull(moduleWeaver.LogWarningPoint);
 		Assert.IsNotNull(moduleWeaver.LogError);
 		Assert.IsNotNull(moduleWeaver.LogErrorPoint);
-		Assert.AreEqual("Ref1", moduleWeaver.ReferenceCopyLocalPaths.First());
+		Assert.AreEqual("Ref1;Ref2", moduleWeaver.References);
+		Assert.AreEqual("CopyRef1", moduleWeaver.ReferenceCopyLocalPaths[0]);
+        Assert.AreEqual("CopyRef2", moduleWeaver.ReferenceCopyLocalPaths[1]);
 		Assert.AreEqual("Debug", moduleWeaver.DefineConstants[0]);
 		Assert.AreEqual("Release", moduleWeaver.DefineConstants[1]);
 
