@@ -45,6 +45,7 @@ public static class DelegateBuilder
                 SetLogMessage = weaverType.BuildPropertySetDelegate<Action<string, MessageImportance>>("LogMessage"),
                 SetLogWarning = weaverType.BuildPropertySetDelegate<Action<string>>("LogWarning"),
                 SetLogWarningPoint = weaverType.BuildPropertySetDelegate<Action<string, SequencePoint>>("LogWarningPoint"),
+                SetReferences = weaverType.BuildPropertySetDelegate<string>("References"),
                 SetReferenceCopyLocalPaths = weaverType.BuildPropertySetDelegate<List<string>>("ReferenceCopyLocalPaths"),
                 SetSolutionDirectoryPath = weaverType.BuildPropertySetDelegate<string>("SolutionDirectoryPath"),
                 SetProjectDirectoryPath = weaverType.BuildPropertySetDelegate<string>("ProjectDirectoryPath"),
