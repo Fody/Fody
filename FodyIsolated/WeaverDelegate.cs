@@ -14,6 +14,7 @@ public class WeaverDelegate
     public Action<object, IAssemblyResolver> SetAssemblyResolver;
     public Action<object, string> SetAssemblyFilePath;
     public Action<object, string> SetAddinDirectoryPath;
+    public Action<object, string> SetReferences;
     public Action<object, List<string>> SetReferenceCopyLocalPaths;
     public Action<object, string> SetSolutionDirectoryPath;
     public Action<object, string> SetProjectDirectoryPath;

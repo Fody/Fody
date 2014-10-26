@@ -74,6 +74,7 @@ public class ValidModuleWeaver
 	public string SolutionDirectoryPath { get; set; }
     public List<string> DefineConstants { get; set; }
 
+    public string References { get; set; }
 	public List<string> ReferenceCopyLocalPaths { get; set; }
 
 	public bool ExecuteCalled;
