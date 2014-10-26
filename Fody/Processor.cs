@@ -35,13 +35,6 @@ public partial class Processor
 
     public virtual bool Execute()
     {
-//#if DEBUG
-//        if (!System.Diagnostics.Debugger.IsAttached)
-//        {
-//            System.Diagnostics.Debugger.Launch();
-//        }
-//#endif
-
         Logger = new BuildLogger
         {
             BuildEngine = BuildEngine,

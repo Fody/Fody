@@ -21,13 +21,6 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
     public void Execute()
     {
-//#if DEBUG
-//        if (!System.Diagnostics.Debugger.IsAttached)
-//        {
-//            System.Diagnostics.Debugger.Launch();
-//        }
-//#endif
-
         try
         {
             SplitUpReferences();
