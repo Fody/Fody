@@ -52,6 +52,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
 ## Addins List
 
   * [Anotar](https://github.com/Fody/Anotar) Simplifies logging through a static class and some IL manipulation.
+  * [ArraySlice](https://github.com/Codealike/arrayslice) ArraySlice allows to build shared memory array views without performance impact. It uses IL manipulation to achieve the fastest implementation.
   * [AssertMessage](https://github.com/Fody/AssertMessage) Generates 'message' from sourcecode and adds it to assertion.
   * [AsyncErrorHandler](https://github.com/Fody/AsyncErrorHandler) Integrates error handling into async and TPL code.
   * [BasicFodyAddin](https://github.com/Fody/BasicFodyAddin) A simple project meant to illustrate how to build an addin.
@@ -69,6 +70,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Expose](https://github.com/kedarvaidya/Expose.Fody) Exposes members and optionally implements interface of a field declared in class.
   * [ExtraConstraints](https://github.com/Fody/ExtraConstraints) Facilitates adding constraints for Enum and Delegate to types and methods.
   * [Fielder](https://github.com/Fody/Fielder) Converts public fields to public properties.
+  * [FodyDependencyInjection](https://github.com/jorgehmv/FodyDependencyInjection) Dependency injection with Fody add-ins. 
   * [Freezable](https://github.com/Fody/Freezable) Implements the Freezable pattern.
   * [InfoOf](https://github.com/Fody/InfoOf) Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http://msdn.microsoft.com/en-us/library/58918ffs.aspx).
   * [Ionad](https://github.com/Fody/Ionad) Replaces static method calls. 
@@ -89,6 +91,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Publicize](https://github.com/Fody/Publicize) Converts non-public members to public hidden members.
   * [RemoveReference](https://github.com/icnocop/RemoveReference.Fody) Facilitates removing references in a compiled assembly during a build.
   * [Resourcer](https://github.com/Fody/Resourcer) Simplifies reading embedded resources from an Assembly.
+  * [RomanticWeb](http://romanticweb.net/) [nuget](https://www.nuget.org/packages/RomanticWeb.Fody/) Fody weaver plugin for RomanticWeb instrumentation.
   * [Scalpel](https://github.com/Fody/Scalpel) Strips tests from an assembly. 
   * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration. 
   * [Stamp](https://github.com/Fody/Stamp) Stamps an assembly with git data.
@@ -97,6 +100,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Stiletto](https://github.com/benjamin-bader/stiletto) Compile-time static analysis and optimization for the Stiletto IoC library.
   * [SwallowExceptions](https://github.com/duaneedwards/SwallowExceptions) Swallow Exceptions in targeted methods.
   * [ToString](https://github.com/Fody/ToString) Generate ToString method from public properties.
+  * [Undisposed](https://github.com/ermshiperete/undisposed-fody) Debugging tool to track down undisposed objects.
   * [Usable](https://github.com/Fody/Usable) Adds using statements for local variables that have been created, and implement [IDisposable](http://msdn.microsoft.com/en-au/library/system.idisposable.aspx).
   * [Validar](https://github.com/Fody/Validar) Injects [IDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.IDataErrorInfo.aspx) or [INotifyDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.INotifyDataErrorInfo.aspx ) code into a class at compile time.
   * [Visualize](https://github.com/Fody/Visualize) Adds debugger attributes to help visualize objects.
