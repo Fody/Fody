@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using Microsoft.Build.Framework;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Moq;
@@ -41,6 +42,7 @@ public class WeaverInitialiserTests
 		Assert.IsNotNull(moduleWeaver.LogWarningPoint);
 		Assert.IsNotNull(moduleWeaver.LogError);
 		Assert.IsNotNull(moduleWeaver.LogErrorPoint);
+		Assert.IsNotNull(moduleWeaver.LogMessage);
 		Assert.AreEqual("Ref1;Ref2", moduleWeaver.References);
 		Assert.AreEqual("CopyRef1", moduleWeaver.ReferenceCopyLocalPaths[0]);
         Assert.AreEqual("CopyRef2", moduleWeaver.ReferenceCopyLocalPaths[1]);
@@ -71,6 +73,7 @@ public class ValidModuleWeaver
 	public Action<string, SequencePoint> LogWarningPoint { get; set; }
 	public Action<string> LogError { get; set; }
 	public Action<string, SequencePoint> LogErrorPoint { get; set; }
+    public Action<string, MessageImportance> LogMessage { get; set; }
 	public IAssemblyResolver AssemblyResolver { get; set; }
 	public ModuleDefinition ModuleDefinition { get; set; }
 	public string SolutionDirectoryPath { get; set; }
