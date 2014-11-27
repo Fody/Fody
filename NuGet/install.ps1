@@ -9,7 +9,7 @@ $buildProject = [Microsoft.Build.Evaluation.ProjectCollection]::GlobalProjectCol
 
 $fodyPathProperty = $buildProject.GetProperty("FodyPath") 
 
-# Dont do a null check since is teems evaluating the value causes powershit to have a conniption 
+# Dont do a null check since is seems evaluating the value causes powershit to have a conniption 
 try	
 {
 	$buildProject.RemoveProperty($fodyPathProperty);
