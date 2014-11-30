@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Remoting;
 using Mono.Cecil;
+using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 {
@@ -19,13 +22,30 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     public List<string> ReferenceCopyLocalPaths { get; set; }
     public List<string> DefineConstants { get; set; }
 
+    Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+    {
+        foreach (var weaverPath in Weavers.Select(x => x.AssemblyPath))
+        {
+            var directoryName = Path.GetDirectoryName(weaverPath);
+            var assemblyFileName = new AssemblyName(args.Name).Name + ".dll";
+            string assemblyPath = Path.Combine(directoryName, assemblyFileName);
+            if (File.Exists(assemblyPath))
+            {
+                return LoadFromFile(assemblyPath);
+            }
+        }
+        return null;
+    }
+
     public void Execute()
     {
+        ResolveEventHandler assemblyResolve = CurrentDomain_AssemblyResolve;
         try
         {
             SplitUpReferences();
             GetSymbolProviders();
             ReadModule();
+            AppDomain.CurrentDomain.AssemblyResolve += assemblyResolve;
             var weaverInstances = new List<WeaverHolder>();
             InitialiseWeavers(weaverInstances);
             ExecuteWeavers(weaverInstances);
@@ -44,6 +64,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         }
         catch (Exception exception)
         {
+            AppDomain.CurrentDomain.AssemblyResolve -= assemblyResolve;
             Logger.LogException(exception);
         }
 
