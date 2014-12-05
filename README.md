@@ -55,6 +55,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [ArraySlice](https://github.com/Codealike/arrayslice) ArraySlice allows to build shared memory array views without performance impact. It uses IL manipulation to achieve the fastest implementation.
   * [AssertMessage](https://github.com/Fody/AssertMessage) Generates 'message' from sourcecode and adds it to assertion.
   * [AsyncErrorHandler](https://github.com/Fody/AsyncErrorHandler) Integrates error handling into async and TPL code.
+  * [AutoDependencyProperty](http://blog.angeloflogic.com/2014/12/no-more-dependencyproperty-with.html) Generates WPF DependencyProperty boilerplate from automatic C# properties.
   * [BasicFodyAddin](https://github.com/Fody/BasicFodyAddin) A simple project meant to illustrate how to build an addin.
   * [Bix.Mixers](https://github.com/rileywhite/Bix.Mixers.Fody) Write custom [mixins](https://en.wikipedia.org/wiki/Mixin) for C#.
   * [Caseless](https://github.com/Fody/Caseless) Change string comparisons to be case insensitive.
