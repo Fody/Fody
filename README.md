@@ -92,7 +92,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Publicize](https://github.com/Fody/Publicize) Converts non-public members to public hidden members.
   * [RemoveReference](https://github.com/icnocop/RemoveReference.Fody) Facilitates removing references in a compiled assembly during a build.
   * [Resourcer](https://github.com/Fody/Resourcer) Simplifies reading embedded resources from an Assembly.
-  * [RomanticWeb](http://romanticweb.net/) [nuget](https://www.nuget.org/packages/RomanticWeb.Fody/) Fody weaver plugin for RomanticWeb instrumentation.
+  * [RomanticWeb](http://romanticweb.net/) Fody weaver plugin for RomanticWeb instrumentation.
   * [Scalpel](https://github.com/Fody/Scalpel) Strips tests from an assembly. 
   * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration. 
   * [Stamp](https://github.com/Fody/Stamp) Stamps an assembly with git data.
