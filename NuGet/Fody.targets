@@ -61,7 +61,7 @@
   </Target>
 
   <!--Support for ncrunch-->
-  <ItemGroup>
+  <ItemGroup  Condition="'$(NCrunch)' == '1'">
     <None Include="$(FodyPath)\*.*" />
   </ItemGroup>
 
