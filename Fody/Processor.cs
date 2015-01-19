@@ -103,6 +103,8 @@ public partial class Processor
             ExecuteInOwnAppDomain();
         }
 
+        Verify();
+
         FlushWeaversXmlHistory();
     }
 
@@ -180,18 +182,31 @@ public partial class Processor
 
             innerWeaver.Execute();
         }
+    }
 
-#if DEBUG
-        if (!Debugger.IsAttached)
+    void Verify()
+    {
+        if (!VerifyAssembly)
         {
-            Debugger.Launch();
+            return;
         }
-#endif
 
-        if (VerifyAssembly)
+        var stopwatch = Stopwatch.StartNew();
+
+        try
         {
+            Logger.LogInfo("  Verifying assembly");
+
             var verifier = new PeVerifier(Logger, References);
             verifier.Verify(AssemblyFilePath);
+        }
+        catch (Exception exception)
+        {
+            Logger.LogException(exception);
+        }
+        finally
+        {
+            Logger.LogInfo(string.Format("  Finished verification in {0}ms.", stopwatch.ElapsedMilliseconds));
         }
     }
 

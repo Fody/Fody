@@ -108,7 +108,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             {
                 Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
                 var startNew = Stopwatch.StartNew();
-                Logger.LogDebug("  Executing Weaver ");
+                Logger.LogInfo(string.Format("  Executing Weaver {0}", weaver.Config.AssemblyName));
                 weaver.WeaverDelegate.Execute(weaver.Instance);
                 var finishedMessage = string.Format("  Finished '{0}' in {1}ms {2}", weaver.Config.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
                 Logger.LogDebug(finishedMessage);

@@ -46,17 +46,20 @@ namespace Fody.Verification
                 return true;
             }
 
-            //var targetDirectory = Path.GetDirectoryName(assemblyFileName);
+            var targetDirectory = Path.GetDirectoryName(assemblyFileName);
 
-            //_logger.LogDebug(string.Format("Copying references to '{0}' to ensure them for the verifier", targetDirectory));
+            _logger.LogDebug(string.Format("Copying references to '{0}' to ensure them for the verifier", targetDirectory));
 
-            //foreach (var reference in _references.Split(';'))
-            //{
-            //    var referenceFileName = Path.GetFileName(reference);
-            //    var destinationFile = Path.Combine(targetDirectory, referenceFileName);
+            foreach (var reference in _references.Split(';'))
+            {
+                var referenceFileName = Path.GetFileName(reference);
+                var destinationFile = Path.Combine(targetDirectory, referenceFileName);
 
-            //    File.Copy(reference, destinationFile);
-            //}
+                if (!File.Exists(destinationFile))
+                {
+                    File.Copy(reference, destinationFile);
+                }
+            }
 
             _logger.LogDebug("Running verifier using command line " + string.Format("{0} {1}", verifierPath, assemblyFileName));
 

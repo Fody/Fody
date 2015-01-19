@@ -22,17 +22,17 @@ public class BuildLogger : MarshalByRefObject, ILogger
 
     public virtual void LogMessage(string message, MessageImportance level)
     {
-        BuildEngine.LogMessageEvent(new BuildMessageEventArgs("  " + message, "", "Fody", level));
+        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + message, "", "Fody", level));
     }
 
     public virtual void LogDebug(string message)
     {
-        BuildEngine.LogMessageEvent(new BuildMessageEventArgs("  " + message, "", "Fody", DebugMessageImportant));
+        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + message, "", "Fody", DebugMessageImportant));
     }
 
     public virtual void LogInfo(string message)
     {
-        BuildEngine.LogMessageEvent(new BuildMessageEventArgs("  " + message, "", "Fody", InfoMessageImportant));
+        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + message, "", "Fody", InfoMessageImportant));
     }
 
     public virtual void LogWarning(string message)
@@ -54,6 +54,11 @@ public class BuildLogger : MarshalByRefObject, ILogger
     {
         ErrorOccurred = true;
         BuildEngine.LogErrorEvent(new BuildErrorEventArgs("", "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber, PrependMessage(message), "", "Fody"));
+    }
+
+    private string GetIndent()
+    {
+        return (currentWeaverName == null) ? "  " : "    ";
     }
 
     string PrependMessage(string message)
