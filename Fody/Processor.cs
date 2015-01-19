@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
+using Fody.Verification;
 using Microsoft.Build.Framework;
 using MSMessageEnum = Microsoft.Build.Framework.MessageImportance;
 
@@ -12,6 +14,7 @@ public partial class Processor
     public string IntermediateDirectoryPath;
     public string KeyFilePath;
     public bool SignAssembly;
+    public bool VerifyAssembly;
     public string ProjectDirectory;
     public string References;
     public string SolutionDirectoryPath;
@@ -40,7 +43,7 @@ public partial class Processor
             BuildEngine = BuildEngine,
         };
 
-        Logger.LogInfo(string.Format("Fody (version {0}) Executing", typeof (Processor).Assembly.GetName().Version));
+        Logger.LogInfo(string.Format("Fody (version {0}) Executing", typeof(Processor).Assembly.GetName().Version));
 
         var stopwatch = Stopwatch.StartNew();
 
@@ -67,14 +70,14 @@ public partial class Processor
         ValidateAssemblyPath();
 
         FindProjectWeavers();
-        
+
         if (!ShouldStartSinceFileChanged())
         {
             if (!CheckForWeaversXmlChanged())
             {
-                
+
                 FindWeavers();
-        
+
                 if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
                 {
                     Logger.LogWarning("A re-build is required to because a weaver changed");
@@ -87,11 +90,14 @@ public partial class Processor
 
         FindWeavers();
 
+        Configure();
+
         if (Weavers.Count == 0)
         {
             Logger.LogError("You don't seem to have configured any weavers. Try adding a Fody nuget package to your project. Have a look here http://nuget.org/packages?q=fody for the list of available packages.");
             return;
         }
+
         lock (locker)
         {
             ExecuteInOwnAppDomain();
@@ -107,7 +113,7 @@ public partial class Processor
         ReadProjectWeavers();
         addinFinder = new AddinFinder
             {
-                Logger = Logger, 
+                Logger = Logger,
                 SolutionDirectoryPath = SolutionDirectoryPath
             };
         addinFinder.FindAddinDirectories();
@@ -119,6 +125,24 @@ public partial class Processor
         ConfigureWhenNoWeaversFound();
 
         Logger.LogDebug(string.Format("Finished finding weavers {0}ms", stopwatch.ElapsedMilliseconds));
+    }
+
+    void Configure()
+    {
+        try
+        {
+            foreach (var configFile in ConfigFiles)
+            {
+                var configXml = XDocument.Load(configFile);
+                var element = configXml.Root;
+
+                element.ReadBool("VerifyAssembly", x => VerifyAssembly = x);
+            }
+        }
+        catch (Exception)
+        {
+            Logger.LogInfo("Failed to read config, using default configuration");
+        }
     }
 
     void ExecuteInOwnAppDomain()
@@ -146,6 +170,7 @@ public partial class Processor
             innerWeaver.KeyFilePath = KeyFilePath;
             innerWeaver.ReferenceCopyLocalPaths = ReferenceCopyLocalPaths;
             innerWeaver.SignAssembly = SignAssembly;
+            innerWeaver.VerifyAssembly = VerifyAssembly;
             innerWeaver.Logger = Logger;
             innerWeaver.SolutionDirectoryPath = SolutionDirectoryPath;
             innerWeaver.Weavers = Weavers;
@@ -154,6 +179,19 @@ public partial class Processor
             innerWeaver.ProjectDirectoryPath = ProjectDirectory;
 
             innerWeaver.Execute();
+        }
+
+#if DEBUG
+        if (!Debugger.IsAttached)
+        {
+            Debugger.Launch();
+        }
+#endif
+
+        if (VerifyAssembly)
+        {
+            var verifier = new PeVerifier(Logger, References);
+            verifier.Verify(AssemblyFilePath);
         }
     }
 

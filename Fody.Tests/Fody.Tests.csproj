@@ -85,6 +85,8 @@
     <Compile Include="ProjectPathFinderTests.cs" />
     <Compile Include="ProjectWeaversFinderTests.cs" />
     <Compile Include="ShouldStartSinceFileChangedTests.cs" />
+    <Compile Include="Verification\VerificationTests.cs" />
+    <Compile Include="Verification\VerifierFixture.cs" />
     <Compile Include="WeaverAssemblyPathFinderTests.cs" />
     <Compile Include="AdHocCecilTests.cs" />
     <Compile Include="WeaverProjectFileFinderTests.cs" />

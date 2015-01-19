@@ -14,6 +14,8 @@ namespace Fody
         public string IntermediateDir { get; set; }
         public string KeyFilePath { get; set; }
         public bool SignAssembly { get; set; }
+        public bool VerifyAssembly { get; set; }
+
         [Required]
         public string ProjectDirectory { get; set; }
 
@@ -47,6 +49,7 @@ namespace Fody
                     IntermediateDirectoryPath = IntermediateDir,
                     KeyFilePath = KeyFilePath,
                     SignAssembly = SignAssembly,
+                    VerifyAssembly = VerifyAssembly,
                     ProjectDirectory = ProjectDirectory,
                     References = References,
                     SolutionDirectoryPath = SolutionDir,

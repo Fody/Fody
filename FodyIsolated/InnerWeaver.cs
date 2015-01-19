@@ -17,6 +17,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     public List<WeaverEntry> Weavers { get; set; }
     public string KeyFilePath { get; set; }
     public bool SignAssembly { get; set; }
+    public bool VerifyAssembly { get; set; }
     public ILogger Logger { get; set; }
     public string IntermediateDirectoryPath { get; set; }
     public List<string> ReferenceCopyLocalPaths { get; set; }

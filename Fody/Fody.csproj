@@ -67,6 +67,8 @@
     <Compile Include="ProjectPathFinder.cs" />
     <Compile Include="ProjectWeaversReader.cs" />
     <Compile Include="AssemblyPathValidator.cs" />
+    <Compile Include="Verification\Interfaces\IVerifier.cs" />
+    <Compile Include="Verification\PeVerifier.cs" />
     <Compile Include="WeaverAssemblyPathFinder.cs" />
     <Compile Include="SolutionPathValidator.cs" />
     <Compile Include="AddinFinder\AddinFilesEnumerator.cs" />
