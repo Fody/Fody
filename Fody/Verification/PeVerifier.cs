@@ -84,6 +84,5 @@ namespace Fody.Verification
 
             return _location;
         }
-
     }
 }
