@@ -8,14 +8,16 @@ public partial class Processor
 {
     public List<WeaverEntry> Weavers;
 
-    public virtual void ReadProjectWeavers()
+    public virtual void ReadProjectWeavers(Configuration configuration)
     {
         if (Weavers != null)
         {
             return;
         }
+
         Weavers = new List<WeaverEntry>();
-        foreach (var configFile in ConfigFiles)
+
+        foreach (var configFile in configuration.ConfigFiles)
         {
             var xDocument = GetDocument(configFile);
             foreach (var element in xDocument.Root.Elements())

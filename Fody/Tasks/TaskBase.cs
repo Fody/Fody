@@ -1,12 +1,11 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
 namespace Fody
 {
-
-    public class WeavingTask : Task
+    public abstract class TaskBase : Task
     {
         [Required]
         public string AssemblyPath { set; get; }
@@ -38,25 +37,16 @@ namespace Fody
             {
                 referenceCopyLocalPaths = ReferenceCopyLocalPaths.Select(x => x.ItemSpec).ToList();
             }
+
             var defineConstants = new List<string>();
             if (DefineConstants != null)
             {
                 defineConstants = DefineConstants.Split(';').ToList();
             }
-            return new Processor
-                {
-                    AssemblyFilePath = AssemblyPath,
-                    IntermediateDirectoryPath = IntermediateDir,
-                    KeyFilePath = KeyFilePath,
-                    SignAssembly = SignAssembly,
-                    VerifyAssembly = VerifyAssembly,
-                    ProjectDirectory = ProjectDirectory,
-                    References = References,
-                    SolutionDirectoryPath = SolutionDir,
-                    BuildEngine = BuildEngine,
-                    ReferenceCopyLocalPaths = referenceCopyLocalPaths,
-                    DefineConstants = defineConstants
-                }.Execute();
+
+            return Execute(referenceCopyLocalPaths, defineConstants);
         }
+
+        protected abstract bool Execute(List<string> referenceCopyLocalPaths, List<string> defineConstants);
     }
 }

@@ -14,8 +14,12 @@ public class WeaversXmlHistoryTests
         try
         {
             var processor = new Processor();
-            processor.ConfigFiles.Add(fileName);
-            processor.CheckForWeaversXmlChanged();
+
+            var configuration = new Configuration(processor.Logger, processor.SolutionDirectoryPath,
+                processor.ProjectDirectory, processor.DefineConstants);
+            configuration.ConfigFiles.Add(fileName);
+
+            processor.CheckForWeaversXmlChanged(configuration);
 
             Assert.AreEqual(File.GetLastWriteTimeUtc(fileName), Processor.TimeStamps.First().Value);
         }
@@ -33,9 +37,13 @@ public class WeaversXmlHistoryTests
         try
         {
             var processor = new Processor();
-            processor.ConfigFiles.Add(fileName);
-            processor.CheckForWeaversXmlChanged();
-            processor.CheckForWeaversXmlChanged();
+
+            var configuration = new Configuration(processor.Logger, processor.SolutionDirectoryPath,
+                processor.ProjectDirectory, processor.DefineConstants);
+            configuration.ConfigFiles.Add(fileName);
+
+            processor.CheckForWeaversXmlChanged(configuration);
+            processor.CheckForWeaversXmlChanged(configuration);
 
             Assert.AreEqual(File.GetLastWriteTimeUtc(fileName), Processor.TimeStamps.First().Value);
         }
@@ -60,10 +68,14 @@ public class WeaversXmlHistoryTests
                 {
                     Logger = loggerMock.Object
                 };
-            processor.ConfigFiles.Add(fileName);
-            processor.CheckForWeaversXmlChanged();
+
+            var configuration = new Configuration(processor.Logger, processor.SolutionDirectoryPath,
+                processor.ProjectDirectory, processor.DefineConstants);
+            configuration.ConfigFiles.Add(fileName);
+
+            processor.CheckForWeaversXmlChanged(configuration);
             File.SetLastWriteTimeUtc(fileName, DateTime.Now.AddHours(1));
-            processor.CheckForWeaversXmlChanged();
+            processor.CheckForWeaversXmlChanged(configuration);
 
             loggerMock.Verify();
 

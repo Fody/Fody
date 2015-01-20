@@ -59,6 +59,23 @@
           DefineConstants="$(DefineConstants)"
       />
   </Target>
+  <Target
+      AfterTargets="AfterBuild"
+      Name="WinFodyVerifyTarget"
+      DependsOnTargets="$(FodyDependsOnTargets)">
+
+    <Fody.VerifyTask
+          AssemblyPath="@(IntermediateAssembly)"
+          IntermediateDir="$(IntermediateDir)"
+          KeyFilePath="$(FodyKeyFilePath)"
+          ProjectDirectory="$(ProjectDir)"
+          SolutionDir="$(FodySolutionDir)"
+          References="@(ReferencePath)"
+          SignAssembly="$(FodySignAssembly)"
+          ReferenceCopyLocalPaths="@(ReferenceCopyLocalPaths)"
+          DefineConstants="$(DefineConstants)"
+      />
+  </Target>
 
   <!--Support for ncrunch-->
   <ItemGroup  Condition="'$(NCrunch)' == '1'">

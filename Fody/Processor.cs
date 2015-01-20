@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using Fody;
 using Fody.Verification;
 using Microsoft.Build.Framework;
 using MSMessageEnum = Microsoft.Build.Framework.MessageImportance;
@@ -69,14 +70,14 @@ public partial class Processor
 
         ValidateAssemblyPath();
 
-        FindProjectWeavers();
+        var configuration = new Configuration(Logger, SolutionDirectoryPath, ProjectDirectory, DefineConstants);
+        configuration.LoadConfiguration();
 
         if (!ShouldStartSinceFileChanged())
         {
-            if (!CheckForWeaversXmlChanged())
+            if (!CheckForWeaversXmlChanged(configuration))
             {
-
-                FindWeavers();
+                FindWeavers(configuration);
 
                 if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
                 {
@@ -88,9 +89,7 @@ public partial class Processor
 
         ValidateSolutionPath();
 
-        FindWeavers();
-
-        Configure();
+        FindWeavers(configuration);
 
         if (Weavers.Count == 0)
         {
@@ -105,14 +104,17 @@ public partial class Processor
 
         Verify();
 
-        FlushWeaversXmlHistory();
+        FlushWeaversXmlHistory(configuration);
     }
 
-    void FindWeavers()
+    void FindWeavers(Configuration configuration)
     {
         var stopwatch = Stopwatch.StartNew();
+
         Logger.LogDebug("Finding weavers");
-        ReadProjectWeavers();
+
+        ReadProjectWeavers(configuration);
+
         addinFinder = new AddinFinder
             {
                 Logger = Logger,
@@ -127,24 +129,6 @@ public partial class Processor
         ConfigureWhenNoWeaversFound();
 
         Logger.LogDebug(string.Format("Finished finding weavers {0}ms", stopwatch.ElapsedMilliseconds));
-    }
-
-    void Configure()
-    {
-        try
-        {
-            foreach (var configFile in ConfigFiles)
-            {
-                var configXml = XDocument.Load(configFile);
-                var element = configXml.Root;
-
-                element.ReadBool("VerifyAssembly", x => VerifyAssembly = x);
-            }
-        }
-        catch (Exception)
-        {
-            Logger.LogInfo("Failed to read config, using default configuration");
-        }
     }
 
     void ExecuteInOwnAppDomain()
@@ -186,28 +170,9 @@ public partial class Processor
 
     void Verify()
     {
-        if (!VerifyAssembly)
-        {
-            return;
-        }
 
-        var stopwatch = Stopwatch.StartNew();
 
-        try
-        {
-            Logger.LogInfo("  Verifying assembly");
 
-            var verifier = new PeVerifier(Logger, References);
-            verifier.Verify(AssemblyFilePath);
-        }
-        catch (Exception exception)
-        {
-            Logger.LogException(exception);
-        }
-        finally
-        {
-            Logger.LogInfo(string.Format("  Finished verification in {0}ms.", stopwatch.ElapsedMilliseconds));
-        }
     }
 
     AppDomain CreateDomain()
