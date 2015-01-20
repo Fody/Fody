@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
@@ -9,11 +10,15 @@ namespace Fody
     {
         [Required]
         public string AssemblyPath { set; get; }
+        public string FinalAssemblyPath { get; set; }
 
         public string IntermediateDir { get; set; }
+
+        [Required]
+        public string FinalDir { get; set; }
+
         public string KeyFilePath { get; set; }
         public bool SignAssembly { get; set; }
-        public bool VerifyAssembly { get; set; }
 
         [Required]
         public string ProjectDirectory { get; set; }
@@ -32,6 +37,8 @@ namespace Fody
 
         public override bool Execute()
         {
+            FinalAssemblyPath = Path.Combine(FinalDir, Path.GetFileName(AssemblyPath));
+
             var referenceCopyLocalPaths = new List<string>();
             if (ReferenceCopyLocalPaths != null)
             {

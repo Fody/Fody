@@ -17,6 +17,8 @@ public class Configuration
         DefineConstants = defineConstants;
 
         ConfigFiles = new List<string>();
+
+        LoadConfiguration();
     }
 
     public List<string> ConfigFiles { get; private set; }

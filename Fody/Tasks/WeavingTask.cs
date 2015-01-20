@@ -13,7 +13,6 @@ namespace Fody
                 IntermediateDirectoryPath = IntermediateDir,
                 KeyFilePath = KeyFilePath,
                 SignAssembly = SignAssembly,
-                VerifyAssembly = VerifyAssembly,
                 ProjectDirectory = ProjectDirectory,
                 References = References,
                 SolutionDirectoryPath = SolutionDir,

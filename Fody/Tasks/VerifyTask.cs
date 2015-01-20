@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Fody.Verification;
 
 namespace Fody
@@ -8,15 +7,19 @@ namespace Fody
     {
         protected override bool Execute(List<string> referenceCopyLocalPaths, List<string> defineConstants)
         {
-            // TODO: read configuration
+            var logger = new BuildLogger
+            {
+                BuildEngine = BuildEngine
+            };
 
-            if (!VerifyAssembly)
+            var configuration = new Configuration(logger, SolutionDir, ProjectDirectory, defineConstants);
+            if (!configuration.VerifyAssembly)
             {
                 return true;
             }
 
-            var verifier = new PeVerifier( new BuildLogger());
-            return verifier.Verify(AssemblyPath);
+            var verifier = new PeVerifier(logger);
+            return verifier.Verify(FinalAssemblyPath);
         }
     }
 }

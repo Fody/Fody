@@ -41,7 +41,7 @@ public partial class Processor
     {
         Logger = new BuildLogger
         {
-            BuildEngine = BuildEngine,
+            BuildEngine = BuildEngine
         };
 
         Logger.LogInfo(string.Format("Fody (version {0}) Executing", typeof(Processor).Assembly.GetName().Version));
