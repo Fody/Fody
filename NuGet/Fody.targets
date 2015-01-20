@@ -50,6 +50,29 @@
     <Fody.WeavingTask
           AssemblyPath="@(IntermediateAssembly)"
           IntermediateDir="$(IntermediateDir)"
+          FinalDir="$(ProjectDir)$(OutputPath)"
+          KeyFilePath="$(FodyKeyFilePath)"
+          ProjectDirectory="$(ProjectDir)"
+          SolutionDir="$(FodySolutionDir)"
+          References="@(ReferencePath)"
+          SignAssembly="$(FodySignAssembly)"
+          ReferenceCopyLocalPaths="@(ReferenceCopyLocalPaths)"
+          DefineConstants="$(DefineConstants)"
+      />
+  </Target>
+
+  <UsingTask
+      TaskName="Fody.VerifyTask"
+      AssemblyFile="$(FodyPath)\Fody.dll" />
+  <Target
+      AfterTargets="AfterBuild"
+      Name="WinFodyVerifyTarget"
+      DependsOnTargets="$(FodyDependsOnTargets)">
+
+    <Fody.VerifyTask
+          AssemblyPath="@(IntermediateAssembly)"
+          IntermediateDir="$(IntermediateDir)"
+          FinalDir="$(ProjectDir)$(OutputPath)"
           KeyFilePath="$(FodyKeyFilePath)"
           ProjectDirectory="$(ProjectDir)"
           SolutionDir="$(FodySolutionDir)"

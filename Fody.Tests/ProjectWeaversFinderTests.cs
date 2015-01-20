@@ -13,13 +13,15 @@ public class ProjectWeaversFinderTests
         var logger = loggerMock.Object;
         var processor = new Processor
                                        {
-										   ProjectDirectory = Environment.CurrentDirectory,
+                                           ProjectDirectory = Environment.CurrentDirectory,
                                            Logger = logger,
                                            SolutionDirectoryPath = Environment.CurrentDirectory
                                        };
-        processor.FindProjectWeavers();
-        Assert.IsEmpty(processor.ConfigFiles);
+
+        var configuration = new Configuration(processor.Logger, processor.SolutionDirectoryPath,
+            processor.ProjectDirectory, processor.DefineConstants);
+
+        Assert.IsEmpty(configuration.ConfigFiles);
         loggerMock.Verify();
-        
     }
 }

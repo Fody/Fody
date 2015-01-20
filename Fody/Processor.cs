@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Xml.Linq;
+using Fody;
+using Fody.Verification;
 using Microsoft.Build.Framework;
 using MSMessageEnum = Microsoft.Build.Framework.MessageImportance;
 
@@ -12,6 +15,7 @@ public partial class Processor
     public string IntermediateDirectoryPath;
     public string KeyFilePath;
     public bool SignAssembly;
+    public bool VerifyAssembly;
     public string ProjectDirectory;
     public string References;
     public string SolutionDirectoryPath;
@@ -37,10 +41,10 @@ public partial class Processor
     {
         Logger = new BuildLogger
         {
-            BuildEngine = BuildEngine,
+            BuildEngine = BuildEngine
         };
 
-        Logger.LogInfo(string.Format("Fody (version {0}) Executing", typeof (Processor).Assembly.GetName().Version));
+        Logger.LogInfo(string.Format("Fody (version {0}) Executing", typeof(Processor).Assembly.GetName().Version));
 
         var stopwatch = Stopwatch.StartNew();
 
@@ -66,15 +70,15 @@ public partial class Processor
 
         ValidateAssemblyPath();
 
-        FindProjectWeavers();
-        
+        var configuration = new Configuration(Logger, SolutionDirectoryPath, ProjectDirectory, DefineConstants);
+        configuration.LoadConfiguration();
+
         if (!ShouldStartSinceFileChanged())
         {
-            if (!CheckForWeaversXmlChanged())
+            if (!CheckForWeaversXmlChanged(configuration))
             {
-                
-                FindWeavers();
-        
+                FindWeavers(configuration);
+
                 if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
                 {
                     Logger.LogWarning("A re-build is required to because a weaver changed");
@@ -85,29 +89,35 @@ public partial class Processor
 
         ValidateSolutionPath();
 
-        FindWeavers();
+        FindWeavers(configuration);
 
         if (Weavers.Count == 0)
         {
             Logger.LogError("You don't seem to have configured any weavers. Try adding a Fody nuget package to your project. Have a look here http://nuget.org/packages?q=fody for the list of available packages.");
             return;
         }
+
         lock (locker)
         {
             ExecuteInOwnAppDomain();
         }
 
-        FlushWeaversXmlHistory();
+        Verify();
+
+        FlushWeaversXmlHistory(configuration);
     }
 
-    void FindWeavers()
+    void FindWeavers(Configuration configuration)
     {
         var stopwatch = Stopwatch.StartNew();
+
         Logger.LogDebug("Finding weavers");
-        ReadProjectWeavers();
+
+        ReadProjectWeavers(configuration);
+
         addinFinder = new AddinFinder
             {
-                Logger = Logger, 
+                Logger = Logger,
                 SolutionDirectoryPath = SolutionDirectoryPath
             };
         addinFinder.FindAddinDirectories();
@@ -146,6 +156,7 @@ public partial class Processor
             innerWeaver.KeyFilePath = KeyFilePath;
             innerWeaver.ReferenceCopyLocalPaths = ReferenceCopyLocalPaths;
             innerWeaver.SignAssembly = SignAssembly;
+            innerWeaver.VerifyAssembly = VerifyAssembly;
             innerWeaver.Logger = Logger;
             innerWeaver.SolutionDirectoryPath = SolutionDirectoryPath;
             innerWeaver.Weavers = Weavers;
@@ -155,6 +166,13 @@ public partial class Processor
 
             innerWeaver.Execute();
         }
+    }
+
+    void Verify()
+    {
+
+
+
     }
 
     AppDomain CreateDomain()

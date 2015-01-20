@@ -6,10 +6,10 @@ public partial class Processor
 {
     public static Dictionary<string, DateTime> TimeStamps = new Dictionary<string, DateTime>();
 
-    public virtual bool CheckForWeaversXmlChanged()
+    public virtual bool CheckForWeaversXmlChanged(Configuration configuration)
     {
         var changed = false;
-        foreach (var configFile in ConfigFiles)
+        foreach (var configFile in configuration.ConfigFiles)
         {
             var timeStamp = File.GetLastWriteTimeUtc(configFile);
             DateTime dateTime;
@@ -29,9 +29,9 @@ public partial class Processor
         return changed;
     }
 
-    public virtual void FlushWeaversXmlHistory()
+    public virtual void FlushWeaversXmlHistory(Configuration configuration)
     {
-        foreach (var configFile in ConfigFiles)
+        foreach (var configFile in configuration.ConfigFiles)
         {
             TimeStamps[configFile] = File.GetLastWriteTimeUtc(configFile);
         }

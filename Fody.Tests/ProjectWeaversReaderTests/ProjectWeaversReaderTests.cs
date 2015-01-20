@@ -10,8 +10,12 @@ public class ProjectWeaversReaderTests
     public void Simple()
     {
         var processor = new Processor();
-        processor.ConfigFiles.AddRange(GetPaths());
-        processor.ReadProjectWeavers();
+
+        var configuration = new Configuration(processor.Logger, processor.SolutionDirectoryPath,
+            processor.ProjectDirectory, processor.DefineConstants);
+        configuration.ConfigFiles.AddRange(GetPaths());
+
+        processor.ReadProjectWeavers(configuration);
         var weavers = processor.Weavers;
         Assert.AreEqual(3, weavers.Count);
         Assert.AreEqual("SampleTask1", weavers[0].AssemblyName);
