@@ -5,8 +5,6 @@ public partial class Processor
 { 
     public List<string> ConfigFiles = new List<string>();
 
-    public string SolutionConfigFilePath;
-
     public virtual void FindProjectWeavers()
     {
         var fodyDirConfigFilePath = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyWeavers.xml");
