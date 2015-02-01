@@ -28,7 +28,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         {
             var directoryName = Path.GetDirectoryName(weaverPath);
             var assemblyFileName = new AssemblyName(args.Name).Name + ".dll";
-            string assemblyPath = Path.Combine(directoryName, assemblyFileName);
+            var assemblyPath = Path.Combine(directoryName, assemblyFileName);
             if (File.Exists(assemblyPath))
             {
                 return LoadFromFile(assemblyPath);

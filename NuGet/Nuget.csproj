@@ -4,7 +4,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{66DDADC1-1631-4EC7-8CB2-DD8080188234}</ProjectGuid>
-    <NuGetPackageImportStamp>84cb21b1</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>8fdcee39</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <ConfigurationName>Debug</ConfigurationName>
@@ -66,11 +66,11 @@
       <Name>FodyIsolated</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\packages\PepitaPackage.1.21.3\build\PepitaPackage.targets" Condition="Exists('..\packages\PepitaPackage.1.21.3\build\PepitaPackage.targets')" />
+  <Import Project="..\packages\PepitaPackage.1.21.4\build\PepitaPackage.targets" Condition="Exists('..\packages\PepitaPackage.1.21.4\build\PepitaPackage.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\PepitaPackage.1.21.3\build\PepitaPackage.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PepitaPackage.1.21.3\build\PepitaPackage.targets'))" />
+    <Error Condition="!Exists('..\packages\PepitaPackage.1.21.4\build\PepitaPackage.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PepitaPackage.1.21.4\build\PepitaPackage.targets'))" />
   </Target>
 </Project>
