@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Moq;
@@ -13,8 +14,13 @@ public class WeaversXmlHistoryTests
         var fileName = Path.GetTempFileName();
         try
         {
-            var processor = new Processor();
-            processor.ConfigFiles.Add(fileName);
+            var processor = new Processor
+            {
+                ConfigFiles = new List<string>
+                                              {
+                                                  fileName
+                                              }
+            };
             processor.CheckForWeaversXmlChanged();
 
             Assert.AreEqual(File.GetLastWriteTimeUtc(fileName), Processor.TimeStamps.First().Value);
@@ -32,8 +38,13 @@ public class WeaversXmlHistoryTests
         var fileName = Path.GetTempFileName();
         try
         {
-            var processor = new Processor();
-            processor.ConfigFiles.Add(fileName);
+            var processor = new Processor
+                            {
+                                ConfigFiles = new List<string>
+                                              {
+                                                  fileName
+                                              }
+                            };
             processor.CheckForWeaversXmlChanged();
             processor.CheckForWeaversXmlChanged();
 
@@ -57,10 +68,13 @@ public class WeaversXmlHistoryTests
             loggerMock.Setup(x => x.LogDebug(It.IsAny<string>()));
 
             var processor = new Processor
-                {
-                    Logger = loggerMock.Object
-                };
-            processor.ConfigFiles.Add(fileName);
+                            {
+                                Logger = loggerMock.Object,
+                                ConfigFiles = new List<string>
+                                              {
+                                                  fileName
+                                              }
+                            };
             processor.CheckForWeaversXmlChanged();
             File.SetLastWriteTimeUtc(fileName, DateTime.Now.AddHours(1));
             processor.CheckForWeaversXmlChanged();

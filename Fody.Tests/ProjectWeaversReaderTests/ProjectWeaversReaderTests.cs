@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 
@@ -9,8 +10,10 @@ public class ProjectWeaversReaderTests
     [Test]
     public void Simple()
     {
-        var processor = new Processor();
-        processor.ConfigFiles.AddRange(GetPaths());
+        var processor = new Processor
+                        {
+                            ConfigFiles = GetPaths().ToList()
+                        };
         processor.ReadProjectWeavers();
         var weavers = processor.Weavers;
         Assert.AreEqual(3, weavers.Count);

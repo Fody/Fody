@@ -59,7 +59,7 @@
     <Compile Include="Processor.cs" />
     <Compile Include="InstanceLinker\WeaversConfiguredInstanceLinker.cs" />
     <Compile Include="InstanceLinker\NoWeaversConfiguredInstanceLinker.cs" />
-    <Compile Include="ProjectWeaversFinder.cs" />
+    <Compile Include="ConfigFileFinder.cs" />
     <Compile Include="AddinFinder\AddinSearchDirectories.cs" />
     <Compile Include="AssemblyVersionReader.cs" />
     <Compile Include="BuildLogger.cs" />

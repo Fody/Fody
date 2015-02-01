@@ -18,6 +18,7 @@ public partial class Processor
     public IBuildEngine BuildEngine;
     public List<string> ReferenceCopyLocalPaths;
     public List<string> DefineConstants;
+    public List<string> ConfigFiles;
 
     AddinFinder addinFinder;
     static Dictionary<string, AppDomain> solutionDomains = new Dictionary<string, AppDomain>(StringComparer.OrdinalIgnoreCase);
@@ -66,8 +67,8 @@ public partial class Processor
 
         ValidateAssemblyPath();
 
-        FindProjectWeavers();
-        
+        ConfigFiles = ConfigFileFinder.FindProjectWeavers(SolutionDirectoryPath, ProjectDirectory, Logger);
+
         if (!ShouldStartSinceFileChanged())
         {
             if (!CheckForWeaversXmlChanged())
@@ -99,6 +100,7 @@ public partial class Processor
 
         FlushWeaversXmlHistory();
     }
+
 
     void FindWeavers()
     {
