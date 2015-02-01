@@ -6,7 +6,7 @@ public  class ConfigFileFinder
     
     public static List<string> FindProjectWeavers(string solutionDirectoryPath, string projectDirectory, BuildLogger logger)
     {
-        List<string> files = new List<string>();
+        var files = new List<string>();
         var fodyDirConfigFilePath = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyWeavers.xml");
         if (File.Exists(fodyDirConfigFilePath))
         {
