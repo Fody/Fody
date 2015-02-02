@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Microsoft.Build.Framework;
 using MSMessageEnum = Microsoft.Build.Framework.MessageImportance;
 
 public partial class Processor
 {
     public string AssemblyFilePath;
-    public string IntermediateDirectoryPath;
+    public string IntermediateDirectory;
     public string KeyFilePath;
     public bool SignAssembly;
     public string ProjectDirectory;
     public string References;
-    public string SolutionDirectoryPath;
-    public IBuildEngine BuildEngine;
+    public string SolutionDirectory;
     public List<string> ReferenceCopyLocalPaths;
     public List<string> DefineConstants;
     public List<string> ConfigFiles;
@@ -36,10 +34,6 @@ public partial class Processor
 
     public virtual bool Execute()
     {
-        Logger = new BuildLogger
-        {
-            BuildEngine = BuildEngine,
-        };
 
         Logger.LogInfo(string.Format("Fody (version {0}) Executing", typeof (Processor).Assembly.GetName().Version));
 
@@ -67,7 +61,7 @@ public partial class Processor
 
         ValidateAssemblyPath();
 
-        ConfigFiles = ConfigFileFinder.FindProjectWeavers(SolutionDirectoryPath, ProjectDirectory, Logger);
+        ConfigFiles = ConfigFileFinder.FindWeaverConfigs(SolutionDirectory, ProjectDirectory, Logger);
 
         if (!ShouldStartSinceFileChanged())
         {
@@ -110,7 +104,7 @@ public partial class Processor
         addinFinder = new AddinFinder
             {
                 Logger = Logger, 
-                SolutionDirectoryPath = SolutionDirectoryPath
+                SolutionDirectoryPath = SolutionDirectory
             };
         addinFinder.FindAddinDirectories();
 
@@ -126,18 +120,18 @@ public partial class Processor
     void ExecuteInOwnAppDomain()
     {
         AppDomain appDomain;
-        if (solutionDomains.TryGetValue(SolutionDirectoryPath, out appDomain))
+        if (solutionDomains.TryGetValue(SolutionDirectory, out appDomain))
         {
             if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
             {
                 Logger.LogDebug("A Weaver HasChanged so loading a new AppDomain");
                 AppDomain.Unload(appDomain);
-                appDomain = solutionDomains[SolutionDirectoryPath] = CreateDomain();
+                appDomain = solutionDomains[SolutionDirectory] = CreateDomain();
             }
         }
         else
         {
-            appDomain = solutionDomains[SolutionDirectoryPath] = CreateDomain();
+            appDomain = solutionDomains[SolutionDirectory] = CreateDomain();
         }
 
         var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
@@ -149,9 +143,9 @@ public partial class Processor
             innerWeaver.ReferenceCopyLocalPaths = ReferenceCopyLocalPaths;
             innerWeaver.SignAssembly = SignAssembly;
             innerWeaver.Logger = Logger;
-            innerWeaver.SolutionDirectoryPath = SolutionDirectoryPath;
+            innerWeaver.SolutionDirectoryPath = SolutionDirectory;
             innerWeaver.Weavers = Weavers;
-            innerWeaver.IntermediateDirectoryPath = IntermediateDirectoryPath;
+            innerWeaver.IntermediateDirectoryPath = IntermediateDirectory;
             innerWeaver.DefineConstants = DefineConstants;
             innerWeaver.ProjectDirectoryPath = ProjectDirectory;
 
@@ -166,6 +160,6 @@ public partial class Processor
         {
             ApplicationBase = AssemblyLocation.CurrentDirectory,
         };
-        return AppDomain.CreateDomain(string.Format("Fody Domain for '{0}'", SolutionDirectoryPath), null, appDomainSetup);
+        return AppDomain.CreateDomain(string.Format("Fody Domain for '{0}'", SolutionDirectory), null, appDomainSetup);
     }
 }

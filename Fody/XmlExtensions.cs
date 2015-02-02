@@ -24,4 +24,19 @@ public static class XmlExtensions
             .Select(x => new XAttribute(x.Name.LocalName, x.Value));
     }
 
+    public static bool TryReadBool(this XElement config, string nodeName, out bool value)
+    {
+        var attribute = config.Attribute(nodeName);
+        if (attribute != null)
+        {
+            if (bool.TryParse(attribute.Value, out value))
+            {
+                return true;
+            }
+            throw new WeavingException(string.Format("Could not parse '{0}' from '{1}'.", nodeName, attribute.Value));
+        }
+        value = false;
+        return false;
+    }
+
 }

@@ -4,7 +4,7 @@ using System.IO;
 public  class ConfigFileFinder
 {
     
-    public static List<string> FindProjectWeavers(string solutionDirectoryPath, string projectDirectory, BuildLogger logger)
+    public static List<string> FindWeaverConfigs(string solutionDirectoryPath, string projectDirectory, ILogger logger)
     {
         var files = new List<string>();
         var fodyDirConfigFilePath = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyWeavers.xml");

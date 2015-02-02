@@ -44,7 +44,7 @@
       AssemblyFile="$(FodyPath)\Fody.dll" />
   <Target
       AfterTargets="AfterCompile"
-      Name="WinFodyTarget"
+      Name="FodyTarget"
       DependsOnTargets="$(FodyDependsOnTargets)">
 
     <Fody.WeavingTask
@@ -60,6 +60,24 @@
       />
   </Target>
 
+
+  <UsingTask
+    TaskName="Fody.VerifyTask"
+    AssemblyFile="$(FodyPath)\Fody.dll" />
+  <Target
+      AfterTargets="AfterBuild"
+      Name="FodyVerifyTarget"
+      DependsOnTargets="$(FodyVerifyDependsOnTargets)">
+
+    <Fody.VerifyTask
+          ProjectDirectory="$(ProjectDir)"
+          TargetPath="$(TargetPath)"
+          SolutionDir="$(FodySolutionDir)"
+          DefineConstants="$(DefineConstants)"
+      />
+  </Target>
+  
+  
   <!--Support for ncrunch-->
   <ItemGroup  Condition="'$(NCrunch)' == '1'">
     <None Include="$(FodyPath)\*.*" />

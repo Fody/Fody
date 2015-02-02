@@ -5,11 +5,11 @@ public partial class Processor
 
     public virtual void ValidateSolutionPath()
     {
-	    SolutionDirectoryPath = Path.GetFullPath(SolutionDirectoryPath);
-        if (!Directory.Exists(SolutionDirectoryPath))
+	    SolutionDirectory = Path.GetFullPath(SolutionDirectory);
+        if (!Directory.Exists(SolutionDirectory))
         {
-            throw new WeavingException(string.Format("SolutionDir \"{0}\" does not exist.", SolutionDirectoryPath));
+            throw new WeavingException(string.Format("SolutionDir \"{0}\" does not exist.", SolutionDirectory));
         }
-        Logger.LogDebug(string.Format("SolutionDirectory path is '{0}'", SolutionDirectoryPath));
+        Logger.LogDebug(string.Format("SolutionDirectory path is '{0}'", SolutionDirectory));
     }
 }
