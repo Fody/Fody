@@ -1,14 +1,16 @@
 ![Icon](https://raw.github.com/Fody/Fody/master/Icons/package_icon.png)
 
-## Extensible tool for weaving .net assemblies
+## Extensible tool for weaving .net assemblies 
 
 ## Introduction 
 
 Manipulating the IL of an assembly as part of a build requires a significant amount of plumbing code. This plumbing code involves knowledge of both the MSBuild and Visual Studio APIs. Fody attempts to eliminate that plumbing code through an extensible add-in model. 
 
-## The nuget package
+## The nuget package  [![NuGet Status](http://img.shields.io/nuget/v/Fody.svg?style=flat)](https://www.nuget.org/packages/Fody/)
 
 https://nuget.org/packages/Fody/
+
+    PM> Install-Package Fody
 
 ## Why? 
 
