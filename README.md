@@ -108,6 +108,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Validar](https://github.com/Fody/Validar) Injects [IDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.IDataErrorInfo.aspx) or [INotifyDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.INotifyDataErrorInfo.aspx ) code into a class at compile time.
   * [Visualize](https://github.com/Fody/Visualize) Adds debugger attributes to help visualize objects.
   * [Virtuosity](https://github.com/Fody/Virtuosity) Change all members to virtual.
+  * [Weavisor](https://github.com/ArxOne/Weavisor) .NET aspect weaver.
   * [YALF](https://github.com/sharpmonkey/YALF) Yet Another Logging Framework.
     
 ## Icon
