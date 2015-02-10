@@ -77,6 +77,7 @@
     <Compile Include="AppDomainAssemblyFinder.cs" />
     <Compile Include="AssemblyVersionReaderTests.cs" />
     <Compile Include="ContainsTypeCheckerTests.cs" />
+    <Compile Include="PeVerifierTests.cs" />
     <Compile Include="SyncRepositories.cs" />
     <Compile Include="DomainAssemblyResolverTests.cs" />
     <Compile Include="InstanceLinker\NoWeaversConfiguredInstanceLinkerTests.cs" />
@@ -135,6 +136,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="NugetPackagePathFinder\FakeSolutionWithNugetConfig\nuget.config" />
+    <Content Include="PeVerifierTests_WithFalseVerifyAssembly.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PeVerifierTests_WithTrueVerifyAssembly.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PeVerifierTests_NoVerifyAssembly.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

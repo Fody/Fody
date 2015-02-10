@@ -12,9 +12,9 @@ public class Verifier
     public List<string> DefineConstants;
     public string ProjectDirectory;
     public string TargetPath;
-    static bool foundPeVerify;
-    static string windowsSdkDirectory;
-    static string peverifyPath;
+    public static bool foundPeVerify;
+    public static string windowsSdkDirectory;
+    public static string peverifyPath;
 
     static Verifier()
     {
@@ -105,10 +105,20 @@ public class Verifier
     }
 
     
-    bool ReadShouldVerifyAssembly()
+    public bool ReadShouldVerifyAssembly()
     {
+        if (DefineConstants.Any(x => x == "FodyVerifyAssembly"))
+        {
+            return true;
+        }
+
         var weaverConfigs = ConfigFileFinder.FindWeaverConfigs(SolutionDirectory, ProjectDirectory, Logger);
 
+        return ExtractVerifyAssemblyFromConfigs(weaverConfigs);
+    }
+
+    public static bool ExtractVerifyAssemblyFromConfigs(List<string> weaverConfigs)
+    {
         foreach (var configFile in weaverConfigs)
         {
             var configXml = XDocument.Load(configFile);
