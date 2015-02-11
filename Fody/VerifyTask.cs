@@ -1,4 +1,3 @@
-using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -17,7 +16,7 @@ namespace Fody
 
         public override bool Execute()
         {
-            var defineConstants = DefineConstants.Split(';').ToList();
+            var defineConstants = DefineConstants.GetConstants();
             var verifier = new Verifier
                            {
                                Logger = new BuildLogger

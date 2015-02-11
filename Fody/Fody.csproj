@@ -54,6 +54,7 @@
       <Link>SearchDirectories\NugetConfigReader.cs</Link>
     </Compile>
     <Compile Include="AssemblyLocation.cs" />
+    <Compile Include="ExtractConstants.cs" />
     <Compile Include="PeVerifier.cs" />
     <Compile Include="ContainsTypeChecker.cs" />
     <Compile Include="DomainAssemblyResolver.cs" />

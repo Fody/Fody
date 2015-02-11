@@ -28,13 +28,12 @@ namespace Fody
         [Required]
         public string SolutionDir { get; set; }
 
-        [Required]
         public string DefineConstants { get; set; }
 
         public override bool Execute()
         {
             var referenceCopyLocalPaths = ReferenceCopyLocalPaths.Select(x => x.ItemSpec).ToList();
-            var defineConstants = DefineConstants.Split(';').ToList();
+            var defineConstants = DefineConstants.GetConstants();
             return new Processor
                    {
                        Logger = new BuildLogger
@@ -52,5 +51,7 @@ namespace Fody
                        DefineConstants = defineConstants
                    }.Execute();
         }
+
     }
 }
+
