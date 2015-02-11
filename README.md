@@ -85,6 +85,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [MethodTimer](https://github.com/Fody/MethodTimer) Injects method timing code.
   * [Mixins](https://bitbucket.org/skwasiborski/mixins.fody/wiki/Home) A mixin is a class that provides a certain functionality to be inherited or just reused by a subclass.
   * [ModuleInit](https://github.com/Fody/ModuleInit) Adds a module initializer to an assembly.
+  * [MrAdvice](https://github.com/ArxOne/MrAdvice) .NET aspect weaver.
   * [Mutable](https://github.com/ndamjan/Mutable.Fody) Make F# setters for union types and eliminate need for `CLIMutable` attribute for records.
   * [Nancy.ModelPostprocess](https://bitbucket.org/tpluscode/nancy.modelpostprocess) Modify Nancy models after route execution but before serialization
   * [NullGuard](https://github.com/Fody/NullGuard) Adds null argument checks to an assembly
@@ -108,7 +109,6 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Validar](https://github.com/Fody/Validar) Injects [IDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.IDataErrorInfo.aspx) or [INotifyDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.INotifyDataErrorInfo.aspx ) code into a class at compile time.
   * [Visualize](https://github.com/Fody/Visualize) Adds debugger attributes to help visualize objects.
   * [Virtuosity](https://github.com/Fody/Virtuosity) Change all members to virtual.
-  * [Weavisor](https://github.com/ArxOne/Weavisor) .NET aspect weaver.
   * [YALF](https://github.com/sharpmonkey/YALF) Yet Another Logging Framework.
     
 ## Icon
