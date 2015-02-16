@@ -7,7 +7,6 @@ namespace Fody
     {
         [Required]
         public string SolutionDir { get; set; }
-        [Required]
         public string DefineConstants { get; set; }
         [Required]
         public string ProjectDirectory { get; set; }
