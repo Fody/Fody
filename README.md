@@ -111,6 +111,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Visualize](https://github.com/Fody/Visualize) Adds debugger attributes to help visualize objects.
   * [Virtuosity](https://github.com/Fody/Virtuosity) Change all members to virtual.
   * [YALF](https://github.com/sharpmonkey/YALF) Yet Another Logging Framework.
+  * [Tail](https://github.com/hazzik/Tail.Fody) Adds a postfixed method call instruction to recursive calls.
     
 ## Icon
 
