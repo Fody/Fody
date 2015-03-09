@@ -79,4 +79,14 @@ public class ModuleWeaver
     {
         ModuleDefinition.Types.Add(new TypeDefinition("MyNamespace", "MyType", TypeAttributes.Public));
     }
+
+    // Will be called when a request to cancel the build occurs. OPTIONAL
+    public void Cancel()
+    {
+    }
+
+    // Will be called after all weaving has occurred and the module has been saved. OPTIONAL
+    public void AfterWeaving()
+    {
+    }
 }
