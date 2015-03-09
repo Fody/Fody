@@ -136,6 +136,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="NugetPackagePathFinder\FakeSolutionWithNugetConfig\nuget.config" />
+    <Content Include="PeVerifierTests_NoVerifyIgnoreCodes.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PeVerifierTests_VerifyIgnoreCodes_Multiple.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="PeVerifierTests_VerifyIgnoreCodes_Single.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="PeVerifierTests_WithFalseVerifyAssembly.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

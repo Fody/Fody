@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 
 [TestFixture]
@@ -20,10 +21,46 @@ public class VerifierTests
     {
         var filePath = Path.Combine(Environment.CurrentDirectory, "PeVerifierTests_NoVerifyAssembly.xml");
         var verifyAssembly = Verifier.ExtractVerifyAssemblyFromConfigs(new List<string>
-                                                                         {
-                                                                             filePath
-                                                                         });
+        {
+            filePath
+        });
         Assert.IsFalse(verifyAssembly);
+    }
+
+    [Test]
+    public void ExtractVerifyIgnoreCodels_NotExists()
+    {
+        var filePath = Path.Combine(Environment.CurrentDirectory, "PeVerifierTests_NoVerifyIgnoreCodes.xml");
+        var verifyAssembly = Verifier.ExtractVerifyIgnoreCodesConfigs(new List<string>
+        {
+            filePath
+        });
+        Assert.IsEmpty(verifyAssembly);
+    }
+
+    [Test]
+    public void ExtractVerifyIgnoreCodels_WithCodeMultiple()
+    {
+        var filePath = Path.Combine(Environment.CurrentDirectory, "PeVerifierTests_VerifyIgnoreCodes_Multiple.xml");
+        var verifyAssembly = Verifier.ExtractVerifyIgnoreCodesConfigs(new List<string>
+        {
+            filePath
+        })
+            .ToList();
+        Assert.Contains("myignorecode1", verifyAssembly);
+        Assert.Contains("myignorecode2", verifyAssembly);
+    }
+
+    [Test]
+    public void ExtractVerifyIgnoreCodels_WithCodeSingle()
+    {
+        var filePath = Path.Combine(Environment.CurrentDirectory, "PeVerifierTests_VerifyIgnoreCodes_Single.xml");
+        var verifyAssembly = Verifier.ExtractVerifyIgnoreCodesConfigs(new List<string>
+        {
+            filePath
+        })
+            .ToList();
+        Assert.Contains("myignorecode1", verifyAssembly);
     }
 
     [Test]
@@ -31,9 +68,9 @@ public class VerifierTests
     {
         var filePath = Path.Combine(Environment.CurrentDirectory, "PeVerifierTests_WithTrueVerifyAssembly.xml");
         var verifyAssembly = Verifier.ExtractVerifyAssemblyFromConfigs(new List<string>
-                                                                         {
-                                                                             filePath
-                                                                         });
+        {
+            filePath
+        });
         Assert.IsTrue(verifyAssembly);
     }
 
@@ -42,9 +79,9 @@ public class VerifierTests
     {
         var filePath = Path.Combine(Environment.CurrentDirectory, "PeVerifierTests_WithFalseVerifyAssembly.xml");
         var verifyAssembly = Verifier.ExtractVerifyAssemblyFromConfigs(new List<string>
-                                                                         {
-                                                                             filePath
-                                                                         });
+        {
+            filePath
+        });
         Assert.IsFalse(verifyAssembly);
     }
 }

@@ -10,6 +10,7 @@ public class Verifier
     public ILogger Logger;
     public string SolutionDirectory;
     public List<string> DefineConstants;
+    public List<string> Ignores;
     public string ProjectDirectory;
     public string TargetPath;
     public static bool foundPeVerify;
@@ -59,7 +60,8 @@ public class Verifier
 
     bool InnerVerify()
     {
-        if (!ReadShouldVerifyAssembly())
+        List<string> ignoreCodes;
+        if (!ReadShouldVerifyAssembly(out ignoreCodes))
         {
             Logger.LogInfo("  Skipped Verifying assembly since it is disabled in configuration");
             return true;
@@ -82,7 +84,7 @@ public class Verifier
 
         var processStartInfo = new ProcessStartInfo(peverifyPath)
                                {
-                                   Arguments = string.Format("\"{0}\" /ignore=0x80070002", TargetPath),
+                                   Arguments = string.Format("\"{0}\" /hresult /ignore=0x80070002,{1}", TargetPath, string.Join(",", ignoreCodes)),
                                    WorkingDirectory = Path.GetDirectoryName(TargetPath),
                                    CreateNoWindow = true,
                                    UseShellExecute = false,
@@ -105,14 +107,15 @@ public class Verifier
     }
 
     
-    public bool ReadShouldVerifyAssembly()
+    public bool ReadShouldVerifyAssembly(out List<string> ignoreCodes)
     {
+        var weaverConfigs = ConfigFileFinder.FindWeaverConfigs(SolutionDirectory, ProjectDirectory, Logger);
+        ignoreCodes = ExtractVerifyIgnoreCodesConfigs(weaverConfigs).ToList();
         if (DefineConstants.Any(x => x == "FodyVerifyAssembly"))
         {
             return true;
         }
 
-        var weaverConfigs = ConfigFileFinder.FindWeaverConfigs(SolutionDirectory, ProjectDirectory, Logger);
 
         return ExtractVerifyAssemblyFromConfigs(weaverConfigs);
     }
@@ -130,5 +133,22 @@ public class Verifier
             }
         }
         return false;
+    }
+
+    public static IEnumerable<string> ExtractVerifyIgnoreCodesConfigs(List<string> weaverConfigs)
+    {
+        foreach (var configFile in weaverConfigs)
+        {
+            var configXml = XDocument.Load(configFile);
+            var element = configXml.Root;
+            var codesConfigs = (string) element.Attribute("VerifyIgnoreCodes");
+            if (!string.IsNullOrWhiteSpace(codesConfigs))
+            {
+                foreach (var value in codesConfigs.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    yield return value;
+                }
+            }
+        }
     }
 }
