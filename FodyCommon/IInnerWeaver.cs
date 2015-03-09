@@ -16,4 +16,5 @@ public interface IInnerWeaver : IDisposable
     string ProjectDirectoryPath { get; set; }
 
     void Execute();
+    void Cancel();
 }

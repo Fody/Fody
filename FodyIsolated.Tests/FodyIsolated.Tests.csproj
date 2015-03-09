@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DelegateBuilders\CancelDelegateBuilderTests.cs" />
     <Compile Include="DelegateBuilders\ConstructorDelegateBuilderTests.cs" />
     <Compile Include="DelegateBuilders\AfterExecuteDelegateBuilderTests.cs" />
     <Compile Include="DelegateBuilders\ExecuteDelegateBuilderTests.cs" />

@@ -21,6 +21,9 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     public string IntermediateDirectoryPath { get; set; }
     public List<string> ReferenceCopyLocalPaths { get; set; }
     public List<string> DefineConstants { get; set; }
+    bool cancelRequested;
+    List<WeaverHolder> weaverInstances = new List<WeaverHolder>();
+    Action cancelDelegate;
 
     Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
     {
@@ -46,14 +49,13 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             GetSymbolProviders();
             ReadModule();
             AppDomain.CurrentDomain.AssemblyResolve += assemblyResolve;
-            var weaverInstances = new List<WeaverHolder>();
-            InitialiseWeavers(weaverInstances);
-            ExecuteWeavers(weaverInstances);
+            InitialiseWeavers();
+            ExecuteWeavers();
             AddProcessedFlag();
             FindStrongNameKey();
             WriteModule();
-            ExecuteAfterWeavers(weaverInstances);
-            DisposeWeavers(weaverInstances);
+            ExecuteAfterWeavers();
+            DisposeWeavers();
 
             if (weaverInstances
                 .Any(_ => _.WeaverDelegate.AfterWeavingExecute != null))
@@ -70,15 +72,29 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
     }
 
+    public void Cancel()
+    {
+        cancelRequested = true;
+        var action = cancelDelegate;
+        if (action != null)
+        {
+            action();
+        }
+    }
+
     void AddProcessedFlag()
     {
         ModuleDefinition.Types.Add(new TypeDefinition(null, "ProcessedByFody", TypeAttributes.NotPublic | TypeAttributes.Abstract | TypeAttributes.Interface));
     }
 
-    void InitialiseWeavers(List<WeaverHolder> weaverInstances)
+    void InitialiseWeavers()
     {
         foreach (var weaverConfig in Weavers)
         {
+            if (cancelRequested)
+            {
+                return;
+            }
             Logger.LogDebug(string.Format("Weaver '{0}'.", weaverConfig.AssemblyPath));
             Logger.LogDebug("  Initializing weaver");
             var assembly = LoadAssembly(weaverConfig.AssemblyPath);
@@ -99,12 +115,20 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         }
     }
 
-    void ExecuteWeavers(List<WeaverHolder> weaverInstances)
+    void ExecuteWeavers()
     {
         foreach (var weaver in weaverInstances)
         {
+            if (cancelRequested)
+            {
+                return;
+            }
             try
             {
+                if (weaver.WeaverDelegate.Cancel != null)
+                {
+                    this.cancelDelegate = () => weaver.WeaverDelegate.Cancel(weaver.Instance);
+                }
                 Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
                 var startNew = Stopwatch.StartNew();
                 Logger.LogDebug("  Executing Weaver ");
@@ -114,16 +138,21 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             }
             finally
             {
+                cancelDelegate = null;
                 Logger.ClearWeaverName();
             }
         }
     }
 
-    void ExecuteAfterWeavers(List<WeaverHolder> weaverInstances)
+    void ExecuteAfterWeavers()
     {
         foreach (var weaver in weaverInstances
             .Where(_ => _.WeaverDelegate.AfterWeavingExecute != null))
         {
+            if (cancelRequested)
+            {
+                return;
+            }
             try
             {
                 Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
@@ -140,7 +169,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         }
     }
 
-    static void DisposeWeavers(List<WeaverHolder> weaverInstances)
+    void DisposeWeavers()
     {
         foreach (var disposable in weaverInstances
             .Select(x => x.Instance)

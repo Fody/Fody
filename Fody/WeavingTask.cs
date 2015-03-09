@@ -5,8 +5,9 @@ using Microsoft.Build.Utilities;
 namespace Fody
 {
 
-    public class WeavingTask : Task
+    public class WeavingTask : Task, ICancelableTask
     {
+        Processor processor;
         [Required]
         public string AssemblyPath { set; get; }
 
@@ -34,24 +35,29 @@ namespace Fody
         {
             var referenceCopyLocalPaths = ReferenceCopyLocalPaths.Select(x => x.ItemSpec).ToList();
             var defineConstants = DefineConstants.GetConstants();
-            return new Processor
-                   {
-                       Logger = new BuildLogger
-                                {
-                                    BuildEngine = BuildEngine,
-                                },
-                       AssemblyFilePath = AssemblyPath,
-                       IntermediateDirectory = IntermediateDir,
-                       KeyFilePath = KeyFilePath,
-                       SignAssembly = SignAssembly,
-                       ProjectDirectory = ProjectDirectory,
-                       References = References,
-                       SolutionDirectory = SolutionDir,
-                       ReferenceCopyLocalPaths = referenceCopyLocalPaths,
-                       DefineConstants = defineConstants
-                   }.Execute();
+            processor = new Processor
+            {
+                Logger = new BuildLogger
+                {
+                    BuildEngine = BuildEngine,
+                },
+                AssemblyFilePath = AssemblyPath,
+                IntermediateDirectory = IntermediateDir,
+                KeyFilePath = KeyFilePath,
+                SignAssembly = SignAssembly,
+                ProjectDirectory = ProjectDirectory,
+                References = References,
+                SolutionDirectory = SolutionDir,
+                ReferenceCopyLocalPaths = referenceCopyLocalPaths,
+                DefineConstants = defineConstants
+            };
+            return processor.Execute();
         }
 
+        public void Cancel()
+        {
+            processor.Cancel();
+        }
     }
 }
 

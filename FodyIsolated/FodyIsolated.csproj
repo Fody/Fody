@@ -63,6 +63,7 @@
     <Compile Include="AssemblyLoader.cs" />
     <Compile Include="AssemblyReferenceFinder.cs" />
     <Compile Include="AssemblyResolver.cs" />
+    <Compile Include="DelegateBuilders\CancelDelegateBuilder.cs" />
     <Compile Include="DelegateBuilders\AfterWeavingDelegateBuilder.cs" />
     <Compile Include="DelegateBuilders\DelegateBuilder.cs" />
     <Compile Include="DelegateBuilders\ExecuteDelegateBuilder.cs" />

@@ -17,6 +17,7 @@ public partial class Processor
     public List<string> ReferenceCopyLocalPaths;
     public List<string> DefineConstants;
     public List<string> ConfigFiles;
+    IInnerWeaver innerWeaver;
 
     AddinFinder addinFinder;
     static Dictionary<string, AppDomain> solutionDomains = new Dictionary<string, AppDomain>(StringComparer.OrdinalIgnoreCase);
@@ -135,7 +136,7 @@ public partial class Processor
         }
 
         var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
-        using (var innerWeaver = (IInnerWeaver)appDomain.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver"))
+        using (innerWeaver = (IInnerWeaver)appDomain.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver"))
         {
             innerWeaver.AssemblyFilePath = AssemblyFilePath;
             innerWeaver.References = References;
@@ -151,6 +152,7 @@ public partial class Processor
 
             innerWeaver.Execute();
         }
+        innerWeaver = null;
     }
 
     AppDomain CreateDomain()
@@ -161,5 +163,13 @@ public partial class Processor
             ApplicationBase = AssemblyLocation.CurrentDirectory,
         };
         return AppDomain.CreateDomain(string.Format("Fody Domain for '{0}'", SolutionDirectory), null, appDomainSetup);
+    }
+
+    public void Cancel()
+    {
+        if (innerWeaver != null)
+        {
+            innerWeaver.Cancel();
+        }
     }
 }

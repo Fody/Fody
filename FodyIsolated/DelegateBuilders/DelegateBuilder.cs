@@ -32,6 +32,7 @@ public static class DelegateBuilder
         return new WeaverDelegate
             {
                 Execute = weaverType.BuildExecuteDelegate(),
+                Cancel = weaverType.BuildCancelDelegate(),
                 AfterWeavingExecute = weaverType.BuildAfterWeavingDelegate(),
                 SetModuleDefinition = moduleDefinitionDelegate,
                 SetConfig = weaverType.BuildPropertySetDelegate<XElement>("Config"),
