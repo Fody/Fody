@@ -88,6 +88,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [ModuleInit](https://github.com/Fody/ModuleInit) Adds a module initializer to an assembly.
   * [MrAdvice](https://github.com/ArxOne/MrAdvice) .NET aspect weaver.
   * [Mutable](https://github.com/ndamjan/Mutable.Fody) Make F# setters for union types and eliminate need for `CLIMutable` attribute for records.
+  * [NameOf](https://github.com/NickStrupat/NameOf) Provides strongly typed access to a compile-time string representing the name of a variable, field, property, method, event, enum value, or type.
   * [Nancy.ModelPostprocess](https://bitbucket.org/tpluscode/nancy.modelpostprocess) Modify Nancy models after route execution but before serialization
   * [NullGuard](https://github.com/Fody/NullGuard) Adds null argument checks to an assembly
   * [Obsolete](https://github.com/Fody/Obsolete) Helps keep usages of [ObsoleteAttribute]([http://msdn.microsoft.com/en-us/library/fwz0y5c2 ) consistent.
