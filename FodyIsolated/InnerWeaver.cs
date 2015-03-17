@@ -127,7 +127,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             {
                 if (weaver.WeaverDelegate.Cancel != null)
                 {
-                    this.cancelDelegate = () => weaver.WeaverDelegate.Cancel(weaver.Instance);
+                    cancelDelegate = () => weaver.WeaverDelegate.Cancel(weaver.Instance);
                 }
                 Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
                 var startNew = Stopwatch.StartNew();
