@@ -49,20 +49,21 @@
     <Reference Include="Mono.Cecil.Rocks">
       <HintPath>..\Lib\Cecil\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
-    <Reference Include="Moq, Version=4.2.1409.1722, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+    <Reference Include="Moq, Version=4.2.1502.911, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Moq.4.2.1409.1722\lib\net40\Moq.dll</HintPath>
+      <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Octokit, Version=0.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Octokit, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Octokit.0.4.1\lib\net45\Octokit.dll</HintPath>
+      <HintPath>..\packages\Octokit.0.8.0\lib\net45\Octokit.dll</HintPath>
     </Reference>
-    <Reference Include="SyncOMatic">
-      <HintPath>..\packages\SyncOMatic.0.1.1.0\Lib\net45\SyncOMatic.dll</HintPath>
+    <Reference Include="SyncOMatic, Version=0.1.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SyncOMatic.0.1.5\lib\net45\SyncOMatic.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
