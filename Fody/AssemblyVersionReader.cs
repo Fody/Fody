@@ -11,7 +11,7 @@ public class AssemblyVersionReader
         }
         catch (BadImageFormatException)
         {
-            throw new WeavingException(String.Format("Could not get version number from '{0}'. It is possible the file is corrupt.", path));
+            throw new WeavingException(string.Format("Could not get version number from '{0}'. It is possible the file is corrupt.", path));
         }
     }
 }
