@@ -32,9 +32,18 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             var directoryName = Path.GetDirectoryName(weaverPath);
             var assemblyFileName = new AssemblyName(args.Name).Name + ".dll";
             var assemblyPath = Path.Combine(directoryName, assemblyFileName);
-            if (File.Exists(assemblyPath))
+            if (!File.Exists(assemblyPath))
+            {
+                continue;
+            }
+            try
             {
                 return LoadFromFile(assemblyPath);
+            }
+            catch (Exception exception)
+            {
+                var message = string.Format("Failed to load '{0}'. Going to swallow and continue to let other AssemblyResolve events to attempt to resolve. Exception:{1}", assemblyPath, exception);
+                Logger.LogWarning(message);
             }
         }
         return null;
