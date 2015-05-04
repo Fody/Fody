@@ -59,9 +59,9 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [AsyncErrorHandler](https://github.com/Fody/AsyncErrorHandler) Integrates error handling into async and TPL code.
   * [AutoDependencyProperty](http://blog.angeloflogic.com/2014/12/no-more-dependencyproperty-with.html) Generates WPF DependencyProperty boilerplate from automatic C# properties.
   * [BasicFodyAddin](https://github.com/Fody/BasicFodyAddin) A simple project meant to illustrate how to build an addin.
-  * [Bix.Mixers](https://github.com/rileywhite/Bix.Mixers.Fody) Write custom [mixins](https://en.wikipedia.org/wiki/Mixin) for C#.
   * [Caseless](https://github.com/Fody/Caseless) Change string comparisons to be case insensitive.
   * [Catel](https://github.com/Catel/Catel.Fody) For transforming automatic properties into [Catel](https://github.com/Catel/Catel) properties.
+  * [Cilador](https://github.com/rileywhite/Cilador) Write your own [mixins](https://en.wikipedia.org/wiki/Mixin) in C# for code reuse without inheritance.
   * [Commander](https://github.com/DamianReeves/Commander.Fody) Injects ICommand properties and implementations for use in MVVM applications.
   * [ConfigureAwait](https://github.com/distantcam/ConfigureAwait) Allows you to set the async ConfigureAwait at a global level for all your await calls.
   * [Costura](https://github.com/Fody/Costura/) For embedding references as resources.
