@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 
 [TestFixture]
@@ -20,7 +21,14 @@ public class PropertyDelegateBuilderTests
     {
         var setterDelegate = GetType().BuildPropertySetDelegate<string>("Property");
         setterDelegate(this, "aString");
-        Assert.AreEqual("aString",Property);
+        Assert.AreEqual("aString", Property);
+    }
+
+    [Test]
+    public void Should_return_false_for_non_existing()
+    {
+        Action<object, string> setterDelegate;
+        Assert.IsFalse(GetType().TryBuildPropertySetDelegate("NonExisting", out setterDelegate));
     }
 
     [Test]
