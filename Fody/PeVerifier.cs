@@ -13,29 +13,29 @@ public class Verifier
     public List<string> Ignores;
     public string ProjectDirectory;
     public string TargetPath;
-    public static bool foundPeVerify;
-    public static string windowsSdkDirectory;
-    public static string peverifyPath;
+    public static bool FoundPeVerify;
+    public static string WindowsSdkDirectory;
+    public static string PeverifyPath;
 
     static Verifier()
     {
         var programFilesPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-        windowsSdkDirectory = Path.Combine(programFilesPath, @"Microsoft SDKs\Windows");
-        if (!Directory.Exists(windowsSdkDirectory))
+        WindowsSdkDirectory = Path.Combine(programFilesPath, @"Microsoft SDKs\Windows");
+        if (!Directory.Exists(WindowsSdkDirectory))
         {
-            foundPeVerify = false;
+            FoundPeVerify = false;
             return;
         }
-        peverifyPath = Directory.EnumerateFiles(windowsSdkDirectory, "peverify.exe", SearchOption.AllDirectories)
+        PeverifyPath = Directory.EnumerateFiles(WindowsSdkDirectory, "peverify.exe", SearchOption.AllDirectories)
             .Where(x => !x.ToLowerInvariant().Contains("x64"))
             .OrderByDescending(x => FileVersionInfo.GetVersionInfo(x).FileVersion)
             .FirstOrDefault();
-        if (peverifyPath == null)
+        if (PeverifyPath == null)
         {
-            foundPeVerify = false;
+            FoundPeVerify = false;
             return;
         }
-        foundPeVerify = true;
+        FoundPeVerify = true;
     }
 
     public bool Verify()
@@ -67,9 +67,9 @@ public class Verifier
             return true;
         }
 
-        if (!foundPeVerify)
+        if (!FoundPeVerify)
         {
-            Logger.LogInfo(string.Format("Skipped Verifying assembly since could not find peverify.exe in '{0}'.", windowsSdkDirectory));
+            Logger.LogInfo(string.Format("Skipped Verifying assembly since could not find peverify.exe in '{0}'.", WindowsSdkDirectory));
             return true;
         }
 
@@ -80,9 +80,9 @@ public class Verifier
         }
 
         Logger.LogInfo("  Verifying assembly");
-        Logger.LogDebug(string.Format("Running verifier using command line {0} {1}", peverifyPath, TargetPath));
+        Logger.LogDebug(string.Format("Running verifier using command line {0} {1}", PeverifyPath, TargetPath));
 
-        var processStartInfo = new ProcessStartInfo(peverifyPath)
+        var processStartInfo = new ProcessStartInfo(PeverifyPath)
                                {
                                    Arguments = string.Format("\"{0}\" /hresult /ignore=0x80070002,{1}", TargetPath, string.Join(",", ignoreCodes)),
                                    WorkingDirectory = Path.GetDirectoryName(TargetPath),

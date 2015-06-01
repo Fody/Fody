@@ -11,9 +11,9 @@ public class VerifierTests
     [Test]
     public void StaticPathResolution()
     {
-        Assert.IsTrue(Verifier.foundPeVerify);
-        Assert.IsTrue(Directory.Exists(Verifier.windowsSdkDirectory));
-        Assert.IsTrue(File.Exists(Verifier.peverifyPath));
+        Assert.IsTrue(Verifier.FoundPeVerify);
+        Assert.IsTrue(Directory.Exists(Verifier.WindowsSdkDirectory));
+        Assert.IsTrue(File.Exists(Verifier.PeverifyPath));
     }
 
     [Test]
