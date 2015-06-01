@@ -22,8 +22,8 @@ public static class DelegateBuilder
 
     public static WeaverDelegate BuildDelegateHolder(this  Type weaverType)
     {
-        var moduleDefinitionDelegate = weaverType.BuildPropertySetDelegate<ModuleDefinition>("ModuleDefinition");
-        if (moduleDefinitionDelegate == null)
+        Action<object, ModuleDefinition> moduleDefinitionDelegate; 
+        if (!weaverType.TryBuildPropertySetDelegate("ModuleDefinition", out moduleDefinitionDelegate))
         {
             var message = string.Format("{0} must contain a public instance settable property named 'ModuleDefinition' of type 'Mono.Cecil.ModuleDefinition'.", weaverType.FullName);
             throw new WeavingException(message);

@@ -4,31 +4,42 @@ using System.Reflection;
 
 public static class PropertyDelegateBuilder
 {
-    public static Action<object, T> BuildPropertySetDelegate<T>(this Type type, string propertyName)
+    public static Action<object, T> BuildPropertySetDelegate<T>(this Type targetType, string propertyName)
     {
-        var propertyInfo = type.GetProperty(propertyName, BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.Public, null, typeof (T), new Type[] {}, null);
+        Action<object, T> action;
+        TryBuildPropertySetDelegate(targetType, propertyName, out action);
+        return action;
+    }
+
+    public static bool TryBuildPropertySetDelegate<T>(this Type targetType, string propertyName, out Action<object, T> action)
+    {
+        var propertyInfo = targetType.GetProperty(propertyName, BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.Public, null, typeof(T), new Type[] { }, null);
+
         if (propertyInfo != null)
         {
             var setMethod = propertyInfo.GetSetMethod();
             var target = Expression.Parameter(typeof (object));
             var value = Expression.Parameter(typeof (T));
-            var property = Expression.Property(Expression.Convert(target, type), setMethod);
+            var property = Expression.Property(Expression.Convert(target, targetType), setMethod);
             var body = Expression.Assign(property, value);
-            return Expression.Lambda<Action<object, T>>(body, target, value)
+            action= Expression.Lambda<Action<object, T>>(body, target, value)
                              .Compile();
+            return true;
         }
-        var fieldInfo = GetField<T>(type, propertyName);
+        var fieldInfo = GetField<T>(targetType, propertyName);
         if (fieldInfo != null)
         {
             var target = Expression.Parameter(typeof (object), "target");
             var value = Expression.Parameter(typeof (T), "value");
-            var fieldExp = Expression.Field(Expression.Convert(target, type), fieldInfo);
+            var fieldExp = Expression.Field(Expression.Convert(target, targetType), fieldInfo);
             var body = Expression.Assign(fieldExp, value);
-            return Expression.Lambda<Action<object, T>>(body, target, value)
+            action= Expression.Lambda<Action<object, T>>(body, target, value)
                              .Compile();
+            return true;
 
         }
-        return (x, y) => { };
+        action= (x, y) => { };
+        return false;
     }
 
     public static FieldInfo GetField<TField>(this Type type, string propertyName)
