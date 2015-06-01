@@ -6,6 +6,9 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting;
 using Mono.Cecil;
+using Mono.Cecil.Mdb;
+using Mono.Cecil.Pdb;
+using Mono.Cecil.Rocks;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
@@ -27,10 +30,27 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
     Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
     {
+        var assemblyName = new AssemblyName(args.Name).Name;
+        if (assemblyName == "Mono.Cecil")
+        {
+            return typeof(ModuleDefinition).Assembly;
+        }
+        if (assemblyName == "Mono.Cecil.Rocks")
+        {
+            return typeof(MethodBodyRocks).Assembly;
+        }
+        if (assemblyName == "Mono.Cecil.Pdb")
+        {
+            return typeof(PdbReader).Assembly;
+        }
+        if (assemblyName == "Mono.Cecil.Mdb")
+        {
+            return typeof(MdbReader).Assembly;
+        }
         foreach (var weaverPath in Weavers.Select(x => x.AssemblyPath))
         {
             var directoryName = Path.GetDirectoryName(weaverPath);
-            var assemblyFileName = new AssemblyName(args.Name).Name + ".dll";
+            var assemblyFileName = assemblyName + ".dll";
             var assemblyPath = Path.Combine(directoryName, assemblyFileName);
             if (!File.Exists(assemblyPath))
             {
