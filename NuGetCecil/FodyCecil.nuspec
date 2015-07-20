@@ -2,12 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata minClientVersion="2.8" >
     <id>FodyCecil</id>
-    <version>$version$-beta01</version>
+    <version>$version$</version>
     <title>FodyCecil</title>
     <authors>Simon Cropp</authors>
     <owners>Simon Cropp</owners>
     <developmentDependency>true</developmentDependency>
-    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <licenseUrl>https://github.com/jbevain/cecil/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>http://github.com/Fody/Fody</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <iconUrl>https://raw.github.com/Fody/Fody/master/Icons/package_icon.png</iconUrl>
