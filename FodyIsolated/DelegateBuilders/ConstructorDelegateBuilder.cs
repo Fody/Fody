@@ -20,7 +20,9 @@ public static class ConstructorDelegateBuilder
             var message = string.Format("'{0}' does not have a public instance constructor with no parameters.", weaverType.FullName);
             throw new WeavingException(message);
         }
-        return (Func<object>) Expression.Lambda(Expression.Convert(Expression.New(constructorInfo), weaverType))
-                                .Compile();
+
+        Func<object> result = () => Expression.Lambda(Expression.Convert(Expression.New(constructorInfo), weaverType))
+                                .Compile().DynamicInvoke();
+        return result;
     }
 }

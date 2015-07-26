@@ -14,7 +14,7 @@ public static class ExecuteDelegateBuilder
             throw new WeavingException(message);
         }
 
-        var target = Expression.Parameter(typeof (object));
+        var target = Expression.Parameter(typeof(object), "Target Object for 'Execute' method invocation.");
         var execute = Expression.Call(Expression.Convert(target, weaverType), executeMethod);
         return Expression.Lambda<Action<object>>(execute, target)
                          .Compile();
