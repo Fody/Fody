@@ -11,6 +11,8 @@ public static class PropertyDelegateBuilder
         return action;
     }
 
+    static void EmptySetter<T>(object o, T t) { }
+
     public static bool TryBuildPropertySetDelegate<T>(this Type targetType, string propertyName, out Action<object, T> action)
     {
         var propertyInfo = targetType.GetProperty(propertyName, BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.Public, null, typeof(T), new Type[] { }, null);
@@ -22,7 +24,7 @@ public static class PropertyDelegateBuilder
             var value = Expression.Parameter(typeof (T));
             var property = Expression.Property(Expression.Convert(target, targetType), setMethod);
             var body = Expression.Assign(property, value);
-            action= Expression.Lambda<Action<object, T>>(body, target, value)
+            action = Expression.Lambda<Action<object, T>>(body, target, value)
                              .Compile();
             return true;
         }
@@ -33,12 +35,12 @@ public static class PropertyDelegateBuilder
             var value = Expression.Parameter(typeof (T), "value");
             var fieldExp = Expression.Field(Expression.Convert(target, targetType), fieldInfo);
             var body = Expression.Assign(fieldExp, value);
-            action= Expression.Lambda<Action<object, T>>(body, target, value)
+            action = Expression.Lambda<Action<object, T>>(body, target, value)
                              .Compile();
             return true;
 
         }
-        action= (x, y) => { };
+        action = EmptySetter;
         return false;
     }
 
