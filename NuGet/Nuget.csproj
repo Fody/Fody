@@ -54,8 +54,8 @@
     <Copy SourceFiles="$(ProjectDir)install.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
     <Copy SourceFiles="$(ProjectDir)uninstall.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
     <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll" />
-    <MakeDir Directories="$(SolutionDir)ForSample\build" />
-    <Copy SourceFiles="$(ProjectDir)Fody.targets" DestinationFolder="$(SolutionDir)ForSample\build" />
+    <MakeDir Directories="$(SolutionDir)ForSample\build\lib" />
+    <Copy SourceFiles="$(ProjectDir)Fody.targets" DestinationFolder="$(SolutionDir)ForSample\build\lib" />
   </Target>
   <ItemGroup>
     <ProjectReference Include="..\Fody\Fody.csproj">

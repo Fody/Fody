@@ -49,5 +49,5 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\..\ForSample\build\Fody.targets" />
+  <Import Project="$(SolutionDir)\..\ForSample\build\lib\Fody.targets" />
 </Project>
