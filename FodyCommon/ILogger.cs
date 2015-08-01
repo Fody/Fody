@@ -1,6 +1,4 @@
-﻿using Microsoft.Build.Framework;
-
-public interface ILogger
+﻿public interface ILogger
 {
     void SetCurrentWeaverName(string weaverName);
     void ClearWeaverName();

@@ -31,7 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Mono.Cecil">
       <HintPath>..\Lib\Cecil\Mono.Cecil.dll</HintPath>
     </Reference>

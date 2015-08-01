@@ -58,6 +58,7 @@
     <Compile Include="IContainsTypeChecker.cs" />
     <Compile Include="IInnerWeaver.cs" />
     <Compile Include="ILogger.cs" />
+    <Compile Include="MessageImportance.cs" />
     <Compile Include="WeaverEntry.cs" />
     <Compile Include="WeavingException.cs" />
   </ItemGroup>

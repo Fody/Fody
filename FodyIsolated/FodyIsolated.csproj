@@ -37,7 +37,6 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Mono.Cecil">
       <HintPath>..\Lib\Cecil\Mono.Cecil.dll</HintPath>
     </Reference>

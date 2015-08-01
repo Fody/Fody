@@ -22,17 +22,17 @@ public class BuildLogger : MarshalByRefObject, ILogger
 
     public virtual void LogMessage(string message, MessageImportance level)
     {
-        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", level));
+        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", (Microsoft.Build.Framework.MessageImportance)level));
     }
 
     public virtual void LogDebug(string message)
     {
-        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", DebugMessageImportant));
+        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", (Microsoft.Build.Framework.MessageImportance) DebugMessageImportant));
     }
 
     public virtual void LogInfo(string message)
     {
-        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", InfoMessageImportant));
+        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", (Microsoft.Build.Framework.MessageImportance)InfoMessageImportant));
     }
 
     public virtual void LogWarning(string message)
