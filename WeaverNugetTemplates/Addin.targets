@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AddinName>Addin</AddinName>
+  </PropertyGroup>
+  <Target
+    AfterTargets="AfterBuild"
+    Name="ValidatePropertyChangedNotExists">
+    <Error 
+      Condition="Exists('$(TargetDir)$(AddinName).dll')" 
+      Text="Detected a $(AddinName).dll in '$(TargetDir)'. This is a reference only file and should not be deployed. Set the reference to not be copied to the output directory. You may also need to manually add '&lt;$(AddinName) /&gt;' into your FodyWeavers.xml. See https://github.com/Fody/Fody/wiki/SampleUsage" />
+  </Target>
+</Project>
