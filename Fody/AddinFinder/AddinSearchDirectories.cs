@@ -9,6 +9,36 @@ public partial class AddinFinder
         AddNugetDirectoryFromNugetConfig();
         AddCurrentFodyDirectoryToAddinSearch();
         AddToolsSolutionDirectoryToAddinSearch();
+        AddNuGetPackageRootToAddinSearch();
+    }
+
+    void AddNuGetPackageRootToAddinSearch()
+    {
+        if (NuGetPackageRoot == null)
+        {
+            return;
+        }
+        if (!Directory.Exists(NuGetPackageRoot))
+        {
+            Logger.LogDebug(string.Format("Skipped scanning '{0}' for weavers since it doesn't exist.", NuGetPackageRoot));
+        }
+        AddFiles(ScanNuGetPackageRoot(NuGetPackageRoot));
+    }
+
+    public static IEnumerable<string> ScanNuGetPackageRoot(string nuGetPackageRoot)
+    {
+        foreach (var packageDirectory in Directory.EnumerateDirectories(nuGetPackageRoot, "*.Fody"))
+        {
+            var packageName = Path.GetFileName(packageDirectory);
+            foreach (var versionDirectory in Directory.EnumerateDirectories(packageDirectory))
+            {
+                var assembly = Path.Combine(versionDirectory, packageName + ".dll");
+                if (File.Exists(assembly))
+                {
+                    yield return assembly;
+                }
+            }
+        }
     }
 
     public void AddToolsSolutionDirectoryToAddinSearch()
@@ -89,4 +119,6 @@ public partial class AddinFinder
 
     public ILogger Logger;
     public string SolutionDirectoryPath;
+    public string NuGetPackageRoot;
+    
 }

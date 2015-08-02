@@ -51,13 +51,19 @@
           AssemblyPath="@(IntermediateAssembly)"
           IntermediateDir="$(IntermediateDir)"
           KeyFilePath="$(FodyKeyFilePath)"
+          NuGetPackageRoot="$(NuGetPackageRoot)"
           ProjectDirectory="$(ProjectDir)"
           SolutionDir="$(FodySolutionDir)"
           References="@(ReferencePath)"
           SignAssembly="$(FodySignAssembly)"
           ReferenceCopyLocalPaths="@(ReferenceCopyLocalPaths)"
           DefineConstants="$(DefineConstants)"
-      />
+      >
+
+      <Output 
+        TaskParameter="ExecutedWeavers"
+        PropertyName="FodyExecutedWeavers" />
+    </Fody.WeavingTask>
   </Target>
 
 

@@ -15,6 +15,7 @@ namespace Fody
         public string IntermediateDir { get; set; }
 
         public string KeyFilePath { get; set; }
+
         public bool SignAssembly { get; set; }
 
         [Required]
@@ -30,6 +31,11 @@ namespace Fody
         public string SolutionDir { get; set; }
 
         public string DefineConstants { get; set; }
+
+        [Output]
+        public string ExecutedWeavers { get; private set; }
+
+        public string NuGetPackageRoot { get; set; }
 
         public override bool Execute()
         {
@@ -49,9 +55,16 @@ namespace Fody
                 References = References,
                 SolutionDirectory = SolutionDir,
                 ReferenceCopyLocalPaths = referenceCopyLocalPaths,
-                DefineConstants = defineConstants
+                DefineConstants = defineConstants,
+                NuGetPackageRoot = NuGetPackageRoot
             };
-            return processor.Execute();
+            var success = processor.Execute();
+            if (success)
+            {
+                ExecutedWeavers = string.Join(";", processor.Weavers.Select(x => x.AssemblyName)) + ";";
+            }
+
+            return success;
         }
 
         public void Cancel()

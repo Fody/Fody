@@ -14,6 +14,7 @@ public partial class Processor
     public string ProjectDirectory;
     public string References;
     public string SolutionDirectory;
+    public string NuGetPackageRoot;
     public List<string> ReferenceCopyLocalPaths;
     public List<string> DefineConstants;
     public List<string> ConfigFiles;
@@ -105,7 +106,8 @@ public partial class Processor
         addinFinder = new AddinFinder
             {
                 Logger = Logger, 
-                SolutionDirectoryPath = SolutionDirectory
+                SolutionDirectoryPath = SolutionDirectory,
+                NuGetPackageRoot = NuGetPackageRoot
             };
         addinFinder.FindAddinDirectories();
 
