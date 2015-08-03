@@ -4,10 +4,20 @@
     <AddinName>Addin</AddinName>
   </PropertyGroup>
   <Target
-    AfterTargets="AfterBuild"
-    Name="ValidatePropertyChangedNotExists">
-    <Error 
-      Condition="Exists('$(TargetDir)$(AddinName).dll')" 
-      Text="Detected a $(AddinName).dll in '$(TargetDir)'. This is a reference only file and should not be deployed. Set the reference to not be copied to the output directory. You may also need to manually add '&lt;$(AddinName) /&gt;' into your FodyWeavers.xml. See https://github.com/Fody/Fody/wiki/SampleUsage" />
+    AfterTargets="FodyTarget"
+    Name="FodyAddinVerification">
+
+    <Error
+      Condition="Exists('$(TargetDir)$(AddinName).dll')"
+      Text="Detected a $(AddinName).dll in '$(TargetDir)'. This is a reference only file and should not be deployed. Set the reference to 'Copy Local=false' or '&quot;$(AddinName).Fody&quot;: {&quot;version&quot;: &quot;X.Y.Z&quot;, &quot;options&quot;: &quot;dev&quot;}'. See https://github.com/Fody/Fody/wiki/SampleUsage" />
+
+    <Error
+      Condition="$(FodyExecutedWeavers) == '*Undefined*'"
+      Text="Could not find `FodyWeaversExecuted` MSBuild property. It is possible you need to update Fody." />
+
+    <Error
+      Condition="$(FodyExecutedWeavers.Contains('$(AddinName);'))"
+      Text="$(AddinName) expected to be executed. You may also need to manually add '&lt;$(AddinName) /&gt;' into your FodyWeavers.xml. eg &lt;Weavers&gt;&lt;$(AddinName)/&gt;&lt;/Weavers&gt; See https://github.com/Fody/Fody/wiki/SampleUsage" />
+
   </Target>
 </Project>
