@@ -10,7 +10,6 @@ public class Verifier
     public ILogger Logger;
     public string SolutionDirectory;
     public List<string> DefineConstants;
-    public List<string> Ignores;
     public string ProjectDirectory;
     public string TargetPath;
     public static bool FoundPeVerify;
