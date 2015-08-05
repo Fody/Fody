@@ -17,7 +17,7 @@ public partial class Processor
             {
                 if (dateTime != timeStamp)
                 {
-                    Logger.LogWarning(string.Format("A re-build is required to apply the changes from '{0}'.", configFile));
+                    Logger.LogError(string.Format("A re-build is required to apply the changes from '{0}'.", configFile));
                     changed = true;
                 }
             }

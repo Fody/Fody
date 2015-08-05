@@ -61,7 +61,8 @@ namespace Fody
             var success = processor.Execute();
             if (success)
             {
-                ExecutedWeavers = string.Join(";", processor.Weavers.Select(x => x.AssemblyName)) + ";";
+                var weavers = processor.Weavers.Select(x => x.AssemblyName);
+                ExecutedWeavers = string.Join(";", weavers) + ";";
             }
 
             return success;

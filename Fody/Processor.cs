@@ -74,7 +74,7 @@ public partial class Processor
         
                 if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
                 {
-                    Logger.LogWarning("A re-build is required to because a weaver changed");
+                    Logger.LogError("A re-build is required to because a weaver changed");
                 }
             }
             return;
