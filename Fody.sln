@@ -22,9 +22,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WeaverNugetTemplates", "WeaverNugetTemplates", "{215FCA55-BC62-4BAD-98EF-7E42079B04CF}"
 	ProjectSection(SolutionItems) = preProject
 		WeaverNugetTemplates\dotnet.targets = WeaverNugetTemplates\dotnet.targets
-		WeaverNugetTemplates\FodyWeavers.xml.install.xdt = WeaverNugetTemplates\FodyWeavers.xml.install.xdt
-		WeaverNugetTemplates\FodyWeavers.xml.uninstall.xdt = WeaverNugetTemplates\FodyWeavers.xml.uninstall.xdt
 		WeaverNugetTemplates\install.ps = WeaverNugetTemplates\install.ps
+		WeaverNugetTemplates\uninstall.ps = WeaverNugetTemplates\uninstall.ps
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetCecil", "NuGetCecil\NugetCecil.csproj", "{4D267DED-10CA-4CF4-84E9-C7945393F86F}"
