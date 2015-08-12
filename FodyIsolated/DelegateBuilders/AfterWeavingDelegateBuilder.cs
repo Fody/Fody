@@ -13,7 +13,7 @@ public static class AfterWeavingDelegateBuilder
             return null;
         }
 
-        var target = Expression.Parameter(typeof (object));
+        var target = Expression.Parameter(typeof (object), "AfterWeavingDelegate Target Object");
         var execute = Expression.Call(Expression.Convert(target, weaverType), afterWeavingMethod);
         return Expression.Lambda<Action<object>>(execute, target)
                          .Compile();

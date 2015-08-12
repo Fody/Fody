@@ -68,7 +68,7 @@ public partial class InnerWeaver : IAssemblyResolver
             return GetAssembly(filePath, parameters);
         }
 
-        var joinedReferences = string.Join(Environment.NewLine, SplitReferences.OrderBy(x => x));
+        var joinedReferences = string.Join(Environment.NewLine, SplitReferences.OrderBy(x => x).ToArray());
         Logger.LogDebug(string.Format("Can not find '{0}'.{1}Tried:{1}{2}", assemblyNameReference.FullName, Environment.NewLine, joinedReferences));
         return null;
     }

@@ -13,7 +13,7 @@ public static class CancelDelegateBuilder
             return null;
         }
 
-        var target = Expression.Parameter(typeof (object));
+        var target = Expression.Parameter(typeof(object), "CancelWeavingDelegate Target Object");
         var execute = Expression.Call(Expression.Convert(target, weaverType), afterWeavingMethod);
         return Expression.Lambda<Action<object>>(execute, target)
                          .Compile();

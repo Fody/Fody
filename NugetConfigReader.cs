@@ -16,7 +16,7 @@ public static class NugetConfigReader
             {
                 return packagePath;
             }
-            packagePath = GetPackagePath(Path.Combine(currentDirectory, ".nuget", "nuget.config"));
+            packagePath = GetPackagePath(Path.Combine(Path.Combine(currentDirectory, ".nuget"), "nuget.config"));
             if (packagePath != null)
             {
                 return packagePath;
@@ -53,7 +53,7 @@ public static class NugetConfigReader
             }
             var repositoryPath = xDocument.Descendants("repositoryPath")
                 .Select(x => x.Value)
-                .FirstOrDefault(x => !string.IsNullOrWhiteSpace(x));
+                .FirstOrDefault(x => !IsNullOrWhiteSpace(x));
             if (repositoryPath != null)
             {
                 return Path.Combine(Path.GetDirectoryName(nugetConfigPath), repositoryPath);
@@ -68,7 +68,7 @@ public static class NugetConfigReader
             {
                 if (repositoryPath.StartsWith("$\\"))
                 {
-                    return repositoryPath.Replace("$", Path.Combine(Path.GetDirectoryName(nugetConfigPath)));
+                    return repositoryPath.Replace("$", Path.GetDirectoryName(nugetConfigPath));
                 }
 
                 return Path.Combine(Path.GetDirectoryName(nugetConfigPath), repositoryPath);
@@ -76,4 +76,12 @@ public static class NugetConfigReader
         }
         return null;
     }
+
+
+    public static bool IsNullOrWhiteSpace(string value)
+    {
+        if (value == null) return true;
+        return string.IsNullOrEmpty(value.Trim());
+    }
+
 }
