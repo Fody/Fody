@@ -24,7 +24,8 @@ public partial class Processor
 
     void GetValue()
     {
-        var weaversBin = Path.Combine(SolutionDirectory, @"Weavers\bin");
+        var weaversBin = Path.Combine(SolutionDirectory, "Weavers", "bin");
+
         if (Directory.Exists(weaversBin))
         {
             WeaverAssemblyPath = Directory.EnumerateFiles(weaversBin, "Weavers.dll", SearchOption.AllDirectories)
