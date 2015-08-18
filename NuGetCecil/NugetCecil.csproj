@@ -31,15 +31,11 @@
   <Target Name="ReBuild" DependsOnTargets="NuGetCecilBuild" />
   <Target Name="NuGetCecilBuild" DependsOnTargets="Clean">
     <MakeDir Directories="$(SolutionDir)NuGetCecilBuild" />
-    <Copy SourceFiles="$(SolutionDir)NugetCecil\FodyCecil.nuspec" DestinationFolder="$(SolutionDir)NuGetCecilBuild" />
+    <Copy SourceFiles="$(SolutionDir)NuGetCecil\FodyCecil.nuspec" DestinationFolder="$(SolutionDir)NuGetCecilBuild" />
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.dll" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
-    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.pdb" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Mdb.dll" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
-    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Mdb.pdb" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Pdb.dll" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
-    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Pdb.pdb" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Rocks.dll" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
-    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Rocks.pdb" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\net40" />
     <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetCecilBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll" />
     <MakeDir Directories="$(SolutionDir)ForSample\build" />
   </Target>

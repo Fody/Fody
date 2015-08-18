@@ -38,15 +38,12 @@
     <Copy SourceFiles="$(SolutionDir)NuGet\Fody.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)NuGet\FodyWeavers.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Content" />
     <Copy SourceFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)FodyCommon\bin\$(ConfigurationName)\FodyCommon.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)FodyCommon\bin\$(ConfigurationName)\FodyCommon.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\FodyIsolated.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\FodyIsolated.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Mdb.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Pdb.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Rocks.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)Lib\Cecil\Mono.Cecil.Pdb.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(ProjectDir)Fody.targets" DestinationFolder="$(SolutionDir)NuGetBuild\build\portable-net+sl+win+wpa+wp" />
     <Copy SourceFiles="$(ProjectDir)Fody.targets" DestinationFolder="$(SolutionDir)NuGetBuild\build\dotnet" />
     <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll" />
