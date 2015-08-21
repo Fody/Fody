@@ -32,7 +32,7 @@ Fody Uses [Mono.Cecil](http://www.mono-project.com/Cecil)  and an add-in based a
  * No install required to build
  * No attributes required
  * No references required
- * Supports .net 3.5, .net 4, .net 4.5, Silverlight 4, Silverlight 5, Windows Phone 7, Windows Phone 8, Metro on Windows 8, Mono, MonoTouch, MonoDroid and PCL 
+ * Supports .net 3.5, .net 4, .net 4.5, .net 4.6, Silverlight 4, Silverlight 5, Windows Phone 7, Windows Phone 8, Metro on Windows 8, Mono, MonoTouch, MonoDroid and PCL 
 
 ## Usage
 
