@@ -25,7 +25,7 @@ public static class DelegateBuilder
         Action<object, ModuleDefinition> moduleDefinitionDelegate;
         if (!weaverType.TryBuildPropertySetDelegate("ModuleDefinition", out moduleDefinitionDelegate))
         {
-            var message = string.Format("Cannot load/use weaver {0}. Note that the weaver must contain a public instance settable property named 'ModuleDefinition' of type 'Mono.Cecil.ModuleDefinition'. If it does, make sure that it's referencing the right version of Mono.Cecil, which is '{1}'.", weaverType.FullName, GetAssemblyVersion(typeof(ModuleDefinition).Assembly));
+            var message = string.Format("Cannot load/use weaver {0}. Note that the weaver must contain a public instance settable property named 'ModuleDefinition' of type 'Mono.Cecil.ModuleDefinition'. If it does, make sure that it's referencing the right version of Mono.Cecil, which is '{1}'.", weaverType.FullName, typeof(ModuleDefinition).Assembly.GetName().Version);
             throw new WeavingException(message);
         }
 
@@ -54,34 +54,4 @@ public static class DelegateBuilder
             ConstructInstance = weaverType.BuildConstructorDelegate()
         };
     }
-
-    private static string GetAssemblyVersion(Assembly assembly, int separatorCount = 3)
-    {
-        separatorCount++;
-
-        // Get full name, which is in [name], Version=[version], Culture=[culture], PublicKeyToken=[publickeytoken] format
-        string assemblyFullName = assembly.FullName;
-
-        string[] splittedAssemblyFullName = assemblyFullName.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-        if (splittedAssemblyFullName.Length < 2)
-        {
-            return "unknown";
-        }
-
-        string version = splittedAssemblyFullName[1].Replace("Version=", string.Empty).Trim();
-        string[] versionSplit = version.Split('.');
-        version = versionSplit[0];
-        for (int i = 1; i < separatorCount; i++)
-        {
-            if (i >= versionSplit.Length)
-            {
-                break;
-            }
-
-            version += string.Format(".{0}", versionSplit[i]);
-        }
-
-        return version;
-    }
-
 }
