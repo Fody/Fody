@@ -12,10 +12,10 @@ public partial class InnerWeaver
 		Assembly assembly;
 		if (assemblies.TryGetValue(assemblyPath, out assembly))
 		{
-            Logger.LogDebug(string.Format("  Loading '{0}' from cache.", assemblyPath));
+            Logger.LogDebug($"  Loading '{assemblyPath}' from cache.");
 			return assembly;
         }
-        Logger.LogDebug(string.Format("  Loading '{0}' from disk.", assemblyPath));
+        Logger.LogDebug($"  Loading '{assemblyPath}' from disk.");
 		return assemblies[assemblyPath] = LoadFromFile(assemblyPath);
 	}
 

@@ -34,6 +34,6 @@ public class SolutionPathValidatorTests
 					    SolutionDirectory = "aString"
 				    };
 			    processor.ValidateSolutionPath();
-			}, string.Format("SolutionDir \"{0}aString\" does not exist.", Path.GetFullPath("baddir")));
+			}, $"SolutionDir \"{Path.GetFullPath("baddir")}aString\" does not exist.");
     }
 }

@@ -24,7 +24,7 @@ public static class DelegateBuilder
         Action<object, ModuleDefinition> moduleDefinitionDelegate;
         if (!weaverType.TryBuildPropertySetDelegate("ModuleDefinition", out moduleDefinitionDelegate))
         {
-            var message = string.Format("Cannot load/use weaver {0}. Note that the weaver must contain a public instance settable property named 'ModuleDefinition' of type 'Mono.Cecil.ModuleDefinition'. If it does, make sure that it's referencing the right version of Mono.Cecil, which is '{1}'.", weaverType.FullName, typeof(ModuleDefinition).Assembly.GetName().Version);
+            var message = $"Cannot load/use weaver {weaverType.FullName}. Note that the weaver must contain a public instance settable property named 'ModuleDefinition' of type 'Mono.Cecil.ModuleDefinition'. If it does, make sure that it's referencing the right version of Mono.Cecil, which is '{typeof (ModuleDefinition).Assembly.GetName().Version}'.";
             throw new WeavingException(message);
         }
 

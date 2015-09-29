@@ -30,20 +30,13 @@ public static class ExceptionExtensions
     {
         var exceptionType = exception.GetType();
         var sequencePointProperty = exceptionType.GetProperty("SequencePoint", BindingFlags.Public | BindingFlags.Instance);
-        if (sequencePointProperty != null)
+        var sequencePoint = (SequencePoint) sequencePointProperty?.GetValue(exception, null);
+        if (sequencePoint != null)
         {
-            var sequencePoint = (SequencePoint) sequencePointProperty.GetValue(exception, null);
-            if (sequencePoint != null)
-            {
-                return sequencePoint;
-            }
+            return sequencePoint;
         }
         var sequencePointField = exceptionType.GetField("SequencePoint", BindingFlags.Public|BindingFlags.Instance);
-        if (sequencePointField != null)
-        {
-            return (SequencePoint)sequencePointField.GetValue(exception);
-        }
-        return null;
+        return (SequencePoint) sequencePointField?.GetValue(exception);
     }
 
     public static string ToFriendlyString(this Exception exception)

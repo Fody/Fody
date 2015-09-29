@@ -17,7 +17,7 @@ public partial class Processor
         }
         else
         {
-            Logger.LogDebug(string.Format("Weaver project file found at '{0}'.", WeaverAssemblyPath));
+            Logger.LogDebug($"Weaver project file found at '{WeaverAssemblyPath}'.");
             FoundWeaverProjectFile = true;
         }
     }

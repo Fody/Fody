@@ -68,6 +68,6 @@ public class BuildLogger : MarshalByRefObject, ILogger
             return "Fody: " + message;
         }
 
-        return string.Format("Fody/{0}: {1}", currentWeaverName, message);
+        return $"Fody/{currentWeaverName}: {message}";
     }
 }

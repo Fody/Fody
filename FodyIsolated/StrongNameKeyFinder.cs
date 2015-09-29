@@ -17,7 +17,7 @@ public partial class InnerWeaver
         {
             if (!File.Exists(keyFilePath))
             {
-                throw new WeavingException(string.Format("KeyFilePath was defined but file does not exist. '{0}'.", keyFilePath));
+                throw new WeavingException($"KeyFilePath was defined but file does not exist. '{keyFilePath}'.");
             }
             StrongNameKeyPair = new StrongNameKeyPair(File.OpenRead(keyFilePath));
         }
@@ -29,7 +29,7 @@ public partial class InnerWeaver
         if (KeyFilePath != null)
         {
             KeyFilePath = Path.GetFullPath(KeyFilePath);
-            Logger.LogDebug(string.Format("Using strong name key from KeyFilePath '{0}'.", KeyFilePath));
+            Logger.LogDebug($"Using strong name key from KeyFilePath '{KeyFilePath}'.");
             return KeyFilePath;
         }
 
@@ -41,7 +41,7 @@ public partial class InnerWeaver
         {
             var keyFileSuffix = (string) assemblyKeyFileAttribute.ConstructorArguments.First().Value;
             var keyFilePath = Path.Combine(IntermediateDirectoryPath, keyFileSuffix);
-            Logger.LogDebug(string.Format("Using strong name key from [AssemblyKeyFileAttribute(\"{0}\")] '{1}'", keyFileSuffix, keyFilePath));
+            Logger.LogDebug($"Using strong name key from [AssemblyKeyFileAttribute(\"{keyFileSuffix}\")] '{keyFilePath}'");
             return keyFilePath;
         }
         Logger.LogDebug("No strong name key found");

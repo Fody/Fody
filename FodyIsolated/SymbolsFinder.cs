@@ -18,14 +18,14 @@ public partial class InnerWeaver
 		if (File.Exists(pdbPath))
 		{
             pdbFound = true;
-            Logger.LogDebug(string.Format("Found debug symbols at '{0}'.", pdbPath));
+            Logger.LogDebug($"Found debug symbols at '{pdbPath}'.");
 		}
 
         mdbPath = AssemblyFilePath + ".mdb";
 		if (File.Exists(mdbPath))
 		{
             mdbFound = true;
-            Logger.LogDebug(string.Format("Found debug symbols at '{0}'.", mdbPath));
+            Logger.LogDebug($"Found debug symbols at '{mdbPath}'.");
 		}
 
         if (pdbFound && mdbFound)
