@@ -8,8 +8,8 @@ public partial class Processor
 	    SolutionDirectory = Path.GetFullPath(SolutionDirectory);
         if (!Directory.Exists(SolutionDirectory))
         {
-            throw new WeavingException(string.Format("SolutionDir \"{0}\" does not exist.", SolutionDirectory));
+            throw new WeavingException($"SolutionDir \"{SolutionDirectory}\" does not exist.");
         }
-        Logger.LogDebug(string.Format("SolutionDirectory path is '{0}'", SolutionDirectory));
+        Logger.LogDebug($"SolutionDirectory path is '{SolutionDirectory}'");
     }
 }

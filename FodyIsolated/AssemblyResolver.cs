@@ -27,7 +27,7 @@ public partial class InnerWeaver : IAssemblyResolver
         }
         catch (Exception exception)
         {
-            throw new Exception(string.Format("Could not read '{0}'.", file), exception);
+            throw new Exception($"Could not read '{file}'.", exception);
         }
     }
 

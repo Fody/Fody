@@ -6,9 +6,9 @@ public partial class Processor
     {
 		if (!Directory.Exists(ProjectDirectory))
         {
-			throw new WeavingException(string.Format("ProjectDirectory \"{0}\" does not exist.", ProjectDirectory));
+			throw new WeavingException($"ProjectDirectory \"{ProjectDirectory}\" does not exist.");
         }
-        Logger.LogDebug(string.Format("ProjectDirectory: '{0}'.", ProjectDirectory));
+        Logger.LogDebug($"ProjectDirectory: '{ProjectDirectory}'.");
     }
 
 }

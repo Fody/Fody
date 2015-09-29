@@ -37,7 +37,7 @@ public partial class Processor
     public virtual bool Execute()
     {
 
-        Logger.LogInfo(string.Format("Fody (version {0}) Executing", typeof (Processor).Assembly.GetName().Version));
+        Logger.LogInfo($"Fody (version {typeof (Processor).Assembly.GetName().Version}) Executing");
 
         var stopwatch = Stopwatch.StartNew();
 
@@ -53,7 +53,7 @@ public partial class Processor
         }
         finally
         {
-            Logger.LogInfo(string.Format("  Finished Fody {0}ms.", stopwatch.ElapsedMilliseconds));
+            Logger.LogInfo($"  Finished Fody {stopwatch.ElapsedMilliseconds}ms.");
         }
     }
 
@@ -117,7 +117,7 @@ public partial class Processor
 
         ConfigureWhenNoWeaversFound();
 
-        Logger.LogDebug(string.Format("Finished finding weavers {0}ms", stopwatch.ElapsedMilliseconds));
+        Logger.LogDebug($"Finished finding weavers {stopwatch.ElapsedMilliseconds}ms");
     }
 
     void ExecuteInOwnAppDomain()
@@ -164,14 +164,11 @@ public partial class Processor
         {
             ApplicationBase = AssemblyLocation.CurrentDirectory,
         };
-        return AppDomain.CreateDomain(string.Format("Fody Domain for '{0}'", SolutionDirectory), null, appDomainSetup);
+        return AppDomain.CreateDomain($"Fody Domain for '{SolutionDirectory}'", null, appDomainSetup);
     }
 
     public void Cancel()
     {
-        if (innerWeaver != null)
-        {
-            innerWeaver.Cancel();
-        }
+        innerWeaver?.Cancel();
     }
 }

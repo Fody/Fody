@@ -62,7 +62,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             }
             catch (Exception exception)
             {
-                var message = string.Format("Failed to load '{0}'. Going to swallow and continue to let other AssemblyResolve events to attempt to resolve. Exception:{1}", assemblyPath, exception);
+                var message = $"Failed to load '{assemblyPath}'. Going to swallow and continue to let other AssemblyResolve events to attempt to resolve. Exception:{exception}";
                 Logger.LogWarning(message);
             }
         }
@@ -105,10 +105,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     {
         cancelRequested = true;
         var action = cancelDelegate;
-        if (action != null)
-        {
-            action();
-        }
+        action?.Invoke();
     }
 
     void AddProcessedFlag()
@@ -124,7 +121,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             {
                 return;
             }
-            Logger.LogDebug(string.Format("Weaver '{0}'.", weaverConfig.AssemblyPath));
+            Logger.LogDebug($"Weaver '{weaverConfig.AssemblyPath}'.");
             Logger.LogDebug("  Initializing weaver");
             var assembly = LoadAssembly(weaverConfig.AssemblyPath);
 
@@ -162,7 +159,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
                 var startNew = Stopwatch.StartNew();
                 Logger.LogDebug("  Executing Weaver ");
                 weaver.WeaverDelegate.Execute(weaver.Instance);
-                var finishedMessage = string.Format("  Finished '{0}' in {1}ms {2}", weaver.Config.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
+                var finishedMessage = $"  Finished '{weaver.Config.AssemblyName}' in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
                 Logger.LogDebug(finishedMessage);
             }
             finally
@@ -188,7 +185,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
                 var startNew = Stopwatch.StartNew();
                 Logger.LogDebug("  Executing After Weaver");
                 weaver.WeaverDelegate.AfterWeavingExecute(weaver.Instance);
-                var finishedMessage = string.Format("  Finished '{0}' in {1}ms {2}", weaver.Config.AssemblyName, startNew.ElapsedMilliseconds, Environment.NewLine);
+                var finishedMessage = $"  Finished '{weaver.Config.AssemblyName}' in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
                 Logger.LogDebug(finishedMessage);
             }
             finally

@@ -52,7 +52,7 @@ public class Verifier
         }
         finally
         {
-            Logger.LogInfo(string.Format("  Finished verification in {0}ms.", stopwatch.ElapsedMilliseconds));
+            Logger.LogInfo($"  Finished verification in {stopwatch.ElapsedMilliseconds}ms.");
         }
     }
 
@@ -68,22 +68,22 @@ public class Verifier
 
         if (!FoundPeVerify)
         {
-            Logger.LogInfo(string.Format("Skipped Verifying assembly since could not find peverify.exe in '{0}'.", WindowsSdkDirectory));
+            Logger.LogInfo($"Skipped Verifying assembly since could not find peverify.exe in '{WindowsSdkDirectory}'.");
             return true;
         }
 
         if (!File.Exists(TargetPath))
         {
-            Logger.LogInfo(string.Format("Cannot verify assembly, file '{0}' does not exist", TargetPath));
+            Logger.LogInfo($"Cannot verify assembly, file '{TargetPath}' does not exist");
             return true;
         }
 
         Logger.LogInfo("  Verifying assembly");
-        Logger.LogDebug(string.Format("Running verifier using command line {0} {1}", PeverifyPath, TargetPath));
+        Logger.LogDebug($"Running verifier using command line {PeverifyPath} {TargetPath}");
 
         var processStartInfo = new ProcessStartInfo(PeverifyPath)
                                {
-                                   Arguments = string.Format("\"{0}\" /hresult /ignore=0x80070002,{1}", TargetPath, string.Join(",", ignoreCodes)),
+                                   Arguments = $"\"{TargetPath}\" /hresult /ignore=0x80070002,{string.Join(",", ignoreCodes)}",
                                    WorkingDirectory = Path.GetDirectoryName(TargetPath),
                                    CreateNoWindow = true,
                                    UseShellExecute = false,
@@ -98,7 +98,7 @@ public class Verifier
 
             if (process.ExitCode != 0)
             {
-                Logger.LogError(string.Format("PEVerify of the assembly failed.\n{0}", output));
+                Logger.LogError($"PEVerify of the assembly failed.\n{output}");
                 return false;
             }
         }

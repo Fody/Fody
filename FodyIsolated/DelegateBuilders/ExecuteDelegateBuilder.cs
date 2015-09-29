@@ -10,7 +10,7 @@ public static class ExecuteDelegateBuilder
         var executeMethod = weaverType.GetMethod("Execute", BindingFlags.Instance | BindingFlags.Public, null, new Type[] {}, null);
         if (executeMethod == null)
         {
-            var message = string.Format("'{0}' must contain a public instance method named 'Execute'.", weaverType.FullName);
+            var message = $"'{weaverType.FullName}' must contain a public instance method named 'Execute'.";
             throw new WeavingException(message);
         }
 
