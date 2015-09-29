@@ -4,7 +4,7 @@ using NUnit.Framework;
 public class GlobalSetUp
 {
     [SetUp]
-    void Setup()
+    public void Setup()
     {
         AssemblyLocation.CurrentDirectory = TestContext.CurrentContext.TestDirectory;
     }
