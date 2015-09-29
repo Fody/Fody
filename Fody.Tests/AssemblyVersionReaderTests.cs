@@ -6,9 +6,8 @@ using NUnit.Framework;
 public class AssemblyVersionReaderTests
 {
     [Test]
-    [ExpectedException(typeof(WeavingException))]
     public void BadImage()
     {
-        AssemblyVersionReader.GetAssemblyVersion( Path.Combine(Environment.CurrentDirectory, "BadAssembly.dll"));
+        Assert.Throws<WeavingException>(() => AssemblyVersionReader.GetAssemblyVersion(Path.Combine(Environment.CurrentDirectory, "BadAssembly.dll")));
     }
 }

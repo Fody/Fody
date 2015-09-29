@@ -6,10 +6,10 @@ public class ExecuteDelegateBuilderTests
 {
 
     [Test]
-    [ExpectedException(ExpectedMessage = "'ExecuteDelegateBuilderTests+NoExecuteClass' must contain a public instance method named 'Execute'.")]
     public void Should_throw_When_no_execute_method()
     {
-        typeof(NoExecuteClass).BuildExecuteDelegate();
+        var exception = Assert.Throws<WeavingException>(() => typeof(NoExecuteClass).BuildExecuteDelegate());
+        Assert.AreEqual(exception.Message, "'ExecuteDelegateBuilderTests+NoExecuteClass' must contain a public instance method named 'Execute'.");
     }
 
     public class NoExecuteClass
@@ -30,10 +30,10 @@ public class ExecuteDelegateBuilderTests
     }
 
     [Test]
-    [ExpectedException(ExpectedMessage = "'ExecuteDelegateBuilderTests+NonPublicClass' must contain a public instance method named 'Execute'.")]
     public void Should_throw_When_execute_is_not_public()
     {
-        typeof(NonPublicClass).BuildExecuteDelegate();
+        var exception = Assert.Throws<WeavingException>(() => typeof(NonPublicClass).BuildExecuteDelegate());
+        Assert.AreEqual(exception.Message, "'ExecuteDelegateBuilderTests+NonPublicClass' must contain a public instance method named 'Execute'.");
     }
 
     public class NonPublicClass
@@ -46,10 +46,10 @@ public class ExecuteDelegateBuilderTests
     }
 
     [Test]
-    [ExpectedException(ExpectedMessage = "'ExecuteDelegateBuilderTests+StaticExecuteClass' must contain a public instance method named 'Execute'.")]
     public void Should_thrown_When_method_is_static()
     {
-        typeof(StaticExecuteClass).BuildExecuteDelegate();
+        var exception = Assert.Throws<WeavingException>(() => typeof(StaticExecuteClass).BuildExecuteDelegate());
+        Assert.AreEqual(exception.Message, "'ExecuteDelegateBuilderTests+StaticExecuteClass' must contain a public instance method named 'Execute'.");
     }
 
     public class StaticExecuteClass
@@ -60,11 +60,10 @@ public class ExecuteDelegateBuilderTests
     }
 
     [Test]
-    [ExpectedException(ExpectedException = typeof(NullReferenceException))]
     public void Should_thrown_inner_exception_When_delegate_is_executed()
     {
         var action = typeof (ThrowFromExecuteClass).BuildExecuteDelegate();
-        action(new ThrowFromExecuteClass());
+        Assert.Throws<NullReferenceException>(() => action(new ThrowFromExecuteClass()));
     }
 
     public class ThrowFromExecuteClass

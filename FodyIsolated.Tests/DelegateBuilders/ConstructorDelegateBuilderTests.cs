@@ -6,54 +6,54 @@ public class ConstructorDelegateBuilderTests
 {
 
     [Test]
-    [ExpectedException(typeof(WeavingException), ExpectedMessage = "'System.Convert' is not a public instance class.")]
     public void Should_throw_When_is_abstract_type()
     {
-        typeof (Convert).BuildConstructorDelegate();
+        var exception = Assert.Throws<WeavingException>(() => typeof (Convert).BuildConstructorDelegate());
+        Assert.AreEqual(exception.Message,"'System.Convert' is not a public instance class.");
     }
 
     [Test]
-    [ExpectedException(typeof(WeavingException), ExpectedMessage = "'System.Console' is not a public instance class.")]
     public void Should_throw_When_is_abstract_static_type()
     {
-        typeof(Console).BuildConstructorDelegate();
+        var exception = Assert.Throws<WeavingException>(() => typeof(Console).BuildConstructorDelegate());
+        Assert.AreEqual(exception.Message, "'System.Console' is not a public instance class.");
     }
 
     [Test]
-    [ExpectedException(typeof(WeavingException), ExpectedMessage = "'System.AttributeTargets' is not a public instance class.")]
     public void Should_throw_When_is_enum()
     {
-        typeof(AttributeTargets).BuildConstructorDelegate();
+        var exception = Assert.Throws<WeavingException>(() => typeof(AttributeTargets).BuildConstructorDelegate());
+        Assert.AreEqual(exception.Message, "'System.AttributeTargets' is not a public instance class.");
     }
 
     [Test]
-    [ExpectedException(typeof(WeavingException), ExpectedMessage = "'PrivateClass' is not a public instance class.")]
     public void Should_throw_When_is_private()
     {
-        typeof(PrivateClass).BuildConstructorDelegate();
+        var exception = Assert.Throws<WeavingException>(() => typeof(PrivateClass).BuildConstructorDelegate());
+        Assert.AreEqual(exception.Message,"'PrivateClass' is not a public instance class.");
     }
 
     [Test]
-    [ExpectedException(typeof(WeavingException), ExpectedMessage = "'InternalClass' is not a public instance class.")]
     public void Should_throw_When_is_internal()
     {
-        typeof(InternalClass).BuildConstructorDelegate();
+        var exception = Assert.Throws<WeavingException>(() => typeof(InternalClass).BuildConstructorDelegate());
+        Assert.AreEqual(exception.Message, "'InternalClass' is not a public instance class.");
     }
 
     [Test]
-    [ExpectedException(typeof(WeavingException), ExpectedMessage = "'WithParamsClass' does not have a public instance constructor with no parameters.")]
     public void Should_throw_When_has_parameters()
     {
         var type = typeof (WithParamsClass);
-        type.BuildConstructorDelegate();
+        var exception = Assert.Throws<WeavingException>(() => type.BuildConstructorDelegate());
+        Assert.AreEqual(exception.Message, "'WithParamsClass' does not have a public instance constructor with no parameters.");
     }
 
     [Test]
-    [ExpectedException(typeof(WeavingException), ExpectedMessage = "'ConstructorDelegateBuilderTests+NestedPublicClass' is a nested class which is not supported.")]
     public void Should_throw_When_is_nested()
     {
         var type = typeof(NestedPublicClass);
-        type.BuildConstructorDelegate();
+        var exception = Assert.Throws<WeavingException>(() => type.BuildConstructorDelegate());
+        Assert.AreEqual(exception.Message, "'ConstructorDelegateBuilderTests+NestedPublicClass' is a nested class which is not supported.");
     }
 
     [Test]

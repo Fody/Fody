@@ -6,14 +6,14 @@ public class DynamicTests
 {
     public string Foo;
     [Test]
-    [Ignore]
+    [Explicit]
     public void NoProperty()
     {
         dynamic x = "aString";
         x.Foo = "aString";
     }
     [Test]
-    [Ignore]
+    [Explicit]
     public void WrongType()
     {
         dynamic x = new DynamicTests();

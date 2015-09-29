@@ -57,11 +57,10 @@ public class AfterExecuteDelegateBuilderTests
     }
 
     [Test]
-    [ExpectedException(ExpectedException = typeof(NullReferenceException))]
     public void Should_thrown_inner_exception_When_delegate_is_executed()
     {
-        var action = typeof(ThrowFromExecuteClass).BuildAfterWeavingDelegate();
-        action(new ThrowFromExecuteClass());
+        var action = typeof (ThrowFromExecuteClass).BuildAfterWeavingDelegate();
+        Assert.Throws<NullReferenceException>(() => action(new ThrowFromExecuteClass()));
     }
 
     public class ThrowFromExecuteClass
