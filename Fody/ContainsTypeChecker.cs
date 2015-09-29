@@ -13,8 +13,12 @@ public class ContainsTypeChecker
         };
         var appDomain = AppDomain.CreateDomain("Fody.ContainsTypeChecker", null, appDomainSetup);
         var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
+        if (!File.Exists(assemblyFile))
+        {
+            throw new Exception("Could not find: " + assemblyFile);
+        }
         var instanceAndUnwrap = appDomain.CreateInstanceFromAndUnwrap(assemblyFile, "IsolatedContainsTypeChecker");
-        containsTypeChecker = (IContainsTypeChecker)instanceAndUnwrap;
+        containsTypeChecker = (IContainsTypeChecker) instanceAndUnwrap;
     }
 
 
