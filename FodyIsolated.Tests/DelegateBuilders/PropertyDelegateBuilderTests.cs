@@ -2,7 +2,7 @@ using System;
 using NUnit.Framework;
 
 [TestFixture]
-public class PropertyDelegateBuilderTests
+public class PropertyDelegateBuilderTests : BaseClassSupplyingInheritedMembers
 {
     public string Property { get; set; }
 #pragma warning disable 169
@@ -23,7 +23,7 @@ public class PropertyDelegateBuilderTests
         setterDelegate(this, "aString");
         Assert.AreEqual("aString", Property);
     }
-
+    
     [Test]
     public void Should_return_false_for_non_existing()
     {
@@ -38,7 +38,21 @@ public class PropertyDelegateBuilderTests
         setterDelegate(this, "aString");
         Assert.AreEqual("aString",Field);
     }
+    
+    [Test]
+    public void Should_be_able_to_set_inherited_properties() {
+        var setterDelegate = GetType().BuildPropertySetDelegate<string>(nameof(InheritedProperty));
+        setterDelegate(this, "blah");
+        Assert.AreEqual("blah", InheritedProperty);
+    }
 
+    [Test]
+    public void Should_be_able_to_set_inherited_fields() {
+        var setterDelegate = GetType().BuildPropertySetDelegate<string>(nameof(InheritedField));
+        setterDelegate(this, "blah");
+        Assert.AreEqual("blah", InheritedField);
+    }
+    
     [Test]
     public void Should_be_a_null_delegate_When_member_does_not_exist()
     {
@@ -66,5 +80,14 @@ public class PropertyDelegateBuilderTests
         var setterDelegate = GetType().BuildPropertySetDelegate<string>("PrivateProperty");
         Assert.IsNull(setterDelegate.Target);
     }
+    
 
+}
+
+
+
+public class BaseClassSupplyingInheritedMembers
+{
+    public string InheritedProperty { get; set; }
+    public string InheritedField;
 }
