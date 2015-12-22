@@ -42,7 +42,7 @@ public class XmlExtensionsTests
               </root>");
         var qualifiedName = XName.Get("table", "http://www.w3schools.com/furniture");
         var tables = xDocument.Descendants(qualifiedName);
-        Debug.WriteLine(tables.Count());
+        Trace.WriteLine(tables.Count());
     }
 
     [Test]
@@ -58,6 +58,6 @@ public class XmlExtensionsTests
             </root>");
         xDocument.StripNamespace();
         var tables = xDocument.Descendants("table");
-        Debug.WriteLine(tables.Count());
+        Trace.WriteLine(tables.Count());
     }
 }

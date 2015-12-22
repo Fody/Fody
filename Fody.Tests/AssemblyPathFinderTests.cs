@@ -8,7 +8,7 @@ public class AssemblyLocationTests
     public void Foo()
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory;
-        Debug.WriteLine(currentDirectory);
+        Trace.WriteLine(currentDirectory);
     }
 }
 
