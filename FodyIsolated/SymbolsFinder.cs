@@ -14,33 +14,11 @@ public partial class InnerWeaver
 
     void GetSymbolProviders()
     {
-		pdbPath = Path.ChangeExtension(AssemblyFilePath, "pdb");
-		if (File.Exists(pdbPath))
-		{
-            pdbFound = true;
-            Logger.LogDebug($"Found debug symbols at '{pdbPath}'.");
-		}
+		FindPdb();
 
-        mdbPath = AssemblyFilePath + ".mdb";
-		if (File.Exists(mdbPath))
-		{
-            mdbFound = true;
-            Logger.LogDebug($"Found debug symbols at '{mdbPath}'.");
-		}
+        FindMdb();
 
-        if (pdbFound && mdbFound)
-        {
-            if (File.GetLastWriteTimeUtc(pdbPath) >= File.GetLastWriteTimeUtc(mdbPath))
-            {
-                mdbFound = false;
-                Logger.LogDebug("Found mdb and pdb debug symbols. Selected pdb (newer).");
-            }
-            else
-            {
-                pdbFound = false;
-                Logger.LogDebug("Found mdb and pdb debug symbols. Selected mdb (newer).");
-            }
-        }
+        ThrowIfFoundBoth();
 
         if (pdbFound)
 		{
@@ -60,4 +38,49 @@ public partial class InnerWeaver
         Logger.LogDebug("Found no debug symbols.");
 	}
 
+    void ThrowIfFoundBoth()
+    {
+        if (!pdbFound || !mdbFound)
+        {
+            return;
+        }
+        if (File.GetLastWriteTimeUtc(pdbPath) >= File.GetLastWriteTimeUtc(mdbPath))
+        {
+            mdbFound = false;
+            Logger.LogDebug("Found mdb and pdb debug symbols. Selected pdb (newer).");
+        }
+        else
+        {
+            pdbFound = false;
+            Logger.LogDebug("Found mdb and pdb debug symbols. Selected mdb (newer).");
+        }
+    }
+
+    void FindPdb()
+    {
+        // because UWP use a wacky convention for symbols
+        pdbPath = Path.ChangeExtension(AssemblyFilePath, "compile.pdb");
+        if (File.Exists(pdbPath))
+        {
+            pdbFound = true;
+            Logger.LogDebug($"Found debug symbols at '{pdbPath}'.");
+            return;
+        }
+        pdbPath = Path.ChangeExtension(AssemblyFilePath, "pdb");
+        if (File.Exists(pdbPath))
+        {
+            pdbFound = true;
+            Logger.LogDebug($"Found debug symbols at '{pdbPath}'.");
+        }
+    }
+
+    void FindMdb()
+    {
+        mdbPath = AssemblyFilePath + ".mdb";
+        if (File.Exists(mdbPath))
+        {
+            mdbFound = true;
+            Logger.LogDebug($"Found debug symbols at '{mdbPath}'.");
+        }
+    }
 }
