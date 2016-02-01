@@ -19,6 +19,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <None Include="install.ps1" />
     <None Include="Fody.nuspec">
       <SubType>Designer</SubType>
     </None>
@@ -37,6 +38,7 @@
     <MakeDir Directories="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)NuGet\Fody.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)NuGet\FodyWeavers.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Content" />
+    <Copy SourceFiles="$(SolutionDir)NuGet\install.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
     <Copy SourceFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)FodyCommon\bin\$(ConfigurationName)\FodyCommon.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
