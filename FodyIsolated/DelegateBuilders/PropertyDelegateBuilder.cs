@@ -19,10 +19,9 @@ public static class PropertyDelegateBuilder
 
         if (propertyInfo != null)
         {
-            var setMethod = propertyInfo.GetSetMethod();
             var target = Expression.Parameter(typeof (object));
             var value = Expression.Parameter(typeof (T));
-            var property = Expression.Property(Expression.Convert(target, targetType), setMethod);
+            var property = Expression.Property(Expression.Convert(target, targetType), propertyInfo);
             var body = Expression.Assign(property, value);
             action = Expression.Lambda<Action<object, T>>(body, target, value)
                              .Compile();
