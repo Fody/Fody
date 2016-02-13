@@ -35,6 +35,7 @@
     </Otherwise>
   </Choose>
   <PropertyGroup>
+    <ProjectWeaverXml>$(ProjectDir)FodyWeavers.xml</ProjectWeaverXml>
     <IntermediateDir>$(ProjectDir)$(IntermediateOutputPath)</IntermediateDir>
     <FodySignAssembly Condition="$(FodySignAssembly) == '' Or $(FodySignAssembly) == '*Undefined*'">$(SignAssembly)</FodySignAssembly>
     <FodyPath Condition="$(FodyPath) == '' Or $(FodyPath) == '*Undefined*'">$(MSBuildThisFileDirectory)..\..\</FodyPath>
@@ -45,7 +46,9 @@
   <Target
       AfterTargets="AfterCompile"
       Name="FodyTarget"
-      DependsOnTargets="$(FodyDependsOnTargets)">
+      DependsOnTargets="$(FodyDependsOnTargets)"
+      Inputs="@(IntermediateAssembly->'%(FullPath)');$(FodyKeyFilePath);$(ProjectWeaverXml)"
+      Outputs="$(TargetPath)">
 
     <Fody.WeavingTask
           AssemblyPath="@(IntermediateAssembly)"
@@ -73,7 +76,9 @@
   <Target Condition="'$(NCrunch)' != '1'"
       AfterTargets="AfterBuild"
       Name="FodyVerifyTarget"
-      DependsOnTargets="$(FodyVerifyDependsOnTargets)">
+      DependsOnTargets="$(FodyVerifyDependsOnTargets)"
+      Inputs="@(IntermediateAssembly->'%(FullPath)');$(FodyKeyFilePath);$(ProjectWeaverXml)"
+      Outputs="$(TargetPath)">
 
     <Fody.VerifyTask
           ProjectDirectory="$(ProjectDir)"
