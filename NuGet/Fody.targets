@@ -45,6 +45,7 @@
       AssemblyFile="$(FodyPath)\Fody.dll" />
   <Target
       AfterTargets="AfterCompile"
+      Condition="Exists(@(IntermediateAssembly))"
       Name="FodyTarget"
       DependsOnTargets="$(FodyDependsOnTargets)"
       Inputs="@(IntermediateAssembly->'%(FullPath)');$(FodyKeyFilePath);$(ProjectWeaverXml)"
@@ -73,7 +74,7 @@
   <UsingTask
     TaskName="Fody.VerifyTask"
     AssemblyFile="$(FodyPath)\Fody.dll" />
-  <Target Condition="'$(NCrunch)' != '1'"
+  <Target Condition="'$(NCrunch)' != '1' And Exists($(TargetPath))"
       AfterTargets="AfterBuild"
       Name="FodyVerifyTarget"
       DependsOnTargets="$(FodyVerifyDependsOnTargets)"
