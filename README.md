@@ -104,6 +104,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [RomanticWeb](http://romanticweb.net/) Fody weaver plugin for RomanticWeb instrumentation.
   * [Scalpel](https://github.com/Fody/Scalpel) Strips tests from an assembly. 
   * [Seal](https://github.com/kamil-mrzyglod/Seal) mark all non-virtual(abstract, non-sealed) types as sealed by default.
+  * [SemVer](https://github.com/dittodhole/csharp-SemVer.Fody) versions your assemblies according to [SemVer](http://semver.org/) based on your CVS commit messages.
   * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration. 
   * [Stamp](https://github.com/Fody/Stamp) Stamps an assembly with git data.
   * [StampSvn](https://github.com/krk/Stamp) Stamps an assembly with svn data.
