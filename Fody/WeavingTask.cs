@@ -37,6 +37,8 @@ namespace Fody
 
         public string NuGetPackageRoot { get; set; }
 
+      public string CustomFodyFile { get; set; }
+
         public override bool Execute()
         {
             var referenceCopyLocalPaths = ReferenceCopyLocalPaths.Select(x => x.ItemSpec).ToList();
@@ -56,7 +58,8 @@ namespace Fody
                 SolutionDirectory = SolutionDir,
                 ReferenceCopyLocalPaths = referenceCopyLocalPaths,
                 DefineConstants = defineConstants,
-                NuGetPackageRoot = NuGetPackageRoot
+                NuGetPackageRoot = NuGetPackageRoot,
+                CustomFodyFile = CustomFodyFile
             };
             var success = processor.Execute();
             if (success)
