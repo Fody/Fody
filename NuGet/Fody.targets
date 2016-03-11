@@ -39,6 +39,7 @@
     <IntermediateDir>$(ProjectDir)$(IntermediateOutputPath)</IntermediateDir>
     <FodySignAssembly Condition="$(FodySignAssembly) == '' Or $(FodySignAssembly) == '*Undefined*'">$(SignAssembly)</FodySignAssembly>
     <FodyPath Condition="$(FodyPath) == '' Or $(FodyPath) == '*Undefined*'">$(MSBuildThisFileDirectory)..\..\</FodyPath>
+    <CustomFodyFile></CustomFodyFile>
   </PropertyGroup>
   <UsingTask
       TaskName="Fody.WeavingTask"
@@ -61,6 +62,7 @@
           References="@(ReferencePath)"
           SignAssembly="$(FodySignAssembly)"
           ReferenceCopyLocalPaths="@(ReferenceCopyLocalPaths)"
+          CustomFodyFile="$(CustomFodyFile)"
           DefineConstants="$(DefineConstants)"
       >
 
