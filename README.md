@@ -96,6 +96,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Nancy.ModelPostprocess](https://bitbucket.org/tpluscode/nancy.modelpostprocess) Modify Nancy models after route execution but before serialization
   * [NullGuard](https://github.com/Fody/NullGuard) Adds null argument checks to an assembly
   * [Obsolete](https://github.com/Fody/Obsolete) Helps keep usages of [ObsoleteAttribute]([http://msdn.microsoft.com/en-us/library/fwz0y5c2 ) consistent.
+  * [Padded](https://github.com/Scooletz/Padded) Adds padding to fight the false sharing problem.
   * [PropertyChanged](https://github.com/Fody/PropertyChanged) Injects INotifyPropertyChanged code into properties.
   * [PropertyChanging](https://github.com/Fody/PropertyChanging) Injects INotifyPropertyChanging code into properties.
   * [Publicize](https://github.com/Fody/Publicize) Converts non-public members to public hidden members.
