@@ -100,6 +100,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [PropertyChanged](https://github.com/Fody/PropertyChanged) Injects INotifyPropertyChanged code into properties.
   * [PropertyChanging](https://github.com/Fody/PropertyChanging) Injects INotifyPropertyChanging code into properties.
   * [Publicize](https://github.com/Fody/Publicize) Converts non-public members to public hidden members.
+  * [QueryValidator](https://github.com/kamil-mrzyglod/QueryValidator.Fody) Validates your DB queries during a build.
   * [ReactiveUI](https://github.com/kswoll/ReactiveUI.Fody) Generates [ReactiveUI](http://reactiveui.net/) `RaisePropertyChange` notifications for properties and `ObservableAsPropertyHelper` properties.
   * [RemoveReference](https://github.com/icnocop/RemoveReference.Fody) Facilitates removing references in a compiled assembly during a build.
   * [Resourcer](https://github.com/Fody/Resourcer) Simplifies reading embedded resources from an Assembly.
