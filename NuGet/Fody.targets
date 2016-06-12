@@ -79,14 +79,14 @@
   <UsingTask
     TaskName="Fody.VerifyTask"
     AssemblyFile="$(FodyPath)\Fody.dll" />
-  <Target Condition="'$(NCrunch)' != '1' And Exists($(TargetPath)) And ('$(FodyWeavingTargetWasRun)' == 'True')"
-      AfterTargets="AfterBuild"
+  <Target Condition="'$(NCrunch)' != '1' And ('$(FodyWeavingTargetWasRun)' == 'True')"
+      AfterTargets="FodyTarget"
       Name="FodyVerifyTarget"
       DependsOnTargets="$(FodyVerifyDependsOnTargets)">
 
     <Fody.VerifyTask
           ProjectDirectory="$(ProjectDir)"
-          TargetPath="$(TargetPath)"
+          TargetPath="@(IntermediateAssembly->'%(FullPath)')"
           SolutionDir="$(FodySolutionDir)"
           DefineConstants="$(DefineConstants)"
       />
