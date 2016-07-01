@@ -8,9 +8,9 @@
 
 Manipulating the IL of an assembly as part of a build requires a significant amount of plumbing code. This plumbing code involves knowledge of both the MSBuild and Visual Studio APIs. Fody attempts to eliminate that plumbing code through an extensible add-in model. 
 
-## The nuget package  [![NuGet Status](http://img.shields.io/nuget/v/Fody.svg?style=flat)](https://www.nuget.org/packages/Fody/)
+## The nuget package  [![NuGet Status](https://img.shields.io/nuget/v/Fody.svg?style=flat)](https://www.nuget.org/packages/Fody/)
 
-https://nuget.org/packages/Fody/
+https://www.nuget.org/packages/Fody/
 
     PM> Install-Package Fody
 
@@ -27,7 +27,7 @@ This technique of "weaving" in new instructions is fantastically powerful. You c
   * Re-applying the strong name if necessary
   * Saving the assembly and pdb
 
-Fody Uses [Mono.Cecil](http://www.mono-project.com/Cecil)  and an add-in based approach to modifying the IL of .net assemblies at compile time.
+Fody Uses [Mono.Cecil](http://www.mono-project.com/Cecil/)  and an add-in based approach to modifying the IL of .net assemblies at compile time.
 
  * No install required to build
  * No attributes required
@@ -79,13 +79,13 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Fielder](https://github.com/Fody/Fielder) Converts public fields to public properties.
   * [FodyDependencyInjection](https://github.com/jorgehmv/FodyDependencyInjection) Dependency injection with Fody add-ins. 
   * [Freezable](https://github.com/Fody/Freezable) Implements the Freezable pattern.
-  * [InfoOf](https://github.com/Fody/InfoOf) Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](http://msdn.microsoft.com/en-us/library/58918ffs.aspx).
+  * [InfoOf](https://github.com/Fody/InfoOf) Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](https://msdn.microsoft.com/en-us/library/58918ffs.aspx).
   * [Ionad](https://github.com/Fody/Ionad) Replaces static method calls. 
-  * [Janitor](https://github.com/Fody/Janitor) Simplifies the implementation of [IDisposable](http://msdn.microsoft.com/en-us/library/system.idisposable.aspx).
+  * [Janitor](https://github.com/Fody/Janitor) Simplifies the implementation of [IDisposable](https://msdn.microsoft.com/en-us/library/system.idisposable.aspx).
   * [JetBrainsAnnotations](https://github.com/Fody/JetBrainsAnnotations) Leverage JetBrains Annotations without the need for JetBrainsAnnotations.dll. 
   * [LoadAssembliesOnStartup](https://github.com/Fody/LoadAssembliesOnStartup) Loads references on startup by using the types in the module initializer
   * [MethodCache](https://github.com/Dresel/MethodCache) Caches return values of methods decorated with a `CacheAttribute`.
-  * [MethodDecorator](http://github.com/Fody/MethodDecorator) Decorate arbitrary methods to run code before and after invocation.
+  * [MethodDecorator](https://github.com/Fody/MethodDecorator) Decorate arbitrary methods to run code before and after invocation.
   * [MethodTimer](https://github.com/Fody/MethodTimer) Injects method timing code.
   * [Mixins](https://bitbucket.org/skwasiborski/mixins.fody/wiki/Home) A mixin is a class that provides a certain functionality to be inherited or just reused by a subclass.
   * [ModuleInit](https://github.com/Fody/ModuleInit) Adds a module initializer to an assembly.
@@ -95,7 +95,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [NameOf](https://github.com/NickStrupat/NameOf) Provides strongly typed access to a compile-time string representing the name of a variable, field, property, method, event, enum value, or type.
   * [Nancy.ModelPostprocess](https://bitbucket.org/tpluscode/nancy.modelpostprocess) Modify Nancy models after route execution but before serialization
   * [NullGuard](https://github.com/Fody/NullGuard) Adds null argument checks to an assembly
-  * [Obsolete](https://github.com/Fody/Obsolete) Helps keep usages of [ObsoleteAttribute]([http://msdn.microsoft.com/en-us/library/fwz0y5c2 ) consistent.
+  * [Obsolete](https://github.com/Fody/Obsolete) Helps keep usages of [ObsoleteAttribute]([https://msdn.microsoft.com/en-us/library/fwz0y5c2 ) consistent.
   * [Padded](https://github.com/Scooletz/Padded) Adds padding to fight the false sharing problem.
   * [PropertyChanged](https://github.com/Fody/PropertyChanged) Injects INotifyPropertyChanged code into properties.
   * [PropertyChanging](https://github.com/Fody/PropertyChanging) Injects INotifyPropertyChanging code into properties.
@@ -107,7 +107,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [RomanticWeb](http://romanticweb.net/) Fody weaver plugin for RomanticWeb instrumentation.
   * [Scalpel](https://github.com/Fody/Scalpel) Strips tests from an assembly. 
   * [Seal](https://github.com/kamil-mrzyglod/Seal) mark all non-virtual(abstract, non-sealed) types as sealed by default.
-  * [SemVer](https://github.com/dittodhole/csharp-SemVer.Fody) versions your assemblies according to [SemVer](http://semver.org/) based on your CVS commit messages.
+  * [SemVer](https://github.com/dittodhole/dotnet-SemVer.Stamp) versions your assemblies according to [SemVer](http://semver.org/) based on your CVS commit messages.
   * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration. 
   * [Stamp](https://github.com/Fody/Stamp) Stamps an assembly with git data.
   * [StampSvn](https://github.com/krk/Stamp) Stamps an assembly with svn data.
@@ -117,8 +117,8 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [ToString](https://github.com/Fody/ToString) Generate `ToString` method from public properties.
   * [Tracer](https://github.com/csnemes/tracer) Adds trace-enter and trace-leave log entries for selected methods.
   * [Undisposed](https://github.com/ermshiperete/undisposed-fody) Debugging tool to track down undisposed objects.
-  * [Usable](https://github.com/Fody/Usable) Adds using statements for local variables that have been created, and implement [IDisposable](http://msdn.microsoft.com/en-au/library/system.idisposable.aspx).
-  * [Validar](https://github.com/Fody/Validar) Injects [IDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.IDataErrorInfo.aspx) or [INotifyDataErrorInfo](http://msdn.microsoft.com/en-us/library/system.componentmodel.INotifyDataErrorInfo.aspx ) code into a class at compile time.
+  * [Usable](https://github.com/Fody/Usable) Adds using statements for local variables that have been created, and implement [IDisposable](https://msdn.microsoft.com/en-au/library/system.idisposable.aspx).
+  * [Validar](https://github.com/Fody/Validar) Injects [IDataErrorInfo](https://msdn.microsoft.com/en-us/library/system.componentmodel.IDataErrorInfo.aspx) or [INotifyDataErrorInfo](https://msdn.microsoft.com/en-us/library/system.componentmodel.INotifyDataErrorInfo.aspx ) code into a class at compile time.
   * [Vandelay](https://github.com/jasonwoods-7/Vandelay) Simplifies MEF importing\exporting.
   * [Visualize](https://github.com/Fody/Visualize) Adds debugger attributes to help visualize objects.
   * [Virtuosity](https://github.com/Fody/Virtuosity) Change all members to virtual.
