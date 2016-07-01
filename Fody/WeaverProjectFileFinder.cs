@@ -24,19 +24,19 @@ public partial class Processor
 
     void GetValue()
     {
-        var weaversBin = Path.Combine(SolutionDirectory, "Weavers", "bin");
+        var weaversBin = FileSystem.Path.Combine(SolutionDirectory, "Weavers", "bin");
 
-        if (Directory.Exists(weaversBin))
+        if (FileSystem.Directory.Exists(weaversBin))
         {
-            WeaverAssemblyPath = Directory.EnumerateFiles(weaversBin, "Weavers.dll", SearchOption.AllDirectories)
-                .OrderByDescending(File.GetLastWriteTime)
+            WeaverAssemblyPath = FileSystem.Directory.EnumerateFiles(weaversBin, "Weavers.dll", SearchOption.AllDirectories)
+                .OrderByDescending(FileSystem.File.GetLastWriteTime)
                 .FirstOrDefault();
             return;
         }
 
         //Hack for ncrunch
         //<Reference Include="...\AppData\Local\NCrunch\2544\1\Integration\Weavers\bin\Debug\Weavers.dll" />
-        WeaverAssemblyPath = References.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries)
+        WeaverAssemblyPath = References.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries)
             .FirstOrDefault(x => x.EndsWith("Weavers.dll"));
     }
 

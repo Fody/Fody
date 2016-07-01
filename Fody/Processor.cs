@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
+using System.IO.Abstractions;
 using System.Linq;
 using MSMessageEnum = Microsoft.Build.Framework.MessageImportance;
 
@@ -20,6 +20,14 @@ public partial class Processor
     public List<string> ConfigFiles;
     IInnerWeaver innerWeaver;
 
+    private static IFileSystem _fileSystem;
+
+    public static IFileSystem FileSystem
+    {
+        get { return _fileSystem ?? new FileSystem(); }
+        set { _fileSystem = value; }
+    }
+
     AddinFinder addinFinder;
     static Dictionary<string, AppDomain> solutionDomains = new Dictionary<string, AppDomain>(StringComparer.OrdinalIgnoreCase);
 
@@ -37,7 +45,7 @@ public partial class Processor
     public virtual bool Execute()
     {
 
-        Logger.LogInfo($"Fody (version {typeof (Processor).Assembly.GetName().Version}) Executing");
+        Logger.LogInfo($"Fody (version {typeof(Processor).Assembly.GetName().Version}) Executing");
 
         var stopwatch = Stopwatch.StartNew();
 
@@ -57,7 +65,7 @@ public partial class Processor
         }
     }
 
-    void Inner()
+    internal void Inner()
     {
         ValidateProjectPath();
 
@@ -69,9 +77,8 @@ public partial class Processor
         {
             if (!CheckForWeaversXmlChanged())
             {
-                
                 FindWeavers();
-        
+
                 if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
                 {
                     Logger.LogError("A re-build is required because a weaver has changed.");
@@ -104,11 +111,11 @@ public partial class Processor
         Logger.LogDebug("Finding weavers");
         ReadProjectWeavers();
         addinFinder = new AddinFinder
-            {
-                Logger = Logger, 
-                SolutionDirectoryPath = SolutionDirectory,
-                NuGetPackageRoot = NuGetPackageRoot
-            };
+        {
+            Logger = Logger,
+            SolutionDirectoryPath = SolutionDirectory,
+            NuGetPackageRoot = NuGetPackageRoot
+        };
         addinFinder.FindAddinDirectories();
 
         FindWeaverProjectFile();
@@ -137,7 +144,7 @@ public partial class Processor
             appDomain = solutionDomains[SolutionDirectory] = CreateDomain();
         }
 
-        var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
+        var assemblyFile = FileSystem.Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
         using (innerWeaver = (IInnerWeaver)appDomain.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver"))
         {
             innerWeaver.AssemblyFilePath = AssemblyFilePath;
