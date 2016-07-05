@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 
 public partial class Processor
 {
@@ -11,7 +10,7 @@ public partial class Processor
         var changed = false;
         foreach (var configFile in ConfigFiles)
         {
-            var timeStamp = File.GetLastWriteTimeUtc(configFile);
+            var timeStamp = FileSystem.File.GetLastWriteTimeUtc(configFile);
             DateTime dateTime;
             if (TimeStamps.TryGetValue(configFile, out dateTime))
             {
@@ -24,7 +23,7 @@ public partial class Processor
             else
             {
                 TimeStamps[configFile] = timeStamp;
-            }   
+            }
         }
         return changed;
     }
@@ -33,7 +32,7 @@ public partial class Processor
     {
         foreach (var configFile in ConfigFiles)
         {
-            TimeStamps[configFile] = File.GetLastWriteTimeUtc(configFile);
+            TimeStamps[configFile] = FileSystem.File.GetLastWriteTimeUtc(configFile);
         }
     }
 }
