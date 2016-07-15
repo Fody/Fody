@@ -8,6 +8,10 @@ public class AssemblyVersionReaderTests
     [Test]
     public void BadImage()
     {
-        Assert.Throws<WeavingException>(() => AssemblyVersionReader.GetAssemblyVersion(Path.Combine(Environment.CurrentDirectory, "BadAssembly.dll")));
+        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, "BadAssembly.dll");
+        Assert.Throws<WeavingException>(() =>
+        {
+            AssemblyVersionReader.GetAssemblyVersion(path);
+        });
     }
 }
