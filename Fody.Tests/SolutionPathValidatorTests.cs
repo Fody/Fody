@@ -28,7 +28,6 @@ public class SolutionPathValidatorTests
     {
 	    Assert.Throws<WeavingException>(() =>
 		    {
-
 			    var processor = new Processor
 				    {
 					    SolutionDirectory = "aString"
