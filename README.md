@@ -76,6 +76,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Equals](https://github.com/Fody/Equals) Generate Equals, GetHashCode and operators methods from properties.
   * [Expose](https://github.com/kedarvaidya/Expose.Fody) Exposes members and optionally implements interface of a field declared in class.
   * [ExtraConstraints](https://github.com/Fody/ExtraConstraints) Facilitates adding constraints for Enum and Delegate to types and methods.
+  * [FactoryId](https://github.com/ramoneeza/FactoryId.Fody) Simplifies the implementation of Factory Method Pattern
   * [Fielder](https://github.com/Fody/Fielder) Converts public fields to public properties.
   * [FodyDependencyInjection](https://github.com/jorgehmv/FodyDependencyInjection) Dependency injection with Fody add-ins. 
   * [Freezable](https://github.com/Fody/Freezable) Implements the Freezable pattern.
