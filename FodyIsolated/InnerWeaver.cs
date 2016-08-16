@@ -5,10 +5,12 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting;
+using System.Text;
 using Mono.Cecil;
 using Mono.Cecil.Mdb;
 using Mono.Cecil.Pdb;
 using Mono.Cecil.Rocks;
+using FieldAttributes = Mono.Cecil.FieldAttributes;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
@@ -80,6 +82,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             AppDomain.CurrentDomain.AssemblyResolve += assemblyResolve;
             InitialiseWeavers();
             ExecuteWeavers();
+            AddWeavingInfo();
             AddProcessedFlag();
             FindStrongNameKey();
             WriteModule();
@@ -168,6 +171,24 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
                 Logger.ClearWeaverName();
             }
         }
+    }
+
+    void AddWeavingInfo()
+    {
+        var typeDefinition = new TypeDefinition(ModuleDefinition.Name.Replace(".dll", string.Empty), "FodyWeavingResults",
+            TypeAttributes.Class | TypeAttributes.NotPublic);
+
+        typeDefinition.CustomAttributes.Add(new CustomAttribute(ModuleDefinition.ImportReference(typeof(DebuggerHiddenAttribute).GetConstructor(Type.EmptyTypes))));
+
+        foreach (var weaver in weaverInstances)
+        {
+            var fd = new FieldDefinition(weaver.Config.AssemblyName, FieldAttributes.Assembly | FieldAttributes.Literal | FieldAttributes.HasDefault, ModuleDefinition.ImportReference(typeof(string)));
+            fd.Constant ="1.10.0";
+
+            typeDefinition.Fields.Add(fd);
+        }
+
+        ModuleDefinition.Types.Add(typeDefinition);
     }
 
     void ExecuteAfterWeavers()
