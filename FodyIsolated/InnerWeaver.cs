@@ -176,6 +176,14 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
     void AddWeavingInfo()
     {
+        if (cancelRequested)
+        {
+            return;
+        }
+
+        Logger.LogDebug("  Adding weaving info");
+        var startNew = Stopwatch.StartNew();
+
         var td = new TypeDefinition(null, "FodyWeavingResults", TypeAttributes.Class | TypeAttributes.NotPublic);
         var attrCtor = ModuleDefinition.ImportReference(
             typeof(FodyGeneratedCodeAttribute).GetConstructor(new[] {typeof(string)}));
@@ -199,6 +207,9 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         }
 
         ModuleDefinition.Types.Add(td);
+
+        var finishedMessage = $"  Finished in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
+        Logger.LogDebug(finishedMessage);
     }
 
     void ExecuteAfterWeavers()
