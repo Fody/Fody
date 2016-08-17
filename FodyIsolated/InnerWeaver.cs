@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting;
 using System.Text;
+using FodyIsolated;
 using Mono.Cecil;
 using Mono.Cecil.Mdb;
 using Mono.Cecil.Pdb;
@@ -175,20 +176,29 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
     void AddWeavingInfo()
     {
-        var typeDefinition = new TypeDefinition(ModuleDefinition.Name.Replace(".dll", string.Empty), "FodyWeavingResults",
-            TypeAttributes.Class | TypeAttributes.NotPublic);
+        var td = new TypeDefinition(null, "FodyWeavingResults", TypeAttributes.Class | TypeAttributes.NotPublic);
+        var attrCtor = ModuleDefinition.ImportReference(
+            typeof(FodyGeneratedCodeAttribute).GetConstructor(new[] {typeof(string)}));
+        var attr = new CustomAttribute(attrCtor);
 
-        typeDefinition.CustomAttributes.Add(new CustomAttribute(ModuleDefinition.ImportReference(typeof(DebuggerHiddenAttribute).GetConstructor(Type.EmptyTypes))));
+        attr.ConstructorArguments.Add(new CustomAttributeArgument(ModuleDefinition.TypeSystem.String,
+            FileVersionInfo.GetVersionInfo(typeof(IInnerWeaver).Assembly.Location).FileVersion));
+        td.CustomAttributes.Add(attr);
 
         foreach (var weaver in weaverInstances)
         {
-            var fd = new FieldDefinition(weaver.Config.AssemblyName, FieldAttributes.Assembly | FieldAttributes.Literal | FieldAttributes.HasDefault, ModuleDefinition.ImportReference(typeof(string)));
-            fd.Constant ="1.10.0";
+            var weaverVersion = FileVersionInfo.GetVersionInfo(weaver.Config.AssemblyPath);
+            var fd = new FieldDefinition(weaver.Config.AssemblyName.Replace(".", string.Empty),
+                FieldAttributes.Assembly | FieldAttributes.Literal | FieldAttributes.HasDefault,
+                ModuleDefinition.ImportReference(typeof(string)))
+            {
+                Constant = weaverVersion.FileVersion
+            };
 
-            typeDefinition.Fields.Add(fd);
+            td.Fields.Add(fd);
         }
 
-        ModuleDefinition.Types.Add(typeDefinition);
+        ModuleDefinition.Types.Add(td);
     }
 
     void ExecuteAfterWeavers()
