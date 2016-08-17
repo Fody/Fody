@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title></title>
+    <authors>Octopus</authors>
+    <description>TODO</description>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+  </metadata>
+  <files>
+    <file src="bin\Debug\Fody.dll" target="lib\net452"></file>
+    <file src="..\FodyIsolated\bin\Debug\*.dll" target="lib\net452"></file>
+  </files>
+</package>
