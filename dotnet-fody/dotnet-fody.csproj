@@ -54,7 +54,6 @@
     <Compile Include="ResponseFileParser.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="dotnet-fody.nuspec">
       <SubType>Designer</SubType>
     </None>
@@ -69,15 +68,7 @@
       <Name>Fody</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  -->
   <Target Name="AfterBuild">
     <Exec WorkingDirectory="$(BuildDir)" Command="..\Tools\NuGet.exe pack -Prop Configuration=$(Configuration)" />
   </Target>
