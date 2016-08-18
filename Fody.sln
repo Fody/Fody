@@ -28,6 +28,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetCecil", "NuGetCecil\NugetCecil.csproj", "{4D267DED-10CA-4CF4-84E9-C7945393F86F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-fody", "dotnet-fody\dotnet-fody.csproj", "{2DD93D98-DEC1-44EB-9F9D-C871E90FCFCB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{89681581-A390-4761-9C27-1F274FE506E7} = {89681581-A390-4761-9C27-1F274FE506E7}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-fody.Tests", "dotnet-fody.Tests\dotnet-fody.Tests.csproj", "{68BF7685-A3DD-40A8-A5CA-4D6AB133ED35}"
 EndProject

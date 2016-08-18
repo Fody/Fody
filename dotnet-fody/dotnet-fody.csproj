@@ -55,7 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="dotnet-fody.nuspec" />
+    <None Include="dotnet-fody.nuspec">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj">
@@ -75,7 +77,8 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
   -->
+  <Target Name="AfterBuild">
+    <Exec WorkingDirectory="$(BuildDir)" Command="..\Tools\NuGet.exe pack -Prop Configuration=$(Configuration)" />
+  </Target>
 </Project>
