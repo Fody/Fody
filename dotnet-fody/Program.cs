@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace Dotnet.Fody
 {
@@ -10,12 +11,22 @@ namespace Dotnet.Fody
     {
         public static int Main(string[] args)
         {
-            if (args.Length != 1 || !args[0].EndsWith(".rsp"))
+            Console.WriteLine($"dotnet-fody {typeof(Program).Assembly.GetName().Version}");
+
+            int exitCode;
+            if (args.Length != 2 || !int.TryParse(args[0], out exitCode) || !args[1].EndsWith(".rsp"))
             {
                 PrintUsage();
                 return 2;
             }
-            var responseFilePath = args[0];
+
+            if (exitCode != 0)
+            {
+                Console.WriteLine("Compiler exited with an error, exiting without making changes");
+                return 0;
+            }
+
+            var responseFilePath = args[1];
             var parameters = ResponseFileParser.ParseFile(responseFilePath);
             var processor = new Processor
             {
@@ -50,7 +61,7 @@ namespace Dotnet.Fody
         private static void PrintUsage()
         {
             Console.Error.WriteLine("Usage:");
-            Console.Error.WriteLine("dotnet fody %compile:ResponseFile%");
+            Console.Error.WriteLine("dotnet fody %compile:CompilerExitCode% %compile:ResponseFile%");
         }
 
         private static string GetNuGetPackageRoot()
