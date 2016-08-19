@@ -35,7 +35,6 @@ public class WeavingInfoTests
         moduleDefinition =
             ModuleDefinition.ReadModule(TestContext.CurrentContext.TestDirectory + "\\DummyAssembly.dll");
 
-
         Assert.IsTrue(moduleDefinition.Types.Count(_ => _.Name == "FodyWeavingResults") >= 1);
         Assert.IsTrue(moduleDefinition.Types.First(_ => _.Name == "FodyWeavingResults").HasCustomAttributes);
         Assert.IsTrue(moduleDefinition.Types.First(_ => _.Name == "FodyWeavingResults").Fields.Any(f => f.Name == "SampleFody"));

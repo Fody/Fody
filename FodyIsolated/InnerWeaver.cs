@@ -8,10 +8,13 @@ using System.Runtime.Remoting;
 using System.Text;
 using FodyIsolated;
 using Mono.Cecil;
+using Mono.Cecil.Cil;
 using Mono.Cecil.Mdb;
 using Mono.Cecil.Pdb;
 using Mono.Cecil.Rocks;
 using FieldAttributes = Mono.Cecil.FieldAttributes;
+using MethodAttributes = Mono.Cecil.MethodAttributes;
+using ParameterAttributes = Mono.Cecil.ParameterAttributes;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
@@ -184,13 +187,45 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         Logger.LogDebug("  Adding weaving info");
         var startNew = Stopwatch.StartNew();
 
-        var td = new TypeDefinition(null, "FodyWeavingResults", TypeAttributes.Class | TypeAttributes.NotPublic);
-        var attrCtor = ModuleDefinition.ImportReference(
-            typeof(FodyGeneratedCodeAttribute).GetConstructor(new[] {typeof(string)}));
-        var attr = new CustomAttribute(attrCtor);
+        // Create 'FodyGeneratedCodeAttribute' which will be used to decorate
+        // our info class
+        var ci = typeof(Attribute).GetConstructors(BindingFlags.NonPublic | BindingFlags.CreateInstance | BindingFlags.Instance).First(c => c.IsFamily);
+        var attrType = new TypeDefinition(null, "FodyGeneratedCodeAttribute",
+            TypeAttributes.Class | TypeAttributes.NotPublic)
+        {
+            BaseType = ModuleDefinition.ImportReference(typeof(Attribute))
+        };
+        attrType.Fields.Add(new FieldDefinition("Version", FieldAttributes.Assembly | FieldAttributes.InitOnly, ModuleDefinition.TypeSystem.String));
 
+        var
+        md = new MethodDefinition(".ctor",
+            MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.SpecialName |
+            MethodAttributes.RTSpecialName, ModuleDefinition.TypeSystem.Void);
+
+        // Add a parameter which should be called in
+        // attribute's ctor
+        md.Parameters.Add(new ParameterDefinition("version", ParameterAttributes.None, ModuleDefinition.TypeSystem.String));
+
+        // Recreate MSIL which should be called when
+        // calling a ctor
+        md.Body.Instructions.Add(Instruction.Create(OpCodes.Ldarg_0));
+        md.Body.Instructions.Add(Instruction.Create(OpCodes.Call,
+            ModuleDefinition.ImportReference(ci)));
+        md.Body.Instructions.Add(Instruction.Create(OpCodes.Nop));
+        md.Body.Instructions.Add(Instruction.Create(OpCodes.Nop));
+        md.Body.Instructions.Add(Instruction.Create(OpCodes.Ldarg_0));
+        md.Body.Instructions.Add(Instruction.Create(OpCodes.Ldarg_1));
+        md.Body.Instructions.Add(Instruction.Create(OpCodes.Stfld, attrType.Fields.First()));
+        md.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
+
+        attrType.Methods.Add(md);
+        ModuleDefinition.Types.Add(attrType);
+
+        var attr = new CustomAttribute(md);
         attr.ConstructorArguments.Add(new CustomAttributeArgument(ModuleDefinition.TypeSystem.String,
             FileVersionInfo.GetVersionInfo(typeof(IInnerWeaver).Assembly.Location).FileVersion));
+
+        var td = new TypeDefinition(null, "FodyWeavingResults", TypeAttributes.Class | TypeAttributes.NotPublic);
         td.CustomAttributes.Add(attr);
 
         foreach (var weaver in weaverInstances)
