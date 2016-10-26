@@ -69,9 +69,9 @@ public partial class Processor
         {
             if (!CheckForWeaversXmlChanged())
             {
-                
+
                 FindWeavers();
-        
+
                 if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
                 {
                     Logger.LogError("A re-build is required because a weaver has changed.");
@@ -105,7 +105,7 @@ public partial class Processor
         ReadProjectWeavers();
         addinFinder = new AddinFinder
             {
-                Logger = Logger, 
+                Logger = Logger,
                 SolutionDirectoryPath = SolutionDirectory,
                 NuGetPackageRoot = NuGetPackageRoot
             };

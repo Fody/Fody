@@ -15,8 +15,8 @@ public partial class InnerWeaver
                 WriteSymbols = true,
                 SymbolWriterProvider = debugWriterProvider,
             };
+
         ModuleDefinition.Write(assemblyPath, parameters);
         Logger.LogDebug($"  Finished writing assembly {stopwatch.ElapsedMilliseconds}ms.");
     }
-
 }

@@ -6,7 +6,7 @@ using SecurityAction = System.Security.Permissions.SecurityAction;
 
 public class IsolatedContainsTypeChecker : MarshalByRefObject, IContainsTypeChecker
 {
-   
+
       //  new DependencyLoader().LoadDependencies();
     public bool Check(string assemblyPath, string typeName)
     {
