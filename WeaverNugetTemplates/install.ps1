@@ -3,14 +3,14 @@
 
 function RemoveForceProjectLevelHack($project)
 {
-    Write-Host "RemoveForceProjectLevelHack" 
-	Foreach ($item in $project.ProjectItems) 
-	{
-		if ($item.Name -eq "Fody_ToBeDeleted.txt")
-		{
-			$item.Delete()
-		}
-	}
+    Write-Host "RemoveForceProjectLevelHack"
+    Foreach ($item in $project.ProjectItems)
+    {
+        if ($item.Name -eq "Fody_ToBeDeleted.txt")
+        {
+            $item.Delete()
+        }
+    }
 }
 
 function FlushVariables()
@@ -23,23 +23,23 @@ function FlushVariables()
 
 function Update-FodyConfig($addinName, $project)
 {
-	Write-Host "Update-FodyConfig" 
+    Write-Host "Update-FodyConfig"
     $fodyWeaversPath = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($project.FullName), "FodyWeavers.xml")
 
-	$FodyLastProjectPath = $env:FodyLastProjectPath
-	$FodyLastWeaverName = $env:FodyLastWeaverName
-	$FodyLastXmlContents = $env:FodyLastXmlContents
-	
-	if (
-		($FodyLastProjectPath -eq $project.FullName) -and 
-		($FodyLastWeaverName -eq $addinName))
-	{
+    $FodyLastProjectPath = $env:FodyLastProjectPath
+    $FodyLastWeaverName = $env:FodyLastWeaverName
+    $FodyLastXmlContents = $env:FodyLastXmlContents
+
+    if (
+        ($FodyLastProjectPath -eq $project.FullName) -and
+        ($FodyLastWeaverName -eq $addinName))
+    {
         Write-Host "Upgrade detected. Restoring content for $addinName"
-		[System.IO.File]::WriteAllText($fodyWeaversPath, $FodyLastXmlContents)
+        [System.IO.File]::WriteAllText($fodyWeaversPath, $FodyLastXmlContents)
         FlushVariables
-		return
-	}
-	
+        return
+    }
+
     FlushVariables
 
     $xml = [xml](get-content $fodyWeaversPath)
@@ -61,7 +61,7 @@ function Fix-ReferencesCopyLocal($package, $project)
 {
     Write-Host "Fix-ReferencesCopyLocal $($package.Id)"
     $asms = $package.AssemblyReferences | %{$_.Name}
- 
+
     foreach ($reference in $project.Object.References)
     {
         if ($asms -contains $reference.Name + ".dll")
@@ -81,8 +81,8 @@ function UnlockWeaversXml($project)
     {
         $fodyWeaversProjectItem.Open("{7651A701-06E5-11D1-8EBD-00A0C90F26EA}")
         $fodyWeaversProjectItem.Save()
-		$fodyWeaversProjectItem.Document.Close()
-    }   
+        $fodyWeaversProjectItem.Document.Close()
+    }
 }
 
 UnlockWeaversXml($project)
