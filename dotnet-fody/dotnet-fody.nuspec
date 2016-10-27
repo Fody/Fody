@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>dotnet-fody</id>
+    <version>$version$-beta01</version>
+    <title>dotnet-fody</title>
+    <authors>Fody</authors>
+    <owners>Fody</owners>
+    <description>.NET Core postcompile tool to run Fody Weavers</description>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+    <projectUrl>http://github.com/Fody/Fody</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>https://raw.github.com/Fody/Fody/master/Icons/package_icon.png</iconUrl>
+    <language>en-AU</language>
+    <tags>ILWeaving, Fody, Cecil, AOP</tags>
+  </metadata>
+  <files>
+    <file src="..\ForSample\*.dll" target="lib\net452"></file>
+  </files>
+</package>
