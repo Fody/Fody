@@ -98,7 +98,11 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             AppDomain.CurrentDomain.AssemblyResolve -= assemblyResolve;
             Logger.LogException(exception);
         }
-
+        finally
+        {
+            ModuleDefinition?.Dispose();
+            SymbolStream?.Dispose();
+        }
     }
 
     public void Cancel()

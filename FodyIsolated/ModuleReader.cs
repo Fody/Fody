@@ -4,33 +4,32 @@ using Mono.Cecil;
 public partial class InnerWeaver
 {
     public ModuleDefinition ModuleDefinition;
+    public FileStream SymbolStream;
 
     public virtual void ReadModule()
     {
+        string symbolsPath;
         if (pdbFound)
         {
-            using (var symbolStream = File.OpenRead(pdbPath))
-            {
-                var readerParameters = new ReaderParameters
-                    {
-                        AssemblyResolver = this,
-                        ReadSymbols = pdbFound || mdbFound,
-                        SymbolReaderProvider = debugReaderProvider,
-                        SymbolStream = symbolStream
-                    };
-                ModuleDefinition = ModuleDefinition.ReadModule(AssemblyFilePath, readerParameters);
-            }
+            symbolsPath = pdbPath;
         }
         else
         {
-            var readerParameters = new ReaderParameters
-                {
-                    AssemblyResolver = this,
-                    ReadSymbols = pdbFound || mdbFound,
-                    SymbolReaderProvider = debugReaderProvider,
-
-                };
-            ModuleDefinition = ModuleDefinition.ReadModule(AssemblyFilePath, readerParameters);
+            symbolsPath = mdbPath;
         }
+
+        var tempAssembly = $"{AssemblyFilePath}.tmp";
+        var tempSymbols = $"{symbolsPath}.tmp";
+        File.Copy(AssemblyFilePath, tempAssembly,true);
+        File.Copy(symbolsPath, tempSymbols, true);
+        SymbolStream = File.OpenRead(tempSymbols);
+        var readerParameters = new ReaderParameters
+        {
+            AssemblyResolver = this,
+            ReadSymbols = true,
+            SymbolReaderProvider = debugReaderProvider,
+            SymbolStream = SymbolStream,
+        };
+        ModuleDefinition = ModuleDefinition.ReadModule(tempAssembly, readerParameters);
     }
 }

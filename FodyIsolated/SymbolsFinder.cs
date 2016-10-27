@@ -18,7 +18,7 @@ public partial class InnerWeaver
 
         FindMdb();
 
-        ThrowIfFoundBoth();
+        ChooseNewest();
 
         if (pdbFound)
         {
@@ -34,11 +34,10 @@ public partial class InnerWeaver
             return;
         }
 
-
-        Logger.LogDebug("Found no debug symbols.");
+        throw new WeavingException("Found no debug symbols.");
     }
 
-    void ThrowIfFoundBoth()
+    void ChooseNewest()
     {
         if (!pdbFound || !mdbFound)
         {

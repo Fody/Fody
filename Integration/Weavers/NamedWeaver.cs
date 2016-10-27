@@ -6,7 +6,12 @@ public class NamedWeaver
 
     public void Execute()
     {
-        var typeDefinition = new TypeDefinition(GetType().Assembly.GetName().Name, "TypeInjectedBy" + GetType().Name, TypeAttributes.Public, ModuleDefinition.Import(typeof (object)));
+        var type = GetType();
+        var typeDefinition = new TypeDefinition(
+            @namespace: type.Assembly.GetName().Name,
+            name: $"TypeInjectedBy{type.Name}",
+            attributes: TypeAttributes.Public,
+            baseType: ModuleDefinition.ImportReference(typeof (object)));
         ModuleDefinition.Types.Add(typeDefinition);
     }
 }
