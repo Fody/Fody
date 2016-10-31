@@ -73,6 +73,7 @@
     <Compile Include="DelegateBuilders\PropertyDelegateBuilderTests.cs" />
     <Compile Include="TypeFinderTest.cs" />
     <Compile Include="WeaverInitialiserTests.cs" />
+    <Compile Include="WeavingInfoTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
@@ -80,6 +81,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DummyAssembly\DummyAssembly.csproj">
+      <Project>{d95530d4-5646-4156-b58e-f2c5d5fa03cc}</Project>
+      <Name>DummyAssembly</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj">
       <Project>{E839A346-8804-4EAC-B635-19D7A911460E}</Project>
       <Name>FodyCommon</Name>
@@ -88,6 +93,15 @@
       <Project>{89681581-A390-4761-9C27-1F274FE506E7}</Project>
       <Name>FodyIsolated</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SampleTask.Fody\SampleTask.Fody.csproj">
+      <Project>{2c10cbd1-5913-46d5-b705-0f3b46e68dd1}</Project>
+      <Name>SampleTask.Fody</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Sample.Fody.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
