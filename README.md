@@ -73,7 +73,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [EmptyConstructor](https://github.com/Fody/EmptyConstructor) Adds an empty constructor to classes even if a non empty one is defined.
   * [EmptyStringGuard](https://github.com/thirkcircus/EmptyStringGuard) Adds empty string argument checks to an assembly.
   * [EnableFaking](https://github.com/philippdolder/EnableFaking.Fody) Allows faking your types without writing interfaces for testing purposes only.
-  * [Equals](https://github.com/Fody/Equals) Generate Equals, GetHashCode and operators methods from properties.
+  * [Equals](https://github.com/Fody/Equals) Generate Equals, GetHashCode and operators methods from properties. (WARNING: This plugin doesn't work well in the same assemnly)
   * [Expose](https://github.com/kedarvaidya/Expose.Fody) Exposes members and optionally implements interface of a field declared in class.
   * [ExtraConstraints](https://github.com/Fody/ExtraConstraints) Facilitates adding constraints for Enum and Delegate to types and methods.
   * [FactoryId](https://github.com/ramoneeza/FactoryId.Fody) Simplifies the implementation of Factory Method Pattern
