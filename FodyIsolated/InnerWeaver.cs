@@ -227,7 +227,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         attr.ConstructorArguments.Add(new CustomAttributeArgument(ModuleDefinition.TypeSystem.String,
             FileVersionInfo.GetVersionInfo(typeof(IInnerWeaver).Assembly.Location).FileVersion));
 
-        var td = new TypeDefinition(null, "FodyWeavingResults", TypeAttributes.Class | TypeAttributes.NotPublic);
+        var td = new TypeDefinition(null, "FodyWeavingResults", TypeAttributes.Class | TypeAttributes.NotPublic, ModuleDefinition.ImportReference(typeof(object)));
         td.CustomAttributes.Add(attr);
 
         foreach (var weaver in weaverInstances)
