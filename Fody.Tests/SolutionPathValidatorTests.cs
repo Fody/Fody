@@ -15,10 +15,10 @@ public class SolutionPathValidatorTests
         var buildLogger = loggerMock.Object;
 
         var processor = new Processor
-            {
-                Logger = buildLogger,
-                SolutionDirectory = Environment.CurrentDirectory
-            };
+        {
+            Logger = buildLogger,
+            SolutionDirectory = Environment.CurrentDirectory
+        };
         processor.ValidateSolutionPath();
         loggerMock.Verify();
     }
@@ -26,13 +26,13 @@ public class SolutionPathValidatorTests
     [Test]
     public void InValid()
     {
-	    Assert.Throws<WeavingException>(() =>
-		    {
-			    var processor = new Processor
-				    {
-					    SolutionDirectory = "aString"
-				    };
-			    processor.ValidateSolutionPath();
-			}, $"SolutionDir \"{Path.GetFullPath("baddir")}aString\" does not exist.");
+        Assert.Throws<WeavingException>(() =>
+        {
+            var processor = new Processor
+            {
+                SolutionDirectory = "aString"
+            };
+            processor.ValidateSolutionPath();
+        }, $"SolutionDir \"{Path.GetFullPath("baddir")}aString\" does not exist.");
     }
 }

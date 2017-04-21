@@ -5,12 +5,12 @@ using NUnit.Framework;
 public class ToFriendlyStringTests
 {
     [Test]
-	[Explicit]
+    [Explicit]
     public void ToFriendlyName()
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory.ToLowerInvariant()
-                .Replace(@"bin\debug", string.Empty)
-                .Replace(@"bin\release", string.Empty);
+            .Replace(@"bin\debug", string.Empty)
+            .Replace(@"bin\release", string.Empty);
         try
         {
             ThrowException1();
@@ -22,7 +22,7 @@ public class ToFriendlyStringTests
             friendlyString = friendlyString
                 .Replace(currentDirectory, string.Empty);
 // ReSharper disable StringLiteralTypo
-			var expected = @"an unhandled exception occurred:
+            var expected = @"an unhandled exception occurred:
 exception:
 foo
 stacktrace:
@@ -38,6 +38,7 @@ void throwexception2()
             Assert.AreEqual(expected, friendlyString);
         }
     }
+
     void ThrowException1()
     {
         ThrowException2();

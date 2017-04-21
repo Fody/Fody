@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
 
-public  class ConfigFileFinder
+public class ConfigFileFinder
 {
-    
+
     public static List<string> FindWeaverConfigs(string solutionDirectoryPath, string projectDirectory, ILogger logger)
     {
         var files = new List<string>();
@@ -21,7 +21,7 @@ public  class ConfigFileFinder
             logger.LogDebug($"Found path to weavers file '{solutionConfigFilePath}'.");
         }
 
-		var projectConfigFilePath = Path.Combine(projectDirectory, "FodyWeavers.xml");
+        var projectConfigFilePath = Path.Combine(projectDirectory, "FodyWeavers.xml");
         if (File.Exists(projectConfigFilePath))
         {
             files.Add(projectConfigFilePath);

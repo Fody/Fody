@@ -17,17 +17,17 @@ public class WeaversConfiguredInstanceLinkerTests
 
 
         var weaverConfig = new WeaverEntry
-                               {
-                                   AssemblyName = "CustomWeaver"
-                               };
+        {
+            AssemblyName = "CustomWeaver"
+        };
         processor.ProcessConfig(weaverConfig);
 
         Assert.AreEqual("CustomWeaver", weaverConfig.TypeName);
-        Assert.AreEqual("Path",weaverConfig.AssemblyPath);
+        Assert.AreEqual("Path", weaverConfig.AssemblyPath);
     }
 
-	[Test]
-	public void Should_use_named_weaver_When_added_to_configured_weavers()
+    [Test]
+    public void Should_use_named_weaver_When_added_to_configured_weavers()
     {
         var mock = new Mock<Processor>();
         mock.Setup(x => x.WeaverProjectContainsType("AddinName"))
@@ -37,15 +37,15 @@ public class WeaversConfiguredInstanceLinkerTests
         mock.CallBase = true;
 
         var processor = mock.Object;
-        
+
         var weaverConfig = new WeaverEntry
-                               {
-                                   AssemblyName = "AddinName"
-                               };
+        {
+            AssemblyName = "AddinName"
+        };
         processor.ProcessConfig(weaverConfig);
 
         Assert.AreEqual("ModuleWeaver", weaverConfig.TypeName);
-        Assert.AreEqual("Path",weaverConfig.AssemblyPath);
+        Assert.AreEqual("Path", weaverConfig.AssemblyPath);
         mock.Verify();
     }
 }

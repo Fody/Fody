@@ -5,7 +5,7 @@ using Mono.Cecil.Cil;
 
 public static class ExceptionExtensions
 {
-    public static void LogException(this ILogger logger,  Exception exception)
+    public static void LogException(this ILogger logger, Exception exception)
     {
         var exceptionType = exception.GetType();
         if (exceptionType.Name == "WeavingException")
@@ -22,7 +22,7 @@ public static class ExceptionExtensions
         }
         else
         {
-            logger.LogError(exception.ToFriendlyString());   
+            logger.LogError(exception.ToFriendlyString());
         }
     }
 
@@ -35,7 +35,7 @@ public static class ExceptionExtensions
         {
             return sequencePoint;
         }
-        var sequencePointField = exceptionType.GetField("SequencePoint", BindingFlags.Public|BindingFlags.Instance);
+        var sequencePointField = exceptionType.GetField("SequencePoint", BindingFlags.Public | BindingFlags.Instance);
         return (SequencePoint) sequencePointField?.GetValue(exception);
     }
 
@@ -43,7 +43,7 @@ public static class ExceptionExtensions
     {
 
         var stringBuilder = new StringBuilder();
-		stringBuilder.Append("An unhandled exception occurred:");
+        stringBuilder.Append("An unhandled exception occurred:");
         stringBuilder.Append(Environment.NewLine);
         stringBuilder.Append("Exception:");
         stringBuilder.Append(Environment.NewLine);

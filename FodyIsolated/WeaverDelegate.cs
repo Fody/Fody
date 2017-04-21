@@ -27,5 +27,5 @@ public class WeaverDelegate
     public Action<object, Action<string, SequencePoint>> SetLogWarningPoint;
     public Action<object, List<string>> SetDefineConstants;
 
-	public Func<object> ConstructInstance;
+    public Func<object> ConstructInstance;
 }

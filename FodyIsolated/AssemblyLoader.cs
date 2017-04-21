@@ -5,21 +5,21 @@ using System.Reflection;
 
 public partial class InnerWeaver
 {
-	static Dictionary<string, Assembly> assemblies = new Dictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
+    static Dictionary<string, Assembly> assemblies = new Dictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
 
     public virtual Assembly LoadAssembly(string assemblyPath)
-	{
-		Assembly assembly;
-		if (assemblies.TryGetValue(assemblyPath, out assembly))
-		{
+    {
+        Assembly assembly;
+        if (assemblies.TryGetValue(assemblyPath, out assembly))
+        {
             Logger.LogDebug($"  Loading '{assemblyPath}' from cache.");
-			return assembly;
+            return assembly;
         }
         Logger.LogDebug($"  Loading '{assemblyPath}' from disk.");
-		return assemblies[assemblyPath] = LoadFromFile(assemblyPath);
-	}
+        return assemblies[assemblyPath] = LoadFromFile(assemblyPath);
+    }
 
-	public static Assembly LoadFromFile(string assemblyPath)
+    public static Assembly LoadFromFile(string assemblyPath)
     {
         var pdbPath = Path.ChangeExtension(assemblyPath, "pdb");
         var rawAssembly = File.ReadAllBytes(assemblyPath);
