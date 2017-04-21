@@ -36,7 +36,6 @@
   </Choose>
   <PropertyGroup>
     <ProjectWeaverXml>$(ProjectDir)FodyWeavers.xml</ProjectWeaverXml>
-    <IntermediateDir>$(ProjectDir)$(IntermediateOutputPath)</IntermediateDir>
     <FodySignAssembly Condition="$(FodySignAssembly) == '' Or $(FodySignAssembly) == '*Undefined*'">$(SignAssembly)</FodySignAssembly>
     <FodyPath Condition="$(FodyPath) == '' Or $(FodyPath) == '*Undefined*'">$(MSBuildThisFileDirectory)..\..\</FodyPath>
   </PropertyGroup>
@@ -53,7 +52,7 @@
 
     <Fody.WeavingTask
           AssemblyPath="@(IntermediateAssembly)"
-          IntermediateDir="$(IntermediateDir)"
+          IntermediateDir="$(ProjectDir)$(IntermediateOutputPath)"
           KeyFilePath="$(FodyKeyFilePath)"
           NuGetPackageRoot="$(NuGetPackageRoot)"
           ProjectDirectory="$(ProjectDir)"
