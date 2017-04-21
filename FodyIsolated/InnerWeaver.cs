@@ -45,11 +45,11 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         }
         if (assemblyName == "Mono.Cecil.Pdb")
         {
-            return typeof(PdbReader).Assembly;
+            return typeof(PdbReaderProvider).Assembly;
         }
         if (assemblyName == "Mono.Cecil.Mdb")
         {
-            return typeof(MdbReader).Assembly;
+            return typeof(MdbReaderProvider).Assembly;
         }
         foreach (var weaverPath in Weavers.Select(x => x.AssemblyPath))
         {
