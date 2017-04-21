@@ -133,7 +133,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             Logger.LogDebug($"Weaver '{weaverConfig.AssemblyPath}'.");
             Logger.LogDebug("  Initializing weaver");
             var assembly = LoadAssembly(weaverConfig.AssemblyPath);
-
+            VerifyMinCecilVersion(assembly);
             var weaverType = assembly.FindType(weaverConfig.TypeName);
 
             var delegateHolder = weaverType.GetDelegateHolderFromCache();
@@ -148,6 +148,27 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
             SetProperties(weaverConfig, weaverInstance, delegateHolder);
         }
+    }
+
+    void VerifyMinCecilVersion(Assembly assembly)
+    {
+        var cecilReference = assembly.GetReferencedAssemblies()
+            .SingleOrDefault(x => x.Name == "Mono.Cecil");
+
+        if (cecilReference == null)
+        {
+            throw new WeavingException($"Expected the weaver '{assembly}' to reference Mono.Cecil.dll. {GetNugetError()}");
+        }
+        var minCecilVersion = new Version(0, 10);
+        if (cecilReference.Version < minCecilVersion)
+        {
+            throw new WeavingException($"The weaver assembly '{assembly}' references an out of date version of Mono.Cecil.dll (cecilReference.Version). At least version {minCecilVersion} is expected. {GetNugetError()}");
+        }
+    }
+
+    string GetNugetError()
+    {
+        return $"The weaver needs to add a NuGet reference to FodyCecil version {GetType().Assembly.GetName().Version}.";
     }
 
     void ExecuteWeavers()
