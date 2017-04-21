@@ -10,9 +10,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Tests</RootNamespace>
     <AssemblyName>Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FodyMessageImportance>High</FodyMessageImportance>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,6 +42,10 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WithNetStandard\WithNetStandard.csproj">
+      <Project>{9bf3769c-92e5-4584-a3a6-0c5a6a72952a}</Project>
+      <Name>WithNetStandard</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WithNugetAndInSolutionWeavers\WithNugetAndInSolutionWeavers.csproj">
       <Project>{7DDD6A9E-7D35-4D5B-8B60-D9D32F3D521A}</Project>
       <Name>WithNugetAndInSolutionWeavers</Name>
@@ -56,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="WithNugetAndInSolutionWeaversTest.cs" />
+    <Compile Include="WithNetStandardTest.cs" />
     <Compile Include="WithNugetWeaversTest.cs" />
     <Compile Include="WithOnlyInSolutionWeaverTest.cs" />
   </ItemGroup>

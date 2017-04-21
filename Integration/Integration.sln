@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 14.0.22823.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weavers", "Weavers\Weavers.csproj", "{3F4C62F3-F582-452F-B455-0CD5C89D96CF}"
 EndProject
@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WithNugetAndInSolutionWeave
 	ProjectSection(ProjectDependencies) = postProject
 		{3F4C62F3-F582-452F-B455-0CD5C89D96CF} = {3F4C62F3-F582-452F-B455-0CD5C89D96CF}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WithNetStandard", "WithNetStandard\WithNetStandard.csproj", "{9BF3769C-92E5-4584-A3A6-0C5A6A72952A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{7DDD6A9E-7D35-4D5B-8B60-D9D32F3D521A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DDD6A9E-7D35-4D5B-8B60-D9D32F3D521A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DDD6A9E-7D35-4D5B-8B60-D9D32F3D521A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BF3769C-92E5-4584-A3A6-0C5A6A72952A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BF3769C-92E5-4584-A3A6-0C5A6A72952A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BF3769C-92E5-4584-A3A6-0C5A6A72952A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BF3769C-92E5-4584-A3A6-0C5A6A72952A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
