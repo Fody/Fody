@@ -5,6 +5,7 @@ using NUnit.Framework;
 public class WeaverAssemblyPathFinderTests
 {
     [Test]
+    [Explicit]
     //TODO:
     public void Valid()
     {
@@ -12,6 +13,6 @@ public class WeaverAssemblyPathFinderTests
                          {
                              ContainsTypeChecker = new Mock<ContainsTypeChecker>().Object,
                          };
-        //finder.FindAssemblyPath("Name");
+        finder.FindAssemblyPath("Name");
     }
 }
