@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Mono.Cecil;
 using Moq;
@@ -10,33 +11,40 @@ public class WeavingInfoTests
     [Test]
     public void WeavedAssembly_ShouldContainWeavedInfo()
     {
-        var moduleDefinition =
-            ModuleDefinition.ReadModule(TestContext.CurrentContext.TestDirectory + "\\DummyAssembly.dll");
-
+        var assemblyFilePath = TestContext.CurrentContext.TestDirectory + "\\DummyAssembly.dll";
+        var pdbFilePath = TestContext.CurrentContext.TestDirectory + "\\DummyAssembly.pdb";
+        var tempFilePath = TestContext.CurrentContext.TestDirectory + "\\Temp.dll";
+        var tempPdbFilePath = TestContext.CurrentContext.TestDirectory + "\\Temp.pdb";
+        File.Copy(assemblyFilePath, tempFilePath, true);
+        File.Copy(pdbFilePath, tempPdbFilePath, true);
         var innerWeaver = new InnerWeaver
         {
             References = string.Empty,
             Logger = new Mock<ILogger>().Object,
-            AssemblyFilePath = TestContext.CurrentContext.TestDirectory + "\\DummyAssembly.dll",
-            ModuleDefinition = moduleDefinition,
-            DefineConstants = new List<string> { "Debug", "Release" },
-            Weavers = new List<WeaverEntry> {
+            AssemblyFilePath = tempFilePath,
+            DefineConstants = new List<string>
+            {
+                "Debug",
+                "Release"
+            },
+            Weavers = new List<WeaverEntry>
+            {
                 new WeaverEntry
                 {
-                    TypeName = "ModuleWeaver",
-                    AssemblyName = "Sample.Fody",
-                    AssemblyPath = TestContext.CurrentContext.TestDirectory + "\\Sample.Fody.dll"
+                    TypeName = "FakeModuleWeaver",
+                    AssemblyName = "FodyIsolated.Tests",
+                    AssemblyPath = TestContext.CurrentContext.TestDirectory + "\\FodyIsolated.Tests.dll"
                 }
             }
         };
-
         innerWeaver.Execute();
 
-        moduleDefinition =
-            ModuleDefinition.ReadModule(TestContext.CurrentContext.TestDirectory + "\\DummyAssembly.dll");
-
-        Assert.IsTrue(moduleDefinition.Types.Count(_ => _.Name == "FodyWeavingResults") >= 1);
-        Assert.IsTrue(moduleDefinition.Types.First(_ => _.Name == "FodyWeavingResults").HasCustomAttributes);
-        Assert.IsTrue(moduleDefinition.Types.First(_ => _.Name == "FodyWeavingResults").Fields.Any(f => f.Name == "SampleFody"));
+        using (var readModule = ModuleDefinition.ReadModule(tempFilePath))
+        {
+            var type = readModule.Types
+                .Single(_ => _.Name == "FodyWeavingResults");
+            Assert.IsTrue(type.HasCustomAttributes);
+            Assert.IsTrue(type.Fields.Any(f => f.Name == "FodyIsolatedTests"));
+        }
     }
 }

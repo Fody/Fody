@@ -69,6 +69,7 @@
     <Compile Include="DelegateBuilders\ConstructorDelegateBuilderTests.cs" />
     <Compile Include="DelegateBuilders\AfterExecuteDelegateBuilderTests.cs" />
     <Compile Include="DelegateBuilders\ExecuteDelegateBuilderTests.cs" />
+    <Compile Include="FakeModuleWeaver.cs" />
     <Compile Include="IsolatedContainsTypeCheckerTests.cs" />
     <Compile Include="DelegateBuilders\PropertyDelegateBuilderTests.cs" />
     <Compile Include="TypeFinderTest.cs" />
@@ -97,11 +98,6 @@
       <Project>{2c10cbd1-5913-46d5-b705-0f3b46e68dd1}</Project>
       <Name>SampleTask.Fody</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Sample.Fody.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
