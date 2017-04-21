@@ -199,31 +199,31 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         };
         attrType.Fields.Add(new FieldDefinition("Version", FieldAttributes.Assembly | FieldAttributes.InitOnly, ModuleDefinition.TypeSystem.String));
 
-        var
-        md = new MethodDefinition(".ctor",
+        var method = new MethodDefinition(".ctor",
             MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.SpecialName |
             MethodAttributes.RTSpecialName, ModuleDefinition.TypeSystem.Void);
 
         // Add a parameter which should be called in
         // attribute's ctor
-        md.Parameters.Add(new ParameterDefinition("version", ParameterAttributes.None, ModuleDefinition.TypeSystem.String));
+        method.Parameters.Add(new ParameterDefinition("version", ParameterAttributes.None, ModuleDefinition.TypeSystem.String));
 
         // Recreate MSIL which should be called when
         // calling a ctor
-        md.Body.Instructions.Add(Instruction.Create(OpCodes.Ldarg_0));
-        md.Body.Instructions.Add(Instruction.Create(OpCodes.Call,
+        var instructions = method.Body.Instructions;
+        instructions.Add(Instruction.Create(OpCodes.Ldarg_0));
+        instructions.Add(Instruction.Create(OpCodes.Call,
             ModuleDefinition.ImportReference(ci)));
-        md.Body.Instructions.Add(Instruction.Create(OpCodes.Nop));
-        md.Body.Instructions.Add(Instruction.Create(OpCodes.Nop));
-        md.Body.Instructions.Add(Instruction.Create(OpCodes.Ldarg_0));
-        md.Body.Instructions.Add(Instruction.Create(OpCodes.Ldarg_1));
-        md.Body.Instructions.Add(Instruction.Create(OpCodes.Stfld, attrType.Fields.First()));
-        md.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
+        instructions.Add(Instruction.Create(OpCodes.Nop));
+        instructions.Add(Instruction.Create(OpCodes.Nop));
+        instructions.Add(Instruction.Create(OpCodes.Ldarg_0));
+        instructions.Add(Instruction.Create(OpCodes.Ldarg_1));
+        instructions.Add(Instruction.Create(OpCodes.Stfld, attrType.Fields.First()));
+        instructions.Add(Instruction.Create(OpCodes.Ret));
 
-        attrType.Methods.Add(md);
+        attrType.Methods.Add(method);
         ModuleDefinition.Types.Add(attrType);
 
-        var attr = new CustomAttribute(md);
+        var attr = new CustomAttribute(method);
         attr.ConstructorArguments.Add(new CustomAttributeArgument(ModuleDefinition.TypeSystem.String,
             FileVersionInfo.GetVersionInfo(typeof(IInnerWeaver).Assembly.Location).FileVersion));
 

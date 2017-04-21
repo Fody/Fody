@@ -51,7 +51,7 @@ public class ModuleWeaver
     // A copy of `$(SolutionDir)` or, if it does not exist, a copy of `$(MSBuildProjectDirectory)..\..\..\`. OPTIONAL
     public string SolutionDirectoryPath { get; set; }
 
-    // Will contain a semicomma delimetered string that contains 
+    // Will contain a semicolon delimited string that contains 
     // all the references for the target project. 
     // A copy of the contents of the @(ReferencePath). OPTIONAL
     public string References { get; set; }
