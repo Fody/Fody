@@ -6,13 +6,10 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting;
 using Mono.Cecil;
-using Mono.Cecil.Cil;
 using Mono.Cecil.Mdb;
 using Mono.Cecil.Pdb;
 using Mono.Cecil.Rocks;
 using FieldAttributes = Mono.Cecil.FieldAttributes;
-using MethodAttributes = Mono.Cecil.MethodAttributes;
-using ParameterAttributes = Mono.Cecil.ParameterAttributes;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
@@ -85,7 +82,6 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             InitialiseWeavers();
             ExecuteWeavers();
             AddWeavingInfo();
-            AddProcessedFlag();
             FindStrongNameKey();
             WriteModule();
             ExecuteAfterWeavers();
@@ -115,11 +111,6 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         cancelRequested = true;
         var action = cancelDelegate;
         action?.Invoke();
-    }
-
-    void AddProcessedFlag()
-    {
-        ModuleDefinition.Types.Add(new TypeDefinition(null, "ProcessedByFody", TypeAttributes.NotPublic | TypeAttributes.Abstract | TypeAttributes.Interface));
     }
 
     void InitialiseWeavers()
@@ -210,64 +201,33 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         Logger.LogDebug("  Adding weaving info");
         var startNew = Stopwatch.StartNew();
 
-        // Create 'FodyGeneratedCodeAttribute' which will be used to decorate
-        // our info class
-        var ci = typeof(Attribute).GetConstructors(BindingFlags.NonPublic | BindingFlags.CreateInstance | BindingFlags.Instance).First(c => c.IsFamily);
-        var attrType = new TypeDefinition(null, "FodyGeneratedCodeAttribute",
-            TypeAttributes.Class | TypeAttributes.NotPublic)
-        {
-            BaseType = ModuleDefinition.ImportReference(typeof(Attribute))
-        };
-        attrType.Fields.Add(new FieldDefinition("Version", FieldAttributes.Assembly | FieldAttributes.InitOnly, ModuleDefinition.TypeSystem.String));
+        var typeDefinition = new TypeDefinition(null, "ProcessedByFody", TypeAttributes.NotPublic | TypeAttributes.Class, ModuleDefinition.TypeSystem.Object);
+        ModuleDefinition.Types.Add(typeDefinition);
 
-        var method = new MethodDefinition(".ctor",
-            MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.SpecialName |
-            MethodAttributes.RTSpecialName, ModuleDefinition.TypeSystem.Void);
-
-        // Add a parameter which should be called in
-        // attribute's ctor
-        method.Parameters.Add(new ParameterDefinition("version", ParameterAttributes.None, ModuleDefinition.TypeSystem.String));
-
-        // Recreate MSIL which should be called when
-        // calling a ctor
-        var instructions = method.Body.Instructions;
-        instructions.Add(Instruction.Create(OpCodes.Ldarg_0));
-        instructions.Add(Instruction.Create(OpCodes.Call,
-            ModuleDefinition.ImportReference(ci)));
-        instructions.Add(Instruction.Create(OpCodes.Nop));
-        instructions.Add(Instruction.Create(OpCodes.Nop));
-        instructions.Add(Instruction.Create(OpCodes.Ldarg_0));
-        instructions.Add(Instruction.Create(OpCodes.Ldarg_1));
-        instructions.Add(Instruction.Create(OpCodes.Stfld, attrType.Fields.First()));
-        instructions.Add(Instruction.Create(OpCodes.Ret));
-
-        attrType.Methods.Add(method);
-        ModuleDefinition.Types.Add(attrType);
-
-        var attr = new CustomAttribute(method);
-        attr.ConstructorArguments.Add(new CustomAttributeArgument(ModuleDefinition.TypeSystem.String,
-            FileVersionInfo.GetVersionInfo(typeof(IInnerWeaver).Assembly.Location).FileVersion));
-
-        var td = new TypeDefinition(null, "FodyWeavingResults", TypeAttributes.Class | TypeAttributes.NotPublic);
-        td.CustomAttributes.Add(attr);
+        AddVersionField(typeof(IInnerWeaver).Assembly.Location, "FodyVersion", typeDefinition);
 
         foreach (var weaver in weaverInstances)
         {
-            var weaverVersion = FileVersionInfo.GetVersionInfo(weaver.Config.AssemblyPath);
-            var fd = new FieldDefinition(weaver.Config.AssemblyName.Replace(".", string.Empty),
-                FieldAttributes.Assembly | FieldAttributes.Literal | FieldAttributes.HasDefault,
-                ModuleDefinition.ImportReference(typeof(string)))
-            {
-                Constant = weaverVersion.FileVersion
-            };
-
-            td.Fields.Add(fd);
+            var configAssemblyPath = weaver.Config.AssemblyPath;
+            var name = weaver.Config.AssemblyName.Replace(".", string.Empty);
+            AddVersionField(configAssemblyPath, name, typeDefinition);
         }
-
-        ModuleDefinition.Types.Add(td);
 
         var finishedMessage = $"  Finished in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
         Logger.LogDebug(finishedMessage);
+    }
+
+    void AddVersionField(string configAssemblyPath, string name, TypeDefinition typeDefinition)
+    {
+        var weaverVersion = FileVersionInfo.GetVersionInfo(configAssemblyPath);
+        var fieldAttributes = FieldAttributes.Assembly | FieldAttributes.Literal | FieldAttributes.Static | FieldAttributes.HasDefault;
+        var systemString = ModuleDefinition.TypeSystem.String;
+        var field = new FieldDefinition(name, fieldAttributes, systemString)
+        {
+            Constant = weaverVersion.FileVersion
+        };
+
+        typeDefinition.Fields.Add(field);
     }
 
     void ExecuteAfterWeavers()
