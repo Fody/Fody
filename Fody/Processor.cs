@@ -14,6 +14,7 @@ public partial class Processor
     public string ProjectDirectory;
     public string References;
     public string SolutionDirectory;
+    public string CustomFodyFile;
     public string NuGetPackageRoot;
     public List<string> ReferenceCopyLocalPaths;
     public List<string> DefineConstants;
@@ -64,6 +65,11 @@ public partial class Processor
         ValidateAssemblyPath();
 
         ConfigFiles = ConfigFileFinder.FindWeaverConfigs(SolutionDirectory, ProjectDirectory, Logger);
+
+      if (!string.IsNullOrEmpty(CustomFodyFile))
+      {
+         ConfigFiles.Add(CustomFodyFile);
+      }
 
         if (!ShouldStartSinceFileChanged())
         {
