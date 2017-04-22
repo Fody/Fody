@@ -79,19 +79,19 @@
     TaskName="Fody.VerifyTask"
     AssemblyFile="$(FodyPath)\Fody.dll" />
   <Target Condition="'$(NCrunch)' != '1' And ('$(FodyWeavingTargetWasRun)' == 'True')"
-      AfterTargets="FodyTarget"
+      AfterTargets="FodyTarget;AfterBuild"
       Name="FodyVerifyTarget"
       DependsOnTargets="$(FodyVerifyDependsOnTargets)">
 
     <Fody.VerifyTask
           ProjectDirectory="$(ProjectDir)"
-          TargetPath="@(IntermediateAssembly->'%(FullPath)')"
+          TargetPath="$(TargetPath)"
           SolutionDir="$(FodySolutionDir)"
           DefineConstants="$(DefineConstants)"
       />
   </Target>
-  
-  
+
+
   <!--Support for ncrunch-->
   <ItemGroup  Condition="'$(NCrunch)' == '1'">
     <None Include="$(FodyPath)\*.*" />
