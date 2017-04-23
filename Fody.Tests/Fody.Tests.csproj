@@ -89,6 +89,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApprovalTestConfig.cs" />
     <Compile Include="AssemblyVersionReaderTests.cs" />
     <Compile Include="ContainsTypeCheckerTests.cs" />
     <Compile Include="GlobalSetUp.cs" />

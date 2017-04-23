@@ -1,4 +1,5 @@
 using System;
+using ApprovalTests;
 using Moq;
 using NUnit.Framework;
 
@@ -11,9 +12,8 @@ public class ProjectWeaversFinderTests
         var loggerMock = new Mock<BuildLogger>();
         loggerMock.Setup(x => x.LogDebug(It.IsAny<string>()));
         var logger = loggerMock.Object;
-        var configFiles = ConfigFileFinder.FindWeaverConfigs(Environment.CurrentDirectory, Environment.CurrentDirectory, logger);
-        Assert.IsEmpty(configFiles);
-        loggerMock.Verify();
+        var weavingException = Assert.Throws<WeavingException>(() => ConfigFileFinder.FindWeaverConfigs(Environment.CurrentDirectory, Environment.CurrentDirectory, logger));
+        Approvals.Verify(weavingException.Message);
         
     }
 }
