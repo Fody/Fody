@@ -32,10 +32,14 @@ namespace Fody
 
         public string DefineConstants { get; set; }
 
+        public string Configuration { get; set; }
+
         [Output]
         public string ExecutedWeavers { get; private set; }
 
         public string NuGetPackageRoot { get; set; }
+
+        public string[] PackageDefinitions { get; set; }
 
         public override bool Execute()
         {
@@ -56,7 +60,8 @@ namespace Fody
                 SolutionDirectory = SolutionDir,
                 ReferenceCopyLocalPaths = referenceCopyLocalPaths,
                 DefineConstants = defineConstants,
-                NuGetPackageRoot = NuGetPackageRoot
+                NuGetPackageRoot = NuGetPackageRoot,
+                PackageDefinitions = PackageDefinitions?.ToList()
             };
             var success = processor.Execute();
             if (success)

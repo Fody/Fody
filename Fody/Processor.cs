@@ -16,6 +16,7 @@ public partial class Processor
     public string SolutionDirectory;
     public string NuGetPackageRoot;
     public List<string> ReferenceCopyLocalPaths;
+    public List<string> PackageDefinitions;
     public List<string> DefineConstants;
     public List<string> ConfigFiles;
     IInnerWeaver innerWeaver;
@@ -107,7 +108,8 @@ public partial class Processor
             {
                 Logger = Logger,
                 SolutionDirectoryPath = SolutionDirectory,
-                NuGetPackageRoot = NuGetPackageRoot
+                NuGetPackageRoot = NuGetPackageRoot,
+                PackageDefinitions = PackageDefinitions,
             };
         addinFinder.FindAddinDirectories();
 

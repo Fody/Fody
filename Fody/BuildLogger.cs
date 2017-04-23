@@ -58,14 +58,14 @@ public class BuildLogger : MarshalByRefObject, ILogger
 
     string GetIndent()
     {
-        return (currentWeaverName == null) ? "  " : "    ";
+        return currentWeaverName == null ? "  " : "    ";
     }
 
     string PrependMessage(string message)
     {
         if (currentWeaverName == null)
         {
-            return "Fody: " + message;
+            return $"Fody: {message}";
         }
 
         return $"Fody/{currentWeaverName}: {message}";

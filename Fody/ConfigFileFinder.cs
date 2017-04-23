@@ -7,12 +7,6 @@ public class ConfigFileFinder
     public static List<string> FindWeaverConfigs(string solutionDirectoryPath, string projectDirectory, ILogger logger)
     {
         var files = new List<string>();
-        var fodyDirConfigFilePath = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyWeavers.xml");
-        if (File.Exists(fodyDirConfigFilePath))
-        {
-            files.Add(fodyDirConfigFilePath);
-            logger.LogDebug($"Found path to weavers file '{fodyDirConfigFilePath}'.");
-        }
 
         var solutionConfigFilePath = Path.Combine(solutionDirectoryPath, "FodyWeavers.xml");
         if (File.Exists(solutionConfigFilePath))
@@ -31,7 +25,7 @@ public class ConfigFileFinder
 
         if (files.Count == 0)
         {
-            var pathsSearched = string.Join("', '", fodyDirConfigFilePath, solutionConfigFilePath, projectConfigFilePath);
+            var pathsSearched = string.Join("', '", solutionConfigFilePath, projectConfigFilePath);
             logger.LogDebug($"Could not find path to weavers file. Searched '{pathsSearched}'.");
         }
         return files;

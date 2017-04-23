@@ -44,7 +44,7 @@ public class WeaverInitialiserTests
             AssemblyPath = @"c:\FakePath\Assembly.dll"
         };
         var moduleWeaver = new ValidModuleWeaver();
-        innerWeaver.SetProperties(weaverEntry, moduleWeaver, (typeof(ValidModuleWeaver)).BuildDelegateHolder());
+        innerWeaver.SetProperties(weaverEntry, moduleWeaver, typeof(ValidModuleWeaver).BuildDelegateHolder());
 
         Assert.IsNotNull(moduleWeaver.LogDebug);
         Assert.IsNotNull(moduleWeaver.LogInfo);
@@ -59,7 +59,7 @@ public class WeaverInitialiserTests
         Assert.AreEqual("Debug", moduleWeaver.DefineConstants[0]);
         Assert.AreEqual("Release", moduleWeaver.DefineConstants[1]);
 
-        // Assert.IsNotEmpty(moduleWeaver.References); 
+        // Assert.IsNotEmpty(moduleWeaver.References);
         Assert.AreEqual(moduleDefinition, moduleWeaver.ModuleDefinition);
         Assert.AreEqual(innerWeaver, moduleWeaver.AssemblyResolver);
         Assert.AreEqual(@"c:\FakePath", moduleWeaver.AddinDirectoryPath);

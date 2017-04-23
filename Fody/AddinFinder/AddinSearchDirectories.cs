@@ -1,15 +1,27 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 public partial class AddinFinder
 {
     public void FindAddinDirectories()
     {
-        AddNugetDirectoryFromConvention();
-        AddNugetDirectoryFromNugetConfig();
-        AddCurrentFodyDirectoryToAddinSearch();
-        AddToolsSolutionDirectoryToAddinSearch();
-        AddNuGetPackageRootToAddinSearch();
+        if (PackageDefinitions == null)
+        {
+            AddNugetDirectoryFromConvention();
+            AddNugetDirectoryFromNugetConfig();
+            AddCurrentFodyDirectoryToAddinSearch();
+            AddToolsSolutionDirectoryToAddinSearch();
+            AddNuGetPackageRootToAddinSearch();
+        }
+        else
+        {
+            foreach (var directory in PackageDefinitions.Where(x => x.ToLowerInvariant().Contains(".fody")))
+            {
+                AddFiles(Directory.EnumerateFiles(directory, "*.Fody.dll"));
+            }
+            AddToolsSolutionDirectoryToAddinSearch();
+        }
     }
 
     void AddNuGetPackageRootToAddinSearch()
@@ -120,5 +132,6 @@ public partial class AddinFinder
     public ILogger Logger;
     public string SolutionDirectoryPath;
     public string NuGetPackageRoot;
-    
+    public List<string> PackageDefinitions;
+
 }

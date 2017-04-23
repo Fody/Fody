@@ -61,6 +61,7 @@
           SignAssembly="$(FodySignAssembly)"
           ReferenceCopyLocalPaths="@(ReferenceCopyLocalPaths)"
           DefineConstants="$(DefineConstants)"
+          PackageDefinitions="@(PackageDefinitions->'%(ResolvedPath)')"
       >
 
       <Output 
