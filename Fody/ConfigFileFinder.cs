@@ -19,8 +19,7 @@ public class ConfigFileFinder
         if (!File.Exists(projectConfigFilePath))
         {
             throw new WeavingException(
-                $@"Could not file a FodyWeavers.xml at the project level ({projectConfigFilePath}). Some project types do not support using NuGet to add content files e.g. netstandard projects. In these cases it is necessary to manually add a FodyWeavers.xml to the project. Example content: 
-<?xml version=""1.0"" encoding=""utf-8"" ?>
+                $@"Could not file a FodyWeavers.xml at the project level ({projectConfigFilePath}). Some project types do not support using NuGet to add content files e.g. netstandard projects. In these cases it is necessary to manually add a FodyWeavers.xml to the project. Example content:
 <Weavers>
   <WeaverName/>
 </Weavers>
