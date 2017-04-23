@@ -83,7 +83,7 @@ public class Verifier
 
         var processStartInfo = new ProcessStartInfo(PeverifyPath)
                                {
-                                   Arguments = $"\"{TargetPath}\" /hresult /ignore=0x80070002,{string.Join(",", ignoreCodes)}",
+                                   Arguments = $"\"{TargetPath}\" /hresult /nologo /ignore=0x80070002,{string.Join(",", ignoreCodes)}",
                                    WorkingDirectory = Path.GetDirectoryName(TargetPath),
                                    CreateNoWindow = true,
                                    UseShellExecute = false,
