@@ -87,7 +87,11 @@ public partial class Processor
 
         if (Weavers.Count == 0)
         {
-            Logger.LogWarning("No configured weavers. It is possible you have not installed a weaver or have installed a fody weaver nuget into a project type that does not support install.ps1. You may need to add that weaver to FodyWeavers.xml manually. eg. <Weavers><WeaverName/></Weavers>. see https://github.com/Fody/Fody/wiki/SampleUsage");
+            Logger.LogWarning(@"No configured weavers. It is possible no weavers have been installed or a weaver has been installed into a project type that does not support install.ps1. It may be necessary to manually add that weaver to FodyWeavers.xm;. eg.
+<Weavers>
+    <WeaverName/>
+</Weavers>
+see https://github.com/Fody/Fody/wiki/SampleUsage");
             return;
         }
         lock (locker)

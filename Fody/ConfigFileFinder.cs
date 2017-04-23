@@ -16,12 +16,18 @@ public class ConfigFileFinder
         }
 
         var projectConfigFilePath = Path.Combine(projectDirectory, "FodyWeavers.xml");
-        if (File.Exists(projectConfigFilePath))
+        if (!File.Exists(projectConfigFilePath))
         {
-            files.Add(projectConfigFilePath);
-            logger.LogDebug($"Found path to weavers file '{projectConfigFilePath}'.");
+            throw new WeavingException(
+                $@"Could not file a FodyWeavers.xml at the project level ({projectConfigFilePath}). Some project types do not support using NuGet to add content files e.g. netstandard projects. In these cases it is necessary to manually add a FodyWeavers.xml to the project. Example content: 
+<?xml version=""1.0"" encoding=""utf-8"" ?>
+<Weavers>
+  <WeaverName/>
+</Weavers>
+");
         }
-
+        files.Add(projectConfigFilePath);
+        logger.LogDebug($"Found path to weavers file '{projectConfigFilePath}'.");
 
         if (files.Count == 0)
         {
