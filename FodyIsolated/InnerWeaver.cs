@@ -90,6 +90,9 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             if (weaverInstances
                 .Any(_ => _.WeaverDelegate.AfterWeavingExecute != null))
             {
+                ModuleDefinition?.Dispose();
+                SymbolStream?.Dispose();
+
                 ReadModule();
                 WriteModule();
             }

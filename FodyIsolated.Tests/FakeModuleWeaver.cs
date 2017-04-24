@@ -7,4 +7,8 @@ public class FakeModuleWeaver
     public void Execute()
     {
     }
+
+    public void AfterWeaving()
+    {
+    }
 }
