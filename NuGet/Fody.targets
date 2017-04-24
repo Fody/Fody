@@ -44,7 +44,7 @@
       AssemblyFile="$(FodyPath)\Fody.dll" />
   <Target
       AfterTargets="AfterCompile"
-      Condition="Exists(@(IntermediateAssembly))"
+      Condition="Exists('@(IntermediateAssembly)')"
       Name="FodyTarget"
       DependsOnTargets="$(FodyDependsOnTargets)"
       Inputs="@(IntermediateAssembly->'%(FullPath)');$(FodyKeyFilePath);$(ProjectWeaverXml)"
