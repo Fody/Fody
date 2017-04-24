@@ -1,4 +1,3 @@
-using System;
 using ApprovalTests;
 using Moq;
 using NUnit.Framework;
@@ -15,6 +14,5 @@ public class ProjectWeaversFinderTests
         var testDirectory = TestContext.CurrentContext.TestDirectory;
         var weavingException = Assert.Throws<WeavingException>(() => ConfigFileFinder.FindWeaverConfigs(testDirectory, testDirectory, logger));
         Approvals.Verify(weavingException.Message.Replace(testDirectory, ""));
-        
     }
 }

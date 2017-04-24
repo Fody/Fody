@@ -1,4 +1,4 @@
-﻿using ApprovalTests.Reporters;
-#if(DEBUG)
+﻿#if(DEBUG)
+using ApprovalTests.Reporters;
 [assembly: UseReporter(typeof(DiffReporter),typeof(AllFailingTestsClipboardReporter))]
 #endif
