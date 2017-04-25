@@ -1,12 +1,15 @@
 ![Icon](https://raw.github.com/Fody/Fody/master/Icons/package_icon.png)
 
+
 ## Extensible tool for weaving .net assemblies 
 
 [![Join the chat at https://gitter.im/Fody/Fody](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Fody/Fody?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## Introduction 
 
-Manipulating the IL of an assembly as part of a build requires a significant amount of plumbing code. This plumbing code involves knowledge of both the MSBuild and Visual Studio APIs. Fody attempts to eliminate that plumbing code through an extensible add-in model. 
+## Introduction
+
+Manipulating the IL of an assembly as part of a build requires a significant amount of plumbing code. This plumbing code involves knowledge of both the MSBuild and Visual Studio APIs. Fody attempts to eliminate that plumbing code through an extensible add-in model.
+
 
 ## The nuget package  [![NuGet Status](https://img.shields.io/nuget/v/Fody.svg?style=flat)](https://www.nuget.org/packages/Fody/)
 
@@ -14,11 +17,13 @@ https://www.nuget.org/packages/Fody/
 
     PM> Install-Package Fody
 
+
 ## Why? 
 
-This technique of "weaving" in new instructions is fantastically powerful. You can turn simple public properties into full [INotifyPropertyChanged implementations](https://github.com/Fody/PropertyChanged), add [checks for null arguments](https://github.com/Fody/NullGuard), add [Git hashes to your Assemblies](https://github.com/Fody/Stamp), even [make all your string comparisons case insensitive](https://github.com/Fody/Caseless). 
+This technique of "weaving" in new instructions is fantastically powerful. You can turn simple public properties into full [INotifyPropertyChanged implementations](https://github.com/Fody/PropertyChanged), add [checks for null arguments](https://github.com/Fody/NullGuard), add [Git hashes to your Assemblies](https://github.com/Fody/Stamp), even [make all your string comparisons case insensitive](https://github.com/Fody/Caseless).
 
-## The plumbing tasks Fody handles 
+
+## The plumbing tasks Fody handles
 
   * Injection of the MSBuild task into the build pipeline
   * Resolving the location of the assembly and pdb
@@ -34,24 +39,29 @@ Fody Uses [Mono.Cecil](http://www.mono-project.com/Cecil/)  and an add-in based 
  * No references required
  * Supports .net 3.5, .net 4, .net 4.5, .net 4.6, Silverlight 4, Silverlight 5, Windows Phone 7, Windows Phone 8, Metro on Windows 8, Mono, MonoTouch, MonoDroid and PCL 
 
+
 ## Usage
 
 See [SampleUsage](https://github.com/Fody/Fody/wiki/SampleUsage) for an introduction on using Fody.
+
 
 ## Naming
 
 The name "Fody" comes from the small birds that belong to the weaver family [Ploceidae](http://en.wikipedia.org/wiki/Fody).
 
-## Tools and Products Used 
+
+## Tools and Products Used
 
  * [JetBrains dotTrace](http://www.jetbrains.com/profiler/)
  * [JetBrains Resharper](http://www.jetbrains.com/resharper/)
  * [Mono Cecil](http://www.mono-project.com/Cecil)
 
+
 ## Samples
 
  * [BasicFodyAddin](https://github.com/Fody/BasicFodyAddin) A simple project meant to illustrate how to build an addin.
  * [FodyAddinSamples](https://github.com/Fody/FodyAddinSamples) is a single solution that contains a working copy of every fody addin.
+
 
 ## Addins List
 
@@ -83,7 +93,6 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [InfoOf](https://github.com/Fody/InfoOf) Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](https://msdn.microsoft.com/en-us/library/58918ffs.aspx).
   * [Ionad](https://github.com/Fody/Ionad) Replaces static method calls. 
   * [Janitor](https://github.com/Fody/Janitor) Simplifies the implementation of [IDisposable](https://msdn.microsoft.com/en-us/library/system.idisposable.aspx).
-  * [JetBrainsAnnotations](https://github.com/Fody/JetBrainsAnnotations) Leverage JetBrains Annotations without the need for JetBrainsAnnotations.dll. 
   * [LoadAssembliesOnStartup](https://github.com/Fody/LoadAssembliesOnStartup) Loads references on startup by using the types in the module initializer
   * [MethodCache](https://github.com/Dresel/MethodCache) Caches return values of methods decorated with a `CacheAttribute`.
   * [MethodDecorator](https://github.com/Fody/MethodDecorator) Decorate arbitrary methods to run code before and after invocation.
@@ -106,14 +115,12 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [RemoveReference](https://github.com/icnocop/RemoveReference.Fody) Facilitates removing references in a compiled assembly during a build.
   * [Resourcer](https://github.com/Fody/Resourcer) Simplifies reading embedded resources from an Assembly.
   * [RomanticWeb](http://romanticweb.net/) Fody weaver plugin for RomanticWeb instrumentation.
-  * [Scalpel](https://github.com/Fody/Scalpel) Strips tests from an assembly. 
   * [Seal](https://github.com/kamil-mrzyglod/Seal) mark all non-virtual(abstract, non-sealed) types as sealed by default.
   * [SemVer](https://github.com/dittodhole/dotnet-SemVer.Stamp) versions your assemblies according to [SemVer](http://semver.org/) based on your CVS commit messages.
   * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration. 
-  * [Stamp](https://github.com/Fody/Stamp) Stamps an assembly with git data.
-  * [StampSvn](https://github.com/krk/Stamp) Stamps an assembly with svn data.
+  * [StampSvn](https://github.com/krk/Stamp) Stamps an assembly with SVN data.
   * [StaticProxy](https://github.com/BrunoJuchli/StaticProxy.Fody) Helps proxy dynamic code emitting: Moq, FakeItEasy, Castle Dynamic, LinFu.
-  * [Stiletto](https://github.com/benjamin-bader/stiletto) Compile-time static analysis and optimization for the Stiletto IoC library.
+  * [SexyProxy](https://github.com/kswoll/sexy-proxy) Proxy generator with support for async patterns.
   * [SwallowExceptions](https://github.com/duaneedwards/SwallowExceptions) Swallow Exceptions in targeted methods.
   * [ToString](https://github.com/Fody/ToString) Generate `ToString` method from public properties.
   * [Tracer](https://github.com/csnemes/tracer) Adds trace-enter and trace-leave log entries for selected methods.
@@ -126,10 +133,22 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [With](https://github.com/mikhailshilkov/With.Fody) Methods to return copies of immutable objects with one property modified.
   * [YALF](https://github.com/sharpmonkey/YALF) Yet Another Logging Framework.
   * [Tail](https://github.com/hazzik/Tail.Fody) Adds a postfixed method call instruction to recursive calls.
-    
+
+
+### No longer maintained
+
+The below addins are no longer maintained. Raise an issue in the specific project if you would like to take ownership.
+
+  * [JetBrainsAnnotations](https://github.com/Fody/JetBrainsAnnotations) Leverage JetBrains Annotations without the need for JetBrainsAnnotations.dll.
+  * [Scalpel](https://github.com/Fody/Scalpel) Strips tests from an assembly.
+  * [Stiletto](https://github.com/benjamin-bader/stiletto) Compile-time static analysis and optimization for the Stiletto IoC library.
+  * [Stamp](https://github.com/Fody/Stamp) Stamps an assembly with git data.
+
+
 ## Icon
 
 <a href="http://thenounproject.com/noun/bird/#icon-No6726" target="_blank">Bird</a> designed by <a href="http://thenounproject.com/MARCOHS" target="_blank">Marco Hernandez</a> from The Noun Project
+
 
 ## More Info
 
@@ -152,7 +171,9 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
  * [Mono Support](https://github.com/Fody/Fody/wiki/Mono)
  * [Building From A Network Share](https://github.com/Fody/Fody/wiki/BuildingFromANetworkShare)
 
+
 ## With thanks to
+
 
 ### Resharper from Jetbrains
 
