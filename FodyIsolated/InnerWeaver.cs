@@ -28,6 +28,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     bool cancelRequested;
     List<WeaverHolder> weaverInstances = new List<WeaverHolder>();
     Action cancelDelegate;
+    AssemblyResolver assemblyResolver;
 
     Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
     {
@@ -77,6 +78,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         {
             SplitUpReferences();
             GetSymbolProviders();
+            assemblyResolver = new AssemblyResolver(ReferenceDictionary, Logger, SplitReferences);
             ReadModule();
             AppDomain.CurrentDomain.AssemblyResolve += assemblyResolve;
             InitialiseWeavers();
@@ -84,18 +86,10 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             AddWeavingInfo();
             FindStrongNameKey();
             WriteModule();
+            ModuleDefinition?.Dispose();
+            SymbolStream?.Dispose();
             ExecuteAfterWeavers();
             DisposeWeavers();
-
-            if (weaverInstances
-                .Any(_ => _.WeaverDelegate.AfterWeavingExecute != null))
-            {
-                ModuleDefinition?.Dispose();
-                SymbolStream?.Dispose();
-
-                ReadModule();
-                WriteModule();
-            }
         }
         catch (Exception exception)
         {
@@ -106,6 +100,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         {
             ModuleDefinition?.Dispose();
             SymbolStream?.Dispose();
+            assemblyResolver?.Dispose();
         }
     }
 

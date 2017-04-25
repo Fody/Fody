@@ -25,7 +25,7 @@ public partial class InnerWeaver
         SymbolStream = File.OpenRead(tempSymbols);
         var readerParameters = new ReaderParameters
         {
-            AssemblyResolver = this,
+            AssemblyResolver = assemblyResolver,
             ReadSymbols = true,
             SymbolReaderProvider = debugReaderProvider,
             SymbolStream = SymbolStream,

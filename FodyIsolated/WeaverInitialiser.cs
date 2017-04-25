@@ -14,7 +14,7 @@ public partial class InnerWeaver
         }
 
         @delegate.SetModuleDefinition(weaverInstance, ModuleDefinition);
-        @delegate.SetAssemblyResolver(weaverInstance, this);
+        @delegate.SetAssemblyResolver(weaverInstance, assemblyResolver);
         @delegate.SetAssemblyFilePath(weaverInstance, AssemblyFilePath);
         @delegate.SetAddinDirectoryPath(weaverInstance, Path.GetDirectoryName(weaverEntry.AssemblyPath));
         @delegate.SetReferences(weaverInstance, References);

@@ -5,16 +5,26 @@ using System.Linq;
 using System.Reflection;
 using Mono.Cecil;
 
-public partial class InnerWeaver : IAssemblyResolver
+public class AssemblyResolver : IAssemblyResolver
 {
+    Dictionary<string, string> referenceDictionary;
+    ILogger logger;
+    List<string> splitReferences;
     Dictionary<string, AssemblyDefinition> assemblyDefinitionCache = new Dictionary<string, AssemblyDefinition>(StringComparer.InvariantCultureIgnoreCase);
+
+    public AssemblyResolver(Dictionary<string, string> ReferenceDictionary, ILogger logger, List<string> splitReferences)
+    {
+        referenceDictionary = ReferenceDictionary;
+        this.logger = logger;
+        this.splitReferences = splitReferences;
+    }
 
     AssemblyDefinition GetAssembly(string file, ReaderParameters parameters)
     {
-        AssemblyDefinition assemblyDefinition;
-        if (assemblyDefinitionCache.TryGetValue(file, out assemblyDefinition))
+        AssemblyDefinition assembly;
+        if (assemblyDefinitionCache.TryGetValue(file, out assembly))
         {
-            return assemblyDefinition;
+            return assembly;
         }
         if (parameters.AssemblyResolver == null)
         {
@@ -22,8 +32,7 @@ public partial class InnerWeaver : IAssemblyResolver
         }
         try
         {
-            assemblyDefinitionCache[file] = assemblyDefinition = ModuleDefinition.ReadModule(file, parameters).Assembly;
-            return assemblyDefinition;
+            return assemblyDefinitionCache[file] = AssemblyDefinition.ReadAssembly(file, parameters);
         }
         catch (Exception exception)
         {
@@ -44,7 +53,7 @@ public partial class InnerWeaver : IAssemblyResolver
         }
 
         string fileFromDerivedReferences;
-        if (ReferenceDictionary.TryGetValue(assemblyNameReference.Name, out fileFromDerivedReferences))
+        if (referenceDictionary.TryGetValue(assemblyNameReference.Name, out fileFromDerivedReferences))
         {
             return GetAssembly(fileFromDerivedReferences, parameters);
         }
@@ -68,15 +77,15 @@ public partial class InnerWeaver : IAssemblyResolver
             return GetAssembly(filePath, parameters);
         }
 
-        var joinedReferences = string.Join(Environment.NewLine, SplitReferences.OrderBy(x => x));
-        Logger.LogDebug(string.Format("Can not find '{0}'.{1}Tried:{1}{2}", assemblyNameReference.FullName, Environment.NewLine, joinedReferences));
+        var joinedReferences = string.Join(Environment.NewLine, splitReferences.OrderBy(x => x));
+        logger.LogDebug(string.Format("Can not find '{0}'.{1}Tried:{1}{2}", assemblyNameReference.FullName, Environment.NewLine, joinedReferences));
         return null;
     }
 
     IEnumerable<string> SearchDirForMatchingName(AssemblyNameReference assemblyNameReference)
     {
         var fileName = assemblyNameReference.Name + ".dll";
-        return ReferenceDictionary.Values
+        return referenceDictionary.Values
             .Select(x => Path.Combine(Path.GetDirectoryName(x), fileName))
             .Where(File.Exists);
     }
@@ -90,10 +99,17 @@ public partial class InnerWeaver : IAssemblyResolver
     {
         if (fullName == null)
         {
-            throw new ArgumentNullException("fullName");
+            throw new ArgumentNullException(nameof(fullName));
         }
 
         return Resolve(AssemblyNameReference.Parse(fullName), parameters);
     }
 
+    public void Dispose()
+    {
+        foreach (var value in assemblyDefinitionCache.Values)
+        {
+            value?.Dispose();
+        }
+    }
 }
