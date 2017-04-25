@@ -14,6 +14,7 @@ public class WeaverInitialiserTests
     {
         var moduleDefinition = ModuleDefinition.CreateModule("Foo", ModuleKind.Dll);
 
+        var resolver = new MockAssemblyResolver();
         var innerWeaver = new InnerWeaver
         {
             Logger = new Mock<ILogger>().Object,
@@ -35,7 +36,8 @@ public class WeaverInitialiserTests
             {
                 "Debug",
                 "Release"
-            }
+            },
+            assemblyResolver = resolver
         };
 
         var weaverEntry = new WeaverEntry
@@ -61,7 +63,7 @@ public class WeaverInitialiserTests
 
         // Assert.IsNotEmpty(moduleWeaver.References);
         Assert.AreEqual(moduleDefinition, moduleWeaver.ModuleDefinition);
-        Assert.AreEqual(innerWeaver, moduleWeaver.AssemblyResolver);
+        Assert.AreEqual(resolver, moduleWeaver.AssemblyResolver);
         Assert.AreEqual(@"c:\FakePath", moduleWeaver.AddinDirectoryPath);
         Assert.AreEqual("AssemblyFilePath", moduleWeaver.AssemblyFilePath);
         Assert.AreEqual("ProjectDirectoryPath", moduleWeaver.ProjectDirectoryPath);

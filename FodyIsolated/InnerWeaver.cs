@@ -28,7 +28,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     bool cancelRequested;
     List<WeaverHolder> weaverInstances = new List<WeaverHolder>();
     Action cancelDelegate;
-    AssemblyResolver assemblyResolver;
+    public IAssemblyResolver assemblyResolver;
 
     Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
     {
