@@ -11,7 +11,7 @@ public partial class InnerWeaver
         var parameters = new WriterParameters
             {
                 StrongNameKeyPair = StrongNameKeyPair,
-                WriteSymbols = true,
+                WriteSymbols = debugWriterProvider != null,
                 SymbolWriterProvider = debugWriterProvider,
             };
 

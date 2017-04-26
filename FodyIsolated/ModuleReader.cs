@@ -8,25 +8,24 @@ public partial class InnerWeaver
 
     public virtual void ReadModule()
     {
-        string symbolsPath;
-        if (pdbFound)
+        var tempAssembly = $"{AssemblyFilePath}.tmp";
+        File.Copy(AssemblyFilePath, tempAssembly, true);
+
+        if (debugReaderProvider != null)
         {
-            symbolsPath = pdbPath;
-        }
-        else
-        {
-            symbolsPath = mdbPath;
+            var symbolsPath = pdbFound ? pdbPath : mdbPath;
+            var tempSymbols = $"{symbolsPath}.tmp";
+            if (File.Exists(symbolsPath))
+            {
+                File.Copy(symbolsPath, tempSymbols, true);
+                SymbolStream = File.OpenRead(tempSymbols);
+            }
         }
 
-        var tempAssembly = $"{AssemblyFilePath}.tmp";
-        var tempSymbols = $"{symbolsPath}.tmp";
-        File.Copy(AssemblyFilePath, tempAssembly,true);
-        File.Copy(symbolsPath, tempSymbols, true);
-        SymbolStream = File.OpenRead(tempSymbols);
         var readerParameters = new ReaderParameters
         {
             AssemblyResolver = assemblyResolver,
-            ReadSymbols = true,
+            ReadSymbols = SymbolStream != null,
             SymbolReaderProvider = debugReaderProvider,
             SymbolStream = SymbolStream,
         };
