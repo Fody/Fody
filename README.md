@@ -73,7 +73,6 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [BasicFodyAddin](https://github.com/Fody/BasicFodyAddin) A simple project meant to illustrate how to build an addin.
   * [Caseless](https://github.com/Fody/Caseless) Change string comparisons to be case insensitive.
   * [Catel](https://github.com/Catel/Catel.Fody) For transforming automatic properties into [Catel](https://github.com/Catel/Catel) properties.
-  * [Commander](https://github.com/DamianReeves/Commander.Fody) Injects ICommand properties and implementations for use in MVVM applications.
   * [ConfigureAwait](https://github.com/distantcam/ConfigureAwait) Allows you to set the async ConfigureAwait at a global level for all your await calls.
   * [Costura](https://github.com/Fody/Costura/) For embedding references as resources.
   * [CryptStr](https://cryptstr.codeplex.com/) Encrypts literal strings in your .NET assemblies.
@@ -135,6 +134,7 @@ The below addins are no longer maintained. Raise an issue in the specific projec
 
   * [ArraySlice](https://github.com/Codealike/arrayslice) ArraySlice allows to build shared memory array views without performance impact. It uses IL manipulation to achieve the fastest implementation.
   * [Cilador](https://github.com/rileywhite/Cilador) Write your own [mixins](https://en.wikipedia.org/wiki/Mixin) in C# for code reuse without inheritance.
+  * [Commander](https://github.com/DamianReeves/Commander.Fody) Injects ICommand properties and implementations for use in MVVM applications.
   * [JetBrainsAnnotations](https://github.com/Fody/JetBrainsAnnotations) Leverage JetBrains Annotations without the need for JetBrainsAnnotations.dll.
   * [Mixins](https://bitbucket.org/skwasiborski/mixins.fody/wiki/Home) A mixin is a class that provides a certain functionality to be inherited or just reused by a subclass.
   * [NameOf](https://github.com/NickStrupat/NameOf) Provides strongly typed access to a compile-time string representing the name of a variable, field, property, method, event, enum value, or type.
