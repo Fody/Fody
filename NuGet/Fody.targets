@@ -72,7 +72,7 @@
     <PropertyGroup>
       <FodyWeavingTargetWasRun>True</FodyWeavingTargetWasRun>
     </PropertyGroup>
-      
+
   </Target>
 
 
@@ -80,7 +80,7 @@
     TaskName="Fody.VerifyTask"
     AssemblyFile="$(FodyPath)\Fody.dll" />
   <Target Condition="'$(NCrunch)' != '1' And ('$(FodyWeavingTargetWasRun)' == 'True')"
-      AfterTargets="FodyTarget;AfterBuild"
+      AfterTargets="FodyTarget"
       Name="FodyVerifyTarget"
       DependsOnTargets="$(FodyVerifyDependsOnTargets)">
 
