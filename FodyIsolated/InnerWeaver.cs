@@ -157,7 +157,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
     string GetNugetError()
     {
-        return $"The weaver needs to add a NuGet reference to FodyCecil version {GetType().Assembly.GetName().Version}.";
+        return $"The weaver needs to add a NuGet reference to FodyCecil version {GetType().Assembly.GetName().Version.Major}.0.";
     }
 
     void ExecuteWeavers()
