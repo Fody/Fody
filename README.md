@@ -152,6 +152,7 @@ The below addins are no longer maintained. Raise an issue in the specific projec
   * [Catel](http://catelproject.com/)
   * [Enums.NET](https://github.com/TylerBrinkley/Enums.NET)
   * [NServiceBus](https://particular.net/nservicebus)
+  * [Orchestra & all Orc.* components (30+)](https://github.com/WildGums)
 
 
 ## Icon
