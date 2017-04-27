@@ -34,7 +34,7 @@ public partial class InnerWeaver
             return;
         }
 
-        throw new WeavingException("Found no debug symbols.");
+        Logger.LogWarning("No debug symbols found. It is recommended to build with debug symbols enabled.");
     }
 
     void ChooseNewest()
