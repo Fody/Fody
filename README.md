@@ -79,7 +79,6 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [CryptStr](https://cryptstr.codeplex.com/) Encrypts literal strings in your .NET assemblies.
   * [DependencyInjection](https://github.com/jorgehmv/FodyDependencyInjection) automatic dependency injection for [Ninject](http://www.ninject.org/), [Autofac](http://autofac.org/) and [Spring](http://www.springframework.net/).
   * [EmptyConstructor](https://github.com/Fody/EmptyConstructor) Adds an empty constructor to classes even if a non empty one is defined.
-  * [Enums.NET](https://github.com/TylerBrinkley/Enums.NET) Enums.NET is a high-performance type-safe .NET enum utility library.
   * [EmptyStringGuard](https://github.com/thirkcircus/EmptyStringGuard) Adds empty string argument checks to an assembly.
   * [EnableFaking](https://github.com/philippdolder/EnableFaking.Fody) Allows faking your types without writing interfaces for testing purposes only.
   * [Equals](https://github.com/Fody/Equals) Generate Equals, GetHashCode and operators methods from properties.
@@ -107,6 +106,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [PropertyChanging](https://github.com/Fody/PropertyChanging) Injects INotifyPropertyChanging code into properties.
   * [Publicize](https://github.com/Fody/Publicize) Converts non-public members to public hidden members.
   * [QueryValidator](https://github.com/kamil-mrzyglod/QueryValidator.Fody) Validates your DB queries during a build.
+  * [Realm](https://github.com/realm/realm-dotnet) Mobile database: a replacement for SQLite & ORMs.
   * [ReactiveUI](https://github.com/kswoll/ReactiveUI.Fody) Generates [ReactiveUI](http://reactiveui.net/) `RaisePropertyChange` notifications for properties and `ObservableAsPropertyHelper` properties.
   * [Resourcer](https://github.com/Fody/Resourcer) Simplifies reading embedded resources from an Assembly.
   * [RomanticWeb](http://romanticweb.net/) Fody weaver plugin for RomanticWeb instrumentation.
@@ -145,6 +145,13 @@ The below addins are no longer maintained. Raise an issue in the specific projec
   * [Seal](https://github.com/kamil-mrzyglod/Seal) mark all non-virtual(abstract, non-sealed) types as sealed by default.
   * [Stiletto](https://github.com/benjamin-bader/stiletto) Compile-time static analysis and optimization for the Stiletto IoC library.
   * [Stamp](https://github.com/Fody/Stamp) Stamps an assembly with git data.
+
+
+## Projects built using Fody
+
+  * [Catel](http://catelproject.com/)
+  * [Enums.NET](https://github.com/TylerBrinkley/Enums.NET)
+  * [NServiceBus](https://particular.net/nservicebus)
 
 
 ## Icon
