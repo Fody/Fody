@@ -14,6 +14,12 @@ public partial class InnerWeaver
 
     void GetSymbolProviders()
     {
+        if (!DebugSymbols)
+        {
+            // Log something about building without symbols?
+            return;
+        }
+
         FindPdb();
 
         FindMdb();

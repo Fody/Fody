@@ -15,6 +15,7 @@ public partial class Processor
     public string References;
     public string SolutionDirectory;
     public string NuGetPackageRoot;
+    public bool DebugSymbols;
     public List<string> ReferenceCopyLocalPaths;
     public List<string> PackageDefinitions;
     public List<string> DefineConstants;
@@ -157,6 +158,7 @@ see https://github.com/Fody/Fody/wiki/SampleUsage");
             innerWeaver.IntermediateDirectoryPath = IntermediateDirectory;
             innerWeaver.DefineConstants = DefineConstants;
             innerWeaver.ProjectDirectoryPath = ProjectDirectory;
+            innerWeaver.DebugSymbols = DebugSymbols;
 
             innerWeaver.Execute();
         }
