@@ -25,6 +25,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     public string IntermediateDirectoryPath { get; set; }
     public List<string> ReferenceCopyLocalPaths { get; set; }
     public List<string> DefineConstants { get; set; }
+    public bool DebugSymbols { get; set; }
     bool cancelRequested;
     List<WeaverHolder> weaverInstances = new List<WeaverHolder>();
     Action cancelDelegate;

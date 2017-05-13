@@ -41,6 +41,8 @@ namespace Fody
 
         public string[] PackageDefinitions { get; set; }
 
+        public bool DebugSymbols { get; set; }
+
         public override bool Execute()
         {
             var referenceCopyLocalPaths = ReferenceCopyLocalPaths.Select(x => x.ItemSpec).ToList();
@@ -61,7 +63,8 @@ namespace Fody
                 ReferenceCopyLocalPaths = referenceCopyLocalPaths,
                 DefineConstants = defineConstants,
                 NuGetPackageRoot = NuGetPackageRoot,
-                PackageDefinitions = PackageDefinitions?.ToList()
+                PackageDefinitions = PackageDefinitions?.ToList(),
+                DebugSymbols = DebugSymbols
             };
             var success = processor.Execute();
             if (success)
