@@ -16,7 +16,7 @@ public partial class AddinFinder
         }
         else
         {
-            foreach (var directory in PackageDefinitions.Where(x => x.ToLowerInvariant().Contains(".fody")))
+            foreach (var directory in PackageDefinitions.Where(x => x.ToLowerInvariant().EndsWith(".fody")))
             {
                 AddFiles(Directory.EnumerateFiles(directory, "*.Fody.dll"));
             }
@@ -40,7 +40,7 @@ public partial class AddinFinder
     public static IEnumerable<string> ScanNuGetPackageRoot(string nuGetPackageRoot)
     {
         var fodyWeaverDirectories = Directory.EnumerateDirectories(nuGetPackageRoot, "*.?ody")
-                                       .Where(dir => dir.ToLowerInvariant().Contains(".fody"));
+                                       .Where(dir => dir.ToLowerInvariant().EndsWith(".fody"));
         
         foreach (var packageDirectory in fodyWeaverDirectories)
         {
