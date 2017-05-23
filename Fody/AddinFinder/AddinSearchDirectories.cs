@@ -16,7 +16,9 @@ public partial class AddinFinder
         }
         else
         {
-            foreach (var directory in PackageDefinitions.Where(x => x.ToLowerInvariant().EndsWith(".fody")))
+            // each PackageDefinition will be of the format C:\...\packages\propertychanging.fody\1.28.0
+            // so must be a Contains(.fody)
+            foreach (var directory in PackageDefinitions.Where(x => x.ToLowerInvariant().Contains(".fody")))
             {
                 AddFiles(Directory.EnumerateFiles(directory, "*.Fody.dll"));
             }
@@ -41,18 +43,17 @@ public partial class AddinFinder
     {
         var fodyWeaverDirectories = Directory.EnumerateDirectories(nuGetPackageRoot, "*.?ody")
                                        .Where(dir => dir.ToLowerInvariant().EndsWith(".fody"));
-        
+
         foreach (var packageDirectory in fodyWeaverDirectories)
         {
             var packageName = Path.GetFileName(packageDirectory);
             foreach (var versionDirectory in Directory.EnumerateDirectories(packageDirectory))
             {
-                var lowercasePackageName = packageName?.ToLowerInvariant() + ".dll";
+                var lowercasePackageName = $"{packageName?.ToLowerInvariant()}.dll";
                 var files = Directory.EnumerateFiles(versionDirectory);
-                var assembly = files.FirstOrDefault(file => Path.GetFileName(file)?.ToLowerInvariant() 
-                                                                    == lowercasePackageName);
-                
-                if (File.Exists(assembly))
+                var assembly = files.FirstOrDefault(file => Path.GetFileName(file)?.ToLowerInvariant() == lowercasePackageName);
+
+                if (assembly != null)
                 {
                     yield return assembly;
                 }
