@@ -1,3 +1,4 @@
+[![Chat on Gitter Status](https://img.shields.io/gitter/room/fody/fody.svg?style=flat)](https://gitter.im/Fody)
 ![Icon](https://raw.github.com/Fody/Fody/master/Icons/package_icon.png)
 
 
@@ -11,7 +12,7 @@
 Manipulating the IL of an assembly as part of a build requires a significant amount of plumbing code. This plumbing code involves knowledge of both the MSBuild and Visual Studio APIs. Fody attempts to eliminate that plumbing code through an extensible add-in model.
 
 
-## The nuget package  [![NuGet Status](https://img.shields.io/nuget/v/Fody.svg?style=flat)](https://www.nuget.org/packages/Fody/)
+## The nuget package
 
 https://www.nuget.org/packages/Fody/
 
