@@ -16,7 +16,7 @@ public partial class InnerWeaver
     {
         if (!DebugSymbols)
         {
-            // Log something about building without symbols?
+            Logger.LogWarning($"Debug symbols are disabled. It is recommended to build with debug symbols enabled.");
             return;
         }
 
