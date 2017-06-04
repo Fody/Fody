@@ -30,7 +30,7 @@ public partial class Processor
                 }
                 var weaverEntry = new WeaverEntry
                                       {
-                                          Element = element.ToString(SaveOptions.OmitDuplicateNamespaces), 
+                                          Element = element.ToString(SaveOptions.OmitDuplicateNamespaces),
                                           AssemblyName = assemblyName
                                       };
                 Weavers.Insert(index, weaverEntry);
@@ -46,7 +46,7 @@ public partial class Processor
         }
         catch (XmlException exception)
         {
-            throw new WeavingException($"Could not read '{"FodyWeavers.xml"}' because it has invalid xml. Message: '{exception.Message}'.");
+            throw new WeavingException($"Could not read 'FodyWeavers.xml' because it has invalid xml. Message: '{exception.Message}'.");
         }
     }
 }
