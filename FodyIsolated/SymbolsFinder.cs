@@ -16,7 +16,7 @@ public partial class InnerWeaver
     {
         if (!DebugSymbols)
         {
-            Logger.LogInfo("DebugSymbols disabled. No sybols file will be processed.");
+            Logger.LogInfo("DebugSymbols disabled. No symbols file will be processed.");
             return;
         }
 
