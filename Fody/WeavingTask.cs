@@ -4,6 +4,7 @@ using Microsoft.Build.Utilities;
 
 namespace Fody
 {
+    using System;
 
     public class WeavingTask : Task, ICancelableTask
     {
@@ -41,7 +42,9 @@ namespace Fody
 
         public string[] PackageDefinitions { get; set; }
 
+        //TODO move back to DebugSymbols when it resolves to true in release mode
         public bool DebugSymbols { get; set; }
+        public string DebugType { get; set; }
 
         public override bool Execute()
         {
@@ -64,7 +67,7 @@ namespace Fody
                 DefineConstants = defineConstants,
                 NuGetPackageRoot = NuGetPackageRoot,
                 PackageDefinitions = PackageDefinitions?.ToList(),
-                DebugSymbols = DebugSymbols
+                DebugSymbols = !string.Equals(DebugType, "none", StringComparison.OrdinalIgnoreCase)
             };
             var success = processor.Execute();
             if (success)
