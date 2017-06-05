@@ -67,7 +67,7 @@ namespace Fody
                 DefineConstants = defineConstants,
                 NuGetPackageRoot = NuGetPackageRoot,
                 PackageDefinitions = PackageDefinitions?.ToList(),
-                DebugSymbols = !string.Equals(DebugType, "none", StringComparison.OrdinalIgnoreCase)
+                DebugSymbols = DebugSymbolsProduced()
             };
             var success = processor.Execute();
             if (success)
@@ -77,6 +77,13 @@ namespace Fody
             }
 
             return success;
+        }
+
+        bool DebugSymbolsProduced()
+        {
+            return
+                !string.Equals(DebugType, "none", StringComparison.OrdinalIgnoreCase) &&
+                !string.Equals(DebugType, "embedded", StringComparison.OrdinalIgnoreCase);
         }
 
         public void Cancel()
