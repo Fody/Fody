@@ -14,6 +14,35 @@
 Manipulating the IL of an assembly as part of a build requires a significant amount of plumbing code. This plumbing code involves knowledge of both the MSBuild and Visual Studio APIs. Fody attempts to eliminate that plumbing code through an extensible add-in model.
 
 
+## Not Supported
+
+ * Projects using the [project.json](https://docs.microsoft.com/en-us/nuget/schema/project-json).
+ * Projects using the xproj.
+ * Projects mixing the old `.csproj` format with new [`<PackageReference>` nodes](https://docs.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#adding-a-packagereference).
+
+To tell the difference bewteen the old and new csproj formats.
+
+The old format starts with
+
+```
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+```
+
+The new format starts with
+
+```
+<Project Sdk="Microsoft.NET.Sdk">
+```
+
+For all these scenarios is it instead recommended to move to the new VS 2017 SDK style projects.
+
+References
+
+ * [Bye-Bye Project.json and .xproj and welcome back .csproj](http://www.talkingdotnet.com/bye-bye-project-json-xproj-welcome-back-csproj/)
+ * [Project.json to MSBuild conversion guide](http://www.natemcmaster.com/blog/2017/01/19/project-json-to-csproj/)
+ * [Migrate from project.json to new VS 2017 SDK style projects](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-migrate)
+
+
 ## The nuget package
 
 https://www.nuget.org/packages/Fody/
