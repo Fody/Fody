@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-public class DomainAssemblyResolver: IDisposable
+class DomainAssemblyResolver: IDisposable
 {
     ResolveEventHandler domainOnAssemblyResolve;
     public DomainAssemblyResolver()

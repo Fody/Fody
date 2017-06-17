@@ -1,39 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{89681581-A390-4761-9C27-1F274FE506E7}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FodyIsolated</RootNamespace>
-    <AssemblyName>FodyIsolated</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <ProductVersion>12.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
-    <FodySignAssembly>true</FodySignAssembly>
-    <NuGetPackageImportStamp>332315fd</NuGetPackageImportStamp>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFramework>net452</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>True</DebugSymbols>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
     <DebugType>full</DebugType>
-    <Optimize>False</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>True</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>True</DebugSymbols>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Cecil">
@@ -48,51 +22,16 @@
     <Reference Include="Mono.Cecil.Rocks">
       <HintPath>..\Lib\Cecil\net40\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs" />
-    <Compile Include="AssemblyLoader.cs" />
-    <Compile Include="AssemblyReferenceFinder.cs" />
-    <Compile Include="AssemblyResolver.cs" />
-    <Compile Include="DelegateBuilders\CancelDelegateBuilder.cs" />
-    <Compile Include="DelegateBuilders\AfterWeavingDelegateBuilder.cs" />
-    <Compile Include="DelegateBuilders\DelegateBuilder.cs" />
-    <Compile Include="DelegateBuilders\ExecuteDelegateBuilder.cs" />
-    <Compile Include="DelegateBuilders\PropertyDelegateBuilder.cs" />
-    <Compile Include="SymbolsFinder.cs" />
-    <Compile Include="ExceptionExtensions.cs" />
-    <Compile Include="InnerWeaver.cs" />
-    <Compile Include="DelegateBuilders\ConstructorDelegateBuilder.cs" />
-    <Compile Include="IsolatedContainsTypeChecker.cs" />
-    <Compile Include="ModuleReader.cs" />
-    <Compile Include="ModuleWriter.cs" />
-    <Compile Include="StrongNameKeyFinder.cs" />
-    <Compile Include="TypeFinder.cs" />
-    <Compile Include="WeaverDelegate.cs" />
-    <Compile Include="WeaverHolder.cs" />
-    <Compile Include="WeaverInitialiser.cs" />
+    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj"/>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj">
-      <Project>{E839A346-8804-4EAC-B635-19D7A911460E}</Project>
-      <Name>FodyCommon</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterBuild">
-    <MakeDir Directories="$(SolutionDir)ForSample" />
-    <Copy SourceFiles="$(TargetDir)FodyIsolated.dll" DestinationFolder="$(SolutionDir)ForSample" />
-    <Copy SourceFiles="$(TargetDir)FodyIsolated.pdb" DestinationFolder="$(SolutionDir)ForSample" Condition="Exists('$(TargetDir)FodyIsolated.pdb')" />
-    <Copy SourceFiles="$(TargetDir)Mono.Cecil.dll" DestinationFolder="$(SolutionDir)ForSample" />
-    <Copy SourceFiles="$(TargetDir)Mono.Cecil.Mdb.dll" DestinationFolder="$(SolutionDir)ForSample" />
-    <Copy SourceFiles="$(TargetDir)Mono.Cecil.Pdb.dll" DestinationFolder="$(SolutionDir)ForSample" />
-    <Copy SourceFiles="$(TargetDir)Mono.Cecil.Rocks.dll" DestinationFolder="$(SolutionDir)ForSample" />
+  <Target Name="CopyForIntegration" AfterTargets="AfterBuild">
+    <MakeDir Directories="$(SolutionDir)ForIntegration" />
+    <Copy SourceFiles="$(TargetDir)FodyIsolated.dll" DestinationFolder="$(SolutionDir)ForIntegration" />
+    <Copy SourceFiles="$(TargetDir)FodyIsolated.pdb" DestinationFolder="$(SolutionDir)ForIntegration" Condition="Exists('$(TargetDir)FodyIsolated.pdb')" />
+    <Copy SourceFiles="$(TargetDir)Mono.Cecil.dll" DestinationFolder="$(SolutionDir)ForIntegration" />
+    <Copy SourceFiles="$(TargetDir)Mono.Cecil.Mdb.dll" DestinationFolder="$(SolutionDir)ForIntegration" />
+    <Copy SourceFiles="$(TargetDir)Mono.Cecil.Pdb.dll" DestinationFolder="$(SolutionDir)ForIntegration" />
+    <Copy SourceFiles="$(TargetDir)Mono.Cecil.Rocks.dll" DestinationFolder="$(SolutionDir)ForIntegration" />
   </Target>
 </Project>
