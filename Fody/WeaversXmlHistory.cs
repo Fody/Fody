@@ -24,7 +24,7 @@ public partial class Processor
             else
             {
                 TimeStamps[configFile] = timeStamp;
-            }   
+            }
         }
         return changed;
     }

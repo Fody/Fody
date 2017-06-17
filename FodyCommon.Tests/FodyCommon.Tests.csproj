@@ -7,8 +7,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.7.0" />
-    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj"/>
-    <ProjectReference Include="..\Fody\Fody.csproj"/>
+    <PackageReference Include="NUnit" Version="3.7.1" />
+    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
+    <ProjectReference Include="..\Fody\Fody.csproj" />
   </ItemGroup>
 </Project>

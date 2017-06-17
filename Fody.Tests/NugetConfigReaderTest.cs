@@ -7,7 +7,7 @@ public class NugetConfigReaderTest
     [Test]
     public void WithNugetConfig()
     {
-        var solutionDir = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "../../NugetPackagePathFinder/FakeSolutionWithNugetConfig"));
+        var solutionDir = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "../../../NugetPackagePathFinder/FakeSolutionWithNugetConfig"));
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(solutionDir);
         Assert.IsTrue(packagesPathFromConfig.EndsWith("FromNugetConfig"));
     }
@@ -15,7 +15,7 @@ public class NugetConfigReaderTest
     [Test]
     public void FakeSolutionWithNestedNugetConfig()
     {
-        var solutionDir = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "../../NugetPackagePathFinder/FakeSolutionWithNestedNugetConfig"));
+        var solutionDir = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "../../../NugetPackagePathFinder/FakeSolutionWithNestedNugetConfig"));
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(solutionDir);
         Assert.IsTrue(packagesPathFromConfig.EndsWith("FromNugetConfig"));
     }
@@ -23,7 +23,7 @@ public class NugetConfigReaderTest
     [Test]
     public void WithNugetConfigInTree()
     {
-        var solutionDir = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "../../NugetPackagePathFinder/FakeSolutionWithNugetConfig/Foo"));
+        var solutionDir = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "../../../NugetPackagePathFinder/FakeSolutionWithNugetConfig/Foo"));
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(solutionDir);
         Assert.IsTrue(packagesPathFromConfig.EndsWith("FromNugetConfig"));
     }
@@ -31,7 +31,7 @@ public class NugetConfigReaderTest
     [Test]
     public void WithNoNugetConfigInTree()
     {
-        var solutionDir = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "../../NugetPackagePathFinder/FakeSolutionNoNugetConfig"));
+        var solutionDir = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "../../../NugetPackagePathFinder/FakeSolutionNoNugetConfig"));
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(solutionDir);
         Assert.IsNull(packagesPathFromConfig);
     }

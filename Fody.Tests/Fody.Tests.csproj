@@ -26,7 +26,7 @@
       <HintPath>..\Lib\Cecil\net40\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
-    <PackageReference Include="NUnit" Version="3.7.0" />
+    <PackageReference Include="NUnit" Version="3.7.1" />
     <PackageReference Include="ObjectApproval" Version="1.6.0" />
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" />

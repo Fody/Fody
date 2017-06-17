@@ -9,15 +9,15 @@ public class WeaverProjectFileFinderTests
     public void Found()
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory;
-        var combine = Path.Combine(currentDirectory, @"..\..\WeaversProjectFileFinder\WithWeaver");
+        var combine = Path.Combine(currentDirectory, "../../../WeaversProjectFileFinder/WithWeaver");
         var loggerMock = new Mock<BuildLogger>();
         loggerMock.Setup(x => x.LogDebug(It.IsAny<string>()));
 
         var processor = new Processor
             {
                 SolutionDirectory = combine,
-                Logger = loggerMock.Object
-            };
+                Logger = loggerMock.Object,
+        };
 
         processor.FindWeaverProjectFile();
         Assert.IsTrue(processor.FoundWeaverProjectFile);
@@ -29,7 +29,7 @@ public class WeaverProjectFileFinderTests
     public void NotFound()
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory;
-        var combine = Path.Combine(currentDirectory, @"..\..\WeaversProjectFileFinder\WithNoWeaver");
+        var combine = Path.Combine(currentDirectory, "../../../WeaversProjectFileFinder/WithNoWeaver");
         var loggerMock = new Mock<BuildLogger>();
         loggerMock.Setup(x => x.LogDebug(It.IsAny<string>()));
 
