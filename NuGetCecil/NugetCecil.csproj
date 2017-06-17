@@ -1,55 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4D267DED-10CA-4CF4-84E9-C7945393F86F}</ProjectGuid>
-    <NuGetPackageImportStamp>66ab6b51</NuGetPackageImportStamp>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <OutputType>Library</OutputType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <ConfigurationName>Debug</ConfigurationName>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <ConfigurationName>Release</ConfigurationName>
+    <TargetFramework>net452</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="FodyCecil.nuspec">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
+    <PackageReference Include="PepitaPackage" Version="1.21.4" />
+    <ProjectReference Include="..\Fody\Fody.csproj" />
+    <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" />
   </ItemGroup>
-  <Target Name="Clean">
-    <RemoveDir Directories="$(SolutionDir)NuGetCecilBuild" />
-  </Target>
-  <Target Name="Build" DependsOnTargets="NuGetCecilBuild" />
-  <Target Name="ReBuild" DependsOnTargets="NuGetCecilBuild" />
-  <Target Name="NuGetCecilBuild" DependsOnTargets="Clean">
+  <Target Name="NuGetBuild" AfterTargets="AfterBuild">
+    <ItemGroup>
+      <FilesToDelete Include="$(SolutionDir)NuGetCecilBuild\**\*.*" />
+    </ItemGroup>
+    <Delete Files="@(FilesToDelete)" />
+    <MakeDir Directories="$(SolutionDir)NuGetCecilBuild" />
     <MakeDir Directories="$(SolutionDir)NuGetCecilBuild" />
     <Copy SourceFiles="$(SolutionDir)NugetCecil\FodyCecil.nuspec" DestinationFolder="$(SolutionDir)NuGetCecilBuild" />
     <ItemGroup>
-      <CecilFiles Include="$(SolutionDir)Lib\Cecil\*.*" />
+      <CecilFiles Include="$(SolutionDir)Lib\Cecil\**\*.*" />
     </ItemGroup>
-    <Copy SourceFiles="@(CecilFiles)" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\" />
-    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetCecilBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\Fody.dll" />
-    <MakeDir Directories="$(SolutionDir)ForSample\build" />
-  </Target>
-  <ItemGroup>
-    <ProjectReference Include="..\Fody\Fody.csproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <Name>Fody</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <Name>FodyIsolated</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="..\packages\PepitaPackage.1.21.4\build\PepitaPackage.targets" Condition="Exists('..\packages\PepitaPackage.1.21.4\build\PepitaPackage.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\PepitaPackage.1.21.4\build\PepitaPackage.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\PepitaPackage.1.21.4\build\PepitaPackage.targets'))" />
+    <Copy SourceFiles="@(CecilFiles)" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\%(RecursiveDir)" />
+    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetCecilBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\net452\Fody.dll" />
   </Target>
 </Project>

@@ -1,94 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{64880F43-E6C1-428E-B00A-E0374697B5CF}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fody</RootNamespace>
-    <AssemblyName>Fody</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
-    <FodySignAssembly>true</FodySignAssembly>
-    <NuGetPackageImportStamp>3332a516</NuGetPackageImportStamp>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFramework>net452</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>True</DebugSymbols>
+    <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
     <DebugType>full</DebugType>
-    <Optimize>False</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>True</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>True</DebugSymbols>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Tasks.v4.0" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs" />
     <Compile Include="..\NugetConfigReader.cs">
       <Link>SearchDirectories\NugetConfigReader.cs</Link>
     </Compile>
-    <Compile Include="AssemblyLocation.cs" />
-    <Compile Include="ExtractConstants.cs" />
-    <Compile Include="PeVerifier.cs" />
-    <Compile Include="ContainsTypeChecker.cs" />
-    <Compile Include="DomainAssemblyResolver.cs" />
-    <Compile Include="Processor.cs" />
-    <Compile Include="InstanceLinker\WeaversConfiguredInstanceLinker.cs" />
-    <Compile Include="InstanceLinker\NoWeaversConfiguredInstanceLinker.cs" />
-    <Compile Include="ConfigFileFinder.cs" />
-    <Compile Include="AddinFinder\AddinSearchDirectories.cs" />
-    <Compile Include="AssemblyVersionReader.cs" />
-    <Compile Include="BuildLogger.cs" />
-    <Compile Include="FileChangedChecker.cs" />
-    <Compile Include="ProjectPathFinder.cs" />
-    <Compile Include="ProjectWeaversReader.cs" />
-    <Compile Include="AssemblyPathValidator.cs" />
-    <Compile Include="VerifyTask.cs" />
-    <Compile Include="WeaverAssemblyPathFinder.cs" />
-    <Compile Include="SolutionPathValidator.cs" />
-    <Compile Include="AddinFinder\AddinFilesEnumerator.cs" />
-    <Compile Include="WeaverProjectContainsWeaverChecker.cs" />
-    <Compile Include="WeaverProjectFileFinder.cs" />
-    <Compile Include="WeaversHistory.cs" />
-    <Compile Include="WeaversXmlHistory.cs" />
-    <Compile Include="WeavingTask.cs" />
-    <Compile Include="XmlExtensions.cs" />
+    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj">
-      <Project>{E839A346-8804-4EAC-B635-19D7A911460E}</Project>
-      <Name>FodyCommon</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="AfterBuild">
-    <MakeDir Directories="$(SolutionDir)ForSample" />
-    <Copy SourceFiles="$(TargetDir)Fody.dll" DestinationFolder="$(SolutionDir)ForSample" />
-    <Copy SourceFiles="$(TargetDir)Fody.pdb" DestinationFolder="$(SolutionDir)ForSample" Condition="Exists('$(TargetDir)Fody.pdb')" />
+  <Target Name="CopyForIntegration" AfterTargets="AfterBuild">
+    <MakeDir Directories="$(SolutionDir)ForIntegration" />
+    <Copy SourceFiles="$(TargetDir)Fody.dll" DestinationFolder="$(SolutionDir)ForIntegration" />
+    <Copy SourceFiles="$(TargetDir)Fody.pdb" DestinationFolder="$(SolutionDir)ForIntegration" Condition="Exists('$(TargetDir)Fody.pdb')" />
   </Target>
 </Project>

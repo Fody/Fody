@@ -1,57 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2AFCC073-136D-4FF3-AC83-BE94B35A4C7B}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fody.Tests</RootNamespace>
-    <AssemblyName>Fody.Tests</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>3186927a</NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <TargetFramework>net452</TargetFramework>
+    <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
-    <DebugType>full</DebugType>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Optimize>False</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ApprovalTests, Version=3.0.0.0, Culture=neutral, PublicKeyToken=11bd7d124fc62e0f, processorArchitecture=MSIL">
-      <HintPath>..\packages\ApprovalTests.3.0.13\lib\net40\ApprovalTests.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ApprovalUtilities, Version=3.0.0.0, Culture=neutral, PublicKeyToken=11bd7d124fc62e0f, processorArchitecture=MSIL">
-      <HintPath>..\packages\ApprovalUtilities.3.0.13\lib\net45\ApprovalUtilities.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ApprovalUtilities.Net45, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ApprovalUtilities.3.0.13\lib\net45\ApprovalUtilities.Net45.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core.4.0.0\lib\net45\Castle.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
+    <PackageReference Include="ApprovalTests" Version="3.0.13" />
+    <PackageReference Include="ApprovalUtilities" Version="3.0.13" />
+    <PackageReference Include="Moq" Version="4.7.25" />
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Cecil">
       <HintPath>..\Lib\Cecil\net40\Mono.Cecil.dll</HintPath>
     </Reference>
@@ -64,72 +26,13 @@
     <Reference Include="Mono.Cecil.Rocks">
       <HintPath>..\Lib\Cecil\net40\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
-    <Reference Include="Moq, Version=4.7.25.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.7.25\lib\net45\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.7.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.7.0\lib\net45\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="ObjectApproval, Version=1.6.0.0, Culture=neutral, PublicKeyToken=c7a34512ecd69090, processorArchitecture=MSIL">
-      <HintPath>..\packages\ObjectApproval.1.6.0\lib\NET40\ObjectApproval.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ApprovalTestConfig.cs" />
-    <Compile Include="AssemblyVersionReaderTests.cs" />
-    <Compile Include="ContainsTypeCheckerTests.cs" />
-    <Compile Include="GlobalSetUp.cs" />
-    <Compile Include="NuGetPackageRootTest.cs" />
-    <Compile Include="PeVerifierTests.cs" />
-    <Compile Include="DomainAssemblyResolverTests.cs" />
-    <Compile Include="InstanceLinker\NoWeaversConfiguredInstanceLinkerTests.cs" />
-    <Compile Include="InstanceLinker\WeaversConfiguredInstanceLinkerTests.cs" />
-    <Compile Include="NugetConfigReaderTest.cs" />
-    <Compile Include="ProjectPathFinderTests.cs" />
-    <Compile Include="ProjectWeaversFinderTests.cs" />
-    <Compile Include="ShouldStartSinceFileChangedTests.cs" />
-    <Compile Include="WeaverAssemblyPathFinderTests.cs" />
-    <Compile Include="WeaverProjectFileFinderTests.cs" />
-    <Compile Include="WeaversHistoryTests.cs" />
-    <Compile Include="WeaversXmlHistoryTests.cs" />
-    <Compile Include="AssemblyPathFinderTests.cs" />
-    <Compile Include="DynamicTests.cs" />
-    <Compile Include="FileChangedCheckerTests.cs" />
-    <Compile Include="ProjectWeaversReaderTests\ProjectWeaversReaderTests.cs" />
-    <Compile Include="SolutionPathValidatorTests.cs" />
-    <Compile Include="XmlExtensionsTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj">
-      <Project>{E839A346-8804-4EAC-B635-19D7A911460E}</Project>
-      <Name>FodyCommon</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj">
-      <Project>{89681581-a390-4761-9c27-1f274fe506e7}</Project>
-      <Name>FodyIsolated</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fody\Fody.csproj">
-      <Project>{64880F43-E6C1-428E-B00A-E0374697B5CF}</Project>
-      <Name>Fody</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SampleTask.Fody\SampleTask.Fody.csproj">
-      <Project>{2C10CBD1-5913-46D5-B705-0F3B46E68DD1}</Project>
-      <Name>SampleTask.Fody</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+    <PackageReference Include="NUnit" Version="3.7.1" />
+    <PackageReference Include="ObjectApproval" Version="1.6.0" />
+    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
+    <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" />
+    <ProjectReference Include="..\Fody\Fody.csproj" />
+    <ProjectReference Include="..\SampleWeaver.Fody\SampleWeaver.Fody.csproj" />
     <Content Include="NugetConfigWithKeyNodeEmpty.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -151,55 +54,40 @@
     <Content Include="FakeNuGetPackageRoot\Weaver2.Fody\2.0.8\Weaver2.Fody.dll" />
     <Content Include="NugetPackagePathFinder\FakeSolutionNoNugetConfig\placeholder.txt" />
     <Content Include="PeVerifierTests_NoVerifyIgnoreCodes.xml">
-      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="PeVerifierTests_VerifyIgnoreCodes_Multiple.xml">
-      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="PeVerifierTests_VerifyIgnoreCodes_Single.xml">
-      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="PeVerifierTests_WithFalseVerifyAssembly.xml">
-      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="PeVerifierTests_WithTrueVerifyAssembly.xml">
-      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="PeVerifierTests_NoVerifyAssembly.xml">
-      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="NugetPackagePathFinder\FakeSolutionWithNestedNugetConfig\.nuget\nuget.config" />
     <None Include="NugetPackagePathFinder\FakeSolutionWithNugetConfig\nuget.config" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="WeaversProjectFileFinder\WithNoWeaver\Weavers\" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="BadAssembly.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ProjectWeaversReaderTests\FodyWeavers1.xml">
-      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ProjectWeaversReaderTests\FodyWeavers2.xml">
-      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ProjectWeaversReaderTests\FodyWeavers3.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Packages\SampleTask.Fody.1.0.0.0\SampleTask.Fody.dll">
+    <Content Include="Packages\SampleWeaver.Fody.1.0.0.0\SampleWeaver.Fody.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <InProject>false</InProject>
     </Content>
@@ -214,5 +102,4 @@
     </Content>
     <Content Include="WeaversProjectFileFinder\WithWeaver\Weavers\bin\Debug\Weavers.dll" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

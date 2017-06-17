@@ -49,5 +49,5 @@
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\..\ForSample\build\lib\Fody.targets" />
+  <Import Project="$(SolutionDir)\..\ForIntegration\build\lib\Fody.targets" />
 </Project>
