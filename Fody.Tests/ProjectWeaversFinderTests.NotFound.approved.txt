@@ -1,4 +1,1 @@
-﻿Could not file a FodyWeavers.xml at the project level (\FodyWeavers.xml). Some project types do not support using NuGet to add content files e.g. netstandard projects. In these cases it is necessary to manually add a FodyWeavers.xml to the project. Example content:
-<Weavers>
-  <WeaverName/>
-</Weavers>
+﻿Could not find path to weavers file. Searched 'SearchDirectory', 'SearchDirectory'.

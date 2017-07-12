@@ -1,4 +1,5 @@
 using System.IO;
+using ApprovalTests;
 using Moq;
 using NUnit.Framework;
 
@@ -15,6 +16,6 @@ public class ProjectWeaversFinderTests
         var searchDirectory = Path.Combine(testDirectory, "FodyWeavers.xml");
 
         var weavingException = Assert.Throws<WeavingException>(() => ConfigFileFinder.FindWeaverConfigs(testDirectory, testDirectory, logger));
-        Assert.AreEqual(weavingException.Message, $"Could not find path to weavers file. Searched '{searchDirectory}', '{searchDirectory}'.");
+        Approvals.Verify(weavingException.Message.Replace(searchDirectory, "SearchDirectory"));
     }
 }
