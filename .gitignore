@@ -13,6 +13,8 @@
 *.ncrunchsolution
 *.ncrunchproject
 
+.idea/
+
 # Build results
 [Dd]ebug/
 [Rr]elease/
