@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +9,8 @@ public partial class AddinFinder
     {
         if (PackageDefinitions == null)
         {
+            Logger.LogDebug("No PackageDefinitions");
+
             AddNugetDirectoryFromConvention();
             AddNugetDirectoryFromNugetConfig();
             AddCurrentFodyDirectoryToAddinSearch();
@@ -16,10 +19,15 @@ public partial class AddinFinder
         }
         else
         {
+            string separator = Environment.NewLine + "    - ";
+            string packageDefinitionsLogMessage = separator + string.Join(separator, PackageDefinitions);
+            Logger.LogDebug($"PackageDefinitions: {packageDefinitionsLogMessage}");
+
             // each PackageDefinition will be of the format C:\...\packages\propertychanging.fody\1.28.0
             // so must be a Contains(.fody)
             foreach (var directory in PackageDefinitions.Where(x => x.ToLowerInvariant().Contains(".fody")))
             {
+                Logger.LogDebug($"Adding weavers from package directory: '{directory}'");
                 AddFiles(Directory.EnumerateFiles(directory, "*.Fody.dll"));
             }
             AddToolsSolutionDirectoryToAddinSearch();
