@@ -147,7 +147,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [SemVer](https://github.com/dittodhole/dotnet-SemVer.Stamp) versions your assemblies according to [SemVer](http://semver.org/) based on your CVS commit messages.
   * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration. 
   * [StampSvn](https://github.com/krk/Stamp) Stamps an assembly with SVN data.
-  * [StaticProxy](https://github.com/BrunoJuchli/StaticProxy.Fody) Helps proxy dynamic code emitting: Moq, FakeItEasy, Castle Dynamic, LinFu.
+  * [StaticProxy](https://github.com/BrunoJuchli/StaticProxy.Fody) Proxy Generator, also for .net standard / .net core (.net standard 1.0+).
   * [SexyProxy](https://github.com/kswoll/sexy-proxy) Proxy generator with support for async patterns.
   * [SwallowExceptions](https://github.com/duaneedwards/SwallowExceptions) Swallow Exceptions in targeted methods.
   * [ToString](https://github.com/Fody/ToString) Generate `ToString` method from public properties.
