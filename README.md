@@ -20,7 +20,7 @@ Manipulating the IL of an assembly as part of a build requires a significant amo
  * Projects using the xproj.
  * Projects mixing the old `.csproj` format with new [`<PackageReference>` nodes](https://docs.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#adding-a-packagereference).
 
-To tell the difference bewteen the old and new csproj formats.
+To tell the difference between the old and new csproj formats.
 
 The old format starts with
 
