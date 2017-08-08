@@ -125,6 +125,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [InfoOf](https://github.com/Fody/InfoOf) Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](https://msdn.microsoft.com/en-us/library/58918ffs.aspx).
   * [Ionad](https://github.com/Fody/Ionad) Replaces static method calls. 
   * [Janitor](https://github.com/Fody/Janitor) Simplifies the implementation of [IDisposable](https://msdn.microsoft.com/en-us/library/system.idisposable.aspx).
+  * [JetBrainsAnnotations](https://github.com/tom-englert/JetBrainsAnnotations.Fody) Converts all JetBrains ReSharper code annotation attributes to External Annotations.
   * [LoadAssembliesOnStartup](https://github.com/Fody/LoadAssembliesOnStartup) Loads references on startup by using the types in the module initializer
   * [MethodCache](https://github.com/Dresel/MethodCache) Caches return values of methods decorated with a `CacheAttribute`.
   * [MethodDecorator](https://github.com/Fody/MethodDecorator) Decorate arbitrary methods to run code before and after invocation.
@@ -172,7 +173,6 @@ The below addins are no longer maintained. Raise an issue in the specific projec
   * [ArraySlice](https://github.com/Codealike/arrayslice) ArraySlice allows to build shared memory array views without performance impact. It uses IL manipulation to achieve the fastest implementation.
   * [Cilador](https://github.com/rileywhite/Cilador) Write your own [mixins](https://en.wikipedia.org/wiki/Mixin) in C# for code reuse without inheritance.
   * [Commander](https://github.com/DamianReeves/Commander.Fody) Injects ICommand properties and implementations for use in MVVM applications.
-  * [JetBrainsAnnotations](https://github.com/Fody/JetBrainsAnnotations) Leverage JetBrains Annotations without the need for JetBrainsAnnotations.dll.
   * [Mixins](https://bitbucket.org/skwasiborski/mixins.fody/wiki/Home) A mixin is a class that provides a certain functionality to be inherited or just reused by a subclass.
   * [NameOf](https://github.com/NickStrupat/NameOf) Provides strongly typed access to a compile-time string representing the name of a variable, field, property, method, event, enum value, or type.
   * [RemoveReference](https://github.com/icnocop/RemoveReference.Fody) Facilitates removing references in a compiled assembly during a build.
