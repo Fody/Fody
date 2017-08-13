@@ -149,6 +149,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration. 
   * [StampSvn](https://github.com/krk/Stamp) Stamps an assembly with SVN data.
   * [StaticProxy](https://github.com/BrunoJuchli/StaticProxy.Fody) Proxy Generator, also for .net standard / .net core (.net standard 1.0+).
+  * [Substitute](https://github.com/tom-englert/Substitute.Fody) Substitute types with other types to e.g. intercept generated code 
   * [SexyProxy](https://github.com/kswoll/sexy-proxy) Proxy generator with support for async patterns.
   * [SwallowExceptions](https://github.com/duaneedwards/SwallowExceptions) Swallow Exceptions in targeted methods.
   * [Throttle](https://github.com/tom-englert/Throttle.Fody) Easily use throttles with minimal coding
