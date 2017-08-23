@@ -145,7 +145,6 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [ReactiveUI](https://github.com/kswoll/ReactiveUI.Fody) Generates [ReactiveUI](http://reactiveui.net/) `RaisePropertyChange` notifications for properties and `ObservableAsPropertyHelper` properties.
   * [Resourcer](https://github.com/Fody/Resourcer) Simplifies reading embedded resources from an Assembly.
   * [RomanticWeb](http://romanticweb.net/) Fody weaver plugin for RomanticWeb instrumentation.
-  * [SemVer](https://github.com/dittodhole/dotnet-SemVer.Stamp) versions your assemblies according to [SemVer](http://semver.org/) based on your CVS commit messages.
   * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration. 
   * [StampSvn](https://github.com/krk/Stamp) Stamps an assembly with SVN data.
   * [StaticProxy](https://github.com/BrunoJuchli/StaticProxy.Fody) Proxy Generator, also for .net standard / .net core (.net standard 1.0+).
