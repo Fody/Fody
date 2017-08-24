@@ -12,6 +12,7 @@ public partial class Processor
     public string KeyFilePath;
     public bool SignAssembly;
     public string ProjectDirectory;
+    public string DocumentationFile;
     public string References;
     public string SolutionDirectory;
     public string NuGetPackageRoot;
@@ -158,6 +159,7 @@ see https://github.com/Fody/Fody/wiki/SampleUsage");
             innerWeaver.IntermediateDirectoryPath = IntermediateDirectory;
             innerWeaver.DefineConstants = DefineConstants;
             innerWeaver.ProjectDirectoryPath = ProjectDirectory;
+            innerWeaver.DocumentationFilePath = DocumentationFile;
             innerWeaver.DebugSymbols = DebugSymbols;
 
             innerWeaver.Execute();

@@ -49,6 +49,7 @@ public static class DelegateBuilder
             SetReferenceCopyLocalPaths = weaverType.BuildPropertySetDelegate<List<string>>("ReferenceCopyLocalPaths"),
             SetSolutionDirectoryPath = weaverType.BuildPropertySetDelegate<string>("SolutionDirectoryPath"),
             SetProjectDirectoryPath = weaverType.BuildPropertySetDelegate<string>("ProjectDirectoryPath"),
+            SetDocumentationFilePath = weaverType.BuildPropertySetDelegate<string>("DocumentationFilePath"),
             SetDefineConstants = weaverType.BuildPropertySetDelegate<List<string>>("DefineConstants"),
             ConstructInstance = weaverType.BuildConstructorDelegate()
         };
