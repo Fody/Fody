@@ -21,6 +21,7 @@ public class WeaverInitialiserTests
             AssemblyFilePath = "AssemblyFilePath",
             ProjectDirectoryPath = "ProjectDirectoryPath",
             SolutionDirectoryPath = "SolutionDirectoryPath",
+            DocumentationFilePath = "DocumentationFilePath",
             ReferenceDictionary = new Dictionary<string, string>
             {
                 {"Ref1;Ref2", "Path1"}
@@ -68,6 +69,7 @@ public class WeaverInitialiserTests
         Assert.AreEqual("AssemblyFilePath", moduleWeaver.AssemblyFilePath);
         Assert.AreEqual("ProjectDirectoryPath", moduleWeaver.ProjectDirectoryPath);
         Assert.AreEqual("SolutionDirectoryPath", moduleWeaver.SolutionDirectoryPath);
+        Assert.AreEqual("DocumentationFilePath", moduleWeaver.DocumentationFilePath);
     }
 
 }
@@ -80,6 +82,7 @@ public class ValidModuleWeaver
     public string AssemblyFilePath { get; set; }
 
     public string ProjectDirectoryPath { get; set; }
+    public string DocumentationFilePath { get; set; }
     public string AddinDirectoryPath { get; set; }
     public Action<string> LogDebug { get; set; }
     public Action<string> LogInfo { get; set; }
