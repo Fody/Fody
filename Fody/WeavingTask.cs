@@ -5,6 +5,7 @@ using Microsoft.Build.Utilities;
 namespace Fody
 {
     using System;
+    using System.Windows.Forms;
 
     public class WeavingTask : Task, ICancelableTask
     {
@@ -22,7 +23,7 @@ namespace Fody
         [Required]
         public string ProjectDirectory { get; set; }
 
-        public string[] DocumentationFilePaths { get; set; }
+        public string DocumentationFilePath { get; set; }
 
         [Required]
         public string References { get; set; }
@@ -63,7 +64,7 @@ namespace Fody
                 KeyFilePath = KeyFilePath,
                 SignAssembly = SignAssembly,
                 ProjectDirectory = ProjectDirectory,
-                DocumentationFile = DocumentationFilePaths?.FirstOrDefault(),
+                DocumentationFilePath = DocumentationFilePath,
                 References = References,
                 SolutionDirectory = SolutionDir,
                 ReferenceCopyLocalPaths = referenceCopyLocalPaths,

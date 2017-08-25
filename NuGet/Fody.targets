@@ -64,7 +64,7 @@
           PackageDefinitions="@(PackageDefinitions->'%(ResolvedPath)')"
           DebugSymbols="$(DebugSymbols)"
           DebugType="$(DebugType)"
-          DocumentationFilePaths="@(DocFileItem->'%(FullPath)')"
+          DocumentationFilePath="@(DocFileItem->'%(FullPath)')"
       >
 
       <Output
