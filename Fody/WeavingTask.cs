@@ -5,7 +5,6 @@ using Microsoft.Build.Utilities;
 namespace Fody
 {
     using System;
-    using System.Windows.Forms;
 
     public class WeavingTask : Task, ICancelableTask
     {
