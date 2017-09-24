@@ -15,6 +15,7 @@ using TypeAttributes = Mono.Cecil.TypeAttributes;
 public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 {
     public string ProjectDirectoryPath { get; set; }
+    public string DocumentationFilePath { get; set; }
     public string AssemblyFilePath { get; set; }
     public string SolutionDirectoryPath { get; set; }
     public string References { get; set; }

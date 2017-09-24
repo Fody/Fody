@@ -22,6 +22,8 @@ namespace Fody
         [Required]
         public string ProjectDirectory { get; set; }
 
+        public string DocumentationFilePath { get; set; }
+
         [Required]
         public string References { get; set; }
 
@@ -61,6 +63,7 @@ namespace Fody
                 KeyFilePath = KeyFilePath,
                 SignAssembly = SignAssembly,
                 ProjectDirectory = ProjectDirectory,
+                DocumentationFilePath = DocumentationFilePath,
                 References = References,
                 SolutionDirectory = SolutionDir,
                 ReferenceCopyLocalPaths = referenceCopyLocalPaths,
