@@ -19,8 +19,8 @@ public partial class AddinFinder
         }
         else
         {
-            string separator = Environment.NewLine + "    - ";
-            string packageDefinitionsLogMessage = separator + string.Join(separator, PackageDefinitions);
+            var separator = Environment.NewLine + "    - ";
+            var packageDefinitionsLogMessage = separator + string.Join(separator, PackageDefinitions);
             Logger.LogDebug($"PackageDefinitions: {packageDefinitionsLogMessage}");
 
             // each PackageDefinition will be of the format C:\...\packages\propertychanging.fody\1.28.0

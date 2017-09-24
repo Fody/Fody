@@ -1,17 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Fody
+static class ExtractConstants
 {
-    static class ExtractConstants
+    internal static List<string> GetConstants(this string input)
     {
-        internal static List<string> GetConstants(this string input)
+        if (input == null)
         {
-            if (input == null)
-            {
-                return new List<string>();
-            }
-            return input.Split(';').ToList();
+            return new List<string>();
         }
+        return input.Split(';').ToList();
     }
 }
