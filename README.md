@@ -32,6 +32,7 @@ While it may seam trivial to "implement support for earlier versions of.net" the
 
  * Custom VMs to verify problems.
  * Added complexity to setting up build environment.
+ * Bugs in unsupported versions in .NET may be manifest as bugs in Fody.
 
 
 ## Not Supported
