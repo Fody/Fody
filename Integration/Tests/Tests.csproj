@@ -2,12 +2,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net452</TargetFramework>
-    <DebugType>full</DebugType>
-    <DebugSymbols>True</DebugSymbols>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="NUnit" Version="3.7.0" />
+    <PackageReference Include="NUnit" Version="3.*" />
     <ProjectReference Include="..\WithNoPdb\WithNoPdb.csproj"/>
     <ProjectReference Include="..\WithNugetAndInSolutionWeavers\WithNugetAndInSolutionWeavers.csproj"/>
     <ProjectReference Include="..\WithNugetWeavers\WithNugetWeavers.csproj"/>

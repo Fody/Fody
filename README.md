@@ -19,7 +19,7 @@ Manipulating the IL of an assembly as part of a build requires a significant amo
  * Classic .NET: See *Support ended* in [NET Framework version history](https://en.wikipedia.org/wiki/.NET_Framework_version_history#Overview). i.e only 4.5.2 and above is supported.
  * .NET core: Follows [.NET Core Support Policy]
 
-No explicit code is in place to check for non supported versions, and throw an error. As such earlier versions of .net may work as a side effect. 
+No explicit code is in place to check for non supported versions, and throw an error. As such earlier versions of .net may work as a side effect.
 
 Any bugs found must be reproduced in a supported version.
 

@@ -4,7 +4,7 @@
     <TargetFramework>net452</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="PepitaPackage" Version="1.21.6" />
+    <PackageReference Include="PepitaPackage" Version="1.*" />
     <ProjectReference Include="..\Fody\Fody.csproj" />
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" />
   </ItemGroup>
