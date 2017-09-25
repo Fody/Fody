@@ -27,7 +27,7 @@ Downstream plugins are recommended to follow the above guidelines.
 
 ## Edit and continue
 
-Edit and continue is not supported.
+Edit and continue is not supported. There is no extension point to re-weave an assembly after the edit part.
 
 
 ### Reasons
