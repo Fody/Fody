@@ -25,6 +25,10 @@ Any bugs found must be reproduced in a supported version.
 
 Downstream plugins are recommended to follow the above guidelines.
 
+## Edit and continue
+
+Edit and continue is not supported.
+
 
 ### Reasons
 
@@ -35,7 +39,9 @@ While it may seam trivial to "implement support for earlier versions of.net" the
  * Bugs in unsupported versions in .NET may be manifest as bugs in Fody.
 
 
-## Not Supported
+## Project formats
+
+The follfare not supported
 
  * Projects using the [project.json](https://docs.microsoft.com/en-us/nuget/schema/project-json).
  * Projects using the xproj.
