@@ -176,6 +176,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Substitute](https://github.com/tom-englert/Substitute.Fody) Substitute types with other types to e.g. intercept generated code 
   * [SexyProxy](https://github.com/kswoll/sexy-proxy) Proxy generator with support for async patterns.
   * [SwallowExceptions](https://github.com/duaneedwards/SwallowExceptions) Swallow Exceptions in targeted methods.
+  * [TestFlask](https://github.com/FatihSahin/test-flask) Records your method args and responses to replay, assert and test.
   * [Throttle](https://github.com/tom-englert/Throttle.Fody) Easily use throttles with minimal coding
   * [ToString](https://github.com/Fody/ToString) Generate `ToString` method from public properties.
   * [Tracer](https://github.com/csnemes/tracer) Adds trace-enter and trace-leave log entries for selected methods.
