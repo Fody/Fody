@@ -27,6 +27,8 @@
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\net40\Mono.Cecil.Mdb.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\net40\Mono.Cecil.Pdb.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\net40\Mono.Cecil.Rocks.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(ProjectDir)Fody.targets" DestinationFolder="$(SolutionDir)NuGetBuild\build\portable-net+sl+win+wpa+wp" />
+    <Copy SourceFiles="$(ProjectDir)Fody.targets" DestinationFolder="$(SolutionDir)NuGetBuild\build\net452" />
     <Copy SourceFiles="$(ProjectDir)Fody.targets" DestinationFolder="$(SolutionDir)NuGetBuild\build\netstandard1.2" />
     <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\net452\Fody.dll" />
     <MakeDir Directories="$(SolutionDir)ForIntegration\build\lib" />
