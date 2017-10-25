@@ -7,4 +7,5 @@ public class WeaverEntry
     public string AssemblyName;
     public string AssemblyPath;
     public string TypeName;
+    public string Source;
 }

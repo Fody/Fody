@@ -1,4 +1,7 @@
 
+using System;
+using System.Linq;
+
 public partial class Processor
 {
     public void ConfigureWhenWeaversFound()
@@ -11,7 +14,16 @@ public partial class Processor
 
     public void ProcessConfig(WeaverEntry weaverConfig)
     {
-        //support for diff names weavers when "In solution weaving"
+        //support for diff names sources
+        if (weaverConfig.Source != null)
+        {
+            weaverConfig.AssemblyPath = References.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault(reference => reference.EndsWith($"{weaverConfig.Source}.dll", StringComparison.InvariantCultureIgnoreCase)) ?? throw new WeavingException($"Assembly {weaverConfig.Source} could not be found.");
+            weaverConfig.TypeName = weaverConfig.AssemblyName;
+            WeaverProjectUsed = true;
+            return;
+        }
+
+        //support for diff names weavers when "In solution weaving"        
         var weaverProjectContains = WeaverProjectContainsType(weaverConfig.AssemblyName);
         if (weaverProjectContains)
         {
