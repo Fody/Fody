@@ -126,7 +126,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [AsyncErrorHandler](https://github.com/Fody/AsyncErrorHandler) Integrates error handling into async and TPL code.
   * [AutoDependencyProperty](http://blog.angeloflogic.com/2014/12/no-more-dependencyproperty-with.html) Generates WPF DependencyProperty boilerplate from automatic C# properties.
   * [AutoProperties](https://github.com/tom-englert/AutoProperties.Fody) Gives you extended control over auto-properties, like directly accessing the backing field or intercepting getters and setters.
-  * [AutoDI](https://github.com/Keboo/AutoDI) A framework for simplifying the creation of objects that only partially depend on resources in your favorite DI container.
+  * [AutoDI](https://github.com/Keboo/AutoDI) A dependency injection container and a framework to simplify working with dependency injection (DI). It is built on top of the Microsoft.Extensions.DependencyInjection.Abstractions.
   * [AutoLazy](https://github.com/bcuff/AutoLazy) Automatically implements the double-checked locking pattern on specified properties and methods.
   * [BasicFodyAddin](https://github.com/Fody/BasicFodyAddin) A simple project meant to illustrate how to build an addin.
   * [Bindables](https://github.com/yusuf-gunaydin/Bindables) Converts your auto properties into Wpf dependency or attached properties. Allows specifying options, defining readonly properties, and calling property changed methods.
