@@ -12,9 +12,9 @@ public class AssemblyResolver : IAssemblyResolver
     List<string> splitReferences;
     Dictionary<string, AssemblyDefinition> assemblyDefinitionCache = new Dictionary<string, AssemblyDefinition>(StringComparer.InvariantCultureIgnoreCase);
 
-    public AssemblyResolver(Dictionary<string, string> ReferenceDictionary, ILogger logger, List<string> splitReferences)
+    public AssemblyResolver(Dictionary<string, string> referenceDictionary, ILogger logger, List<string> splitReferences)
     {
-        referenceDictionary = ReferenceDictionary;
+        this.referenceDictionary = referenceDictionary;
         this.logger = logger;
         this.splitReferences = splitReferences;
     }
