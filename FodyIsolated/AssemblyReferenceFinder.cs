@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-public partial class InnerWeaver 
+public partial class InnerWeaver
 {
     public Dictionary<string, string> ReferenceDictionary = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
     public List<string> SplitReferences;
@@ -17,7 +17,6 @@ public partial class InnerWeaver
         Logger.LogDebug("Reference count=" + ReferenceDictionary.Count);
     }
 
-
     void SetRefDictionary(IEnumerable<string> filePaths)
     {
         foreach (var filePath in filePaths)
@@ -25,5 +24,4 @@ public partial class InnerWeaver
             ReferenceDictionary[Path.GetFileNameWithoutExtension(filePath)] = filePath;
         }
     }
-
 }

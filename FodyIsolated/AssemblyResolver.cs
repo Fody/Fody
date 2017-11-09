@@ -52,8 +52,7 @@ public class AssemblyResolver : IAssemblyResolver
             parameters = new ReaderParameters();
         }
 
-        string fileFromDerivedReferences;
-        if (referenceDictionary.TryGetValue(assemblyNameReference.Name, out fileFromDerivedReferences))
+        if (referenceDictionary.TryGetValue(assemblyNameReference.Name, out var fileFromDerivedReferences))
         {
             return GetAssembly(fileFromDerivedReferences, parameters);
         }
