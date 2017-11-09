@@ -12,8 +12,7 @@ public partial class Processor
         foreach (var configFile in ConfigFiles)
         {
             var timeStamp = File.GetLastWriteTimeUtc(configFile);
-            DateTime dateTime;
-            if (TimeStamps.TryGetValue(configFile, out dateTime))
+            if (TimeStamps.TryGetValue(configFile, out var dateTime))
             {
                 if (dateTime != timeStamp)
                 {

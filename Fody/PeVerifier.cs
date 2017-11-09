@@ -59,8 +59,7 @@ public class Verifier
 
     bool InnerVerify()
     {
-        List<string> ignoreCodes;
-        if (!ReadShouldVerifyAssembly(out ignoreCodes))
+        if (!ReadShouldVerifyAssembly(out var ignoreCodes))
         {
             Logger.LogInfo("  Skipped Verifying assembly since it is disabled in configuration");
             return true;
@@ -125,8 +124,7 @@ public class Verifier
         {
             var configXml = XDocument.Load(configFile);
             var element = configXml.Root;
-            bool value;
-            if (element.TryReadBool("VerifyAssembly", out value))
+            if (element.TryReadBool("VerifyAssembly", out var value))
             {
                 return value;
             }

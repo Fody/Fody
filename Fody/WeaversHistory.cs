@@ -12,8 +12,7 @@ public static class WeaversHistory
         foreach (var weaverPath in weaverPaths)
         {
             var newVersion = File.GetLastWriteTimeUtc(weaverPath);
-            DateTime dateTime;
-            if (TimeStamps.TryGetValue(weaverPath, out dateTime))
+            if (TimeStamps.TryGetValue(weaverPath, out var dateTime))
             {
                 if (dateTime != newVersion)
                 {

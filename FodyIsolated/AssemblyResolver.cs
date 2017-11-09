@@ -21,8 +21,7 @@ public class AssemblyResolver : IAssemblyResolver
 
     AssemblyDefinition GetAssembly(string file, ReaderParameters parameters)
     {
-        AssemblyDefinition assembly;
-        if (assemblyDefinitionCache.TryGetValue(file, out assembly))
+        if (assemblyDefinitionCache.TryGetValue(file, out var assembly))
         {
             return assembly;
         }

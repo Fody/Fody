@@ -6,8 +6,7 @@ public static class PropertyDelegateBuilder
 {
     public static Action<object, T> BuildPropertySetDelegate<T>(this Type targetType, string propertyName)
     {
-        Action<object, T> action;
-        TryBuildPropertySetDelegate(targetType, propertyName, out action);
+        TryBuildPropertySetDelegate(targetType, propertyName, out Action<object, T> action);
         return action;
     }
 

@@ -9,8 +9,7 @@ public static class DelegateBuilder
 
     public static WeaverDelegate GetDelegateHolderFromCache(this Type weaverType)
     {
-        WeaverDelegate @delegate;
-        if (!weaverDelegates.TryGetValue(weaverType.TypeHandle, out @delegate))
+        if (!weaverDelegates.TryGetValue(weaverType.TypeHandle, out var @delegate))
         {
             weaverDelegates[weaverType.TypeHandle] = @delegate = BuildDelegateHolder(weaverType);
         }
@@ -21,8 +20,7 @@ public static class DelegateBuilder
 
     public static WeaverDelegate BuildDelegateHolder(this Type weaverType)
     {
-        Action<object, ModuleDefinition> moduleDefinitionDelegate;
-        if (!weaverType.TryBuildPropertySetDelegate("ModuleDefinition", out moduleDefinitionDelegate))
+        if (!weaverType.TryBuildPropertySetDelegate("ModuleDefinition", out Action<object, ModuleDefinition> moduleDefinitionDelegate))
         {
             var message = $"Cannot load/use weaver {weaverType.FullName}. Note that the weaver must contain a public instance settable property named 'ModuleDefinition' of type 'Mono.Cecil.ModuleDefinition'. If it does, make sure that it's referencing the right version of Mono.Cecil, which is '{typeof (ModuleDefinition).Assembly.GetName().Version}'.";
             throw new WeavingException(message);

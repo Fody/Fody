@@ -130,8 +130,7 @@ see https://github.com/Fody/Fody/wiki/SampleUsage");
 
     void ExecuteInOwnAppDomain()
     {
-        AppDomain appDomain;
-        if (solutionDomains.TryGetValue(SolutionDirectory, out appDomain))
+        if (solutionDomains.TryGetValue(SolutionDirectory, out var appDomain))
         {
             if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
             {

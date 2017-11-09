@@ -9,8 +9,7 @@ public partial class InnerWeaver
 
     public virtual Assembly LoadAssembly(string assemblyPath)
     {
-        Assembly assembly;
-        if (assemblies.TryGetValue(assemblyPath, out assembly))
+        if (assemblies.TryGetValue(assemblyPath, out var assembly))
         {
             Logger.LogDebug($"  Loading '{assemblyPath}' from cache.");
             return assembly;
