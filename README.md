@@ -14,6 +14,66 @@
 Manipulating the IL of an assembly as part of a build requires a significant amount of plumbing code. This plumbing code involves knowledge of both the MSBuild and Visual Studio APIs. Fody attempts to eliminate that plumbing code through an extensible add-in model.
 
 
+## Usage
+
+Install using [NuGet](https://docs.microsoft.com/en-au/nuget/). See [Using the package manager console](https://docs.microsoft.com/en-au/nuget/tools/package-manager-console) for more info.
+
+Fody ships in two parts:
+
+ 1. The core "engine" shipped in the [Fody NuGet package](https://www.nuget.org/packages/Fody/)
+ 1. Any number of ["addins" or "weavers"](https://github.com/Fody/Fody#addins-list) which are all shipped in their own NuGet packages.
+
+The below examples will use [Virtuosity](https://github.com/Fody/Virtuosity).
+
+
+### Add the nuget
+
+[Install](https://docs.microsoft.com/en-us/nuget/tools/ps-ref-install-package) the package in the project:
+
+```
+Install-Package WeaverName.Fody
+```
+
+e.g.
+
+```
+Install-Package Virtuosity.Fody
+```
+
+
+### Update Fody
+
+Since NuGet always defaults to the oldest, and most buggy, version of any dependency it is important to do a [NuGet update](https://docs.microsoft.com/en-us/nuget/tools/ps-ref-update-package) of Fody after installing any weaver.
+
+```
+Update-Package Fody
+```
+
+[Subscribe to Fody](https://libraries.io/nuget/Fody) on [Libraries.io](https://libraries.io) to get notified of releases of Fody.
+
+
+### Add FodyWeavers.xml
+
+To indicate what weavers run and in what order a `FodyWeavers.xml` file is used at the project level. It needs to be added manually. It takes the following form:
+
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<Weavers>
+    <WeaverName/> 
+</Weavers>
+```
+
+e.g.
+
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<Weavers>
+    <Virtuosity/> 
+</Weavers>
+```
+
+
 ## Supported Runtimes
 
  * Classic .NET: See *Support ended* in [NET Framework version history](https://en.wikipedia.org/wiki/.NET_Framework_version_history#Overview). i.e only 4.5.2 and above is supported.
