@@ -21,7 +21,7 @@ Install using [NuGet](https://docs.microsoft.com/en-au/nuget/). See [Using the p
 Fody ships in two parts:
 
  1. The core "engine" shipped in the [Fody NuGet package](https://www.nuget.org/packages/Fody/)
- 1. Any number of ["addins" or "weavers"](https://github.com/Fody/Fody#addins-list) which are all shipped in their own NuGet packages.
+ 1. Any number of ["addins" or "weavers"](#addins-list) which are all shipped in their own NuGet packages.
 
 The below examples will use [Virtuosity](https://github.com/Fody/Virtuosity).
 
@@ -60,7 +60,7 @@ To indicate what weavers run and in what order a `FodyWeavers.xml` file is used 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Weavers>
-    <WeaverName/> 
+  <WeaverName/> 
 </Weavers>
 ```
 
@@ -69,7 +69,7 @@ e.g.
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Weavers>
-    <Virtuosity/> 
+  <Virtuosity/> 
 </Weavers>
 ```
 
