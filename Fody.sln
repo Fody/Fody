@@ -1,33 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 15.0.26430.13
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fody", "Fody\Fody.csproj", "{64880F43-E6C1-428E-B00A-E0374697B5CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fody", "Fody\Fody.csproj", "{64880F43-E6C1-428E-B00A-E0374697B5CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWeaver.Fody", "SampleWeaver.Fody\SampleWeaver.Fody.csproj", "{2C10CBD1-5913-46D5-B705-0F3B46E68DD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWeaver.Fody", "SampleWeaver.Fody\SampleWeaver.Fody.csproj", "{2C10CBD1-5913-46D5-B705-0F3B46E68DD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fody.Tests", "Fody.Tests\Fody.Tests.csproj", "{2AFCC073-136D-4FF3-AC83-BE94B35A4C7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fody.Tests", "Fody.Tests\Fody.Tests.csproj", "{2AFCC073-136D-4FF3-AC83-BE94B35A4C7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FodyIsolated", "FodyIsolated\FodyIsolated.csproj", "{89681581-A390-4761-9C27-1F274FE506E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyIsolated", "FodyIsolated\FodyIsolated.csproj", "{89681581-A390-4761-9C27-1F274FE506E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FodyIsolated.Tests", "FodyIsolated.Tests\FodyIsolated.Tests.csproj", "{1C314DBE-A36D-422A-A25C-5B9402CE4F5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyIsolated.Tests", "FodyIsolated.Tests\FodyIsolated.Tests.csproj", "{1C314DBE-A36D-422A-A25C-5B9402CE4F5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FodyCommon", "FodyCommon\FodyCommon.csproj", "{E839A346-8804-4EAC-B635-19D7A911460E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyCommon", "FodyCommon\FodyCommon.csproj", "{E839A346-8804-4EAC-B635-19D7A911460E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FodyCommon.Tests", "FodyCommon.Tests\FodyCommon.Tests.csproj", "{C66C8111-BE64-4899-BD7C-688A9ED3A62F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyCommon.Tests", "FodyCommon.Tests\FodyCommon.Tests.csproj", "{C66C8111-BE64-4899-BD7C-688A9ED3A62F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nuget", "NuGet\Nuget.csproj", "{66DDADC1-1631-4EC7-8CB2-DD8080188234}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nuget", "NuGet\Nuget.csproj", "{66DDADC1-1631-4EC7-8CB2-DD8080188234}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WeaverNugetTemplates", "WeaverNugetTemplates", "{215FCA55-BC62-4BAD-98EF-7E42079B04CF}"
-	ProjectSection(SolutionItems) = preProject
-		WeaverNugetTemplates\install.ps1 = WeaverNugetTemplates\install.ps1
-		WeaverNugetTemplates\uninstall.ps1 = WeaverNugetTemplates\uninstall.ps1
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NugetCecil", "NuGetCecil\NugetCecil.csproj", "{4D267DED-10CA-4CF4-84E9-C7945393F86F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetCecil", "NuGetCecil\NugetCecil.csproj", "{4D267DED-10CA-4CF4-84E9-C7945393F86F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DummyAssembly", "DummyAssembly\DummyAssembly.csproj", "{D95530D4-5646-4156-B58E-F2C5D5FA03CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DummyAssembly", "DummyAssembly\DummyAssembly.csproj", "{D95530D4-5646-4156-B58E-F2C5D5FA03CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -144,6 +138,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {777F54B0-1B85-4977-B2AF-C4493CAAEBB8}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Fody\Fody.csproj
