@@ -29,5 +29,5 @@ public class ShouldStartSinceFileChangedTests
 
 public interface ProcessedByFody
 {
-    
+
 }

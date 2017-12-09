@@ -23,7 +23,6 @@ public partial class InnerWeaver
         }
     }
 
-
     string GetKeyFilePath()
     {
         if (KeyFilePath != null)

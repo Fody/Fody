@@ -265,7 +265,6 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         }
     }
 
-
     public sealed override object InitializeLifetimeService()
     {
         // Returning null designates an infinite non-expiring lease.
@@ -279,5 +278,4 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         //Disconnects the remoting channel(s) of this object and all nested objects.
         RemotingServices.Disconnect(this);
     }
-
 }

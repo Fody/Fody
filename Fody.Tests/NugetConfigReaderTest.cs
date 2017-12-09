@@ -83,5 +83,4 @@ public class NugetConfigReaderTest
         var packagesPathFromConfig = NugetConfigReader.GetPackagePath(configPath);
         Assert.AreEqual(Path.Combine(TestContext.CurrentContext.TestDirectory, "Packages"), packagesPathFromConfig);
     }
-
 }

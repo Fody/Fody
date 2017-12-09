@@ -6,7 +6,6 @@ using NUnit.Framework;
 [TestFixture]
 public class VerifierTests
 {
-
     [Test]
     public void StaticPathResolution()
     {

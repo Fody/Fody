@@ -3,7 +3,6 @@ using System.Text;
 
 public static class ExceptionExtensions
 {
-
     public static string GetLoaderMessages(this ReflectionTypeLoadException exception)
     {
         var stringBuilder = new StringBuilder();

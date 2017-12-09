@@ -44,7 +44,7 @@ public class ModuleWeaver
     // A copy of $(ProjectDir). OPTIONAL
     public string ProjectDirectoryPath { get; set; }
 
-    // Will contain the full directory path of the XML documentation file, 
+    // Will contain the full directory path of the XML documentation file,
     // if generating the documentation file is enabled in the project.
     // A copy of @(DocFileItem->'%(FullPath)'). OPTIONAL
     public string DocumentationFilePath { get; set; }

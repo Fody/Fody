@@ -3,7 +3,6 @@ using NUnit.Framework;
 [TestFixture]
 public class TypeFinderTest
 {
-
     [Test]
     public void Valid()
     {

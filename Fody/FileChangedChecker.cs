@@ -1,6 +1,5 @@
 public partial class Processor
 {
-
     public virtual bool ShouldStartSinceFileChanged()
     {
         if (ContainsTypeChecker.Check(AssemblyFilePath, "ProcessedByFody"))

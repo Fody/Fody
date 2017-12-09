@@ -98,7 +98,6 @@ public partial class AddinFinder
         AddWeaversFromDir(fodyParentDirectory);
     }
 
-
     public void AddNugetDirectoryFromNugetConfig()
     {
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(SolutionDirectoryPath);
@@ -144,10 +143,8 @@ public partial class AddinFinder
         }
     }
 
-
     public ILogger Logger;
     public string SolutionDirectoryPath;
     public string NuGetPackageRoot;
     public List<string> PackageDefinitions;
-
 }

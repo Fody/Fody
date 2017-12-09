@@ -29,6 +29,5 @@ namespace Fody
                            };
             return verifier.Verify();
         }
-
     }
 }

@@ -38,5 +38,4 @@ public static class XmlExtensions
         value = false;
         return false;
     }
-
 }

@@ -39,7 +39,6 @@ public partial class Processor
 
     public virtual bool Execute()
     {
-
         Logger.LogInfo($"Fody (version {typeof (Processor).Assembly.GetName().Version}) Executing");
 
         var stopwatch = Stopwatch.StartNew();

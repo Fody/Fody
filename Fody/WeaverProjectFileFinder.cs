@@ -39,5 +39,4 @@ public partial class Processor
         WeaverAssemblyPath = References.Split(new[] {";"}, StringSplitOptions.RemoveEmptyEntries)
             .FirstOrDefault(x => x.EndsWith("Weavers.dll"));
     }
-
 }

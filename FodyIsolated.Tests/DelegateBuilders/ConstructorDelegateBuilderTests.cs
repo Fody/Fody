@@ -4,7 +4,6 @@ using NUnit.Framework;
 [TestFixture]
 public class ConstructorDelegateBuilderTests
 {
-
     [Test]
     public void Should_throw_When_is_abstract_type()
     {
@@ -68,7 +67,6 @@ public class ConstructorDelegateBuilderTests
     public class NestedPublicClass
     {
     }
-
 }
 
 public class WithParamsClass

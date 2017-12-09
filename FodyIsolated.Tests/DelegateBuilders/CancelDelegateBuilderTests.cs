@@ -4,7 +4,6 @@ using NUnit.Framework;
 [TestFixture]
 public class CancelDelegateBuilderTests
 {
-
     [Test]
     public void Should_not_throw_When_no_cancel_method()
     {
@@ -70,5 +69,4 @@ public class CancelDelegateBuilderTests
             throw new NullReferenceException();
         }
     }
-
 }

@@ -4,7 +4,6 @@ using System.Reflection;
 
 public static class AfterWeavingDelegateBuilder
 {
-
     public static Action<object> BuildAfterWeavingDelegate(this Type weaverType)
     {
         var afterWeavingMethod = weaverType.GetMethod("AfterWeaving", BindingFlags.Instance | BindingFlags.Public, null, new Type[] { }, null);
@@ -17,7 +16,5 @@ public static class AfterWeavingDelegateBuilder
         var execute = Expression.Call(Expression.Convert(target, weaverType), afterWeavingMethod);
         return Expression.Lambda<Action<object>>(execute, target)
                          .Compile();
-
     }
-
 }

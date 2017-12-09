@@ -23,7 +23,7 @@ public class PropertyDelegateBuilderTests : BaseClassSupplyingInheritedMembers
         setterDelegate(this, "aString");
         Assert.AreEqual("aString", Property);
     }
-    
+
     [Test]
     public void Should_return_false_for_non_existing()
     {
@@ -38,7 +38,7 @@ public class PropertyDelegateBuilderTests : BaseClassSupplyingInheritedMembers
         setterDelegate(this, "aString");
         Assert.AreEqual("aString",Field);
     }
-    
+
     [Test]
     public void Should_be_able_to_set_inherited_properties() {
         var setterDelegate = GetType().BuildPropertySetDelegate<string>(nameof(InheritedProperty));
@@ -52,7 +52,7 @@ public class PropertyDelegateBuilderTests : BaseClassSupplyingInheritedMembers
         setterDelegate(this, "blah");
         Assert.AreEqual("blah", InheritedField);
     }
-    
+
     [Test]
     public void Should_be_a_null_delegate_When_member_does_not_exist()
     {
@@ -80,11 +80,7 @@ public class PropertyDelegateBuilderTests : BaseClassSupplyingInheritedMembers
         var setterDelegate = GetType().BuildPropertySetDelegate<string>("PrivateProperty");
         Assert.IsNull(setterDelegate.Target);
     }
-    
-
 }
-
-
 
 public class BaseClassSupplyingInheritedMembers
 {

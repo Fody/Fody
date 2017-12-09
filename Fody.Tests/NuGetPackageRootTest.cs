@@ -15,5 +15,4 @@ public class NuGetPackageRootTest
             .Select(s=>s.Replace(@"\\", @"\").Replace(combine, "")).ToList();
         ObjectApprover.VerifyWithJson(result);
     }
-
 }

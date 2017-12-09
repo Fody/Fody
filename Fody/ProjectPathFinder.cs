@@ -10,5 +10,4 @@ public partial class Processor
         }
         Logger.LogDebug($"ProjectDirectory: '{ProjectDirectory}'.");
     }
-
 }

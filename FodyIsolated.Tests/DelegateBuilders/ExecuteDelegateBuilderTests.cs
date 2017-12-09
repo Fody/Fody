@@ -4,7 +4,6 @@ using NUnit.Framework;
 [TestFixture]
 public class ExecuteDelegateBuilderTests
 {
-
     [Test]
     public void Should_throw_When_no_execute_method()
     {
@@ -73,5 +72,4 @@ public class ExecuteDelegateBuilderTests
             throw new NullReferenceException();
         }
     }
-
 }

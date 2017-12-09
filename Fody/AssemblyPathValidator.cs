@@ -2,7 +2,6 @@ using System.IO;
 
 public partial class Processor
 {
-
     public virtual void ValidateAssemblyPath()
     {
         AssemblyFilePath = Path.Combine(ProjectDirectory, AssemblyFilePath);
@@ -13,5 +12,4 @@ public partial class Processor
 
         Logger.LogDebug($"AssemblyPath: '{AssemblyFilePath}'");
     }
-
 }

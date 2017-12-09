@@ -6,7 +6,6 @@ using Mono.Cecil.Cil;
 
 public static class DelegateBuilder
 {
-
     public static WeaverDelegate GetDelegateHolderFromCache(this Type weaverType)
     {
         if (!weaverDelegates.TryGetValue(weaverType.TypeHandle, out var @delegate))

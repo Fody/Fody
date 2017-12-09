@@ -4,7 +4,6 @@ using System.Reflection;
 
 public static class ExecuteDelegateBuilder
 {
-
     public static Action<object> BuildExecuteDelegate(this Type weaverType)
     {
         var executeMethod = weaverType.GetMethod("Execute", BindingFlags.Instance | BindingFlags.Public, null, new Type[] {}, null);
@@ -18,7 +17,5 @@ public static class ExecuteDelegateBuilder
         var execute = Expression.Call(Expression.Convert(target, weaverType), executeMethod);
         return Expression.Lambda<Action<object>>(execute, target)
                          .Compile();
-
     }
-
 }

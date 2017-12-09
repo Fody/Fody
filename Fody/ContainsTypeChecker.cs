@@ -27,5 +27,4 @@ public class ContainsTypeChecker
     {
         return containsTypeChecker.Check(assemblyPath, typeName);
     }
-
 }

@@ -8,7 +8,6 @@ public class IsolatedContainsTypeChecker :
     MarshalByRefObject,
     IContainsTypeChecker
 {
-
     public bool Check(string assemblyPath, string typeName)
     {
         var parameters = new ReaderParameters

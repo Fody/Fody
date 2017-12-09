@@ -4,7 +4,6 @@ using Mono.Cecil.Cil;
 
 public partial class InnerWeaver
 {
-
     public virtual void SetProperties(WeaverEntry weaverEntry, object weaverInstance, WeaverDelegate @delegate)
     {
         if (weaverEntry.Element != null)
@@ -31,7 +30,6 @@ public partial class InnerWeaver
         @delegate.SetLogErrorPoint(weaverInstance, LogErrorPoint);
         @delegate.SetDefineConstants(weaverInstance, DefineConstants);
     }
-
 
     void LogWarningPoint(string message, SequencePoint point)
     {

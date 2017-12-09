@@ -71,7 +71,6 @@ public class WeaverInitialiserTests
         Assert.AreEqual("SolutionDirectoryPath", moduleWeaver.SolutionDirectoryPath);
         Assert.AreEqual("DocumentationFilePath", moduleWeaver.DocumentationFilePath);
     }
-
 }
 
 public class ValidModuleWeaver

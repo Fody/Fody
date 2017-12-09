@@ -56,7 +56,6 @@ public class Verifier
         }
     }
 
-
     bool InnerVerify()
     {
         if (!ReadShouldVerifyAssembly(out var ignoreCodes))
@@ -104,7 +103,6 @@ public class Verifier
         return true;
     }
 
-    
     public bool ReadShouldVerifyAssembly(out List<string> ignoreCodes)
     {
         var weaverConfigs = ConfigFileFinder.FindWeaverConfigs(SolutionDirectory, ProjectDirectory, Logger);
@@ -113,8 +111,6 @@ public class Verifier
         {
             return true;
         }
-
-
         return ExtractVerifyAssemblyFromConfigs(weaverConfigs);
     }
 

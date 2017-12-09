@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using NUnit.Framework;
 
-
 [TestFixture]
 public class ProjectWeaversReaderTests
 {
@@ -23,7 +22,6 @@ public class ProjectWeaversReaderTests
         Assert.AreEqual("<SampleTask2 MyProperty2=\"PropertyValue2\" />", weavers[1].Element);
         Assert.AreEqual("SampleTask3", weavers[2].AssemblyName);
         Assert.AreEqual("<SampleTask3 MyProperty3=\"PropertyValue3\" />", weavers[2].Element);
-
     }
 
     static IEnumerable<string> GetPaths()
@@ -32,5 +30,5 @@ public class ProjectWeaversReaderTests
         yield return Path.Combine(currentDirectory, @"ProjectWeaversReaderTests\FodyWeavers1.xml");
         yield return Path.Combine(currentDirectory, @"ProjectWeaversReaderTests\FodyWeavers2.xml");
         yield return Path.Combine(currentDirectory, @"ProjectWeaversReaderTests\FodyWeavers3.xml");
-    }   
+    }
 }

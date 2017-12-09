@@ -7,7 +7,6 @@ public partial class AddinFinder
 {
     public List<string> FodyFiles = new List<string>();
 
-
     public string FindAddinAssembly(string packageName)
     {
         var packageFileName = packageName + ".Fody.dll";

@@ -4,7 +4,6 @@ using NUnit.Framework;
 [TestFixture]
 public class WeaversConfiguredInstanceLinkerTests
 {
-
     [Test]
     public void Should_use_Custom_weaver_from_weaver_project_When_added_to_configured_weavers()
     {

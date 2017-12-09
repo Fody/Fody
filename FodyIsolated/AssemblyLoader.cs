@@ -33,5 +33,4 @@ public partial class InnerWeaver
         }
         return Assembly.Load(rawAssembly);
     }
-
 }

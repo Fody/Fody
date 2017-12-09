@@ -3,7 +3,6 @@ using System.IO;
 
 public class ConfigFileFinder
 {
-
     public static List<string> FindWeaverConfigs(string solutionDirectoryPath, string projectDirectory, ILogger logger)
     {
         var files = new List<string>();
@@ -37,5 +36,4 @@ public class ConfigFileFinder
         }
         return files;
     }
-
 }

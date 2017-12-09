@@ -4,7 +4,6 @@ using System.Reflection;
 
 public static class CancelDelegateBuilder
 {
-
     public static Action<object> BuildCancelDelegate(this Type weaverType)
     {
         var afterWeavingMethod = weaverType.GetMethod("Cancel", BindingFlags.Instance | BindingFlags.Public, null, new Type[] { }, null);
@@ -17,7 +16,5 @@ public static class CancelDelegateBuilder
         var execute = Expression.Call(Expression.Convert(target, weaverType), afterWeavingMethod);
         return Expression.Lambda<Action<object>>(execute, target)
                          .Compile();
-
     }
-
 }
