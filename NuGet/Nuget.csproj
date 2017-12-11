@@ -9,14 +9,15 @@
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" />
   </ItemGroup>
   <Target Name="NuGetBuild" AfterTargets="AfterBuild">
+
     <ItemGroup>
-      <FilesToDelete Include="$(SolutionDir)NuGetBuild\**\*.*" />
+      <FodyFilesToDelete Include="$(SolutionDir)NuGetBuild\**\*.*" />
     </ItemGroup>
-    <Delete Files="@(FilesToDelete)" />
+    <Delete Files="@(FodyFilesToDelete)" />
     <MakeDir Directories="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)NuGet\Fody.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
-    <Copy SourceFiles="$(SolutionDir)NuGet\FodyWeavers.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Content" />
-    <Copy SourceFiles="$(SolutionDir)NuGet\install.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
+    <Copy SourceFiles="$(ProjectDir)\Fody.nuspec" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(ProjectDir)\FodyWeavers.xml" DestinationFolder="$(SolutionDir)NuGetBuild\Content" />
+    <Copy SourceFiles="$(ProjectDir)\install.ps1" DestinationFolder="$(SolutionDir)NuGetBuild\Tools" />
     <Copy SourceFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\net452\Fody.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)Fody\bin\$(ConfigurationName)\net452\Fody.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)FodyCommon\bin\$(ConfigurationName)\net452\FodyCommon.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
@@ -33,5 +34,19 @@
     <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\net452\Fody.dll" />
     <MakeDir Directories="$(SolutionDir)ForIntegration\build\lib" />
     <Copy SourceFiles="$(ProjectDir)Fody.targets" DestinationFolder="$(SolutionDir)ForIntegration\build\lib" />
+
+    <ItemGroup>
+      <CecilFilesToDelete Include="$(SolutionDir)NuGetCecilBuild\**\*.*" />
+    </ItemGroup>
+    <Delete Files="@(CecilFilesToDelete)" />
+    <MakeDir Directories="$(SolutionDir)NuGetCecilBuild" />
+    <MakeDir Directories="$(SolutionDir)NuGetCecilBuild" />
+    <Copy SourceFiles="$(ProjectDir)\FodyCecil.nuspec" DestinationFolder="$(SolutionDir)NuGetCecilBuild" />
+    <ItemGroup>
+      <CecilFiles Include="$(SolutionDir)Lib\Cecil\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(CecilFiles)" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\%(RecursiveDir)" />
+    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetCecilBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\net452\Fody.dll" />
+
   </Target>
 </Project>

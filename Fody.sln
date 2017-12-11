@@ -19,8 +19,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyCommon.Tests", "FodyCom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nuget", "NuGet\Nuget.csproj", "{66DDADC1-1631-4EC7-8CB2-DD8080188234}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NugetCecil", "NuGetCecil\NugetCecil.csproj", "{4D267DED-10CA-4CF4-84E9-C7945393F86F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DummyAssembly", "DummyAssembly\DummyAssembly.csproj", "{D95530D4-5646-4156-B58E-F2C5D5FA03CC}"
 EndProject
 Global
@@ -113,16 +111,6 @@ Global
 		{66DDADC1-1631-4EC7-8CB2-DD8080188234}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{66DDADC1-1631-4EC7-8CB2-DD8080188234}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{66DDADC1-1631-4EC7-8CB2-DD8080188234}.Release|x86.ActiveCfg = Release|Any CPU
-		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{4D267DED-10CA-4CF4-84E9-C7945393F86F}.Release|x86.ActiveCfg = Release|Any CPU
 		{D95530D4-5646-4156-B58E-F2C5D5FA03CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D95530D4-5646-4156-B58E-F2C5D5FA03CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D95530D4-5646-4156-B58E-F2C5D5FA03CC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
