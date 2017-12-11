@@ -1,12 +1,11 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class XmlExtensionsTests
+public class XmlExtensionsTests : TestBase
 {
-    [Test]
+    [Fact]
     public void Simple()
     {
         var xDocument = XDocument.Parse(
@@ -18,7 +17,7 @@ public class XmlExtensionsTests
   </f:table>
 </root>");
         xDocument.StripNamespace();
-        Assert.AreEqual(
+        Assert.Equal(
             @"<root>
   <table>
     <name id=""1"" id2=""2"">African Coffee Table</name>
@@ -28,7 +27,7 @@ public class XmlExtensionsTests
 </root>".Replace("\r\n", "\n"), xDocument.ToString().Replace("\r\n", "\n"));
     }
 
-    [Test]
+    [Fact]
     public void QueryWithNamespace()
     {
         var xDocument = XDocument.Parse(
@@ -44,7 +43,7 @@ public class XmlExtensionsTests
         Trace.WriteLine(tables.Count());
     }
 
-    [Test]
+    [Fact]
     public void QueryWithNoNamespace()
     {
         var xDocument = XDocument.Parse(

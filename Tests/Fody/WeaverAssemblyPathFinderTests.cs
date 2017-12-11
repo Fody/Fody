@@ -1,11 +1,9 @@
 using Moq;
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class WeaverAssemblyPathFinderTests
+public class WeaverAssemblyPathFinderTests : TestBase
 {
-    [Test]
-    [Explicit]
+    [Fact(Skip = "todo")]
     //TODO:
     public void Valid()
     {

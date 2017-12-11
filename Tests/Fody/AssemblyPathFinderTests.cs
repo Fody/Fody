@@ -1,14 +1,12 @@
 using System.Diagnostics;
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class AssemblyLocationTests
+public class AssemblyLocationTests : TestBase
 {
-    [Test]
+    [Fact]
     public void Foo()
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory;
         Trace.WriteLine(currentDirectory);
     }
 }
-

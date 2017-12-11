@@ -1,10 +1,9 @@
 using Moq;
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class WeaversConfiguredInstanceLinkerTests
+public class WeaversConfiguredInstanceLinkerTests : TestBase
 {
-    [Test]
+    [Fact]
     public void Should_use_Custom_weaver_from_weaver_project_When_added_to_configured_weavers()
     {
         var mock = new Mock<Processor>();
@@ -21,11 +20,11 @@ public class WeaversConfiguredInstanceLinkerTests
         };
         processor.ProcessConfig(weaverConfig);
 
-        Assert.AreEqual("CustomWeaver", weaverConfig.TypeName);
-        Assert.AreEqual("Path", weaverConfig.AssemblyPath);
+        Assert.Equal("CustomWeaver", weaverConfig.TypeName);
+        Assert.Equal("Path", weaverConfig.AssemblyPath);
     }
 
-    [Test]
+    [Fact]
     public void Should_use_named_weaver_When_added_to_configured_weavers()
     {
         var mock = new Mock<Processor>();
@@ -43,8 +42,8 @@ public class WeaversConfiguredInstanceLinkerTests
         };
         processor.ProcessConfig(weaverConfig);
 
-        Assert.AreEqual("ModuleWeaver", weaverConfig.TypeName);
-        Assert.AreEqual("Path", weaverConfig.AssemblyPath);
+        Assert.Equal("ModuleWeaver", weaverConfig.TypeName);
+        Assert.Equal("Path", weaverConfig.AssemblyPath);
         mock.Verify();
     }
 }

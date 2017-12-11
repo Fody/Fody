@@ -1,10 +1,9 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class AfterExecuteDelegateBuilderTests
+public class AfterExecuteDelegateBuilderTests : TestBase
 {
-    [Test]
+    [Fact]
     public void Should_not_throw_When_no_execute_method()
     {
         typeof(NoExecuteClass).BuildAfterWeavingDelegate();
@@ -14,7 +13,7 @@ public class AfterExecuteDelegateBuilderTests
     {
     }
 
-    [Test]
+    [Fact]
     public void Should_find_method_When_execute_is_valid()
     {
         typeof(ValidClass).BuildAfterWeavingDelegate()(new ValidClass());
@@ -27,7 +26,7 @@ public class AfterExecuteDelegateBuilderTests
         }
     }
 
-    [Test]
+    [Fact]
     public void Should_not_throw_When_execute_is_not_public()
     {
         typeof(NonPublicClass).BuildAfterWeavingDelegate();
@@ -42,7 +41,7 @@ public class AfterExecuteDelegateBuilderTests
         }
     }
 
-    [Test]
+    [Fact]
     public void Should_not_throw_When_method_is_static()
     {
         typeof(StaticExecuteClass).BuildAfterWeavingDelegate();
@@ -55,7 +54,7 @@ public class AfterExecuteDelegateBuilderTests
         }
     }
 
-    [Test]
+    [Fact]
     public void Should_thrown_inner_exception_When_delegate_is_executed()
     {
         var action = typeof (ThrowFromExecuteClass).BuildAfterWeavingDelegate();

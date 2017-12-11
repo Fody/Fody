@@ -1,7 +1,6 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using WithNoPdb;
 
-[TestFixture]
 public class WithNoPdbTest
 {
     [Test]

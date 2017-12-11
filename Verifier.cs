@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text.RegularExpressions;
 using Microsoft.Build.Utilities;
-using NUnit.Framework;
+using Xunit;
 
 public static class Verifier
 {

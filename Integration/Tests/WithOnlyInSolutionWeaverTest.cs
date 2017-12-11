@@ -1,7 +1,6 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
 public class WithOnlyInSolutionWeaverTest
 {
     [Test]

@@ -1,86 +1,85 @@
 using System.IO;
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class NugetConfigReaderTest
+public class NugetConfigReaderTest : TestBase
 {
-    [Test]
+    [Fact]
     public void WithNugetConfig()
     {
-        var solutionDir = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "../../../Fody/NugetPackagePathFinder/FakeSolutionWithNugetConfig"));
+        var solutionDir = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "../../../Fody/NugetPackagePathFinder/FakeSolutionWithNugetConfig"));
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(solutionDir);
-        Assert.IsTrue(packagesPathFromConfig.EndsWith("FromNugetConfig"));
+        Assert.EndsWith("FromNugetConfig", packagesPathFromConfig);
     }
 
-    [Test]
+    [Fact]
     public void FakeSolutionWithNestedNugetConfig()
     {
-        var solutionDir = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "../../../Fody/NugetPackagePathFinder/FakeSolutionWithNestedNugetConfig"));
+        var solutionDir = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "../../../Fody/NugetPackagePathFinder/FakeSolutionWithNestedNugetConfig"));
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(solutionDir);
-        Assert.IsTrue(packagesPathFromConfig.EndsWith("FromNugetConfig"));
+        Assert.EndsWith("FromNugetConfig", packagesPathFromConfig);
     }
 
-    [Test]
+    [Fact]
     public void WithNugetConfigInTree()
     {
-        var solutionDir = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "../../../Fody/NugetPackagePathFinder/FakeSolutionWithNugetConfig/Foo"));
+        var solutionDir = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "../../../Fody/NugetPackagePathFinder/FakeSolutionWithNugetConfig/Foo"));
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(solutionDir);
-        Assert.IsTrue(packagesPathFromConfig.EndsWith("FromNugetConfig"));
+        Assert.EndsWith("FromNugetConfig",packagesPathFromConfig);
     }
 
-    [Test]
+    [Fact]
     public void WithNoNugetConfigInTree()
     {
-        var solutionDir = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "../../../Fody/NugetPackagePathFinder/FakeSolutionNoNugetConfig"));
+        var solutionDir = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "../../../Fody/NugetPackagePathFinder/FakeSolutionNoNugetConfig"));
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(solutionDir);
-        Assert.IsNull(packagesPathFromConfig);
+        Assert.Null(packagesPathFromConfig);
     }
 
-    [Test]
+    [Fact]
     public void NugetConfigWithRepoNode()
     {
-        var configPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fody/NugetConfigWithRepoNode.txt");
+        var configPath = Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/NugetConfigWithRepoNode.txt");
         var packagesPathFromConfig = NugetConfigReader.GetPackagePath(configPath);
-        Assert.AreEqual(Path.Combine(TestContext.CurrentContext.TestDirectory, @"Fody\repositoryPathValue"), packagesPathFromConfig);
+        Assert.Equal(Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\repositoryPathValue"), packagesPathFromConfig);
     }
 
-    [Test]
+    [Fact]
     public void NugetConfigWithKeyNodeEmpty()
     {
-        var configPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fody/NugetConfigWithKeyNodeEmpty.txt");
+        var configPath = Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/NugetConfigWithKeyNodeEmpty.txt");
         var packagesPathFromConfig = NugetConfigReader.GetPackagePath(configPath);
-        Assert.IsNull(packagesPathFromConfig);
+        Assert.Null(packagesPathFromConfig);
     }
 
-    [Test]
+    [Fact]
     public void NugetConfigWithRepoNodeEmpty()
     {
-        var configPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fody/NugetConfigWithRepoNodeEmpty.txt");
+        var configPath = Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/NugetConfigWithRepoNodeEmpty.txt");
         var packagesPathFromConfig = NugetConfigReader.GetPackagePath(configPath);
-        Assert.IsNull(packagesPathFromConfig);
+        Assert.Null(packagesPathFromConfig);
     }
 
-    [Test]
+    [Fact]
     public void NugetConfigWithKeyNode()
     {
-        var configPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fody/NugetConfigWithKeyNode.txt");
+        var configPath = Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/NugetConfigWithKeyNode.txt");
         var packagesPathFromConfig = NugetConfigReader.GetPackagePath(configPath);
-        Assert.AreEqual(Path.Combine(TestContext.CurrentContext.TestDirectory, @"Fody\repositoryPathValue"), packagesPathFromConfig);
+        Assert.Equal(Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\repositoryPathValue"), packagesPathFromConfig);
     }
 
-    [Test]
+    [Fact]
     public void NugetConfigWithPlaceholderRemovesToken()
     {
-        var configPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fody/NugetConfigWithPlaceholder.txt");
+        var configPath = Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/NugetConfigWithPlaceholder.txt");
         var packagesPathFromConfig = NugetConfigReader.GetPackagePath(configPath);
-        Assert.False(packagesPathFromConfig.Contains("$"));
+        Assert.DoesNotContain("$", packagesPathFromConfig);
     }
 
-    [Test]
+    [Fact]
     public void NugetConfigWithPlaceholderUsesDirectory()
     {
-        var configPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "Fody/NugetConfigWithPlaceholder.txt");
+        var configPath = Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/NugetConfigWithPlaceholder.txt");
         var packagesPathFromConfig = NugetConfigReader.GetPackagePath(configPath);
-        Assert.AreEqual(Path.Combine(TestContext.CurrentContext.TestDirectory, @"Fody\Packages"), packagesPathFromConfig);
+        Assert.Equal(Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\Packages"), packagesPathFromConfig);
     }
 }

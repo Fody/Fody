@@ -1,20 +1,19 @@
 using System;
 using System.IO;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class WeaversHistoryTests
+public class WeaversHistoryTests : TestBase
 {
-    [Test]
+    [Fact]
     public void AddNewFile()
     {
         var fileName = Path.GetTempFileName();
         try
         {
             var hasChanged = WeaversHistory.HasChanged(new[] {fileName});
-            Assert.IsFalse(hasChanged);
-            Assert.AreEqual(fileName, WeaversHistory.TimeStamps.First().Key);
+            Assert.False(hasChanged);
+            Assert.Equal(fileName, WeaversHistory.TimeStamps.First().Key);
         }
         finally
         {
@@ -23,7 +22,7 @@ public class WeaversHistoryTests
         }
     }
 
-    [Test]
+    [Fact]
     public void Changed()
     {
         var fileName = Path.GetTempFileName();
@@ -32,7 +31,7 @@ public class WeaversHistoryTests
             WeaversHistory.HasChanged(new[] {fileName});
             File.SetLastWriteTimeUtc(fileName, DateTime.Now.AddHours(1));
             var hasChanged = WeaversHistory.HasChanged(new[] {fileName});
-            Assert.IsTrue(hasChanged);
+            Assert.True(hasChanged);
         }
         finally
         {
@@ -41,7 +40,7 @@ public class WeaversHistoryTests
         }
     }
 
-    [Test]
+    [Fact]
     public void Same()
     {
         var fileName = Path.GetTempFileName();
@@ -50,7 +49,7 @@ public class WeaversHistoryTests
             WeaversHistory.HasChanged(new[] { fileName });
 
             var hasChanged = WeaversHistory.HasChanged(new[] { fileName });
-            Assert.IsFalse(hasChanged);
+            Assert.False(hasChanged);
         }
         finally
         {

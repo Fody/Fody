@@ -1,19 +1,18 @@
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class TypeFinderTest
+public class TypeFinderTest : TestBase
 {
-    [Test]
+    [Fact]
     public void Valid()
     {
         var assembly = typeof(InnerWeaver).Assembly;
         assembly.FindType("ModuleReader");
     }
 
-    [Test]
+    [Fact]
     public void NoTypeInAssembly()
     {
         var assembly = GetType().Assembly;
-        Assert.IsNull(assembly.FindType("ModuleWeaver"));
+        Assert.Null(assembly.FindType("ModuleWeaver"));
     }
 }

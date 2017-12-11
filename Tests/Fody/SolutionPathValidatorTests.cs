@@ -1,12 +1,11 @@
 using System;
 using System.IO;
 using Moq;
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class SolutionPathValidatorTests
+public class SolutionPathValidatorTests : TestBase
 {
-    [Test]
+    [Fact]
     public void Valid()
     {
         var loggerMock = new Mock<BuildLogger>();
@@ -23,16 +22,20 @@ public class SolutionPathValidatorTests
         loggerMock.Verify();
     }
 
-    [Test]
+    [Fact]
     public void InValid()
     {
-        Assert.Throws<WeavingException>(() =>
+        Action paramName = () =>
         {
             var processor = new Processor
             {
                 SolutionDirectory = "aString"
             };
             processor.ValidateSolutionPath();
-        }, $"SolutionDir \"{Path.GetFullPath("baddir")}aString\" does not exist.");
+        };
+#pragma warning disable xUnit2015 // Do not use typeof expression to check the exception type
+        var exception = Assert.Throws(typeof(WeavingException), paramName);
+#pragma warning restore xUnit2015 // Do not use typeof expression to check the exception type
+        Assert.Equal($"SolutionDir \"{Path.GetFullPath("aString")}\" does not exist.", exception.Message);
     }
 }
