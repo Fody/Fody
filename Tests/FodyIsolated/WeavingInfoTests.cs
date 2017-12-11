@@ -32,8 +32,8 @@ public class WeavingInfoTests
                 new WeaverEntry
                 {
                     TypeName = "FakeModuleWeaver",
-                    AssemblyName = "FodyIsolated.Tests",
-                    AssemblyPath = TestContext.CurrentContext.TestDirectory + "\\FodyIsolated.Tests.dll"
+                    AssemblyName = "Tests",
+                    AssemblyPath = TestContext.CurrentContext.TestDirectory + "\\Tests.dll"
                 }
             }
         };
@@ -43,7 +43,7 @@ public class WeavingInfoTests
         {
             var type = readModule.Types
                 .Single(_ => _.Name == "ProcessedByFody");
-            Assert.IsTrue(type.Fields.Any(f => f.Name == "FodyIsolatedTests"));
+            Assert.IsTrue(type.Fields.Any(f => f.Name == "Tests"));
         }
     }
 }

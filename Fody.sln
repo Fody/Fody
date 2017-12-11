@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyIsolated", "FodyIsolated\FodyIsolated.csproj", "{89681581-A390-4761-9C27-1F274FE506E7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyIsolated.Tests", "FodyIsolated.Tests\FodyIsolated.Tests.csproj", "{1C314DBE-A36D-422A-A25C-5B9402CE4F5B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyCommon", "FodyCommon\FodyCommon.csproj", "{E839A346-8804-4EAC-B635-19D7A911460E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyCommon.Tests", "FodyCommon.Tests\FodyCommon.Tests.csproj", "{C66C8111-BE64-4899-BD7C-688A9ED3A62F}"
@@ -71,16 +69,6 @@ Global
 		{89681581-A390-4761-9C27-1F274FE506E7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{89681581-A390-4761-9C27-1F274FE506E7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{89681581-A390-4761-9C27-1F274FE506E7}.Release|x86.ActiveCfg = Release|Any CPU
-		{1C314DBE-A36D-422A-A25C-5B9402CE4F5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C314DBE-A36D-422A-A25C-5B9402CE4F5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1C314DBE-A36D-422A-A25C-5B9402CE4F5B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{1C314DBE-A36D-422A-A25C-5B9402CE4F5B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{1C314DBE-A36D-422A-A25C-5B9402CE4F5B}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{1C314DBE-A36D-422A-A25C-5B9402CE4F5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1C314DBE-A36D-422A-A25C-5B9402CE4F5B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1C314DBE-A36D-422A-A25C-5B9402CE4F5B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{1C314DBE-A36D-422A-A25C-5B9402CE4F5B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{1C314DBE-A36D-422A-A25C-5B9402CE4F5B}.Release|x86.ActiveCfg = Release|Any CPU
 		{E839A346-8804-4EAC-B635-19D7A911460E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E839A346-8804-4EAC-B635-19D7A911460E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E839A346-8804-4EAC-B635-19D7A911460E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
