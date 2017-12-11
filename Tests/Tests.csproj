@@ -30,73 +30,71 @@
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" />
     <ProjectReference Include="..\Fody\Fody.csproj" />
     <ProjectReference Include="..\SampleWeaver.Fody\SampleWeaver.Fody.csproj" />
-    <Content Include="NugetConfigWithKeyNodeEmpty.txt">
+    <Content Include="Fody\NugetConfigWithKeyNodeEmpty.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="NugetConfigWithPlaceholder.txt">
+    <Content Include="Fody\NugetConfigWithPlaceholder.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="NugetConfigWithRepoNodeEmpty.txt">
+    <Content Include="Fody\NugetConfigWithRepoNodeEmpty.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="NugetConfigWithKeyNode.txt">
+    <Content Include="Fody\NugetConfigWithKeyNode.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="NugetConfigWithRepoNode.txt">
+    <Content Include="Fody\NugetConfigWithRepoNode.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="FakeNuGetPackageRoot\Weaver1.Fody\1.0.7\Weaver1.Fody.dll" />
-    <Content Include="FakeNuGetPackageRoot\Weaver1.Fody\1.0.8\Weaver1.Fody.dll" />
-    <Content Include="FakeNuGetPackageRoot\Weaver2.Fody\2.0.7\Weaver2.Fody.dll" />
-    <Content Include="FakeNuGetPackageRoot\Weaver2.Fody\2.0.8\Weaver2.Fody.dll" />
-    <Content Include="NugetPackagePathFinder\FakeSolutionNoNugetConfig\placeholder.txt" />
-    <Content Include="PeVerifierTests_NoVerifyIgnoreCodes.xml">
+    <Content Include="Fody\FakeNuGetPackageRoot\Weaver1.Fody\1.0.7\Weaver1.Fody.dll" />
+    <Content Include="Fody\FakeNuGetPackageRoot\Weaver1.Fody\1.0.8\Weaver1.Fody.dll" />
+    <Content Include="Fody\FakeNuGetPackageRoot\Weaver2.Fody\2.0.7\Weaver2.Fody.dll" />
+    <Content Include="Fody\FakeNuGetPackageRoot\Weaver2.Fody\2.0.8\Weaver2.Fody.dll" />
+    <Content Include="Fody\NugetPackagePathFinder\FakeSolutionNoNugetConfig\placeholder.txt" />
+    <Content Include="Fody\PeVerifierTests_NoVerifyIgnoreCodes.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="PeVerifierTests_VerifyIgnoreCodes_Multiple.xml">
+    <Content Include="Fody\PeVerifierTests_VerifyIgnoreCodes_Multiple.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="PeVerifierTests_VerifyIgnoreCodes_Single.xml">
+    <Content Include="Fody\PeVerifierTests_VerifyIgnoreCodes_Single.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="PeVerifierTests_WithFalseVerifyAssembly.xml">
+    <Content Include="Fody\PeVerifierTests_WithFalseVerifyAssembly.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="PeVerifierTests_WithTrueVerifyAssembly.xml">
+    <Content Include="Fody\PeVerifierTests_WithTrueVerifyAssembly.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="PeVerifierTests_NoVerifyAssembly.xml">
+    <Content Include="Fody\PeVerifierTests_NoVerifyAssembly.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="NugetPackagePathFinder\FakeSolutionWithNestedNugetConfig\.nuget\nuget.config" />
-    <None Include="NugetPackagePathFinder\FakeSolutionWithNugetConfig\nuget.config" />
-    <Folder Include="WeaversProjectFileFinder\WithNoWeaver\Weavers\" />
-    <Content Include="BadAssembly.dll">
+    <None Include="Fody\NugetPackagePathFinder\FakeSolutionWithNestedNugetConfig\.nuget\nuget.config" />
+    <Content Include="Fody\BadAssembly.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProjectWeaversReaderTests\FodyWeavers1.xml">
+    <Content Include="Fody\ProjectWeaversReaderTests\FodyWeavers1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProjectWeaversReaderTests\FodyWeavers2.xml">
+    <Content Include="Fody\ProjectWeaversReaderTests\FodyWeavers2.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ProjectWeaversReaderTests\FodyWeavers3.xml">
+    <Content Include="Fody\ProjectWeaversReaderTests\FodyWeavers3.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Packages\SampleWeaver.Fody.1.0.0.0\SampleWeaver.Fody.dll">
+    <Content Include="Fody\Packages\SampleWeaver.Fody.1.0.0.0\SampleWeaver.Fody.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <InProject>false</InProject>
     </Content>
-    <Content Include="Solution\SearchPath1\TextFile1.txt">
+    <Content Include="Fody\Solution\SearchPath1\TextFile1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Solution\SearchPath2\TextFile1.txt">
+    <Content Include="Fody\Solution\SearchPath2\TextFile1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Solution\Tools\TextFile1.txt">
+    <Content Include="Fody\Solution\Tools\TextFile1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="WeaversProjectFileFinder\WithWeaver\Weavers\bin\Debug\Weavers.dll" />
+    <Content Include="Fody\WeaversProjectFileFinder\WithWeaver\Weavers\bin\Debug\Weavers.dll" />
   </ItemGroup>
 </Project>

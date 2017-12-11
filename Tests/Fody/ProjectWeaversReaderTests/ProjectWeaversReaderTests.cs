@@ -27,8 +27,8 @@ public class ProjectWeaversReaderTests
     static IEnumerable<string> GetPaths()
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory;
-        yield return Path.Combine(currentDirectory, @"ProjectWeaversReaderTests\FodyWeavers1.xml");
-        yield return Path.Combine(currentDirectory, @"ProjectWeaversReaderTests\FodyWeavers2.xml");
-        yield return Path.Combine(currentDirectory, @"ProjectWeaversReaderTests\FodyWeavers3.xml");
+        yield return Path.Combine(currentDirectory, @"Fody\ProjectWeaversReaderTests\FodyWeavers1.xml");
+        yield return Path.Combine(currentDirectory, @"Fody\ProjectWeaversReaderTests\FodyWeavers2.xml");
+        yield return Path.Combine(currentDirectory, @"Fody\ProjectWeaversReaderTests\FodyWeavers3.xml");
     }
 }
