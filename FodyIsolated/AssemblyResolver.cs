@@ -12,11 +12,16 @@ public class AssemblyResolver : IAssemblyResolver
     List<string> splitReferences;
     Dictionary<string, AssemblyDefinition> assemblyDefinitionCache = new Dictionary<string, AssemblyDefinition>(StringComparer.InvariantCultureIgnoreCase);
 
-    public AssemblyResolver(Dictionary<string, string> referenceDictionary, ILogger logger, List<string> splitReferences)
+    public AssemblyResolver(ILogger logger, List<string> splitReferences)
     {
-        this.referenceDictionary = referenceDictionary;
+        this.referenceDictionary = new Dictionary<string, string>();
         this.logger = logger;
         this.splitReferences = splitReferences;
+
+        foreach (var filePath in splitReferences)
+        {
+            this.referenceDictionary[Path.GetFileNameWithoutExtension(filePath)] = filePath;
+        }
     }
 
     AssemblyDefinition GetAssembly(string file, ReaderParameters parameters)
@@ -56,11 +61,6 @@ public class AssemblyResolver : IAssemblyResolver
             return GetAssembly(fileFromDerivedReferences, parameters);
         }
 
-        return TryToReadFromDirs(assemblyNameReference, parameters);
-    }
-
-    AssemblyDefinition TryToReadFromDirs(AssemblyNameReference assemblyNameReference, ReaderParameters parameters)
-    {
         var joinedReferences = string.Join(Environment.NewLine, splitReferences.OrderBy(x => x));
         logger.LogDebug($"Can't find '{assemblyNameReference.FullName}'.{Environment.NewLine}Tried:{Environment.NewLine}{joinedReferences}");
         return null;

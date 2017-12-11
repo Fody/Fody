@@ -80,7 +80,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         {
             SplitUpReferences();
             GetSymbolProviders();
-            assemblyResolver = new AssemblyResolver(ReferenceDictionary, Logger, SplitReferences);
+            assemblyResolver = new AssemblyResolver(Logger, SplitReferences);
             ReadModule();
             AppDomain.CurrentDomain.AssemblyResolve += assemblyResolve;
             InitialiseWeavers();

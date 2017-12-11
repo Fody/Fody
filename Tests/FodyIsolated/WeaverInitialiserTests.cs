@@ -22,10 +22,6 @@ public class WeaverInitialiserTests
             ProjectDirectoryPath = "ProjectDirectoryPath",
             SolutionDirectoryPath = "SolutionDirectoryPath",
             DocumentationFilePath = "DocumentationFilePath",
-            ReferenceDictionary = new Dictionary<string, string>
-            {
-                {"Ref1;Ref2", "Path1"}
-            },
             ReferenceCopyLocalPaths = new List<string>
             {
                 "CopyRef1",
@@ -40,6 +36,7 @@ public class WeaverInitialiserTests
             },
             assemblyResolver = resolver
         };
+        innerWeaver.SplitUpReferences();
 
         var weaverEntry = new WeaverEntry
         {
