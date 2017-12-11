@@ -1,10 +1,9 @@
 using Moq;
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class FileChangedCheckerTests
+public class FileChangedCheckerTests : TestBase
 {
-    [Test]
+    [Fact]
     public void Simple()
     {
         var processor = new Processor
@@ -13,6 +12,6 @@ public class FileChangedCheckerTests
                 Logger = new Mock<BuildLogger>().Object,
                 AssemblyFilePath = GetType().Assembly.Location
             };
-        Assert.IsTrue(processor.ShouldStartSinceFileChanged());
+        Assert.True(processor.ShouldStartSinceFileChanged());
     }
 }

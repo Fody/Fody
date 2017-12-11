@@ -1,13 +1,12 @@
 using System.IO;
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class AssemblyVersionReaderTests
+public class AssemblyVersionReaderTests : TestBase
 {
-    [Test]
+    [Fact]
     public void BadImage()
     {
-        var path = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Fody\BadAssembly.dll");
+        var path = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\BadAssembly.dll");
         Assert.Throws<WeavingException>(() =>
         {
             AssemblyVersionReader.GetAssemblyVersion(path);

@@ -4,12 +4,11 @@ using System.Xml.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Moq;
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class WeaverInitialiserTests
+public class WeaverInitialiserTests : TestBase
 {
-    [Test]
+    [Fact]
     public void ValidProps()
     {
         var moduleDefinition = ModuleDefinition.CreateModule("Foo", ModuleKind.Dll);
@@ -46,27 +45,27 @@ public class WeaverInitialiserTests
         var moduleWeaver = new ValidModuleWeaver();
         innerWeaver.SetProperties(weaverEntry, moduleWeaver, typeof(ValidModuleWeaver).BuildDelegateHolder());
 
-        Assert.IsNotNull(moduleWeaver.LogDebug);
-        Assert.IsNotNull(moduleWeaver.LogInfo);
-        Assert.IsNotNull(moduleWeaver.LogWarning);
-        Assert.IsNotNull(moduleWeaver.LogWarningPoint);
-        Assert.IsNotNull(moduleWeaver.LogError);
-        Assert.IsNotNull(moduleWeaver.LogErrorPoint);
-        Assert.IsNotNull(moduleWeaver.LogMessage);
-        Assert.AreEqual("Ref1;Ref2", moduleWeaver.References);
-        Assert.AreEqual("CopyRef1", moduleWeaver.ReferenceCopyLocalPaths[0]);
-        Assert.AreEqual("CopyRef2", moduleWeaver.ReferenceCopyLocalPaths[1]);
-        Assert.AreEqual("Debug", moduleWeaver.DefineConstants[0]);
-        Assert.AreEqual("Release", moduleWeaver.DefineConstants[1]);
+        Assert.NotNull(moduleWeaver.LogDebug);
+        Assert.NotNull(moduleWeaver.LogInfo);
+        Assert.NotNull(moduleWeaver.LogWarning);
+        Assert.NotNull(moduleWeaver.LogWarningPoint);
+        Assert.NotNull(moduleWeaver.LogError);
+        Assert.NotNull(moduleWeaver.LogErrorPoint);
+        Assert.NotNull(moduleWeaver.LogMessage);
+        Assert.Equal("Ref1;Ref2", moduleWeaver.References);
+        Assert.Equal("CopyRef1", moduleWeaver.ReferenceCopyLocalPaths[0]);
+        Assert.Equal("CopyRef2", moduleWeaver.ReferenceCopyLocalPaths[1]);
+        Assert.Equal("Debug", moduleWeaver.DefineConstants[0]);
+        Assert.Equal("Release", moduleWeaver.DefineConstants[1]);
 
         // Assert.IsNotEmpty(moduleWeaver.References);
-        Assert.AreEqual(moduleDefinition, moduleWeaver.ModuleDefinition);
-        Assert.AreEqual(resolver, moduleWeaver.AssemblyResolver);
-        Assert.AreEqual(@"c:\FakePath", moduleWeaver.AddinDirectoryPath);
-        Assert.AreEqual("AssemblyFilePath", moduleWeaver.AssemblyFilePath);
-        Assert.AreEqual("ProjectDirectoryPath", moduleWeaver.ProjectDirectoryPath);
-        Assert.AreEqual("SolutionDirectoryPath", moduleWeaver.SolutionDirectoryPath);
-        Assert.AreEqual("DocumentationFilePath", moduleWeaver.DocumentationFilePath);
+        Assert.Equal(moduleDefinition, moduleWeaver.ModuleDefinition);
+        Assert.Equal(resolver, moduleWeaver.AssemblyResolver);
+        Assert.Equal(@"c:\FakePath", moduleWeaver.AddinDirectoryPath);
+        Assert.Equal("AssemblyFilePath", moduleWeaver.AssemblyFilePath);
+        Assert.Equal("ProjectDirectoryPath", moduleWeaver.ProjectDirectoryPath);
+        Assert.Equal("SolutionDirectoryPath", moduleWeaver.SolutionDirectoryPath);
+        Assert.Equal("DocumentationFilePath", moduleWeaver.DocumentationFilePath);
     }
 }
 

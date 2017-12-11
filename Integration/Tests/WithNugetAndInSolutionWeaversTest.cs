@@ -1,8 +1,7 @@
 ﻿using System;
-using NUnit.Framework;
+using Xunit;
 using WithNugetAndInSolutionWeavers;
 
-[TestFixture]
 public class WithNugetAndInSolutionWeaversTest
 {
     [Test]

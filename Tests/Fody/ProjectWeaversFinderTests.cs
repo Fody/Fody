@@ -1,21 +1,20 @@
 using System.IO;
 using ApprovalTests;
 using Moq;
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class ProjectWeaversFinderTests
+public class ProjectWeaversFinderTests : TestBase
 {
-    [Test]
+    [Fact]
     public void NotFound()
     {
         var loggerMock = new Mock<BuildLogger>();
         loggerMock.Setup(x => x.LogDebug(It.IsAny<string>()));
         var logger = loggerMock.Object;
-        var testDirectory = TestContext.CurrentContext.TestDirectory;
-        var searchDirectory = Path.Combine(testDirectory, "FodyWeavers.xml");
+        var searchDirectory = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyWeavers.xml");
 
-        var weavingException = Assert.Throws<WeavingException>(() => ConfigFileFinder.FindWeaverConfigs(testDirectory, testDirectory, logger));
+        var weavingException = Assert.Throws<WeavingException>(
+            () => ConfigFileFinder.FindWeaverConfigs(AssemblyLocation.CurrentDirectory, AssemblyLocation.CurrentDirectory, logger));
         Approvals.Verify(weavingException.Message.Replace(searchDirectory, "SearchDirectory"));
     }
 }

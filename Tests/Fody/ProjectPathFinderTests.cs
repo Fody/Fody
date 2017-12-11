@@ -1,9 +1,8 @@
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class ProjectPathFinderTests
+public class ProjectPathFinderTests : TestBase
 {
-    [Test]
+    [Fact]
     public void Execute()
     {
     }

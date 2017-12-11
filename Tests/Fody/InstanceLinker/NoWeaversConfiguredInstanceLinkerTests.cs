@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Moq;
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class NoWeaversConfiguredInstanceLinkerTests
+public class NoWeaversConfiguredInstanceLinkerTests : TestBase
 {
-    [Test]
+    [Fact]
     public void Should_add_weavers_project_When_weavers_project_found_and_not_used_by_configured_weavers()
     {
         var mock = new Mock<Processor>();
@@ -23,7 +22,7 @@ public class NoWeaversConfiguredInstanceLinkerTests
         processor.ConfigureWhenNoWeaversFound();
 
         var weaverEntry = processor.Weavers.First();
-        Assert.AreEqual("ModuleWeaver",weaverEntry.TypeName);
-        Assert.AreEqual("Path",weaverEntry.AssemblyPath);
+        Assert.Equal("ModuleWeaver",weaverEntry.TypeName);
+        Assert.Equal("Path",weaverEntry.AssemblyPath);
     }
 }

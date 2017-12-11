@@ -1,15 +1,14 @@
 using System.IO;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 using ObjectApproval;
 
-[TestFixture]
-public class NuGetPackageRootTest
+public class NuGetPackageRootTest : TestBase
 {
-    [Test]
+    [Fact]
     public void WithNuGetPackageRoot()
     {
-        var combine = Path.GetFullPath(Path.Combine(TestContext.CurrentContext.TestDirectory, "../../../Fody/FakeNuGetPackageRoot"));
+        var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "../../../Fody/FakeNuGetPackageRoot"));
         var nuGetPackageRoot = Path.GetFullPath(combine);
         var result = AddinFinder.ScanNuGetPackageRoot(nuGetPackageRoot)
             .Select(s=>s.Replace(@"\\", @"\").Replace(combine, "")).ToList();

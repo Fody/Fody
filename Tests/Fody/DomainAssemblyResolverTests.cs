@@ -1,11 +1,10 @@
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class DomainAssemblyResolverTests
+public class DomainAssemblyResolverTests : TestBase
 {
-    [Test]
+    [Fact]
     public void GetAssembly()
     {
-        Assert.IsNotNull( DomainAssemblyResolver.GetAssembly(GetType().Assembly.GetName().FullName));
+        Assert.NotNull(DomainAssemblyResolver.GetAssembly(GetType().Assembly.GetName().FullName));
     }
 }

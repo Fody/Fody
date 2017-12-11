@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
-[TestFixture]
-public class ProjectWeaversReaderTests
+public class ProjectWeaversReaderTests : TestBase
 {
-    [Test]
+    [Fact]
     public void Simple()
     {
         var processor = new Processor
@@ -15,13 +14,13 @@ public class ProjectWeaversReaderTests
                         };
         processor.ReadProjectWeavers();
         var weavers = processor.Weavers;
-        Assert.AreEqual(3, weavers.Count);
-        Assert.AreEqual("SampleTask1", weavers[0].AssemblyName);
-        Assert.AreEqual("<SampleTask1 MyProperty1=\"PropertyValue2Overwrite\" />", weavers[0].Element);
-        Assert.AreEqual("SampleTask2", weavers[1].AssemblyName);
-        Assert.AreEqual("<SampleTask2 MyProperty2=\"PropertyValue2\" />", weavers[1].Element);
-        Assert.AreEqual("SampleTask3", weavers[2].AssemblyName);
-        Assert.AreEqual("<SampleTask3 MyProperty3=\"PropertyValue3\" />", weavers[2].Element);
+        Assert.Equal(3, weavers.Count);
+        Assert.Equal("SampleTask1", weavers[0].AssemblyName);
+        Assert.Equal("<SampleTask1 MyProperty1=\"PropertyValue2Overwrite\" />", weavers[0].Element);
+        Assert.Equal("SampleTask2", weavers[1].AssemblyName);
+        Assert.Equal("<SampleTask2 MyProperty2=\"PropertyValue2\" />", weavers[1].Element);
+        Assert.Equal("SampleTask3", weavers[2].AssemblyName);
+        Assert.Equal("<SampleTask3 MyProperty3=\"PropertyValue3\" />", weavers[2].Element);
     }
 
     static IEnumerable<string> GetPaths()
