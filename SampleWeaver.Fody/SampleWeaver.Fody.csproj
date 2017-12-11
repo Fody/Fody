@@ -19,6 +19,6 @@
     </Reference>
   </ItemGroup>
   <Target Name="CopyForIntegration" AfterTargets="AfterBuild">
-     <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(SolutionDir)Fody.Tests\Packages\SampleWeaver.Fody.1.0.0.0\SampleWeaver.Fody.dll" />
+     <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(SolutionDir)Tests\Packages\SampleWeaver.Fody.1.0.0.0\SampleWeaver.Fody.dll" />
   </Target>
 </Project>

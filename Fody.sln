@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fody", "Fody\Fody.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWeaver.Fody", "SampleWeaver.Fody\SampleWeaver.Fody.csproj", "{2C10CBD1-5913-46D5-B705-0F3B46E68DD1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fody.Tests", "Fody.Tests\Fody.Tests.csproj", "{2AFCC073-136D-4FF3-AC83-BE94B35A4C7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{2AFCC073-136D-4FF3-AC83-BE94B35A4C7B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyIsolated", "FodyIsolated\FodyIsolated.csproj", "{89681581-A390-4761-9C27-1F274FE506E7}"
 EndProject
