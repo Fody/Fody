@@ -61,46 +61,9 @@ public class AssemblyResolver : IAssemblyResolver
 
     AssemblyDefinition TryToReadFromDirs(AssemblyNameReference assemblyNameReference, ReaderParameters parameters)
     {
-        var filesWithMatchingName = SearchDirForMatchingName(assemblyNameReference).ToList();
-        foreach (var filePath in filesWithMatchingName)
-        {
-            var assemblyName = AssemblyName.GetAssemblyName(filePath);
-            if (assemblyNameReference.Version == null || assemblyName.Version == assemblyNameReference.Version)
-            {
-                return GetAssembly(filePath, parameters);
-            }
-        }
-        foreach (var filePath in filesWithMatchingName.OrderByDescending(s => AssemblyName.GetAssemblyName(s).Version))
-        {
-            return GetAssembly(filePath, parameters);
-        }
-
         var joinedReferences = string.Join(Environment.NewLine, splitReferences.OrderBy(x => x));
-        logger.LogDebug(string.Format("Can not find '{0}'.{1}Tried:{1}{2}", assemblyNameReference.FullName, Environment.NewLine, joinedReferences));
+        logger.LogDebug($"Can't find '{assemblyNameReference.FullName}'.{Environment.NewLine}Tried:{Environment.NewLine}{joinedReferences}");
         return null;
-    }
-
-    IEnumerable<string> SearchDirForMatchingName(AssemblyNameReference assemblyNameReference)
-    {
-        var fileName = assemblyNameReference.Name + ".dll";
-        return referenceDictionary.Values
-            .Select(x => Path.Combine(Path.GetDirectoryName(x), fileName))
-            .Where(File.Exists);
-    }
-
-    public AssemblyDefinition Resolve(string fullName)
-    {
-        return Resolve(AssemblyNameReference.Parse(fullName));
-    }
-
-    public AssemblyDefinition Resolve(string fullName, ReaderParameters parameters)
-    {
-        if (fullName == null)
-        {
-            throw new ArgumentNullException(nameof(fullName));
-        }
-
-        return Resolve(AssemblyNameReference.Parse(fullName), parameters);
     }
 
     public void Dispose()
