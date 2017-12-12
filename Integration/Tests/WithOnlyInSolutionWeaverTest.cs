@@ -3,9 +3,9 @@ using Xunit;
 
 public class WithOnlyInSolutionWeaverTest
 {
-    [Test]
+    [Fact]
     public void EnsureTypeInjectedByModuleWeaver()
     {
-        Assert.IsNotNull(Type.GetType("Weavers.TypeInjectedByModuleWeaver, WithOnlyInSolutionWeaver"));
+        Assert.NotNull(Type.GetType("Weavers.TypeInjectedByModuleWeaver, WithOnlyInSolutionWeaver"));
     }
 }
