@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using Mono.Cecil;
 
 public class AssemblyResolver : IAssemblyResolver
@@ -12,15 +11,19 @@ public class AssemblyResolver : IAssemblyResolver
     List<string> splitReferences;
     Dictionary<string, AssemblyDefinition> assemblyDefinitionCache = new Dictionary<string, AssemblyDefinition>(StringComparer.InvariantCultureIgnoreCase);
 
+    public AssemblyResolver()
+    {
+    }
+
     public AssemblyResolver(ILogger logger, List<string> splitReferences)
     {
-        this.referenceDictionary = new Dictionary<string, string>();
+        referenceDictionary = new Dictionary<string, string>();
         this.logger = logger;
         this.splitReferences = splitReferences;
 
         foreach (var filePath in splitReferences)
         {
-            this.referenceDictionary[Path.GetFileNameWithoutExtension(filePath)] = filePath;
+            referenceDictionary[Path.GetFileNameWithoutExtension(filePath)] = filePath;
         }
     }
 
@@ -44,12 +47,17 @@ public class AssemblyResolver : IAssemblyResolver
         }
     }
 
-    public AssemblyDefinition Resolve(AssemblyNameReference assemblyNameReference)
+    public virtual AssemblyDefinition Resolve(string assemblyName)
+    {
+        return Resolve(new AssemblyNameReference(assemblyName, null));
+    }
+
+    public virtual AssemblyDefinition Resolve(AssemblyNameReference assemblyNameReference)
     {
         return Resolve(assemblyNameReference, new ReaderParameters());
     }
 
-    public AssemblyDefinition Resolve(AssemblyNameReference assemblyNameReference, ReaderParameters parameters)
+    public virtual AssemblyDefinition Resolve(AssemblyNameReference assemblyNameReference, ReaderParameters parameters)
     {
         if (parameters == null)
         {
@@ -66,7 +74,7 @@ public class AssemblyResolver : IAssemblyResolver
         return null;
     }
 
-    public void Dispose()
+    public virtual void Dispose()
     {
         foreach (var value in assemblyDefinitionCache.Values)
         {

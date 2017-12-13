@@ -1,4 +1,6 @@
-﻿public interface ILogger
+﻿using Fody;
+
+public interface ILogger
 {
     void SetCurrentWeaverName(string weaverName);
     void ClearWeaverName();

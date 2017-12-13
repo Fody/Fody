@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>FodyHelper</id>
+    <version>$version$</version>
+    <title>FodyHelper</title>
+    <authors>Simon Cropp</authors>
+    <owners>Simon Cropp</owners>
+    <developmentDependency>true</developmentDependency>
+    <licenseUrl>https://github.com/jbevain/cecil/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>http://github.com/Fody/Fody</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>https://raw.github.com/Fody/Fody/master/Icons/package_icon.png</iconUrl>
+    <description>Helpers for Fody.</description>
+    <summary />
+    <language>en-AU</language>
+    <tags>ILWeaving, Fody, Cecil, AOP</tags>
+  </metadata>
+</package>

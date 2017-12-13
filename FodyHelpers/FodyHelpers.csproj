@@ -4,25 +4,23 @@
     <TargetFrameworks>net452;netstandard2.0</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
-    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\net40\Mono.Cecil.dll" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <PackageReference Include="Microsoft.Build" Version="15.*" />
-    <PackageReference Include="Microsoft.Build.Framework" Version="15.*" />
     <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\netstandard1.3\Mono.Cecil.dll" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs" />
   </ItemGroup>
-  <Target Name="CopyForIntegration" AfterTargets="AfterBuild">
+  <Target Name="CopyForIntegration" AfterTargets="AfterBuild" Condition=" '$(TargetFramework)' == 'net452' ">
     <MakeDir Directories="$(SolutionDir)ForIntegration" />
     <Copy SourceFiles="$(TargetDir)FodyHelpers.dll" DestinationFolder="$(SolutionDir)ForIntegration" />
-    <Copy SourceFiles="$(TargetDir)FodyHelpers.pdb" DestinationFolder="$(SolutionDir)ForIntegration" Condition="Exists('$(TargetDir)FodyCommon.pdb')" />
+    <Copy SourceFiles="$(TargetDir)FodyHelpers.pdb" DestinationFolder="$(SolutionDir)ForIntegration" />
   </Target>
 </Project>

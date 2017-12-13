@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
+using Fody;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 using Moq;
@@ -14,7 +16,48 @@ public class WeaverInitialiserTests : TestBase
         var moduleDefinition = ModuleDefinition.CreateModule("Foo", ModuleKind.Dll);
 
         var resolver = new MockAssemblyResolver();
-        var innerWeaver = new InnerWeaver
+        var innerWeaver = BuildInnerWeaver(moduleDefinition, resolver);
+        innerWeaver.SplitUpReferences();
+
+        var weaverEntry = new WeaverEntry
+        {
+            Element = "<foo/>",
+            AssemblyPath = @"c:\FakePath\Assembly.dll"
+        };
+        var moduleWeaver = new ValidModuleWeaver();
+        innerWeaver.SetProperties(weaverEntry, moduleWeaver, typeof(ValidModuleWeaver).BuildDelegateHolder());
+
+        ValidateProps(moduleWeaver, moduleDefinition);
+        Assert.Equal(resolver, moduleWeaver.AssemblyResolver);
+    }
+
+    [Fact]
+    public void ValidPropsFromBase()
+    {
+        var moduleDefinition = ModuleDefinition.CreateModule("Foo", ModuleKind.Dll);
+
+        var resolver = new MockAssemblyResolver();
+        var innerWeaver = BuildInnerWeaver(moduleDefinition, resolver);
+        innerWeaver.SplitUpReferences();
+
+        var weaverEntry = new WeaverEntry
+        {
+            Element = "<foo/>",
+            AssemblyPath = @"c:\FakePath\Assembly.dll"
+        };
+        var moduleWeaver = new ValidFromBaseModuleWeaver();
+        innerWeaver.SetProperties(weaverEntry, moduleWeaver, typeof(ValidFromBaseModuleWeaver).BuildDelegateHolder());
+
+        ValidateProps(moduleWeaver, moduleDefinition);
+        Assert.Null(((dynamic)moduleWeaver).AssemblyResolver);
+        Assert.NotNull(moduleWeaver.FindType);
+        Assert.NotNull(moduleWeaver.ResolveAssembly);
+    }
+
+
+    static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, MockAssemblyResolver resolver)
+    {
+        return new InnerWeaver
         {
             Logger = new Mock<ILogger>().Object,
             AssemblyFilePath = "AssemblyFilePath",
@@ -35,16 +78,10 @@ public class WeaverInitialiserTests : TestBase
             },
             assemblyResolver = resolver
         };
-        innerWeaver.SplitUpReferences();
+    }
 
-        var weaverEntry = new WeaverEntry
-        {
-            Element = "<foo/>",
-            AssemblyPath = @"c:\FakePath\Assembly.dll"
-        };
-        var moduleWeaver = new ValidModuleWeaver();
-        innerWeaver.SetProperties(weaverEntry, moduleWeaver, typeof(ValidModuleWeaver).BuildDelegateHolder());
-
+    static void ValidateProps(dynamic moduleWeaver, ModuleDefinition moduleDefinition)
+    {
         Assert.NotNull(moduleWeaver.LogDebug);
         Assert.NotNull(moduleWeaver.LogInfo);
         Assert.NotNull(moduleWeaver.LogWarning);
@@ -60,7 +97,6 @@ public class WeaverInitialiserTests : TestBase
 
         // Assert.IsNotEmpty(moduleWeaver.References);
         Assert.Equal(moduleDefinition, moduleWeaver.ModuleDefinition);
-        Assert.Equal(resolver, moduleWeaver.AssemblyResolver);
         Assert.Equal(@"c:\FakePath", moduleWeaver.AddinDirectoryPath);
         Assert.Equal("AssemblyFilePath", moduleWeaver.AssemblyFilePath);
         Assert.Equal("ProjectDirectoryPath", moduleWeaver.ProjectDirectoryPath);
@@ -99,5 +135,20 @@ public class ValidModuleWeaver
     public void Execute()
     {
         ExecuteCalled = true;
+    }
+}
+
+public class ValidFromBaseModuleWeaver : BaseModuleWeaver
+{
+    public bool ExecuteCalled;
+
+    public override void Execute()
+    {
+        ExecuteCalled = true;
+    }
+
+    public override IEnumerable<string> GetAssembliesForScanning()
+    {
+        return Enumerable.Empty<string>();
     }
 }

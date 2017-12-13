@@ -6,11 +6,13 @@
     <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Mono.Cecil">
       <HintPath>..\Lib\Cecil\net40\Mono.Cecil.dll</HintPath>
     </Reference>
     <Compile Include="..\CommonAssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
   </ItemGroup>
   <Target Name="CopyForIntegration" AfterTargets="AfterBuild">
     <MakeDir Directories="$(SolutionDir)ForIntegration" />

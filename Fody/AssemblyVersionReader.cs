@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using Fody;
 
 public class AssemblyVersionReader
 {

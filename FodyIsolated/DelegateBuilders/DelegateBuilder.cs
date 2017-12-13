@@ -1,11 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
+using Fody;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
 public static class DelegateBuilder
 {
+    public static bool InheritsFromBaseWeaver(this Type weaverType)
+    {
+        return typeof(BaseModuleWeaver).IsAssignableFrom(weaverType);
+    }
+
     public static WeaverDelegate GetDelegateHolderFromCache(this Type weaverType)
     {
         if (!weaverDelegates.TryGetValue(weaverType.TypeHandle, out var @delegate))
@@ -31,23 +37,26 @@ public static class DelegateBuilder
             Cancel = weaverType.BuildCancelDelegate(),
             AfterWeavingExecute = weaverType.BuildAfterWeavingDelegate(),
             SetModuleDefinition = moduleDefinitionDelegate,
-            SetConfig = weaverType.BuildPropertySetDelegate<XElement>("Config"),
-            SetAddinDirectoryPath = weaverType.BuildPropertySetDelegate<string>("AddinDirectoryPath"),
-            SetAssemblyFilePath = weaverType.BuildPropertySetDelegate<string>("AssemblyFilePath"),
-            SetAssemblyResolver = weaverType.BuildPropertySetDelegate<IAssemblyResolver>("AssemblyResolver"),
-            SetLogError = weaverType.BuildPropertySetDelegate<Action<string>>("LogError"),
-            SetLogErrorPoint = weaverType.BuildPropertySetDelegate<Action<string, SequencePoint>>("LogErrorPoint"),
-            SetLogDebug = weaverType.BuildPropertySetDelegate<Action<string>>("LogDebug"),
-            SetLogInfo = weaverType.BuildPropertySetDelegate<Action<string>>("LogInfo"),
-            SetLogMessage = weaverType.BuildPropertySetDelegate<Action<string, MessageImportance>>("LogMessage"),
-            SetLogWarning = weaverType.BuildPropertySetDelegate<Action<string>>("LogWarning"),
-            SetLogWarningPoint = weaverType.BuildPropertySetDelegate<Action<string, SequencePoint>>("LogWarningPoint"),
-            SetReferences = weaverType.BuildPropertySetDelegate<string>("References"),
-            SetReferenceCopyLocalPaths = weaverType.BuildPropertySetDelegate<List<string>>("ReferenceCopyLocalPaths"),
-            SetSolutionDirectoryPath = weaverType.BuildPropertySetDelegate<string>("SolutionDirectoryPath"),
-            SetProjectDirectoryPath = weaverType.BuildPropertySetDelegate<string>("ProjectDirectoryPath"),
-            SetDocumentationFilePath = weaverType.BuildPropertySetDelegate<string>("DocumentationFilePath"),
-            SetDefineConstants = weaverType.BuildPropertySetDelegate<List<string>>("DefineConstants"),
+            SetConfig = weaverType.BuildSetConfig(),
+            SetAddinDirectoryPath = weaverType.BuildSetAddinDirectoryPath(),
+            SetAssemblyFilePath = weaverType.BuildSetAssemblyFilePath(),
+            SetAssemblyResolver = weaverType.BuildSetAssemblyResolver(),
+            SetResolveAssembly = weaverType.BuildSetResolveAssembly(),
+            SetLogError = weaverType.BuildSetLogError(),
+            SetLogErrorPoint = weaverType.BuildSetLogErrorPoint(),
+            SetLogDebug = weaverType.BuildSetLogDebug(),
+            SetLogInfo = weaverType.BuildSetLogInfo(),
+            SetLogMessage = weaverType.BuildSetLogMessage(),
+            SetLogWarning = weaverType.BuildSetLogWarning(),
+            SetLogWarningPoint = weaverType.BuildSetLogWarningPoint(),
+            SetReferences = weaverType.BuildSetReferences(),
+            SetReferenceCopyLocalPaths = weaverType.BuildSetReferenceCopyLocalPaths(),
+            SetSolutionDirectoryPath = weaverType.BuildSetSolutionDirectoryPath(),
+            SetProjectDirectoryPath = weaverType.BuildSetProjectDirectoryPath(),
+            SetDocumentationFilePath = weaverType.BuildSetDocumentationFilePath(),
+            SetDefineConstants = weaverType.BuildSetDefineConstants(),
+            SetFindType = weaverType.BuildSetFindType(),
+            GetAssembliesForScanning = weaverType.BuildGetAssembliesForScanningDelegate(),
             ConstructInstance = weaverType.BuildConstructorDelegate()
         };
     }

@@ -1,17 +1,22 @@
 using Mono.Cecil;
 
-public class MockAssemblyResolver : IAssemblyResolver
+public class MockAssemblyResolver : AssemblyResolver
 {
-    public void Dispose()
+    public override void Dispose()
     {
     }
 
-    public AssemblyDefinition Resolve(AssemblyNameReference name)
+    public override AssemblyDefinition Resolve(string name)
     {
         throw new System.NotImplementedException();
     }
 
-    public AssemblyDefinition Resolve(AssemblyNameReference name, ReaderParameters parameters)
+    public override AssemblyDefinition Resolve(AssemblyNameReference name)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override AssemblyDefinition Resolve(AssemblyNameReference name, ReaderParameters parameters)
     {
         throw new System.NotImplementedException();
     }

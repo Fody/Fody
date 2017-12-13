@@ -1,4 +1,6 @@
 
+using Fody;
+
 public partial class Processor
 {
     public void ConfigureWhenWeaversFound()

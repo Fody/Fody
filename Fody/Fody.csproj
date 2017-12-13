@@ -15,6 +15,7 @@
       <Link>SearchDirectories\NugetConfigReader.cs</Link>
     </Compile>
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
+    <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
   </ItemGroup>
   <Target Name="CopyForIntegration" AfterTargets="AfterBuild">
     <MakeDir Directories="$(SolutionDir)ForIntegration" />

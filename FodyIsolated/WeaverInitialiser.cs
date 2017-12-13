@@ -1,5 +1,6 @@
 using System.IO;
 using System.Xml.Linq;
+using Fody;
 using Mono.Cecil.Cil;
 
 public partial class InnerWeaver
@@ -13,7 +14,6 @@ public partial class InnerWeaver
         }
 
         @delegate.SetModuleDefinition(weaverInstance, ModuleDefinition);
-        @delegate.SetAssemblyResolver(weaverInstance, assemblyResolver);
         @delegate.SetAssemblyFilePath(weaverInstance, AssemblyFilePath);
         @delegate.SetAddinDirectoryPath(weaverInstance, Path.GetDirectoryName(weaverEntry.AssemblyPath));
         @delegate.SetReferences(weaverInstance, References);
@@ -29,6 +29,15 @@ public partial class InnerWeaver
         @delegate.SetLogError(weaverInstance, Logger.LogError);
         @delegate.SetLogErrorPoint(weaverInstance, LogErrorPoint);
         @delegate.SetDefineConstants(weaverInstance, DefineConstants);
+        if (weaverInstance is BaseModuleWeaver)
+        {
+            @delegate.SetFindType(weaverInstance, FindType);
+            @delegate.SetResolveAssembly(weaverInstance, assemblyName => assemblyResolver.Resolve(assemblyName));
+        }
+        else
+        {
+            @delegate.SetAssemblyResolver(weaverInstance, assemblyResolver);
+        }
     }
 
     void LogWarningPoint(string message, SequencePoint point)

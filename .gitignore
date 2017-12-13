@@ -43,6 +43,7 @@
 packages/
 ForIntegration/
 NuGetCecilBuild/
+NuGetHelpersBuild/
 NugetBuild/
 ChocolateyNuGetBuild/
 

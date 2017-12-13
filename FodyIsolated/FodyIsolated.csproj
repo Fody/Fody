@@ -19,7 +19,8 @@
       <HintPath>..\Lib\Cecil\net40\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Compile Include="..\CommonAssemblyInfo.cs" />
-    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj"/>
+    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
+    <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
   </ItemGroup>
   <Target Name="CopyForIntegration" AfterTargets="AfterBuild">
     <MakeDir Directories="$(SolutionDir)ForIntegration" />

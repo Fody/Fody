@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting;
+using Fody;
 using Mono.Cecil;
 using Mono.Cecil.Mdb;
 using Mono.Cecil.Pdb;
@@ -30,7 +31,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     bool cancelRequested;
     List<WeaverHolder> weaverInstances = new List<WeaverHolder>();
     Action cancelDelegate;
-    public IAssemblyResolver assemblyResolver;
+    public AssemblyResolver assemblyResolver;
 
     Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
     {
@@ -39,27 +40,32 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         {
             return typeof(ModuleDefinition).Assembly;
         }
+
         if (assemblyName == "Mono.Cecil.Rocks")
         {
             return typeof(MethodBodyRocks).Assembly;
         }
+
         if (assemblyName == "Mono.Cecil.Pdb")
         {
             return typeof(PdbReaderProvider).Assembly;
         }
+
         if (assemblyName == "Mono.Cecil.Mdb")
         {
             return typeof(MdbReaderProvider).Assembly;
         }
+
         foreach (var weaverPath in Weavers.Select(x => x.AssemblyPath))
         {
             var directoryName = Path.GetDirectoryName(weaverPath);
-            var assemblyFileName = assemblyName + ".dll";
+            var assemblyFileName = $"{assemblyName}.dll";
             var assemblyPath = Path.Combine(directoryName, assemblyFileName);
             if (!File.Exists(assemblyPath))
             {
                 continue;
             }
+
             try
             {
                 return LoadFromFile(assemblyPath);
@@ -70,6 +76,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
                 Logger.LogWarning(message);
             }
         }
+
         return null;
     }
 
@@ -84,6 +91,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             ReadModule();
             AppDomain.CurrentDomain.AssemblyResolve += assemblyResolve;
             InitialiseWeavers();
+            BuildAssembliesToScan();
             ExecuteWeavers();
             AddWeavingInfo();
             FindStrongNameKey();
@@ -109,8 +117,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     public void Cancel()
     {
         cancelRequested = true;
-        var action = cancelDelegate;
-        action?.Invoke();
+        cancelDelegate?.Invoke();
     }
 
     void InitialiseWeavers()
@@ -121,6 +128,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             {
                 return;
             }
+
             Logger.LogDebug($"Weaver '{weaverConfig.AssemblyPath}'.");
             Logger.LogDebug("  Initializing weaver");
             var assembly = LoadAssembly(weaverConfig.AssemblyPath);
@@ -130,11 +138,11 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             var delegateHolder = weaverType.GetDelegateHolderFromCache();
             var weaverInstance = delegateHolder.ConstructInstance();
             var weaverHolder = new WeaverHolder
-                               {
-                                   Instance = weaverInstance,
-                                   WeaverDelegate = delegateHolder,
-                                   Config = weaverConfig
-                               };
+            {
+                Instance = weaverInstance,
+                WeaverDelegate = delegateHolder,
+                Config = weaverConfig
+            };
             weaverInstances.Add(weaverHolder);
 
             SetProperties(weaverConfig, weaverInstance, delegateHolder);
@@ -150,6 +158,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         {
             throw new WeavingException($"Expected the weaver '{assembly}' to reference Mono.Cecil.dll. {GetNugetError()}");
         }
+
         var minCecilVersion = new Version(0, 10);
         if (cecilReference.Version < minCecilVersion)
         {
@@ -170,12 +179,14 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             {
                 return;
             }
+
             try
             {
                 if (weaver.WeaverDelegate.Cancel != null)
                 {
                     cancelDelegate = () => weaver.WeaverDelegate.Cancel(weaver.Instance);
                 }
+
                 Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
                 var startNew = Stopwatch.StartNew();
                 Logger.LogDebug("  Executing Weaver ");
@@ -201,7 +212,9 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         Logger.LogDebug("  Adding weaving info");
         var startNew = Stopwatch.StartNew();
 
-        var typeDefinition = new TypeDefinition(null, "ProcessedByFody", TypeAttributes.NotPublic | TypeAttributes.Class, ModuleDefinition.TypeSystem.Object);
+        var typeAttributes = TypeAttributes.NotPublic |
+                             TypeAttributes.Class;
+        var typeDefinition = new TypeDefinition(null, "ProcessedByFody", typeAttributes, ModuleDefinition.TypeSystem.Object);
         ModuleDefinition.Types.Add(typeDefinition);
 
         AddVersionField(typeof(IInnerWeaver).Assembly.Location, "FodyVersion", typeDefinition);
@@ -220,7 +233,10 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     void AddVersionField(string configAssemblyPath, string name, TypeDefinition typeDefinition)
     {
         var weaverVersion = FileVersionInfo.GetVersionInfo(configAssemblyPath);
-        var fieldAttributes = FieldAttributes.Assembly | FieldAttributes.Literal | FieldAttributes.Static | FieldAttributes.HasDefault;
+        var fieldAttributes = FieldAttributes.Assembly |
+                              FieldAttributes.Literal |
+                              FieldAttributes.Static |
+                              FieldAttributes.HasDefault;
         var systemString = ModuleDefinition.TypeSystem.String;
         var field = new FieldDefinition(name, fieldAttributes, systemString)
         {
@@ -239,6 +255,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             {
                 return;
             }
+
             try
             {
                 Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);

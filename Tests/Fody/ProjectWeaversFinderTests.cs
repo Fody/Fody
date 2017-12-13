@@ -1,5 +1,6 @@
 using System.IO;
 using ApprovalTests;
+using Fody;
 using Moq;
 using Xunit;
 

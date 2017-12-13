@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Build.Framework;
+using MessageImportance = Fody.MessageImportance;
 
 public class BuildLogger : MarshalByRefObject, ILogger
 {

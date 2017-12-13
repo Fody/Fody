@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nuget", "NuGet\Nuget.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DummyAssembly", "DummyAssembly\DummyAssembly.csproj", "{D95530D4-5646-4156-B58E-F2C5D5FA03CC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyHelpers", "FodyHelpers\FodyHelpers.csproj", "{B95F633D-F876-4DC2-947F-4AAA48332575}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,18 @@ Global
 		{D95530D4-5646-4156-B58E-F2C5D5FA03CC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D95530D4-5646-4156-B58E-F2C5D5FA03CC}.Release|x86.ActiveCfg = Release|Any CPU
 		{D95530D4-5646-4156-B58E-F2C5D5FA03CC}.Release|x86.Build.0 = Release|Any CPU
+		{B95F633D-F876-4DC2-947F-4AAA48332575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B95F633D-F876-4DC2-947F-4AAA48332575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B95F633D-F876-4DC2-947F-4AAA48332575}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B95F633D-F876-4DC2-947F-4AAA48332575}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B95F633D-F876-4DC2-947F-4AAA48332575}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B95F633D-F876-4DC2-947F-4AAA48332575}.Debug|x86.Build.0 = Debug|Any CPU
+		{B95F633D-F876-4DC2-947F-4AAA48332575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B95F633D-F876-4DC2-947F-4AAA48332575}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B95F633D-F876-4DC2-947F-4AAA48332575}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B95F633D-F876-4DC2-947F-4AAA48332575}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B95F633D-F876-4DC2-947F-4AAA48332575}.Release|x86.ActiveCfg = Release|Any CPU
+		{B95F633D-F876-4DC2-947F-4AAA48332575}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

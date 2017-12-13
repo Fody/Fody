@@ -8,9 +8,9 @@ public class WeaverAssemblyPathFinderTests : TestBase
     public void Valid()
     {
         var finder = new Processor
-                         {
-                             ContainsTypeChecker = new Mock<ContainsTypeChecker>().Object,
-                         };
+        {
+            ContainsTypeChecker = new Mock<ContainsTypeChecker>().Object,
+        };
         finder.FindAssemblyPath("Name");
     }
 }

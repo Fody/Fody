@@ -7,6 +7,7 @@
     <PackageReference Include="PepitaPackage" Version="1.*" />
     <ProjectReference Include="..\Fody\Fody.csproj" />
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" />
+    <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
   </ItemGroup>
   <Target Name="NuGetBuild" AfterTargets="AfterBuild">
 
@@ -24,6 +25,8 @@
     <Copy SourceFiles="$(SolutionDir)FodyCommon\bin\$(ConfigurationName)\net452\FodyCommon.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\net452\FodyIsolated.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)FodyIsolated\bin\$(ConfigurationName)\net452\FodyIsolated.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)FodyHelpers\bin\$(ConfigurationName)\net452\FodyHelpers.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
+    <Copy SourceFiles="$(SolutionDir)FodyHelpers\bin\$(ConfigurationName)\net452\FodyHelpers.pdb" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\net40\Mono.Cecil.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\net40\Mono.Cecil.Mdb.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
     <Copy SourceFiles="$(SolutionDir)Lib\Cecil\net40\Mono.Cecil.Pdb.dll" DestinationFolder="$(SolutionDir)NuGetBuild" />
@@ -47,6 +50,18 @@
     </ItemGroup>
     <Copy SourceFiles="@(CecilFiles)" DestinationFolder="$(SolutionDir)NuGetCecilBuild\lib\%(RecursiveDir)" />
     <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetCecilBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\net452\Fody.dll" />
+
+    <ItemGroup>
+      <HelperFilesToDelete Include="$(SolutionDir)NuGetHelpersBuild\**\*.*" />
+    </ItemGroup>
+    <Delete Files="@(HelperFilesToDelete)" />
+    <MakeDir Directories="$(SolutionDir)NuGetHelpersBuild" />
+    <MakeDir Directories="$(SolutionDir)NuGetHelpersBuild" />
+    <Copy SourceFiles="$(SolutionDir)FodyHelpers\bin\$(ConfigurationName)\net452\FodyHelpers.dll" DestinationFolder="$(SolutionDir)NuGetHelpersBuild" />
+    <Copy SourceFiles="$(SolutionDir)FodyHelpers\bin\$(ConfigurationName)\net452\FodyHelpers.pdb" DestinationFolder="$(SolutionDir)NuGetHelpersBuild" />
+    <Copy SourceFiles="$(SolutionDir)FodyHelpers\bin\$(ConfigurationName)\net452\FodyHelpers.xml" DestinationFolder="$(SolutionDir)NuGetHelpersBuild" />
+    <Copy SourceFiles="$(ProjectDir)FodyHelpers.nuspec" DestinationFolder="$(SolutionDir)NuGetHelpersBuild" />
+    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetHelpersBuild" MetadataAssembly="$(SolutionDir)NuGetHelpersBuild\FodyHelpers.dll" />
 
   </Target>
 </Project>
