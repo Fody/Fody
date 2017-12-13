@@ -5,9 +5,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="PepitaPackage" Version="1.*" />
-    <ProjectReference Include="..\Fody\Fody.csproj" />
-    <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" />
-    <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
   </ItemGroup>
   <Target Name="NuGetBuild" AfterTargets="AfterBuild">
 
