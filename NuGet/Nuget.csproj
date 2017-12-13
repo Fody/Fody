@@ -57,11 +57,14 @@
     <Delete Files="@(HelperFilesToDelete)" />
     <MakeDir Directories="$(SolutionDir)NuGetHelpersBuild" />
     <MakeDir Directories="$(SolutionDir)NuGetHelpersBuild" />
-    <Copy SourceFiles="$(SolutionDir)FodyHelpers\bin\$(ConfigurationName)\net452\FodyHelpers.dll" DestinationFolder="$(SolutionDir)NuGetHelpersBuild" />
-    <Copy SourceFiles="$(SolutionDir)FodyHelpers\bin\$(ConfigurationName)\net452\FodyHelpers.pdb" DestinationFolder="$(SolutionDir)NuGetHelpersBuild" />
-    <Copy SourceFiles="$(SolutionDir)FodyHelpers\bin\$(ConfigurationName)\net452\FodyHelpers.xml" DestinationFolder="$(SolutionDir)NuGetHelpersBuild" />
+    <Copy SourceFiles="$(SolutionDir)FodyHelpers\bin\$(ConfigurationName)\net452\FodyHelpers.dll" DestinationFolder="$(SolutionDir)NuGetHelpersBuild\lib\net452" />
+    <Copy SourceFiles="$(SolutionDir)FodyHelpers\bin\$(ConfigurationName)\net452\FodyHelpers.pdb" DestinationFolder="$(SolutionDir)NuGetHelpersBuild\lib\net452" />
+    <Copy SourceFiles="$(SolutionDir)FodyHelpers\bin\$(ConfigurationName)\net452\FodyHelpers.xml" DestinationFolder="$(SolutionDir)NuGetHelpersBuild\lib\net452" />
+    <Copy SourceFiles="$(SolutionDir)FodyHelpers\bin\$(ConfigurationName)\netstandard2.0\FodyHelpers.dll" DestinationFolder="$(SolutionDir)NuGetHelpersBuild\lib\netstandard2.0" />
+    <Copy SourceFiles="$(SolutionDir)FodyHelpers\bin\$(ConfigurationName)\netstandard2.0\FodyHelpers.pdb" DestinationFolder="$(SolutionDir)NuGetHelpersBuild\lib\netstandard2.0" />
+    <Copy SourceFiles="$(SolutionDir)FodyHelpers\bin\$(ConfigurationName)\netstandard2.0\FodyHelpers.xml" DestinationFolder="$(SolutionDir)NuGetHelpersBuild\lib\netstandard2.0" />
     <Copy SourceFiles="$(ProjectDir)FodyHelpers.nuspec" DestinationFolder="$(SolutionDir)NuGetHelpersBuild" />
-    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetHelpersBuild" MetadataAssembly="$(SolutionDir)NuGetHelpersBuild\FodyHelpers.dll" />
+    <PepitaPackage.CreatePackageTask NuGetBuildDirectory="$(SolutionDir)NuGetHelpersBuild" MetadataAssembly="$(SolutionDir)Fody\bin\$(ConfigurationName)\net452\Fody.dll" />
 
   </Target>
 </Project>

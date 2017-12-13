@@ -15,5 +15,8 @@
     <summary />
     <language>en-AU</language>
     <tags>ILWeaving, Fody, Cecil, AOP</tags>
+    <dependencies>
+      <dependency id="FodyCecil" version="$version$"/>
+    </dependencies>
   </metadata>
 </package>
