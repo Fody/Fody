@@ -2,7 +2,7 @@
 
   <Target Name="IncludeAllInPackage">
     <ItemGroup>
-      <TfmSpecificPackageFile Include="$(OutputPath)\*.*" Exclude="**/$(TargetName).*" PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)" />
+      <TfmSpecificPackageFile Include="$(OutputPath)\*.*" Exclude="**/$(TargetName).*;*.json;**/Microsoft*;**/System*" PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)" />
     </ItemGroup>
   </Target>
 

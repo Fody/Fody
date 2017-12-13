@@ -38,7 +38,7 @@
     <ProjectWeaverXml>$(ProjectDir)FodyWeavers.xml</ProjectWeaverXml>
     <FodySignAssembly Condition="$(FodySignAssembly) == '' Or $(FodySignAssembly) == '*Undefined*'">$(SignAssembly)</FodySignAssembly>
     <FodyPath Condition="$(FodyPath) == '' Or $(FodyPath) == '*Undefined*'">$(MSBuildThisFileDirectory)..\..\</FodyPath>
-    <FodyAssembly>$(FodyPath)tasks\net452\Fody.dll</FodyAssembly>
+    <FodyAssembly>$(FodyPath)tasks\net46\Fody.dll</FodyAssembly>
   </PropertyGroup>
   <UsingTask
       TaskName="Fody.WeavingTask"

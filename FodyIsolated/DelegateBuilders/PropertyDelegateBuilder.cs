@@ -269,12 +269,12 @@ public static class PropertyDelegateBuilder
 
         if (propertyInfo != null)
         {
-            throw new WeavingException($"Having a property named '{propertyName}' on '{targetType.FullName}' is not supported. Move over to inheriting {nameof(BaseModuleWeaver)} instead.");
+            throw new WeavingException($"Having a property named '{propertyName}' on '{targetType.FullName}' is not supported. Move over to inheriting from {nameof(BaseModuleWeaver)} instead.");
         }
         var fieldInfo = GetField(targetType, propertyName);
         if (fieldInfo != null)
         {
-            throw new WeavingException($"Having a field named '{propertyName}' on '{targetType.FullName}' is not supported. Move over to inheriting {nameof(BaseModuleWeaver)} instead.");
+            throw new WeavingException($"Having a field named '{propertyName}' on '{targetType.FullName}' is not supported. Move over to inheriting from {nameof(BaseModuleWeaver)} instead.");
         }
     }
 

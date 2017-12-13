@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
@@ -140,8 +139,5 @@ namespace Fody
         public virtual void AfterWeaving()
         {
         }
-
-        [Obsolete("Move to " + nameof(ResolveAssembly), true)]
-        public IAssemblyResolver AssemblyResolver { get; set; }
     }
 }

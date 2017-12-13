@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Weavers</RootNamespace>
     <AssemblyName>Weavers</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FodyHelpers">
+      <HintPath>..\..\ForIntegration\tasks\net46\FodyHelpers.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>..\..\Lib\Cecil\net40\Mono.Cecil.dll</HintPath>
     </Reference>
@@ -42,9 +46,6 @@
     </Reference>
     <Reference Include="Mono.Cecil.Rocks">
       <HintPath>..\..\Lib\Cecil\net40\Mono.Cecil.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="FodyHelpers">
-      <HintPath>..\..\tasks\FodyHelpers.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -49,11 +49,9 @@ public class WeaverInitialiserTests : TestBase
         innerWeaver.SetProperties(weaverEntry, moduleWeaver, typeof(ValidFromBaseModuleWeaver).BuildDelegateHolder());
 
         ValidateProps(moduleWeaver, moduleDefinition);
-        Assert.Null(((dynamic)moduleWeaver).AssemblyResolver);
         Assert.NotNull(moduleWeaver.FindType);
         Assert.NotNull(moduleWeaver.ResolveAssembly);
     }
-
 
     static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, MockAssemblyResolver resolver)
     {
