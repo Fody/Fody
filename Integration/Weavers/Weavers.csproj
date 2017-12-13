@@ -44,7 +44,7 @@
       <HintPath>..\..\Lib\Cecil\net40\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="FodyHelpers">
-      <HintPath>..\..\ForIntegration\FodyHelpers.dll</HintPath>
+      <HintPath>..\..\tasks\FodyHelpers.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

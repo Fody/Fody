@@ -5,18 +5,9 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Mono.Cecil">
-      <HintPath>..\Lib\Cecil\net40\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Compile Include="..\CommonAssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
-  </ItemGroup>
   <Target Name="CopyForIntegration" AfterTargets="AfterBuild">
     <MakeDir Directories="$(SolutionDir)ForIntegration" />
-    <Copy SourceFiles="$(TargetDir)FodyCommon.dll" DestinationFolder="$(SolutionDir)ForIntegration" />
-    <Copy SourceFiles="$(TargetDir)FodyCommon.pdb" DestinationFolder="$(SolutionDir)ForIntegration" Condition="Exists('$(TargetDir)FodyCommon.pdb')" />
+    <Copy SourceFiles="$(TargetDir)FodyCommon.dll" DestinationFolder="$(SolutionDir)ForIntegration\tasks\" />
+    <Copy SourceFiles="$(TargetDir)FodyCommon.pdb" DestinationFolder="$(SolutionDir)ForIntegration\tasks\" />
   </Target>
 </Project>

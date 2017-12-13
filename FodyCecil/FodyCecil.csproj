@@ -2,10 +2,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
-    <SignAssembly>true</SignAssembly>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Description>Helpers for Fody.</Description>
+    <Description>Custom Cecil version used by Fody.</Description>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
   </PropertyGroup>
   <ItemGroup Condition="$(TargetFramework) == 'net452'">
     <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\net40\Mono.Cecil.dll" />

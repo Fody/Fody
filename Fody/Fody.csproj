@@ -1,25 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFrameworks>net452</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>Extensible tool for weaving .net assemblies.</Description>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
+    <DevelopmentDependency>true</DevelopmentDependency>
+</PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Tasks.v4.0" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
-    <Compile Include="..\CommonAssemblyInfo.cs" />
     <Compile Include="..\NugetConfigReader.cs">
-      <Link>SearchDirectories\NugetConfigReader.cs</Link>
+      <Link>NugetConfigReader.cs</Link>
     </Compile>
-    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
-    <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
+    <Content Include="Fody.targets">
+      <Pack>true</Pack>
+      <PackagePath>build\netstandard1.2;build\net452;build\portable-net+sl+win+wpa+wp</PackagePath>
+    </Content>
+    <Content Include="$(SolutionDir)FodyIsolated\bin\$(Configuration)\$(TargetFramework)\*.*">
+      <Link>References\%(Filename)%(Extension)</Link>
+      <Pack>true</Pack>
+      <PackagePath>tasks\$(TargetFramework)</PackagePath>
+    </Content>
+    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" PrivateAssets="All" />
+    <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" PrivateAssets="All" />
+    <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" PrivateAssets="All" />
   </ItemGroup>
   <Target Name="CopyForIntegration" AfterTargets="AfterBuild">
     <MakeDir Directories="$(SolutionDir)ForIntegration" />
-    <Copy SourceFiles="$(TargetDir)Fody.dll" DestinationFolder="$(SolutionDir)ForIntegration" />
-    <Copy SourceFiles="$(TargetDir)Fody.pdb" DestinationFolder="$(SolutionDir)ForIntegration" Condition="Exists('$(TargetDir)Fody.pdb')" />
+    <Copy SourceFiles="$(TargetDir)Fody.dll" DestinationFolder="$(SolutionDir)ForIntegration\tasks\" />
+    <Copy SourceFiles="$(TargetDir)Fody.pdb" DestinationFolder="$(SolutionDir)ForIntegration\tasks\" />
+    <Copy SourceFiles="$(TargetDir)FodyIsolated.dll" DestinationFolder="$(SolutionDir)ForIntegration\tasks\" />
+    <Copy SourceFiles="$(TargetDir)FodyIsolated.pdb" DestinationFolder="$(SolutionDir)ForIntegration\tasks\" />
+    <Copy SourceFiles="$(TargetDir)Mono.Cecil.dll" DestinationFolder="$(SolutionDir)ForIntegration\tasks\" />
+    <Copy SourceFiles="$(TargetDir)Mono.Cecil.Mdb.dll" DestinationFolder="$(SolutionDir)ForIntegration\tasks\" />
+    <Copy SourceFiles="$(TargetDir)Mono.Cecil.Pdb.dll" DestinationFolder="$(SolutionDir)ForIntegration\tasks\" />
+    <Copy SourceFiles="$(TargetDir)Mono.Cecil.Rocks.dll" DestinationFolder="$(SolutionDir)ForIntegration\tasks\" />
+    <MakeDir Directories="$(SolutionDir)ForIntegration\build\lib" />
+    <Copy SourceFiles="$(ProjectDir)Fody.targets" DestinationFolder="$(SolutionDir)ForIntegration\build\lib" />
   </Target>
 </Project>

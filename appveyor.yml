@@ -7,6 +7,4 @@ build:
   project: Fody.sln
   verbosity: minimal
 artifacts:
-- path: NuGetBuild\*.nupkg
-- path: NuGetCecilBuild\*.nupkg
-- path: NuGetHelpersBuild\*.nupkg
+- path: nugest\*.nupkg

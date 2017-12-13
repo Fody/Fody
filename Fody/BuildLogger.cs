@@ -21,7 +21,7 @@ public class BuildLogger : MarshalByRefObject, ILogger
         currentWeaverName = null;
     }
 
-    public virtual void LogMessage(string message, MessageImportance level)
+    public virtual void LogMessage(string message, int level)
     {
         BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", (Microsoft.Build.Framework.MessageImportance)level));
     }
