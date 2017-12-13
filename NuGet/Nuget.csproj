@@ -6,7 +6,7 @@
   <ItemGroup>
     <PackageReference Include="PepitaPackage" Version="1.*" />
   </ItemGroup>
-  <Target Name="NuGetBuild" AfterTargets="AfterBuild">
+  <Target Name="NuGetBuild" AfterTargets="AfterBuild" Condition=" '$(TargetFramework)' == 'net452' ">
 
     <ItemGroup>
       <FodyFilesToDelete Include="$(SolutionDir)NuGetBuild\**\*.*" />
