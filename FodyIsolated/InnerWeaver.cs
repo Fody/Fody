@@ -36,6 +36,10 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
     {
         var assemblyName = new AssemblyName(args.Name).Name;
+        if (assemblyName == "FodyHelpers")
+        {
+            return typeof(BaseModuleWeaver).Assembly;
+        }
         if (assemblyName == "Mono.Cecil")
         {
             return typeof(ModuleDefinition).Assembly;
