@@ -40,6 +40,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         {
             return typeof(BaseModuleWeaver).Assembly;
         }
+
         if (assemblyName == "Mono.Cecil")
         {
             return typeof(ModuleDefinition).Assembly;
