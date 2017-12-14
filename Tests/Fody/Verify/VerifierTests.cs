@@ -1,22 +1,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Fody;
 using Xunit;
 
 public class VerifierTests : TestBase
 {
     [Fact]
-    public void StaticPathResolution()
-    {
-        Assert.True(Verifier.FoundPeVerify);
-        Assert.True(Directory.Exists(Verifier.WindowsSdkDirectory));
-        Assert.True(File.Exists(Verifier.PeverifyPath));
-    }
-
-    [Fact]
     public void ExtractVerifyAssemblyFromConfig_NotExists()
     {
-        var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\PeVerifierTests_NoVerifyAssembly.xml");
+        var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\Verify\VerifierTests_NoVerifyAssembly.xml");
         var verifyAssembly = Verifier.ExtractVerifyAssemblyFromConfigs(new List<string>
         {
             filePath
@@ -27,7 +20,7 @@ public class VerifierTests : TestBase
     [Fact]
     public void ExtractVerifyIgnoreCodels_NotExists()
     {
-        var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\PeVerifierTests_NoVerifyIgnoreCodes.xml");
+        var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\Verify\VerifierTests_NoVerifyIgnoreCodes.xml");
         var verifyAssembly = Verifier.ExtractVerifyIgnoreCodesConfigs(new List<string>
         {
             filePath
@@ -38,7 +31,7 @@ public class VerifierTests : TestBase
     [Fact]
     public void ExtractVerifyIgnoreCodels_WithCodeMultiple()
     {
-        var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\PeVerifierTests_VerifyIgnoreCodes_Multiple.xml");
+        var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\Verify\VerifierTests_VerifyIgnoreCodes_Multiple.xml");
         var verifyAssembly = Verifier.ExtractVerifyIgnoreCodesConfigs(new List<string>
         {
             filePath
@@ -51,7 +44,7 @@ public class VerifierTests : TestBase
     [Fact]
     public void ExtractVerifyIgnoreCodels_WithCodeSingle()
     {
-        var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\PeVerifierTests_VerifyIgnoreCodes_Single.xml");
+        var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\Verify\VerifierTests_VerifyIgnoreCodes_Single.xml");
         var verifyAssembly = Verifier.ExtractVerifyIgnoreCodesConfigs(new List<string>
         {
             filePath
@@ -63,7 +56,7 @@ public class VerifierTests : TestBase
     [Fact]
     public void ExtractVerifyAssemblyFromConfig_WithTrue()
     {
-        var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\PeVerifierTests_WithTrueVerifyAssembly.xml");
+        var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\Verify\VerifierTests_WithTrueVerifyAssembly.xml");
         var verifyAssembly = Verifier.ExtractVerifyAssemblyFromConfigs(new List<string>
         {
             filePath
@@ -74,7 +67,7 @@ public class VerifierTests : TestBase
     [Fact]
     public void ExtractVerifyAssemblyFromConfig_WithFalse()
     {
-        var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\PeVerifierTests_WithFalseVerifyAssembly.xml");
+        var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\Verify\VerifierTests_WithFalseVerifyAssembly.xml");
         var verifyAssembly = Verifier.ExtractVerifyAssemblyFromConfigs(new List<string>
         {
             filePath

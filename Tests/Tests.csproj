@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net452</TargetFramework>
+    <TargetFramework>net46</TargetFramework>
     <Optimize>False</Optimize>
   </PropertyGroup>
   <ItemGroup>
@@ -10,8 +10,6 @@
     <PackageReference Include="Moq" Version="4.*" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
-    <Reference Include="Microsoft.Build.Framework" />
-    <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mono.Cecil">
       <HintPath>..\Lib\Cecil\net40\Mono.Cecil.dll</HintPath>
@@ -29,12 +27,13 @@
     <PackageReference Include="ObjectApproval" Version="1.*" />
     <ProjectReference Include="..\DummyAssembly\DummyAssembly.csproj" />
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
+    <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" />
     <ProjectReference Include="..\Fody\Fody.csproj" />
     <ProjectReference Include="..\SampleWeaver.Fody\SampleWeaver.Fody.csproj" />
     <Content Include="Fody\NugetConfig*.txt" CopyToOutputDirectory="Always" />
     <Content Include="Fody\FakeNuGetPackageRoot\**\*.*" CopyToOutputDirectory="Always" />
-    <Content Include="Fody\PeVerifierTests_*.*" CopyToOutputDirectory="Always" />
+    <Content Include="Fody\Verify\VerifierTests_*.*" CopyToOutputDirectory="Always" />
     <None Include="Fody\NugetPackagePathFinder\FakeSolutionWithNestedNugetConfig\.nuget\nuget.config" CopyToOutputDirectory="Always" />
     <Content Include="Fody\BadAssembly.dll" CopyToOutputDirectory="Always" />
     <Content Include="Fody\Packages\SampleWeaver.Fody.1.0.0.0\SampleWeaver.Fody.dll" CopyToOutputDirectory="Always" />

@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Fody;
 using Moq;
 using Xunit;
 

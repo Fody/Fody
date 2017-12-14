@@ -1,4 +1,5 @@
 using System;
+using Fody;
 using Xunit;
 
 public class ConstructorDelegateBuilderTests : TestBase
@@ -55,11 +56,18 @@ public class ConstructorDelegateBuilderTests : TestBase
     }
 
     [Fact]
-    public void Should_construct_When_is_Valid()
+    public void Find_and_run()
     {
         var type = typeof(ValidClass);
         var anObject = type.BuildConstructorDelegate()();
-        Assert.NotNull(anObject);
+        Assert.Equal(type, anObject.GetType());
+    }
+
+    [Fact]
+    public void Find_and_run_from_base()
+    {
+        var type = typeof(WeaverFromBase);
+        var anObject = type.BuildConstructorDelegate()();
         Assert.Equal(type, anObject.GetType());
     }
 

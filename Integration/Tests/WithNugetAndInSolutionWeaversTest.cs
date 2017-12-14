@@ -17,6 +17,12 @@ public class WithNugetAndInSolutionWeaversTest
     }
 
     [Fact]
+    public void EnsureTypeInjectedByNamedWeaverFromBase()
+    {
+        Assert.NotNull(Type.GetType("Weavers.TypeInjectedByNamedWeaverFromBase, WithNugetAndInSolutionWeavers"));
+    }
+
+    [Fact]
     public void EnsureTypeChangedByNugetWeaver()
     {
         Assert.True(typeof(Class1).GetMethod("Method").IsVirtual);

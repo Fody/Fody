@@ -1,4 +1,5 @@
 using System.IO;
+using Fody;
 
 public partial class Processor
 {

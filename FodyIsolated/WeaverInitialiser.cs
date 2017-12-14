@@ -1,5 +1,6 @@
 using System.IO;
 using System.Xml.Linq;
+using Fody;
 using Mono.Cecil.Cil;
 
 public partial class InnerWeaver
@@ -13,7 +14,6 @@ public partial class InnerWeaver
         }
 
         @delegate.SetModuleDefinition(weaverInstance, ModuleDefinition);
-        @delegate.SetAssemblyResolver(weaverInstance, assemblyResolver);
         @delegate.SetAssemblyFilePath(weaverInstance, AssemblyFilePath);
         @delegate.SetAddinDirectoryPath(weaverInstance, Path.GetDirectoryName(weaverEntry.AssemblyPath));
         @delegate.SetReferences(weaverInstance, References);
@@ -21,14 +21,23 @@ public partial class InnerWeaver
         @delegate.SetSolutionDirectoryPath(weaverInstance, SolutionDirectoryPath);
         @delegate.SetProjectDirectoryPath(weaverInstance, ProjectDirectoryPath);
         @delegate.SetDocumentationFilePath(weaverInstance, DocumentationFilePath);
-        @delegate.SetLogDebug(weaverInstance, s => Logger.LogDebug("  " + s));
-        @delegate.SetLogInfo(weaverInstance, s => Logger.LogInfo("  " + s));
-        @delegate.SetLogMessage(weaverInstance, (s, importance) => Logger.LogMessage("  " + s, importance));
+        @delegate.SetLogDebug(weaverInstance, message => Logger.LogDebug("  " + message));
+        @delegate.SetLogInfo(weaverInstance, message => Logger.LogInfo("  " + message));
+        @delegate.SetLogMessage(weaverInstance, (message, importance) => Logger.LogMessage("  " + message, (int) importance));
         @delegate.SetLogWarning(weaverInstance, Logger.LogWarning);
         @delegate.SetLogWarningPoint(weaverInstance, LogWarningPoint);
         @delegate.SetLogError(weaverInstance, Logger.LogError);
         @delegate.SetLogErrorPoint(weaverInstance, LogErrorPoint);
         @delegate.SetDefineConstants(weaverInstance, DefineConstants);
+        if (weaverInstance is BaseModuleWeaver)
+        {
+            @delegate.SetFindType(weaverInstance, FindType);
+            @delegate.SetResolveAssembly(weaverInstance, assemblyName => assemblyResolver.Resolve(assemblyName));
+        }
+        else
+        {
+            @delegate.SetAssemblyResolver(weaverInstance, assemblyResolver);
+        }
     }
 
     void LogWarningPoint(string message, SequencePoint point)

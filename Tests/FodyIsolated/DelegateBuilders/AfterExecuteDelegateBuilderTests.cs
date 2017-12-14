@@ -4,7 +4,7 @@ using Xunit;
 public class AfterExecuteDelegateBuilderTests : TestBase
 {
     [Fact]
-    public void Should_not_throw_When_no_execute_method()
+    public void Should_not_throw_When_no_method()
     {
         typeof(NoExecuteClass).BuildAfterWeavingDelegate();
     }
@@ -14,9 +14,17 @@ public class AfterExecuteDelegateBuilderTests : TestBase
     }
 
     [Fact]
-    public void Should_find_method_When_execute_is_valid()
+    public void Find_and_run()
     {
-        typeof(ValidClass).BuildAfterWeavingDelegate()(new ValidClass());
+        var action = typeof(ValidClass).BuildAfterWeavingDelegate();
+        action(new ValidClass());
+    }
+
+    [Fact]
+    public void Find_and_run_from_base()
+    {
+        var action = typeof(WeaverFromBase).BuildAfterWeavingDelegate();
+        action(new WeaverFromBase());
     }
 
     public class ValidClass
@@ -27,7 +35,7 @@ public class AfterExecuteDelegateBuilderTests : TestBase
     }
 
     [Fact]
-    public void Should_not_throw_When_execute_is_not_public()
+    public void Should_not_throw_When_method_is_not_public()
     {
         typeof(NonPublicClass).BuildAfterWeavingDelegate();
     }

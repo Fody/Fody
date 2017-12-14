@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Build.Framework;
+using MessageImportance = Fody.MessageImportance;
 
 public class BuildLogger : MarshalByRefObject, ILogger
 {
@@ -20,7 +21,7 @@ public class BuildLogger : MarshalByRefObject, ILogger
         currentWeaverName = null;
     }
 
-    public virtual void LogMessage(string message, MessageImportance level)
+    public virtual void LogMessage(string message, int level)
     {
         BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", (Microsoft.Build.Framework.MessageImportance)level));
     }

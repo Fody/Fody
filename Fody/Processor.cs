@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using MSMessageEnum = Microsoft.Build.Framework.MessageImportance;
 
 public partial class Processor
 {

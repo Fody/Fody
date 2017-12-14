@@ -1,3 +1,4 @@
+using Fody;
 
 public partial class Processor
 {

@@ -4,7 +4,7 @@ using Xunit;
 public class CancelDelegateBuilderTests : TestBase
 {
     [Fact]
-    public void Should_not_throw_When_no_cancel_method()
+    public void Should_not_throw_When_no_method()
     {
         typeof(NoCancelClass).BuildCancelDelegate();
     }
@@ -14,9 +14,17 @@ public class CancelDelegateBuilderTests : TestBase
     }
 
     [Fact]
-    public void Should_find_method_When_cancel_is_valid()
+    public void Find_and_run()
     {
-        typeof(ValidClass).BuildCancelDelegate()(new ValidClass());
+        var action = typeof(ValidClass).BuildCancelDelegate();
+        action(new ValidClass());
+    }
+
+    [Fact]
+    public void Find_and_run_from_base()
+    {
+        var action = typeof(WeaverFromBase).BuildCancelDelegate();
+        action(new WeaverFromBase());
     }
 
     public class ValidClass
@@ -27,7 +35,7 @@ public class CancelDelegateBuilderTests : TestBase
     }
 
     [Fact]
-    public void Should_not_throw_When_cancel_is_not_public()
+    public void Should_not_throw_When_method_is_not_public()
     {
         typeof(NonPublicClass).BuildCancelDelegate();
     }

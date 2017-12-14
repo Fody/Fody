@@ -1,13 +1,14 @@
 using System;
+using Fody;
 using Xunit;
 
 public class ExecuteDelegateBuilderTests : TestBase
 {
     [Fact]
-    public void Should_throw_When_no_execute_method()
+    public void Should_throw_When_no_method()
     {
         var exception = Assert.Throws<WeavingException>(() => typeof(NoExecuteClass).BuildExecuteDelegate());
-        Assert.Equal("'ExecuteDelegateBuilderTests+NoExecuteClass' must contain a public instance method named 'Execute'.", exception.Message);
+        Assert.Equal("'ExecuteDelegateBuilderTests+NoExecuteClass' must contain a public instance method named 'Execute'.",exception.Message);
     }
 
     public class NoExecuteClass
@@ -15,9 +16,17 @@ public class ExecuteDelegateBuilderTests : TestBase
     }
 
     [Fact]
-    public void Should_find_method_When_execute_is_valid()
+    public void Find_and_run()
     {
-        typeof(ValidClass).BuildExecuteDelegate()(new ValidClass());
+        var action = typeof(ValidClass).BuildExecuteDelegate();
+        action(new ValidClass());
+    }
+
+    [Fact]
+    public void Find_and_run_from_base()
+    {
+        var action = typeof(WeaverFromBase).BuildExecuteDelegate();
+        action(new WeaverFromBase());
     }
 
     public class ValidClass
@@ -28,7 +37,7 @@ public class ExecuteDelegateBuilderTests : TestBase
     }
 
     [Fact]
-    public void Should_throw_When_execute_is_not_public()
+    public void Should_throw_When_method_is_not_public()
     {
         var exception = Assert.Throws<WeavingException>(() => typeof(NonPublicClass).BuildExecuteDelegate());
         Assert.Equal("'ExecuteDelegateBuilderTests+NonPublicClass' must contain a public instance method named 'Execute'.", exception.Message);
