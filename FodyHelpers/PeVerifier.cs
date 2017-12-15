@@ -120,7 +120,7 @@ BeforeOutput:
             using (var process = Process.Start(processStartInfo))
             {
                 output = process.StandardOutput.ReadToEnd();
-
+                output = Regex.Replace(output, @"^All Classes and Methods.*", "");
                 process.WaitForExit(1000);
 
                 if (process.ExitCode != 0)
