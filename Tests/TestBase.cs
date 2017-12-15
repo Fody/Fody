@@ -1,4 +1,5 @@
 using Fody;
+#pragma warning disable 618
 
 public class TestBase
 {
