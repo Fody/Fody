@@ -79,7 +79,23 @@ namespace Fody
             return afterOutput == beforeOutput;
         }
 
-        static string TrimLineNumbers(this string input)
+        public static void ThrowIfDifferent(string beforeAssemblyPath, string afterAssemblyPath, IEnumerable<string> ignoreCodes)
+        {
+            Verify(beforeAssemblyPath, afterAssemblyPath, ignoreCodes, out var beforeOutput, out var afterOutput);
+            if (beforeOutput == afterOutput)
+            {
+                return;
+            }
+            throw new Exception($@"The files have difference peverify results.
+
+AfterOutput:
+{afterOutput}
+
+BeforeOutput:
+{beforeOutput}");
+        }
+
+            static string TrimLineNumbers(this string input)
         {
             return Regex.Replace(input, "0x.*]", "");
         }

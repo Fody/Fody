@@ -15,7 +15,7 @@ public class PeVerifierTests : TestBase
     [Fact]
     public void Should_verify_current_assembly()
     {
-        var verify = PeVerifier.Verify(GetAssemblyPath(),Enumerable.Empty<string>(),out var output);
+        var verify = PeVerifier.Verify(GetAssemblyPath(), Enumerable.Empty<string>(),out var output);
         Assert.True(verify);
         Assert.NotNull(output);
         Assert.NotEmpty(output);

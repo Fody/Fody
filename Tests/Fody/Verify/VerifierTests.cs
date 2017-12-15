@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Fody;
 using Xunit;
 
 public class VerifierTests : TestBase
