@@ -16,7 +16,7 @@
     </Compile>
     <Content Include="Fody.targets">
       <Pack>true</Pack>
-      <PackagePath>build\netstandard1.2;build\net452;build\portable-net+sl+win+wpa+wp</PackagePath>
+      <PackagePath>build\netstandard1.0;build\net452;build\portable-net+sl+win+wpa+wp</PackagePath>
     </Content>
     <Content Include="$(SolutionDir)FodyIsolated\bin\$(Configuration)\$(TargetFramework)\*.*">
       <Link>References\%(Filename)%(Extension)</Link>
