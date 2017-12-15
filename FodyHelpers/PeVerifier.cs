@@ -79,6 +79,11 @@ namespace Fody
             return afterOutput == beforeOutput;
         }
 
+        public static void ThrowIfDifferent(string beforeAssemblyPath, string afterAssemblyPath)
+        {
+            ThrowIfDifferent(beforeAssemblyPath, afterAssemblyPath, Enumerable.Empty<string>());
+        }
+
         public static void ThrowIfDifferent(string beforeAssemblyPath, string afterAssemblyPath, IEnumerable<string> ignoreCodes)
         {
             Verify(beforeAssemblyPath, afterAssemblyPath, ignoreCodes, out var beforeOutput, out var afterOutput);
@@ -86,6 +91,7 @@ namespace Fody
             {
                 return;
             }
+
             throw new Exception($@"The files have difference peverify results.
 
 AfterOutput:
@@ -95,7 +101,7 @@ BeforeOutput:
 {beforeOutput}");
         }
 
-            static string TrimLineNumbers(this string input)
+        static string TrimLineNumbers(this string input)
         {
             return Regex.Replace(input, "0x.*]", "");
         }
