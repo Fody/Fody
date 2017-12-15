@@ -121,7 +121,10 @@ BeforeOutput:
             {
                 output = process.StandardOutput.ReadToEnd();
                 output = Regex.Replace(output, @"^All Classes and Methods.*", "");
-                process.WaitForExit(1000);
+                if (!process.WaitForExit(10000))
+                {
+                    throw new Exception("PeVerify failed to exit");
+                }
 
                 if (process.ExitCode != 0)
                 {
