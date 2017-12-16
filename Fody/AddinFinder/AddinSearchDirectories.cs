@@ -25,10 +25,18 @@ public partial class AddinFinder
 
             // each PackageDefinition will be of the format C:\...\packages\propertychanging.fody\1.28.0
             // so must be a Contains(.fody)
-            foreach (var directory in PackageDefinitions.Where(x => x.ToLowerInvariant().Contains(".fody")))
+            foreach (var versionDirectory in PackageDefinitions.Where(x => x.ToLowerInvariant().Contains(".fody")))
             {
-                Logger.LogDebug($"Adding weavers from package directory: '{directory}'");
-                AddFiles(Directory.EnumerateFiles(directory, "*.Fody.dll"));
+                Logger.LogDebug($"Adding weavers from package directory: '{versionDirectory}'");
+
+                var netClassic = Path.Combine(versionDirectory, "netclassicweaver");
+                if (Directory.Exists(netClassic))
+                {
+                    AddFiles(Directory.EnumerateFiles(netClassic, "*.Fody.dll"));
+                    continue;
+                }
+
+                AddFiles(Directory.EnumerateFiles(versionDirectory, "*.Fody.dll"));
             }
             AddToolsSolutionDirectoryToAddinSearch();
         }
