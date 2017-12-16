@@ -4,7 +4,7 @@
     <PackageLicenseUrl Condition="'$(PackageLicenseUrl)' == ''">http://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance Condition="'$(PackageRequireLicenseAcceptance)' == ''">false</PackageRequireLicenseAcceptance>
     <PackageTags Condition="'$(PackageTags)' == ''">ILWeaving, Fody, Cecil, AOP</PackageTags>
-    <PackageOutputPath>nugets</PackageOutputPath>
+    <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludePDBsInPackage</TargetsForTfmSpecificContentInPackage>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
