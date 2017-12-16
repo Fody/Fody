@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <PackageId Condition="'$(PackageId)' == ''">$(AssemblyName).Fody</PackageId>
+    <Description Condition="'$(Description)' == ''">$(PackageId)</Description>
+    <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">$(PackageProjectUrl)/package_icon.png</PackageIconUrl>
+  </PropertyGroup>
+  <Target Name="IncludePDBsInPackage">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(OutputPath)\$(AssemblyName).pdb" PackagePath="$(BuildOutputTargetFolder)$(TargetFramework)" />
+    </ItemGroup>
+  </Target>
+</Project>

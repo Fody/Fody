@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net452</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Description>NuGet packaging Fody repositories</Description>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IsTool>true</IsTool>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="build\*" PackagePath="build" />
+    <Content Include="buildMultiTargeting\*" PackagePath="buildMultiTargeting" />
+  </ItemGroup>
+
+</Project>

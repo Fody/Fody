@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <authors>$authors$</authors>
+    <owners>$owners$</owners>
+    <developmentDependency>true</developmentDependency>
+    <licenseUrl>$licenseUrl$</licenseUrl>
+    <projectUrl>$projectUrl$</projectUrl>
+    <iconUrl>$iconUrl$</iconUrl>
+    <requireLicenseAcceptance>$requireLicenseAcceptance$</requireLicenseAcceptance>
+    <description>$description$</description>
+    <copyright>$copyright$</copyright>
+    <tags>$tags$</tags>
+    <dependencies>
+      <dependency id="Fody" version="[$version$, $version$]"/>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\..\binaries\net452\NServiceBus.Persistence.Sql.ScriptBuilderTask.???" target="netclassic" />
+    <file src="NServiceBus.Persistence.Sql.MsBuild.targets" target="build" />
+  </files>
+</package>

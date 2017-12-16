@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <PackageLicenseUrl Condition="'$(PackageLicenseUrl)' == ''">http://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance Condition="'$(PackageRequireLicenseAcceptance)' == ''">false</PackageRequireLicenseAcceptance>
+    <PackageTags Condition="'$(PackageTags)' == ''">ILWeaving, Fody, Cecil, AOP</PackageTags>
+    <PackageOutputPath>nugets</PackageOutputPath>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludePDBsInPackage</TargetsForTfmSpecificContentInPackage>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+    <DisableFody>true</DisableFody>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Fody" Version="*"/>
+    <Content Include="$(SolutionDir)$(SolutionName).Fody\bin\$(Configuration)\**\$(SolutionName).Fody.*" Exclude="**\*.json">
+      <Link>weavers\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <Pack>true</Pack>
+      <PackagePath>weavers\%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
+    </Content>
+  </ItemGroup>
+</Project>

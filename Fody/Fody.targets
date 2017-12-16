@@ -45,7 +45,7 @@
       AssemblyFile="$(FodyAssembly)" />
   <Target
       AfterTargets="AfterCompile"
-      Condition="Exists('@(IntermediateAssembly)') And '$(DesignTimeBuild)' != 'true'"
+      Condition="Exists('@(IntermediateAssembly)') And $(DesignTimeBuild) != true And $(DisableFody) != true"
       Name="FodyTarget"
       DependsOnTargets="$(FodyDependsOnTargets)"
       Inputs="@(IntermediateAssembly->'%(FullPath)');$(FodyKeyFilePath);$(ProjectWeaverXml)"
@@ -74,7 +74,7 @@
     </Fody.WeavingTask>
 
     <PropertyGroup>
-      <FodyWeavingTargetWasRun>True</FodyWeavingTargetWasRun>
+      <FodyWeavingTargetWasRun>true</FodyWeavingTargetWasRun>
     </PropertyGroup>
 
   </Target>
@@ -83,7 +83,7 @@
   <UsingTask
     TaskName="Fody.VerifyTask"
     AssemblyFile="$(FodyAssembly)" />
-  <Target Condition="'$(NCrunch)' != '1' And ('$(FodyWeavingTargetWasRun)' == 'True')"
+  <Target Condition="'$(NCrunch)' != '1' And $(FodyWeavingTargetWasRun) == true And $(DisableFody) != true"
       AfterTargets="AfterBuild"
       Name="FodyVerifyTarget"
       DependsOnTargets="$(FodyVerifyDependsOnTargets)">

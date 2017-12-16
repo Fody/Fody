@@ -5,10 +5,13 @@ namespace Fody
 {
     public class VerifyTask : Task
     {
-        [Required] public string SolutionDir { get; set; }
+        [Required]
+        public string SolutionDir { get; set; }
         public string DefineConstants { get; set; }
-        [Required] public string ProjectDirectory { get; set; }
-        [Required] public string TargetPath { get; set; }
+        [Required]
+        public string ProjectDirectory { get; set; }
+        [Required]
+        public string TargetPath { get; set; }
 
         public override bool Execute()
         {

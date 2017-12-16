@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2003
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 15.0.26430.13
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fody", "Fody\Fody.csproj", "{64880F43-E6C1-428E-B00A-E0374697B5CF}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -21,6 +21,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyHelpers", "FodyHelpers\FodyHelpers.csproj", "{B95F633D-F876-4DC2-947F-4AAA48332575}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyCecil", "FodyCecil\FodyCecil.csproj", "{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyPackaging", "FodyPackaging\FodyPackaging.csproj", "{B2D01ACC-D215-4063-A9CD-7CE862D799F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -118,6 +120,18 @@ Global
 		{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}.Release|x86.ActiveCfg = Release|Any CPU
 		{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}.Release|x86.Build.0 = Release|Any CPU
+		{B2D01ACC-D215-4063-A9CD-7CE862D799F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2D01ACC-D215-4063-A9CD-7CE862D799F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2D01ACC-D215-4063-A9CD-7CE862D799F9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B2D01ACC-D215-4063-A9CD-7CE862D799F9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B2D01ACC-D215-4063-A9CD-7CE862D799F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B2D01ACC-D215-4063-A9CD-7CE862D799F9}.Debug|x86.Build.0 = Debug|Any CPU
+		{B2D01ACC-D215-4063-A9CD-7CE862D799F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2D01ACC-D215-4063-A9CD-7CE862D799F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2D01ACC-D215-4063-A9CD-7CE862D799F9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B2D01ACC-D215-4063-A9CD-7CE862D799F9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B2D01ACC-D215-4063-A9CD-7CE862D799F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{B2D01ACC-D215-4063-A9CD-7CE862D799F9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
