@@ -19,7 +19,7 @@ public partial class AddinFinder
         }
         else
         {
-            var separator = Environment.NewLine + "    - ";
+            var separator = $"{Environment.NewLine}    - ";
             var packageDefinitionsLogMessage = separator + string.Join(separator, PackageDefinitions);
             Logger.LogDebug($"PackageDefinitions: {packageDefinitionsLogMessage}");
 
@@ -58,6 +58,13 @@ public partial class AddinFinder
             foreach (var versionDirectory in Directory.EnumerateDirectories(packageDirectory))
             {
                 var lowercasePackageName = $"{packageName?.ToLowerInvariant()}.dll";
+                var netClassic = Path.Combine(versionDirectory, @"netclassicweaver\", lowercasePackageName);
+                if (File.Exists(netClassic))
+                {
+                    yield return netClassic;
+                    yield break;
+                }
+
                 var files = Directory.EnumerateFiles(versionDirectory);
                 var assembly = files.FirstOrDefault(file => Path.GetFileName(file)?.ToLowerInvariant() == lowercasePackageName);
 

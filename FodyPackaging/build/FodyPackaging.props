@@ -15,10 +15,15 @@
   <ItemGroup>
     <PackageReference Include="Fody"
                       Version="2.*"/>
-    <Content Include="$(SolutionDir)$(SolutionName).Fody\bin\$(Configuration)\**\$(SolutionName).Fody.*"
+    <Content Include="$(SolutionDir)$(SolutionName).Fody\bin\$(Configuration)\net46\$(SolutionName).Fody.*"
              Exclude="**\*.json"
-             Link="weavers\%(RecursiveDir)%(Filename)%(Extension)"
+             Link="netclassicweaver\%(Filename)%(Extension)"
              Pack="true"
-             PackagePath="weavers\%(RecursiveDir)%(Filename)%(Extension)"/>
+             PackagePath="netclassicweaver\%(Filename)%(Extension)"/>
+    <Content Include="$(SolutionDir)$(SolutionName).Fody\bin\$(Configuration)\netstandard2.0\$(SolutionName).Fody.*"
+             Exclude="**\*.json"
+             Link="netstandardweaver\%(Filename)%(Extension)"
+             Pack="true"
+             PackagePath="netstandardweaver\%(Filename)%(Extension)"/>
   </ItemGroup>
 </Project>
