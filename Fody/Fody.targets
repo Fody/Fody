@@ -79,7 +79,6 @@
 
   </Target>
 
-
   <UsingTask
     TaskName="Fody.VerifyTask"
     AssemblyFile="$(FodyAssembly)" />
@@ -95,7 +94,6 @@
           DefineConstants="$(DefineConstants)"
       />
   </Target>
-
 
   <!--Support for ncrunch-->
   <ItemGroup  Condition="'$(NCrunch)' == '1'">

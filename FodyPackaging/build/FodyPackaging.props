@@ -13,11 +13,12 @@
     <DisableFody>true</DisableFody>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Fody" Version="2.*"/>
-    <Content Include="$(SolutionDir)$(SolutionName).Fody\bin\$(Configuration)\**\$(SolutionName).Fody.*" Exclude="**\*.json">
-      <Link>weavers\%(RecursiveDir)%(Filename)%(Extension)</Link>
-      <Pack>true</Pack>
-      <PackagePath>weavers\%(RecursiveDir)%(Filename)%(Extension)</PackagePath>
-    </Content>
+    <PackageReference Include="Fody"
+                      Version="2.*"/>
+    <Content Include="$(SolutionDir)$(SolutionName).Fody\bin\$(Configuration)\**\$(SolutionName).Fody.*"
+             Exclude="**\*.json"
+             Link="weavers\%(RecursiveDir)%(Filename)%(Extension)"
+             Pack="true"
+             PackagePath="weavers\%(RecursiveDir)%(Filename)%(Extension)"/>
   </ItemGroup>
 </Project>
