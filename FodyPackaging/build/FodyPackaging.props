@@ -13,7 +13,7 @@
     <DisableFody>true</DisableFody>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Fody" Version="*"/>
+    <PackageReference Include="Fody" Version="2.*"/>
     <Content Include="$(SolutionDir)$(SolutionName).Fody\bin\$(Configuration)\**\$(SolutionName).Fody.*" Exclude="**\*.json">
       <Link>weavers\%(RecursiveDir)%(Filename)%(Extension)</Link>
       <Pack>true</Pack>
