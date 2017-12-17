@@ -14,10 +14,15 @@ namespace Fody
         {
             var assembly = typeof(CodeBaseLocation).Assembly;
 
-            var uri = new UriBuilder(assembly.CodeBase);
-            var currentAssemblyPath = Uri.UnescapeDataString(uri.Path);
+            var currentAssemblyPath = assembly.GetAssemblyLocation();
             var currentDirectory = Path.GetDirectoryName(currentAssemblyPath);
             CurrentDirectory = currentDirectory;
+        }
+
+        public static string GetAssemblyLocation(this Assembly assembly)
+        {
+            var uri = new UriBuilder(assembly.CodeBase);
+            return Uri.UnescapeDataString(uri.Path);
         }
 
         public static readonly string CurrentDirectory;
