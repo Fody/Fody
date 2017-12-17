@@ -25,5 +25,6 @@ public class TargetWeaver : BaseModuleWeaver
     public override IEnumerable<string> GetAssembliesForScanning()
     {
         yield return "mscorlib";
+        yield return "System";
     }
 }

@@ -14,6 +14,7 @@ namespace Fody
     {
         public static TestResult ExecuteTestRun(this BaseModuleWeaver weaver, string assemblyPath)
         {
+            assemblyPath = Path.Combine(CodeBaseLocation.CurrentDirectory, assemblyPath);
             var fodyTempDir = Path.Combine(Path.GetDirectoryName(assemblyPath), "fodytemp");
             Directory.CreateDirectory(fodyTempDir);
             var targetAssemblyPath = Path.Combine(fodyTempDir, Path.GetFileName(assemblyPath));

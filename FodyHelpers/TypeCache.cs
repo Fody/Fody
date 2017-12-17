@@ -22,10 +22,18 @@ public class TypeCache
         {
             foreach (var exportedType in assembly.MainModule.ExportedTypes)
             {
-                if (definitions.All(x => x.Name.Name != exportedType.Scope.Name))
+                if (definitions.Any(x => x.Name.Name == exportedType.Scope.Name))
                 {
-                    AddIfPublic(exportedType.Resolve());
+                    continue;
                 }
+
+                var typeDefinition = exportedType.Resolve();
+                if (typeDefinition == null)
+                {
+                    continue;
+                }
+
+                AddIfPublic(typeDefinition);
             }
         }
     }

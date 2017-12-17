@@ -1,5 +1,7 @@
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using Mono.Cecil;
 
@@ -26,22 +28,45 @@ namespace Fody
         {
             if (!definitions.TryGetValue(name, out var definition))
             {
-                var assembly = Assembly.Load(name);
+                var assembly = GetAssembly(name);
                 if (assembly == null)
                 {
                     return null;
                 }
-                var assemblyLocation = assembly.GetAssemblyLocation();
-                var readerParameters = new ReaderParameters(ReadingMode.Deferred)
-                {
-                    ReadWrite = false,
-                    ReadSymbols = false,
-                    AssemblyResolver = this
-                };
-                definitions[name] = definition = AssemblyDefinition.ReadAssembly(assemblyLocation, readerParameters);
+                definitions[name] = definition = GetAssemblyDefinition(assembly);
             }
 
             return definition;
+        }
+
+        static Assembly GetAssembly(string name)
+        {
+            if (string.Equals(name, "System", StringComparison.OrdinalIgnoreCase))
+            {
+                return typeof(GeneratedCodeAttribute).Assembly;
+            }
+
+            try
+            {
+                return Assembly.Load(name);
+            }
+            catch (FileNotFoundException)
+            {
+                return null;
+            }
+        }
+
+        AssemblyDefinition GetAssemblyDefinition(Assembly assembly)
+        {
+            var assemblyLocation = assembly.GetAssemblyLocation();
+            var readerParameters = new ReaderParameters(ReadingMode.Deferred)
+            {
+                ReadWrite = false,
+                ReadSymbols = false,
+                AssemblyResolver = this
+            };
+            var assemblyDefinition = AssemblyDefinition.ReadAssembly(assemblyLocation, readerParameters);
+            return assemblyDefinition;
         }
 
         public AssemblyDefinition Resolve(AssemblyNameReference name, ReaderParameters parameters)
