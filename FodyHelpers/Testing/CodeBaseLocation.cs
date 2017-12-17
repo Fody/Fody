@@ -7,7 +7,7 @@ namespace Fody
     /// <summary>
     /// Uses <see cref="Assembly.CodeBase"/> to derive the current directory.
     /// </summary>
-    [Obsolete("Only for developement purposes when building Fody addins. The API may change in minor releases.")]
+    [Obsolete(OnlyForTesting.Message)]
     public static class CodeBaseLocation
     {
         static CodeBaseLocation()

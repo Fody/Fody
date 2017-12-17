@@ -10,7 +10,7 @@ namespace Fody
     /// <summary>
     /// Verifies assemblies using peverify.exe.
     /// </summary>
-    [Obsolete("Only for developement purposes when building Fody addins. The API may change in minor releases.")]
+    [Obsolete(OnlyForTesting.Message)]
     public static class PeVerifier
     {
         public static readonly bool FoundPeVerify;
