@@ -1,15 +1,12 @@
 using System;
+using Fody;
 using Microsoft.Build.Framework;
-using MessageImportance = Fody.MessageImportance;
 
 public class BuildLogger : MarshalByRefObject, ILogger
 {
     public IBuildEngine BuildEngine { get; set; }
     public bool ErrorOccurred;
     string currentWeaverName;
-
-    MessageImportance DebugMessageImportant = MessageImportance.Normal;
-    MessageImportance InfoMessageImportant = MessageImportance.High;
 
     public virtual void SetCurrentWeaverName(string weaverName)
     {
@@ -28,12 +25,12 @@ public class BuildLogger : MarshalByRefObject, ILogger
 
     public virtual void LogDebug(string message)
     {
-        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", (Microsoft.Build.Framework.MessageImportance) DebugMessageImportant));
+        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", (Microsoft.Build.Framework.MessageImportance)MessageImportanceDefaults.Debug));
     }
 
     public virtual void LogInfo(string message)
     {
-        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", (Microsoft.Build.Framework.MessageImportance)InfoMessageImportant));
+        BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", (Microsoft.Build.Framework.MessageImportance)MessageImportanceDefaults.Info));
     }
 
     public virtual void LogWarning(string message)
