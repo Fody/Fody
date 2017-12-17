@@ -2,7 +2,6 @@
 <Project>
   <PropertyGroup>
     <PackageVersion>2.3.0</PackageVersion>
-    <Title>Fody</Title>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <LangVersion>latest</LangVersion>
     <NoWarn>CS1591</NoWarn>
