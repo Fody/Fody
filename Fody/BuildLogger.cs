@@ -25,12 +25,16 @@ public class BuildLogger : MarshalByRefObject, ILogger
 
     public virtual void LogDebug(string message)
     {
+#pragma warning disable 618
         BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", (Microsoft.Build.Framework.MessageImportance)MessageImportanceDefaults.Debug));
+#pragma warning restore 618
     }
 
     public virtual void LogInfo(string message)
     {
+#pragma warning disable 618
         BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", (Microsoft.Build.Framework.MessageImportance)MessageImportanceDefaults.Info));
+#pragma warning restore 618
     }
 
     public virtual void LogWarning(string message)
