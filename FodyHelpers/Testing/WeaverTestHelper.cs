@@ -14,10 +14,11 @@ namespace Fody
     {
         public static TestResult ExecuteTestRun(this BaseModuleWeaver weaver, string assemblyPath)
         {
-            var targetAssemblyPath = Path.ChangeExtension(assemblyPath, "fody.tmp");
-            File.Delete(targetAssemblyPath);
+            var fodyTempDir = Path.Combine(Path.GetDirectoryName(assemblyPath), "fodytemp");
+            Directory.CreateDirectory(fodyTempDir);
+            var targetAssemblyPath = Path.Combine(fodyTempDir, Path.GetFileName(assemblyPath));
+            var targetSymbolsPath = Path.ChangeExtension(targetAssemblyPath, "pdb");
             var symbolsPath = Path.ChangeExtension(assemblyPath, "pdb");
-            var targetSymbolsPath = Path.ChangeExtension(assemblyPath, "fody.pdb");
             File.Copy(assemblyPath, targetAssemblyPath, true);
             File.Copy(symbolsPath, targetSymbolsPath, true);
 
@@ -40,6 +41,7 @@ namespace Fody
                 var readerParameters = new ReaderParameters(ReadingMode.Immediate)
                 {
                     AssemblyResolver = assemblyResolver,
+                    SymbolReaderProvider = new SymbolReaderProvider(),
                     ReadWrite = true,
                     ReadSymbols = true
                 };
