@@ -91,7 +91,6 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         try
         {
             SplitUpReferences();
-            GetSymbolProviders();
             assemblyResolver = new AssemblyResolver(Logger, SplitReferences);
             ReadModule();
             AppDomain.CurrentDomain.AssemblyResolve += assemblyResolve;
@@ -102,7 +101,6 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             FindStrongNameKey();
             WriteModule();
             ModuleDefinition?.Dispose();
-            CleanupTempSymbolsAndAssembly();
             ExecuteAfterWeavers();
             DisposeWeavers();
         }
@@ -114,7 +112,6 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         finally
         {
             ModuleDefinition?.Dispose();
-            CleanupTempSymbolsAndAssembly();
             assemblyResolver?.Dispose();
         }
     }

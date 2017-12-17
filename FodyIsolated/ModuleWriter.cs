@@ -9,13 +9,11 @@ public partial class InnerWeaver
         Logger.LogDebug($"  Writing assembly to '{AssemblyFilePath}'.");
 
         var parameters = new WriterParameters
-            {
-                StrongNameKeyPair = StrongNameKeyPair,
-                WriteSymbols = debugWriterProvider != null,
-                SymbolWriterProvider = debugWriterProvider,
-            };
+        {
+            StrongNameKeyPair = StrongNameKeyPair,
+        };
 
-        ModuleDefinition.Write(AssemblyFilePath, parameters);
+        ModuleDefinition.Write(parameters);
         Logger.LogDebug($"  Finished writing assembly {stopwatch.ElapsedMilliseconds}ms.");
     }
 }
