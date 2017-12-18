@@ -20,6 +20,7 @@
 
       <FilesToInclude Include="$(AttributeDirPath)\**\$(SolutionName).dll"/>
       <FilesToInclude Include="$(AttributeDirPath)\**\$(SolutionName).pdb"/>
+      <FilesToInclude Include="$(AttributeDirPath)\**\$(SolutionName).xml"/>
 
     </ItemGroup>
     <CreateItem Include="@(FilesToInclude)"
