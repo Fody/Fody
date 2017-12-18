@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <PackageId Condition="'$(PackageId)' == ''">$(AssemblyName).Fody</PackageId>
-    <Description Condition="'$(Description)' == ''">$(PackageId)</Description>
     <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">$(PackageProjectUrl)\package_icon.png</PackageIconUrl>
   </PropertyGroup>
-  <Target Name="IncludePDBsInPackage">
+  <Target Name="IncludeFodyFiles">
     <ItemGroup>
-      <TfmSpecificPackageFile Include="$(OutputPath)\$(AssemblyName).pdb"
-                              PackagePath="$(BuildOutputTargetFolder)\$(TargetFramework)" />
+      <TfmSpecificPackageFile Include="$(OutputPath)\$(AssemblyName).*"
+                              Condition="$(TargetFramework) == 'net46'"
+                              PackagePath="netclassicweaver" />
+      <TfmSpecificPackageFile Include="$(OutputPath)\$(AssemblyName).*"
+                              Condition="$(TargetFramework) == 'netstandard2.0'"
+                              PackagePath="netstandardweaver" />
     </ItemGroup>
+
+    <PropertyGroup>
+      <AttributeDirPath>$(SolutionDir)$(SolutionName)\bin\$(Configuration)\</AttributeDirPath>
+    </PropertyGroup>
+    <ItemGroup>
+
+      <FilesToInclude Include="$(AttributeDirPath)\**\$(SolutionName).dll"/>
+      <FilesToInclude Include="$(AttributeDirPath)\**\$(SolutionName).pdb"/>
+
+    </ItemGroup>
+    <CreateItem Include="@(FilesToInclude)"
+                AdditionalMetadata="PackagePath=lib\%(FilesToInclude.RecursiveDir)">
+      <Output TaskParameter="Include" ItemName="TfmSpecificPackageFile"/>
+    </CreateItem>
+
   </Target>
 </Project>

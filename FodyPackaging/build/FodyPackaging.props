@@ -5,25 +5,11 @@
     <PackageRequireLicenseAcceptance Condition="'$(PackageRequireLicenseAcceptance)' == ''">false</PackageRequireLicenseAcceptance>
     <PackageTags Condition="'$(PackageTags)' == ''">ILWeaving, Fody, Cecil, AOP</PackageTags>
     <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludePDBsInPackage</TargetsForTfmSpecificContentInPackage>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeFodyFiles</TargetsForTfmSpecificContentInPackage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <DisableFody>true</DisableFody>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">http://github.com/Fody/$(SolutionName)</PackageProjectUrl>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Fody"
-                      Version="2.*"/>
-    <Content Include="$(SolutionDir)$(SolutionName).Fody\bin\$(Configuration)\net46\$(SolutionName).Fody.*"
-             Exclude="**\*.json"
-             Link="netclassicweaver\%(Filename)%(Extension)"
-             Pack="true"
-             PackagePath="netclassicweaver\%(Filename)%(Extension)"/>
-    <Content Include="$(SolutionDir)$(SolutionName).Fody\bin\$(Configuration)\netstandard2.0\$(SolutionName).Fody.*"
-             Exclude="**\*.json"
-             Link="netstandardweaver\%(Filename)%(Extension)"
-             Pack="true"
-             PackagePath="netstandardweaver\%(Filename)%(Extension)"/>
-  </ItemGroup>
 </Project>
