@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 14.0.22823.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weavers", "Weavers\Weavers.csproj", "{3F4C62F3-F582-452F-B455-0CD5C89D96CF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{9C8338D4-3F27-4FA5-97A0-6039FDB07724}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{9C8338D4-3F27-4FA5-97A0-6039FDB07724}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WithNugetWeavers", "WithNugetWeavers\WithNugetWeavers.csproj", "{4744FEC7-AE13-4A20-81C6-BBB837C19B5F}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -23,8 +23,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WithNugetAndInSolutionWeave
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WithNoPdb", "WithNoPdb\WithNoPdb.csproj", "{4F286C5B-9599-4F6A-BD7F-1E7BB9DDCAC6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WithStrongName", "WithStrongName\WithStrongName.csproj", "{FDEE804A-3861-4C5A-9089-696DB9B19F24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,15 +54,8 @@ Global
 		{4F286C5B-9599-4F6A-BD7F-1E7BB9DDCAC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F286C5B-9599-4F6A-BD7F-1E7BB9DDCAC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F286C5B-9599-4F6A-BD7F-1E7BB9DDCAC6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FDEE804A-3861-4C5A-9089-696DB9B19F24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FDEE804A-3861-4C5A-9089-696DB9B19F24}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FDEE804A-3861-4C5A-9089-696DB9B19F24}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FDEE804A-3861-4C5A-9089-696DB9B19F24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {0290197C-EB3D-4706-A2E2-1D46472C639B}
 	EndGlobalSection
 EndGlobal

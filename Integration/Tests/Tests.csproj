@@ -10,6 +10,5 @@
     <ProjectReference Include="..\WithNugetAndInSolutionWeavers\WithNugetAndInSolutionWeavers.csproj" />
     <ProjectReference Include="..\WithNugetWeavers\WithNugetWeavers.csproj" />
     <ProjectReference Include="..\WithOnlyInSolutionWeaver\WithOnlyInSolutionWeaver.csproj" />
-    <ProjectReference Include="..\WithStrongName\WithStrongName.csproj" />
   </ItemGroup>
 </Project>
