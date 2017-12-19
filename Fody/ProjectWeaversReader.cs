@@ -32,7 +32,8 @@ public partial class Processor
                 var weaverEntry = new WeaverEntry
                                       {
                                           Element = element.ToString(SaveOptions.OmitDuplicateNamespaces),
-                                          AssemblyName = assemblyName
+                                          AssemblyName = assemblyName,
+                                          Source = element.Attribute("Source")?.Value,
                                       };
                 Weavers.Insert(index, weaverEntry);
             }
