@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
+    <PackageId>$(SolutionName).Fody</PackageId>
     <PackageLicenseUrl Condition="'$(PackageLicenseUrl)' == ''">http://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance Condition="'$(PackageRequireLicenseAcceptance)' == ''">false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">http://github.com/Fody/$(SolutionName)</PackageProjectUrl>
     <PackageTags Condition="'$(PackageTags)' == ''">ILWeaving, Fody, Cecil, AOP</PackageTags>
     <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeFodyFiles</TargetsForTfmSpecificContentInPackage>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <DisableFody>true</DisableFody>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
-    <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">http://github.com/Fody/$(SolutionName)</PackageProjectUrl>
+    <WeaverName>$(SolutionName).Fody</WeaverName>
+    <WeaverDirPath>$(SolutionDir)$(WeaverName)\bin\$(Configuration)\</WeaverDirPath>
   </PropertyGroup>
+  <ItemGroup>
+    <!-- this project targets netstandard2.0 (unnecessarily) and has the below ref to work around this bug https://github.com/Microsoft/msbuild/issues/2661 -->
+    <ProjectReference Include="..\$(WeaverName)\$(WeaverName).csproj" PrivateAssets="All" Condition="$(TargetFramework)=='fake'" />
+  </ItemGroup>
 </Project>

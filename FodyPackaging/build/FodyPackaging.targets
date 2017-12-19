@@ -1,32 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <PropertyGroup>
-    <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">$(PackageProjectUrl)\package_icon.png</PackageIconUrl>
-  </PropertyGroup>
   <Target Name="IncludeFodyFiles">
     <ItemGroup>
-      <TfmSpecificPackageFile Include="$(OutputPath)\$(AssemblyName).*"
-                              Condition="$(TargetFramework) == 'net46'"
-                              PackagePath="netclassicweaver" />
-      <TfmSpecificPackageFile Include="$(OutputPath)\$(AssemblyName).*"
-                              Condition="$(TargetFramework) == 'netstandard2.0'"
-                              PackagePath="netstandardweaver" />
+      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net46\$(WeaverName).dll" />
+      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net46\$(WeaverName).pdb" />
+      <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2.0\$(WeaverName).dll" />
+      <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2.0\$(WeaverName).pdb" />
     </ItemGroup>
-
-    <PropertyGroup>
-      <AttributeDirPath>$(SolutionDir)$(SolutionName)\bin\$(Configuration)\</AttributeDirPath>
-    </PropertyGroup>
-    <ItemGroup>
-
-      <FilesToInclude Include="$(AttributeDirPath)\**\$(SolutionName).dll"/>
-      <FilesToInclude Include="$(AttributeDirPath)\**\$(SolutionName).pdb"/>
-      <FilesToInclude Include="$(AttributeDirPath)\**\$(SolutionName).xml"/>
-
-    </ItemGroup>
-    <CreateItem Include="@(FilesToInclude)"
-                AdditionalMetadata="PackagePath=lib\%(FilesToInclude.RecursiveDir)">
-      <Output TaskParameter="Include" ItemName="TfmSpecificPackageFile"/>
+    <CreateItem Include="@(NetClassicFilesToInclude)" AdditionalMetadata="PackagePath=netclassicweaver">
+      <Output TaskParameter="Include" ItemName="TfmSpecificPackageFile" />
     </CreateItem>
-
+    <CreateItem Include="@(NetStandardFilesToInclude)" AdditionalMetadata="PackagePath=netstandardweaver">
+      <Output TaskParameter="Include" ItemName="TfmSpecificPackageFile" />
+    </CreateItem>
   </Target>
 </Project>
