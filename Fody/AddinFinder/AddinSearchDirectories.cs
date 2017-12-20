@@ -7,9 +7,10 @@ public partial class AddinFinder
 {
     public void FindAddinDirectories()
     {
+        Logger.LogDebug("FindAddinDirectories:");
         if (PackageDefinitions == null)
         {
-            Logger.LogDebug("No PackageDefinitions");
+            Logger.LogDebug("  No PackageDefinitions");
 
             AddNugetDirectoryFromConvention();
             AddNugetDirectoryFromNugetConfig();
@@ -21,13 +22,13 @@ public partial class AddinFinder
         {
             var separator = $"{Environment.NewLine}    - ";
             var packageDefinitionsLogMessage = separator + string.Join(separator, PackageDefinitions);
-            Logger.LogDebug($"PackageDefinitions: {packageDefinitionsLogMessage}");
+            Logger.LogDebug($"  PackageDefinitions: {packageDefinitionsLogMessage}");
 
             // each PackageDefinition will be of the format C:\...\packages\propertychanging.fody\1.28.0
             // so must be a Contains(.fody)
             foreach (var versionDirectory in PackageDefinitions.Where(x => x.ToLowerInvariant().Contains(".fody")))
             {
-                Logger.LogDebug($"Adding weavers from package directory: '{versionDirectory}'");
+                Logger.LogDebug($"  Scannin package directory: '{versionDirectory}'");
 
                 var netClassic = Path.Combine(versionDirectory, "netclassicweaver");
                 if (Directory.Exists(netClassic))
@@ -46,12 +47,14 @@ public partial class AddinFinder
     {
         if (NuGetPackageRoot == null)
         {
+            Logger.LogDebug($"  Skipped NuGetPackageRoot since it is not defined.");
             return;
         }
         if (!Directory.Exists(NuGetPackageRoot))
         {
-            Logger.LogDebug($"Skipped scanning '{NuGetPackageRoot}' for weavers since it doesn't exist.");
+            Logger.LogDebug($"  Skipped NuGetPackageRoot '{NuGetPackageRoot}' since it doesn't exist.");
         }
+        Logger.LogDebug($"  Scanning NuGetPackageRoot '{NuGetPackageRoot}'.");
         AddFiles(ScanNuGetPackageRoot(NuGetPackageRoot));
     }
 
@@ -86,30 +89,22 @@ public partial class AddinFinder
 
     public void AddToolsSolutionDirectoryToAddinSearch()
     {
-        Logger.LogDebug($"SolutionDirectoryPath: {SolutionDirectoryPath}");
         var solutionDirToolsDirectory = Path.Combine(SolutionDirectoryPath, "Tools");
 
         if (!Directory.Exists(solutionDirToolsDirectory))
         {
-            Logger.LogDebug($"Skipped scanning '{solutionDirToolsDirectory}' for weavers since it doesn't exist.");
+            Logger.LogDebug($"  Skipped scanning '{solutionDirToolsDirectory}' since it doesn't exist.");
             return;
         }
 
-        Logger.LogDebug($"Adding weaver dlls from '{solutionDirToolsDirectory}'.");
+        Logger.LogDebug($"  Scanning SolutionDir/Tools directory convention: '{solutionDirToolsDirectory}'.");
         AddFiles(Directory.EnumerateFiles(solutionDirToolsDirectory, "*.Fody.dll", SearchOption.AllDirectories));
     }
 
     public void AddCurrentFodyDirectoryToAddinSearch()
     {
-        Logger.LogDebug($"SolutionDirectoryPath: {SolutionDirectoryPath}");
         var fodyParentDirectory = Directory.GetParent(AssemblyLocation.CurrentDirectory).FullName;
-
-        if (!Directory.Exists(fodyParentDirectory))
-        {
-            Logger.LogDebug($"Skipped scanning '{fodyParentDirectory}' for weavers since it doesn't exist.");
-            return;
-        }
-
+        Logger.LogDebug($"  Scanning the directory Fody.dll exists in: {fodyParentDirectory}'.");
         AddWeaversFromDir(fodyParentDirectory);
     }
 
@@ -118,14 +113,15 @@ public partial class AddinFinder
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(SolutionDirectoryPath);
         if (packagesPathFromConfig == null)
         {
-            Logger.LogDebug("Could not find packages dir from nuget config.");
+            Logger.LogDebug("  Skipped directory from Nuget Config since it could not be derived.");
             return;
         }
         if (!Directory.Exists(packagesPathFromConfig))
         {
-            Logger.LogDebug($"Skipped scanning '{packagesPathFromConfig}' for weavers since it doesn't exist.");
+            Logger.LogDebug($"  Skipped directory from Nuget Config '{packagesPathFromConfig}' since it doesn't exist.");
             return;
         }
+        Logger.LogDebug($"  Scanning directory from Nuget Config: {packagesPathFromConfig}'.");
         AddWeaversFromDir(packagesPathFromConfig);
     }
 
@@ -134,15 +130,16 @@ public partial class AddinFinder
         var solutionPackages = Path.Combine(SolutionDirectoryPath, "Packages");
         if (!Directory.Exists(solutionPackages))
         {
-            Logger.LogDebug($"Skipped scanning '{solutionPackages}' for weavers since it doesn't exist.");
+            Logger.LogDebug($"  Skipped SolutionDir/Packages convention '{solutionPackages}' since it doesn't exist.");
             return;
         }
+        Logger.LogDebug($"  Scanning SolutionDir/Packages convention: {solutionPackages}'.");
         AddWeaversFromDir(solutionPackages);
     }
 
     void AddWeaversFromDir(string directory)
     {
-        Logger.LogDebug($"Adding weaver dlls from '{directory}'.");
+        Logger.LogDebug($"    Adding weaver dlls from '{directory}'.");
         foreach (var packageDir in Directory.GetDirectories(directory, "*.Fody*"))
         {
             AddFiles(Directory.EnumerateFiles(packageDir, "*.Fody.dll"));
@@ -153,7 +150,7 @@ public partial class AddinFinder
     {
         foreach (var file in files)
         {
-            Logger.LogDebug($"Fody weaver file added '{file}'");
+            Logger.LogDebug($"    Fody weaver file added '{file}'");
             FodyFiles.Add(file);
         }
     }
