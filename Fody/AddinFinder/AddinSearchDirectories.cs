@@ -14,7 +14,7 @@ public partial class AddinFinder
 
             AddNugetDirectoryFromConvention();
             AddNugetDirectoryFromNugetConfig();
-            AddCurrentFodyDirectoryToAddinSearch();
+            AddDerivePackagesFromMsBuildThisFileDirectory();
             AddToolsSolutionDirectoryToAddinSearch();
             AddNuGetPackageRootToAddinSearch();
         }
@@ -101,11 +101,11 @@ public partial class AddinFinder
         AddFiles(Directory.EnumerateFiles(solutionDirToolsDirectory, "*.Fody.dll", SearchOption.AllDirectories));
     }
 
-    public void AddCurrentFodyDirectoryToAddinSearch()
+    public void AddDerivePackagesFromMsBuildThisFileDirectory()
     {
-        var fodyParentDirectory = Directory.GetParent(AssemblyLocation.CurrentDirectory).FullName;
-        Logger.LogDebug($"  Scanning the directory Fody.dll exists in: {fodyParentDirectory}'.");
-        AddWeaversFromDir(fodyParentDirectory);
+        var fromMsBuildThisFileDirectory = Path.Combine(MsBuildThisFileDirectory,@"..\..\..\");
+        Logger.LogDebug($"  Scanning the MsBuildThisFileDirectory parent: {fromMsBuildThisFileDirectory}'.");
+        AddWeaversFromDir(fromMsBuildThisFileDirectory);
     }
 
     public void AddNugetDirectoryFromNugetConfig()
@@ -157,6 +157,7 @@ public partial class AddinFinder
 
     public ILogger Logger;
     public string SolutionDirectoryPath;
+    public string MsBuildThisFileDirectory;
     public string NuGetPackageRoot;
     public List<string> PackageDefinitions;
 }

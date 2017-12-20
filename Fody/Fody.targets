@@ -66,6 +66,7 @@
           DebugSymbols="$(DebugSymbols)"
           DebugType="$(DebugType)"
           DocumentationFilePath="@(DocFileItem->'%(FullPath)')"
+          MsBuildThisFileDirectory="$(MSBuildThisFileDirectory)"
       >
 
       <Output

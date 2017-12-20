@@ -15,6 +15,7 @@ public partial class Processor
     public string References;
     public string SolutionDirectory;
     public string NuGetPackageRoot;
+    public string MSBuildThisFileDirectory;
     public bool DebugSymbols;
     public List<string> ReferenceCopyLocalPaths;
     public List<string> PackageDefinitions;
@@ -112,6 +113,7 @@ see https://github.com/Fody/Fody/wiki/SampleUsage");
             {
                 Logger = Logger,
                 SolutionDirectoryPath = SolutionDirectory,
+                MsBuildThisFileDirectory= MSBuildThisFileDirectory,
                 NuGetPackageRoot = NuGetPackageRoot,
                 PackageDefinitions = PackageDefinitions,
             };

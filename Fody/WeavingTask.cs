@@ -33,6 +33,9 @@ namespace Fody
         [Required]
         public string SolutionDir { get; set; }
 
+        [Required]
+        public string MSBuildThisFileDirectory { get; set; }
+
         public string DefineConstants { get; set; }
 
         public string Configuration { get; set; }
@@ -69,6 +72,7 @@ namespace Fody
                 ReferenceCopyLocalPaths = referenceCopyLocalPaths,
                 DefineConstants = defineConstants,
                 NuGetPackageRoot = NuGetPackageRoot,
+                MSBuildThisFileDirectory = MSBuildThisFileDirectory,
                 PackageDefinitions = PackageDefinitions?.ToList(),
                 DebugSymbols = DebugSymbolsProduced()
             };
