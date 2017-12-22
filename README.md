@@ -85,6 +85,7 @@ Any bugs found must be reproduced in a supported version.
 
 Downstream plugins are recommended to follow the above guidelines.
 
+
 ### Reasons
 
 While it may seam trivial to "implement support for earlier versions of.net" the long term support implications are too costly. For example to support earlier versions of .net require 
@@ -93,9 +94,11 @@ While it may seam trivial to "implement support for earlier versions of.net" the
  * Added complexity to setting up build environment.
  * Bugs in unsupported versions in .NET may be manifest as bugs in Fody.
 
+
 ## Edit and continue
 
 Edit and continue is not supported. There is no extension point to re-weave an assembly after the edit part.
+
 
 ## Project formats
 
