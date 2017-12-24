@@ -30,7 +30,7 @@ public static class NugetConfigReader
                 }
                 currentDirectory = directoryInfo.FullName;
             }
-            catch 
+            catch
             {
                 // trouble with tree walk. ignore
                 return null;
@@ -40,40 +40,56 @@ public static class NugetConfigReader
 
     public static string GetPackagePath(string nugetConfigPath)
     {
-        if (File.Exists(nugetConfigPath))
+        var packagePath = Inner(nugetConfigPath);
+        if (packagePath == null)
         {
-            XDocument xDocument;
-            try
-            {
-                xDocument = XDocument.Load(nugetConfigPath);
-            }
-            catch (XmlException)
-            {
-                return null;
-            }
-            var repositoryPath = xDocument.Descendants("repositoryPath")
-                .Select(x => x.Value)
-                .FirstOrDefault(x => !string.IsNullOrWhiteSpace(x));
-            if (repositoryPath != null)
-            {
-                return Path.Combine(Path.GetDirectoryName(nugetConfigPath), repositoryPath);
-            }
-            repositoryPath = xDocument.Descendants("add")
-                .Where(x =>   string.Equals((string)x.Attribute("key"), "repositoryPath",StringComparison.OrdinalIgnoreCase))
-                .Select(x => x.Attribute("value"))
-                .Where(x => x != null)
-                .Select(x => x.Value)
-                .FirstOrDefault();
-            if (repositoryPath != null)
-            {
-                if (repositoryPath.StartsWith("$\\"))
-                {
-                    return repositoryPath.Replace("$", Path.Combine(Path.GetDirectoryName(nugetConfigPath)));
-                }
-
-                return Path.Combine(Path.GetDirectoryName(nugetConfigPath), repositoryPath);
-            }
+            return null;
         }
-        return null;
+
+        return Path.GetFullPath(packagePath);
+    }
+
+    static string Inner(string nugetConfigPath)
+    {
+        if (!File.Exists(nugetConfigPath))
+        {
+            return null;
+        }
+
+        XDocument xDocument;
+        try
+        {
+            xDocument = XDocument.Load(nugetConfigPath);
+        }
+        catch (XmlException)
+        {
+            return null;
+        }
+
+        var repositoryPath = xDocument.Descendants("repositoryPath")
+            .Select(x => x.Value)
+            .FirstOrDefault(x => !string.IsNullOrWhiteSpace(x));
+        if (repositoryPath != null)
+        {
+            return Path.Combine(Path.GetDirectoryName(nugetConfigPath), repositoryPath);
+        }
+
+        repositoryPath = xDocument.Descendants("add")
+            .Where(x => string.Equals((string) x.Attribute("key"), "repositoryPath", StringComparison.OrdinalIgnoreCase))
+            .Select(x => x.Attribute("value"))
+            .Where(x => x != null)
+            .Select(x => x.Value)
+            .FirstOrDefault();
+        if (repositoryPath == null)
+        {
+            return null;
+        }
+
+        if (repositoryPath.StartsWith("$\\"))
+        {
+            return repositoryPath.Replace("$", Path.Combine(Path.GetDirectoryName(nugetConfigPath)));
+        }
+
+        return Path.Combine(Path.GetDirectoryName(nugetConfigPath), repositoryPath);
     }
 }

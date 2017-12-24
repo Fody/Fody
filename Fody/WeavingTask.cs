@@ -72,7 +72,7 @@ namespace Fody
                 ReferenceCopyLocalPaths = referenceCopyLocalPaths,
                 DefineConstants = defineConstants,
                 NuGetPackageRoot = NuGetPackageRoot,
-                MSBuildThisFileDirectory = MSBuildThisFileDirectory,
+                MSBuildDirectory = MSBuildThisFileDirectory,
                 PackageDefinitions = PackageDefinitions?.ToList(),
                 DebugSymbols = DebugSymbolsProduced()
             };

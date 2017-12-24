@@ -86,3 +86,4 @@ Fody/.DS_Store
 .DS_Store
 
 *.userprefs
+*.received.txt

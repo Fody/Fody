@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <PackageVersion>2.3.3</PackageVersion>
+    <PackageVersion>2.3.4</PackageVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <LangVersion>latest</LangVersion>
     <NoWarn>CS1591</NoWarn>
