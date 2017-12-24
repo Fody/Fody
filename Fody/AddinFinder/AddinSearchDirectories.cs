@@ -119,7 +119,7 @@ public partial class AddinFinder
 
     public void AddFromMsBuildDirectory()
     {
-        var fromMsBuildThisFileDirectory = Path.GetFullPath(Path.Combine(msBuildTaskDirectory, @"..\..\..\"));
+        var fromMsBuildThisFileDirectory = Path.GetFullPath(Path.Combine(msBuildTaskDirectory, "../../../"));
         if (!Directory.Exists(fromMsBuildThisFileDirectory))
         {
             log($"  Skipped scanning '{fromMsBuildThisFileDirectory}' since it doesn't exist.");
