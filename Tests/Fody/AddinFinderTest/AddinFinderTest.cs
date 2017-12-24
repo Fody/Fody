@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using Xunit;
@@ -32,12 +33,13 @@ public class AddinFinderTest : TestBase
     static void Verify(string combine)
     {
         var addinFinder = new AddinFinder(
-            log: (s) => { },
+            log: s => { },
             solutionDirectory: Path.Combine(combine, "Solution"),
             msBuildTaskDirectory: Path.Combine(combine, "MsBuildDirectory/1/2/3"),
             nuGetPackageRoot: Path.Combine(combine, "NuGetPackageRoot"),
             packageDefinitions: null);
         addinFinder.FindAddinDirectories();
+       throw new Exception(ObjectApprover.AsFormattedJson(addinFinder.FodyFiles.Select(x => x.Replace(combine, ""))));
         ObjectApprover.VerifyWithJson(addinFinder.FodyFiles.Select(x => x.Replace(combine, "")));
     }
 }
