@@ -40,6 +40,6 @@ public class AddinFinderTest : TestBase
             packageDefinitions: null);
         addinFinder.FindAddinDirectories();
        throw new Exception(ObjectApprover.AsFormattedJson(addinFinder.FodyFiles.Select(x => x.Replace(combine, ""))));
-        ObjectApprover.VerifyWithJson(addinFinder.FodyFiles.Select(x => x.Replace(combine, "")));
+        //ObjectApprover.VerifyWithJson(addinFinder.FodyFiles.Select(x => x.Replace(combine, "")));
     }
 }
