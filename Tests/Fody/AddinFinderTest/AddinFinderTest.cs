@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Linq;
 using Xunit;
@@ -39,7 +38,6 @@ public class AddinFinderTest : TestBase
             nuGetPackageRoot: Path.Combine(combine, "NuGetPackageRoot"),
             packageDefinitions: null);
         addinFinder.FindAddinDirectories();
-       throw new Exception(ObjectApprover.AsFormattedJson(addinFinder.FodyFiles.Select(x => x.Replace(combine, ""))));
-        //ObjectApprover.VerifyWithJson(addinFinder.FodyFiles.Select(x => x.Replace(combine, "")));
+        ObjectApprover.VerifyWithJson(addinFinder.FodyFiles.Select(x => x.Replace(combine, "")));
     }
 }
