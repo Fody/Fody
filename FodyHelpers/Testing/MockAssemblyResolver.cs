@@ -48,7 +48,9 @@ namespace Fody
 
             try
             {
-                return Assembly.Load(name);
+#pragma warning disable 618
+                return Assembly.LoadWithPartialName(name);
+#pragma warning restore 618
             }
             catch (FileNotFoundException)
             {
@@ -65,8 +67,7 @@ namespace Fody
                 ReadSymbols = false,
                 AssemblyResolver = this
             };
-            var assemblyDefinition = AssemblyDefinition.ReadAssembly(assemblyLocation, readerParameters);
-            return assemblyDefinition;
+            return AssemblyDefinition.ReadAssembly(assemblyLocation, readerParameters);
         }
 
         public AssemblyDefinition Resolve(AssemblyNameReference name, ReaderParameters parameters)
