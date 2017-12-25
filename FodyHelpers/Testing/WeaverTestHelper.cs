@@ -12,7 +12,7 @@ namespace Fody
     [Obsolete(OnlyForTesting.Message)]
     public static class WeaverTestHelper
     {
-        public static TestResult ExecuteTestRun(this BaseModuleWeaver weaver, string assemblyPath)
+        public static TestResult ExecuteTestRun(this BaseModuleWeaver weaver, string assemblyPath, bool runPeVerify = true)
         {
             assemblyPath = Path.Combine(CodeBaseLocation.CurrentDirectory, assemblyPath);
             var fodyTempDir = Path.Combine(Path.GetDirectoryName(assemblyPath), "fodytemp");
@@ -56,7 +56,10 @@ namespace Fody
                     moduleDefinition.Write();
                 }
 
-                PeVerifier.ThrowIfDifferent(assemblyPath, targetAssemblyPath, new[] {"0x80070002"});
+                if (runPeVerify)
+                {
+                    PeVerifier.ThrowIfDifferent(assemblyPath, targetAssemblyPath, new[] {"0x80070002"});
+                }
                 testStatus.Assembly = Assembly.Load(File.ReadAllBytes(targetAssemblyPath));
                 return testStatus;
             }
