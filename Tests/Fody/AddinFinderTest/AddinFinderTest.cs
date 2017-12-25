@@ -8,7 +8,7 @@ public class AddinFinderTest : TestBase
     [Fact]
     public void WithNuGetPackageRoot()
     {
-        var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "../../../Fody/FakeNuGetPackageRoot"));
+        var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/FakeNuGetPackageRoot"));
         var nuGetPackageRoot = Path.GetFullPath(combine);
         var result = AddinFinder.ScanDirectoryForPackages(nuGetPackageRoot)
             .Select(s => s.Replace(@"\\", @"\").Replace(combine, ""))
