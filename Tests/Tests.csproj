@@ -42,18 +42,4 @@
     <Content Include="Fody\WeaversProjectFileFinder\**\*.*" CopyToOutputDirectory="Always" />
     <Content Include="Fody\ProjectWeaversReaderTests\*.xml" CopyToOutputDirectory="Always" />
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="Fody\AddinFinderTest\NewNugetStructure\FromNugetConfig\Weaver.Fody\1.0.0\Weaver.Fody.dll" />
-    <None Remove="Fody\AddinFinderTest\NewNugetStructure\FromNugetConfig\Weaver.Fody\2.0.0\netclassicweaver\Weaver.Fody.dll" />
-    <None Remove="Fody\AddinFinderTest\NewNugetStructure\MsBuildDirectory\Weaver.Fody\3.0.0\Weaver.Fody.dll" />
-    <None Remove="Fody\AddinFinderTest\NewNugetStructure\MsBuildDirectory\Weaver.Fody\4.0.0\netclassicweaver\Weaver.Fody.dll" />
-    <None Remove="Fody\AddinFinderTest\NewNugetStructure\NuGetPackageRoot\Weaver.Fody\5.0.0\Weaver.Fody.dll" />
-    <None Remove="Fody\AddinFinderTest\NewNugetStructure\NuGetPackageRoot\Weaver.Fody\6.0.0\netclassicweaver\Weaver.Fody.dll" />
-    <None Remove="Fody\AddinFinderTest\NewNugetStructure\Solution\nuget.config" />
-    <None Remove="Fody\AddinFinderTest\NewNugetStructure\Solution\packages\Weaver.Fody\7.0.0\Weaver.Fody.dll" />
-    <None Remove="Fody\AddinFinderTest\NewNugetStructure\Solution\packages\Weaver.Fody\8.0.0\netclassicweaver\Weaver.Fody.dll" />
-    <None Remove="Fody\AddinFinderTest\NewNugetStructure\Solution\tools\Weaver.Fody.dll" />
-    <None Remove="Fody\AddinFinderTest\NewNugetStructure\Solution\tools\Weaver.Fody\9.0.0\Weaver.Fody.dll" />
-    <None Remove="Fody\AddinFinderTest\NewNugetStructure\Solution\tools\Weaver.Fody\10.0.0\netclassicweaver\Weaver.Fody.dll" />
-  </ItemGroup>
 </Project>
