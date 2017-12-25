@@ -73,6 +73,8 @@ e.g.
 </Weavers>
 ```
 
+The [Project Configuration Manager](https://github.com/tom-englert/ProjectConfigurationManager/wiki/6.-Fody) provides an interactive tool that can support you configuring your weavers, 
+which is especially helpful in solutions with many projects.
 
 ## Supported Runtimes
 
