@@ -1,12 +1,13 @@
 [![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg?style=flat&max-age=86400)](https://gitter.im/Fody/Fody)
 [![NuGet Status](http://img.shields.io/nuget/v/Fody.svg?style=flat&max-age=86400)](https://www.nuget.org/packages/Fody/)
+[![Join the chat at https://gitter.im/Fody/Fody](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Fody/Fody?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 ![Icon](https://raw.github.com/Fody/Fody/master/Icons/package_icon.png)
 
 
 ## Extensible tool for weaving .net assemblies 
 
-[![Join the chat at https://gitter.im/Fody/Fody](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Fody/Fody?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
 ## Introduction
@@ -17,7 +18,9 @@ Manipulating the IL of an assembly as part of a build requires a significant amo
 
 If you dont have time to contribute code via PRs the you can support financially using [OpenCollective](https://opencollective.com/fody/).
 
-<script src="https://opencollective.com/Fody/donate/button.js" color="white"></script>
+<a type="button" target="_blank" href="https://opencollective.com/Fody/donate" >
+<img src="https://opencollective.com/Fody/donate/button@2x.png?color=blue" width="300">
+</a>
 
 
 ## Usage
