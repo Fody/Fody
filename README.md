@@ -18,7 +18,9 @@ Manipulating the IL of an assembly as part of a build requires a significant amo
 
 If you dont have time to contribute code via PRs the you can support financially using [OpenCollective](https://opencollective.com/fody/donate).
 
-<a type="button" target="_blank" href="https://opencollective.com/Fody/donate" style="border: 0 none;  text-decoration: none;"><img src="https://opencollective.com/Fody/donate/button@2x.png?color=blue" width="300"></a>
+[<img src="https://opencollective.com/Fody/donate/button@2x.png?color=blue">](https://opencollective.com/Fody/donate)
+
+[![Foo](https://opencollective.com/Fody/donate/button@2x.png?color=blue | width=100)](https://opencollective.com/Fody/donate)
 
 
 ## Usage
