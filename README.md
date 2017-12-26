@@ -13,6 +13,12 @@
 
 Manipulating the IL of an assembly as part of a build requires a significant amount of plumbing code. This plumbing code involves knowledge of both the MSBuild and Visual Studio APIs. Fody attempts to eliminate that plumbing code through an extensible add-in model.
 
+## Support Fody
+
+If you dont have time to contribute code via PRs the you can support financially using [OpenCollective](https://opencollective.com/fody/).
+
+<script src="https://opencollective.com/Fody/donate/button.js" color="white"></script>
+
 
 ## Usage
 
