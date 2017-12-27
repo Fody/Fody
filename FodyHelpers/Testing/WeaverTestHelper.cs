@@ -12,7 +12,7 @@ namespace Fody
     [Obsolete(OnlyForTesting.Message)]
     public static class WeaverTestHelper
     {
-        public static TestResult ExecuteTestRun(this BaseModuleWeaver weaver, string assemblyPath, bool runPeVerify = true)
+        public static TestResult ExecuteTestRun(this BaseModuleWeaver weaver, string assemblyPath, bool runPeVerify = true, Action<ModuleDefinition> afterExecuteCallback = null, Action<ModuleDefinition> beforeExecuteCallback = null)
         {
             assemblyPath = Path.Combine(CodeBaseLocation.CurrentDirectory, assemblyPath);
             var fodyTempDir = Path.Combine(Path.GetDirectoryName(assemblyPath), "fodytemp");
@@ -49,9 +49,11 @@ namespace Fody
 
                 using (var moduleDefinition = ModuleDefinition.ReadModule(targetAssemblyPath, readerParameters))
                 {
+                    beforeExecuteCallback?.Invoke(moduleDefinition);
                     weaver.ModuleDefinition = moduleDefinition;
 
                     weaver.Execute();
+                    afterExecuteCallback?.Invoke(moduleDefinition);
 
                     moduleDefinition.Write();
                 }
