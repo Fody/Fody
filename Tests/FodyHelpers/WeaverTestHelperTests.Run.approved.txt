@@ -1,0 +1,10 @@
+﻿{
+  "Messages": [],
+  "Warnings": [],
+  "Errors": [],
+  "Assembly": {
+    "Data": "DummyAssembly, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "UnityType": 6,
+    "AssemblyName": "DummyAssembly, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+  }
+}

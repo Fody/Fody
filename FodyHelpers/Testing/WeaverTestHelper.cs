@@ -12,12 +12,22 @@ namespace Fody
     [Obsolete(OnlyForTesting.Message)]
     public static class WeaverTestHelper
     {
-        public static TestResult ExecuteTestRun(this BaseModuleWeaver weaver, string assemblyPath, bool runPeVerify = true, Action<ModuleDefinition> afterExecuteCallback = null, Action<ModuleDefinition> beforeExecuteCallback = null)
+        public static TestResult ExecuteTestRun(this BaseModuleWeaver weaver, string assemblyPath, bool runPeVerify = true, Action<ModuleDefinition> afterExecuteCallback = null, Action<ModuleDefinition> beforeExecuteCallback = null, string assemblyName = null)
         {
             assemblyPath = Path.Combine(CodeBaseLocation.CurrentDirectory, assemblyPath);
             var fodyTempDir = Path.Combine(Path.GetDirectoryName(assemblyPath), "fodytemp");
             Directory.CreateDirectory(fodyTempDir);
-            var targetAssemblyPath = Path.Combine(fodyTempDir, Path.GetFileName(assemblyPath));
+            string targetFileName;
+            if (assemblyName == null)
+            {
+                assemblyName = Path.GetFileNameWithoutExtension(assemblyPath);
+                targetFileName = Path.GetFileName(assemblyPath);
+            }
+            else
+            {
+                targetFileName = assemblyName + ".dll";
+            }
+            var targetAssemblyPath = Path.Combine(fodyTempDir, targetFileName);
             var targetSymbolsPath = Path.ChangeExtension(targetAssemblyPath, "pdb");
             var symbolsPath = Path.ChangeExtension(assemblyPath, "pdb");
             File.Copy(assemblyPath, targetAssemblyPath, true);
@@ -49,6 +59,7 @@ namespace Fody
 
                 using (var moduleDefinition = ModuleDefinition.ReadModule(targetAssemblyPath, readerParameters))
                 {
+                    moduleDefinition.Assembly.Name.Name = assemblyName;
                     beforeExecuteCallback?.Invoke(moduleDefinition);
                     weaver.ModuleDefinition = moduleDefinition;
 
