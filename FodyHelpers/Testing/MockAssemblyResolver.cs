@@ -41,6 +41,19 @@ namespace Fody
 
         static Assembly GetAssembly(string name)
         {
+#if (NETSTANDARD2_0)
+            if (string.Equals(name, "netstandard", StringComparison.OrdinalIgnoreCase))
+            {
+            var netstandard = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
+                @"dotnet\sdk\NuGetFallbackFolder\netstandard.library\2.0.0\build\netstandard2.0\ref\netstandard.dll");
+                if (File.Exists(netstandard))
+                {
+                    return Assembly.LoadFrom(netstandard);
+                }
+                throw new Exception($"Expected netstandard 2.0 to exist for testing purposes: {netstandard}");
+            }
+#endif
             if (string.Equals(name, "System", StringComparison.OrdinalIgnoreCase))
             {
                 return typeof(GeneratedCodeAttribute).Assembly;
