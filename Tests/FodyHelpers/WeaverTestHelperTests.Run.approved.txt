@@ -1,5 +1,10 @@
 ﻿{
-  "Messages": [],
+  "Messages": [
+    {
+      "Text": "\tNo reference to 'Tests' found. References not modified.",
+      "MessageImportance": "Normal"
+    }
+  ],
   "Warnings": [],
   "Errors": [],
   "Assembly": {
