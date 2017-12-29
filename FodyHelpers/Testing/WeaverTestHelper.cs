@@ -90,7 +90,7 @@ namespace Fody
                     }
 
                     ignoreList.Add("0x80070002");
-                    PeVerifier.ThrowIfDifferent(assemblyPath, targetAssemblyPath, ignoreList);
+                    PeVerifier.ThrowIfDifferent(assemblyPath, targetAssemblyPath, ignoreList, Path.GetDirectoryName(assemblyPath));
                 }
                 testStatus.Assembly = Assembly.Load(File.ReadAllBytes(targetAssemblyPath));
                 return testStatus;
