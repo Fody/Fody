@@ -44,7 +44,7 @@ namespace Fody
             FoundPeVerify = true;
         }
 
-        public static bool Verify(string assemblyPath, IEnumerable<string> ignoreCodes, out string output)
+        public static bool Verify(string assemblyPath, IEnumerable<string> ignoreCodes, out string output, string workingDirectory = null)
         {
             if (!FoundPeVerify)
             {
@@ -66,27 +66,27 @@ namespace Fody
                 throw new ArgumentNullException($"Cannot verify assembly, file '{assemblyPath}' does not exist");
             }
 
-            return InnerVerify(assemblyPath, ignoreCodes, out output);
+            return InnerVerify(assemblyPath, ignoreCodes, out output, workingDirectory);
         }
 
-        public static bool Verify(string beforeAssemblyPath, string afterAssemblyPath, IEnumerable<string> ignoreCodes, out string beforeOutput, out string afterOutput)
+        public static bool Verify(string beforeAssemblyPath, string afterAssemblyPath, IEnumerable<string> ignoreCodes, out string beforeOutput, out string afterOutput, string workingDirectory = null)
         {
             var codes = ignoreCodes.ToList();
-            InnerVerify(beforeAssemblyPath, codes, out beforeOutput);
-            InnerVerify(afterAssemblyPath, codes, out afterOutput);
+            InnerVerify(beforeAssemblyPath, codes, out beforeOutput, workingDirectory);
+            InnerVerify(afterAssemblyPath, codes, out afterOutput, workingDirectory);
             afterOutput = afterOutput.TrimLineNumbers();
             beforeOutput = beforeOutput.TrimLineNumbers();
             return afterOutput == beforeOutput;
         }
 
-        public static void ThrowIfDifferent(string beforeAssemblyPath, string afterAssemblyPath)
+        public static void ThrowIfDifferent(string beforeAssemblyPath, string afterAssemblyPath, string workingDirectory = null)
         {
-            ThrowIfDifferent(beforeAssemblyPath, afterAssemblyPath, Enumerable.Empty<string>());
+            ThrowIfDifferent(beforeAssemblyPath, afterAssemblyPath, Enumerable.Empty<string>(), workingDirectory);
         }
 
-        public static void ThrowIfDifferent(string beforeAssemblyPath, string afterAssemblyPath, IEnumerable<string> ignoreCodes)
+        public static void ThrowIfDifferent(string beforeAssemblyPath, string afterAssemblyPath, IEnumerable<string> ignoreCodes, string workingDirectory = null)
         {
-            Verify(beforeAssemblyPath, afterAssemblyPath, ignoreCodes, out var beforeOutput, out var afterOutput);
+            Verify(beforeAssemblyPath, afterAssemblyPath, ignoreCodes, out var beforeOutput, out var afterOutput, workingDirectory);
             if (beforeOutput == afterOutput)
             {
                 return;
@@ -106,12 +106,16 @@ BeforeOutput:
             return Regex.Replace(input, "0x.*]", "");
         }
 
-        static bool InnerVerify(string assemblyPath, IEnumerable<string> ignoreCodes, out string output)
+        static bool InnerVerify(string assemblyPath, IEnumerable<string> ignoreCodes, out string output, string workingDirectory = null)
         {
+            if (workingDirectory == null)
+            {
+                workingDirectory = Path.GetDirectoryName(assemblyPath);
+            }
             var processStartInfo = new ProcessStartInfo(peverifyPath)
             {
                 Arguments = $"\"{assemblyPath}\" /hresult /nologo /ignore={string.Join(",", ignoreCodes)}",
-                WorkingDirectory = Path.GetDirectoryName(assemblyPath),
+                WorkingDirectory = workingDirectory,
                 CreateNoWindow = true,
                 UseShellExecute = false,
                 RedirectStandardOutput = true
