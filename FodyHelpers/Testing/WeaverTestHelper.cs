@@ -62,7 +62,7 @@ namespace Fody
                     AssemblyResolver = assemblyResolver,
                     SymbolReaderProvider = new SymbolReaderProvider(),
                     ReadWrite = true,
-                    ReadSymbols = true
+                    ReadSymbols = true,
                 };
 
                 using (var moduleDefinition = ModuleDefinition.ReadModule(targetAssemblyPath, readerParameters))
