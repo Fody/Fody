@@ -72,6 +72,8 @@ namespace Fody
                     weaver.ModuleDefinition = moduleDefinition;
 
                     weaver.Execute();
+                    ReferenceCleaner.CleanReferences(moduleDefinition, weaver, weaver.LogDebug);
+
                     afterExecuteCallback?.Invoke(moduleDefinition);
 
                     moduleDefinition.Write();

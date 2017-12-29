@@ -139,5 +139,10 @@ namespace Fody
         public virtual void AfterWeaving()
         {
         }
+
+        /// <summary>
+        /// Called after all weaving has occurred and the module has been saved.
+        /// </summary>
+        public virtual bool ShouldCleanReference => false;
     }
 }

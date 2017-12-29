@@ -198,6 +198,12 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
                 weaver.WeaverDelegate.Execute(weaver.Instance);
                 var finishedMessage = $"  Finished '{weaver.Config.AssemblyName}' in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
                 Logger.LogDebug(finishedMessage);
+#pragma warning disable 618
+                if (weaver.Instance is BaseModuleWeaver baseModuleWeaver)
+                {
+                    ReferenceCleaner.CleanReferences(ModuleDefinition, baseModuleWeaver, Logger.LogDebug);
+                }
+#pragma warning restore 618
             }
             finally
             {

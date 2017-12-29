@@ -36,6 +36,8 @@ public class TargetWeaver : BaseModuleWeaver
         Assert.NotNull(type);
     }
 
+    public override bool ShouldCleanReference => true;
+
     public override IEnumerable<string> GetAssembliesForScanning()
     {
         yield return "netstandard";
