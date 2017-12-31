@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <PackageVersion>2.3.11</PackageVersion>
+    <PackageVersion>2.3.12</PackageVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <LangVersion>latest</LangVersion>
     <NoWarn>CS1591</NoWarn>
@@ -13,7 +13,7 @@
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeAllInPackage</TargetsForTfmSpecificContentInPackage>
     <Authors>Simon Cropp</Authors>
     <PackageProjectUrl>http://github.com/Fody/Fody</PackageProjectUrl>
-    <PackageIconUrl>https://raw.github.com/Fody/Fody/master/Icons/package_icon.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.github.com/Fody/Fody/master/package_icon.png</PackageIconUrl>
     <PackageTags>ILWeaving, Fody, Cecil, AOP</PackageTags>
   </PropertyGroup>
 </Project>
