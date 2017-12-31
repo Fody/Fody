@@ -13,11 +13,12 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <DisableFody>true</DisableFody>
-    <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">https://raw.github.com/Fody/$(PackageId)/master/package_icon.png</PackageIconUrl>
-    <WeaverDirPath>$(SolutionDir)$(PackageId)\bin\$(Configuration)\</WeaverDirPath>
+    <WeaverName>$(SolutionName).Fody</WeaverName>
+    <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">https://raw.github.com/Fody/$(WeaverName)/master/package_icon.png</PackageIconUrl>
+    <WeaverDirPath>$(SolutionDir)$(WeaverName)\bin\$(Configuration)\</WeaverDirPath>
   </PropertyGroup>
   <ItemGroup>
     <!-- this project targets netstandard2.0 (unnecessarily) and has the below ref to work around this bug https://github.com/Microsoft/msbuild/issues/2661 -->
-    <ProjectReference Include="..\$(PackageId)\$(PackageId).csproj" PrivateAssets="All" Condition="$(TargetFramework)=='fake'" />
+    <ProjectReference Include="..\$(WeaverName)\$(WeaverName).csproj" PrivateAssets="All" Condition="$(TargetFramework)=='fake'" />
   </ItemGroup>
 </Project>
