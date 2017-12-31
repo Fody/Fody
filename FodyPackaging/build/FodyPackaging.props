@@ -14,7 +14,7 @@
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <DisableFody>true</DisableFody>
     <WeaverName>$(SolutionName).Fody</WeaverName>
-    <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">https://raw.github.com/Fody/$(WeaverName)/master/package_icon.png</PackageIconUrl>
+    <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">https://raw.github.com/Fody/$(SolutionName)/master/package_icon.png</PackageIconUrl>
     <WeaverDirPath>$(SolutionDir)$(WeaverName)\bin\$(Configuration)\</WeaverDirPath>
   </PropertyGroup>
   <ItemGroup>
