@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <PackageId>$(SolutionName).Fody</PackageId>
+    <PackageId>$(MSBuildProjectName).Fody</PackageId>
     <PackageLicenseUrl Condition="'$(PackageLicenseUrl)' == ''">http://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance Condition="'$(PackageRequireLicenseAcceptance)' == ''">false</PackageRequireLicenseAcceptance>
     <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">http://github.com/Fody/$(SolutionName)</PackageProjectUrl>
@@ -13,12 +13,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <DisableFody>true</DisableFody>
-    <WeaverName>$(SolutionName).Fody</WeaverName>
     <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">https://raw.github.com/Fody/$(SolutionName)/master/package_icon.png</PackageIconUrl>
-    <WeaverDirPath>$(SolutionDir)$(WeaverName)\bin\$(Configuration)\</WeaverDirPath>
+    <WeaverDirPath>..\$(PackageId)\bin\$(Configuration)\</WeaverDirPath>
   </PropertyGroup>
   <ItemGroup>
     <!-- this project targets netstandard2.0 (unnecessarily) and has the below ref to work around this bug https://github.com/Microsoft/msbuild/issues/2661 -->
-    <ProjectReference Include="..\$(WeaverName)\$(WeaverName).csproj" PrivateAssets="All" Condition="$(TargetFramework)=='fake'" />
+    <ProjectReference Include="..\$(PackageId)\$(PackageId).csproj" PrivateAssets="All" Condition="$(TargetFramework)=='fake'" />
   </ItemGroup>
 </Project>
