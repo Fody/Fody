@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+#if NET46
+using System.Runtime.Remoting;
+#endif
 
 public partial class Processor
 {
@@ -24,7 +27,8 @@ public partial class Processor
     IInnerWeaver innerWeaver;
 
     AddinFinder addinFinder;
-    static Dictionary<string, AppDomain> solutionDomains = new Dictionary<string, AppDomain>(StringComparer.OrdinalIgnoreCase);
+    static Dictionary<string, IsolatedAssemblyLoadContext> solutionAssemblyLoadContexts =
+        new Dictionary<string, IsolatedAssemblyLoadContext>(StringComparer.OrdinalIgnoreCase);
 
     public BuildLogger Logger;
     static object locker;
@@ -97,7 +101,7 @@ see https://github.com/Fody/Fody/wiki/SampleUsage");
         }
         lock (locker)
         {
-            ExecuteInOwnAppDomain();
+            ExecuteInOwnAssemblyLoadContext();
         }
 
         FlushWeaversXmlHistory();
@@ -121,24 +125,24 @@ see https://github.com/Fody/Fody/wiki/SampleUsage");
         Logger.LogDebug($"Finished finding weavers {stopwatch.ElapsedMilliseconds}ms");
     }
 
-    void ExecuteInOwnAppDomain()
+    void ExecuteInOwnAssemblyLoadContext()
     {
-        if (solutionDomains.TryGetValue(SolutionDirectory, out var appDomain))
+        if (solutionAssemblyLoadContexts.TryGetValue(SolutionDirectory, out var loadContext))
         {
             if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
             {
-                Logger.LogDebug("A Weaver HasChanged so loading a new AppDomain");
-                AppDomain.Unload(appDomain);
-                appDomain = solutionDomains[SolutionDirectory] = CreateDomain();
+                Logger.LogDebug("A Weaver HasChanged so loading a new AssemblyLoadContext");
+                loadContext.Unload();
+                loadContext = solutionAssemblyLoadContexts[SolutionDirectory] = CreateAssemblyLoadContext();
             }
         }
         else
         {
-            appDomain = solutionDomains[SolutionDirectory] = CreateDomain();
+            loadContext = solutionAssemblyLoadContexts[SolutionDirectory] = CreateAssemblyLoadContext();
         }
-
+        
         var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
-        using (innerWeaver = (IInnerWeaver)appDomain.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver"))
+        using (innerWeaver = (IInnerWeaver)loadContext.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver"))
         {
             innerWeaver.AssemblyFilePath = AssemblyFilePath;
             innerWeaver.References = References;
@@ -159,14 +163,10 @@ see https://github.com/Fody/Fody/wiki/SampleUsage");
         innerWeaver = null;
     }
 
-    AppDomain CreateDomain()
+    IsolatedAssemblyLoadContext CreateAssemblyLoadContext()
     {
-        Logger.LogDebug("Creating a new AppDomain");
-        var appDomainSetup = new AppDomainSetup
-        {
-            ApplicationBase = AssemblyLocation.CurrentDirectory,
-        };
-        return AppDomain.CreateDomain($"Fody Domain for '{SolutionDirectory}'", null, appDomainSetup);
+        Logger.LogDebug("Creating a new AssemblyLoadContext");
+        return new IsolatedAssemblyLoadContext($"Fody Domain for '{SolutionDirectory}'", AssemblyLocation.CurrentDirectory);
     }
 
     public void Cancel()

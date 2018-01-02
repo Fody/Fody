@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net46</TargetFramework>
+    <TargetFrameworks>netcoreapp2.0;net46</TargetFrameworks>
     <Optimize>False</Optimize>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ApprovalTests" Version="3.*" />
-    <PackageReference Include="ApprovalUtilities" Version="3.*" />
+    <PackageReference Include="ApprovalTests" Version="3.*" Condition="$(TargetFramework) == 'net46'" />
+    <PackageReference Include="ApprovalUtilities" Version="3.*" Condition="$(TargetFramework) == 'net46'" />
     <PackageReference Include="Moq" Version="4.*" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
@@ -24,7 +24,7 @@
       <HintPath>..\Lib\Cecil\net40\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
     <PackageReference Include="Newtonsoft.Json" Version="10.*" />
-    <PackageReference Include="ObjectApproval" Version="1.*" />
+    <PackageReference Include="ObjectApproval" Version="1.*" Condition="$(TargetFramework) == 'net46'" />
     <ProjectReference Include="..\DummyAssembly\DummyAssembly.csproj" />
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
     <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
