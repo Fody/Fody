@@ -16,8 +16,4 @@
     <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">https://raw.github.com/Fody/$(SolutionName)/master/package_icon.png</PackageIconUrl>
     <WeaverDirPath>..\$(PackageId)\bin\$(Configuration)\</WeaverDirPath>
   </PropertyGroup>
-  <ItemGroup>
-    <!-- this project targets netstandard2.0 (unnecessarily) and has the below ref to work around this bug https://github.com/Microsoft/msbuild/issues/2661 -->
-    <ProjectReference Include="..\$(PackageId)\$(PackageId).csproj" PrivateAssets="All" Condition="$(TargetFramework)=='fake'" />
-  </ItemGroup>
 </Project>
