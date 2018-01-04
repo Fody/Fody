@@ -22,10 +22,18 @@ public class AddinFinderTest : TestBase
         var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/AddinFinderTest/OldNugetStructure"));
         Verify(combine);
     }
+
     [Fact]
     public void Integration_NewNugetStructure()
     {
         var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/AddinFinderTest/NewNugetStructure"));
+        Verify(combine);
+    }
+
+    [Fact]
+    public void Integration_PaketStructure()
+    {
+        var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/AddinFinderTest/PaketStructure"));
         Verify(combine);
     }
 
