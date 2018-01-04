@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 public partial class AddinFinder
 {
@@ -79,15 +80,27 @@ public partial class AddinFinder
             yield return GetAssemblyFromNugetDir(versionDirectory, packageName);
         }
 
-        var newStyleDirectories = Directory.EnumerateDirectories(directory)
+        var newOrPaketStyleDirectories = Directory.EnumerateDirectories(directory)
             .Where(dir => dir.ToLowerInvariant().EndsWith(".fody"));
 
-        foreach (var packageDirectory in newStyleDirectories)
+        foreach (var packageDirectory in newOrPaketStyleDirectories)
         {
             var packageName = Path.GetFileName(packageDirectory);
-            foreach (var versionDirectory in Directory.EnumerateDirectories(packageDirectory))
+
+            var newStyleVersionDirectories = Directory.EnumerateDirectories(packageDirectory)
+                .Where(dir => Regex.IsMatch(Path.GetFileName(dir), @"^[0-9]+\.[0-9]+"))
+                .ToList();
+
+            if (newStyleVersionDirectories.Any())
             {
-                yield return GetAssemblyFromNugetDir(versionDirectory, packageName);
+                foreach (var versionDirectory in newStyleVersionDirectories)
+                {
+                    yield return GetAssemblyFromNugetDir(versionDirectory, packageName);
+                }
+            }
+            else
+            {
+                yield return GetAssemblyFromNugetDir(packageDirectory, packageName);
             }
         }
     }
