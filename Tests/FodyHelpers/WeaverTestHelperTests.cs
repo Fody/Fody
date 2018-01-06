@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Fody;
 using ObjectApproval;
 using Xunit;
+
+//using Xunit;
 
 #pragma warning disable 618
 public class WeaverTestHelperTests : TestBase
@@ -13,7 +16,12 @@ public class WeaverTestHelperTests : TestBase
         var assemblyPath = Path.Combine(CodeBaseLocation.CurrentDirectory, "DummyAssembly.dll");
         var weaver = new TargetWeaver();
         var result = weaver.ExecuteTestRun(assemblyPath);
-        ObjectApprover.VerifyWithJson(result);
+        ObjectApprover.VerifyWithJson(result, ScrubCurrentDirectory);
+    }
+
+    static string ScrubCurrentDirectory(string s)
+    {
+        return s.Replace(@"\\", @"\").Replace(CodeBaseLocation.CurrentDirectory, "");
     }
 
     [Fact]
@@ -24,7 +32,7 @@ public class WeaverTestHelperTests : TestBase
         var result = weaver.ExecuteTestRun(
             assemblyPath: assemblyPath,
             assemblyName: "NewName");
-        ObjectApprover.VerifyWithJson(result);
+        ObjectApprover.VerifyWithJson(result, ScrubCurrentDirectory);
     }
 }
 

@@ -22,7 +22,6 @@ namespace Fody
 
         public IReadOnlyList<LogMessage> Messages => messages;
 
-
         List<SequencePointMessage> warnings = new List<SequencePointMessage>();
 
         internal void AddWarning(string text, SequencePoint sequencePoint)
@@ -51,5 +50,6 @@ namespace Fody
 
         public IReadOnlyList<SequencePointMessage> Errors => errors;
         public Assembly Assembly { get; internal set; }
+        public string AssemblyPath { get; internal set; }
     }
 }
