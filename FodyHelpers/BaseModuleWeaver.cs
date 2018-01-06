@@ -110,6 +110,12 @@ namespace Fody
         public List<string> DefineConstants { get; set; }
 
         /// <summary>
+        /// Set to true if this weaver did not modifiy the ModuleDefinition.
+        /// If all weavers set this property to true, Fody will leave the assembly untouched.
+        /// </summary>
+        public bool IsAssemblyUnmodified { get; set; }
+
+        /// <summary>
         /// Called when the weaver is executed.
         /// </summary>
         public abstract void Execute();
