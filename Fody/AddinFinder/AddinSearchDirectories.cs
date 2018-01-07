@@ -107,10 +107,15 @@ public partial class AddinFinder
 
     public static string GetAssemblyFromNugetDir(string versionDir, string packageName)
     {
-        var netClassic = Path.Combine(versionDir, "netclassicweaver");
-        if (Directory.Exists(netClassic))
+#if (NETSTANDARD2_0)
+        var specificDir = Path.Combine(versionDir, "netstandardweaver");
+#endif
+#if (NET46)
+        var specificDir = Path.Combine(versionDir, "netclassicweaver");
+#endif
+        if (Directory.Exists(specificDir))
         {
-            return Path.Combine(netClassic, $"{packageName}.dll");
+            return Path.Combine(specificDir, $"{packageName}.dll");
         }
 
         return Path.Combine(versionDir, $"{packageName}.dll");
