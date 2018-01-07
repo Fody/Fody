@@ -15,14 +15,14 @@
     <tags>$tags$</tags>
   </metadata>
   <files>
-    <file src=".\bin\$configuration$\net46\Fody*.dll" target="netclassic" />
-    <file src=".\bin\$configuration$\net46\Mono*.dll" target="netclassic" />
-    <file src=".\bin\$configuration$\net46\Fody*.pdb" target="netclassic" />
-    <file src=".\bin\$configuration$\net46\Mono*.pdb" target="netclassic" />
-    <file src=".\bin\$configuration$\netstandard2.0\Fody*.dll" target="netstandard" />
-    <file src=".\bin\$configuration$\netstandard2.0\Mono*.dll" target="netstandard" />
-    <file src=".\bin\$configuration$\netstandard2.0\Fody*.pdb" target="netstandard" />
-    <file src=".\bin\$configuration$\netstandard2.0\Mono*.pdb" target="netstandard" />
+    <file src=".\bin\$configuration$\net46\Fody*.dll" target="tasks\netclassic" />
+    <file src=".\bin\$configuration$\net46\Mono*.dll" target="tasks\netclassic" />
+    <file src=".\bin\$configuration$\net46\Fody*.pdb" target="tasks\netclassic" />
+    <file src=".\bin\$configuration$\net46\Mono*.pdb" target="tasks\netclassic" />
+    <file src=".\bin\$configuration$\netstandard2.0\Fody*.dll" target="tasks\netstandard" />
+    <file src=".\bin\$configuration$\netstandard2.0\Mono*.dll" target="tasks\netstandard" />
+    <file src=".\bin\$configuration$\netstandard2.0\Fody*.pdb" target="tasks\netstandard" />
+    <file src=".\bin\$configuration$\netstandard2.0\Mono*.pdb" target="tasks\netstandard" />
     <file src="Fody.targets" target="build" />
   </files>
 </package>

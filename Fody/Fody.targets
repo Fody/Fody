@@ -13,7 +13,7 @@
     </When>
     <When Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">
       <PropertyGroup>
-        <FodySolutionDir>$(MSBuildProjectDirectory)..\..\..\</FodySolutionDir>
+        <FodySolutionDir>$(MSBuildProjectDirectory)..\</FodySolutionDir>
       </PropertyGroup>
     </When>
   </Choose>
@@ -37,7 +37,7 @@
   <PropertyGroup>
     <ProjectWeaverXml>$(ProjectDir)FodyWeavers.xml</ProjectWeaverXml>
     <FodySignAssembly Condition="$(FodySignAssembly) == '' Or $(FodySignAssembly) == '*Undefined*'">$(SignAssembly)</FodySignAssembly>
-    <FodyPath Condition="$(FodyPath) == '' Or $(FodyPath) == '*Undefined*'">$(MSBuildThisFileDirectory)..\..\</FodyPath>
+    <FodyPath Condition="$(FodyPath) == '' Or $(FodyPath) == '*Undefined*'">$(MSBuildThisFileDirectory)..\</FodyPath>
   </PropertyGroup>
   <Choose>
     <When Condition="'$(MSBuildRuntimeType)'=='Core'">

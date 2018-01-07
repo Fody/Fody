@@ -44,7 +44,6 @@ src/Integration/Directory.Build.props
 
 ##  If you have NuGet Package Restore enabled, uncomment this
 packages/
-ForIntegration/
 nugets/
 
 # Visual Studio profiler
