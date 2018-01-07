@@ -11,5 +11,6 @@
     "Data": "NewName, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
     "UnityType": 6,
     "AssemblyName": "NewName, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-  }
+  },
+  "AssemblyPath": "\fodytemp\NewName.dll"
 }

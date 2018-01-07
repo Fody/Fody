@@ -95,6 +95,7 @@ namespace Fody
                     PeVerifier.ThrowIfDifferent(assemblyPath, targetAssemblyPath, ignoreList, Path.GetDirectoryName(assemblyPath));
                 }
                 testStatus.Assembly = Assembly.Load(File.ReadAllBytes(targetAssemblyPath));
+                testStatus.AssemblyPath = targetAssemblyPath;
                 return testStatus;
             }
         }

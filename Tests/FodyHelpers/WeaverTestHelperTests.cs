@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Fody;
@@ -5,6 +6,8 @@ using Fody;
 using ObjectApproval;
 #endif
 using Xunit;
+
+//using Xunit;
 
 #pragma warning disable 618
 public class WeaverTestHelperTests : TestBase
@@ -16,8 +19,13 @@ public class WeaverTestHelperTests : TestBase
         var weaver = new TargetWeaver();
         var result = weaver.ExecuteTestRun(assemblyPath);
 #if NET46 // TODO: Remove when ObjectApproval supports .NET Core
-        ObjectApprover.VerifyWithJson(result);
+        ObjectApprover.VerifyWithJson(result, ScrubCurrentDirectory);
 #endif
+    }
+
+    static string ScrubCurrentDirectory(string s)
+    {
+        return s.Replace(@"\\", @"\").Replace(CodeBaseLocation.CurrentDirectory, "");
     }
 
     [Fact]
@@ -29,7 +37,7 @@ public class WeaverTestHelperTests : TestBase
             assemblyPath: assemblyPath,
             assemblyName: "NewName");
 #if NET46 // TODO: Remove when ObjectApproval supports .NET Core
-        ObjectApprover.VerifyWithJson(result);
+        ObjectApprover.VerifyWithJson(result, ScrubCurrentDirectory);
 #endif
     }
 }
