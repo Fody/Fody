@@ -42,12 +42,12 @@
   <Choose>
     <When Condition="'$(MSBuildRuntimeType)'=='Core'">
       <PropertyGroup>
-        <FodyAssembly>$(FodyPath)tasks\netstandard\Fody.dll</FodyAssembly>
+        <FodyAssembly>$(FodyPath)netstandardtask\Fody.dll</FodyAssembly>
       </PropertyGroup>
     </When>
     <Otherwise>
       <PropertyGroup>
-        <FodyAssembly>$(FodyPath)tasks\netclassic\Fody.dll</FodyAssembly>
+        <FodyAssembly>$(FodyPath)netclassictask\Fody.dll</FodyAssembly>
       </PropertyGroup>
     </Otherwise>
   </Choose>
