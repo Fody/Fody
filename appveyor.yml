@@ -8,3 +8,4 @@ build:
   verbosity: minimal
 artifacts:
 - path: nugets\*.nupkg
+- path: **\*.received 
