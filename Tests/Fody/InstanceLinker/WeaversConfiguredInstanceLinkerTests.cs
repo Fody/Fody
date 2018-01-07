@@ -30,7 +30,7 @@ public class WeaversConfiguredInstanceLinkerTests : TestBase
         var mock = new Mock<Processor>();
         mock.Setup(x => x.WeaverProjectContainsType("AddinName"))
             .Returns(false);
-        mock.Setup(x => x.FindAssemblyPath("AddinName")).Returns("Path");
+        mock.Setup(x => x.FindAssemblyPath("AddinName", null)).Returns("Path");
 
         mock.CallBase = true;
 

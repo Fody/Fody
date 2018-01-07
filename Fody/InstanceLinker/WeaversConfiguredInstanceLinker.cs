@@ -21,7 +21,7 @@ public partial class Processor
             return;
         }
 
-        var assemblyPath = FindAssemblyPath(weaverConfig.AssemblyName);
+        var assemblyPath = FindAssemblyPath(weaverConfig.AssemblyName, VersionFilter.Parse(weaverConfig.VersionFilter));
         if (assemblyPath == null)
         {
             var message = string.Format(

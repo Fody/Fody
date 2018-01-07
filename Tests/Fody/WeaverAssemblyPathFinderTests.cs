@@ -11,6 +11,6 @@ public class WeaverAssemblyPathFinderTests : TestBase
         {
             ContainsTypeChecker = new Mock<ContainsTypeChecker>().Object,
         };
-        finder.FindAssemblyPath("Name");
+        finder.FindAssemblyPath("Name", null);
     }
 }
