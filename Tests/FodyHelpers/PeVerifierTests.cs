@@ -29,7 +29,12 @@ public class PeVerifierTests : TestBase
         var assemblyPath = GetAssemblyPath().ToLowerInvariant();
         var newAssemblyPath = assemblyPath.Replace(".dll", "2.dll");
         File.Copy(assemblyPath, newAssemblyPath, true);
+#if (NET46)
         PeVerifier.ThrowIfDifferent(assemblyPath, newAssemblyPath);
+#else
+        PeVerifier.ThrowIfDifferent(assemblyPath, newAssemblyPath,
+            ignoreCodes: new[] {"0x80070002", "0x80131869"});
+#endif
         File.Delete(newAssemblyPath);
     }
 

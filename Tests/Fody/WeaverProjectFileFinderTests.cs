@@ -8,14 +8,15 @@ public class WeaverProjectFileFinderTests : TestBase
     public void Found()
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory;
-        var combine = Path.Combine(currentDirectory, "../../../Fody/WeaversProjectFileFinder/WithWeaver");
+        var combine = Path.Combine(currentDirectory, @"..\..\..\Fody\WeaversProjectFileFinder\WithWeaver");
         var loggerMock = new Mock<BuildLogger>();
         loggerMock.Setup(x => x.LogDebug(It.IsAny<string>()));
 
         var processor = new Processor
-            {
-                SolutionDirectory = combine,
-                Logger = loggerMock.Object,
+        {
+            SolutionDirectory = combine,
+            Logger = loggerMock.Object,
+            References = ""
         };
 
         processor.FindWeaverProjectFile();

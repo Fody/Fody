@@ -5,7 +5,7 @@ using Xunit;
 using ObjectApproval;
 #endif
 
-public class AddinFinderTest : TestBase
+public partial class AddinFinderTest : TestBase
 {
     [Fact]
     public void WithNuGetPackageRoot()

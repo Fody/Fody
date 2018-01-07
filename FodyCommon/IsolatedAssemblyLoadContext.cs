@@ -1,6 +1,5 @@
-﻿using System;
-
-#if NET46
+﻿#if NET46
+using System;
 public class IsolatedAssemblyLoadContext
 {
     AppDomain appDomain;

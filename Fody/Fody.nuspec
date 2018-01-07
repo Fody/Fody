@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <authors>$authors$</authors>
+    <owners>$owners$</owners>
+    <developmentDependency>true</developmentDependency>
+    <licenseUrl>$licenseUrl$</licenseUrl>
+    <projectUrl>$projectUrl$</projectUrl>
+    <iconUrl>$iconUrl$</iconUrl>
+    <requireLicenseAcceptance>$requireLicenseAcceptance$</requireLicenseAcceptance>
+    <description>$description$</description>
+    <copyright>$copyright$</copyright>
+    <tags>$tags$</tags>
+  </metadata>
+  <files>
+    <file src=".\bin\$configuration$\net46\Fody*.dll" target="netclassic" />
+    <file src=".\bin\$configuration$\net46\Mono*.dll" target="netclassic" />
+    <file src=".\bin\$configuration$\net46\Fody*.pdb" target="netclassic" />
+    <file src=".\bin\$configuration$\net46\Mono*.pdb" target="netclassic" />
+    <file src=".\bin\$configuration$\netstandard2.0\Fody*.dll" target="netstandard" />
+    <file src=".\bin\$configuration$\netstandard2.0\Mono*.dll" target="netstandard" />
+    <file src=".\bin\$configuration$\netstandard2.0\Fody*.pdb" target="netstandard" />
+    <file src=".\bin\$configuration$\netstandard2.0\Mono*.pdb" target="netstandard" />
+    <file src="Fody.targets" target="build" />
+  </files>
+</package>

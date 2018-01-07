@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-#if NET46
-using System.Runtime.Remoting;
-#endif
 
 public partial class Processor
 {
@@ -107,7 +104,6 @@ see https://github.com/Fody/Fody/wiki/SampleUsage");
         FlushWeaversXmlHistory();
     }
 
-
     void FindWeavers()
     {
         var stopwatch = Stopwatch.StartNew();
@@ -140,7 +136,7 @@ see https://github.com/Fody/Fody/wiki/SampleUsage");
         {
             loadContext = solutionAssemblyLoadContexts[SolutionDirectory] = CreateAssemblyLoadContext();
         }
-        
+
         var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
         using (innerWeaver = (IInnerWeaver)loadContext.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver"))
         {

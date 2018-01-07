@@ -13,6 +13,9 @@
 *.ncrunchsolution
 *.ncrunchproject
 
+
+src/Integration/Directory.Build.props
+
 .idea/
 
 # Build results

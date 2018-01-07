@@ -24,7 +24,7 @@ public partial class Processor
 
     void GetValue()
     {
-        var weaversBin = Path.Combine(SolutionDirectory, "Weavers", "bin");
+        var weaversBin = Path.GetFullPath(Path.Combine(SolutionDirectory, "Weavers", "bin"));
 
         if (Directory.Exists(weaversBin))
         {

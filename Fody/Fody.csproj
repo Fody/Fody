@@ -6,34 +6,26 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Extensible tool for weaving .net assemblies.</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
     <DevelopmentDependency>true</DevelopmentDependency>
-    <TaskDir>$(SolutionDir)ForIntegration\tasks\net46</TaskDir>
-</PropertyGroup>
+    <NuSpecFile>Fody.nuspec</NuSpecFile>
+  </PropertyGroup>
+  <Target Name="SetPackageDependencies" BeforeTargets="GenerateNuspec">
+    <PropertyGroup>
+      <NuspecProperties>configuration=$(Configuration);id=$(PackageId);version=$(PackageVersion);authors=$(Authors);owners=$(Authors);licenseUrl=$(PackageLicenseUrl);requireLicenseAcceptance=$(PackageRequireLicenseAcceptance);iconUrl=$(PackageIconUrl);projectUrl=$(PackageProjectUrl);description=$(Description);tags=$(PackageTags)</NuspecProperties>
+    </PropertyGroup>
+  </Target>
   <ItemGroup>
     <Compile Include="..\NugetConfigReader.cs">
       <Link>NugetConfigReader.cs</Link>
     </Compile>
-    <Content Include="Fody.targets">
-      <Pack>true</Pack>
-      <PackagePath>build\netstandard1.0;build\net452;build\portable-net+sl+win+wpa+wp</PackagePath>
-    </Content>
-    <Content Include="$(SolutionDir)FodyIsolated\bin\$(Configuration)\$(TargetFramework)\*.*">
-      <Link>References\%(Filename)%(Extension)</Link>
-      <Pack>true</Pack>
-      <PackagePath>tasks\$(TargetFramework)</PackagePath>
-    </Content>
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.5.180" PrivateAssets="All" />
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" PrivateAssets="All" />
     <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" PrivateAssets="All" />
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" PrivateAssets="All" />
   </ItemGroup>
-  <Target Name="CopyForIntegration" AfterTargets="AfterBuild">
-    <ItemGroup>
-      <OutputFiles Include="$(OutDir)**\*" Exclude="**/Microsoft*;**/System*" />
-    </ItemGroup>
-    <RemoveDir Directories="$(TaskDir)" />
-    <Copy SourceFiles="@(OutputFiles)" DestinationFolder="$(TaskDir)" />
-    <Copy SourceFiles="$(ProjectDir)Fody.targets" DestinationFolder="$(SolutionDir)ForIntegration\build\lib" />
+
+  <Target Name="PreparePackagesForIntegrationSolution" BeforeTargets="GenerateNuspec">
+    <WriteLinesToFile Lines="&lt;Project&gt;&lt;PropertyGroup&gt;&lt;IntegrationVersion&gt;$(PackageVersion)&lt;/IntegrationVersion&gt;&lt;/PropertyGroup&gt;&lt;/Project&gt;" File="..\Integration\Directory.Build.props" Overwrite="true" />
   </Target>
+
 </Project>
