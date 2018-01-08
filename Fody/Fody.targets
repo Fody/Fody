@@ -13,7 +13,7 @@
     </When>
     <When Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">
       <PropertyGroup>
-        <FodySolutionDir>$(MSBuildProjectDirectory)..\..\..\</FodySolutionDir>
+        <FodySolutionDir>$(MSBuildProjectDirectory)..\</FodySolutionDir>
       </PropertyGroup>
     </When>
   </Choose>
@@ -37,9 +37,20 @@
   <PropertyGroup>
     <ProjectWeaverXml>$(ProjectDir)FodyWeavers.xml</ProjectWeaverXml>
     <FodySignAssembly Condition="$(FodySignAssembly) == '' Or $(FodySignAssembly) == '*Undefined*'">$(SignAssembly)</FodySignAssembly>
-    <FodyPath Condition="$(FodyPath) == '' Or $(FodyPath) == '*Undefined*'">$(MSBuildThisFileDirectory)..\..\</FodyPath>
-    <FodyAssembly>$(FodyPath)tasks\net46\Fody.dll</FodyAssembly>
+    <FodyPath Condition="$(FodyPath) == '' Or $(FodyPath) == '*Undefined*'">$(MSBuildThisFileDirectory)..\</FodyPath>
   </PropertyGroup>
+  <Choose>
+    <When Condition="'$(MSBuildRuntimeType)'=='Core'">
+      <PropertyGroup>
+        <FodyAssembly>$(FodyPath)netstandardtask\Fody.dll</FodyAssembly>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <FodyAssembly>$(FodyPath)netclassictask\Fody.dll</FodyAssembly>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
   <UsingTask
       TaskName="Fody.WeavingTask"
       AssemblyFile="$(FodyAssembly)" />

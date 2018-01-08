@@ -1,8 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using Fody;
+#if NET46 // TODO: Remove when ObjectApproval supports .NET Core
 using ObjectApproval;
+#endif
 using Xunit;
 
 //using Xunit;
@@ -16,7 +17,9 @@ public class WeaverTestHelperTests : TestBase
         var assemblyPath = Path.Combine(CodeBaseLocation.CurrentDirectory, "DummyAssembly.dll");
         var weaver = new TargetWeaver();
         var result = weaver.ExecuteTestRun(assemblyPath);
+#if NET46 // TODO: Remove when ObjectApproval supports .NET Core
         ObjectApprover.VerifyWithJson(result, ScrubCurrentDirectory);
+#endif
     }
 
     static string ScrubCurrentDirectory(string s)
@@ -32,7 +35,9 @@ public class WeaverTestHelperTests : TestBase
         var result = weaver.ExecuteTestRun(
             assemblyPath: assemblyPath,
             assemblyName: "NewName");
+#if NET46 // TODO: Remove when ObjectApproval supports .NET Core
         ObjectApprover.VerifyWithJson(result, ScrubCurrentDirectory);
+#endif
     }
 }
 

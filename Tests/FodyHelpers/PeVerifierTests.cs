@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Linq;
 using Fody;
 using Mono.Cecil;
 using Xunit;
@@ -17,7 +16,12 @@ public class PeVerifierTests : TestBase
     [Fact]
     public void Should_verify_current_assembly()
     {
-        var verify = PeVerifier.Verify(GetAssemblyPath(), Enumerable.Empty<string>(), out var output);
+
+#if (NET46)
+        var verify = PeVerifier.Verify(GetAssemblyPath(), System.Linq.Enumerable.Empty<string>(), out var output);
+#else
+        var verify = PeVerifier.Verify(GetAssemblyPath(), GetNetCoreIgnoreCodes(), out var output);
+#endif
         Assert.True(verify);
         Assert.NotNull(output);
         Assert.NotEmpty(output);
@@ -29,8 +33,18 @@ public class PeVerifierTests : TestBase
         var assemblyPath = GetAssemblyPath().ToLowerInvariant();
         var newAssemblyPath = assemblyPath.Replace(".dll", "2.dll");
         File.Copy(assemblyPath, newAssemblyPath, true);
+#if (NET46)
         PeVerifier.ThrowIfDifferent(assemblyPath, newAssemblyPath);
+#else
+        PeVerifier.ThrowIfDifferent(assemblyPath, newAssemblyPath,
+            ignoreCodes: GetNetCoreIgnoreCodes());
+#endif
         File.Delete(newAssemblyPath);
+    }
+
+    private static string[] GetNetCoreIgnoreCodes()
+    {
+        return new[] {"0x80070002", "0x80131869"};
     }
 
     [Fact]

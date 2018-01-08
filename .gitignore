@@ -13,6 +13,9 @@
 *.ncrunchsolution
 *.ncrunchproject
 
+
+src/Integration/Directory.Build.props
+
 .idea/
 
 # Build results
@@ -41,7 +44,6 @@
 
 ##  If you have NuGet Package Restore enabled, uncomment this
 packages/
-ForIntegration/
 nugets/
 
 # Visual Studio profiler
@@ -88,3 +90,4 @@ Fody/.DS_Store
 *.userprefs
 *.received.txt
 *.bak
+Integration/Directory.Build.props
