@@ -7,4 +7,4 @@ build:
   project: Fody.sln
   verbosity: minimal
 artifacts:
-- path: Tests\**\*.received
+- path: nugets\*.nupkg
