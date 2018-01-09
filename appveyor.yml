@@ -13,7 +13,5 @@ test_script:
     %xunit20%\xunit.console Tests\bin\Release\net46\Tests.dll
 
     dotnet test "Tests\Tests.csproj" --framework netcoreapp2.0 --configuration Release --no-build --output bin\Release\netcoreapp2.0
-
-    %xunit20%\xunit.console Integration\Tests\bin\Release\net46\Tests.dll
 artifacts:
 - path: nugets\*.nupkg
