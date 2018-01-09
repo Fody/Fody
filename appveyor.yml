@@ -3,8 +3,10 @@ image: Visual Studio 2017
 configuration: Release
 before_build:
 - ps: nuget restore
-build:
-  project: Fody.sln
-  verbosity: minimal
+build_script:
+- cmd: 
+    dotnet build Fody.sln --configuration Release
+
+    dotnet build Integration\Integration.sln --configuration Release
 artifacts:
 - path: nugets\*.nupkg
