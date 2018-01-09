@@ -255,13 +255,30 @@ public static class PropertyDelegateBuilder
         return weaverType.BuildPropertySetDelegate<string>("AddinDirectoryPath");
     }
 
+    public static Func<object, bool> BuildIsAssemblyUnmodifiedDelegate(this Type weaverType)
+    {
+        if (weaverType.InheritsFromBaseWeaver())
+        {
+            return target => ((BaseModuleWeaver)target).IsAssemblyUnmodified;
+        }
+        return weaverType.BuildPropertyGetDelegate<bool>(nameof(BaseModuleWeaver.IsAssemblyUnmodified));
+    }
+
     public static Action<object, T> BuildPropertySetDelegate<T>(this Type targetType, string propertyName)
     {
         TryBuildPropertySetDelegate(targetType, propertyName, out Action<object, T> action);
         return action;
     }
 
-    static void EmptySetter<T>(object o, T t) { }
+    public static Func<object, T> BuildPropertyGetDelegate<T>(this Type targetType, string propertyName)
+    {
+        TryBuildPropertyGetDelegate(targetType, propertyName, out Func<object, T> getter);
+        return getter;
+    }
+
+    private static void EmptySetter<T>(object o, T t) { }
+
+    private static T EmptyGetter<T>(object o) => default;
 
     public static void ThrowIfPropertyExists(this Type targetType, string propertyName)
     {
@@ -316,6 +333,46 @@ public static class PropertyDelegateBuilder
         }
 
         action = EmptySetter;
+        return false;
+    }
+
+    public static bool TryBuildPropertyGetDelegate<T>(this Type targetType, string propertyName,
+        out Func<object, T> getter)
+    {
+        var propertyInfo = targetType.GetProperty(propertyName, BindingFlags.SetProperty | BindingFlags.Instance | BindingFlags.Public);
+
+        if (propertyInfo != null)
+        {
+            if (propertyInfo.PropertyType != typeof(T))
+            {
+                throw new WeavingException($"Expected property '{propertyName}' on '{targetType.FullName}' to be of type '{typeof(T).FullName}'");
+            }
+
+            var target = Expression.Parameter(typeof(object), "target");
+            var property = Expression.Property(Expression.Convert(target, targetType), propertyInfo);
+            var convert = Expression.TypeAs(property, typeof(T));
+            getter = Expression.Lambda<Func<object, T>>(convert, target)
+                .Compile();
+            return true;
+        }
+
+        var fieldInfo = GetField(targetType, propertyName);
+        if (fieldInfo != null)
+        {
+            if (fieldInfo.FieldType != typeof(T))
+            {
+                throw new WeavingException($"Expected field '{propertyName}' on '{targetType.FullName}' to be of type '{typeof(T).FullName}'");
+            }
+
+            var target = Expression.Parameter(typeof(object), "target");
+            var fieldExp = Expression.Field(Expression.Convert(target, targetType), fieldInfo);
+            var convert = Expression.TypeAs(fieldExp, typeof(T));
+            getter = Expression.Lambda<Func<object, T>>(convert, target)
+                .Compile();
+            return true;
+        }
+
+        getter = EmptyGetter<T>;
         return false;
     }
 
