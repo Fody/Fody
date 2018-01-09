@@ -51,5 +51,18 @@ namespace Fody
         public IReadOnlyList<SequencePointMessage> Errors => errors;
         public Assembly Assembly { get; internal set; }
         public string AssemblyPath { get; internal set; }
+
+        public dynamic GetInstance(string className)
+        {
+            var type = Assembly.GetType(className, true);
+            return Activator.CreateInstance(type);
+        }
+
+        public dynamic GetGenericInstance(string className, params Type[] types)
+        {
+            var type = Assembly.GetType(className, true);
+            var genericType = type.MakeGenericType(types);
+            return Activator.CreateInstance(genericType);
+        }
     }
 }
