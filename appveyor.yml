@@ -8,5 +8,10 @@ build_script:
     dotnet build Fody.sln --configuration Release
 
     dotnet build Integration\Integration.sln --configuration Release
+test_script:
+- cmd: >-
+    %xunit20%\xunit.console Tests\bin\Release\net46\Tests.dll
+
+    dotnet test "Tests\Tests.csproj" --framework netcoreapp2.0 --configuration Release --no-build --output bin\Release\netcoreapp2.0
 artifacts:
 - path: nugets\*.nupkg
