@@ -3,33 +3,29 @@ using System.IO;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
-namespace Fody
+class SymbolReaderProvider : ISymbolReaderProvider
 {
-    [Obsolete(OnlyForTesting.Message)]
-    public class SymbolReaderProvider : ISymbolReaderProvider
+    DefaultSymbolReaderProvider inner;
+
+    public SymbolReaderProvider()
     {
-        DefaultSymbolReaderProvider inner;
+        inner = new DefaultSymbolReaderProvider(false);
+    }
 
-        public SymbolReaderProvider()
+    public ISymbolReader GetSymbolReader(ModuleDefinition module, string fileName)
+    {
+        var symbolReader = inner.GetSymbolReader(module, fileName);
+        if (symbolReader != null)
         {
-            inner = new DefaultSymbolReaderProvider(false);
+            return symbolReader;
         }
 
-        public ISymbolReader GetSymbolReader(ModuleDefinition module, string fileName)
-        {
-            var symbolReader = inner.GetSymbolReader(module, fileName);
-            if (symbolReader != null)
-            {
-                return symbolReader;
-            }
+        var uwpAssemblyPath = Path.ChangeExtension(fileName, "compile.dll");
+        return inner.GetSymbolReader(module, uwpAssemblyPath);
+    }
 
-            var uwpAssemblyPath = Path.ChangeExtension(fileName, "compile.dll");
-            return inner.GetSymbolReader(module, uwpAssemblyPath);
-        }
-
-        public ISymbolReader GetSymbolReader(ModuleDefinition module, Stream symbolStream)
-        {
-            throw new NotSupportedException();
-        }
+    public ISymbolReader GetSymbolReader(ModuleDefinition module, Stream symbolStream)
+    {
+        throw new NotSupportedException();
     }
 }

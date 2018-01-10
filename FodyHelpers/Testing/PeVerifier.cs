@@ -46,6 +46,8 @@ namespace Fody
 
         public static bool Verify(string assemblyPath, IEnumerable<string> ignoreCodes, out string output, string workingDirectory = null)
         {
+            Guard.AgainstNullAndEmpty(nameof(assemblyPath), assemblyPath);
+            Guard.AgainstNull(nameof(ignoreCodes), ignoreCodes);
             if (!FoundPeVerify)
             {
                 throw new Exception($"Could not find find peverify.exe in '{windowsSdkDirectory}'.");
@@ -71,6 +73,9 @@ namespace Fody
 
         public static bool Verify(string beforeAssemblyPath, string afterAssemblyPath, IEnumerable<string> ignoreCodes, out string beforeOutput, out string afterOutput, string workingDirectory = null)
         {
+            Guard.AgainstNullAndEmpty(nameof(beforeAssemblyPath), beforeAssemblyPath);
+            Guard.AgainstNullAndEmpty(nameof(afterAssemblyPath), afterAssemblyPath);
+            Guard.AgainstNull(nameof(ignoreCodes), ignoreCodes);
             var codes = ignoreCodes.ToList();
             InnerVerify(beforeAssemblyPath, codes, out beforeOutput, workingDirectory);
             InnerVerify(afterAssemblyPath, codes, out afterOutput, workingDirectory);
@@ -81,11 +86,15 @@ namespace Fody
 
         public static void ThrowIfDifferent(string beforeAssemblyPath, string afterAssemblyPath, string workingDirectory = null)
         {
+            Guard.AgainstNullAndEmpty(nameof(beforeAssemblyPath), beforeAssemblyPath);
+            Guard.AgainstNullAndEmpty(nameof(afterAssemblyPath), afterAssemblyPath);
             ThrowIfDifferent(beforeAssemblyPath, afterAssemblyPath, Enumerable.Empty<string>(), workingDirectory);
         }
 
         public static void ThrowIfDifferent(string beforeAssemblyPath, string afterAssemblyPath, IEnumerable<string> ignoreCodes, string workingDirectory = null)
         {
+            Guard.AgainstNullAndEmpty(nameof(beforeAssemblyPath), beforeAssemblyPath);
+            Guard.AgainstNullAndEmpty(nameof(afterAssemblyPath), afterAssemblyPath);
             Verify(beforeAssemblyPath, afterAssemblyPath, ignoreCodes, out var beforeOutput, out var afterOutput, workingDirectory);
             if (beforeOutput == afterOutput)
             {

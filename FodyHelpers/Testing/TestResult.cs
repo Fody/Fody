@@ -54,12 +54,14 @@ namespace Fody
 
         public dynamic GetInstance(string className)
         {
+            Guard.AgainstNullAndEmpty(nameof(className), className);
             var type = Assembly.GetType(className, true);
             return Activator.CreateInstance(type);
         }
 
         public dynamic GetGenericInstance(string className, params Type[] types)
         {
+            Guard.AgainstNullAndEmpty(nameof(className), className);
             var type = Assembly.GetType(className, true);
             var genericType = type.MakeGenericType(types);
             return Activator.CreateInstance(genericType);

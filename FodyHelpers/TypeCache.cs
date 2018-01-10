@@ -3,7 +3,7 @@ using System.Linq;
 using Fody;
 using Mono.Cecil;
 
-public class TypeCache
+class TypeCache
 {
     Dictionary<string, TypeDefinition> cachedTypes = new Dictionary<string, TypeDefinition>();
 

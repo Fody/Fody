@@ -21,6 +21,7 @@ namespace Fody
 
         public static string GetAssemblyLocation(this Assembly assembly)
         {
+            Guard.AgainstNull(nameof(assembly), assembly);
             var uri = new UriBuilder(assembly.CodeBase);
             return Uri.UnescapeDataString(uri.Path);
         }
