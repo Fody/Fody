@@ -8,6 +8,9 @@ build_script:
     dotnet build Fody.sln --configuration Release
 
     dotnet build Integration\Integration.sln --configuration Release
+
+    msbuild Integration\Tests\Tests.csproj /target:Restore
+
 test_script:
 - cmd: >-
     %xunit20%\xunit.console Tests\bin\Release\net46\Tests.dll
