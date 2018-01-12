@@ -13,7 +13,7 @@
     </When>
     <When Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">
       <PropertyGroup>
-        <FodySolutionDir>$(MSBuildProjectDirectory)..\</FodySolutionDir>
+        <FodySolutionDir>$(MSBuildProjectDirectory)\..\</FodySolutionDir>
       </PropertyGroup>
     </When>
   </Choose>
