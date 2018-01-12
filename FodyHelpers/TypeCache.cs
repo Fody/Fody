@@ -45,6 +45,17 @@ class TypeCache
             return type;
         }
 
+        if (!typeName.Contains('.'))
+        {
+            foreach (var typeDefinition in cachedTypes.Values)
+            {
+                if (typeDefinition.Name == typeName)
+                {
+                    return typeDefinition;
+                }
+            }
+        }
+
         throw new WeavingException($"Could not find '{typeName}'.");
     }
 
