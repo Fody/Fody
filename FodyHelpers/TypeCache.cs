@@ -59,6 +59,11 @@ class TypeCache
         throw new WeavingException($"Could not find '{typeName}'.");
     }
 
+    public virtual bool TryFindType(string typeName, out TypeDefinition type)
+    {
+        return cachedTypes.TryGetValue(typeName, out type);
+    }
+
     void AddIfPublic(TypeDefinition type)
     {
         if (!type.IsPublic)

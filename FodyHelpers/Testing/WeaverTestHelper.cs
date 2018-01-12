@@ -55,6 +55,7 @@ namespace Fody
                 weaver.LogErrorPoint = (text, sequencePoint) => testStatus.AddError(text, sequencePoint);
 
                 weaver.FindType = typeCache.FindType;
+                weaver.TryFindType = typeCache.TryFindType;
                 weaver.ResolveAssembly = assemblyResolver.Resolve;
 
                 var readerParameters = new ReaderParameters(ReadingMode.Immediate)

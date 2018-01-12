@@ -47,6 +47,12 @@ public class TargetWeaver : BaseModuleWeaver
     {
         var type = FindType("System.Boolean");
         Assert.NotNull(type);
+        var found = TryFindType("System.Boolean", out type);
+        Assert.NotNull(type);
+        Assert.True(found);
+        var notFound = TryFindType("FOo", out type);
+        Assert.Null(type);
+        Assert.False(notFound);
     }
 
     public override bool ShouldCleanReference => true;

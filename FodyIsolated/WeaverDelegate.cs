@@ -31,5 +31,6 @@ public class WeaverDelegate
     public Action<object, List<string>> SetDefineConstants;
     public Func<object> ConstructInstance;
     public Action<object, Func<string, TypeDefinition>> SetFindType;
+    public Action<object, TryFindTypeFunc> SetTryFindType;
     public Func<object, IEnumerable<string>> GetAssembliesForScanning;
 }

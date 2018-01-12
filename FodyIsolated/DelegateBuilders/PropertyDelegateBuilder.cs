@@ -22,6 +22,19 @@ public static class PropertyDelegateBuilder
         weaverType.ThrowIfPropertyExists(nameof(BaseModuleWeaver.FindType));
         return (o, func) => { };
     }
+    public static Action<object, TryFindTypeFunc> BuildSetTryFindType(this Type weaverType)
+    {
+        if (weaverType.InheritsFromBaseWeaver())
+        {
+            return (target, action) =>
+            {
+                var baseModuleWeaver = (BaseModuleWeaver)target;
+                baseModuleWeaver.TryFindType = action;
+            };
+        }
+        weaverType.ThrowIfPropertyExists(nameof(BaseModuleWeaver.TryFindType));
+        return (o, func) => { };
+    }
 
     public static Action<object, XElement> BuildSetConfig(this Type weaverType)
     {
