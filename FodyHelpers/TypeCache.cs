@@ -45,23 +45,47 @@ class TypeCache
             return type;
         }
 
-        if (!typeName.Contains('.'))
+        if (FindFromValues(typeName, out type))
         {
-            foreach (var typeDefinition in cachedTypes.Values)
-            {
-                if (typeDefinition.Name == typeName)
-                {
-                    return typeDefinition;
-                }
-            }
+            return type;
         }
 
         throw new WeavingException($"Could not find '{typeName}'.");
     }
 
+   bool FindFromValues(string typeName, out TypeDefinition type)
+    {
+        if (!typeName.Contains('.'))
+        {
+            var types = cachedTypes.Values
+                .Where(x=>x.Name == typeName)
+                .ToList();
+            if (types.Count > 1)
+            {
+                throw new WeavingException($"Found multiple types for '{typeName}'.");
+            }
+            if (types.Count ==0)
+            {
+                type = null;
+                return false;
+            }
+
+            type = types[0];
+            return true;
+        }
+
+        type = null;
+        return false;
+    }
+
     public virtual bool TryFindType(string typeName, out TypeDefinition type)
     {
-        return cachedTypes.TryGetValue(typeName, out type);
+        if (cachedTypes.TryGetValue(typeName, out type))
+        {
+            return true;
+        }
+
+        return FindFromValues(typeName, out type);
     }
 
     void AddIfPublic(TypeDefinition type)
