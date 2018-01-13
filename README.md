@@ -4,7 +4,7 @@
 [![Join the chat at https://gitter.im/Fody/Fody](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Fody/Fody?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
-![Icon](https://raw.github.com/Fody/Fody/master/Icons/package_icon.png)
+![Icon](https://raw.githubusercontent.com/Fody/Fody/master/package_icon.png)
 
 
 ## Extensible tool for weaving .net assemblies 
