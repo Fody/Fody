@@ -132,6 +132,11 @@ namespace Fody
         /// Uses all assemblies listed from calling <see cref="GetAssembliesForScanning"/> on all weavers.
         /// </summary>
         public Func<string, TypeDefinition> FindType { get; set; } = _ => throw new WeavingException($"{nameof(FindType)} has not been set.");
+        /// <summary>
+        /// Handler for searching for a type.
+        /// Uses all assemblies listed from calling <see cref="GetAssembliesForScanning"/> on all weavers.
+        /// </summary>
+        public TryFindTypeFunc TryFindType { get; set; } = (string name, out TypeDefinition type) => throw new WeavingException($"{nameof(TryFindType)} has not been set.");
 
         /// <summary>
         /// Called after all weaving has occurred and the module has been saved.
@@ -145,4 +150,6 @@ namespace Fody
         /// </summary>
         public virtual bool ShouldCleanReference => false;
     }
+
+    public delegate bool TryFindTypeFunc(string typeName, out TypeDefinition type);
 }

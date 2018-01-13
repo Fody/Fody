@@ -54,6 +54,7 @@ public static class DelegateBuilder
             SetDocumentationFilePath = weaverType.BuildSetDocumentationFilePath(),
             SetDefineConstants = weaverType.BuildSetDefineConstants(),
             SetFindType = weaverType.BuildSetFindType(),
+            SetTryFindType = weaverType.BuildSetTryFindType(),
             GetAssembliesForScanning = weaverType.BuildGetAssembliesForScanningDelegate(),
             ConstructInstance = weaverType.BuildConstructorDelegate()
         };

@@ -50,6 +50,7 @@ public class WeaverInitialiserTests : TestBase
 
         ValidateProps(moduleWeaver, moduleDefinition);
         Assert.NotNull(moduleWeaver.FindType);
+        Assert.NotNull(moduleWeaver.TryFindType);
         Assert.NotNull(moduleWeaver.ResolveAssembly);
     }
 

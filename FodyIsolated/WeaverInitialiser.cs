@@ -32,6 +32,7 @@ public partial class InnerWeaver
         if (weaverInstance is BaseModuleWeaver)
         {
             @delegate.SetFindType(weaverInstance, typeCache.FindType);
+            @delegate.SetTryFindType(weaverInstance, typeCache.TryFindType);
             @delegate.SetResolveAssembly(weaverInstance, assemblyName => assemblyResolver.Resolve(assemblyName));
         }
         else
