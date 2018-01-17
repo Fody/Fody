@@ -2,10 +2,10 @@
 <Project>
   <Target Name="IncludeFodyFiles">
     <ItemGroup>
-      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net46\$(PackageId).dll" />
-      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net46\$(PackageId).pdb" />
-      <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2.0\$(PackageId).dll" />
-      <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2.0\$(PackageId).pdb" />
+      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net4*\$(PackageId).dll" />
+      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net4*\$(PackageId).pdb" />
+      <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2*\$(PackageId).dll" />
+      <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2*\$(PackageId).pdb" />
     </ItemGroup>
     <CreateItem Include="@(NetClassicFilesToInclude)" AdditionalMetadata="PackagePath=netclassicweaver">
       <Output TaskParameter="Include" ItemName="TfmSpecificPackageFile" />
