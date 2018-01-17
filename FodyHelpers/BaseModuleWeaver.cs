@@ -101,13 +101,13 @@ namespace Fody
         /// A list of all the references marked as copy-local.
         /// A copy of the contents of the @(ReferenceCopyLocalPaths).
         /// </summary>
-        public List<string> ReferenceCopyLocalPaths { get; set; }
+        public List<string> ReferenceCopyLocalPaths { get; set; } = new List<string>();
 
         /// <summary>
         /// A list of all the msbuild constants.
         /// A copy of the contents of the $(DefineConstants).
         /// </summary>
-        public List<string> DefineConstants { get; set; }
+        public List<string> DefineConstants { get; set; } = new List<string>();
 
         /// <summary>
         /// Called when the weaver is executed.
