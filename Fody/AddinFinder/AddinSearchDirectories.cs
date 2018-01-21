@@ -69,21 +69,13 @@ public partial class AddinFinder
 
     public static IEnumerable<string> ScanDirectoryForPackages(string directory)
     {
-        var oldStyleDirectories = Directory.EnumerateDirectories(directory)
-            .Where(dir => dir.ToLowerInvariant().Contains(".fody."));
+        return AddOldStyleDirectories(directory)
+            .Concat(AddNewOrPaketStyleDirectories(directory));
+    }
 
-        foreach (var versionDirectory in oldStyleDirectories)
-        {
-            var fileName = Path.GetFileName(versionDirectory);
-            var index = fileName.IndexOf(".fody.", StringComparison.OrdinalIgnoreCase);
-            var packageName = fileName.Substring(0, index+5);
-            yield return GetAssemblyFromNugetDir(versionDirectory, packageName);
-        }
-
-        var newOrPaketStyleDirectories = Directory.EnumerateDirectories(directory)
-            .Where(dir => dir.ToLowerInvariant().EndsWith(".fody"));
-
-        foreach (var packageDirectory in newOrPaketStyleDirectories)
+    static IEnumerable<string> AddNewOrPaketStyleDirectories(string directory)
+    {
+        foreach (var packageDirectory in DirectoryEx.EnumerateDirectoriesEndsWith(directory, ".fody"))
         {
             var packageName = Path.GetFileName(packageDirectory);
 
@@ -102,6 +94,17 @@ public partial class AddinFinder
             {
                 yield return GetAssemblyFromNugetDir(packageDirectory, packageName);
             }
+        }
+    }
+
+    static IEnumerable<string> AddOldStyleDirectories(string directory)
+    {
+        foreach (var versionDirectory in DirectoryEx.EnumerateDirectoriesContains(directory, ".fody."))
+        {
+            var fileName = Path.GetFileName(versionDirectory);
+            var index = fileName.IndexOf(".fody.", StringComparison.OrdinalIgnoreCase);
+            var packageName = fileName.Substring(0, index + 5);
+            yield return GetAssemblyFromNugetDir(versionDirectory, packageName);
         }
     }
 
@@ -132,7 +135,7 @@ public partial class AddinFinder
         }
 
         log($"  Scanning SolutionDir/Tools directory convention: '{solutionDirToolsDirectory}'.");
-        AddFiles(Directory.EnumerateFiles(solutionDirToolsDirectory, "*.Fody.dll", SearchOption.AllDirectories));
+        AddFiles(DirectoryEx.EnumerateFilesEndsWith(solutionDirToolsDirectory, ".Fody.dll", SearchOption.AllDirectories));
     }
 
     public void AddFromMsBuildDirectory()
