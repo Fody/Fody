@@ -13,7 +13,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <DisableFody>true</DisableFody>
-    <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">https://raw.github.com/Fody/$(SolutionName)/master/package_icon.png</PackageIconUrl>
+    <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">https://raw.githubusercontent.com/Fody/$(SolutionName)/master/package_icon.png</PackageIconUrl>
     <WeaverDirPath>..\$(PackageId)\bin\$(Configuration)\</WeaverDirPath>
   </PropertyGroup>
   <ItemGroup>
