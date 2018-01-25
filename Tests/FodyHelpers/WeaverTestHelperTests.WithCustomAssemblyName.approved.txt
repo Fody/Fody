@@ -8,9 +8,9 @@
   "Warnings": [],
   "Errors": [],
   "Assembly": {
-    "Data": "NewName, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "Data": "NewName, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "UnityType": 6,
-    "AssemblyName": "NewName, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+    "AssemblyName": "NewName, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
   },
   "AssemblyPath": "\fodytemp\NewName.dll"
 }
