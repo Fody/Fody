@@ -22,6 +22,8 @@ public class ToFriendlyStringTests : TestBase
             var expected = @"an unhandled exception occurred:
 exception:
 foo
+type:
+system.exception
 stacktrace:
    at tofriendlystringtests.throwexception2() in tofriendlystringtests.cs:line 60
    at tofriendlystringtests.throwexception1() in tofriendlystringtests.cs:line 55
