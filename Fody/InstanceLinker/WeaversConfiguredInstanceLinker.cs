@@ -28,7 +28,7 @@ public partial class Processor
                 @"Could not find a weaver named '{0}'.
 If you have nuget package restore turned on you probably need to do a build to download the weavers.
 Alternatively you may have added a weaver to your 'FodyWeavers.xml' and forgot to add the appropriate NuGet package.
-Perhaps you need to run 'Install-Package {0}.Fody'. This url may provide more information http://nuget.org/packages/{0}.Fody/ .", weaverConfig.AssemblyName);
+This url may provide more information http://nuget.org/packages/{0}.Fody/ .", weaverConfig.AssemblyName);
             throw new WeavingException(message);
         }
         weaverConfig.AssemblyPath = assemblyPath;
