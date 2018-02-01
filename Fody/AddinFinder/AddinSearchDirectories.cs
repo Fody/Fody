@@ -70,7 +70,7 @@ public partial class AddinFinder
     public static IEnumerable<string> ScanDirectoryForPackages(string directory)
     {
         return AddOldStyleDirectories(directory)
-            .Concat(AddNewOrPaketStyleDirectories(directory));
+            .Concat(AddNewOrPaketStyleDirectories(directory).Where(x => x != null));
     }
 
     static IEnumerable<string> AddNewOrPaketStyleDirectories(string directory)
@@ -118,10 +118,17 @@ public partial class AddinFinder
 #endif
         if (Directory.Exists(specificDir))
         {
-            return Path.Combine(specificDir, $"{packageName}.dll");
+            return GetAssemblyFromDir(specificDir, packageName);
         }
+        
+        return GetAssemblyFromDir(versionDir, packageName);
+    }
 
-        return Path.Combine(versionDir, $"{packageName}.dll");
+    public static string GetAssemblyFromDir(string dir, string packageName)
+    {
+        return Directory.GetFiles(dir)
+            .Select(x => new FileInfo(x))
+            .FirstOrDefault(x => x.Name.Equals($"{packageName}.dll", StringComparison.OrdinalIgnoreCase))?.FullName;
     }
 
     public void AddToolsSolutionDirectoryToAddinSearch()
