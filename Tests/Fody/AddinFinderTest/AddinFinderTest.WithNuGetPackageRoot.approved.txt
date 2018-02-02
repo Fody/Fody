@@ -1,7 +1,7 @@
 ﻿[
   "\\Weaver1.Fody\\1.0.7\\Weaver1.Fody.dll",
   "\\Weaver1.Fody\\1.0.8\\Weaver1.Fody.dll",
-  "\\weaver2.fody\\2.0.7\\weaver2.fody.dll",
-  "\\weaver2.fody\\2.0.8\\weaver2.fody.dll",
-  "\\weaver3.fody\\2.0.8\\netclassicweaver\\weaver3.fody.dll"
+  "\\weaver2.fody\\2.0.7\\Weaver2.Fody.dll",
+  "\\weaver2.fody\\2.0.8\\Weaver2.Fody.dll",
+  "\\weaver3.fody\\2.0.8\\netclassicweaver\\Weaver3.Fody.dll"
 ]
