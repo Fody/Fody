@@ -1,7 +1,7 @@
 [![AppVeyor](https://img.shields.io/appveyor/ci/SimonCropp/fody/master.svg?style=flat&max-age=86400&label=appveyor)](https://ci.appveyor.com/project/SimonCropp/fody/branch/master) 
 [![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg?style=flat&max-age=86400)](https://gitter.im/Fody/Fody)
 [![NuGet Status](http://img.shields.io/nuget/v/Fody.svg?style=flat&max-age=86400)](https://www.nuget.org/packages/Fody/)
-[![Join the chat at https://gitter.im/Fody/Fody](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Fody/Fody?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/Fody/Fody](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Fody/Fody?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) [![Backers on Open Collective](https://opencollective.com/fody/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/fody/sponsors/badge.svg)](#sponsors) 
 
 
 ![Icon](https://raw.githubusercontent.com/Fody/Fody/master/package_icon.png)
@@ -333,3 +333,33 @@ http://www.jetbrains.com/resharper/
 http://www.jetbrains.com/teamcity/
 
 ![TeamCity.png](http://www.jetbrains.com/img/logos/logo_teamcity_small.gif)
+
+### Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="graphs/contributors"><img src="https://opencollective.com/fody/contributors.svg?width=890" /></a>
+
+
+### Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/fody#backer)]
+
+<a href="https://opencollective.com/fody#backers" target="_blank"><img src="https://opencollective.com/fody/backers.svg?width=890"></a>
+
+
+### Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/fody#sponsor)]
+
+<a href="https://opencollective.com/fody/sponsor/0/website" target="_blank"><img src="https://opencollective.com/fody/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/fody/sponsor/1/website" target="_blank"><img src="https://opencollective.com/fody/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/fody/sponsor/2/website" target="_blank"><img src="https://opencollective.com/fody/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/fody/sponsor/3/website" target="_blank"><img src="https://opencollective.com/fody/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/fody/sponsor/4/website" target="_blank"><img src="https://opencollective.com/fody/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/fody/sponsor/5/website" target="_blank"><img src="https://opencollective.com/fody/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/fody/sponsor/6/website" target="_blank"><img src="https://opencollective.com/fody/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/fody/sponsor/7/website" target="_blank"><img src="https://opencollective.com/fody/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/fody/sponsor/8/website" target="_blank"><img src="https://opencollective.com/fody/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/fody/sponsor/9/website" target="_blank"><img src="https://opencollective.com/fody/sponsor/9/avatar.svg"></a>
+
+
