@@ -62,6 +62,9 @@
       Inputs="@(IntermediateAssembly->'%(FullPath)');$(FodyKeyFilePath);$(ProjectWeaverXml)"
       Outputs="$(TargetPath)">
 
+    <ItemGroup>
+      <FodyPackageDefinitions Include="%(PackageDefinitions.ResolvedPath)" Condition="@(Type)=='package'"/>
+    </ItemGroup>
     <Fody.WeavingTask
           AssemblyPath="@(IntermediateAssembly)"
           IntermediateDir="$(ProjectDir)$(IntermediateOutputPath)"
@@ -73,7 +76,7 @@
           SignAssembly="$(FodySignAssembly)"
           ReferenceCopyLocalPaths="@(ReferenceCopyLocalPaths)"
           DefineConstants="$(DefineConstants)"
-          PackageDefinitions="@(PackageDefinitions->'%(ResolvedPath)')"
+          PackageDefinitions="@(FodyPackageDefinitions)"
           DebugSymbols="$(DebugSymbols)"
           DebugType="$(DebugType)"
           DocumentationFilePath="@(DocFileItem->'%(FullPath)')"
