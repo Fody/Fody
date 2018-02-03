@@ -17,8 +17,6 @@ public class Verifier
 
     public bool Verify()
     {
-        var stopwatch = Stopwatch.StartNew();
-
         try
         {
             return InnerVerify();
@@ -27,10 +25,6 @@ public class Verifier
         {
             Logger.LogException(exception);
             return false;
-        }
-        finally
-        {
-            Logger.LogInfo($"  Finished verification in {stopwatch.ElapsedMilliseconds}ms.");
         }
     }
 
@@ -54,15 +48,25 @@ public class Verifier
             return true;
         }
 
-        Logger.LogInfo("  Verifying assembly");
-        ignoreCodes.Add("0x80070002");
-        if (PeVerifier.Verify(TargetPath, ignoreCodes, out var output))
-        {
-            return true;
-        }
+        var stopwatch = Stopwatch.StartNew();
 
-        Logger.LogError($"PEVerify of the assembly failed.\n{output}");
-        return false;
+        try
+        {
+            Logger.LogInfo("  Verifying assembly");
+            ignoreCodes.Add("0x80070002");
+            if (PeVerifier.Verify(TargetPath, ignoreCodes, out var output))
+            {
+                return true;
+            }
+
+            Logger.LogError($"PEVerify of the assembly failed.\n{output}");
+            return false;
+        }
+        finally
+        {
+
+            Logger.LogInfo($"  Finished verification in {stopwatch.ElapsedMilliseconds}ms.");
+        }
     }
 
     public bool ReadShouldVerifyAssembly(out List<string> ignoreCodes)
