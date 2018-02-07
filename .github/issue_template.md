@@ -4,4 +4,4 @@ Complete as many of the following as possible
  * [ ] Submitted a PR (https://help.github.com/articles/about-pull-requests/) with a failing unit test.
  * [ ] Submitted a PR (https://help.github.com/articles/about-pull-requests/) with a fix.
  
-Want to see Fody survive and evolve? consider supporting the collective: https://opencollective.com/fody/donate
+Want to see Fody survive and evolve? Consider supporting the collective: https://opencollective.com/fody/donate
