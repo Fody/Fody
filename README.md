@@ -15,6 +15,7 @@
 
 Manipulating the IL of an assembly as part of a build requires a significant amount of plumbing code. This plumbing code involves knowledge of both the MSBuild and Visual Studio APIs. Fody attempts to eliminate that plumbing code through an extensible add-in model.
 
+
 ## Support Fody
 
 If you dont have time to contribute code via PRs the you can support financially using [OpenCollective](https://opencollective.com/fody/donate).
@@ -84,6 +85,7 @@ e.g.
 The [Project Configuration Manager](https://github.com/tom-englert/ProjectConfigurationManager/wiki/6.-Fody) provides an interactive tool that can support you configuring your weavers, 
 which is especially helpful in solutions with many projects.
 
+
 ## Supported Runtimes
 
  * Classic .NET: See *Support ended* in [NET Framework version history](https://en.wikipedia.org/wiki/.NET_Framework_version_history#Overview). i.e only 4.5.2 and above is supported.
@@ -112,7 +114,7 @@ Edit and continue is not supported. There is no extension point to re-weave an a
 
 ## Project formats
 
-The follfare not supported
+The following are not supported
 
  * Projects using the [project.json](https://docs.microsoft.com/en-us/nuget/schema/project-json).
  * Projects using the xproj.
@@ -333,6 +335,7 @@ http://www.jetbrains.com/resharper/
 http://www.jetbrains.com/teamcity/
 
 ![TeamCity.png](http://www.jetbrains.com/img/logos/logo_teamcity_small.gif)
+
 
 ### Contributors
 
