@@ -15,33 +15,10 @@ namespace Fody
     {
         public static readonly bool FoundPeVerify;
         static string peverifyPath;
-        static string windowsSdkDirectory;
 
         static PeVerifier()
         {
-            var programFilesPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-            windowsSdkDirectory = Path.Combine(programFilesPath, @"Microsoft SDKs\Windows");
-            if (!Directory.Exists(windowsSdkDirectory))
-            {
-                FoundPeVerify = false;
-                return;
-            }
-
-            peverifyPath = Directory.EnumerateFiles(windowsSdkDirectory, "peverify.exe", SearchOption.AllDirectories)
-                .Where(x => !x.ToLowerInvariant().Contains("x64"))
-                .OrderByDescending(x =>
-                {
-                    var info = FileVersionInfo.GetVersionInfo(x);
-                    return new Version(info.FileMajorPart, info.FileMinorPart, info.FileBuildPart);
-                })
-                .FirstOrDefault();
-            if (peverifyPath == null)
-            {
-                FoundPeVerify = false;
-                return;
-            }
-
-            FoundPeVerify = true;
+            FoundPeVerify = SdkToolFinder.TryFindTool("peverify", out peverifyPath);
         }
 
         public static bool Verify(string assemblyPath, IEnumerable<string> ignoreCodes, out string output, string workingDirectory = null)
@@ -50,7 +27,7 @@ namespace Fody
             Guard.AgainstNull(nameof(ignoreCodes), ignoreCodes);
             if (!FoundPeVerify)
             {
-                throw new Exception($"Could not find find peverify.exe in '{windowsSdkDirectory}'.");
+                throw new Exception("Could not find find peverify.exe in.");
             }
 
             if (ignoreCodes == null)
