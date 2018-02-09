@@ -22,7 +22,7 @@ public class IldasmTests : TestBase
 
     static string GetAssemblyPath()
     {
-        var assembly = typeof(TestBase).Assembly;
+        var assembly = typeof(FactAttribute).Assembly;
 
         var uri = new UriBuilder(assembly.CodeBase);
         return Uri.UnescapeDataString(uri.Path);
