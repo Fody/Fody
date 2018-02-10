@@ -56,8 +56,8 @@ namespace Fody
             var codes = ignoreCodes.ToList();
             InnerVerify(beforeAssemblyPath, codes, out beforeOutput, workingDirectory);
             InnerVerify(afterAssemblyPath, codes, out afterOutput, workingDirectory);
-            afterOutput = afterOutput.TrimLineNumbers();
-            beforeOutput = beforeOutput.TrimLineNumbers();
+            afterOutput = TrimLineNumbers(afterOutput);
+            beforeOutput = TrimLineNumbers(beforeOutput);
             return afterOutput == beforeOutput;
         }
 
@@ -87,9 +87,9 @@ BeforeOutput:
 {beforeOutput}");
         }
 
-        static string TrimLineNumbers(this string input)
+        public static string TrimLineNumbers(string input)
         {
-            return Regex.Replace(input, "0x.*]", "");
+            return Regex.Replace(input, @"\[offset .*\]", "");
         }
 
         static bool InnerVerify(string assemblyPath, IEnumerable<string> ignoreCodes, out string output, string workingDirectory = null)
