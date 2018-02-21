@@ -15,13 +15,13 @@ public class AssemblyResolver : IAssemblyResolver
     {
     }
 
-    public AssemblyResolver(ILogger logger, List<string> splitReferences)
+    public AssemblyResolver(ILogger logger, IEnumerable<string> splitReferences)
     {
         referenceDictionary = new Dictionary<string, string>();
         this.logger = logger;
-        this.splitReferences = splitReferences;
+        this.splitReferences = splitReferences.ToList();
 
-        foreach (var filePath in splitReferences)
+        foreach (var filePath in this.splitReferences)
         {
             referenceDictionary[GetAssemblyName(filePath)] = filePath;
         }
