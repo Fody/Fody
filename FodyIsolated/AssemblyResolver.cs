@@ -23,7 +23,20 @@ public class AssemblyResolver : IAssemblyResolver
 
         foreach (var filePath in splitReferences)
         {
-            referenceDictionary[Path.GetFileNameWithoutExtension(filePath)] = filePath;
+            referenceDictionary[GetAssemblyName(filePath)] = filePath;
+        }
+    }
+
+    private string GetAssemblyName(string filePath)
+    {
+        try
+        {
+            return GetAssembly(filePath, new ReaderParameters(ReadingMode.Deferred)).Name.Name;
+        }
+        catch (Exception ex)
+        {
+            logger.LogDebug($"Could not load {filePath}, assuming the assembly name is equal to the file name: {ex}");
+            return Path.GetFileNameWithoutExtension(filePath);
         }
     }
 
