@@ -15,15 +15,28 @@ public class AssemblyResolver : IAssemblyResolver
     {
     }
 
-    public AssemblyResolver(ILogger logger, List<string> splitReferences)
+    public AssemblyResolver(ILogger logger, IEnumerable<string> splitReferences)
     {
         referenceDictionary = new Dictionary<string, string>();
         this.logger = logger;
-        this.splitReferences = splitReferences;
+        this.splitReferences = splitReferences.ToList();
 
-        foreach (var filePath in splitReferences)
+        foreach (var filePath in this.splitReferences)
         {
-            referenceDictionary[Path.GetFileNameWithoutExtension(filePath)] = filePath;
+            referenceDictionary[GetAssemblyName(filePath)] = filePath;
+        }
+    }
+
+    private string GetAssemblyName(string filePath)
+    {
+        try
+        {
+            return GetAssembly(filePath, new ReaderParameters(ReadingMode.Deferred)).Name.Name;
+        }
+        catch (Exception ex)
+        {
+            logger.LogDebug($"Could not load {filePath}, assuming the assembly name is equal to the file name: {ex}");
+            return Path.GetFileNameWithoutExtension(filePath);
         }
     }
 
