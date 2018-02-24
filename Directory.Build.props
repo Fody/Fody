@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <Version>2.4.2</Version>
+    <Version>2.4.3</Version>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <LangVersion>latest</LangVersion>
     <NoWarn>CS1591</NoWarn>
@@ -16,4 +16,9 @@
     <PackageIconUrl>https://raw.github.com/Fody/Fody/master/package_icon.png</PackageIconUrl>
     <PackageTags>ILWeaving, Fody, Cecil, AOP</PackageTags>
   </PropertyGroup>
+  <Target Name="IncludeAllInPackage">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(OutputPath)\*.*" Exclude="**/$(TargetName).*;*.json;**/Microsoft*;**/System*" PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)" />
+    </ItemGroup>
+  </Target>
 </Project>

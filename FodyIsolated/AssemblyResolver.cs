@@ -82,8 +82,7 @@ public class AssemblyResolver : IAssemblyResolver
             return GetAssembly(fileFromDerivedReferences, parameters);
         }
 
-        var joinedReferences = string.Join(Environment.NewLine+"\t\t", splitReferences.OrderBy(x => x));
-        logger.LogDebug($"Can't find '{assemblyNameReference.FullName}'.{Environment.NewLine}\tTried:{Environment.NewLine}{joinedReferences}");
+        logger.LogDebug($"Can't find '{assemblyNameReference.FullName}'.{Environment.NewLine}");
         return null;
     }
 

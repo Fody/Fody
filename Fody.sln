@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 15.0.26430.13
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fody", "Fody\Fody.csproj", "{64880F43-E6C1-428E-B00A-E0374697B5CF}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -27,7 +27,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CDCDDCD6-6958-4352-AF0C-C589ECD51C0D}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
-		Directory.Build.targets = Directory.Build.targets
 	EndProjectSection
 EndProject
 Global

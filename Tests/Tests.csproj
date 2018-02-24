@@ -9,14 +9,14 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.5.180" />
     <PackageReference Include="Microsoft.Build.Framework" Version="15.5.180" />
-    <PackageReference Include="ApprovalTests" Version="3.*" Condition="$(TargetFramework) == 'net46'" />
-    <PackageReference Include="ApprovalUtilities" Version="3.*" Condition="$(TargetFramework) == 'net46'" />
-    <PackageReference Include="Moq" Version="4.*" />
+    <PackageReference Include="ApprovalTests" Version="3.0.13" Condition="$(TargetFramework) == 'net46'" />
+    <PackageReference Include="ApprovalUtilities" Version="3.0.13" Condition="$(TargetFramework) == 'net46'" />
+    <PackageReference Include="Moq" Version="4.8.2" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <Reference Include="Microsoft.CSharp" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
-    <PackageReference Include="ObjectApproval" Version="2.*" Condition="$(TargetFramework) == 'net46'" />
+    <PackageReference Include="ObjectApproval" Version="2.2" Condition="$(TargetFramework) == 'net46'" />
     <ProjectReference Include="..\DummyAssembly\DummyAssembly.csproj" />
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
     <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
