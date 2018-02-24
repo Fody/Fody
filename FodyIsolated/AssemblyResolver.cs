@@ -82,7 +82,7 @@ public class AssemblyResolver : IAssemblyResolver
             return GetAssembly(fileFromDerivedReferences, parameters);
         }
 
-        logger.LogDebug($"Can't find '{assemblyNameReference.FullName}'.{Environment.NewLine}");
+        logger.LogDebug($"Can't find '{assemblyNameReference.FullName}'.");
         return null;
     }
 
