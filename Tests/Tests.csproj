@@ -7,8 +7,8 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.5.180" />
-    <PackageReference Include="Microsoft.Build.Framework" Version="15.5.180" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.6.82" />
+    <PackageReference Include="Microsoft.Build.Framework" Version="15.6.82" />
     <PackageReference Include="ApprovalTests" Version="3.0.13" Condition="$(TargetFramework) == 'net46'" />
     <PackageReference Include="ApprovalUtilities" Version="3.0.13" Condition="$(TargetFramework) == 'net46'" />
     <PackageReference Include="Moq" Version="4.8.2" />

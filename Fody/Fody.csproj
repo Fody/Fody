@@ -18,7 +18,7 @@
     <Compile Include="..\NugetConfigReader.cs">
       <Link>NugetConfigReader.cs</Link>
     </Compile>
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.5.180" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.6.82" PrivateAssets="All" />
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" PrivateAssets="All" />
     <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" PrivateAssets="All" />
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" PrivateAssets="All" />
