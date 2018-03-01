@@ -17,7 +17,6 @@ static class ReferenceCleaner
             .FirstOrDefault(x => x.Name == weaverName);
         if (referenceToRemove == null)
         {
-            log($"\tNo reference to '{weaverName}' found. References not modified.");
             return;
         }
 
