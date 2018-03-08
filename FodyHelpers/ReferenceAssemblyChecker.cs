@@ -10,9 +10,16 @@ namespace Fody
     {
         public static bool IsReferenceAssembly(string path)
         {
-            var asm = AssemblyDefinition.ReadAssembly(path);
-            var isRefAssembly = asm.CustomAttributes.Any(a => a.AttributeType.FullName == "System.Runtime.CompilerServices.ReferenceAssemblyAttribute");
-            return isRefAssembly;
+            try
+            {
+                var asm = AssemblyDefinition.ReadAssembly(path);
+                var isRefAssembly = asm.CustomAttributes.Any(a => a.AttributeType.FullName == "System.Runtime.CompilerServices.ReferenceAssemblyAttribute");
+                return isRefAssembly;
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException($"Could not load assembly '{path}': {ex.Message}", ex);
+            }
         }
 
         public static bool IsImplementationAssembly(string path) => false == IsReferenceAssembly(path);
