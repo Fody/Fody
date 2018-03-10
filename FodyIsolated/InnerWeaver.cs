@@ -169,7 +169,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         var minCecilVersion = new Version(0, 10);
         if (cecilReference.Version < minCecilVersion)
         {
-            throw new WeavingException($"The weaver assembly '{assembly}' references an out of date version of Mono.Cecil.dll (cecilReference.Version). At least version {minCecilVersion} is expected. {GetNugetError()}");
+            throw new WeavingException($"The weaver assembly '{assembly}' references an out of date version of Mono.Cecil.dll {cecilReference.Version}. At least version {minCecilVersion} is expected. {GetNugetError()}");
         }
     }
 
