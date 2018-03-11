@@ -2,6 +2,7 @@ using Fody;
 using System;
 using System.IO;
 using System.Linq;
+#pragma warning disable 618
 
 public partial class Processor
 {

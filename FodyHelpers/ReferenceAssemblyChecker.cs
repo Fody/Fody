@@ -1,27 +1,23 @@
 ﻿using Mono.Cecil;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Fody
 {
+    [Obsolete(OnlyForTesting.Message)]
     public static class ReferenceAssemblyChecker
     {
-        public static bool IsReferenceAssembly(string path)
+        public static bool IsImplementationAssembly(string path)
         {
             try
             {
                 var asm = AssemblyDefinition.ReadAssembly(path);
-                var isRefAssembly = asm.CustomAttributes.Any(a => a.AttributeType.FullName == "System.Runtime.CompilerServices.ReferenceAssemblyAttribute");
-                return isRefAssembly;
+                return asm.CustomAttributes.All(a => a.AttributeType.FullName != "System.Runtime.CompilerServices.ReferenceAssemblyAttribute");
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                throw new InvalidOperationException($"Could not load assembly '{path}': {ex.Message}", ex);
+                throw new Exception($"Could not load assembly '{path}': {exception.Message}", exception);
             }
         }
-
-        public static bool IsImplementationAssembly(string path) => false == IsReferenceAssembly(path);
     }
 }
