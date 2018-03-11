@@ -7,8 +7,6 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.6.82" />
-    <PackageReference Include="Microsoft.Build.Framework" Version="15.6.82" />
     <PackageReference Include="ApprovalTests" Version="3.0.13" Condition="$(TargetFramework) == 'net46'" />
     <PackageReference Include="ApprovalUtilities" Version="3.0.13" Condition="$(TargetFramework) == 'net46'" />
     <PackageReference Include="Moq" Version="4.8.2" />
@@ -35,12 +33,17 @@
     <Content Include="Fody\ProjectWeaversReaderTests\*.xml" CopyToOutputDirectory="Always" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework) == 'net46'">
+    <Reference Include="Microsoft.Build" />
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Build.Tasks.v4.0" />
+    <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\net40\Mono.Cecil.dll" />
     <Reference Include="Mono.Cecil.Mdb" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Mdb.dll" />
     <Reference Include="Mono.Cecil.Pdb" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Pdb.dll" />
     <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Rocks.dll" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework) == 'netcoreapp2.0'">
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.6.82" />
     <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\netstandard1.3\Mono.Cecil.dll" />
     <Reference Include="Mono.Cecil.Mdb" HintPath="..\Lib\Cecil\netstandard1.3\Mono.Cecil.Mdb.dll" />
     <Reference Include="Mono.Cecil.Pdb" HintPath="..\Lib\Cecil\netstandard1.3\Mono.Cecil.Pdb.dll" />
