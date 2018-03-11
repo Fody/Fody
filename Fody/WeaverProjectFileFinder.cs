@@ -1,3 +1,4 @@
+using Fody;
 using System;
 using System.IO;
 using System.Linq;
@@ -30,6 +31,7 @@ public partial class Processor
         {
             WeaverAssemblyPath = Directory.EnumerateFiles(weaversBin, "Weavers.dll", SearchOption.AllDirectories)
                 .OrderByDescending(File.GetLastWriteTime)
+                .Where(ReferenceAssemblyChecker.IsImplementationAssembly)
                 .FirstOrDefault();
             return;
         }
