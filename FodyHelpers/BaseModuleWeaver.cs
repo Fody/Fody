@@ -132,6 +132,7 @@ namespace Fody
         /// Uses all assemblies listed from calling <see cref="GetAssembliesForScanning"/> on all weavers.
         /// </summary>
         public Func<string, TypeDefinition> FindType { get; set; } = _ => throw new WeavingException($"{nameof(FindType)} has not been set.");
+
         /// <summary>
         /// Handler for searching for a type.
         /// Uses all assemblies listed from calling <see cref="GetAssembliesForScanning"/> on all weavers.
@@ -146,7 +147,8 @@ namespace Fody
         }
 
         /// <summary>
-        /// Called after all weaving has occurred and the module has been saved.
+        /// Set to true if the reference to an equally named library (same name as this fody addin with the ending ".Fody" trimmed)
+        /// should be removed by Fody after a successful execution
         /// </summary>
         public virtual bool ShouldCleanReference => false;
     }
