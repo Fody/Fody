@@ -50,7 +50,7 @@ namespace Fody
         //TODO move back to DebugSymbols when it resolves to true in release mode
         public bool DebugSymbols { get; set; }
         public string DebugType { get; set; }
-
+        public string ProjectWeaverXml { get; set; }
         public override bool Execute()
         {
             var referenceCopyLocalPaths = ReferenceCopyLocalPaths.Select(x => x.ItemSpec).ToList();
@@ -74,7 +74,8 @@ namespace Fody
                 NuGetPackageRoot = NuGetPackageRoot,
                 MSBuildDirectory = MSBuildThisFileDirectory,
                 PackageDefinitions = PackageDefinitions?.ToList(),
-                DebugSymbols = DebugSymbolsProduced()
+                DebugSymbols = DebugSymbolsProduced(),
+                ProjectWeaverXmlPath = ProjectWeaverXml
             };
             var success = processor.Execute();
             if (success)
