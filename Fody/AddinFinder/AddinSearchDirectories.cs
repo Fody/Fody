@@ -116,16 +116,18 @@ public partial class AddinFinder
 #if (NET46)
         var specificDir = Path.Combine(versionDir, "netclassicweaver");
 #endif
-        if (Directory.Exists(specificDir))
-        {
-            return GetAssemblyFromDir(specificDir, packageName);
-        }
-        
-        return GetAssemblyFromDir(versionDir, packageName);
+
+        return GetAssemblyFromDir(specificDir, packageName)
+               ?? GetAssemblyFromDir(versionDir, packageName);
     }
 
-    public static string GetAssemblyFromDir(string dir, string packageName)
+    static string GetAssemblyFromDir(string dir, string packageName)
     {
+        if (!Directory.Exists(dir))
+        {
+            return null;
+        }
+
         return Directory.GetFiles(dir)
             .Select(x => new FileInfo(x))
             .FirstOrDefault(x => x.Name.Equals($"{packageName}.dll", StringComparison.OrdinalIgnoreCase))?.FullName;
@@ -197,7 +199,10 @@ public partial class AddinFinder
 
     void AddFile(string file)
     {
-        log($"    Fody weaver file added '{file}'");
-        FodyFiles.Add(file);
+        if (!string.IsNullOrEmpty(file))
+        {
+            log($"    Fody weaver file added '{file}'");
+            FodyFiles.Add(file);
+        }
     }
 }
