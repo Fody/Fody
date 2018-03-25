@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using Fody;
 using Xunit;
 #if NET46 // TODO: Remove when ObjectApproval supports .NET Core
 using ObjectApproval;
@@ -41,7 +42,18 @@ public partial class AddinFinderTest : TestBase
         Verify(combine);
     }
 
-    static void Verify(string combine)
+    [Fact(Skip = "Need valid weavers dlls, or better mocking")]
+    public void WhenVersionFilterIsSpecifiedItLimitsMatchedWeavers()
+    {
+        var addinFinder = new AddinFinder(null, null, null, null, null);
+        addinFinder.FodyFiles.Add("");
+        var filter = VersionFilter.Parse("[1.0.7, 1.0.8)");
+
+        string found = addinFinder.FindAddinAssembly("Weaver1", filter);
+        Assert.Equal("", found);
+    }
+
+    private static void Verify(string combine)
     {
         var addinFinder = new AddinFinder(
             log: s => { },

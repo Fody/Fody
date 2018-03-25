@@ -7,6 +7,7 @@ using Fody;
 
 public partial class Processor
 {
+    private const string WeaverVersionAttribute = "WeaverVersion";
     public List<WeaverEntry> Weavers;
 
     public virtual void ReadProjectWeavers()
@@ -31,6 +32,7 @@ public partial class Processor
                 }
                 var weaverEntry = new WeaverEntry
                                       {
+                                          VersionFilter = element.Attribute(WeaverVersionAttribute)?.Value,
                                           Element = element.ToString(SaveOptions.OmitDuplicateNamespaces),
                                           AssemblyName = assemblyName
                                       };

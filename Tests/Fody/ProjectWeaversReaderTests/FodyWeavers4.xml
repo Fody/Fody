@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Weavers >
+  <SampleTask1 WeaverVersion="1.2.3"/>
+  <SampleTask2 WeaverVersion="(1.2.3, 4.5.*]"/>
+  <SampleTask3 />
+</Weavers>

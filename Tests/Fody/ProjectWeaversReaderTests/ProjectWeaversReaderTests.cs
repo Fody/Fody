@@ -23,6 +23,25 @@ public class ProjectWeaversReaderTests : TestBase
         Assert.Equal("<SampleTask3 MyProperty3=\"PropertyValue3\" />", weavers[2].Element);
     }
 
+    [Fact]
+    public void ItLoadsWeaverVersionFilters()
+    {
+        var currentDirectory = AssemblyLocation.CurrentDirectory;
+        var processor = new Processor
+        {
+            ConfigFiles = new List<string>
+            {
+                Path.Combine(currentDirectory, @"Fody\ProjectWeaversReaderTests\FodyWeavers4.xml")
+            }
+        };
+        processor.ReadProjectWeavers();
+        var weavers = processor.Weavers;
+        Assert.Equal(3, weavers.Count);
+        Assert.Equal("1.2.3", weavers[0].VersionFilter);
+        Assert.Equal("(1.2.3, 4.5.*]", weavers[1].VersionFilter);
+        Assert.True(string.IsNullOrWhiteSpace(weavers[2].VersionFilter));
+    }
+
     static IEnumerable<string> GetPaths()
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory;
