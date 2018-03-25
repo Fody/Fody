@@ -16,6 +16,7 @@ public partial class Processor
     public string SolutionDirectory;
     public string NuGetPackageRoot;
     public string MSBuildDirectory;
+    public string ProjectWeaverXmlPath;
     public bool DebugSymbols;
     public List<string> ReferenceCopyLocalPaths;
     public List<string> PackageDefinitions;
@@ -40,7 +41,7 @@ public partial class Processor
 
     public virtual bool Execute()
     {
-        Logger.LogInfo($"Fody (version {typeof (Processor).Assembly.GetName().Version}) Executing");
+        Logger.LogInfo($"Fody (version {typeof(Processor).Assembly.GetName().Version}) Executing");
 
         var stopwatch = Stopwatch.StartNew();
 
@@ -66,7 +67,8 @@ public partial class Processor
 
         ValidateAssemblyPath();
 
-        ConfigFiles = ConfigFileFinder.FindWeaverConfigs(SolutionDirectory, ProjectDirectory, Logger);
+        //ConfigFiles = ConfigFileFinder.FindWeaverConfigs(SolutionDirectory, ProjectDirectory, Logger);
+        ConfigFiles = ConfigFileFinder.FindWeaverConfigs(ProjectDirectory, Logger, new[] { SolutionDirectory }, new[] { ProjectWeaverXmlPath });
 
         if (!ShouldStartSinceFileChanged())
         {

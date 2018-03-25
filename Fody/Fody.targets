@@ -35,7 +35,7 @@
     </Otherwise>
   </Choose>
   <PropertyGroup>
-    <ProjectWeaverXml>$(ProjectDir)FodyWeavers.xml</ProjectWeaverXml>
+    <ProjectWeaverXml Condition="'$(ProjectWeaverXml)' != ''">$(ProjectDir)FodyWeavers.xml</ProjectWeaverXml>
     <FodySignAssembly Condition="$(FodySignAssembly) == '' Or $(FodySignAssembly) == '*Undefined*'">$(SignAssembly)</FodySignAssembly>
     <FodyPath Condition="$(FodyPath) == '' Or $(FodyPath) == '*Undefined*'">$(MSBuildThisFileDirectory)..\</FodyPath>
   </PropertyGroup>
@@ -84,6 +84,7 @@
           DebugType="$(DebugType)"
           DocumentationFilePath="@(DocFileItem->'%(FullPath)')"
           MsBuildThisFileDirectory="$(MSBuildThisFileDirectory)"
+          ProjectWeaverXml="$(ProjectWeaverXml)"
       >
 
       <Output
