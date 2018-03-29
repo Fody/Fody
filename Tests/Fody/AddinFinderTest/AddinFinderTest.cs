@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Xunit;
@@ -39,6 +41,29 @@ public partial class AddinFinderTest : TestBase
     {
         var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/AddinFinderTest/PaketStructure"));
         Verify(combine);
+    }
+
+    [Fact]
+    public void IgnoreInvalidPackageDefinitions()
+    {
+        var root = Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/AddinFinderTest/NewNugetStructure");
+        var addinFinder = new AddinFinder(
+            log: s => { },
+            solutionDirectory: Path.Combine(root, "Solution"),
+            msBuildTaskDirectory: Path.Combine(root, "MsBuildDirectory/1/2/3"),
+            nuGetPackageRoot: Path.Combine(root, "NuGetPackageRoot"),
+            packageDefinitions: new List<string>
+            {
+                Path.Combine(root, "Solution/packages/Weaver.Fody/7.0.0"),
+                Path.Combine(root, "Solution/packages/ThisIsATrap.Fody")
+            });
+
+        addinFinder.FindAddinDirectories();
+
+        Assert.Contains(
+            Path.Combine(root, "Solution/packages/Weaver.Fody/7.0.0/Weaver.Fody.dll").Replace('/', Path.DirectorySeparatorChar),
+            addinFinder.FodyFiles.Select(i => i.Replace('/', Path.DirectorySeparatorChar))
+        );
     }
 
     static void Verify(string combine)
