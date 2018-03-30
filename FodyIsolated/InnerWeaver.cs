@@ -197,7 +197,14 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
                 Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
                 var startNew = Stopwatch.StartNew();
                 Logger.LogDebug("  Executing Weaver ");
-                weaver.WeaverDelegate.Execute(weaver.Instance);
+                try
+                {
+                    weaver.WeaverDelegate.Execute(weaver.Instance);
+                }
+                catch (Exception exception)
+                {
+                    throw new Exception($"Failed to execute weaver {weaver.Config.AssemblyPath}", exception);
+                }
                 var finishedMessage = $"  Finished '{weaver.Config.AssemblyName}' in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
                 Logger.LogDebug(finishedMessage);
 #pragma warning disable 618
