@@ -1,14 +1,10 @@
 using System;
 using System.Linq;
-using System.Security.Permissions;
 using Mono.Cecil;
-using SecurityAction = System.Security.Permissions.SecurityAction;
 
-public class IsolatedContainsTypeChecker :
-    MarshalByRefObject,
-    IContainsTypeChecker
+public class ContainsTypeChecker
 {
-    public bool Check(string assemblyPath, string typeName)
+    public virtual bool Check(string assemblyPath, string typeName)
     {
         var parameters = new ReaderParameters
         {
@@ -21,13 +17,5 @@ public class IsolatedContainsTypeChecker :
             var types = module.Types;
             return types.Any(x => string.Equals(x.Name, typeName, StringComparison.OrdinalIgnoreCase));
         }
-    }
-
-    [SecurityPermission(
-        SecurityAction.Demand,
-        Flags = SecurityPermissionFlag.Infrastructure)]
-    public override object InitializeLifetimeService()
-    {
-        return null;
     }
 }

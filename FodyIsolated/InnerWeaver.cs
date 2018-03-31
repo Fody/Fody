@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 #if NET46
 using System.Runtime.Remoting;
 #endif
@@ -17,6 +18,7 @@ using TypeAttributes = Mono.Cecil.TypeAttributes;
 
 public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 {
+    static byte[] expectedCecilToken = typeof(ModuleDefinition).Assembly.GetName().GetPublicKeyToken();
     public string ProjectDirectoryPath { get; set; }
     public string DocumentationFilePath { get; set; }
     public string AssemblyFilePath { get; set; }
@@ -139,7 +141,6 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             Logger.LogDebug($"Weaver '{weaverConfig.AssemblyPath}'.");
             Logger.LogDebug("  Initializing weaver");
             var assembly = LoadAssembly(weaverConfig.AssemblyPath);
-            VerifyMinCecilVersion(assembly);
             var weaverType = assembly.FindType(weaverConfig.TypeName);
 
             var delegateHolder = weaverType.GetDelegateHolderFromCache();
@@ -156,7 +157,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         }
     }
 
-    void VerifyMinCecilVersion(Assembly assembly)
+    void VerifyCecilReference(Assembly assembly)
     {
         var cecilReference = assembly.GetReferencedAssemblies()
             .SingleOrDefault(x => x.Name == "Mono.Cecil");
@@ -170,6 +171,12 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         if (cecilReference.Version < minCecilVersion)
         {
             throw new WeavingException($"The weaver assembly '{assembly}' references an out of date version of Mono.Cecil.dll {cecilReference.Version}. At least version {minCecilVersion} is expected. {GetNugetError()}");
+        }
+
+        var publicKeyToken = cecilReference.GetPublicKeyToken();
+        if (!publicKeyToken.SequenceEqual(expectedCecilToken))
+        {
+            throw new WeavingException($"The weaver assembly '{assembly}' references an out of date version of Mono.Cecil.dll. Expected strong name token of '{BitConverter.ToString(expectedCecilToken)}' but got '{BitConverter.ToString(publicKeyToken)}'. The weaver needs to update to at least version 3.0 of FodyHelpers.");
         }
     }
 

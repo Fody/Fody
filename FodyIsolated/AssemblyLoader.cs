@@ -15,7 +15,10 @@ public partial class InnerWeaver
             return assembly;
         }
         Logger.LogDebug($"  Loading '{assemblyPath}' from disk.");
-        return assemblies[assemblyPath] = LoadFromFile(assemblyPath);
+        var loadFromFile = LoadFromFile(assemblyPath);
+
+        VerifyCecilReference(loadFromFile);
+        return assemblies[assemblyPath] = loadFromFile;
     }
 
     public static Assembly LoadFromFile(string assemblyPath)
