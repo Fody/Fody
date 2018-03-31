@@ -17,7 +17,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
     <PackageReference Include="ObjectApproval" Version="2.2" Condition="$(TargetFramework) == 'net46'" />
     <ProjectReference Include="..\DummyAssembly\DummyAssembly.csproj" />
-    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
     <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" />
     <ProjectReference Include="..\Fody\Fody.csproj" />
