@@ -56,7 +56,7 @@ public partial class AddinFinder
     {
         if (nuGetPackageRoot == null)
         {
-            log($"  Skipped NuGetPackageRoot since it is not defined.");
+            log("  Skipped NuGetPackageRoot since it is not defined.");
             return;
         }
         if (!Directory.Exists(nuGetPackageRoot))
