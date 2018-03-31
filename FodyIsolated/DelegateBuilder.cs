@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Reflection;
 using Fody;
 
 public static class DelegateBuilder
@@ -15,6 +17,7 @@ public static class DelegateBuilder
         {
             weaverDelegates[weaverType.TypeHandle] = @delegate = BuildDelegateHolder(weaverType);
         }
+
         return @delegate;
     }
 
@@ -29,5 +32,28 @@ public static class DelegateBuilder
 
         var message = $"Cannot load/use weaver {weaverType.FullName}. Weavers must inherit from {nameof(BaseModuleWeaver)} which exists in the FodyHelpers nuget package.";
         throw new WeavingException(message);
+    }
+
+    public static Func<BaseModuleWeaver> BuildConstructorDelegate(this Type weaverType)
+    {
+        if (weaverType.IsNested)
+        {
+            throw new WeavingException($"'{weaverType.FullName}' is a nested class which is not supported.");
+        }
+
+        if (weaverType.IsAbstract || !weaverType.IsClass || !weaverType.IsPublic)
+        {
+            throw new WeavingException($"'{weaverType.FullName}' is not a public instance class.");
+        }
+
+        var constructorInfo = weaverType.GetConstructor(BindingFlags.Instance | BindingFlags.Public, null, new Type[] { }, null);
+        if (constructorInfo == null)
+        {
+            var message = $"'{weaverType.FullName}' does not have a public instance constructor with no parameters.";
+            throw new WeavingException(message);
+        }
+
+        return (Func<BaseModuleWeaver>) Expression.Lambda(Expression.TypeAs(Expression.New(constructorInfo), typeof(BaseModuleWeaver)))
+            .Compile();
     }
 }
