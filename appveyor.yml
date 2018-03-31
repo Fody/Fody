@@ -7,7 +7,6 @@ build_script:
 - cmd: 
     dotnet build Fody.sln --configuration Release
 
-    dotnet build Integration\Integration.sln --configuration Release
 
 
 test_script:
