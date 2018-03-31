@@ -25,7 +25,7 @@ namespace Fody
             Guard.AgainstNullAndEmpty(nameof(assemblyPath), assemblyPath);
             if (!FoundIldasm)
             {
-                throw new Exception($"Could not find find ildasm.exe.");
+                throw new Exception("Could not find find ildasm.exe.");
             }
 
             if (!string.IsNullOrEmpty(identifier))

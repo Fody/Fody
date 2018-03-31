@@ -29,9 +29,11 @@ using System.Runtime.Loader;
 
 public class IsolatedAssemblyLoadContext : AssemblyLoadContext
 {
+    // ReSharper disable UnusedParameter.Local
     public IsolatedAssemblyLoadContext(string friendlyName, string applicationBase)
     {
     }
+    // ReSharper restore UnusedParameter.Local
 
     /// <inheritdoc />
     protected override Assembly Load(AssemblyName assemblyName)

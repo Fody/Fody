@@ -17,7 +17,7 @@ public static class ExceptionExtensions
 
             stringBuilder.Append("Type:");
             stringBuilder.Append(Environment.NewLine);
-            stringBuilder.Append(exception.GetType().ToString());
+            stringBuilder.Append(exception.GetType());
             stringBuilder.Append(Environment.NewLine);
 
             foreach (var i in exception.Data)
