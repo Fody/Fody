@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Fody;
 using Xunit;
 
@@ -85,14 +86,38 @@ public class WithParamsClass
     }
 }
 
-public class ValidClass
+public class ValidClass:BaseModuleWeaver
 {
+    public override void Execute()
+    {
+    }
+
+    public override IEnumerable<string> GetAssembliesForScanning()
+    {
+     yield break;
+    }
 }
 
-internal class InternalClass
+internal class InternalClass: BaseModuleWeaver
 {
+    public override void Execute()
+    {
+    }
+
+    public override IEnumerable<string> GetAssembliesForScanning()
+    {
+        yield break;
+    }
 }
 
-class PrivateClass
+class PrivateClass: BaseModuleWeaver
 {
+    public override void Execute()
+    {
+    }
+
+    public override IEnumerable<string> GetAssembliesForScanning()
+    {
+        yield break;
+    }
 }

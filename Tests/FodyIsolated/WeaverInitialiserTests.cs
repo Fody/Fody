@@ -1,36 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 using Fody;
 using Mono.Cecil;
-using Mono.Cecil.Cil;
 using Moq;
 using Xunit;
 
 public class WeaverInitialiserTests : TestBase
 {
-    [Fact]
-    public void ValidProps()
-    {
-        var moduleDefinition = ModuleDefinition.CreateModule("Foo", ModuleKind.Dll);
-
-        var resolver = new MockAssemblyResolver();
-        var innerWeaver = BuildInnerWeaver(moduleDefinition, resolver);
-        innerWeaver.SplitUpReferences();
-
-        var weaverEntry = new WeaverEntry
-        {
-            Element = "<foo/>",
-            AssemblyPath = @"c:\FakePath\Assembly.dll"
-        };
-        var moduleWeaver = new ValidModuleWeaver();
-        innerWeaver.SetProperties(weaverEntry, moduleWeaver, typeof(ValidModuleWeaver).BuildDelegateHolder());
-
-        ValidateProps(moduleWeaver, moduleDefinition);
-        Assert.Equal(resolver, moduleWeaver.AssemblyResolver);
-    }
-
     [Fact]
     public void ValidPropsFromBase()
     {
@@ -46,7 +22,7 @@ public class WeaverInitialiserTests : TestBase
             AssemblyPath = @"c:\FakePath\Assembly.dll"
         };
         var moduleWeaver = new ValidFromBaseModuleWeaver();
-        innerWeaver.SetProperties(weaverEntry, moduleWeaver, typeof(ValidFromBaseModuleWeaver).BuildDelegateHolder());
+        innerWeaver.SetProperties(weaverEntry, moduleWeaver);
 
         ValidateProps(moduleWeaver, moduleDefinition);
         Assert.NotNull(moduleWeaver.FindType);
@@ -101,39 +77,6 @@ public class WeaverInitialiserTests : TestBase
         Assert.Equal("ProjectDirectoryPath", moduleWeaver.ProjectDirectoryPath);
         Assert.Equal("SolutionDirectoryPath", moduleWeaver.SolutionDirectoryPath);
         Assert.Equal("DocumentationFilePath", moduleWeaver.DocumentationFilePath);
-    }
-}
-
-public class ValidModuleWeaver
-{
-    public XElement Config { get; set; }
-
-    //   public List<string> References { get; set; }
-    public string AssemblyFilePath { get; set; }
-
-    public string ProjectDirectoryPath { get; set; }
-    public string DocumentationFilePath { get; set; }
-    public string AddinDirectoryPath { get; set; }
-    public Action<string> LogDebug { get; set; }
-    public Action<string> LogInfo { get; set; }
-    public Action<string> LogWarning { get; set; }
-    public Action<string, SequencePoint> LogWarningPoint { get; set; }
-    public Action<string> LogError { get; set; }
-    public Action<string, SequencePoint> LogErrorPoint { get; set; }
-    public Action<string, MessageImportance> LogMessage { get; set; }
-    public IAssemblyResolver AssemblyResolver { get; set; }
-    public ModuleDefinition ModuleDefinition { get; set; }
-    public string SolutionDirectoryPath { get; set; }
-    public List<string> DefineConstants { get; set; }
-
-    public string References { get; set; }
-    public List<string> ReferenceCopyLocalPaths { get; set; }
-
-    public bool ExecuteCalled;
-
-    public void Execute()
-    {
-        ExecuteCalled = true;
     }
 }
 

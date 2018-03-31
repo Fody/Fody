@@ -1,14 +1,14 @@
-using Mono.Cecil;
+using System.Collections.Generic;
+using Fody;
 
-public class FakeModuleWeaver
+public class FakeModuleWeaver :BaseModuleWeaver
 {
-    public ModuleDefinition ModuleDefinition { get; set; }
-
-    public void Execute()
+    public override void Execute()
     {
     }
 
-    public void AfterWeaving()
+    public override IEnumerable<string> GetAssembliesForScanning()
     {
+        yield break;
     }
 }

@@ -5,40 +5,33 @@ using Mono.Cecil.Cil;
 
 public partial class InnerWeaver
 {
-    public virtual void SetProperties(WeaverEntry weaverEntry, object weaverInstance, WeaverDelegate @delegate)
+    public virtual void SetProperties(WeaverEntry weaverEntry, BaseModuleWeaver weaverInstance)
     {
         if (weaverEntry.Element != null)
         {
             var weaverElement = XElement.Parse(weaverEntry.Element);
-            @delegate.SetConfig(weaverInstance, weaverElement);
+            weaverInstance.Config= weaverElement;
         }
 
-        @delegate.SetModuleDefinition(weaverInstance, ModuleDefinition);
-        @delegate.SetAssemblyFilePath(weaverInstance, AssemblyFilePath);
-        @delegate.SetAddinDirectoryPath(weaverInstance, Path.GetDirectoryName(weaverEntry.AssemblyPath));
-        @delegate.SetReferences(weaverInstance, References);
-        @delegate.SetReferenceCopyLocalPaths(weaverInstance, ReferenceCopyLocalPaths);
-        @delegate.SetSolutionDirectoryPath(weaverInstance, SolutionDirectoryPath);
-        @delegate.SetProjectDirectoryPath(weaverInstance, ProjectDirectoryPath);
-        @delegate.SetDocumentationFilePath(weaverInstance, DocumentationFilePath);
-        @delegate.SetLogDebug(weaverInstance, message => Logger.LogDebug("  " + message));
-        @delegate.SetLogInfo(weaverInstance, message => Logger.LogInfo("  " + message));
-        @delegate.SetLogMessage(weaverInstance, (message, importance) => Logger.LogMessage("  " + message, (int) importance));
-        @delegate.SetLogWarning(weaverInstance, Logger.LogWarning);
-        @delegate.SetLogWarningPoint(weaverInstance, LogWarningPoint);
-        @delegate.SetLogError(weaverInstance, Logger.LogError);
-        @delegate.SetLogErrorPoint(weaverInstance, LogErrorPoint);
-        @delegate.SetDefineConstants(weaverInstance, DefineConstants);
-        if (weaverInstance is BaseModuleWeaver)
-        {
-            @delegate.SetFindType(weaverInstance, typeCache.FindType);
-            @delegate.SetTryFindType(weaverInstance, typeCache.TryFindType);
-            @delegate.SetResolveAssembly(weaverInstance, assemblyName => assemblyResolver.Resolve(assemblyName));
-        }
-        else
-        {
-            @delegate.SetAssemblyResolver(weaverInstance, assemblyResolver);
-        }
+        weaverInstance.ModuleDefinition = ModuleDefinition;
+        weaverInstance.AssemblyFilePath = AssemblyFilePath;
+        weaverInstance.AddinDirectoryPath = Path.GetDirectoryName(weaverEntry.AssemblyPath);
+        weaverInstance.References = References;
+        weaverInstance.ReferenceCopyLocalPaths = ReferenceCopyLocalPaths;
+        weaverInstance.SolutionDirectoryPath = SolutionDirectoryPath;
+        weaverInstance.ProjectDirectoryPath = ProjectDirectoryPath;
+        weaverInstance.DocumentationFilePath = DocumentationFilePath;
+        weaverInstance.LogDebug = message => Logger.LogDebug("  " + message);
+        weaverInstance.LogInfo = message => Logger.LogInfo("  " + message);
+        weaverInstance.LogMessage = (message, importance) => Logger.LogMessage("  " + message, (int)importance);
+        weaverInstance.LogWarning = Logger.LogWarning;
+        weaverInstance.LogWarningPoint = LogWarningPoint;
+        weaverInstance.LogError = Logger.LogError;
+        weaverInstance.LogErrorPoint = LogErrorPoint;
+        weaverInstance.DefineConstants = DefineConstants;
+        weaverInstance.FindType = typeCache.FindType;
+        weaverInstance.TryFindType = typeCache.TryFindType;
+        weaverInstance.ResolveAssembly = assemblyName => assemblyResolver.Resolve(assemblyName);
     }
 
     void LogWarningPoint(string message, SequencePoint point)

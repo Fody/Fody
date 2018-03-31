@@ -5,7 +5,7 @@ using Fody;
 
 public static class ConstructorDelegateBuilder
 {
-    public static Func<object> BuildConstructorDelegate(this Type weaverType)
+    public static Func<BaseModuleWeaver> BuildConstructorDelegate(this Type weaverType)
     {
         if (weaverType.IsNested)
         {
@@ -21,7 +21,7 @@ public static class ConstructorDelegateBuilder
             var message = $"'{weaverType.FullName}' does not have a public instance constructor with no parameters.";
             throw new WeavingException(message);
         }
-        return (Func<object>) Expression.Lambda(Expression.Convert(Expression.New(constructorInfo), weaverType))
+        return (Func<BaseModuleWeaver>) Expression.Lambda(Expression.TypeAs(Expression.New(constructorInfo), typeof(BaseModuleWeaver)))
                                 .Compile();
     }
 }

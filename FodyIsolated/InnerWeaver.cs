@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 #if NET46
 using System.Runtime.Remoting;
 #endif
@@ -144,16 +143,15 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             var weaverType = assembly.FindType(weaverConfig.TypeName);
 
             var delegateHolder = weaverType.GetDelegateHolderFromCache();
-            var weaverInstance = delegateHolder.ConstructInstance();
+            var weaverInstance = delegateHolder();
             var weaverHolder = new WeaverHolder
             {
                 Instance = weaverInstance,
-                WeaverDelegate = delegateHolder,
                 Config = weaverConfig
             };
             weaverInstances.Add(weaverHolder);
 
-            SetProperties(weaverConfig, weaverInstance, delegateHolder);
+            SetProperties(weaverConfig, weaverInstance);
         }
     }
 
@@ -196,17 +194,14 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
             try
             {
-                if (weaver.WeaverDelegate.Cancel != null)
-                {
-                    cancelDelegate = () => weaver.WeaverDelegate.Cancel(weaver.Instance);
-                }
+                cancelDelegate = weaver.Instance.Cancel;
 
                 Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
                 var startNew = Stopwatch.StartNew();
                 Logger.LogDebug("  Executing Weaver ");
                 try
                 {
-                    weaver.WeaverDelegate.Execute(weaver.Instance);
+                    weaver.Instance.Execute();
                 }
                 catch (Exception exception)
                 {
@@ -275,8 +270,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
     void ExecuteAfterWeavers()
     {
-        foreach (var weaver in weaverInstances
-            .Where(_ => _.WeaverDelegate.AfterWeavingExecute != null))
+        foreach (var weaver in weaverInstances)
         {
             if (cancelRequested)
             {
@@ -288,7 +282,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
                 Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
                 var startNew = Stopwatch.StartNew();
                 Logger.LogDebug("  Executing After Weaver");
-                weaver.WeaverDelegate.AfterWeavingExecute(weaver.Instance);
+                weaver.Instance.AfterWeaving();
                 var finishedMessage = $"  Finished '{weaver.Config.AssemblyName}' in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
                 Logger.LogDebug(finishedMessage);
             }

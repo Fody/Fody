@@ -11,7 +11,7 @@ public partial class InnerWeaver
         var assemblyDefinitions = new Dictionary<string, AssemblyDefinition>(StringComparer.OrdinalIgnoreCase);
         foreach (var weaver in weaverInstances)
         {
-            foreach (var assemblyName in weaver.WeaverDelegate.GetAssembliesForScanning(weaver.Instance))
+            foreach (var assemblyName in weaver.Instance.GetAssembliesForScanning())
             {
                 var assembly = assemblyResolver.Resolve(assemblyName);
                 if (assembly == null)

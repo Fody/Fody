@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Fody;
-using Mono.Cecil;
 
 public static class DelegateBuilder
 {
@@ -10,7 +9,7 @@ public static class DelegateBuilder
         return typeof(BaseModuleWeaver).IsAssignableFrom(weaverType);
     }
 
-    public static WeaverDelegate GetDelegateHolderFromCache(this Type weaverType)
+    public static Func<BaseModuleWeaver> GetDelegateHolderFromCache(this Type weaverType)
     {
         if (!weaverDelegates.TryGetValue(weaverType.TypeHandle, out var @delegate))
         {
@@ -19,44 +18,16 @@ public static class DelegateBuilder
         return @delegate;
     }
 
-    static Dictionary<RuntimeTypeHandle, WeaverDelegate> weaverDelegates = new Dictionary<RuntimeTypeHandle, WeaverDelegate>();
+    static Dictionary<RuntimeTypeHandle, Func<BaseModuleWeaver>> weaverDelegates = new Dictionary<RuntimeTypeHandle, Func<BaseModuleWeaver>>();
 
-    public static WeaverDelegate BuildDelegateHolder(this Type weaverType)
+    public static Func<BaseModuleWeaver> BuildDelegateHolder(this Type weaverType)
     {
-        if (!weaverType.TryBuildPropertySetDelegate("ModuleDefinition", out Action<object, ModuleDefinition> moduleDefinitionDelegate))
+        if (!weaverType.InheritsFromBaseWeaver())
         {
-            var message = $"Cannot load/use weaver {weaverType.FullName}. Note that the weaver must contain a public instance settable property named 'ModuleDefinition' of type 'Mono.Cecil.ModuleDefinition'. If it does, make sure that it's referencing the right version of Mono.Cecil, which is '{typeof (ModuleDefinition).Assembly.GetName().Version}'.";
+            var message = $"Cannot load/use weaver {weaverType.FullName}. Weavers must inherit from {nameof(BaseModuleWeaver)} which exists in the FodyHelpers nuget package.";
             throw new WeavingException(message);
         }
 
-        return new WeaverDelegate
-        {
-            Execute = weaverType.BuildExecuteDelegate(),
-            Cancel = weaverType.BuildCancelDelegate(),
-            AfterWeavingExecute = weaverType.BuildAfterWeavingDelegate(),
-            SetModuleDefinition = moduleDefinitionDelegate,
-            SetConfig = weaverType.BuildSetConfig(),
-            SetAddinDirectoryPath = weaverType.BuildSetAddinDirectoryPath(),
-            SetAssemblyFilePath = weaverType.BuildSetAssemblyFilePath(),
-            SetAssemblyResolver = weaverType.BuildSetAssemblyResolver(),
-            SetResolveAssembly = weaverType.BuildSetResolveAssembly(),
-            SetLogError = weaverType.BuildSetLogError(),
-            SetLogErrorPoint = weaverType.BuildSetLogErrorPoint(),
-            SetLogDebug = weaverType.BuildSetLogDebug(),
-            SetLogInfo = weaverType.BuildSetLogInfo(),
-            SetLogMessage = weaverType.BuildSetLogMessage(),
-            SetLogWarning = weaverType.BuildSetLogWarning(),
-            SetLogWarningPoint = weaverType.BuildSetLogWarningPoint(),
-            SetReferences = weaverType.BuildSetReferences(),
-            SetReferenceCopyLocalPaths = weaverType.BuildSetReferenceCopyLocalPaths(),
-            SetSolutionDirectoryPath = weaverType.BuildSetSolutionDirectoryPath(),
-            SetProjectDirectoryPath = weaverType.BuildSetProjectDirectoryPath(),
-            SetDocumentationFilePath = weaverType.BuildSetDocumentationFilePath(),
-            SetDefineConstants = weaverType.BuildSetDefineConstants(),
-            SetFindType = weaverType.BuildSetFindType(),
-            SetTryFindType = weaverType.BuildSetTryFindType(),
-            GetAssembliesForScanning = weaverType.BuildGetAssembliesForScanningDelegate(),
-            ConstructInstance = weaverType.BuildConstructorDelegate()
-        };
+        return weaverType.BuildConstructorDelegate();
     }
 }
