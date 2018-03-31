@@ -5,6 +5,7 @@ using Fody;
 using ObjectApproval;
 #endif
 using Xunit;
+// ReSharper disable UnusedVariable
 
 //using Xunit;
 

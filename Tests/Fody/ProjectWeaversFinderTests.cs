@@ -5,6 +5,7 @@ using ApprovalTests;
 using Fody;
 using Moq;
 using Xunit;
+// ReSharper disable UnusedVariable
 
 public class ProjectWeaversFinderTests : TestBase
 {

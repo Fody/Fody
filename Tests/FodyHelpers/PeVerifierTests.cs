@@ -3,6 +3,7 @@ using System.IO;
 using Fody;
 using Mono.Cecil;
 using Xunit;
+// ReSharper disable UnusedVariable
 
 #pragma warning disable 618
 public class PeVerifierTests : TestBase
