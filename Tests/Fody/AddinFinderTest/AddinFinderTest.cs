@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Xunit;
-#if NET46 // TODO: Remove when ObjectApproval supports .NET Core
 using ObjectApproval;
-#endif
 
+// TODO: re-include in project when ObjectApproval supports .NET Core
 public partial class AddinFinderTest : TestBase
 {
     [Fact]
@@ -17,9 +15,7 @@ public partial class AddinFinderTest : TestBase
         var result = AddinFinder.ScanDirectoryForPackages(nuGetPackageRoot)
             .Select(s => s.Replace(@"\\", @"\").Replace(combine, ""))
             .ToList();
-#if NET46 // TODO: Remove when ObjectApproval supports .NET Core
         ObjectApprover.VerifyWithJson(result);
-#endif
     }
 
     [Fact]
@@ -75,8 +71,6 @@ public partial class AddinFinderTest : TestBase
             nuGetPackageRoot: Path.Combine(combine, "NuGetPackageRoot"),
             packageDefinitions: null);
         addinFinder.FindAddinDirectories();
-#if NET46 // TODO: Remove when ObjectApproval supports .NET Core
         ObjectApprover.VerifyWithJson(addinFinder.FodyFiles.Select(x => x.Replace(combine, "")));
-#endif
     }
 }
