@@ -21,7 +21,7 @@ public partial class Processor
     public List<string> PackageDefinitions;
     public List<string> DefineConstants;
     public List<string> ConfigFiles;
-    InnerWeaver innerWeaver;
+    IInnerWeaver innerWeaver;
 
     AddinFinder addinFinder;
     static Dictionary<string, IsolatedAssemblyLoadContext> solutionAssemblyLoadContexts =
@@ -138,7 +138,7 @@ see https://github.com/Fody/Fody/wiki/SampleUsage");
         }
 
         var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
-        using (innerWeaver = (InnerWeaver)loadContext.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver"))
+        using (innerWeaver = (IInnerWeaver)loadContext.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver"))
         {
             innerWeaver.AssemblyFilePath = AssemblyFilePath;
             innerWeaver.References = References;
