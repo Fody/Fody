@@ -15,7 +15,7 @@ using Mono.Cecil.Rocks;
 using FieldAttributes = Mono.Cecil.FieldAttributes;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
 
-public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
+public partial class InnerWeaver : MarshalByRefObject, IDisposable
 {
     static byte[] expectedCecilToken = typeof(ModuleDefinition).Assembly.GetName().GetPublicKeyToken();
     public string ProjectDirectoryPath { get; set; }
@@ -239,7 +239,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         var typeDefinition = new TypeDefinition(null, "ProcessedByFody", typeAttributes, ModuleDefinition.TypeSystem.Object);
         ModuleDefinition.Types.Add(typeDefinition);
 
-        AddVersionField(typeof(IInnerWeaver).Assembly.Location, "FodyVersion", typeDefinition);
+        AddVersionField(typeof(InnerWeaver).Assembly.Location, "FodyVersion", typeDefinition);
 
         foreach (var weaver in weaverInstances)
         {
