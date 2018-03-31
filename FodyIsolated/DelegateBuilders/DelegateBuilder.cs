@@ -22,12 +22,12 @@ public static class DelegateBuilder
 
     public static Func<BaseModuleWeaver> BuildDelegateHolder(this Type weaverType)
     {
-        if (!weaverType.InheritsFromBaseWeaver())
+        if (weaverType.InheritsFromBaseWeaver())
         {
-            var message = $"Cannot load/use weaver {weaverType.FullName}. Weavers must inherit from {nameof(BaseModuleWeaver)} which exists in the FodyHelpers nuget package.";
-            throw new WeavingException(message);
+            return weaverType.BuildConstructorDelegate();
         }
 
-        return weaverType.BuildConstructorDelegate();
+        var message = $"Cannot load/use weaver {weaverType.FullName}. Weavers must inherit from {nameof(BaseModuleWeaver)} which exists in the FodyHelpers nuget package.";
+        throw new WeavingException(message);
     }
 }
