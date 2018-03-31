@@ -35,6 +35,7 @@ public static class ExceptionExtensions
             logger.LogError(exception.ToFriendlyString());
         }
     }
+
     static SequencePoint GetSequencePoint(Exception exception)
     {
         var exceptionType = exception.GetType();

@@ -9,7 +9,6 @@ build_script:
 
     dotnet build Integration\Integration.sln --configuration Release
 
-    msbuild Integration\Tests\Tests.csproj /target:Restore
 
 test_script:
 - cmd: >-
