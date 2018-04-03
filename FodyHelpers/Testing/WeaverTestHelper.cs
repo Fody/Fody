@@ -53,7 +53,7 @@ namespace Fody
                 weaver.LogWarningPoint = (text, sequencePoint) => testStatus.AddWarning(text, sequencePoint);
                 weaver.LogError = text => testStatus.AddError(text, null);
                 weaver.LogErrorPoint = (text, sequencePoint) => testStatus.AddError(text, sequencePoint);
-
+                weaver.AssemblyFilePath = targetAssemblyPath;
                 weaver.FindType = typeCache.FindType;
                 weaver.TryFindType = typeCache.TryFindType;
                 weaver.ResolveAssembly = assemblyResolver.Resolve;
