@@ -1,4 +1,5 @@
 using System;
+using Mono.Cecil.Cil;
 
 namespace Fody
 {
@@ -8,5 +9,7 @@ namespace Fody
             : base(message)
         {
         }
+
+        public SequencePoint SequencePoint { get; set; }
     }
 }
