@@ -1,10 +1,10 @@
-﻿using Mono.Cecil;
+﻿using System.Collections.Generic;
+using Fody;
+using Mono.Cecil;
 
-public class ModuleWeaver
+public class ModuleWeaver: BaseModuleWeaver
 {
-    public ModuleDefinition ModuleDefinition { get; set; }
-
-    public void Execute()
+    public override void Execute()
     {
         var type = GetType();
         var typeDefinition = new TypeDefinition(
@@ -13,5 +13,10 @@ public class ModuleWeaver
             attributes: TypeAttributes.Public,
             baseType: ModuleDefinition.ImportReference(typeof(object)));
         ModuleDefinition.Types.Add(typeDefinition);
+    }
+
+    public override IEnumerable<string> GetAssembliesForScanning()
+    {
+        yield break;
     }
 }
