@@ -22,6 +22,13 @@ public static class DirectoryEx
             .Where(_ => _.EndsWith(end, StringComparison.OrdinalIgnoreCase));
     }
 
+    public static string DirectoryActualCase(string directory, string name) 
+    {
+        return Directory.EnumerateDirectories(directory, "*", SearchOption.TopDirectoryOnly)
+            .Where(_ => _.EndsWith(name, StringComparison.OrdinalIgnoreCase))
+            .FirstOrDefault();
+    }
+
     public static IEnumerable<string> EnumerateDirectoriesContains(string directory, string contains)
     {
         return Directory.EnumerateDirectories(directory)
