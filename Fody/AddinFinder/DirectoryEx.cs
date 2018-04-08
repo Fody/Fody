@@ -11,22 +11,10 @@ public static class DirectoryEx
             .Where(_ => _.EndsWith(end, StringComparison.OrdinalIgnoreCase));
     }
 
-    public static IEnumerable<string> EnumerateFilesEndsWith(string directory, string end)
-    {
-        return Directory.EnumerateFiles(directory, "*")
-            .Where(_ => _.EndsWith(end, StringComparison.OrdinalIgnoreCase));
-    }
     public static IEnumerable<string> EnumerateDirectoriesEndsWith(string directory, string end)
     {
         return Directory.EnumerateDirectories(directory, "*")
             .Where(_ => _.EndsWith(end, StringComparison.OrdinalIgnoreCase));
-    }
-
-    public static string DirectoryActualCase(string directory, string name) 
-    {
-        return Directory.EnumerateDirectories(directory, "*", SearchOption.TopDirectoryOnly)
-            .Where(_ => _.EndsWith(name, StringComparison.OrdinalIgnoreCase))
-            .FirstOrDefault();
     }
 
     public static IEnumerable<string> EnumerateDirectoriesContains(string directory, string contains)

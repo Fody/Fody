@@ -179,14 +179,12 @@ public partial class AddinFinder
 
     public void AddNugetDirectoryFromConvention()
     {
-        var solutionPackages = Path.Combine(solutionDirectory, DirectoryEx.DirectoryActualCase(solutionDirectory, "Packages"));
-        if (!Directory.Exists(solutionPackages))
+        foreach (var solutionPackages in DirectoryEx.EnumerateDirectoriesEndsWith(solutionDirectory, "Packages"))
         {
-            log($"  Skipped SolutionDir/Packages convention '{solutionPackages}' since it doesn't exist.");
-            return;
+
+            log($"  Scanning SolutionDir/Packages convention: {solutionPackages}'.");
+            AddFiles(ScanDirectoryForPackages(solutionPackages));
         }
-        log($"  Scanning SolutionDir/Packages convention: {solutionPackages}'.");
-        AddFiles(ScanDirectoryForPackages(solutionPackages));
     }
 
     void AddFiles(IEnumerable<string> files)
