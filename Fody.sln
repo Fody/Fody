@@ -20,8 +20,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DummyAssembly", "DummyAssem
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyHelpers", "FodyHelpers\FodyHelpers.csproj", "{B95F633D-F876-4DC2-947F-4AAA48332575}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyCecil", "FodyCecil\FodyCecil.csproj", "{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyPackaging", "FodyPackaging\FodyPackaging.csproj", "{B2D01ACC-D215-4063-A9CD-7CE862D799F9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CDCDDCD6-6958-4352-AF0C-C589ECD51C0D}"
@@ -113,18 +111,6 @@ Global
 		{B95F633D-F876-4DC2-947F-4AAA48332575}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B95F633D-F876-4DC2-947F-4AAA48332575}.Release|x86.ActiveCfg = Release|Any CPU
 		{B95F633D-F876-4DC2-947F-4AAA48332575}.Release|x86.Build.0 = Release|Any CPU
-		{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}.Debug|x86.Build.0 = Debug|Any CPU
-		{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}.Release|x86.ActiveCfg = Release|Any CPU
-		{0CD3819B-D429-4A35-93AB-B9D6F1BB0694}.Release|x86.Build.0 = Release|Any CPU
 		{B2D01ACC-D215-4063-A9CD-7CE862D799F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B2D01ACC-D215-4063-A9CD-7CE862D799F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2D01ACC-D215-4063-A9CD-7CE862D799F9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

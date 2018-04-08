@@ -5,6 +5,5 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="FodyHelpers" Version="$(IntegrationVersion)" />
-    <PackageReference Include="FodyCecil" Version="$(IntegrationVersion)" />
   </ItemGroup>
 </Project>
