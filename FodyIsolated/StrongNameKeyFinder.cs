@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -6,6 +7,7 @@ using Fody;
 public partial class InnerWeaver
 {
     public StrongNameKeyPair StrongNameKeyPair;
+    public byte[] KeyFileBytes = null;
 
     public virtual void FindStrongNameKey()
     {
@@ -20,7 +22,25 @@ public partial class InnerWeaver
             {
                 throw new WeavingException($"KeyFilePath was defined but file does not exist. '{keyFilePath}'.");
             }
-            StrongNameKeyPair = new StrongNameKeyPair(File.OpenRead(keyFilePath));
+
+            var keyFileBytes = File.ReadAllBytes(keyFilePath);
+            StrongNameKeyPair = new StrongNameKeyPair(KeyFileBytes);
+
+            try
+            {
+                // Ensure that we can generate the public key from the key file. This requires the private to
+                // work. If we cannot generate the public key, an ArgumentException will be thrown. In this case,
+                // the assembly is delay-signed with a public only keyfile.
+                var bytes = StrongNameKeyPair.PublicKey;
+            }
+            catch(ArgumentException)
+            {
+                // We know that we cannot sign the assembly with this keyfile. Let's assume that it is a public
+                // only keyfile and pass along all the bytes. Mono.Cecil will parse the file to create the public
+                // key and assign that to the assembly name without signing it.
+                StrongNameKeyPair = null;
+                KeyFileBytes = keyFileBytes;
+            }
         }
     }
 
