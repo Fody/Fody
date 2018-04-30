@@ -24,7 +24,7 @@ public partial class InnerWeaver
             }
 
             var keyFileBytes = File.ReadAllBytes(keyFilePath);
-            StrongNameKeyPair = new StrongNameKeyPair(KeyFileBytes);
+            StrongNameKeyPair = new StrongNameKeyPair(keyFileBytes);
 
             try
             {
