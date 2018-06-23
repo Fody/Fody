@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.1;net471</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.0;net46</TargetFrameworks>
     <Optimize>False</Optimize>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -9,13 +9,13 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ApprovalTests" Version="3.0.14" Condition="$(TargetFramework) == 'net471'" />
+    <PackageReference Include="ApprovalTests" Version="3.0.14" Condition="$(TargetFramework) == 'net46'" />
     <PackageReference Include="Moq" Version="4.8.2" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <Reference Include="Microsoft.CSharp" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="ObjectApproval" Version="2.2" Condition="$(TargetFramework) == 'net471'" />
+    <PackageReference Include="ObjectApproval" Version="2.2" Condition="$(TargetFramework) == 'net46'" />
     <ProjectReference Include="..\DummyAssembly\DummyAssembly.csproj" />
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
     <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
@@ -33,7 +33,7 @@
     <Content Include="Fody\WeaversProjectFileFinder\**\*.*" CopyToOutputDirectory="Always" />
     <Content Include="Fody\ProjectWeaversReaderTests\*.xml" CopyToOutputDirectory="Always" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework) == 'net471'">
+  <ItemGroup Condition="$(TargetFramework) == 'net46'">
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Tasks.v4.0" />
@@ -43,7 +43,7 @@
     <Reference Include="Mono.Cecil.Pdb" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Pdb.dll" />
     <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Rocks.dll" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework) == 'netcoreapp2.1'">
+  <ItemGroup Condition="$(TargetFramework) == 'netcoreapp2.0'">
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.6.82" />
     <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\netstandard1.3\Mono.Cecil.dll" />
     <Reference Include="Mono.Cecil.Mdb" HintPath="..\Lib\Cecil\netstandard1.3\Mono.Cecil.Mdb.dll" />
