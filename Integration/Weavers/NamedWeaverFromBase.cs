@@ -11,7 +11,7 @@ public class NamedWeaverFromBase : BaseModuleWeaver
             @namespace: type.Assembly.GetName().Name,
             name: $"TypeInjectedBy{type.Name}",
             attributes: TypeAttributes.Public,
-            baseType: ModuleDefinition.ImportReference(typeof (object)));
+            baseType: TypeSystem.ObjectReference);
         ModuleDefinition.Types.Add(typeDefinition);
         var foundType = FindType("System.Boolean");
         if (foundType == null)

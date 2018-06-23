@@ -57,9 +57,14 @@ namespace Fody
         public Func<string, AssemblyDefinition> ResolveAssembly { get; set; }
 
         /// <summary>
-        /// An instance of <see cref="ModuleDefinition"/> for processing.
+        /// An instance of <see cref="Mono.Cecil.ModuleDefinition"/> for processing.
         /// </summary>
         public ModuleDefinition ModuleDefinition { get; set; }
+
+        /// <summary>
+        /// Commonly used <see cref="TypeReference"/>s.
+        /// </summary>
+        public TypeSystem TypeSystem { get; set; }
 
         /// <summary>
         /// The full path of the target assembly.

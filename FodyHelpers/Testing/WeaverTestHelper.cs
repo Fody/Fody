@@ -35,6 +35,7 @@ namespace Fody
             {
                 targetFileName = assemblyName + ".dll";
             }
+
             var targetAssemblyPath = Path.Combine(fodyTempDir, targetFileName);
             var targetSymbolsPath = Path.ChangeExtension(targetAssemblyPath, "pdb");
             var symbolsPath = Path.ChangeExtension(assemblyPath, "pdb");
@@ -57,7 +58,6 @@ namespace Fody
                 weaver.FindType = typeCache.FindType;
                 weaver.TryFindType = typeCache.TryFindType;
                 weaver.ResolveAssembly = assemblyResolver.Resolve;
-
                 var readerParameters = new ReaderParameters(ReadingMode.Immediate)
                 {
                     AssemblyResolver = assemblyResolver,
@@ -66,18 +66,19 @@ namespace Fody
                     ReadSymbols = true,
                 };
 
-                using (var moduleDefinition = ModuleDefinition.ReadModule(targetAssemblyPath, readerParameters))
+                using (var module = ModuleDefinition.ReadModule(targetAssemblyPath, readerParameters))
                 {
-                    moduleDefinition.Assembly.Name.Name = assemblyName;
-                    beforeExecuteCallback?.Invoke(moduleDefinition);
-                    weaver.ModuleDefinition = moduleDefinition;
+                    module.Assembly.Name.Name = assemblyName;
+                    beforeExecuteCallback?.Invoke(module);
+                    weaver.ModuleDefinition = module;
+                    weaver.TypeSystem = new TypeSystem(typeCache.FindType, module);
 
                     weaver.Execute();
-                    ReferenceCleaner.CleanReferences(moduleDefinition, weaver, weaver.LogDebug);
+                    ReferenceCleaner.CleanReferences(module, weaver, weaver.LogDebug);
 
-                    afterExecuteCallback?.Invoke(moduleDefinition);
+                    afterExecuteCallback?.Invoke(module);
 
-                    moduleDefinition.Write();
+                    module.Write();
                 }
 
                 if (runPeVerify)
@@ -95,6 +96,7 @@ namespace Fody
                     ignoreList.Add("0x80070002");
                     PeVerifier.ThrowIfDifferent(assemblyPath, targetAssemblyPath, ignoreList, Path.GetDirectoryName(assemblyPath));
                 }
+
                 testStatus.Assembly = Assembly.Load(File.ReadAllBytes(targetAssemblyPath));
                 testStatus.AssemblyPath = targetAssemblyPath;
                 return testStatus;

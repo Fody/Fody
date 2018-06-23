@@ -100,6 +100,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             AppDomain.CurrentDomain.AssemblyResolve += assemblyResolve;
             InitialiseWeavers();
             BuildAssembliesToScan();
+            InitialiseTypeSystem();
             ExecuteWeavers();
             AddWeavingInfo();
             FindStrongNameKey();
@@ -236,7 +237,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
         var typeAttributes = TypeAttributes.NotPublic |
                              TypeAttributes.Class;
-        var typeDefinition = new TypeDefinition(null, "ProcessedByFody", typeAttributes, ModuleDefinition.TypeSystem.Object);
+        var typeDefinition = new TypeDefinition(null, "ProcessedByFody", typeAttributes, TypeSystem.ObjectReference);
         ModuleDefinition.Types.Add(typeDefinition);
 
         AddVersionField(typeof(IInnerWeaver).Assembly.Location, "FodyVersion", typeDefinition);
@@ -259,8 +260,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
                               FieldAttributes.Literal |
                               FieldAttributes.Static |
                               FieldAttributes.HasDefault;
-        var systemString = ModuleDefinition.TypeSystem.String;
-        var field = new FieldDefinition(name, fieldAttributes, systemString)
+        var field = new FieldDefinition(name, fieldAttributes, TypeSystem.StringReference)
         {
             Constant = weaverVersion.FileVersion
         };
