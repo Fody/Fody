@@ -1,104 +1,169 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Fody;
 using Mono.Cecil;
 
-class TypeCache
+namespace Fody
 {
-    Dictionary<string, TypeDefinition> cachedTypes = new Dictionary<string, TypeDefinition>();
-
-    public void Initialise(IEnumerable<AssemblyDefinition> assemblyDefinitions)
+    [Obsolete(OnlyForTesting.Message)]
+    public class TypeCache
     {
-        var definitions = assemblyDefinitions.ToList();
-        foreach (var assembly in definitions)
+        private readonly Func<string, AssemblyDefinition> resolve;
+
+        public static List<string> defaultAssemblies = new List<string>()
         {
-            foreach (var type in assembly.MainModule.GetTypes())
-            {
-                AddIfPublic(type);
-            }
+            "mscorlib",
+            "System",
+            "System.Runtime",
+            "System.Core",
+            "netstandard"
+        };
+
+        Dictionary<string, TypeDefinition> cachedTypes = new Dictionary<string, TypeDefinition>();
+
+        public TypeCache(Func<string, AssemblyDefinition> resolve)
+        {
+            this.resolve = resolve;
         }
 
-        foreach (var assembly in definitions)
+        public void BuildAssembliesToScan(BaseModuleWeaver weaver)
         {
-            foreach (var exportedType in assembly.MainModule.ExportedTypes)
+            BuildAssembliesToScan(new[] {weaver});
+        }
+
+        public void BuildAssembliesToScan(IEnumerable<BaseModuleWeaver> weavers)
+        {
+            var assemblyDefinitions = new Dictionary<string, AssemblyDefinition>(StringComparer.OrdinalIgnoreCase);
+            foreach (var assemblyName in GetAssembliesForScanning(weavers))
             {
-                if (definitions.Any(x => x.Name.Name == exportedType.Scope.Name))
+                var assembly = resolve(assemblyName);
+                if (assembly == null)
                 {
                     continue;
                 }
 
-                var typeDefinition = exportedType.Resolve();
-                if (typeDefinition == null)
+                if (assemblyDefinitions.ContainsKey(assemblyName))
                 {
                     continue;
                 }
 
-                AddIfPublic(typeDefinition);
+                assemblyDefinitions.Add(assemblyName, assembly);
             }
-        }
-    }
 
-    public virtual TypeDefinition FindType(string typeName)
-    {
-        if (cachedTypes.TryGetValue(typeName, out var type))
-        {
-            return type;
+            Initialise(assemblyDefinitions.Values);
         }
 
-        if (FindFromValues(typeName, out type))
+        IEnumerable<string> GetAssembliesForScanning(IEnumerable<BaseModuleWeaver> weavers)
         {
-            return type;
-        }
-
-        throw new WeavingException($"Could not find '{typeName}'.");
-    }
-
-   bool FindFromValues(string typeName, out TypeDefinition type)
-    {
-        if (!typeName.Contains('.'))
-        {
-            var types = cachedTypes.Values
-                .Where(x=>x.Name == typeName)
-                .ToList();
-            if (types.Count > 1)
+            foreach (var assemblyName in defaultAssemblies)
             {
-                throw new WeavingException($"Found multiple types for '{typeName}'.");
+                yield return assemblyName;
             }
-            if (types.Count ==0)
+
+            foreach (var weaver in weavers)
             {
-                type = null;
-                return false;
+                foreach (var assemblyName in weaver.GetAssembliesForScanning())
+                {
+                    yield return assemblyName;
+                }
+            }
+        }
+
+        void Initialise(IEnumerable<AssemblyDefinition> assemblyDefinitions)
+        {
+            var definitions = assemblyDefinitions.ToList();
+            foreach (var assembly in definitions)
+            {
+                foreach (var type in assembly.MainModule.GetTypes())
+                {
+                    AddIfPublic(type);
+                }
             }
 
-            type = types[0];
-            return true;
+            foreach (var assembly in definitions)
+            {
+                foreach (var exportedType in assembly.MainModule.ExportedTypes)
+                {
+                    if (definitions.Any(x => x.Name.Name == exportedType.Scope.Name))
+                    {
+                        continue;
+                    }
+
+                    var typeDefinition = exportedType.Resolve();
+                    if (typeDefinition == null)
+                    {
+                        continue;
+                    }
+
+                    AddIfPublic(typeDefinition);
+                }
+            }
         }
 
-        type = null;
-        return false;
-    }
-
-    public virtual bool TryFindType(string typeName, out TypeDefinition type)
-    {
-        if (cachedTypes.TryGetValue(typeName, out type))
+        public virtual TypeDefinition FindType(string typeName)
         {
-            return true;
+            if (cachedTypes.TryGetValue(typeName, out var type))
+            {
+                return type;
+            }
+
+            if (FindFromValues(typeName, out type))
+            {
+                return type;
+            }
+
+            throw new WeavingException($"Could not find '{typeName}'.");
         }
 
-        return FindFromValues(typeName, out type);
-    }
-
-    void AddIfPublic(TypeDefinition type)
-    {
-        if (!type.IsPublic)
+        bool FindFromValues(string typeName, out TypeDefinition type)
         {
-            return;
-        }
-        if (cachedTypes.ContainsKey(type.FullName))
-        {
-            return;
+            if (!typeName.Contains('.'))
+            {
+                var types = cachedTypes.Values
+                    .Where(x => x.Name == typeName)
+                    .ToList();
+                if (types.Count > 1)
+                {
+                    throw new WeavingException($"Found multiple types for '{typeName}'.");
+                }
+
+                if (types.Count == 0)
+                {
+                    type = null;
+                    return false;
+                }
+
+                type = types[0];
+                return true;
+            }
+
+            type = null;
+            return false;
         }
 
-        cachedTypes.Add(type.FullName, type);
+        public virtual bool TryFindType(string typeName, out TypeDefinition type)
+        {
+            if (cachedTypes.TryGetValue(typeName, out type))
+            {
+                return true;
+            }
+
+            return FindFromValues(typeName, out type);
+        }
+
+        void AddIfPublic(TypeDefinition type)
+        {
+            if (!type.IsPublic)
+            {
+                return;
+            }
+
+            if (cachedTypes.ContainsKey(type.FullName))
+            {
+                return;
+            }
+
+            cachedTypes.Add(type.FullName, type);
+        }
     }
 }

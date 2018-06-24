@@ -32,6 +32,7 @@ public class WeaverInitialiserTests : TestBase
 
     static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, MockAssemblyResolver resolver)
     {
+#pragma warning disable 618
         return new InnerWeaver
         {
             Logger = new Mock<ILogger>().Object,
@@ -51,7 +52,8 @@ public class WeaverInitialiserTests : TestBase
                 "Debug",
                 "Release"
             },
-            assemblyResolver = resolver
+            assemblyResolver = resolver,
+            TypeCache = new TypeCache(resolver.Resolve)
         };
     }
 

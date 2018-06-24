@@ -105,12 +105,8 @@ namespace Fody
 
         static TypeCache CacheTypes(BaseModuleWeaver weaver, MockAssemblyResolver assemblyResolver)
         {
-            var definitions = weaver.GetAssembliesForScanning()
-                .Select(assemblyResolver.Resolve)
-                .Where(definition => definition != null);
-
-            var typeCache = new TypeCache();
-            typeCache.Initialise(definitions);
+            var typeCache = new TypeCache(assemblyResolver.Resolve);
+            typeCache.BuildAssembliesToScan(weaver);
             return typeCache;
         }
     }

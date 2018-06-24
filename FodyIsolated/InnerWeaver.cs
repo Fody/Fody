@@ -14,6 +14,7 @@ using Mono.Cecil.Pdb;
 using Mono.Cecil.Rocks;
 using FieldAttributes = Mono.Cecil.FieldAttributes;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
+#pragma warning disable 618
 
 public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 {
@@ -88,6 +89,8 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         return null;
     }
 
+#pragma warning disable 618
+    public TypeCache TypeCache;
     public void Execute()
     {
         ResolveEventHandler assemblyResolve = CurrentDomain_AssemblyResolve;
@@ -98,8 +101,10 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             assemblyResolver = new AssemblyResolver(Logger, SplitReferences);
             ReadModule();
             AppDomain.CurrentDomain.AssemblyResolve += assemblyResolve;
+            TypeCache = new TypeCache(assemblyResolver.Resolve);
             InitialiseWeavers();
-            BuildAssembliesToScan();
+
+            TypeCache.BuildAssembliesToScan(weaverInstances.Select(x=>x.Instance));
             InitialiseTypeSystem();
             ExecuteWeavers();
             AddWeavingInfo();

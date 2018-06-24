@@ -6,7 +6,7 @@ public partial class InnerWeaver
 
     void InitialiseTypeSystem()
     {
-        TypeSystem = new TypeSystem(typeCache.FindType, ModuleDefinition);
+        TypeSystem = new TypeSystem(TypeCache.FindType, ModuleDefinition);
         foreach (var weaver in weaverInstances)
         {
             weaver.Instance.TypeSystem = TypeSystem;
