@@ -69,9 +69,9 @@ namespace Fody
                 using (var module = ModuleDefinition.ReadModule(targetAssemblyPath, readerParameters))
                 {
                     module.Assembly.Name.Name = assemblyName;
-                    beforeExecuteCallback?.Invoke(module);
                     weaver.ModuleDefinition = module;
                     weaver.TypeSystem = new TypeSystem(typeCache.FindType, module);
+                    beforeExecuteCallback?.Invoke(module);
 
                     weaver.Execute();
                     ReferenceCleaner.CleanReferences(module, weaver, weaver.LogDebug);
