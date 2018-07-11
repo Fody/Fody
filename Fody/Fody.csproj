@@ -23,7 +23,7 @@
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0'">
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.6.82" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.7.179" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework) == 'net46'">
     <Reference Include="Microsoft.Build" />
