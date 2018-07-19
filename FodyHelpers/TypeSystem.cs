@@ -44,6 +44,8 @@ namespace Fody
             UIntPtrReference = module.ImportReference(UIntPtrDefinition);
             StringDefinition = resolve("System.String");
             StringReference = module.ImportReference(StringDefinition);
+            TaskDefinition = resolve("System.Threading.Tasks.Task");
+            TaskReference = module.ImportReference(TaskDefinition);
         }
 
         public TypeReference IntPtrReference { get; }
@@ -63,6 +65,7 @@ namespace Fody
         public TypeReference UInt64Reference { get; }
         public TypeReference SingleReference { get; }
         public TypeReference DoubleReference { get; }
+        public TypeReference TaskReference { get; }
         public TypeDefinition ObjectDefinition { get; }
         public TypeDefinition VoidDefinition { get; }
         public TypeDefinition BooleanDefinition { get; }
@@ -80,5 +83,6 @@ namespace Fody
         public TypeDefinition IntPtrDefinition { get; }
         public TypeDefinition UIntPtrDefinition { get; }
         public TypeDefinition StringDefinition { get; }
+        public TypeDefinition TaskDefinition { get; }
     }
 }
