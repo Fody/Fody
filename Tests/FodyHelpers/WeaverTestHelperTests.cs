@@ -51,9 +51,13 @@ public class WeaverTestHelperTests : TestBase
         var weaver = new WeaverUsingSymbols();
         var start = DateTime.Now;
         var result = weaver.ExecuteTestRun(assemblyPath);
-        var newSymbolsPath = Path.ChangeExtension(result.AssemblyPath, ".pdb");
+        
+        var symbolsPath = Path.ChangeExtension(result.AssemblyPath, ".pdb");
 
-        Assert.True(start <= new FileInfo(newSymbolsPath).CreationTime);
+        var symbolsFileInfo = new FileInfo(symbolsPath);
+
+        Assert.True(symbolsFileInfo.Exists);
+        Assert.True(start <= symbolsFileInfo.CreationTime);
 
 #if NET46 // TODO: Remove when ObjectApproval supports .NET Core
         ObjectApprover.VerifyWithJson(result, ScrubCurrentDirectory);
