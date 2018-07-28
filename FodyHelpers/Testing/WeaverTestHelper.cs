@@ -58,7 +58,7 @@ namespace Fody
                 weaver.FindType = typeCache.FindType;
                 weaver.TryFindType = typeCache.TryFindType;
                 weaver.ResolveAssembly = assemblyResolver.Resolve;
-                var readerParameters = new ReaderParameters(ReadingMode.Immediate)
+                var readerParameters = new ReaderParameters
                 {
                     AssemblyResolver = assemblyResolver,
                     SymbolReaderProvider = new SymbolReaderProvider(),
