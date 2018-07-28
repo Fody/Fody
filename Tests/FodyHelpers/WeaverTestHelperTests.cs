@@ -53,7 +53,6 @@ public class WeaverTestHelperTests : TestBase
         var result = weaver.ExecuteTestRun(assemblyPath);
         
         var symbolsPath = Path.ChangeExtension(result.AssemblyPath, ".pdb");
-
         var symbolsFileInfo = new FileInfo(symbolsPath);
 
         Assert.True(symbolsFileInfo.Exists);
