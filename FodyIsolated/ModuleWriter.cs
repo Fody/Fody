@@ -12,7 +12,6 @@ public partial class InnerWeaver
             {
 #if NET46
                 StrongNameKeyPair = StrongNameKeyPair,
-                PublicKeyBytes = KeyFileBytes,
 #endif
                 WriteSymbols = debugWriterProvider != null,
                 SymbolWriterProvider = debugWriterProvider,
