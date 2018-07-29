@@ -10,7 +10,7 @@ namespace Fody
     {
         private readonly Func<string, AssemblyDefinition> resolve;
 
-        public static List<string> defaultAssemblies = new List<string>()
+        public static List<string> defaultAssemblies = new List<string>
         {
             "mscorlib",
             "System",

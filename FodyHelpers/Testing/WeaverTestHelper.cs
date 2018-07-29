@@ -25,6 +25,8 @@ namespace Fody
             assemblyPath = Path.Combine(CodeBaseLocation.CurrentDirectory, assemblyPath);
             var fodyTempDir = Path.Combine(Path.GetDirectoryName(assemblyPath), "fodytemp");
             Directory.CreateDirectory(fodyTempDir);
+
+
             string targetFileName;
             if (assemblyName == null)
             {
