@@ -37,10 +37,6 @@ namespace Fody
             }
 
             var targetAssemblyPath = Path.Combine(fodyTempDir, targetFileName);
-            var targetSymbolsPath = Path.ChangeExtension(targetAssemblyPath, "pdb");
-            var symbolsPath = Path.ChangeExtension(assemblyPath, "pdb");
-            File.Copy(assemblyPath, targetAssemblyPath, true);
-            File.Copy(symbolsPath, targetSymbolsPath, true);
 
             using (var assemblyResolver = new MockAssemblyResolver())
             {
@@ -54,19 +50,19 @@ namespace Fody
                 weaver.LogWarningPoint = (text, sequencePoint) => testStatus.AddWarning(text, sequencePoint);
                 weaver.LogError = text => testStatus.AddError(text, null);
                 weaver.LogErrorPoint = (text, sequencePoint) => testStatus.AddError(text, sequencePoint);
-                weaver.AssemblyFilePath = targetAssemblyPath;
+                weaver.AssemblyFilePath = assemblyPath;
                 weaver.FindType = typeCache.FindType;
                 weaver.TryFindType = typeCache.TryFindType;
                 weaver.ResolveAssembly = assemblyResolver.Resolve;
-                var readerParameters = new ReaderParameters(ReadingMode.Immediate)
+                var readerParameters = new ReaderParameters
                 {
                     AssemblyResolver = assemblyResolver,
                     SymbolReaderProvider = new SymbolReaderProvider(),
-                    ReadWrite = true,
+                    ReadWrite = false,
                     ReadSymbols = true,
                 };
 
-                using (var module = ModuleDefinition.ReadModule(targetAssemblyPath, readerParameters))
+                using (var module = ModuleDefinition.ReadModule(assemblyPath, readerParameters))
                 {
                     module.Assembly.Name.Name = assemblyName;
                     weaver.ModuleDefinition = module;
@@ -78,7 +74,12 @@ namespace Fody
 
                     afterExecuteCallback?.Invoke(module);
 
-                    module.Write();
+                    var writerParameters = new WriterParameters
+                    {
+                        WriteSymbols = true
+                    };
+
+                    module.Write(targetAssemblyPath, writerParameters);
                 }
 
                 if (runPeVerify)
