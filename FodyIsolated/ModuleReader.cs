@@ -6,6 +6,7 @@ public partial class InnerWeaver
     public ModuleDefinition ModuleDefinition;
     public FileStream SymbolStream;
     string tempAssembly;
+    string tempSymbols;
 
     public virtual void ReadModule()
     {
@@ -15,7 +16,7 @@ public partial class InnerWeaver
         if (debugReaderProvider != null)
         {
             var symbolsPath = pdbFound ? pdbPath : mdbPath;
-            var tempSymbols = $"{symbolsPath}.tmp";
+            tempSymbols = $"{symbolsPath}.tmp";
             if (File.Exists(symbolsPath))
             {
                 File.Copy(symbolsPath, tempSymbols, true);
@@ -37,5 +38,9 @@ public partial class InnerWeaver
     {
         SymbolStream?.Dispose();
         File.Delete(tempAssembly);
+        if (File.Exists(tempSymbols))
+        {
+            File.Delete(tempSymbols);
+        }
     }
 }
