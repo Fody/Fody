@@ -18,7 +18,7 @@ public class ImportExtensionsTests : TestBase
     {
         var assemblyPath = Path.Combine(CodeBaseLocation.CurrentDirectory, "DummyAssembly.dll");
         var weaver = new TestWeaver();
-        weaver.ExecuteTestRun(assemblyPath);
+        weaver.ExecuteTestRun(assemblyPath, false, null, null, "ImportExtensionsTests");
 
         Assert.Equal("System.Boolean System.String::Equals(System.String,System.String,System.StringComparison)", weaver.StringEquals.FullName);
         Assert.Equal("System.String", weaver.StringType.FullName);
