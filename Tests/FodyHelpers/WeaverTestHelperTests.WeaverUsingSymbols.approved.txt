@@ -1,0 +1,11 @@
+﻿{
+  "Messages": [],
+  "Warnings": [],
+  "Errors": [],
+  "Assembly": {
+    "Data": "DummyAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "UnityType": 6,
+    "AssemblyName": "DummyAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+  },
+  "AssemblyPath": "\fodytemp\DummyAssembly.dll"
+}

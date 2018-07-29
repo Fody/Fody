@@ -54,7 +54,7 @@ public class WeaverTestHelperTests : TestBase
         var symbolsFileInfo = new FileInfo(symbolsPath);
 
         Assert.True(symbolsFileInfo.Exists);
-        Assert.True(start <= symbolsFileInfo.CreationTime);
+        Assert.True(start <= symbolsFileInfo.LastWriteTime);
 
 #if NET46 // TODO: Remove when ObjectApproval supports .NET Core
         ObjectApprover.VerifyWithJson(result, ScrubCurrentDirectory);

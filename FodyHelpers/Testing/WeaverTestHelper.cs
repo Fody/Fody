@@ -26,6 +26,7 @@ namespace Fody
             var fodyTempDir = Path.Combine(Path.GetDirectoryName(assemblyPath), "fodytemp");
             Directory.CreateDirectory(fodyTempDir);
 
+            IoHelper.PurgeDirectory(fodyTempDir);
 
             string targetFileName;
             if (assemblyName == null)
