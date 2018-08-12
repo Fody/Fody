@@ -40,7 +40,7 @@ public partial class AddinFinder
             var packageDefinitionsLogMessage = separator + string.Join(separator, packageDefinitions);
             log($"  PackageDefinitions: {packageDefinitionsLogMessage}");
 
-            // each PackageDefinition will be of the format C:\...\packages\propertychanging.fody\1.28.0
+            // each PackageDefinition will be of the format C:\...\packages\weaver.fody\1.28.0
             // so must be a Contains(.fody)
             foreach (var versionDirectory in packageDefinitions.Where(x => x.ToLowerInvariant().Contains(".fody")))
             {
