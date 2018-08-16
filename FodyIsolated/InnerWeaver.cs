@@ -14,6 +14,7 @@ using Mono.Cecil.Pdb;
 using Mono.Cecil.Rocks;
 using FieldAttributes = Mono.Cecil.FieldAttributes;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
+#pragma warning disable 618
 
 public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 {
@@ -88,6 +89,8 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         return null;
     }
 
+#pragma warning disable 618
+    public TypeCache TypeCache;
     public void Execute()
     {
         ResolveEventHandler assemblyResolve = CurrentDomain_AssemblyResolve;
@@ -98,8 +101,11 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             assemblyResolver = new AssemblyResolver(Logger, SplitReferences);
             ReadModule();
             AppDomain.CurrentDomain.AssemblyResolve += assemblyResolve;
+            TypeCache = new TypeCache(assemblyResolver.Resolve);
             InitialiseWeavers();
-            BuildAssembliesToScan();
+
+            TypeCache.BuildAssembliesToScan(weaverInstances.Select(x=>x.Instance));
+            InitialiseTypeSystem();
             ExecuteWeavers();
             AddWeavingInfo();
             FindStrongNameKey();
@@ -236,7 +242,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
         var typeAttributes = TypeAttributes.NotPublic |
                              TypeAttributes.Class;
-        var typeDefinition = new TypeDefinition(null, "ProcessedByFody", typeAttributes, ModuleDefinition.TypeSystem.Object);
+        var typeDefinition = new TypeDefinition(null, "ProcessedByFody", typeAttributes, TypeSystem.ObjectReference);
         ModuleDefinition.Types.Add(typeDefinition);
 
         AddVersionField(typeof(IInnerWeaver).Assembly.Location, "FodyVersion", typeDefinition);
@@ -259,8 +265,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
                               FieldAttributes.Literal |
                               FieldAttributes.Static |
                               FieldAttributes.HasDefault;
-        var systemString = ModuleDefinition.TypeSystem.String;
-        var field = new FieldDefinition(name, fieldAttributes, systemString)
+        var field = new FieldDefinition(name, fieldAttributes, TypeSystem.StringReference)
         {
             Constant = weaverVersion.FileVersion
         };

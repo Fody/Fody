@@ -1,8 +1,5 @@
 version: 1.0.{build}
 image: Visual Studio 2017
-configuration: Release
-before_build:
-- ps: nuget restore
 build_script:
 - cmd: 
     dotnet build Fody.sln --configuration Release
@@ -10,11 +7,8 @@ build_script:
     dotnet build Integration\Integration.sln --configuration Release
 
     msbuild Integration\Tests\Tests.csproj /target:Restore
-
-test_script:
-- cmd: >-
-    %xunit20%\xunit.console Tests\bin\Release\net46\Tests.dll
-
-    dotnet test "Tests\Tests.csproj" --framework netcoreapp2.0 --configuration Release --no-build --output bin\Release\netcoreapp2.0
+test:
+  assemblies:
+    - '**\*Tests.dll'
 artifacts:
 - path: nugets\*.nupkg

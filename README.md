@@ -171,11 +171,6 @@ Fody Uses [Mono.Cecil](http://www.mono-project.com/Cecil/)  and an add-in based 
  * No references required
 
 
-## Usage
-
-See [SampleUsage](https://github.com/Fody/Fody/wiki/SampleUsage) for an introduction on using Fody.
-
-
 ## Naming
 
 The name "Fody" comes from the small birds that belong to the weaver family [Ploceidae](http://en.wikipedia.org/wiki/Fody).

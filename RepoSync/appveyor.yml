@@ -1,0 +1,9 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+build_script:
+- cmd: dotnet build --configuration Release
+test:
+  assemblies:
+    - '**\*Tests.dll'
+artifacts:
+- path: nugets\**\*.nupkg

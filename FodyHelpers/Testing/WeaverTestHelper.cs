@@ -25,6 +25,9 @@ namespace Fody
             assemblyPath = Path.Combine(CodeBaseLocation.CurrentDirectory, assemblyPath);
             var fodyTempDir = Path.Combine(Path.GetDirectoryName(assemblyPath), "fodytemp");
             Directory.CreateDirectory(fodyTempDir);
+
+            IoHelper.PurgeDirectory(fodyTempDir);
+
             string targetFileName;
             if (assemblyName == null)
             {
@@ -35,11 +38,8 @@ namespace Fody
             {
                 targetFileName = assemblyName + ".dll";
             }
+
             var targetAssemblyPath = Path.Combine(fodyTempDir, targetFileName);
-            var targetSymbolsPath = Path.ChangeExtension(targetAssemblyPath, "pdb");
-            var symbolsPath = Path.ChangeExtension(assemblyPath, "pdb");
-            File.Copy(assemblyPath, targetAssemblyPath, true);
-            File.Copy(symbolsPath, targetSymbolsPath, true);
 
             using (var assemblyResolver = new MockAssemblyResolver())
             {
@@ -53,31 +53,36 @@ namespace Fody
                 weaver.LogWarningPoint = (text, sequencePoint) => testStatus.AddWarning(text, sequencePoint);
                 weaver.LogError = text => testStatus.AddError(text, null);
                 weaver.LogErrorPoint = (text, sequencePoint) => testStatus.AddError(text, sequencePoint);
-                weaver.AssemblyFilePath = targetAssemblyPath;
+                weaver.AssemblyFilePath = assemblyPath;
                 weaver.FindType = typeCache.FindType;
                 weaver.TryFindType = typeCache.TryFindType;
                 weaver.ResolveAssembly = assemblyResolver.Resolve;
-
-                var readerParameters = new ReaderParameters(ReadingMode.Immediate)
+                var readerParameters = new ReaderParameters
                 {
                     AssemblyResolver = assemblyResolver,
                     SymbolReaderProvider = new SymbolReaderProvider(),
-                    ReadWrite = true,
+                    ReadWrite = false,
                     ReadSymbols = true,
                 };
 
-                using (var moduleDefinition = ModuleDefinition.ReadModule(targetAssemblyPath, readerParameters))
+                using (var module = ModuleDefinition.ReadModule(assemblyPath, readerParameters))
                 {
-                    moduleDefinition.Assembly.Name.Name = assemblyName;
-                    beforeExecuteCallback?.Invoke(moduleDefinition);
-                    weaver.ModuleDefinition = moduleDefinition;
+                    module.Assembly.Name.Name = assemblyName;
+                    weaver.ModuleDefinition = module;
+                    weaver.TypeSystem = new TypeSystem(typeCache.FindType, module);
+                    beforeExecuteCallback?.Invoke(module);
 
                     weaver.Execute();
-                    ReferenceCleaner.CleanReferences(moduleDefinition, weaver, weaver.LogDebug);
+                    ReferenceCleaner.CleanReferences(module, weaver, weaver.LogDebug);
 
-                    afterExecuteCallback?.Invoke(moduleDefinition);
+                    afterExecuteCallback?.Invoke(module);
 
-                    moduleDefinition.Write();
+                    var writerParameters = new WriterParameters
+                    {
+                        WriteSymbols = true
+                    };
+
+                    module.Write(targetAssemblyPath, writerParameters);
                 }
 
                 if (runPeVerify)
@@ -95,6 +100,7 @@ namespace Fody
                     ignoreList.Add("0x80070002");
                     PeVerifier.ThrowIfDifferent(assemblyPath, targetAssemblyPath, ignoreList, Path.GetDirectoryName(assemblyPath));
                 }
+
                 testStatus.Assembly = Assembly.Load(File.ReadAllBytes(targetAssemblyPath));
                 testStatus.AssemblyPath = targetAssemblyPath;
                 return testStatus;
@@ -103,12 +109,8 @@ namespace Fody
 
         static TypeCache CacheTypes(BaseModuleWeaver weaver, MockAssemblyResolver assemblyResolver)
         {
-            var definitions = weaver.GetAssembliesForScanning()
-                .Select(assemblyResolver.Resolve)
-                .Where(definition => definition != null);
-
-            var typeCache = new TypeCache();
-            typeCache.Initialise(definitions);
+            var typeCache = new TypeCache(assemblyResolver.Resolve);
+            typeCache.BuildAssembliesToScan(weaver);
             return typeCache;
         }
     }

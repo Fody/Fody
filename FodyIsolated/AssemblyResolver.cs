@@ -27,7 +27,7 @@ public class AssemblyResolver : IAssemblyResolver
         }
     }
 
-    private string GetAssemblyName(string filePath)
+    string GetAssemblyName(string filePath)
     {
         try
         {

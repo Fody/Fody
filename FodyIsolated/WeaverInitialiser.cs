@@ -29,8 +29,8 @@ public partial class InnerWeaver
         weaverInstance.LogError = Logger.LogError;
         weaverInstance.LogErrorPoint = LogErrorPoint;
         weaverInstance.DefineConstants = DefineConstants;
-        weaverInstance.FindType = typeCache.FindType;
-        weaverInstance.TryFindType = typeCache.TryFindType;
+        weaverInstance.FindType = TypeCache.FindType;
+        weaverInstance.TryFindType = TypeCache.TryFindType;
         weaverInstance.ResolveAssembly = assemblyName => assemblyResolver.Resolve(assemblyName);
     }
 

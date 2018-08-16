@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Fody;
@@ -36,6 +37,25 @@ public class WeaverTestHelperTests : TestBase
         var result = weaver.ExecuteTestRun(
             assemblyPath: assemblyPath,
             assemblyName: "NewName");
+#if NET46 // TODO: Remove when ObjectApproval supports .NET Core
+        ObjectApprover.VerifyWithJson(result, ScrubCurrentDirectory);
+#endif
+    }
+
+    [Fact]
+    public void WeaverUsingSymbols()
+    {
+        var start = DateTime.Now;
+        var assemblyPath = Path.Combine(CodeBaseLocation.CurrentDirectory, "DummyAssembly.dll");
+        var weaver = new WeaverUsingSymbols();
+        var result = weaver.ExecuteTestRun(assemblyPath);
+
+        var symbolsPath = Path.ChangeExtension(result.AssemblyPath, ".pdb");
+        var symbolsFileInfo = new FileInfo(symbolsPath);
+
+        Assert.True(symbolsFileInfo.Exists);
+        Assert.True(start <= symbolsFileInfo.LastWriteTime);
+
 #if NET46 // TODO: Remove when ObjectApproval supports .NET Core
         ObjectApprover.VerifyWithJson(result, ScrubCurrentDirectory);
 #endif
