@@ -100,7 +100,7 @@ Downstream plugins are recommended to follow the above guidelines.
 
 ### Reasons
 
-While it may seam trivial to "implement support for earlier versions of.net" the long term support implications are too costly. For example to support earlier versions of .net require 
+While it may seam trivial to "implement support for earlier versions of .net" the long term support implications are too costly. For example to support earlier versions of .net require 
 
  * Custom VMs to verify problems.
  * Added complexity to setting up build environment.
