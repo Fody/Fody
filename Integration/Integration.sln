@@ -3,26 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 14.0.22823.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weavers", "Weavers\Weavers.csproj", "{3F4C62F3-F582-452F-B455-0CD5C89D96CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Weavers", "Weavers\Weavers.csproj", "{3F4C62F3-F582-452F-B455-0CD5C89D96CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{9C8338D4-3F27-4FA5-97A0-6039FDB07724}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{9C8338D4-3F27-4FA5-97A0-6039FDB07724}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WithNugetWeavers", "WithNugetWeavers\WithNugetWeavers.csproj", "{4744FEC7-AE13-4A20-81C6-BBB837C19B5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WithNugetWeavers", "WithNugetWeavers\WithNugetWeavers.csproj", "{4744FEC7-AE13-4A20-81C6-BBB837C19B5F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3F4C62F3-F582-452F-B455-0CD5C89D96CF} = {3F4C62F3-F582-452F-B455-0CD5C89D96CF}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WithOnlyInSolutionWeaver", "WithOnlyInSolutionWeaver\WithOnlyInSolutionWeaver.csproj", "{4D1BF1C8-5C19-4A95-BEFF-6F8D67FF7B87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WithOnlyInSolutionWeaver", "WithOnlyInSolutionWeaver\WithOnlyInSolutionWeaver.csproj", "{4D1BF1C8-5C19-4A95-BEFF-6F8D67FF7B87}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3F4C62F3-F582-452F-B455-0CD5C89D96CF} = {3F4C62F3-F582-452F-B455-0CD5C89D96CF}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WithNugetAndInSolutionWeavers", "WithNugetAndInSolutionWeavers\WithNugetAndInSolutionWeavers.csproj", "{7DDD6A9E-7D35-4D5B-8B60-D9D32F3D521A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WithNugetAndInSolutionWeavers", "WithNugetAndInSolutionWeavers\WithNugetAndInSolutionWeavers.csproj", "{7DDD6A9E-7D35-4D5B-8B60-D9D32F3D521A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3F4C62F3-F582-452F-B455-0CD5C89D96CF} = {3F4C62F3-F582-452F-B455-0CD5C89D96CF}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WithNoPdb", "WithNoPdb\WithNoPdb.csproj", "{4F286C5B-9599-4F6A-BD7F-1E7BB9DDCAC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WithNoPdb", "WithNoPdb\WithNoPdb.csproj", "{4F286C5B-9599-4F6A-BD7F-1E7BB9DDCAC6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WithDelaySigning", "WithDelaySigning\WithDelaySigning.csproj", "{C3D5197A-17E4-44FB-80F4-F997FBE5C6A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,8 +56,15 @@ Global
 		{4F286C5B-9599-4F6A-BD7F-1E7BB9DDCAC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F286C5B-9599-4F6A-BD7F-1E7BB9DDCAC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F286C5B-9599-4F6A-BD7F-1E7BB9DDCAC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3D5197A-17E4-44FB-80F4-F997FBE5C6A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3D5197A-17E4-44FB-80F4-F997FBE5C6A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3D5197A-17E4-44FB-80F4-F997FBE5C6A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3D5197A-17E4-44FB-80F4-F997FBE5C6A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FB2B8964-0831-4822-A004-57CE5E55106C}
 	EndGlobalSection
 EndGlobal
