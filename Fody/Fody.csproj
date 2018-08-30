@@ -3,9 +3,8 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     <Description>Extensible tool for weaving .net assemblies.</Description>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <DevelopmentDependency>true</DevelopmentDependency>
     <NuSpecFile>Fody.nuspec</NuSpecFile>
   </PropertyGroup>
@@ -23,7 +22,7 @@
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0'">
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.7.179" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.8.166" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework) == 'net46'">
     <Reference Include="Microsoft.Build" />
