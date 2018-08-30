@@ -1,5 +1,5 @@
 using System.IO;
-#if NET46 // TODO: Remove when ApprovalTests supports .NET Core
+#if net472 // TODO: Remove when ApprovalTests supports .NET Core
 using ApprovalTests;
 #endif
 using Fody;
@@ -19,7 +19,7 @@ public class ProjectWeaversFinderTests : TestBase
 
         var weavingException = Assert.Throws<WeavingException>(
             () => ConfigFileFinder.FindWeaverConfigs(AssemblyLocation.CurrentDirectory, AssemblyLocation.CurrentDirectory, logger));
-#if NET46 // TODO: Remove when ApprovalTests supports .NET Core
+#if net472 // TODO: Remove when ApprovalTests supports .NET Core
         Approvals.Verify(weavingException.Message.Replace(searchDirectory, "SearchDirectory"));
 #endif
     }

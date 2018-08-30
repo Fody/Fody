@@ -16,7 +16,7 @@ public class IldasmTests : TestBase
     public void Verify()
     {
         var verify = Ildasm.Decompile(GetAssemblyPath());
-#if(NET46)
+#if(net472)
         ApprovalTests.Approvals.Verify(verify);
 #endif
     }

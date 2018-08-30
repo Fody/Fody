@@ -31,7 +31,7 @@
     <Content Include="Fody\WeaversProjectFileFinder\**\*.*" CopyToOutputDirectory="Always" />
     <Content Include="Fody\ProjectWeaversReaderTests\*.xml" CopyToOutputDirectory="Always" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework) == 'net46'">
+  <ItemGroup Condition="$(TargetFramework) == 'net472'">
     <PackageReference Include="ApprovalTests" Version="3.0.15" />
     <PackageReference Include="ObjectApproval" Version="2.2" />
     <Reference Include="Microsoft.Build" />
@@ -43,7 +43,7 @@
     <Reference Include="Mono.Cecil.Pdb" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Pdb.dll" />
     <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Rocks.dll" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework) == 'netcoreapp2.0'">
+  <ItemGroup Condition="$(TargetFramework) == 'netcoreapp2.1'">
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.7.179" />
     <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\netstandard1.3\Mono.Cecil.dll" />
     <Reference Include="Mono.Cecil.Mdb" HintPath="..\Lib\Cecil\netstandard1.3\Mono.Cecil.Mdb.dll" />
