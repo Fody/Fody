@@ -244,6 +244,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Resourcer](https://github.com/Fody/Resourcer) Simplifies reading embedded resources from an Assembly.
   * [RomanticWeb](http://romanticweb.net/) Fody weaver plugin for RomanticWeb instrumentation.
   * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration. 
+  * [Stamp](https://github.com/304NotModified/Fody.Stamp) Stamps an assembly with git data.
   * [StampSvn](https://github.com/krk/Stamp) Stamps an assembly with SVN data.
   * [StaticProxy](https://github.com/BrunoJuchli/StaticProxy.Fody) Proxy Generator, also for .net standard / .net core (.net standard 1.0+).
   * [Substitute](https://github.com/tom-englert/Substitute.Fody) Substitute types with other types to e.g. intercept generated code 
@@ -278,7 +279,7 @@ The below addins are no longer maintained. Raise an issue in the specific projec
   * [Scalpel](https://github.com/Fody/Scalpel) Strips tests from an assembly.
   * [Seal](https://github.com/kamil-mrzyglod/Seal) mark all non-virtual(abstract, non-sealed) types as sealed by default.
   * [Stiletto](https://github.com/benjamin-bader/stiletto) Compile-time static analysis and optimization for the Stiletto IoC library.
-  * [Stamp](https://github.com/Fody/Stamp) Stamps an assembly with git data.
+  
 
 
 ## Projects built using Fody
