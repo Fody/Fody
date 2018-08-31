@@ -53,7 +53,6 @@ public class PeVerifierTests : TestBase
 #endif
     }
 
-
     [Fact]
     public void Invalid_assembly_should_throw()
     {
