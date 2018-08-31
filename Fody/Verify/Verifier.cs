@@ -53,8 +53,6 @@ public class Verifier
         try
         {
             Logger.LogInfo("  Verifying assembly");
-            ignoreCodes.Add("0x80070002");
-            ignoreCodes.Add("0x80131252");
             if (PeVerifier.Verify(TargetPath, ignoreCodes, out var output))
             {
                 return true;

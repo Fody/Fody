@@ -97,7 +97,6 @@ namespace Fody
                         ignoreList = ignoreCodes.ToList();
                     }
 
-                    ignoreList.Add("0x80070002");
                     PeVerifier.ThrowIfDifferent(assemblyPath, targetAssemblyPath, ignoreList, Path.GetDirectoryName(assemblyPath));
                 }
 

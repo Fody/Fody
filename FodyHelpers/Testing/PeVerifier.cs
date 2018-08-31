@@ -45,7 +45,7 @@ namespace Fody
                 throw new ArgumentNullException($"Cannot verify assembly, file '{assemblyPath}' does not exist");
             }
 
-            return InnerVerify(assemblyPath, ignoreCodes, out output, workingDirectory);
+            return InnerVerify(assemblyPath, ignoreCodes.ToList(), out output, workingDirectory);
         }
 
         public static bool Verify(string beforeAssemblyPath, string afterAssemblyPath, IEnumerable<string> ignoreCodes, out string beforeOutput, out string afterOutput, string workingDirectory = null)
@@ -92,8 +92,10 @@ BeforeOutput:
             return Regex.Replace(input, @"\[offset .*\]", "");
         }
 
-        static bool InnerVerify(string assemblyPath, IEnumerable<string> ignoreCodes, out string output, string workingDirectory = null)
+        static bool InnerVerify(string assemblyPath, IList<string> ignoreCodes, out string output, string workingDirectory = null)
         {
+            ignoreCodes.Add("0x80070002");
+            ignoreCodes.Add("0x80131252");
             if (workingDirectory == null)
             {
                 workingDirectory = Path.GetDirectoryName(assemblyPath);
