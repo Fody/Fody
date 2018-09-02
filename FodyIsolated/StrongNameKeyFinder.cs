@@ -7,7 +7,7 @@ using Fody;
 public partial class InnerWeaver
 {
     public StrongNameKeyPair StrongNameKeyPair;
-    public byte[] PublicKey = null;
+    public byte[] PublicKey;
 
     public virtual void FindStrongNameKey()
     {
