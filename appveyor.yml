@@ -1,11 +1,10 @@
 version: 1.0.{build}
 image: Visual Studio 2017
 build_script:
-- cmd: 
+- cmd: |
     dotnet build Fody.sln --configuration Release
-
-    dotnet build Integration\Integration.sln --configuration Release
-
+    msbuild Integration\Integration.sln /target:Restore
+    msbuild Integration\Integration.sln /p:Configuration=Release /verbosity:minimal
     msbuild Integration\Tests\Tests.csproj /target:Restore
 test:
   assemblies:

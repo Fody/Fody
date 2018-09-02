@@ -17,6 +17,7 @@ public partial class InnerWeaver
                 SymbolWriterProvider = debugWriterProvider,
             };
 
+        ModuleDefinition.Assembly.Name.PublicKey = PublicKey;
         ModuleDefinition.Write(AssemblyFilePath, parameters);
         Logger.LogDebug($"  Finished writing assembly {stopwatch.ElapsedMilliseconds}ms.");
     }
