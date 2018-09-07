@@ -85,7 +85,7 @@ namespace Fody
                     module.Write(targetAssemblyPath, writerParameters);
                 }
 
-                if (runPeVerify)
+                if (runPeVerify && IsWindows())
                 {
                     List<string> ignoreList;
                     if (ignoreCodes == null)
@@ -104,6 +104,12 @@ namespace Fody
                 testStatus.AssemblyPath = targetAssemblyPath;
                 return testStatus;
             }
+        }
+
+        static bool IsWindows()
+        {
+            var platform = Environment.OSVersion.Platform.ToString();
+            return platform.StartsWith("win", StringComparison.OrdinalIgnoreCase);
         }
 
         static TypeCache CacheTypes(BaseModuleWeaver weaver, MockAssemblyResolver assemblyResolver)
