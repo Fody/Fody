@@ -47,8 +47,6 @@ namespace Fody
 
         public string[] PackageDefinitions { get; set; }
 
-        //TODO move back to DebugSymbols when it resolves to true in release mode
-        public bool DebugSymbols { get; set; }
         public string DebugType { get; set; }
 
         public override bool Execute()
@@ -74,7 +72,7 @@ namespace Fody
                 NuGetPackageRoot = NuGetPackageRoot,
                 MSBuildDirectory = MSBuildThisFileDirectory,
                 PackageDefinitions = PackageDefinitions?.ToList(),
-                DebugSymbols = DebugSymbolsProduced()
+                DebugSymbols = GetDebugSymbolsType()
             };
             var success = processor.Execute();
             if (success)
@@ -86,11 +84,15 @@ namespace Fody
             return success;
         }
 
-        bool DebugSymbolsProduced()
+        private DebugSymbolsType GetDebugSymbolsType()
         {
-            return
-                !string.Equals(DebugType, "none", StringComparison.OrdinalIgnoreCase) &&
-                !string.Equals(DebugType, "embedded", StringComparison.OrdinalIgnoreCase);
+            if (string.Equals(DebugType, "none", StringComparison.OrdinalIgnoreCase))
+                return DebugSymbolsType.None;
+
+            if (string.Equals(DebugType, "embedded", StringComparison.OrdinalIgnoreCase))
+                return DebugSymbolsType.Embedded;
+
+            return DebugSymbolsType.External;
         }
 
         public void Cancel()

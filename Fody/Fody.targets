@@ -80,7 +80,6 @@
           ReferenceCopyLocalPaths="@(ReferenceCopyLocalPaths)"
           DefineConstants="$(DefineConstants)"
           PackageDefinitions="@(FodyPackageDefinitions)"
-          DebugSymbols="$(DebugSymbols)"
           DebugType="$(DebugType)"
           DocumentationFilePath="@(DocFileItem->'%(FullPath)')"
           MsBuildThisFileDirectory="$(MSBuildThisFileDirectory)"
