@@ -12,6 +12,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NoPackageAnalysis>true</NoPackageAnalysis>
+    <DevelopmentDependency>true</DevelopmentDependency>
     <NoWarn>$(NoWarn);NU5118</NoWarn>
     <DisableFody>true</DisableFody>
     <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">https://raw.githubusercontent.com/Fody/$(SolutionName)/master/package_icon.png</PackageIconUrl>
