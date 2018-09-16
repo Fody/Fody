@@ -20,7 +20,7 @@ Any code or stack traces must be properly formatted with markdown.
 
 A clear and concise description of what the bug is.
 
-**Submit a PR that fixes the**
+**Submit a PR that fixes the bug**
 
 Submit a [Pull Request (PR)](https://help.github.com/articles/about-pull-requests/) that fixes the bug. Include in this PR a test that verifies the fix. If you were not able to fix the bug, a PR that illustrates your partial progress will suffice. If you prefer someone else fix this bug for you, please donate to the [Fody OpenCollective](https://opencollective.com/fody/donate) and include a note to that effect in the issue.
 
