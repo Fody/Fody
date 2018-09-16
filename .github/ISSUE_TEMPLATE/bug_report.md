@@ -3,7 +3,7 @@ name: Bug fix
 about: Create a bug fix to help us improve
 ---
 
-Note: New issues raised, where it is clear the submitter has not read the issue template, are likely to be closed with "please read the issue template". Please don't take offense at this. It is simply a time management decision. If someone raises an issue, and can't be bothered to spend the time to read the issue template, then the project maintainers should not be expected to spend the time read the submitted issue. Often too much time is spent going back and forth in issue comments asking for information that is outlined in the issue template.
+Note: New issues raised, where it is clear the submitter has not read the issue template, are likely to be closed with "please read the issue template". Please don't take offense at this. It is simply a time management decision. If someone raises an issue, and can't be bothered to spend the time to read the issue template, then the project maintainers should not be expected to spend the time to read the submitted issue. Often too much time is spent going back and forth in issue comments asking for information that is outlined in the issue template.
 
 **Preamble**
 
