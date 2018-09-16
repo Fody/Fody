@@ -8,7 +8,7 @@ Note: New issues raised, where it is clear the submitter has not read the issue 
 
 **Conditions**
 
-Where relevant Ensure you are using the current stable versions of the following:
+Where relevant, ensure you are using the current stable versions of the following:
 
  * Fody (note for this you need an explicit NuGet reference to Fody in you csproj)
  * Fody weavers
