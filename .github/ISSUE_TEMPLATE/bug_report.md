@@ -20,8 +20,6 @@ Where relevant, ensure you are using the current stable versions of the followin
 
 Any code or stack traces must be properly formatted with markdown.
 
-
-
 **Describe the bug**
 
 A clear and concise description of what the bug is.
