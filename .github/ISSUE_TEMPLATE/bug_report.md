@@ -24,13 +24,13 @@ Any code or stack traces must be properly formatted with markdown.
 
 A clear and concise description of what the bug is.
 
+**Minimal Repro**
+
+Ensure you have replicated the bug in a minimal solution with the fewest moving parts. Often this will help point to the true cause of the problem. Upload this repro as part of the issue, preferably a public GitHub repository or a downloadable zip. The repro will allow the maintainers of this project to smoke test the any fix.
+
 **Submit a PR that fixes the bug**
 
 Submit a [Pull Request (PR)](https://help.github.com/articles/about-pull-requests/) that fixes the bug. Include in this PR a test that verifies the fix. If you were not able to fix the bug, a PR that illustrates your partial progress will suffice. If you prefer someone else fix this bug for you, please donate to the [Fody OpenCollective](https://opencollective.com/fody/donate) and include a note to that effect in the issue.
-
-**Minimal Repro**
-
-Uploaded a minimal solution that reproduces the problem with the fewest moving pieces. Preferably a public GitHub repository or a downloadable zip.
 
 **Expected behavior**
 
