@@ -14,33 +14,45 @@ public partial class InnerWeaver
 
     void GetSymbolProviders()
     {
-        if (!DebugSymbols)
+        switch (DebugSymbols)
         {
-            Logger.LogInfo("DebugSymbols disabled. No symbols file will be processed.");
-            return;
+            case DebugSymbolsType.None:
+            {
+                Logger.LogInfo("Debug symbols disabled.");
+                return;
+            }
+
+            case DebugSymbolsType.Embedded:
+            {
+                debugReaderProvider = new EmbeddedPortablePdbReaderProvider();
+                debugWriterProvider = new EmbeddedPortablePdbWriterProvider();
+                return;
+            }
+
+            default:
+            {
+                FindPdb();
+                FindMdb();
+                ChooseNewest();
+
+                if (pdbFound)
+                {
+                    debugReaderProvider = new PdbReaderProvider();
+                    debugWriterProvider = new PdbWriterProvider();
+                    return;
+                }
+
+                if (mdbFound)
+                {
+                    debugReaderProvider = new MdbReaderProvider();
+                    debugWriterProvider = new MdbWriterProvider();
+                    return;
+                }
+
+                Logger.LogWarning("No debug symbols found. It is recommended to build with debug symbols enabled.");
+                return;
+            }
         }
-
-        FindPdb();
-
-        FindMdb();
-
-        ChooseNewest();
-
-        if (pdbFound)
-        {
-            debugReaderProvider = new PdbReaderProvider();
-            debugWriterProvider = new PdbWriterProvider();
-            return;
-        }
-
-        if (mdbFound)
-        {
-            debugReaderProvider = new MdbReaderProvider();
-            debugWriterProvider = new MdbWriterProvider();
-            return;
-        }
-
-        Logger.LogWarning("No debug symbols found. It is recommended to build with debug symbols enabled.");
     }
 
     void ChooseNewest()

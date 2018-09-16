@@ -16,7 +16,7 @@ public partial class Processor
     public string SolutionDirectory;
     public string NuGetPackageRoot;
     public string MSBuildDirectory;
-    public bool DebugSymbols;
+    public DebugSymbolsType DebugSymbols;
     public List<string> ReferenceCopyLocalPaths;
     public List<string> PackageDefinitions;
     public List<string> DefineConstants;

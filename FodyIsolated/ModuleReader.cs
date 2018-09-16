@@ -13,7 +13,7 @@ public partial class InnerWeaver
         tempAssembly = $"{AssemblyFilePath}.tmp";
         File.Copy(AssemblyFilePath, tempAssembly, true);
 
-        if (debugReaderProvider != null)
+        if (debugReaderProvider != null && DebugSymbols != DebugSymbolsType.Embedded)
         {
             var symbolsPath = pdbFound ? pdbPath : mdbPath;
             tempSymbols = $"{symbolsPath}.tmp";
@@ -27,10 +27,11 @@ public partial class InnerWeaver
         var readerParameters = new ReaderParameters
         {
             AssemblyResolver = assemblyResolver,
-            ReadSymbols = SymbolStream != null,
+            ReadSymbols = SymbolStream != null || DebugSymbols == DebugSymbolsType.Embedded,
             SymbolReaderProvider = debugReaderProvider,
             SymbolStream = SymbolStream,
         };
+
         ModuleDefinition = ModuleDefinition.ReadModule(tempAssembly, readerParameters);
     }
 
