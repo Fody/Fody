@@ -5,7 +5,11 @@ about: Create a bug fix to help us improve
 
 Note: New issues raised, where it is clear the submitter has not read the issue template, are likely to be closed with "please read the issue template". Please don't take offense at this. It is simply a time management decision. If someone raises an issue, and can't be bothered to spend the time to read the issue template, then the project maintainers should not be expected to spend the time read the submitted issue. Often too much time is spent going back and forth in issue comments asking for information that is outlined in the issue template.
 
-**Conditions**
+**Preamble**
+
+Questions specific to IL manipulation should be placed on [StackOveflow](https://stackoverflow.com/) or the [Cecil mailing list](https://groups.google.com/forum/#!forum/mono-cecil).
+
+General questions about Fody or weavers should be placed on [StackOveflow](https://stackoverflow.com/) or the [Fody Gitter room](https://gitter.im/Fody/Fody)
 
 Where relevant, ensure you are using the current stable versions of the following:
 
@@ -15,6 +19,8 @@ Where relevant, ensure you are using the current stable versions of the followin
  * dotnetcore sdk
 
 Any code or stack traces must be properly formatted with markdown.
+
+
 
 **Describe the bug**
 
