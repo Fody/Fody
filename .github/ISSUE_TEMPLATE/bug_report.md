@@ -1,35 +1,43 @@
 ---
-name: Bug report
-about: Create a report to help us improve
-
+name: Bug fix
+about: Create a bug fix to help us improve
 ---
 
+Note: New issues raised, where it is clear the submitter has not read the issue template, are likely to be closed with "please read the issue template". Please don't take offense at this. It is simply a time management decision. If someone raises an issue, and can't be bothered to spend the time to read the issue template, the the project maintainers should not be expected to spend the time read the submitted issue. Often too much time is spent going back and forth in issue comments asking for information that is outlined in the issue template.
+
+
+**Conditions**
+
+Where relevant Ensure you are using the current stable versions of the following:
+
+ * Fody (note for this you need an explicit NuGet reference to Fody in you csproj)
+ * Fody weavers
+ * Visual Studio
+ * dotnetcore sdk
+
+Any code or stack traces must be properly formatted with markdown.
+
+
 **Describe the bug**
+
 A clear and concise description of what the bug is.
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+
+**Submit a PR that fixes the**
+
+Submit a [Pull Request (PR)](https://help.github.com/articles/about-pull-requests/) that fixes the bug. Include in this PR a test that verifies the fix. If you were not able to fix the bug, a PR that illustrates your partial progress will suffice. If you prefer someone else fix this bug for you, please donate to the [Fody OpenCollective](https://opencollective.com/fody/donate) and include a note to that effect in the issue.
+
+
+**Minimal Repro**
+
+Uploaded a minimal solution that reproduces the problem with the fewest moving pieces. Preferably a public GitHub repository or a downloadable zip.
+
 
 **Expected behavior**
+
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
-
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
-
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
 
 **Additional context**
+
 Add any other context about the problem here.
