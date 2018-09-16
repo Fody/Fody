@@ -9,7 +9,9 @@
 
 ## Extensible tool for weaving .net assemblies 
 
+## Preamble
 
+This is a community driven OSS project. As such consumers of this project are expected to contribute back to keep this project alive. Contributions can be in the form of your time via fixing bugs, contributing features, adding doco, triaging issues, reviewing PRs, or answering questions from other community members. If you cannot commit to this, either contribute money to the [Fody OpenCollective](https://opencollective.com/fody/donate) or dont use this project.
 
 ## Introduction
 
@@ -279,7 +281,7 @@ The below addins are no longer maintained. Raise an issue in the specific projec
   * [Scalpel](https://github.com/Fody/Scalpel) Strips tests from an assembly.
   * [Seal](https://github.com/kamil-mrzyglod/Seal) mark all non-virtual(abstract, non-sealed) types as sealed by default.
   * [Stiletto](https://github.com/benjamin-bader/stiletto) Compile-time static analysis and optimization for the Stiletto IoC library.
-  
+
 
 
 ## Projects built using Fody
