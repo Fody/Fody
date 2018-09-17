@@ -13,6 +13,8 @@ class Program
         var sync = new RepoSync(credentials, "Fody", "Fody", "master", Console.WriteLine);
         sync.AddSourceItem(TreeEntryTargetType.Blob, "RepoSync/appveyor.yml", "appveyor.yml");
         sync.AddSourceItem(TreeEntryTargetType.Blob, ".editorconfig", ".editorconfig");
+        sync.AddSourceItem(TreeEntryTargetType.Blob, "ISSUE_TEMPLATE/bug_report.md", "ISSUE_TEMPLATE/bug_report.md");
+        sync.AddSourceItem(TreeEntryTargetType.Blob, "ISSUE_TEMPLATE/feature_request.md", "ISSUE_TEMPLATE/feature_request.md");
         sync.AddTarget("Fody", "Anotar", "master");
         sync.AddTarget("Fody", "AsyncErrorHandler", "master");
         sync.AddTarget("Fody", "BasicFodyAddin", "master");

@@ -16,9 +16,9 @@ Where relevant, ensure you are using the current stable versions of the followin
  * Fody (note for this you need an explicit NuGet reference to Fody in you csproj)
  * Fody weavers
  * Visual Studio
- * dotnetcore sdk
+ * [.NET Core SDK](https://www.microsoft.com/net/download)
 
-Any code or stack traces must be properly formatted with markdown.
+Any code or stack traces must be properly formatted with [GitHub markdown](https://guides.github.com/features/mastering-markdown/).
 
 #### Describe the bug
 
@@ -30,7 +30,7 @@ Ensure you have replicated the bug in a minimal solution with the fewest moving 
 
 #### Submit a PR that fixes the bug
 
-Submit a [Pull Request (PR)](https://help.github.com/articles/about-pull-requests/) that fixes the bug. Include in this PR a test that verifies the fix. If you were not able to fix the bug, a PR that illustrates your partial progress will suffice. If you prefer someone else fix this bug for you, please donate to the [Fody OpenCollective](https://opencollective.com/fody/donate) and include a note to that effect in the issue.
+Submit a [Pull Request (PR)](https://help.github.com/articles/about-pull-requests/) that fixes the bug. Include in this PR a test that verifies the fix. If you were not able to fix the bug, a PR that illustrates your partial progress will suffice. If you prefer someone else fix this bug for you, please donate to the [Fody OpenCollective](https://opencollective.com/fody/donate) and include a note to that effect in this issue.
 
 #### Expected behavior
 
