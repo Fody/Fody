@@ -221,7 +221,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [FodyDependencyInjection](https://github.com/jorgehmv/FodyDependencyInjection) Dependency injection with Fody add-ins.
   * [Freezable](https://github.com/Fody/Freezable) Implements the Freezable pattern.
   * [InfoOf](https://github.com/Fody/InfoOf) Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](https://msdn.microsoft.com/en-us/library/58918ffs.aspx).
-  * [InlineIL](https://github.com/ltrzesniewski/InlineIL.Fody) Injects arbitrary IL code using an API similar to [`ILGenerator`](https://docs.microsoft.com/en-us/dotnet/api/system.reflection.emit.ilgenerator).
+  * [InlineIL](https://github.com/ltrzesniewski/InlineIL.Fody) Provides a way to embed arbitrary IL instructions in existing code.
   * [Ionad](https://github.com/Fody/Ionad) Replaces static method calls. 
   * [Janitor](https://github.com/Fody/Janitor) Simplifies the implementation of [IDisposable](https://msdn.microsoft.com/en-us/library/system.idisposable.aspx).
   * [JetBrainsAnnotations](https://github.com/tom-englert/JetBrainsAnnotations.Fody) Converts all JetBrains ReSharper code annotation attributes to External Annotations.
