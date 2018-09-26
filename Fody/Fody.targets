@@ -61,7 +61,7 @@
       AfterTargets="AfterCompile"
       Condition="Exists('@(IntermediateAssembly)') And $(DesignTimeBuild) != true And $(DisableFody) != true"
       Name="FodyTarget"
-      DependsOnTargets="$(FodyDependsOnTargets)"
+      DependsOnTargets="$(FodyDependsOnTargets);RunResolvePackageDependencies"
       Inputs="@(IntermediateAssembly->'%(FullPath)');$(FodyKeyFilePath);$(ProjectWeaverXml)"
       Outputs="$(TargetPath)">
 
