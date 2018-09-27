@@ -51,9 +51,6 @@
     <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\netstandard1.3\Mono.Cecil.Rocks.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Fody\AddinFinderTest\AddinFinderTest.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
 </Project>

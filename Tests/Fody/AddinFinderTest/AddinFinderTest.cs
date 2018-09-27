@@ -1,10 +1,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
+// TODO: re-include in project when ObjectApproval supports .NET Core
+#if NET472
+using ApprovalTests.Reporters;
+
 using Xunit;
 using ObjectApproval;
 
-// TODO: re-include in project when ObjectApproval supports .NET Core
 public partial class AddinFinderTest : TestBase
 {
     [Fact]
@@ -19,6 +23,7 @@ public partial class AddinFinderTest : TestBase
     }
 
     [Fact]
+    [UseReporter(typeof(DiffReporter))]
     public void Integration_OldNugetStructure()
     {
         var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/AddinFinderTest/OldNugetStructure"));
@@ -26,6 +31,7 @@ public partial class AddinFinderTest : TestBase
     }
 
     [Fact]
+    [UseReporter(typeof(DiffReporter))]
     public void Integration_NewNugetStructure()
     {
         var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/AddinFinderTest/NewNugetStructure"));
@@ -33,6 +39,7 @@ public partial class AddinFinderTest : TestBase
     }
 
     [Fact]
+    [UseReporter(typeof(DiffReporter))]
     public void Integration_PaketStructure()
     {
         var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/AddinFinderTest/PaketStructure"));
@@ -52,7 +59,8 @@ public partial class AddinFinderTest : TestBase
             {
                 Path.Combine(root, "Solution/packages/Weaver.Fody/7.0.0"),
                 Path.Combine(root, "Solution/packages/ThisIsATrap.Fody")
-            });
+            },
+            weaverProbingPaths: null);
 
         addinFinder.FindAddinDirectories();
 
@@ -69,8 +77,10 @@ public partial class AddinFinderTest : TestBase
             solutionDirectory: Path.Combine(combine, "Solution"),
             msBuildTaskDirectory: Path.Combine(combine, "MsBuildDirectory/1/2/3"),
             nuGetPackageRoot: Path.Combine(combine, "NuGetPackageRoot"),
-            packageDefinitions: null);
+            packageDefinitions: null,
+            weaverProbingPaths: null);
         addinFinder.FindAddinDirectories();
-        ObjectApprover.VerifyWithJson(addinFinder.FodyFiles.Select(x => x.Replace(combine, "")));
+        ObjectApprover.VerifyWithJson(addinFinder.FodyFiles.Select(x => x.Replace(combine, "").Replace("packages", "Packages")));
     }
 }
+#endif

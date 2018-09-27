@@ -36,6 +36,8 @@ namespace Fody
         [Required]
         public string MSBuildThisFileDirectory { get; set; }
 
+        public string WeaverProbingPaths { get; set; }
+
         public string DefineConstants { get; set; }
 
         public string Configuration { get; set; }
@@ -71,6 +73,7 @@ namespace Fody
                 DefineConstants = defineConstants,
                 NuGetPackageRoot = NuGetPackageRoot,
                 MSBuildDirectory = MSBuildThisFileDirectory,
+                WeaverProbingPaths = WeaverProbingPaths,
                 PackageDefinitions = PackageDefinitions?.ToList(),
                 DebugSymbols = GetDebugSymbolsType()
             };

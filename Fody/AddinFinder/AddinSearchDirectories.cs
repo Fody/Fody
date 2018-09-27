@@ -11,14 +11,31 @@ public partial class AddinFinder
     string msBuildTaskDirectory;
     string nuGetPackageRoot;
     List<string> packageDefinitions;
+    string[] weaverProbingPaths;
 
-    public AddinFinder(Action<string> log,string solutionDirectory,string msBuildTaskDirectory,string nuGetPackageRoot,List<string> packageDefinitions)
+    public AddinFinder(Action<string> log, string solutionDirectory, string msBuildTaskDirectory, string nuGetPackageRoot, List<string> packageDefinitions, string weaverProbingPaths)
     {
         this.log = log;
         this.solutionDirectory = solutionDirectory;
         this.msBuildTaskDirectory = msBuildTaskDirectory;
         this.nuGetPackageRoot = nuGetPackageRoot;
         this.packageDefinitions = packageDefinitions;
+        this.weaverProbingPaths = weaverProbingPaths?.Split(';')
+          .Select(item => item.Trim())
+          .Where(item => !string.IsNullOrEmpty(item))
+          .Select(Path.GetDirectoryName) // .props file is in the build sub-directory => package root is the parent folder.
+          .Where(item => !string.IsNullOrEmpty(item))
+          .Select(item => item.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar)        
+          .OrderByDescending(item => item.Length)
+          .Distinct(StringComparer.OrdinalIgnoreCase)
+          .ToArray() ?? new string[0];
+
+        log("Weaver probing paths:");
+
+        foreach (var weaverProbingPath in this.weaverProbingPaths)
+        {
+            log("  " + weaverProbingPath);
+        }
     }
 
     public void FindAddinDirectories()
@@ -62,8 +79,10 @@ public partial class AddinFinder
         if (!Directory.Exists(nuGetPackageRoot))
         {
             log($"  Skipped NuGetPackageRoot '{nuGetPackageRoot}' since it doesn't exist.");
+            return;
         }
         log($"  Scanning NuGetPackageRoot '{nuGetPackageRoot}'.");
+
         AddFiles(ScanDirectoryForPackages(nuGetPackageRoot));
     }
 

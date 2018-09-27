@@ -16,6 +16,7 @@ public partial class Processor
     public string SolutionDirectory;
     public string NuGetPackageRoot;
     public string MSBuildDirectory;
+    public string WeaverProbingPaths;
     public DebugSymbolsType DebugSymbols;
     public List<string> ReferenceCopyLocalPaths;
     public List<string> PackageDefinitions;
@@ -109,7 +110,7 @@ see https://github.com/Fody/Fody/wiki/SampleUsage");
         var stopwatch = Stopwatch.StartNew();
         Logger.LogDebug("Finding weavers");
         ReadProjectWeavers();
-        addinFinder = new AddinFinder(Logger.LogDebug, SolutionDirectory, MSBuildDirectory, NuGetPackageRoot, PackageDefinitions);
+        addinFinder = new AddinFinder(Logger.LogDebug, SolutionDirectory, MSBuildDirectory, NuGetPackageRoot, PackageDefinitions, WeaverProbingPaths);
         addinFinder.FindAddinDirectories();
 
         FindWeaverProjectFile();
