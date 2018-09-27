@@ -9,7 +9,7 @@ using ApprovalTests.Reporters;
 using Xunit;
 using ObjectApproval;
 
-public partial class AddinFinderTest : TestBase
+public class AddinFinderTest : TestBase
 {
     [Fact]
     public void WithNuGetPackageRoot()
