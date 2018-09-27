@@ -23,6 +23,7 @@ public partial class AddinFinder
         this.weaverProbingPaths = weaverProbingPaths?.Split(';')
           .Select(item => item.Trim())
           .Where(item => !string.IsNullOrEmpty(item))
+          .Select(item => item.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar))
           .Select(Path.GetDirectoryName) // .props file is in the build sub-directory => package root is the parent folder.
           .Where(item => !string.IsNullOrEmpty(item))
           .Select(item => item.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar)        

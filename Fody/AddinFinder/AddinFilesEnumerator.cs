@@ -13,14 +13,18 @@ public partial class AddinFinder
     {
         var packageFileName = packageName + ".Fody.dll";
 
-        return FodyFiles.Where(x => string.Equals(Path.GetFileName(x), packageFileName, StringComparison.OrdinalIgnoreCase))
+        var candidates = FodyFiles.Where(x => string.Equals(Path.GetFileName(x), packageFileName, StringComparison.OrdinalIgnoreCase))
             .OrderBy(ProbingPathScore)
-            .ThenByDescending(VersionReader)
+            .ThenByDescending(VersionReader);
+
+        return candidates
             .FirstOrDefault();
     }
 
     private int ProbingPathScore(string filePath)
     {
-        return weaverProbingPaths.Any(probingPath => filePath.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar).StartsWith(probingPath, StringComparison.OrdinalIgnoreCase)) ? 0 : 1;
+        var score = weaverProbingPaths.Any(probingPath => filePath.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar).StartsWith(probingPath, StringComparison.OrdinalIgnoreCase)) ? 0 : 1;
+
+        return score;
     }
 }
