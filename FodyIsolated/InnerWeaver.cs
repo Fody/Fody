@@ -261,19 +261,11 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     void AddVersionField(Assembly assembly, string name, TypeDefinition typeDefinition)
     {
         var weaverVersion = "0.0.0.0";
-        if (string.IsNullOrEmpty(assembly.Location))
+        var attrs = assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute));
+        var fileVersionAttribute = (AssemblyFileVersionAttribute)attrs.FirstOrDefault();
+        if (fileVersionAttribute != null)
         {
-            var attrs = assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute));
-            var fileVersionAttribute = (AssemblyFileVersionAttribute)attrs.FirstOrDefault();
-            if (fileVersionAttribute != null)
-            {
-                weaverVersion = fileVersionAttribute.Version;
-            }
-        }
-        else
-        {
-            var fileName = Path.GetFullPath(assembly.Location);
-            weaverVersion = FileVersionInfo.GetVersionInfo(fileName).FileVersion;
+            weaverVersion = fileVersionAttribute.Version;
         }
         
         var fieldAttributes = FieldAttributes.Assembly |
