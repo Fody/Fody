@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- This is just to test FodyPackaging, use local output path -->
+    <PackageOutputPath>$(ProjectDir)bin</PackageOutputPath>
+  </PropertyGroup>
+
+  <Import Project="..\FodyPackaging\build\FodyPackaging.props" />
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
+  </PropertyGroup>
+
+  <Import Project="..\FodyPackaging\build\FodyPackaging.targets" />
+
+</Project>
