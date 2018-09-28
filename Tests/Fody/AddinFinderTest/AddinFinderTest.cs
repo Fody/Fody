@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -68,6 +69,28 @@ public class AddinFinderTest : TestBase
             Path.Combine(root, "Solution/packages/Weaver.Fody/7.0.0/Weaver.Fody.dll").Replace('/', Path.DirectorySeparatorChar),
             addinFinder.FodyFiles.Select(i => i.Replace('/', Path.DirectorySeparatorChar))
         );
+    }
+
+    [Fact]
+    public void FindFromProbingPaths()
+    {
+        var packageRoot = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/FakeNuGetPackageRoot"));
+
+        var probingPaths = $@";{packageRoot}\weaver1.fody\1.0.7\build\;{packageRoot}\weaver2.fody\2.0.7\build\;{packageRoot}\weaver_bad.fody\1.0.7\build\;";
+
+        var log = string.Empty;
+
+        var addins = AddinProbingPathFinder.Lookup(probingPaths, s => log += s);
+
+        var expected = @"[Weaver1, \weaver1.fody\1.0.7\Weaver1.Fody.dll]|[Weaver2, \weaver2.fody\2.0.7\Weaver2.Fody.dll]";
+
+        var result = string.Join("|", addins.Select(item => item.ToString().Replace(packageRoot, string.Empty)).OrderBy(item => item));
+
+        Assert.Equal(expected, result, StringComparer.OrdinalIgnoreCase);
+        Assert.Equal(@"Invalid weaver probing path: No weaver found at \weaver_bad.fody\1.0.7\", log.Replace(packageRoot, string.Empty), StringComparer.OrdinalIgnoreCase);
+        Assert.Equal(@"\weaver1.fody\1.0.7\Weaver1.Fody.dll", addins["WeAvEr1"].Replace(packageRoot, string.Empty), StringComparer.OrdinalIgnoreCase);
+        Assert.Equal(@"\weaver1.fody\1.0.7\Weaver1.Fody.dll", addins["weaver1"].Replace(packageRoot, string.Empty), StringComparer.OrdinalIgnoreCase);
+        Assert.Equal(@"\weaver1.fody\1.0.7\Weaver1.Fody.dll", addins["WEAVER1"].Replace(packageRoot, string.Empty), StringComparer.OrdinalIgnoreCase);
     }
 
     static void Verify(string combine)

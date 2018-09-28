@@ -6,12 +6,14 @@ using System.Text.RegularExpressions;
 
 public partial class AddinFinder
 {
-    Action<string> log;
-    string solutionDirectory;
-    string msBuildTaskDirectory;
-    string nuGetPackageRoot;
-    List<string> packageDefinitions;
-    string[] weaverProbingPaths;
+    readonly Action<string> log;
+    readonly string solutionDirectory;
+    readonly string msBuildTaskDirectory;
+    readonly string nuGetPackageRoot;
+    readonly List<string> packageDefinitions;
+    readonly string weaverProbingPaths;
+
+    IDictionary<string, string> weaversFromProbingPaths;
 
     public AddinFinder(Action<string> log, string solutionDirectory, string msBuildTaskDirectory, string nuGetPackageRoot, List<string> packageDefinitions, string weaverProbingPaths)
     {
@@ -20,28 +22,17 @@ public partial class AddinFinder
         this.msBuildTaskDirectory = msBuildTaskDirectory;
         this.nuGetPackageRoot = nuGetPackageRoot;
         this.packageDefinitions = packageDefinitions;
-        this.weaverProbingPaths = weaverProbingPaths?.Split(';')
-          .Select(item => item.Trim())
-          .Where(item => !string.IsNullOrEmpty(item))
-          .Select(item => item.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar))
-          .Select(Path.GetDirectoryName) // .props file is in the build sub-directory => package root is the parent folder.
-          .Where(item => !string.IsNullOrEmpty(item))
-          .Select(item => item.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar)        
-          .OrderByDescending(item => item.Length)
-          .Distinct(StringComparer.OrdinalIgnoreCase)
-          .ToArray() ?? new string[0];
-
-        log("Weaver probing paths:");
-
-        foreach (var weaverProbingPath in this.weaverProbingPaths)
-        {
-            log("  " + weaverProbingPath);
-        }
+        this.weaverProbingPaths = weaverProbingPaths;
     }
 
     public void FindAddinDirectories()
     {
-        log("FindAddinDirectories:");
+        weaversFromProbingPaths = AddinProbingPathFinder.Lookup(weaverProbingPaths, log);
+    }
+
+    void FindAddinDirectoriesLegacy()
+    {
+        log("FindAddinDirectories (Legacy):");
         if (packageDefinitions == null)
         {
             log("  No PackageDefinitions");
@@ -128,7 +119,7 @@ public partial class AddinFinder
         }
     }
 
-    public static string GetAssemblyFromNugetDir(string versionDir, string packageName)
+    static string GetAssemblyFromNugetDir(string versionDir, string packageName)
     {
 #if (NETSTANDARD2_0)
         var specificDir = Path.Combine(versionDir, "netstandardweaver");
@@ -153,7 +144,7 @@ public partial class AddinFinder
             .FirstOrDefault(x => x.Name.Equals($"{packageName}.dll", StringComparison.OrdinalIgnoreCase))?.FullName;
     }
 
-    public void AddToolsSolutionDirectoryToAddinSearch()
+    void AddToolsSolutionDirectoryToAddinSearch()
     {
         var solutionDirToolsDirectory = Path.Combine(solutionDirectory, "Tools");
 
@@ -167,7 +158,7 @@ public partial class AddinFinder
         AddFiles(DirectoryEx.EnumerateFilesEndsWith(solutionDirToolsDirectory, ".Fody.dll", SearchOption.AllDirectories));
     }
 
-    public void AddFromMsBuildDirectory()
+    void AddFromMsBuildDirectory()
     {
         var fromMsBuildThisFileDirectory = Path.GetFullPath(Path.Combine(msBuildTaskDirectory, "../../../"));
         if (!Directory.Exists(fromMsBuildThisFileDirectory))
@@ -180,7 +171,7 @@ public partial class AddinFinder
         AddFiles(ScanDirectoryForPackages(fromMsBuildThisFileDirectory));
     }
 
-    public void AddNugetDirectoryFromNugetConfig()
+    void AddNugetDirectoryFromNugetConfig()
     {
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(solutionDirectory);
         if (packagesPathFromConfig == null)
@@ -197,7 +188,7 @@ public partial class AddinFinder
         AddFiles(ScanDirectoryForPackages(packagesPathFromConfig));
     }
 
-    public void AddNugetDirectoryFromConvention()
+    void AddNugetDirectoryFromConvention()
     {
         foreach (var solutionPackages in DirectoryEx.EnumerateDirectoriesEndsWith(solutionDirectory, "Packages"))
         {

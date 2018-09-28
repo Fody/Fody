@@ -5,26 +5,33 @@ using System.Linq;
 
 public partial class AddinFinder
 {
-    public List<string> FodyFiles = new List<string>();
+    private List<string> fodyFiles;
 
-    public Func<string, Version> VersionReader = AssemblyVersionReader.GetAssemblyVersion;
+    public List<string> FodyFiles
+    {
+        get
+        {
+            if (fodyFiles == null)
+            {
+                fodyFiles = new List<string>();
+                FindAddinDirectoriesLegacy();
+            }
+
+            return fodyFiles;
+        }
+    }
 
     public string FindAddinAssembly(string packageName)
     {
+        if (weaversFromProbingPaths == null)
+            throw new InvalidOperationException("you must call FindAddinDirectories() first");
+
+        if (weaversFromProbingPaths.TryGetValue(packageName, out var filePath))
+            return filePath;
+
         var packageFileName = packageName + ".Fody.dll";
-
-        var candidates = FodyFiles.Where(x => string.Equals(Path.GetFileName(x), packageFileName, StringComparison.OrdinalIgnoreCase))
-            .OrderBy(ProbingPathScore)
-            .ThenByDescending(VersionReader);
-
-        return candidates
+        return FodyFiles.Where(x => string.Equals(Path.GetFileName(x), packageFileName, StringComparison.OrdinalIgnoreCase))
+            .OrderByDescending(AssemblyVersionReader.GetAssemblyVersion)
             .FirstOrDefault();
-    }
-
-    private int ProbingPathScore(string filePath)
-    {
-        var score = weaverProbingPaths.Any(probingPath => filePath.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar).StartsWith(probingPath, StringComparison.OrdinalIgnoreCase)) ? 0 : 1;
-
-        return score;
     }
 }
