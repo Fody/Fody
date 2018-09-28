@@ -245,29 +245,36 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         var typeDefinition = new TypeDefinition(null, "ProcessedByFody", typeAttributes, TypeSystem.ObjectReference);
         ModuleDefinition.Types.Add(typeDefinition);
 
-        AddVersionField(typeof(IInnerWeaver).Assembly.Location, "FodyVersion", typeDefinition);
+        AddVersionField(typeof(IInnerWeaver).Assembly, "FodyVersion", typeDefinition);
 
         foreach (var weaver in weaverInstances)
         {
-            var configAssemblyPath = weaver.Config.AssemblyPath;
+            var configAssembly = weaver.Instance.GetType().Assembly;
             var name = weaver.Config.AssemblyName.Replace(".", string.Empty);
-            AddVersionField(configAssemblyPath, name, typeDefinition);
+            AddVersionField(configAssembly, name, typeDefinition);
         }
 
         var finishedMessage = $"  Finished in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
         Logger.LogDebug(finishedMessage);
     }
 
-    void AddVersionField(string configAssemblyPath, string name, TypeDefinition typeDefinition)
+    void AddVersionField(Assembly assembly, string name, TypeDefinition typeDefinition)
     {
-        var weaverVersion = FileVersionInfo.GetVersionInfo(configAssemblyPath);
+        var weaverVersion = "0.0.0.0";
+        var attrs = assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute));
+        var fileVersionAttribute = (AssemblyFileVersionAttribute)attrs.FirstOrDefault();
+        if (fileVersionAttribute != null)
+        {
+            weaverVersion = fileVersionAttribute.Version;
+        }
+        
         var fieldAttributes = FieldAttributes.Assembly |
                               FieldAttributes.Literal |
                               FieldAttributes.Static |
                               FieldAttributes.HasDefault;
         var field = new FieldDefinition(name, fieldAttributes, TypeSystem.StringReference)
         {
-            Constant = weaverVersion.FileVersion
+            Constant = weaverVersion
         };
 
         typeDefinition.Fields.Add(field);
