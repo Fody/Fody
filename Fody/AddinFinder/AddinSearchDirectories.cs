@@ -1,18 +1,21 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
 public partial class AddinFinder
 {
+    private const string WeaverDllSuffix = ".Fody.dll";
+
     readonly Action<string> log;
     readonly string solutionDirectory;
     readonly string msBuildTaskDirectory;
     readonly string nuGetPackageRoot;
     readonly string weaverProbingPaths;
 
-    IDictionary<string, string> weaversFromProbingPaths;
+    IDictionary<string, string> weaversFromWellKnownPaths;
 
     public AddinFinder(Action<string> log, string solutionDirectory, string msBuildTaskDirectory, string nuGetPackageRoot, string weaverProbingPaths)
     {
@@ -25,7 +28,43 @@ public partial class AddinFinder
 
     public void FindAddinDirectories()
     {
-        weaversFromProbingPaths = AddinProbingPathFinder.Lookup(weaverProbingPaths, log);
+        var waverFiles = EnumerateAddinsFromProbingPaths(weaverProbingPaths).Concat(EnumerateToolsSolutionDirectoryWeavers());
+
+        weaversFromWellKnownPaths = BuildWeaversDictionary(waverFiles);
+    }
+
+    public static IEnumerable<string> EnumerateAddinsFromProbingPaths(string weaverProbingPaths)
+    {
+        var probingPaths = weaverProbingPaths?.Split(';')
+            .Select(item => item.Trim())
+            .Where(item => !string.IsNullOrEmpty(item))
+            .Select(item => item.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar))
+            .Select(Path.GetDirectoryName) // .props file is in the build sub-directory => package root is the parent folder.
+            .Where(item => !string.IsNullOrEmpty(item))
+            .Select(item => item.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar)
+            .OrderByDescending(item => item.Length)
+            .Distinct(StringComparer.OrdinalIgnoreCase);
+
+        var waverFiles = probingPaths?
+            .Select(path => GetAssemblyFromNugetDir(path, null))
+            .Where(path => !string.IsNullOrEmpty(path))
+            .ToArray();
+
+        return waverFiles ?? Enumerable.Empty<string>();
+    }
+
+    public static Dictionary<string, string> BuildWeaversDictionary(IEnumerable<string> waverFiles)
+    {
+        return waverFiles?.ToDictionary(GetAddinNameFromWeaverFile, StringComparer.OrdinalIgnoreCase) 
+               ?? new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+    }
+
+    static string GetAddinNameFromWeaverFile(string filePath)
+    {
+        Debug.Assert(filePath.EndsWith(WeaverDllSuffix, StringComparison.OrdinalIgnoreCase));
+
+        // remove .Fody.dll
+        return Path.ChangeExtension(Path.GetFileNameWithoutExtension(filePath), null);
     }
 
     void FindAddinDirectoriesLegacy()
@@ -35,7 +74,6 @@ public partial class AddinFinder
         AddNugetDirectoryFromConvention();
         AddNugetDirectoryFromNugetConfig();
         AddFromMsBuildDirectory();
-        AddToolsSolutionDirectoryToAddinSearch();
         AddNuGetPackageRootToAddinSearch();
     }
 
@@ -117,23 +155,31 @@ public partial class AddinFinder
             return null;
         }
 
+        if (packageName == null)
+        {
+            return Directory.GetFiles(dir)
+                .Select(x => new FileInfo(x))
+                .FirstOrDefault(x => x.Name.EndsWith(WeaverDllSuffix, StringComparison.OrdinalIgnoreCase))?.FullName;
+        }
+
         return Directory.GetFiles(dir)
             .Select(x => new FileInfo(x))
             .FirstOrDefault(x => x.Name.Equals($"{packageName}.dll", StringComparison.OrdinalIgnoreCase))?.FullName;
     }
 
-    void AddToolsSolutionDirectoryToAddinSearch()
+    IEnumerable<string> EnumerateToolsSolutionDirectoryWeavers()
     {
         var solutionDirToolsDirectory = Path.Combine(solutionDirectory, "Tools");
 
         if (!Directory.Exists(solutionDirToolsDirectory))
         {
             log($"  Skipped scanning '{solutionDirToolsDirectory}' since it doesn't exist.");
-            return;
+            return Enumerable.Empty<string>();
         }
 
         log($"  Scanning SolutionDir/Tools directory convention: '{solutionDirToolsDirectory}'.");
-        AddFiles(DirectoryEx.EnumerateFilesEndsWith(solutionDirToolsDirectory, ".Fody.dll", SearchOption.AllDirectories));
+        
+        return DirectoryEx.EnumerateFilesEndsWith(solutionDirToolsDirectory, WeaverDllSuffix, SearchOption.AllDirectories);
     }
 
     void AddFromMsBuildDirectory()

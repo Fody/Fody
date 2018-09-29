@@ -23,10 +23,10 @@ public partial class AddinFinder
 
     public string FindAddinAssembly(string packageName)
     {
-        if (weaversFromProbingPaths == null)
+        if (weaversFromWellKnownPaths == null)
             throw new InvalidOperationException("you must call FindAddinDirectories() first");
 
-        if (weaversFromProbingPaths.TryGetValue(packageName, out var filePath))
+        if (weaversFromWellKnownPaths.TryGetValue(packageName, out var filePath))
             return filePath;
 
         var packageFileName = packageName + ".Fody.dll";
