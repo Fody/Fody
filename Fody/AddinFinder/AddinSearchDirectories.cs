@@ -57,8 +57,10 @@ public partial class AddinFinder
 
     public static Dictionary<string, string> BuildWeaversDictionary(IEnumerable<string> waverFiles)
     {
-        return waverFiles?.ToDictionary(GetAddinNameFromWeaverFile, StringComparer.OrdinalIgnoreCase) 
-               ?? new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        return waverFiles?
+               .Where(item => item != null)
+               .ToDictionary(GetAddinNameFromWeaverFile, StringComparer.OrdinalIgnoreCase) 
+           ?? new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
     }
 
     static string GetAddinNameFromWeaverFile(string filePath)
@@ -75,7 +77,8 @@ public partial class AddinFinder
 
         return EnumerateNugetDirectoryFromNugetConfig()
             .Concat(EnumerateWeaversFromMsBuildDirectory())
-            .Concat(EnumerateNuGetPackageRoot());
+            .Concat(EnumerateNuGetPackageRoot())
+            .Where(item => item != null);
     }
 
     IEnumerable<string> EnumerateNuGetPackageRoot()
@@ -97,11 +100,12 @@ public partial class AddinFinder
 
     public static IEnumerable<string> ScanDirectoryForPackages(string directory)
     {
-        return AddOldStyleDirectories(directory)
-            .Concat(AddNewOrPaketStyleDirectories(directory).Where(x => x != null));
+        return EnumerateOldStyleDirectories(directory)
+            .Concat(EnumerateNewOrPaketStyleDirectories(directory)
+            .Where(x => x != null));
     }
 
-    static IEnumerable<string> AddNewOrPaketStyleDirectories(string directory)
+    static IEnumerable<string> EnumerateNewOrPaketStyleDirectories(string directory)
     {
         foreach (var packageDirectory in DirectoryEx.EnumerateDirectoriesEndsWith(directory, ".fody"))
         {
@@ -125,7 +129,7 @@ public partial class AddinFinder
         }
     }
 
-    static IEnumerable<string> AddOldStyleDirectories(string directory)
+    static IEnumerable<string> EnumerateOldStyleDirectories(string directory)
     {
         foreach (var versionDirectory in DirectoryEx.EnumerateDirectoriesContains(directory, ".fody."))
         {
