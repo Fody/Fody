@@ -5,16 +5,15 @@ using System.Linq;
 
 public partial class AddinFinder
 {
-    private List<string> fodyFiles;
+    private IList<string> fodyFiles;
 
-    public List<string> FodyFiles
+    public IList<string> FodyFiles
     {
         get
         {
             if (fodyFiles == null)
             {
-                fodyFiles = new List<string>();
-                FindAddinDirectoriesLegacy();
+                fodyFiles = FindAddinDirectoriesLegacy().ToArray();
             }
 
             return fodyFiles;
@@ -29,7 +28,8 @@ public partial class AddinFinder
         if (weaversFromWellKnownPaths.TryGetValue(packageName, out var filePath))
             return filePath;
 
-        var packageFileName = packageName + ".Fody.dll";
+        var packageFileName = packageName + WeaverDllSuffix;
+
         return FodyFiles.Where(x => string.Equals(Path.GetFileName(x), packageFileName, StringComparison.OrdinalIgnoreCase))
             .OrderByDescending(AssemblyVersionReader.GetAssemblyVersion)
             .FirstOrDefault();

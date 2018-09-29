@@ -28,9 +28,11 @@ public partial class AddinFinder
 
     public void FindAddinDirectories()
     {
-        var waverFiles = EnumerateAddinsFromProbingPaths(weaverProbingPaths).Concat(EnumerateToolsSolutionDirectoryWeavers());
+        var weaverFiles = EnumerateAddinsFromProbingPaths(weaverProbingPaths)
+            .Concat(EnumerateToolsSolutionDirectoryWeavers())
+            .Concat(EnumerateInSolutionWeavers());
 
-        weaversFromWellKnownPaths = BuildWeaversDictionary(waverFiles);
+        weaversFromWellKnownPaths = BuildWeaversDictionary(weaverFiles);
     }
 
     public static IEnumerable<string> EnumerateAddinsFromProbingPaths(string weaverProbingPaths)
@@ -67,31 +69,30 @@ public partial class AddinFinder
         return Path.ChangeExtension(Path.GetFileNameWithoutExtension(filePath), null);
     }
 
-    void FindAddinDirectoriesLegacy()
+    IEnumerable<string> FindAddinDirectoriesLegacy()
     {
         log("FindAddinDirectories (Legacy):");
 
-        AddNugetDirectoryFromConvention();
-        AddNugetDirectoryFromNugetConfig();
-        AddFromMsBuildDirectory();
-        AddNuGetPackageRootToAddinSearch();
+        return EnumerateNugetDirectoryFromNugetConfig()
+            .Concat(EnumerateWeaversFromMsBuildDirectory())
+            .Concat(EnumerateNuGetPackageRoot());
     }
 
-    void AddNuGetPackageRootToAddinSearch()
+    IEnumerable<string> EnumerateNuGetPackageRoot()
     {
         if (nuGetPackageRoot == null)
         {
             log("  Skipped NuGetPackageRoot since it is not defined.");
-            return;
+            return Enumerable.Empty<string>();
         }
         if (!Directory.Exists(nuGetPackageRoot))
         {
             log($"  Skipped NuGetPackageRoot '{nuGetPackageRoot}' since it doesn't exist.");
-            return;
+            return Enumerable.Empty<string>();
         }
         log($"  Scanning NuGetPackageRoot '{nuGetPackageRoot}'.");
 
-        AddFiles(ScanDirectoryForPackages(nuGetPackageRoot));
+        return ScanDirectoryForPackages(nuGetPackageRoot);
     }
 
     public static IEnumerable<string> ScanDirectoryForPackages(string directory)
@@ -182,60 +183,46 @@ public partial class AddinFinder
         return DirectoryEx.EnumerateFilesEndsWith(solutionDirToolsDirectory, WeaverDllSuffix, SearchOption.AllDirectories);
     }
 
-    void AddFromMsBuildDirectory()
+    IEnumerable<string> EnumerateWeaversFromMsBuildDirectory()
     {
         var fromMsBuildThisFileDirectory = Path.GetFullPath(Path.Combine(msBuildTaskDirectory, "../../../"));
         if (!Directory.Exists(fromMsBuildThisFileDirectory))
         {
             log($"  Skipped scanning '{fromMsBuildThisFileDirectory}' since it doesn't exist.");
-            return;
+            return Enumerable.Empty<string>();
         }
 
         log($"  Scanning the MsBuildThisFileDirectory parent: {fromMsBuildThisFileDirectory}'.");
-        AddFiles(ScanDirectoryForPackages(fromMsBuildThisFileDirectory));
+        return ScanDirectoryForPackages(fromMsBuildThisFileDirectory);
     }
 
-    void AddNugetDirectoryFromNugetConfig()
+    IEnumerable<string> EnumerateNugetDirectoryFromNugetConfig()
     {
         var packagesPathFromConfig = NugetConfigReader.GetPackagesPathFromConfig(solutionDirectory);
         if (packagesPathFromConfig == null)
         {
             log("  Skipped directory from Nuget Config since it could not be derived.");
-            return;
+            return Enumerable.Empty<string>();
         }
         if (!Directory.Exists(packagesPathFromConfig))
         {
             log($"  Skipped directory from Nuget Config '{packagesPathFromConfig}' since it doesn't exist.");
-            return;
+            return Enumerable.Empty<string>();
         }
         log($"  Scanning directory from Nuget Config: {packagesPathFromConfig}'.");
-        AddFiles(ScanDirectoryForPackages(packagesPathFromConfig));
+        
+        return ScanDirectoryForPackages(packagesPathFromConfig);
     }
 
-    void AddNugetDirectoryFromConvention()
+    IEnumerable<string> EnumerateInSolutionWeavers()
     {
-        foreach (var solutionPackages in DirectoryEx.EnumerateDirectoriesEndsWith(solutionDirectory, "Packages"))
+        IEnumerable<string> ScanDirectory(string directory)
         {
-
-            log($"  Scanning SolutionDir/Packages convention: {solutionPackages}'.");
-            AddFiles(ScanDirectoryForPackages(solutionPackages));
+            log($"  Scanning SolutionDir/Packages convention: {directory}'.");
+            return ScanDirectoryForPackages(directory);
         }
-    }
 
-    void AddFiles(IEnumerable<string> files)
-    {
-        foreach (var file in files)
-        {
-            AddFile(file);
-        }
-    }
-
-    void AddFile(string file)
-    {
-        if (!string.IsNullOrEmpty(file))
-        {
-            log($"    Fody weaver file added '{file}'");
-            FodyFiles.Add(file);
-        }
+        return DirectoryEx.EnumerateDirectoriesEndsWith(solutionDirectory, "Packages")
+            .SelectMany(ScanDirectory);
     }
 }
