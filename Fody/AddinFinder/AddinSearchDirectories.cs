@@ -55,16 +55,33 @@ public partial class AddinFinder
         return waverFiles ?? Enumerable.Empty<string>();
     }
 
+    class WeaverNameComparer : IEqualityComparer<string>
+    {
+        public bool Equals(string x, string y)
+        {
+            return string.Equals(GetAddinNameFromWeaverFile(x), GetAddinNameFromWeaverFile(y), StringComparison.OrdinalIgnoreCase);
+        }
+
+        public int GetHashCode(string obj)
+        {
+            return GetAddinNameFromWeaverFile(obj)?.GetHashCode() ?? 0;
+        }
+    }
+
     public static Dictionary<string, string> BuildWeaversDictionary(IEnumerable<string> waverFiles)
     {
         return waverFiles?
                .Where(item => item != null)
+               .Distinct(new WeaverNameComparer())
                .ToDictionary(GetAddinNameFromWeaverFile, StringComparer.OrdinalIgnoreCase) 
            ?? new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
     }
 
     static string GetAddinNameFromWeaverFile(string filePath)
     {
+        if (filePath == null)
+            return null;
+
         Debug.Assert(filePath.EndsWith(WeaverDllSuffix, StringComparison.OrdinalIgnoreCase));
 
         // remove .Fody.dll
