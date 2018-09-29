@@ -47,8 +47,6 @@ namespace Fody
 
         public string NuGetPackageRoot { get; set; }
 
-        public string[] PackageDefinitions { get; set; }
-
         public string DebugType { get; set; }
 
         public override bool Execute()
@@ -74,7 +72,6 @@ namespace Fody
                 NuGetPackageRoot = NuGetPackageRoot,
                 MSBuildDirectory = MSBuildThisFileDirectory,
                 WeaverProbingPaths = WeaverProbingPaths,
-                PackageDefinitions = PackageDefinitions?.ToList(),
                 DebugSymbols = GetDebugSymbolsType()
             };
             var success = processor.Execute();

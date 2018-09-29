@@ -10,18 +10,16 @@ public partial class AddinFinder
     readonly string solutionDirectory;
     readonly string msBuildTaskDirectory;
     readonly string nuGetPackageRoot;
-    readonly List<string> packageDefinitions;
     readonly string weaverProbingPaths;
 
     IDictionary<string, string> weaversFromProbingPaths;
 
-    public AddinFinder(Action<string> log, string solutionDirectory, string msBuildTaskDirectory, string nuGetPackageRoot, List<string> packageDefinitions, string weaverProbingPaths)
+    public AddinFinder(Action<string> log, string solutionDirectory, string msBuildTaskDirectory, string nuGetPackageRoot, string weaverProbingPaths)
     {
         this.log = log;
         this.solutionDirectory = solutionDirectory;
         this.msBuildTaskDirectory = msBuildTaskDirectory;
         this.nuGetPackageRoot = nuGetPackageRoot;
-        this.packageDefinitions = packageDefinitions;
         this.weaverProbingPaths = weaverProbingPaths;
     }
 
@@ -33,32 +31,12 @@ public partial class AddinFinder
     void FindAddinDirectoriesLegacy()
     {
         log("FindAddinDirectories (Legacy):");
-        if (packageDefinitions == null)
-        {
-            log("  No PackageDefinitions");
 
-            AddNugetDirectoryFromConvention();
-            AddNugetDirectoryFromNugetConfig();
-            AddFromMsBuildDirectory();
-            AddToolsSolutionDirectoryToAddinSearch();
-            AddNuGetPackageRootToAddinSearch();
-        }
-        else
-        {
-            var separator = $"{Environment.NewLine}    - ";
-            var packageDefinitionsLogMessage = separator + string.Join(separator, packageDefinitions);
-            log($"  PackageDefinitions: {packageDefinitionsLogMessage}");
-
-            // each PackageDefinition will be of the format C:\...\packages\weaver.fody\1.28.0
-            // so must be a Contains(.fody)
-            foreach (var versionDirectory in packageDefinitions.Where(x => x.ToLowerInvariant().Contains(".fody")))
-            {
-                log($"  Scanning package directory: '{versionDirectory}'");
-
-                AddFile(GetAssemblyFromNugetDir(versionDirectory, Directory.GetParent(versionDirectory).Name));
-            }
-            AddToolsSolutionDirectoryToAddinSearch();
-        }
+        AddNugetDirectoryFromConvention();
+        AddNugetDirectoryFromNugetConfig();
+        AddFromMsBuildDirectory();
+        AddToolsSolutionDirectoryToAddinSearch();
+        AddNuGetPackageRootToAddinSearch();
     }
 
     void AddNuGetPackageRootToAddinSearch()

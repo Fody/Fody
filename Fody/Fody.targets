@@ -61,13 +61,10 @@
       AfterTargets="AfterCompile"
       Condition="Exists('@(IntermediateAssembly)') And $(DesignTimeBuild) != true And $(DisableFody) != true"
       Name="FodyTarget"
-      DependsOnTargets="$(FodyDependsOnTargets);RunResolvePackageDependencies"
+      DependsOnTargets="$(FodyDependsOnTargets)"
       Inputs="@(IntermediateAssembly->'%(FullPath)');$(FodyKeyFilePath);$(ProjectWeaverXml)"
       Outputs="$(TargetPath)">
 
-    <ItemGroup>
-      <FodyPackageDefinitions Include="%(PackageDefinitions.ResolvedPath)"/>
-    </ItemGroup>
     <Fody.WeavingTask
           AssemblyPath="@(IntermediateAssembly)"
           IntermediateDir="$(ProjectDir)$(IntermediateOutputPath)"
@@ -79,7 +76,6 @@
           SignAssembly="$(FodySignAssembly)"
           ReferenceCopyLocalPaths="@(ReferenceCopyLocalPaths)"
           DefineConstants="$(DefineConstants)"
-          PackageDefinitions="@(FodyPackageDefinitions)"
           DebugType="$(DebugType)"
           DocumentationFilePath="@(DocFileItem->'%(FullPath)')"
           MsBuildThisFileDirectory="$(MSBuildThisFileDirectory)"
