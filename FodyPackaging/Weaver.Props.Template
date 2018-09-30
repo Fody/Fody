@@ -1,5 +1,12 @@
 ﻿<Project>
   <PropertyGroup>
-    <WeaverProbingPaths>$(WeaverProbingPaths);$(MsBuildThisFileDirectory)</WeaverProbingPaths>
+    <RuntimeToken Condition="$(MSBuildRuntimeType) == 'Core'">netclassicweaver</RuntimeToken>
+    <RuntimeToken Condition="$(MSBuildRuntimeType) != 'Core'">netstandardweaver</RuntimeToken>
   </PropertyGroup>
+  <ItemGroup>
+    <FilesToAdd Include="$(MsBuildThisFileDirectory)..\$(RuntimeToken)\$(MSBuildThisFileName).dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <WeaverFiles Include="@(FilesToAdd)"/>
+  </ItemGroup>
 </Project>

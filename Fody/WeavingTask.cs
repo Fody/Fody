@@ -29,14 +29,13 @@ namespace Fody
 
         [Required]
         public ITaskItem[] ReferenceCopyLocalPaths { get; set; }
+        public ITaskItem[] WeaverFiles { get; set; }
 
         public string NCrunchOriginalSolutionDirectory { get; set; }
         public string SolutionDirectory { get; set; }
 
         [Required]
         public string MSBuildThisFileDirectory { get; set; }
-
-        public string WeaverProbingPaths { get; set; }
 
         public string DefineConstants { get; set; }
 
@@ -71,7 +70,7 @@ namespace Fody
                 DefineConstants = defineConstants,
                 NuGetPackageRoot = NuGetPackageRoot,
                 MSBuildDirectory = MSBuildThisFileDirectory,
-                WeaverProbingPaths = WeaverProbingPaths,
+                WeaverFilesFromProps = WeaverFiles.Select(x => x.ItemSpec).ToList(),
                 DebugSymbols = GetDebugSymbolsType()
             };
             var success = processor.Execute();

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Fody;
 
 public partial class AddinFinder
 {
@@ -13,46 +14,38 @@ public partial class AddinFinder
     string solutionDirectory;
     string msBuildTaskDirectory;
     string nuGetPackageRoot;
-    string weaverProbingPaths;
+    List<string> weaverFilesFromProps;
 
     Dictionary<string, string> weaversFromWellKnownPaths;
 
-    public AddinFinder(Action<string> log, string solutionDirectory, string msBuildTaskDirectory, string nuGetPackageRoot, string weaverProbingPaths)
+    public AddinFinder(Action<string> log, string solutionDirectory, string msBuildTaskDirectory, string nuGetPackageRoot, List<string> weaverFilesFromProps)
     {
         this.log = log;
         this.solutionDirectory = solutionDirectory;
         this.msBuildTaskDirectory = msBuildTaskDirectory;
         this.nuGetPackageRoot = nuGetPackageRoot;
-        this.weaverProbingPaths = weaverProbingPaths;
+        this.weaverFilesFromProps = weaverFilesFromProps;
     }
 
     public void FindAddinDirectories()
     {
-        var weaverFiles = EnumerateAddinsFromProbingPaths(weaverProbingPaths)
-            .Concat(EnumerateToolsSolutionDirectoryWeavers())
+        ValidateWeaverFiles(weaverFilesFromProps);
+
+        var weaverFiles = weaverFilesFromProps.Concat(EnumerateToolsSolutionDirectoryWeavers())
             .Concat(EnumerateInSolutionWeavers());
 
         weaversFromWellKnownPaths = BuildWeaversDictionary(weaverFiles);
     }
 
-    public static IEnumerable<string> EnumerateAddinsFromProbingPaths(string weaverProbingPaths)
+    public static void ValidateWeaverFiles(List<string> weaverFilesFromProps)
     {
-        var probingPaths = weaverProbingPaths?.Split(';')
-            .Select(item => item.Trim())
-            .Where(item => !string.IsNullOrEmpty(item))
-            .Select(item => item.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar))
-            .Select(Path.GetDirectoryName) // .props file is in the build sub-directory => package root is the parent folder.
-            .Where(item => !string.IsNullOrEmpty(item))
-            .Select(item => item.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar)
-            .OrderByDescending(item => item.Length)
-            .Distinct(StringComparer.OrdinalIgnoreCase);
-
-        var waverFiles = probingPaths?
-            .Select(path => GetAssemblyFromNugetDir(path, null))
-            .Where(path => !string.IsNullOrEmpty(path))
-            .ToArray();
-
-        return waverFiles ?? Enumerable.Empty<string>();
+        foreach (var weaverFile in weaverFilesFromProps)
+        {
+            if (!File.Exists(weaverFile))
+            {
+                throw new WeavingException($"An invalid weaver file has been passed in: {weaverFile}");
+            }
+        }
     }
 
     class WeaverNameComparer : IEqualityComparer<string>
@@ -68,13 +61,11 @@ public partial class AddinFinder
         }
     }
 
-    public static Dictionary<string, string> BuildWeaversDictionary(IEnumerable<string> waverFiles)
+    public static Dictionary<string, string> BuildWeaversDictionary(IEnumerable<string> weaverFiles)
     {
-        return waverFiles?
-               .Where(item => item != null)
+        return weaverFiles
                .Distinct(new WeaverNameComparer())
-               .ToDictionary(GetAddinNameFromWeaverFile, StringComparer.OrdinalIgnoreCase)
-           ?? new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+               .ToDictionary(GetAddinNameFromWeaverFile, StringComparer.OrdinalIgnoreCase);
     }
 
     static string GetAddinNameFromWeaverFile(string filePath)
