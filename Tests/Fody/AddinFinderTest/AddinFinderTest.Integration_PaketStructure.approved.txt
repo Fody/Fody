@@ -1,11 +1,6 @@
 ﻿[
-  "\\Solution\\Packages\\Weaver7.Fody\\netclassicweaver\\Weaver7.Fody.dll",
-  "\\Solution\\Packages\\Weaver8.Fody\\Weaver8.Fody.dll",
   "\\MsBuildDirectory\\Weaver1.Fody\\Weaver1.Fody.dll",
   "\\MsBuildDirectory\\Weaver2.Fody\\netclassicweaver\\Weaver2.Fody.dll",
-  "\\Solution\\Tools\\Weaver.Fody.dll",
-  "\\Solution\\Tools\\Weaver10.Fody\\Weaver10.Fody.dll",
-  "\\Solution\\Tools\\Weaver9.Fody\\netclassicweaver\\Weaver9.Fody.dll",
   "\\NuGetPackageRoot\\Weaver5.Fody.1.0.0\\Weaver5.Fody.dll",
   "\\NuGetPackageRoot\\Weaver6.Fody.1.0.0\\netclassicweaver\\Weaver6.Fody.dll",
   "\\NuGetPackageRoot\\Weaver3.Fody\\Weaver3.Fody.dll",

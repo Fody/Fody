@@ -36,6 +36,8 @@ namespace Fody
         [Required]
         public string MSBuildThisFileDirectory { get; set; }
 
+        public string WeaverProbingPaths { get; set; }
+
         public string DefineConstants { get; set; }
 
         public string Configuration { get; set; }
@@ -44,8 +46,6 @@ namespace Fody
         public string ExecutedWeavers { get; private set; }
 
         public string NuGetPackageRoot { get; set; }
-
-        public string[] PackageDefinitions { get; set; }
 
         public string DebugType { get; set; }
 
@@ -71,7 +71,7 @@ namespace Fody
                 DefineConstants = defineConstants,
                 NuGetPackageRoot = NuGetPackageRoot,
                 MSBuildDirectory = MSBuildThisFileDirectory,
-                PackageDefinitions = PackageDefinitions?.ToList(),
+                WeaverProbingPaths = WeaverProbingPaths,
                 DebugSymbols = GetDebugSymbolsType()
             };
             var success = processor.Execute();

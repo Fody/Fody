@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <Target Name="IncludeFodyFiles">
+    <PropertyGroup>
+      <WeaverPropsTempFile>$(ProjectDir)$(IntermediateOutputPath)$(PackageId).props</WeaverPropsTempFile>
+    </PropertyGroup>
+
     <ItemGroup>
       <NetClassicFilesToInclude Include="$(WeaverDirPath)\net4*\$(PackageId).dll" />
       <NetClassicFilesToInclude Include="$(WeaverDirPath)\net4*\$(PackageId).pdb" />
       <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2*\$(PackageId).dll" />
       <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2*\$(PackageId).pdb" />
     </ItemGroup>
+    
+    <Copy SourceFiles="$(WeaverPropsTemplate)" DestinationFiles="$(WeaverPropsTempFile)" />
+
     <CreateItem Include="@(NetClassicFilesToInclude)" AdditionalMetadata="PackagePath=netclassicweaver">
       <Output TaskParameter="Include" ItemName="TfmSpecificPackageFile" />
     </CreateItem>
     <CreateItem Include="@(NetStandardFilesToInclude)" AdditionalMetadata="PackagePath=netstandardweaver">
       <Output TaskParameter="Include" ItemName="TfmSpecificPackageFile" />
     </CreateItem>
+    <CreateItem Include="$(WeaverPropsTempFile)" AdditionalMetadata="PackagePath=build">
+      <Output TaskParameter="Include" ItemName="TfmSpecificPackageFile" />
+    </CreateItem>
+
   </Target>
 </Project>
