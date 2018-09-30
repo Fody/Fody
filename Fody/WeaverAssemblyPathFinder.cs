@@ -8,6 +8,7 @@ public partial class Processor
         {
             if (ContainsTypeChecker.Check(assemblyPath, "ModuleWeaver"))
             {
+                Logger.LogInfo($"Searched for '{weaverName}'. Found: {assemblyPath}");
                 return assemblyPath;
             }
         }
