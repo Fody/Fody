@@ -39,7 +39,7 @@ public class WeaverInitialiserTests : TestBase
             AssemblyFilePath = "AssemblyFilePath",
             ProjectDirectoryPath = "ProjectDirectoryPath",
             SolutionDirectoryPath = "SolutionDirectoryPath",
-            DocumentationFilePath = "DocumentationFilePath",
+            DocumentationFilePath = "DocumentationFile",
             ReferenceCopyLocalPaths = new List<string>
             {
                 "CopyRef1",
@@ -78,7 +78,7 @@ public class WeaverInitialiserTests : TestBase
         Assert.Equal("AssemblyFilePath", moduleWeaver.AssemblyFilePath);
         Assert.Equal("ProjectDirectoryPath", moduleWeaver.ProjectDirectoryPath);
         Assert.Equal("SolutionDirectoryPath", moduleWeaver.SolutionDirectoryPath);
-        Assert.Equal("DocumentationFilePath", moduleWeaver.DocumentationFilePath);
+        Assert.Equal("DocumentationFile", moduleWeaver.DocumentationFilePath);
     }
 }
 

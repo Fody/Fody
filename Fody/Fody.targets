@@ -7,17 +7,17 @@
   <Choose>
     <When Condition="'$(MSBuildRuntimeType)'=='Core'">
       <PropertyGroup>
-        <FodyAssemblyPath>$(FodyPath)netstandardtask</FodyAssemblyPath>
+        <FodyAssemblyFile>$(FodyPath)netstandardtask</FodyAssemblyFile>
       </PropertyGroup>
     </When>
     <Otherwise>
       <PropertyGroup>
-        <FodyAssemblyPath>$(FodyPath)netclassictask</FodyAssemblyPath>
+        <FodyAssemblyFile>$(FodyPath)netclassictask</FodyAssemblyFile>
       </PropertyGroup>
     </Otherwise>
   </Choose>
   <PropertyGroup>
-    <FodyAssembly>$(FodyAssemblyPath)\Fody.dll</FodyAssembly>
+    <FodyAssembly>$(FodyAssemblyFile)\Fody.dll</FodyAssembly>
   </PropertyGroup>
   <UsingTask
       TaskName="Fody.WeavingTask"
@@ -31,7 +31,7 @@
       Outputs="$(TargetPath)">
 
     <Fody.WeavingTask
-          AssemblyPath="@(IntermediateAssembly)"
+          AssemblyFile="@(IntermediateAssembly)"
           IntermediateDirectory="$(ProjectDir)$(IntermediateOutputPath)"
           KeyOriginatorFile="$(KeyOriginatorFile)"
           AssemblyOriginatorKeyFile="$(AssemblyOriginatorKeyFile)"
@@ -40,10 +40,10 @@
           SolutionDirectory="$(SolutionDir)"
           References="@(ReferencePath)"
           SignAssembly="$(FodySignAssembly)"
-          ReferenceCopyLocalPaths="@(ReferenceCopyLocalPaths)"
+          ReferenceCopyLocalFiles="@(ReferenceCopyLocalPaths)"
           DefineConstants="$(DefineConstants)"
           DebugType="$(DebugType)"
-          DocumentationFilePath="@(DocFileItem->'%(FullPath)')"
+          DocumentationFile="@(DocFileItem->'%(FullPath)')"
           MsBuildThisFileDirectory="$(MSBuildThisFileDirectory)"
           WeaverFiles="$(WeaverFiles)"
           NCrunchOriginalSolutionDirectory="$(NCrunchOriginalSolutionDir)"
@@ -75,7 +75,7 @@
 
   <!--Support for ncrunch-->
   <ItemGroup  Condition="'$(NCrunch)' == '1'">
-    <None Include="$(FodyAssemblyPath)\*.*" />
+    <None Include="$(FodyAssemblyFile)\*.*" />
   </ItemGroup>
 
 </Project>

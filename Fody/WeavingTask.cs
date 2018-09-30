@@ -11,7 +11,7 @@ namespace Fody
     {
         Processor processor;
         [Required]
-        public string AssemblyPath { set; get; }
+        public string AssemblyFile { set; get; }
 
         [Required]
         public string IntermediateDirectory { get; set; }
@@ -23,13 +23,13 @@ namespace Fody
         [Required]
         public string ProjectDirectory { get; set; }
 
-        public string DocumentationFilePath { get; set; }
+        public string DocumentationFile { get; set; }
 
         [Required]
         public string References { get; set; }
 
         [Required]
-        public ITaskItem[] ReferenceCopyLocalPaths { get; set; }
+        public ITaskItem[] ReferenceCopyLocalFiles { get; set; }
         public ITaskItem[] WeaverFiles { get; set; }
 
         public string NCrunchOriginalSolutionDirectory { get; set; }
@@ -51,7 +51,7 @@ namespace Fody
 
         public override bool Execute()
         {
-            var referenceCopyLocalPaths = ReferenceCopyLocalPaths.Select(x => x.ItemSpec).ToList();
+            var referenceCopyLocalPaths = ReferenceCopyLocalFiles.Select(x => x.ItemSpec).ToList();
             var defineConstants = DefineConstants.GetConstants();
             processor = new Processor
             {
@@ -59,12 +59,12 @@ namespace Fody
                 {
                     BuildEngine = BuildEngine,
                 },
-                AssemblyFilePath = AssemblyPath,
+                AssemblyFilePath = AssemblyFile,
                 IntermediateDirectory = IntermediateDirectory,
                 KeyFilePath = KeyOriginatorFile ?? AssemblyOriginatorKeyFile,
                 SignAssembly = SignAssembly,
                 ProjectDirectory = ProjectDirectory,
-                DocumentationFilePath = DocumentationFilePath,
+                DocumentationFilePath = DocumentationFile,
                 References = References,
                 SolutionDirectory = SolutionDirectoryFinder.Find(SolutionDirectory, NCrunchOriginalSolutionDirectory, ProjectDirectory),
                 ReferenceCopyLocalPaths = referenceCopyLocalPaths,
