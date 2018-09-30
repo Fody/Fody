@@ -17,23 +17,6 @@
       </PropertyGroup>
     </When>
   </Choose>
-  <Choose>
-    <When Condition="$(KeyOriginatorFile) != '' And $(KeyOriginatorFile) != '*Undefined*'">
-      <PropertyGroup>
-        <FodyKeyFilePath>$(KeyOriginatorFile)</FodyKeyFilePath>
-      </PropertyGroup>
-    </When>
-    <When Condition="$(AssemblyOriginatorKeyFile) != '' And $(AssemblyOriginatorKeyFile) != '*Undefined*'">
-      <PropertyGroup>
-        <FodyKeyFilePath>$(AssemblyOriginatorKeyFile)</FodyKeyFilePath>
-      </PropertyGroup>
-    </When>
-    <Otherwise >
-      <PropertyGroup>
-        <FodyKeyFilePath></FodyKeyFilePath>
-      </PropertyGroup>
-    </Otherwise>
-  </Choose>
   <PropertyGroup>
     <ProjectWeaverXml>$(ProjectDir)FodyWeavers.xml</ProjectWeaverXml>
     <FodySignAssembly Condition="$(FodySignAssembly) == '' Or $(FodySignAssembly) == '*Undefined*'">$(SignAssembly)</FodySignAssembly>
@@ -68,7 +51,8 @@
     <Fody.WeavingTask
           AssemblyPath="@(IntermediateAssembly)"
           IntermediateDir="$(ProjectDir)$(IntermediateOutputPath)"
-          KeyFilePath="$(FodyKeyFilePath)"
+          KeyOriginatorFile="$(KeyOriginatorFile)"
+          AssemblyOriginatorKeyFile="$(AssemblyOriginatorKeyFile)"
           NuGetPackageRoot="$(NuGetPackageRoot)"
           ProjectDirectory="$(ProjectDir)"
           SolutionDir="$(FodySolutionDir)"

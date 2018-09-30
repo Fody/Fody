@@ -14,8 +14,8 @@ namespace Fody
 
         [Required]
         public string IntermediateDir { get; set; }
-
-        public string KeyFilePath { get; set; }
+        public string KeyOriginatorFile { get; set; }
+        public string AssemblyOriginatorKeyFile { get; set; }
 
         public bool SignAssembly { get; set; }
 
@@ -61,7 +61,7 @@ namespace Fody
                 },
                 AssemblyFilePath = AssemblyPath,
                 IntermediateDirectory = IntermediateDir,
-                KeyFilePath = KeyFilePath,
+                KeyFilePath = KeyOriginatorFile ?? AssemblyOriginatorKeyFile,
                 SignAssembly = SignAssembly,
                 ProjectDirectory = ProjectDirectory,
                 DocumentationFilePath = DocumentationFilePath,
