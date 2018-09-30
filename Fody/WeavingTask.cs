@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
@@ -70,7 +71,7 @@ namespace Fody
                 DefineConstants = defineConstants,
                 NuGetPackageRoot = NuGetPackageRoot,
                 MSBuildDirectory = MSBuildThisFileDirectory,
-                WeaverFilesFromProps = WeaverFiles.Select(x => x.ItemSpec).ToList(),
+                WeaverFilesFromProps = GetWeaverFilesFromProps(),
                 DebugSymbols = GetDebugSymbolsType()
             };
             var success = processor.Execute();
@@ -81,6 +82,16 @@ namespace Fody
             }
 
             return success;
+        }
+
+        List<string> GetWeaverFilesFromProps()
+        {
+            if (WeaverFiles == null)
+            {
+                return new List<string>();
+            }
+            return WeaverFiles.Select(x => x.ItemSpec)
+                .ToList();
         }
 
         DebugSymbolsType GetDebugSymbolsType()
