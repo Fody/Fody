@@ -84,13 +84,17 @@ namespace Fody
             return success;
         }
 
-        private DebugSymbolsType GetDebugSymbolsType()
+        DebugSymbolsType GetDebugSymbolsType()
         {
             if (string.Equals(DebugType, "none", StringComparison.OrdinalIgnoreCase))
+            {
                 return DebugSymbolsType.None;
+            }
 
             if (string.Equals(DebugType, "embedded", StringComparison.OrdinalIgnoreCase))
+            {
                 return DebugSymbolsType.Embedded;
+            }
 
             return DebugSymbolsType.External;
         }

@@ -2,7 +2,7 @@
 {
     public class Class1
     {
-        private int field;
+        int field;
 
         public void Method(int param)
         {

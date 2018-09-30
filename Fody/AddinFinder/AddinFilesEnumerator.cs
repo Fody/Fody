@@ -6,7 +6,7 @@ using System.Linq;
 
 public partial class AddinFinder
 {
-    private IList<string> fodyFiles;
+    IList<string> fodyFiles;
 
     public IList<string> FodyFiles
     {

@@ -39,7 +39,7 @@ namespace Fody
             return definition;
         }
 
-        private static bool TryGetAssemblyLocation(string name, out string assemblyLocation)
+        static bool TryGetAssemblyLocation(string name, out string assemblyLocation)
         {
 #if (NETSTANDARD2_0)
             if (string.Equals(name, "netstandard", StringComparison.OrdinalIgnoreCase))
@@ -84,7 +84,7 @@ namespace Fody
             }
         }
 
-        private AssemblyDefinition GetAssemblyDefinition(string assemblyLocation)
+        AssemblyDefinition GetAssemblyDefinition(string assemblyLocation)
         {
             var readerParameters = new ReaderParameters(ReadingMode.Deferred)
             {

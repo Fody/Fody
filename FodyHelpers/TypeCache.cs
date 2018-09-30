@@ -8,7 +8,7 @@ namespace Fody
     [Obsolete(OnlyForTesting.Message)]
     public class TypeCache
     {
-        private readonly Func<string, AssemblyDefinition> resolve;
+        Func<string, AssemblyDefinition> resolve;
 
         public static List<string> defaultAssemblies = new List<string>
         {
