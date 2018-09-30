@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <Project>
   <Target Name="IncludeFodyFiles">
     <PropertyGroup>
@@ -11,7 +10,7 @@
       <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2*\$(PackageId).dll" />
       <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2*\$(PackageId).pdb" />
     </ItemGroup>
-    
+
     <Copy SourceFiles="$(WeaverPropsTemplate)" DestinationFiles="$(WeaverPropsTempFile)" />
 
     <CreateItem Include="@(NetClassicFilesToInclude)" AdditionalMetadata="PackagePath=netclassicweaver">
