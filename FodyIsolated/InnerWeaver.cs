@@ -267,7 +267,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         {
             weaverVersion = fileVersionAttribute.Version;
         }
-        
+
         var fieldAttributes = FieldAttributes.Assembly |
                               FieldAttributes.Literal |
                               FieldAttributes.Static |

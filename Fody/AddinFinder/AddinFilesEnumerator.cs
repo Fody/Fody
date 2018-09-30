@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -22,11 +23,12 @@ public partial class AddinFinder
 
     public string FindAddinAssembly(string packageName)
     {
-        if (weaversFromWellKnownPaths == null)
-            throw new InvalidOperationException("you must call FindAddinDirectories() first");
+        Debug.Assert(weaversFromWellKnownPaths != null, "call FindAddinDirectories() first");
 
         if (weaversFromWellKnownPaths.TryGetValue(packageName, out var filePath))
+        {
             return filePath;
+        }
 
         var packageFileName = packageName + WeaverDllSuffix;
 

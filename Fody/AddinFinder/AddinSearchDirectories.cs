@@ -7,15 +7,15 @@ using System.Text.RegularExpressions;
 
 public partial class AddinFinder
 {
-    private const string WeaverDllSuffix = ".Fody.dll";
+    const string WeaverDllSuffix = ".Fody.dll";
 
-    readonly Action<string> log;
-    readonly string solutionDirectory;
-    readonly string msBuildTaskDirectory;
-    readonly string nuGetPackageRoot;
-    readonly string weaverProbingPaths;
+    Action<string> log;
+    string solutionDirectory;
+    string msBuildTaskDirectory;
+    string nuGetPackageRoot;
+    string weaverProbingPaths;
 
-    IDictionary<string, string> weaversFromWellKnownPaths;
+    Dictionary<string, string> weaversFromWellKnownPaths;
 
     public AddinFinder(Action<string> log, string solutionDirectory, string msBuildTaskDirectory, string nuGetPackageRoot, string weaverProbingPaths)
     {
@@ -73,14 +73,16 @@ public partial class AddinFinder
         return waverFiles?
                .Where(item => item != null)
                .Distinct(new WeaverNameComparer())
-               .ToDictionary(GetAddinNameFromWeaverFile, StringComparer.OrdinalIgnoreCase) 
+               .ToDictionary(GetAddinNameFromWeaverFile, StringComparer.OrdinalIgnoreCase)
            ?? new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
     }
 
     static string GetAddinNameFromWeaverFile(string filePath)
     {
         if (filePath == null)
+        {
             return null;
+        }
 
         Debug.Assert(filePath.EndsWith(WeaverDllSuffix, StringComparison.OrdinalIgnoreCase));
 
@@ -200,7 +202,7 @@ public partial class AddinFinder
         }
 
         log($"  Scanning SolutionDir/Tools directory convention: '{solutionDirToolsDirectory}'.");
-        
+
         return DirectoryEx.EnumerateFilesEndsWith(solutionDirToolsDirectory, WeaverDllSuffix, SearchOption.AllDirectories);
     }
 
@@ -231,7 +233,7 @@ public partial class AddinFinder
             return Enumerable.Empty<string>();
         }
         log($"  Scanning directory from Nuget Config: {packagesPathFromConfig}'.");
-        
+
         return ScanDirectoryForPackages(packagesPathFromConfig);
     }
 

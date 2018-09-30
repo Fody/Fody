@@ -1,9 +1,8 @@
+// TODO: re-include in project when ObjectApproval supports .NET Core
+#if NET472
 using System;
 using System.IO;
 using System.Linq;
-
-// TODO: re-include in project when ObjectApproval supports .NET Core
-#if NET472
 using ApprovalTests.Reporters;
 
 using Xunit;
