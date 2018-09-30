@@ -45,7 +45,7 @@
           DebugType="$(DebugType)"
           DocumentationFile="@(DocFileItem->'%(FullPath)')"
           MsBuildThisFileDirectory="$(MSBuildThisFileDirectory)"
-          WeaverFiles="$(WeaverFiles)"
+          WeaverFiles="@(WeaverFiles)"
           NCrunchOriginalSolutionDirectory="$(NCrunchOriginalSolutionDir)"
       >
 
