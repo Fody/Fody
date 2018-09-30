@@ -13,7 +13,7 @@ namespace Fody
         public string AssemblyPath { set; get; }
 
         [Required]
-        public string IntermediateDir { get; set; }
+        public string IntermediateDirectory { get; set; }
         public string KeyOriginatorFile { get; set; }
         public string AssemblyOriginatorKeyFile { get; set; }
 
@@ -30,8 +30,8 @@ namespace Fody
         [Required]
         public ITaskItem[] ReferenceCopyLocalPaths { get; set; }
 
-        [Required]
-        public string SolutionDir { get; set; }
+        public string NCrunchOriginalSolutionDirectory { get; set; }
+        public string SolutionDirectory { get; set; }
 
         [Required]
         public string MSBuildThisFileDirectory { get; set; }
@@ -60,13 +60,13 @@ namespace Fody
                     BuildEngine = BuildEngine,
                 },
                 AssemblyFilePath = AssemblyPath,
-                IntermediateDirectory = IntermediateDir,
+                IntermediateDirectory = IntermediateDirectory,
                 KeyFilePath = KeyOriginatorFile ?? AssemblyOriginatorKeyFile,
                 SignAssembly = SignAssembly,
                 ProjectDirectory = ProjectDirectory,
                 DocumentationFilePath = DocumentationFilePath,
                 References = References,
-                SolutionDirectory = SolutionDir,
+                SolutionDirectory = SolutionDirectoryFinder.Find(SolutionDirectory, NCrunchOriginalSolutionDirectory, ProjectDirectory),
                 ReferenceCopyLocalPaths = referenceCopyLocalPaths,
                 DefineConstants = defineConstants,
                 NuGetPackageRoot = NuGetPackageRoot,

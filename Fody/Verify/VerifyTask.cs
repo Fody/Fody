@@ -5,8 +5,8 @@ namespace Fody
 {
     public class VerifyTask : Task
     {
-        [Required]
-        public string SolutionDir { get; set; }
+        public string NCrunchOriginalSolutionDirectory { get; set; }
+        public string SolutionDirectory { get; set; }
         public string DefineConstants { get; set; }
         [Required]
         public string ProjectDirectory { get; set; }
@@ -22,7 +22,7 @@ namespace Fody
                 {
                     BuildEngine = BuildEngine,
                 },
-                SolutionDirectory = SolutionDir,
+                SolutionDirectory = SolutionDirectoryFinder.Find(SolutionDirectory, NCrunchOriginalSolutionDirectory, ProjectDirectory),
                 ProjectDirectory = ProjectDirectory,
                 DefineConstants = defineConstants,
                 TargetPath = TargetPath,
