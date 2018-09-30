@@ -1,10 +1,8 @@
 // TODO: re-include in project when ObjectApproval supports .NET Core
 #if NET472
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using ApprovalTests.Reporters;
 using Xunit;
 using ObjectApproval;
 
@@ -22,7 +20,6 @@ public class AddinFinderTest : TestBase
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void Integration_OldNugetStructure()
     {
         var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/AddinFinderTest/OldNugetStructure"));
@@ -30,7 +27,6 @@ public class AddinFinderTest : TestBase
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void Integration_NewNugetStructure()
     {
         var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/AddinFinderTest/NewNugetStructure"));
@@ -38,35 +34,10 @@ public class AddinFinderTest : TestBase
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void Integration_PaketStructure()
     {
         var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/AddinFinderTest/PaketStructure"));
         Verify(combine);
-    }
-
-    [Fact]
-    public void FindFromProbingPaths()
-    {
-        var packageRoot = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/FakeNuGetPackageRoot"));
-
-        var probingPaths = new List<string>
-        {
-            $@";{packageRoot}\weaver1.fody\1.0.7\build\",
-            $@"{packageRoot}\weaver2.fody\2.0.7\build\",
-            $@"{packageRoot}\weaver_bad.fody\1.0.7\build\"
-        };
-
-        var addins = AddinFinder.BuildWeaversDictionary(probingPaths);
-
-        var expected = @"[Weaver1, \weaver1.fody\1.0.7\Weaver1.Fody.dll]|[Weaver2, \weaver2.fody\2.0.7\Weaver2.Fody.dll]";
-
-        var result = string.Join("|", addins.Select(item => item.ToString().Replace(packageRoot, string.Empty)).OrderBy(item => item));
-
-        Assert.Equal(expected, result, StringComparer.OrdinalIgnoreCase);
-        Assert.Equal(@"\weaver1.fody\1.0.7\Weaver1.Fody.dll", addins["WeAvEr1"].Replace(packageRoot, string.Empty), StringComparer.OrdinalIgnoreCase);
-        Assert.Equal(@"\weaver1.fody\1.0.7\Weaver1.Fody.dll", addins["weaver1"].Replace(packageRoot, string.Empty), StringComparer.OrdinalIgnoreCase);
-        Assert.Equal(@"\weaver1.fody\1.0.7\Weaver1.Fody.dll", addins["WEAVER1"].Replace(packageRoot, string.Empty), StringComparer.OrdinalIgnoreCase);
     }
 
     static void Verify(string combine)
