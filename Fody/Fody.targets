@@ -54,7 +54,7 @@
           KeyOriginatorFile="$(KeyOriginatorFile)"
           AssemblyOriginatorKeyFile="$(AssemblyOriginatorKeyFile)"
           NuGetPackageRoot="$(NuGetPackageRoot)"
-          ProjectDirectory="$(ProjectDir)"
+          ProjectDirectory="$(MSBuildProjectDirectory)"
           SolutionDir="$(FodySolutionDir)"
           References="@(ReferencePath)"
           SignAssembly="$(FodySignAssembly)"
@@ -82,7 +82,7 @@
       DependsOnTargets="$(FodyVerifyDependsOnTargets)">
 
     <Fody.VerifyTask
-          ProjectDirectory="$(ProjectDir)"
+          ProjectDirectory="$(MSBuildProjectDirectory)"
           TargetPath="$(TargetPath)"
           SolutionDir="$(FodySolutionDir)"
           DefineConstants="$(DefineConstants)"
