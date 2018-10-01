@@ -34,6 +34,7 @@ public partial class AddinFinder
         var weaverFiles = weaverFilesFromProps.Concat(EnumerateToolsSolutionDirectoryWeavers())
             .Concat(EnumerateInSolutionWeavers());
 
+            //.OrderByDescending(AssemblyVersionReader.GetAssemblyVersion)
         weaversFromWellKnownPaths = BuildWeaversDictionary(weaverFiles);
     }
 
@@ -64,8 +65,8 @@ public partial class AddinFinder
     public static Dictionary<string, string> BuildWeaversDictionary(IEnumerable<string> weaverFiles)
     {
         return weaverFiles
-               .Distinct(new WeaverNameComparer())
-               .ToDictionary(GetAddinNameFromWeaverFile, StringComparer.OrdinalIgnoreCase);
+            .Distinct(new WeaverNameComparer())
+            .ToDictionary(GetAddinNameFromWeaverFile, StringComparer.OrdinalIgnoreCase);
     }
 
     static string GetAddinNameFromWeaverFile(string filePath)
@@ -111,6 +112,9 @@ public partial class AddinFinder
     public static IEnumerable<string> ScanDirectoryForPackages(string directory)
     {
         return EnumerateOldStyleDirectories(directory)
+            //TODO: using newest is a hack. will be removed when move from dir scanning to props file
+            .OrderByDescending(x=>x.Version)
+            .Select(x=>x.Assembly)
             .Concat(EnumerateNewOrPaketStyleDirectories(directory)
             .Where(x => x != null));
     }
@@ -139,14 +143,21 @@ public partial class AddinFinder
         }
     }
 
-    static IEnumerable<string> EnumerateOldStyleDirectories(string directory)
+    struct AssemblyAndVersion
+    {
+        public Version Version;
+        public string Assembly;
+    }
+    static IEnumerable<AssemblyAndVersion> EnumerateOldStyleDirectories(string directory)
     {
         foreach (var versionDirectory in DirectoryEx.EnumerateDirectoriesContains(directory, ".fody."))
         {
             var fileName = Path.GetFileName(versionDirectory);
             var index = fileName.IndexOf(".fody.", StringComparison.OrdinalIgnoreCase);
             var packageName = fileName.Substring(0, index + 5);
-            yield return GetAssemblyFromNugetDir(versionDirectory, packageName);
+            var version = Version.Parse(fileName.Substring(index + 6).Split('-')[0]);
+
+            yield return new AssemblyAndVersion{Version = version, Assembly= GetAssemblyFromNugetDir(versionDirectory, packageName)};
         }
     }
 
