@@ -6,15 +6,15 @@ using System.Linq;
 
 public partial class AddinFinder
 {
-    IList<string> fodyFiles;
+    List<string> fodyFiles;
 
-    public IList<string> FodyFiles
+    public List<string> FodyFiles
     {
         get
         {
             if (fodyFiles == null)
             {
-                fodyFiles = FindAddinDirectoriesLegacy().ToArray();
+                fodyFiles = FindAddinDirectoriesLegacy().ToList();
             }
 
             return fodyFiles;
