@@ -20,7 +20,6 @@ public class PeVerifierTests : TestBase
         var verify = PeVerifier.Verify(GetAssemblyPath(), GetIgnoreCodes(), out var output);
         Assert.True(verify);
         Assert.NotNull(output);
-        Assert.NotEmpty(output);
     }
 
     [Fact]

@@ -30,7 +30,7 @@ public class WeaverInitialiserTests : TestBase
         Assert.NotNull(moduleWeaver.ResolveAssembly);
     }
 
-    static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, MockAssemblyResolver resolver)
+    static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, AssemblyResolver resolver)
     {
 #pragma warning disable 618
         return new InnerWeaver
