@@ -1,8 +1,7 @@
-// TODO: re-include in project when ObjectApproval supports .NET Core
-#if NET472
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using ApprovalTests.Namers;
 using Xunit;
 using ObjectApproval;
 
@@ -16,28 +15,40 @@ public class AddinFinderTest : TestBase
         var result = AddinFinder.ScanDirectoryForPackages(nuGetPackageRoot)
             .Select(s => s.Replace(@"\\", @"\").Replace(combine, ""))
             .ToList();
-        ObjectApprover.VerifyWithJson(result);
+        using (ApprovalResults.UniqueForRuntime())
+        {
+            ObjectApprover.VerifyWithJson(result);
+        }
     }
 
     [Fact]
     public void Integration_OldNugetStructure()
     {
         var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/AddinFinderTest/OldNugetStructure"));
-        Verify(combine);
+        using (ApprovalResults.UniqueForRuntime())
+        {
+            Verify(combine);
+        }
     }
 
     [Fact]
     public void Integration_NewNugetStructure()
     {
         var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/AddinFinderTest/NewNugetStructure"));
-        Verify(combine);
+        using (ApprovalResults.UniqueForRuntime())
+        {
+            Verify(combine);
+        }
     }
 
     [Fact]
     public void Integration_PaketStructure()
     {
         var combine = Path.GetFullPath(Path.Combine(AssemblyLocation.CurrentDirectory, "Fody/AddinFinderTest/PaketStructure"));
-        Verify(combine);
+        using (ApprovalResults.UniqueForRuntime())
+        {
+            Verify(combine);
+        }
     }
 
     static void Verify(string combine)
@@ -52,4 +63,3 @@ public class AddinFinderTest : TestBase
         ObjectApprover.VerifyWithJson(addinFinder.FodyFiles.Select(x => x.Replace(combine, "").Replace("packages", "Packages")));
     }
 }
-#endif

@@ -1,0 +1,5 @@
+﻿[
+  "\\FromNugetConfig\\Weaver.Fody\\1.0.0\\Weaver.Fody.dll",
+  "\\MsBuildDirectory\\Weaver.Fody\\3.0.0\\Weaver.Fody.dll",
+  "\\NuGetPackageRoot\\Weaver.Fody\\5.0.0\\Weaver.Fody.dll"
+]

@@ -116,7 +116,8 @@ public partial class AddinFinder
             .OrderByDescending(x=>x.Version)
             .Select(x=>x.Assembly)
             .Concat(EnumerateNewOrPaketStyleDirectories(directory)
-            .Where(x => x != null));
+            .Where(x => x != null))
+            .Where(x => x != null);
     }
 
     static IEnumerable<string> EnumerateNewOrPaketStyleDirectories(string directory)
