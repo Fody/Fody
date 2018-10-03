@@ -1,11 +1,8 @@
 using System.IO;
-#if net472 // TODO: Remove when ApprovalTests supports .NET Core
 using ApprovalTests;
-#endif
 using Fody;
 using Moq;
 using Xunit;
-// ReSharper disable UnusedVariable
 
 public class ProjectWeaversFinderTests : TestBase
 {
@@ -19,8 +16,6 @@ public class ProjectWeaversFinderTests : TestBase
 
         var weavingException = Assert.Throws<WeavingException>(
             () => ConfigFileFinder.FindWeaverConfigs(AssemblyLocation.CurrentDirectory, AssemblyLocation.CurrentDirectory, logger));
-#if net472 // TODO: Remove when ApprovalTests supports .NET Core
         Approvals.Verify(weavingException.Message.Replace(searchDirectory, "SearchDirectory"));
-#endif
     }
 }
