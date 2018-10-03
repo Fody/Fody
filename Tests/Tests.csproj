@@ -9,7 +9,9 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="ApprovalTests" Version="3.0.18" />
     <PackageReference Include="Moq" Version="4.10.0" />
+    <PackageReference Include="ObjectApproval" Version="2.3.0" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
     <Reference Include="Microsoft.CSharp" />
@@ -32,8 +34,6 @@
     <Content Include="Fody\ProjectWeaversReaderTests\*.xml" CopyToOutputDirectory="Always" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework) == 'net472'">
-    <PackageReference Include="ApprovalTests" Version="3.0.16" />
-    <PackageReference Include="ObjectApproval" Version="2.2" />
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Tasks.v4.0" />
