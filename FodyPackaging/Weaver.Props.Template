@@ -1,12 +1,17 @@
 ﻿<Project>
+
   <PropertyGroup>
-    <RuntimeToken Condition="$(MSBuildRuntimeType) == 'Core'">netclassicweaver</RuntimeToken>
-    <RuntimeToken Condition="$(MSBuildRuntimeType) != 'Core'">netstandardweaver</RuntimeToken>
+    <WeaverRuntimeToken Condition="$(MSBuildRuntimeType) != 'Core'">netclassicweaver</WeaverRuntimeToken>
+    <WeaverRuntimeToken Condition="$(MSBuildRuntimeType) == 'Core'">netstandardweaver</WeaverRuntimeToken>
   </PropertyGroup>
+
   <ItemGroup>
-    <FilesToAdd Include="$(MsBuildThisFileDirectory)..\$(RuntimeToken)\$(MSBuildThisFileName).dll" />
+    <WeaverFiles Include="$(MsBuildThisFileDirectory)..\$(WeaverRuntimeToken)\$(MSBuildThisFileName).dll" />
   </ItemGroup>
-  <ItemGroup>
-    <WeaverFiles Include="@(FilesToAdd)"/>
+
+  <!-- Support for NCrunch -->
+  <ItemGroup  Condition="'$(NCrunch)' == '1'">
+    <None Include="@(WeaverFiles)" />
   </ItemGroup>
+
 </Project>
