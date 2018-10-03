@@ -1,4 +1,4 @@
-﻿<Project>
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
     <WeaverRuntimeToken Condition="$(MSBuildRuntimeType) != 'Core'">netclassicweaver</WeaverRuntimeToken>
@@ -7,11 +7,6 @@
 
   <ItemGroup>
     <WeaverFiles Include="$(MsBuildThisFileDirectory)..\$(WeaverRuntimeToken)\$(MSBuildThisFileName).dll" />
-  </ItemGroup>
-
-  <!-- Support for NCrunch -->
-  <ItemGroup  Condition="'$(NCrunch)' == '1'">
-    <None Include="@(WeaverFiles)" />
   </ItemGroup>
 
 </Project>
