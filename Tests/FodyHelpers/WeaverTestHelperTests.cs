@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Fody;
-#if net472 // TODO: Remove when ObjectApproval supports .NET Core
 using ObjectApproval;
-#endif
 using Xunit;
 // ReSharper disable UnusedVariable
 
@@ -19,9 +17,20 @@ public class WeaverTestHelperTests : TestBase
         var assemblyPath = Path.Combine(CodeBaseLocation.CurrentDirectory, "DummyAssembly.dll");
         var weaver = new TargetWeaver();
         var result = weaver.ExecuteTestRun(assemblyPath);
-#if net472 // TODO: Remove when ObjectApproval supports .NET Core
-        ObjectApprover.VerifyWithJson(result, ScrubCurrentDirectory);
-#endif
+        Verify(result);
+    }
+
+    static void Verify(TestResult result)
+    {
+        ObjectApprover.VerifyWithJson(new
+            {
+                result.Errors,
+                result.Messages,
+                result.Warnings,
+                result.AssemblyPath,
+                result.Assembly.FullName
+            },
+            ScrubCurrentDirectory);
     }
 
     static string ScrubCurrentDirectory(string s)
@@ -37,9 +46,7 @@ public class WeaverTestHelperTests : TestBase
         var result = weaver.ExecuteTestRun(
             assemblyPath: assemblyPath,
             assemblyName: "NewName");
-#if net472 // TODO: Remove when ObjectApproval supports .NET Core
-        ObjectApprover.VerifyWithJson(result, ScrubCurrentDirectory);
-#endif
+        Verify(result);
     }
 
     [Fact]
@@ -56,9 +63,7 @@ public class WeaverTestHelperTests : TestBase
         Assert.True(symbolsFileInfo.Exists);
         Assert.True(start <= symbolsFileInfo.LastWriteTime);
 
-#if net472 // TODO: Remove when ObjectApproval supports .NET Core
-        ObjectApprover.VerifyWithJson(result, ScrubCurrentDirectory);
-#endif
+        Verify(result);
     }
 }
 

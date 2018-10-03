@@ -1,11 +1,7 @@
 ﻿{
+  "Errors": [],
   "Messages": [],
   "Warnings": [],
-  "Errors": [],
-  "Assembly": {
-    "Data": "NewName, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-    "UnityType": 6,
-    "AssemblyName": "NewName, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-  },
-  "AssemblyPath": "\fodytemp\NewName.dll"
+  "AssemblyPath": "\fodytemp\NewName.dll",
+  "FullName": "NewName, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
 }
