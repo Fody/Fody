@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using ApprovalTests;
 using Fody;
 using Mono.Cecil;
 using Xunit;
@@ -47,9 +48,7 @@ public class PeVerifierTests : TestBase
 [IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::get_NullProperty][offset 0x00000006][found unmanaged pointer][expected unmanaged pointer] Unexpected type on the stack.
 [IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::set_NullProperty][offset 0x00000001] Unmanaged pointers are not a verifiable type.
 3 Error(s) Verifying C:\Code\Fody\net452\AssemblyToProcess.dll");
-#if (net472)
-        ApprovalTests.Approvals.Verify(text);
-#endif
+        Approvals.Verify(text);
     }
 
     [Fact]

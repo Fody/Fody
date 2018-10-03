@@ -1,4 +1,6 @@
 using System;
+using ApprovalTests;
+using ApprovalTests.Namers;
 using Fody;
 using Xunit;
 // ReSharper disable UnusedVariable
@@ -16,9 +18,10 @@ public class IldasmTests : TestBase
     public void Verify()
     {
         var verify = Ildasm.Decompile(GetAssemblyPath());
-#if(net472)
-        ApprovalTests.Approvals.Verify(verify);
-#endif
+        using (ApprovalResults.UniqueForRuntime())
+        {
+            Approvals.Verify(verify);
+        }
     }
 
     static string GetAssemblyPath()
