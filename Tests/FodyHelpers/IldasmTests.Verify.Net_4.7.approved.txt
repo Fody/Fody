@@ -55,7 +55,7 @@
                                                                                                       6F 6E 00 00 )                                     // on..
                                                                                                       74 69 6E 67 20 46 72 61 6D 65 77 6F 72 6B 00 00 ) // ting Framework..
                                                                                                         20 2E 4E 45 54 20 46 6F 75 6E 64 61 74 69 6F 6E   //  .NET Foundation
-                                                                                                        00 00 )
+                                                                                                        00 00 ) 
                                                                                                     65 00 00 )                                        // e..
                                                                                                               56 65 72 73 69 6F 6E 3D 76 31 2E 31 01 00 54 0E   // Version=v1.1..T.
                                                                                                               14 46 72 61 6D 65 77 6F 72 6B 44 69 73 70 6C 61   // .FrameworkDispla
@@ -88,7 +88,7 @@
 {
   .field private initonly !'<name>j__TPar' '<name>i__Field'
   .field private initonly !'<value>j__TPar' '<value>i__Field'
-  .method public hidebysig specialname instance !'<name>j__TPar'
+  .method public hidebysig specialname instance !'<name>j__TPar' 
           get_name() cil managed
   {
     // Code size       7 (0x7)
@@ -96,8 +96,8 @@
     IL_0000:  ldarg.0
     IL_0001:  ldfld      !0 class '<>f__AnonymousType0`2'<!'<name>j__TPar',!'<value>j__TPar'>::'<name>i__Field'
     IL_0006:  ret
-  }
-  .method public hidebysig specialname instance !'<value>j__TPar'
+  } 
+  .method public hidebysig specialname instance !'<value>j__TPar' 
           get_value() cil managed
   {
     // Code size       7 (0x7)
@@ -105,8 +105,8 @@
     IL_0000:  ldarg.0
     IL_0001:  ldfld      !1 class '<>f__AnonymousType0`2'<!'<name>j__TPar',!'<value>j__TPar'>::'<value>i__Field'
     IL_0006:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(!'<name>j__TPar' name,
                                !'<value>j__TPar' 'value') cil managed
   {
@@ -121,8 +121,8 @@
     IL_000e:  ldarg.2
     IL_000f:  stfld      !1 class '<>f__AnonymousType0`2'<!'<name>j__TPar',!'<value>j__TPar'>::'<value>i__Field'
     IL_0014:  ret
-  }
-  .method public hidebysig virtual instance bool
+  } 
+  .method public hidebysig virtual instance bool 
           Equals(object 'value') cil managed
   {
     // Code size       59 (0x3b)
@@ -151,8 +151,8 @@
     IL_0038:  ret
     IL_0039:  ldc.i4.0
     IL_003a:  ret
-  }
-  .method public hidebysig virtual instance int32
+  } 
+  .method public hidebysig virtual instance int32 
           GetHashCode() cil managed
   {
     // Code size       52 (0x34)
@@ -173,8 +173,8 @@
     IL_002d:  callvirt   instance int32 class [System.Collections]System.Collections.Generic.EqualityComparer`1<!'<value>j__TPar'>::GetHashCode(!0)
     IL_0032:  add
     IL_0033:  ret
-  }
-  .method public hidebysig virtual instance string
+  } 
+  .method public hidebysig virtual instance string 
           ToString() cil managed
   {
     // Code size       136 (0x88)
@@ -237,13 +237,13 @@
                                                                       string,
                                                                       object[])
     IL_0087:  ret
-  }
+  } 
   .property instance !'<name>j__TPar' name()
   {
-  }
+  } 
   .property instance !'<value>j__TPar' 'value'()
   {
-  }
+  } 
 }
 .class private abstract auto ansi sealed beforefieldinit ExceptionExtensions
        extends [System.Runtime]System.Object
@@ -257,8 +257,8 @@
     IL_0001:  call       class [System.Runtime]System.Runtime.ExceptionServices.ExceptionDispatchInfo [System.Runtime]System.Runtime.ExceptionServices.ExceptionDispatchInfo::Capture(class [System.Runtime]System.Exception)
     IL_0006:  callvirt   instance void [System.Runtime]System.Runtime.ExceptionServices.ExceptionDispatchInfo::Throw()
     IL_000b:  ret
-  }
-  .method public hidebysig static class [System.Runtime]System.Exception
+  } 
+  .method public hidebysig static class [System.Runtime]System.Exception 
           Unwrap(class [System.Runtime]System.Exception ex) cil managed
   {
     // Code size       22 (0x16)
@@ -275,7 +275,7 @@
     IL_000d:  callvirt   instance class [System.Runtime]System.Exception [System.Runtime]System.Exception::get_InnerException()
     IL_0012:  starg.s    ex
     IL_0014:  br.s       IL_0000
-  }
+  } 
 }
 .class private abstract auto ansi sealed beforefieldinit Guard
        extends [System.Runtime]System.Object
@@ -291,7 +291,7 @@
     IL_0004:  newobj     instance void [System.Runtime]System.ArgumentNullException::.ctor(string)
     IL_0009:  throw
     IL_000a:  ret
-  }
+  } 
   .method public hidebysig static void  ArgumentNotNullOrEmpty(string argName,
                                                                class [System.Runtime]System.Collections.IEnumerable argValue) cil managed
   {
@@ -311,7 +311,7 @@
                                                                                        string)
     IL_001f:  throw
     IL_0020:  ret
-  }
+  } 
   .method public hidebysig static void  ArgumentValid(string argName,
                                                       string message,
                                                       bool test) cil managed
@@ -326,7 +326,7 @@
                                                                                        string)
     IL_000a:  throw
     IL_000b:  ret
-  }
+  } 
 }
 .class public auto ansi sealed beforefieldinit Xunit.AssemblyTraitAttribute
        extends [System.Runtime]System.Attribute
@@ -336,9 +336,9 @@
                                                                   string) = ( 01 00 21 58 75 6E 69 74 2E 53 64 6B 2E 41 73 73   // ..!Xunit.Sdk.Ass
                                                                               65 6D 62 6C 79 54 72 61 69 74 44 69 73 63 6F 76   // emblyTraitDiscov
                                                                               65 72 65 72 0A 78 75 6E 69 74 2E 63 6F 72 65 00   // erer.xunit.core.
-                                                                              00 )
+                                                                              00 ) 
                                                                                                                                      4D 75 6C 74 69 70 6C 65 01 )                      // Multiple.
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(string name,
                                string 'value') cil managed
   {
@@ -347,7 +347,7 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.ClassDataAttribute
        extends Xunit.Sdk.DataAttribute
@@ -355,7 +355,7 @@
                                                                                                                                      4D 75 6C 74 69 70 6C 65 01 54 02 09 49 6E 68 65   // Multiple.T..Inhe
                                                                                                                                      72 69 74 65 64 01 )                               // rited.
   .field private class [System.Runtime]System.Type '<Class>k__BackingField'
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(class [System.Runtime]System.Type 'class') cil managed
   {
     // Code size       14 (0xe)
@@ -366,8 +366,8 @@
     IL_0007:  ldarg.1
     IL_0008:  call       instance void Xunit.ClassDataAttribute::set_Class(class [System.Runtime]System.Type)
     IL_000d:  ret
-  }
-  .method public hidebysig specialname instance class [System.Runtime]System.Type
+  } 
+  .method public hidebysig specialname instance class [System.Runtime]System.Type 
           get_Class() cil managed
   {
     // Code size       7 (0x7)
@@ -375,8 +375,8 @@
     IL_0000:  ldarg.0
     IL_0001:  ldfld      class [System.Runtime]System.Type Xunit.ClassDataAttribute::'<Class>k__BackingField'
     IL_0006:  ret
-  }
-  .method private hidebysig specialname instance void
+  } 
+  .method private hidebysig specialname instance void 
           set_Class(class [System.Runtime]System.Type 'value') cil managed
   {
     // Code size       8 (0x8)
@@ -385,8 +385,8 @@
     IL_0001:  ldarg.1
     IL_0002:  stfld      class [System.Runtime]System.Type Xunit.ClassDataAttribute::'<Class>k__BackingField'
     IL_0007:  ret
-  }
-  .method public hidebysig virtual instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]>
+  } 
+  .method public hidebysig virtual instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]> 
           GetData(class [System.Reflection]System.Reflection.MethodInfo testMethod) cil managed
   {
     // Code size       81 (0x51)
@@ -426,18 +426,18 @@
     IL_004e:  throw
     IL_004f:  ldloc.0
     IL_0050:  ret
-  }
+  } 
   .property instance class [System.Runtime]System.Type
           Class()
   {
-  }
+  } 
 }
 .class public auto ansi sealed beforefieldinit Xunit.CollectionAttribute
        extends [System.Runtime]System.Attribute
 {
                                                                                                                                      4D 75 6C 74 69 70 6C 65 00 54 02 09 49 6E 68 65   // Multiple.T..Inhe
                                                                                                                                      72 69 74 65 64 01 )                               // rited.
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(string name) cil managed
   {
     // Code size       7 (0x7)
@@ -445,7 +445,7 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi sealed Xunit.CollectionBehavior
        extends [System.Runtime]System.Enum
@@ -460,7 +460,7 @@
                                                                                                                                      4D 75 6C 74 69 70 6C 65 00 )                      // Multiple.
   .field private bool '<DisableTestParallelization>k__BackingField'
   .field private int32 '<MaxParallelThreads>k__BackingField'
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -468,8 +468,8 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(valuetype Xunit.CollectionBehavior collectionBehavior) cil managed
   {
     // Code size       7 (0x7)
@@ -477,8 +477,8 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(string factoryTypeName,
                                string factoryAssemblyName) cil managed
   {
@@ -487,8 +487,8 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
-  .method public hidebysig specialname instance bool
+  } 
+  .method public hidebysig specialname instance bool 
           get_DisableTestParallelization() cil managed
   {
     // Code size       7 (0x7)
@@ -496,8 +496,8 @@
     IL_0000:  ldarg.0
     IL_0001:  ldfld      bool Xunit.CollectionBehaviorAttribute::'<DisableTestParallelization>k__BackingField'
     IL_0006:  ret
-  }
-  .method public hidebysig specialname instance void
+  } 
+  .method public hidebysig specialname instance void 
           set_DisableTestParallelization(bool 'value') cil managed
   {
     // Code size       8 (0x8)
@@ -506,8 +506,8 @@
     IL_0001:  ldarg.1
     IL_0002:  stfld      bool Xunit.CollectionBehaviorAttribute::'<DisableTestParallelization>k__BackingField'
     IL_0007:  ret
-  }
-  .method public hidebysig specialname instance int32
+  } 
+  .method public hidebysig specialname instance int32 
           get_MaxParallelThreads() cil managed
   {
     // Code size       7 (0x7)
@@ -515,8 +515,8 @@
     IL_0000:  ldarg.0
     IL_0001:  ldfld      int32 Xunit.CollectionBehaviorAttribute::'<MaxParallelThreads>k__BackingField'
     IL_0006:  ret
-  }
-  .method public hidebysig specialname instance void
+  } 
+  .method public hidebysig specialname instance void 
           set_MaxParallelThreads(int32 'value') cil managed
   {
     // Code size       8 (0x8)
@@ -525,13 +525,13 @@
     IL_0001:  ldarg.1
     IL_0002:  stfld      int32 Xunit.CollectionBehaviorAttribute::'<MaxParallelThreads>k__BackingField'
     IL_0007:  ret
-  }
+  } 
   .property instance bool DisableTestParallelization()
   {
-  }
+  } 
   .property instance int32 MaxParallelThreads()
   {
-  }
+  } 
 }
 .class public auto ansi sealed beforefieldinit Xunit.CollectionDefinitionAttribute
        extends [System.Runtime]System.Attribute
@@ -539,7 +539,7 @@
                                                                                                                                      4D 75 6C 74 69 70 6C 65 00 54 02 09 49 6E 68 65   // Multiple.T..Inhe
                                                                                                                                      72 69 74 65 64 00 )                               // rited.
   .field private bool '<DisableParallelization>k__BackingField'
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(string name) cil managed
   {
     // Code size       7 (0x7)
@@ -547,8 +547,8 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
-  .method public hidebysig specialname instance bool
+  } 
+  .method public hidebysig specialname instance bool 
           get_DisableParallelization() cil managed
   {
     // Code size       7 (0x7)
@@ -556,8 +556,8 @@
     IL_0000:  ldarg.0
     IL_0001:  ldfld      bool Xunit.CollectionDefinitionAttribute::'<DisableParallelization>k__BackingField'
     IL_0006:  ret
-  }
-  .method public hidebysig specialname instance void
+  } 
+  .method public hidebysig specialname instance void 
           set_DisableParallelization(bool 'value') cil managed
   {
     // Code size       8 (0x8)
@@ -566,10 +566,10 @@
     IL_0001:  ldarg.1
     IL_0002:  stfld      bool Xunit.CollectionDefinitionAttribute::'<DisableParallelization>k__BackingField'
     IL_0007:  ret
-  }
+  } 
   .property instance bool DisableParallelization()
   {
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.FactAttribute
        extends [System.Runtime]System.Attribute
@@ -583,7 +583,7 @@
   .field private string '<DisplayName>k__BackingField'
   .field private string '<Skip>k__BackingField'
   .field private int32 '<Timeout>k__BackingField'
-  .method public hidebysig newslot specialname virtual
+  .method public hidebysig newslot specialname virtual 
           instance string  get_DisplayName() cil managed
   {
     // Code size       7 (0x7)
@@ -591,8 +591,8 @@
     IL_0000:  ldarg.0
     IL_0001:  ldfld      string Xunit.FactAttribute::'<DisplayName>k__BackingField'
     IL_0006:  ret
-  }
-  .method public hidebysig newslot specialname virtual
+  } 
+  .method public hidebysig newslot specialname virtual 
           instance void  set_DisplayName(string 'value') cil managed
   {
     // Code size       8 (0x8)
@@ -601,8 +601,8 @@
     IL_0001:  ldarg.1
     IL_0002:  stfld      string Xunit.FactAttribute::'<DisplayName>k__BackingField'
     IL_0007:  ret
-  }
-  .method public hidebysig newslot specialname virtual
+  } 
+  .method public hidebysig newslot specialname virtual 
           instance string  get_Skip() cil managed
   {
     // Code size       7 (0x7)
@@ -610,8 +610,8 @@
     IL_0000:  ldarg.0
     IL_0001:  ldfld      string Xunit.FactAttribute::'<Skip>k__BackingField'
     IL_0006:  ret
-  }
-  .method public hidebysig newslot specialname virtual
+  } 
+  .method public hidebysig newslot specialname virtual 
           instance void  set_Skip(string 'value') cil managed
   {
     // Code size       8 (0x8)
@@ -620,8 +620,8 @@
     IL_0001:  ldarg.1
     IL_0002:  stfld      string Xunit.FactAttribute::'<Skip>k__BackingField'
     IL_0007:  ret
-  }
-  .method public hidebysig newslot specialname virtual
+  } 
+  .method public hidebysig newslot specialname virtual 
           instance int32  get_Timeout() cil managed
   {
     // Code size       7 (0x7)
@@ -629,8 +629,8 @@
     IL_0000:  ldarg.0
     IL_0001:  ldfld      int32 Xunit.FactAttribute::'<Timeout>k__BackingField'
     IL_0006:  ret
-  }
-  .method public hidebysig newslot specialname virtual
+  } 
+  .method public hidebysig newslot specialname virtual 
           instance void  set_Timeout(int32 'value') cil managed
   {
     // Code size       8 (0x8)
@@ -639,8 +639,8 @@
     IL_0001:  ldarg.1
     IL_0002:  stfld      int32 Xunit.FactAttribute::'<Timeout>k__BackingField'
     IL_0007:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -648,29 +648,29 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
+  } 
   .property instance string DisplayName()
   {
-  }
+  } 
   .property instance string Skip()
   {
-  }
+  } 
   .property instance int32 Timeout()
   {
-  }
+  } 
 }
 .class interface public abstract auto ansi Xunit.IAsyncLifetime
 {
-  .method public hidebysig newslot abstract virtual
-          instance class [System.Threading.Tasks]System.Threading.Tasks.Task
+  .method public hidebysig newslot abstract virtual 
+          instance class [System.Threading.Tasks]System.Threading.Tasks.Task 
           InitializeAsync() cil managed
   {
-  }
-  .method public hidebysig newslot abstract virtual
-          instance class [System.Threading.Tasks]System.Threading.Tasks.Task
+  } 
+  .method public hidebysig newslot abstract virtual 
+          instance class [System.Threading.Tasks]System.Threading.Tasks.Task 
           DisposeAsync() cil managed
   {
-  }
+  } 
 }
 .class interface public abstract auto ansi Xunit.IClassFixture`1<class TFixture>
 {
@@ -687,7 +687,7 @@
                                                                              72 0A 78 75 6E 69 74 2E 63 6F 72 65 00 00 )       // r.xunit.core..
                                                                                                                                      4D 75 6C 74 69 70 6C 65 01 )                      // Multiple.
   .field private initonly object[] data
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(object[] data) cil managed
   {
     .param [1]
@@ -699,8 +699,8 @@
     IL_0007:  ldarg.1
     IL_0008:  stfld      object[] Xunit.InlineDataAttribute::data
     IL_000d:  ret
-  }
-  .method public hidebysig virtual instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]>
+  } 
+  .method public hidebysig virtual instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]> 
           GetData(class [System.Reflection]System.Reflection.MethodInfo testMethod) cil managed
   {
     // Code size       16 (0x10)
@@ -713,15 +713,15 @@
     IL_0009:  ldfld      object[] Xunit.InlineDataAttribute::data
     IL_000e:  stelem.ref
     IL_000f:  ret
-  }
+  } 
 }
 .class interface public abstract auto ansi Xunit.ITestCollectionOrderer
 {
-  .method public hidebysig newslot abstract virtual
-          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<class [xunit.abstractions]Xunit.Abstractions.ITestCollection>
+  .method public hidebysig newslot abstract virtual 
+          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<class [xunit.abstractions]Xunit.Abstractions.ITestCollection> 
           OrderTestCollections(class [System.Runtime]System.Collections.Generic.IEnumerable`1<class [xunit.abstractions]Xunit.Abstractions.ITestCollection> testCollections) cil managed
   {
-  }
+  } 
 }
 .class public auto ansi sealed beforefieldinit Xunit.MemberDataAttribute
        extends Xunit.MemberDataAttributeBase
@@ -732,7 +732,7 @@
                                                                              72 0A 78 75 6E 69 74 2E 63 6F 72 65 00 00 )       // r.xunit.core..
                                                                                                                                      4D 75 6C 74 69 70 6C 65 01 54 02 09 49 6E 68 65   // Multiple.T..Inhe
                                                                                                                                      72 69 74 65 64 01 )                               // rited.
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(string memberName,
                                object[] parameters) cil managed
   {
@@ -745,8 +745,8 @@
     IL_0003:  call       instance void Xunit.MemberDataAttributeBase::.ctor(string,
                                                                             object[])
     IL_0008:  ret
-  }
-  .method family hidebysig virtual instance object[]
+  } 
+  .method family hidebysig virtual instance object[] 
           ConvertDataItem(class [System.Reflection]System.Reflection.MethodInfo testMethod,
                           object item) cil managed
   {
@@ -787,7 +787,7 @@
     IL_0040:  throw
     IL_0041:  ldloc.0
     IL_0042:  ret
-  }
+  } 
 }
 .class public abstract auto ansi beforefieldinit Xunit.MemberDataAttributeBase
        extends Xunit.Sdk.DataAttribute
@@ -799,7 +799,7 @@
   {
     .field public class Xunit.MemberDataAttributeBase '<>4__this'
     .field public class [System.Reflection]System.Reflection.MethodInfo testMethod
-    .method public hidebysig specialname rtspecialname
+    .method public hidebysig specialname rtspecialname 
             instance void  .ctor() cil managed
     {
       // Code size       7 (0x7)
@@ -808,7 +808,7 @@
       IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
       IL_0006:  ret
     } // end of method '<>c__DisplayClass17_0'::.ctor
-    .method assembly hidebysig instance object[]
+    .method assembly hidebysig instance object[] 
             '<GetData>b__0'(object item) cil managed
     {
       // Code size       19 (0x13)
@@ -822,14 +822,14 @@
                                                                                             object)
       IL_0012:  ret
     } // end of method '<>c__DisplayClass17_0'::'<GetData>b__0'
-  }
+  } 
   .class auto ansi serializable sealed nested private beforefieldinit '<>c'
          extends [System.Runtime]System.Object
   {
     .field public static initonly class Xunit.MemberDataAttributeBase/'<>c' '<>9'
     .field public static class [System.Runtime]System.Func`2<object,string> '<>9__17_1'
     .field public static class [System.Runtime]System.Func`2<object,class [System.Runtime]System.Type> '<>9__20_0'
-    .method private hidebysig specialname rtspecialname static
+    .method private hidebysig specialname rtspecialname static 
             void  .cctor() cil managed
     {
       // Code size       11 (0xb)
@@ -838,7 +838,7 @@
       IL_0005:  stsfld     class Xunit.MemberDataAttributeBase/'<>c' Xunit.MemberDataAttributeBase/'<>c'::'<>9'
       IL_000a:  ret
     } // end of method '<>c'::.cctor
-    .method public hidebysig specialname rtspecialname
+    .method public hidebysig specialname rtspecialname 
             instance void  .ctor() cil managed
     {
       // Code size       7 (0x7)
@@ -847,7 +847,7 @@
       IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
       IL_0006:  ret
     } // end of method '<>c'::.ctor
-    .method assembly hidebysig instance string
+    .method assembly hidebysig instance string 
             '<GetData>b__17_1'(object p) cil managed
     {
       // Code size       27 (0x1b)
@@ -865,7 +865,7 @@
       IL_0015:  ldstr      "(null)"
       IL_001a:  ret
     } // end of method '<>c'::'<GetData>b__17_1'
-    .method assembly hidebysig instance class [System.Runtime]System.Type
+    .method assembly hidebysig instance class [System.Runtime]System.Type 
             '<GetMethodAccessor>b__20_0'(object p) cil managed
     {
       // Code size       12 (0xc)
@@ -878,12 +878,12 @@
       IL_0006:  call       instance class [System.Runtime]System.Type [System.Runtime]System.Object::GetType()
       IL_000b:  ret
     } // end of method '<>c'::'<GetMethodAccessor>b__20_0'
-  }
+  } 
   .class auto ansi sealed nested private beforefieldinit '<>c__DisplayClass19_0'
          extends [System.Runtime]System.Object
   {
     .field public class [System.Reflection]System.Reflection.FieldInfo fieldInfo
-    .method public hidebysig specialname rtspecialname
+    .method public hidebysig specialname rtspecialname 
             instance void  .ctor() cil managed
     {
       // Code size       7 (0x7)
@@ -892,7 +892,7 @@
       IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
       IL_0006:  ret
     } // end of method '<>c__DisplayClass19_0'::.ctor
-    .method assembly hidebysig instance object
+    .method assembly hidebysig instance object 
             '<GetFieldAccessor>b__0'() cil managed
     {
       // Code size       13 (0xd)
@@ -903,7 +903,7 @@
       IL_0007:  callvirt   instance object [System.Reflection]System.Reflection.FieldInfo::GetValue(object)
       IL_000c:  ret
     } // end of method '<>c__DisplayClass19_0'::'<GetFieldAccessor>b__0'
-  }
+  } 
   .class auto ansi sealed nested private beforefieldinit '<>c__DisplayClass20_0'
          extends [System.Runtime]System.Object
   {
@@ -911,7 +911,7 @@
     .field public class [System.Runtime]System.Type[] parameterTypes
     .field public class [System.Reflection]System.Reflection.MethodInfo methodInfo
     .field public class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.MethodInfo,bool> '<>9__2'
-    .method public hidebysig specialname rtspecialname
+    .method public hidebysig specialname rtspecialname 
             instance void  .ctor() cil managed
     {
       // Code size       7 (0x7)
@@ -920,7 +920,7 @@
       IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
       IL_0006:  ret
     } // end of method '<>c__DisplayClass20_0'::.ctor
-    .method assembly hidebysig instance bool
+    .method assembly hidebysig instance bool 
             '<GetMethodAccessor>b__2'(class [System.Reflection]System.Reflection.MethodInfo m) cil managed
     {
       // Code size       44 (0x2c)
@@ -943,7 +943,7 @@
       IL_002a:  ldc.i4.0
       IL_002b:  ret
     } // end of method '<>c__DisplayClass20_0'::'<GetMethodAccessor>b__2'
-    .method assembly hidebysig instance object
+    .method assembly hidebysig instance object 
             '<GetMethodAccessor>b__1'() cil managed
     {
       // Code size       24 (0x18)
@@ -958,12 +958,12 @@
                                                                                                    object[])
       IL_0017:  ret
     } // end of method '<>c__DisplayClass20_0'::'<GetMethodAccessor>b__1'
-  }
+  } 
   .class auto ansi sealed nested private beforefieldinit '<>c__DisplayClass21_0'
          extends [System.Runtime]System.Object
   {
     .field public class [System.Reflection]System.Reflection.PropertyInfo propInfo
-    .method public hidebysig specialname rtspecialname
+    .method public hidebysig specialname rtspecialname 
             instance void  .ctor() cil managed
     {
       // Code size       7 (0x7)
@@ -972,7 +972,7 @@
       IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
       IL_0006:  ret
     } // end of method '<>c__DisplayClass21_0'::.ctor
-    .method assembly hidebysig instance object
+    .method assembly hidebysig instance object 
             '<GetPropertyAccessor>b__0'() cil managed
     {
       // Code size       14 (0xe)
@@ -985,12 +985,12 @@
                                                                                                        object[])
       IL_000d:  ret
     } // end of method '<>c__DisplayClass21_0'::'<GetPropertyAccessor>b__0'
-  }
+  } 
   .field private bool '<DisableDiscoveryEnumeration>k__BackingField'
   .field private string '<MemberName>k__BackingField'
   .field private class [System.Runtime]System.Type '<MemberType>k__BackingField'
   .field private object[] '<Parameters>k__BackingField'
-  .method family hidebysig specialname rtspecialname
+  .method family hidebysig specialname rtspecialname 
           instance void  .ctor(string memberName,
                                object[] parameters) cil managed
   {
@@ -1005,8 +1005,8 @@
     IL_000e:  ldarg.2
     IL_000f:  call       instance void Xunit.MemberDataAttributeBase::set_Parameters(object[])
     IL_0014:  ret
-  }
-  .method public hidebysig specialname instance bool
+  } 
+  .method public hidebysig specialname instance bool 
           get_DisableDiscoveryEnumeration() cil managed
   {
     // Code size       7 (0x7)
@@ -1014,8 +1014,8 @@
     IL_0000:  ldarg.0
     IL_0001:  ldfld      bool Xunit.MemberDataAttributeBase::'<DisableDiscoveryEnumeration>k__BackingField'
     IL_0006:  ret
-  }
-  .method public hidebysig specialname instance void
+  } 
+  .method public hidebysig specialname instance void 
           set_DisableDiscoveryEnumeration(bool 'value') cil managed
   {
     // Code size       8 (0x8)
@@ -1024,8 +1024,8 @@
     IL_0001:  ldarg.1
     IL_0002:  stfld      bool Xunit.MemberDataAttributeBase::'<DisableDiscoveryEnumeration>k__BackingField'
     IL_0007:  ret
-  }
-  .method public hidebysig specialname instance string
+  } 
+  .method public hidebysig specialname instance string 
           get_MemberName() cil managed
   {
     // Code size       7 (0x7)
@@ -1033,8 +1033,8 @@
     IL_0000:  ldarg.0
     IL_0001:  ldfld      string Xunit.MemberDataAttributeBase::'<MemberName>k__BackingField'
     IL_0006:  ret
-  }
-  .method private hidebysig specialname instance void
+  } 
+  .method private hidebysig specialname instance void 
           set_MemberName(string 'value') cil managed
   {
     // Code size       8 (0x8)
@@ -1043,8 +1043,8 @@
     IL_0001:  ldarg.1
     IL_0002:  stfld      string Xunit.MemberDataAttributeBase::'<MemberName>k__BackingField'
     IL_0007:  ret
-  }
-  .method public hidebysig specialname instance class [System.Runtime]System.Type
+  } 
+  .method public hidebysig specialname instance class [System.Runtime]System.Type 
           get_MemberType() cil managed
   {
     // Code size       7 (0x7)
@@ -1052,8 +1052,8 @@
     IL_0000:  ldarg.0
     IL_0001:  ldfld      class [System.Runtime]System.Type Xunit.MemberDataAttributeBase::'<MemberType>k__BackingField'
     IL_0006:  ret
-  }
-  .method public hidebysig specialname instance void
+  } 
+  .method public hidebysig specialname instance void 
           set_MemberType(class [System.Runtime]System.Type 'value') cil managed
   {
     // Code size       8 (0x8)
@@ -1062,8 +1062,8 @@
     IL_0001:  ldarg.1
     IL_0002:  stfld      class [System.Runtime]System.Type Xunit.MemberDataAttributeBase::'<MemberType>k__BackingField'
     IL_0007:  ret
-  }
-  .method public hidebysig specialname instance object[]
+  } 
+  .method public hidebysig specialname instance object[] 
           get_Parameters() cil managed
   {
     // Code size       7 (0x7)
@@ -1071,8 +1071,8 @@
     IL_0000:  ldarg.0
     IL_0001:  ldfld      object[] Xunit.MemberDataAttributeBase::'<Parameters>k__BackingField'
     IL_0006:  ret
-  }
-  .method private hidebysig specialname instance void
+  } 
+  .method private hidebysig specialname instance void 
           set_Parameters(object[] 'value') cil managed
   {
     // Code size       8 (0x8)
@@ -1081,8 +1081,8 @@
     IL_0001:  ldarg.1
     IL_0002:  stfld      object[] Xunit.MemberDataAttributeBase::'<Parameters>k__BackingField'
     IL_0007:  ret
-  }
-  .method public hidebysig virtual instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]>
+  } 
+  .method public hidebysig virtual instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]> 
           GetData(class [System.Reflection]System.Reflection.MethodInfo testMethod) cil managed
   {
     // Code size       327 (0x147)
@@ -1232,13 +1232,13 @@
     IL_0141:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!1> [System.Linq]System.Linq.Enumerable::Select<object,object[]>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
                                                                                                                                                           class [System.Runtime]System.Func`2<!!0,!!1>)
     IL_0146:  ret
-  }
-  .method family hidebysig newslot abstract virtual
+  } 
+  .method family hidebysig newslot abstract virtual 
           instance object[]  ConvertDataItem(class [System.Reflection]System.Reflection.MethodInfo testMethod,
                                              object item) cil managed
   {
-  }
-  .method private hidebysig instance class [System.Runtime]System.Func`1<object>
+  } 
+  .method private hidebysig instance class [System.Runtime]System.Func`1<object> 
           GetFieldAccessor(class [System.Runtime]System.Type 'type') cil managed
   {
     // Code size       94 (0x5e)
@@ -1283,8 +1283,8 @@
     IL_0058:  newobj     instance void class [System.Runtime]System.Func`1<object>::.ctor(object,
                                                                                           native int)
     IL_005d:  ret
-  }
-  .method private hidebysig instance class [System.Runtime]System.Func`1<object>
+  } 
+  .method private hidebysig instance class [System.Runtime]System.Func`1<object> 
           GetMethodAccessor(class [System.Runtime]System.Type 'type') cil managed
   {
     // Code size       200 (0xc8)
@@ -1369,8 +1369,8 @@
     IL_00c2:  newobj     instance void class [System.Runtime]System.Func`1<object>::.ctor(object,
                                                                                           native int)
     IL_00c7:  ret
-  }
-  .method private hidebysig instance class [System.Runtime]System.Func`1<object>
+  } 
+  .method private hidebysig instance class [System.Runtime]System.Func`1<object> 
           GetPropertyAccessor(class [System.Runtime]System.Type 'type') cil managed
   {
     // Code size       112 (0x70)
@@ -1420,7 +1420,7 @@
     IL_006a:  newobj     instance void class [System.Runtime]System.Func`1<object>::.ctor(object,
                                                                                           native int)
     IL_006f:  ret
-  }
+  } 
   .method private hidebysig static bool  ParameterTypesCompatible(class [System.Reflection]System.Reflection.ParameterInfo[] parameters,
                                                                   class [System.Runtime]System.Type[] parameterTypes) cil managed
   {
@@ -1489,20 +1489,20 @@
     IL_0065:  blt.s      IL_003a
     IL_0067:  ldc.i4.1
     IL_0068:  ret
-  }
+  } 
   .property instance bool DisableDiscoveryEnumeration()
   {
-  }
+  } 
   .property instance string MemberName()
   {
-  }
+  } 
   .property instance class [System.Runtime]System.Type
           MemberType()
   {
-  }
+  } 
   .property instance object[] Parameters()
   {
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.Record
        extends [System.Runtime]System.Object
@@ -1515,7 +1515,7 @@
     .field public valuetype [System.Threading.Tasks]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<class [System.Runtime]System.Exception> '<>t__builder'
     .field public class [System.Runtime]System.Func`1<class [System.Threading.Tasks]System.Threading.Tasks.Task> testCode
     .field private valuetype [System.Threading.Tasks]System.Runtime.CompilerServices.TaskAwaiter '<>u__1'
-    .method private hidebysig newslot virtual final
+    .method private hidebysig newslot virtual final 
             instance void  MoveNext() cil managed
     {
       .override [System.Threading.Tasks]System.Runtime.CompilerServices.IAsyncStateMachine::MoveNext
@@ -1582,13 +1582,13 @@
           IL_007c:  stloc.1
           IL_007d:  leave.s    IL_0099
         }  // end .try
-        catch [System.Runtime]System.Exception
+        catch [System.Runtime]System.Exception 
         {
           IL_007f:  stloc.1
           IL_0080:  leave.s    IL_0099
         }  // end handler
       }  // end .try
-      catch [System.Runtime]System.Exception
+      catch [System.Runtime]System.Exception 
       {
         IL_0082:  stloc.3
         IL_0083:  ldarg.0
@@ -1609,7 +1609,7 @@
       IL_00a8:  call       instance void valuetype [System.Threading.Tasks]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<class [System.Runtime]System.Exception>::SetResult(!0)
       IL_00ad:  ret
     } // end of method '<ExceptionAsync>d__3'::MoveNext
-    .method private hidebysig newslot virtual final
+    .method private hidebysig newslot virtual final 
             instance void  SetStateMachine(class [System.Threading.Tasks]System.Runtime.CompilerServices.IAsyncStateMachine stateMachine) cil managed
     {
       .override [System.Threading.Tasks]System.Runtime.CompilerServices.IAsyncStateMachine::SetStateMachine
@@ -1621,8 +1621,8 @@
       IL_0007:  call       instance void valuetype [System.Threading.Tasks]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<class [System.Runtime]System.Exception>::SetStateMachine(class [System.Threading.Tasks]System.Runtime.CompilerServices.IAsyncStateMachine)
       IL_000c:  ret
     } // end of method '<ExceptionAsync>d__3'::SetStateMachine
-  }
-  .method public hidebysig static class [System.Runtime]System.Exception
+  } 
+  .method public hidebysig static class [System.Runtime]System.Exception 
           Exception(class [System.Runtime]System.Action testCode) cil managed
   {
     // Code size       26 (0x1a)
@@ -1640,15 +1640,15 @@
       IL_0012:  stloc.0
       IL_0013:  leave.s    IL_0018
     }  // end .try
-    catch [System.Runtime]System.Exception
+    catch [System.Runtime]System.Exception 
     {
       IL_0015:  stloc.0
       IL_0016:  leave.s    IL_0018
     }  // end handler
     IL_0018:  ldloc.0
     IL_0019:  ret
-  }
-  .method public hidebysig static class [System.Runtime]System.Exception
+  } 
+  .method public hidebysig static class [System.Runtime]System.Exception 
           Exception(class [System.Runtime]System.Func`1<object> testCode) cil managed
   {
     // Code size       46 (0x2e)
@@ -1667,7 +1667,7 @@
       IL_0016:  stloc.0
       IL_0017:  leave.s    IL_001c
     }  // end .try
-    catch [System.Runtime]System.Exception
+    catch [System.Runtime]System.Exception 
     {
       IL_0019:  stloc.1
       IL_001a:  leave.s    IL_002c
@@ -1682,8 +1682,8 @@
     IL_002b:  ret
     IL_002c:  ldloc.1
     IL_002d:  ret
-  }
-  .method public hidebysig static class [System.Runtime]System.Exception
+  } 
+  .method public hidebysig static class [System.Runtime]System.Exception 
           Exception(class [System.Runtime]System.Func`1<class [System.Threading.Tasks]System.Threading.Tasks.Task> testCode) cil managed
   {
                                                                           bool) = ( 01 00 53 59 6F 75 20 6D 75 73 74 20 63 61 6C 6C   // ..SYou must call
@@ -1696,8 +1696,8 @@
     .maxstack  8
     IL_0000:  newobj     instance void [System.Runtime]System.NotImplementedException::.ctor()
     IL_0005:  throw
-  }
-  .method public hidebysig static class [System.Threading.Tasks]System.Threading.Tasks.Task`1<class [System.Runtime]System.Exception>
+  } 
+  .method public hidebysig static class [System.Threading.Tasks]System.Threading.Tasks.Task`1<class [System.Runtime]System.Exception> 
           ExceptionAsync(class [System.Runtime]System.Func`1<class [System.Threading.Tasks]System.Threading.Tasks.Task> testCode) cil managed
   {
                                                                                                                                                    3C 45 78 63 65 70 74 69 6F 6E 41 73 79 6E 63 3E   // <ExceptionAsync>
@@ -1725,8 +1725,8 @@
     IL_002e:  ldflda     valuetype [System.Threading.Tasks]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<class [System.Runtime]System.Exception> Xunit.Record/'<ExceptionAsync>d__3'::'<>t__builder'
     IL_0033:  call       instance class [System.Threading.Tasks]System.Threading.Tasks.Task`1<!0> valuetype [System.Threading.Tasks]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<class [System.Runtime]System.Exception>::get_Task()
     IL_0038:  ret
-  }
-  .method assembly hidebysig static void
+  } 
+  .method assembly hidebysig static void 
           GuardArgumentNotNull(string argName,
                                object argValue) cil managed
   {
@@ -1738,8 +1738,8 @@
     IL_0004:  newobj     instance void [System.Runtime]System.ArgumentNullException::.ctor(string)
     IL_0009:  throw
     IL_000a:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -1747,14 +1747,14 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi sealed beforefieldinit Xunit.TestCaseOrdererAttribute
        extends [System.Runtime]System.Attribute
 {
                                                                                                                                      69 74 65 64 01 54 02 0D 41 6C 6C 6F 77 4D 75 6C   // ited.T..AllowMul
                                                                                                                                      74 69 70 6C 65 00 )                               // tiple.
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(string ordererTypeName,
                                string ordererAssemblyName) cil managed
   {
@@ -1763,14 +1763,14 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi sealed beforefieldinit Xunit.TestCollectionOrdererAttribute
        extends [System.Runtime]System.Attribute
 {
                                                                                                                                      69 74 65 64 01 54 02 0D 41 6C 6C 6F 77 4D 75 6C   // ited.T..AllowMul
                                                                                                                                      74 69 70 6C 65 00 )                               // tiple.
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(string ordererTypeName,
                                string ordererAssemblyName) cil managed
   {
@@ -1779,7 +1779,7 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi sealed beforefieldinit Xunit.TestFrameworkAttribute
        extends [System.Runtime]System.Attribute
@@ -1792,7 +1792,7 @@
                                                                                       78 65 63 75 74 69 6F 6E 2E 7B 50 6C 61 74 66 6F   // xecution.{Platfo
                                                                                       72 6D 7D 00 00 )                                  // rm}..
                                                                                                                                      4D 75 6C 74 69 70 6C 65 00 )                      // Multiple.
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(string typeName,
                                string assemblyName) cil managed
   {
@@ -1801,7 +1801,7 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.TheoryAttribute
        extends Xunit.FactAttribute
@@ -1812,7 +1812,7 @@
                                                                                       6E 69 74 2E 65 78 65 63 75 74 69 6F 6E 2E 7B 50   // nit.execution.{P
                                                                                       6C 61 74 66 6F 72 6D 7D 00 00 )                   // latform}..
                                                                                                                                      4D 75 6C 74 69 70 6C 65 00 )                      // Multiple.
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -1820,7 +1820,7 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void Xunit.FactAttribute::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public abstract auto ansi beforefieldinit Xunit.TheoryData
        extends [System.Runtime]System.Object
@@ -1828,7 +1828,7 @@
                   [System.Runtime]System.Collections.IEnumerable
 {
   .field private initonly class [System.Collections]System.Collections.Generic.List`1<object[]> data
-  .method family hidebysig instance void
+  .method family hidebysig instance void 
           AddRow(object[] values) cil managed
   {
     .param [1]
@@ -1839,9 +1839,9 @@
     IL_0006:  ldarg.1
     IL_0007:  callvirt   instance void class [System.Collections]System.Collections.Generic.List`1<object[]>::Add(!0)
     IL_000c:  ret
-  }
-  .method public hidebysig newslot virtual final
-          instance class [System.Runtime]System.Collections.Generic.IEnumerator`1<object[]>
+  } 
+  .method public hidebysig newslot virtual final 
+          instance class [System.Runtime]System.Collections.Generic.IEnumerator`1<object[]> 
           GetEnumerator() cil managed
   {
     // Code size       17 (0x11)
@@ -1851,9 +1851,9 @@
     IL_0006:  callvirt   instance valuetype [System.Collections]System.Collections.Generic.List`1/Enumerator<!0> class [System.Collections]System.Collections.Generic.List`1<object[]>::GetEnumerator()
     IL_000b:  box        valuetype [System.Collections]System.Collections.Generic.List`1/Enumerator<object[]>
     IL_0010:  ret
-  }
-  .method private hidebysig newslot virtual final
-          instance class [System.Runtime]System.Collections.IEnumerator
+  } 
+  .method private hidebysig newslot virtual final 
+          instance class [System.Runtime]System.Collections.IEnumerator 
           System.Collections.IEnumerable.GetEnumerator() cil managed
   {
     .override [System.Runtime]System.Collections.IEnumerable::GetEnumerator
@@ -1862,8 +1862,8 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance class [System.Runtime]System.Collections.Generic.IEnumerator`1<object[]> Xunit.TheoryData::GetEnumerator()
     IL_0006:  ret
-  }
-  .method family hidebysig specialname rtspecialname
+  } 
+  .method family hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       18 (0x12)
@@ -1874,12 +1874,12 @@
     IL_000b:  ldarg.0
     IL_000c:  call       instance void [System.Runtime]System.Object::.ctor()
     IL_0011:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.TheoryData`1<T>
        extends Xunit.TheoryData
 {
-  .method public hidebysig instance void
+  .method public hidebysig instance void 
           Add(!T p) cil managed
   {
     // Code size       22 (0x16)
@@ -1894,8 +1894,8 @@
     IL_000f:  stelem.ref
     IL_0010:  call       instance void Xunit.TheoryData::AddRow(object[])
     IL_0015:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -1903,12 +1903,12 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void Xunit.TheoryData::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.TheoryData`2<T1,T2>
        extends Xunit.TheoryData
 {
-  .method public hidebysig instance void
+  .method public hidebysig instance void 
           Add(!T1 p1,
               !T2 p2) cil managed
   {
@@ -1929,8 +1929,8 @@
     IL_0018:  stelem.ref
     IL_0019:  call       instance void Xunit.TheoryData::AddRow(object[])
     IL_001e:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -1938,12 +1938,12 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void Xunit.TheoryData::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.TheoryData`3<T1,T2,T3>
        extends Xunit.TheoryData
 {
-  .method public hidebysig instance void
+  .method public hidebysig instance void 
           Add(!T1 p1,
               !T2 p2,
               !T3 p3) cil managed
@@ -1970,8 +1970,8 @@
     IL_0021:  stelem.ref
     IL_0022:  call       instance void Xunit.TheoryData::AddRow(object[])
     IL_0027:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -1979,12 +1979,12 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void Xunit.TheoryData::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.TheoryData`4<T1,T2,T3,T4>
        extends Xunit.TheoryData
 {
-  .method public hidebysig instance void
+  .method public hidebysig instance void 
           Add(!T1 p1,
               !T2 p2,
               !T3 p3,
@@ -2017,8 +2017,8 @@
     IL_002b:  stelem.ref
     IL_002c:  call       instance void Xunit.TheoryData::AddRow(object[])
     IL_0031:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -2026,13 +2026,13 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void Xunit.TheoryData::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.TheoryData`5<T1,T2,T3,T4,
                                                            T5>
        extends Xunit.TheoryData
 {
-  .method public hidebysig instance void
+  .method public hidebysig instance void 
           Add(!T1 p1,
               !T2 p2,
               !T3 p3,
@@ -2071,8 +2071,8 @@
     IL_0035:  stelem.ref
     IL_0036:  call       instance void Xunit.TheoryData::AddRow(object[])
     IL_003b:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -2080,13 +2080,13 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void Xunit.TheoryData::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.TheoryData`6<T1,T2,T3,T4,
                                                            T5,T6>
        extends Xunit.TheoryData
 {
-  .method public hidebysig instance void
+  .method public hidebysig instance void 
           Add(!T1 p1,
               !T2 p2,
               !T3 p3,
@@ -2131,8 +2131,8 @@
     IL_003f:  stelem.ref
     IL_0040:  call       instance void Xunit.TheoryData::AddRow(object[])
     IL_0045:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -2140,13 +2140,13 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void Xunit.TheoryData::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.TheoryData`7<T1,T2,T3,T4,
                                                            T5,T6,T7>
        extends Xunit.TheoryData
 {
-  .method public hidebysig instance void
+  .method public hidebysig instance void 
           Add(!T1 p1,
               !T2 p2,
               !T3 p3,
@@ -2197,8 +2197,8 @@
     IL_0049:  stelem.ref
     IL_004a:  call       instance void Xunit.TheoryData::AddRow(object[])
     IL_004f:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -2206,13 +2206,13 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void Xunit.TheoryData::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.TheoryData`8<T1,T2,T3,T4,
                                                            T5,T6,T7,T8>
        extends Xunit.TheoryData
 {
-  .method public hidebysig instance void
+  .method public hidebysig instance void 
           Add(!T1 p1,
               !T2 p2,
               !T3 p3,
@@ -2269,8 +2269,8 @@
     IL_0053:  stelem.ref
     IL_0054:  call       instance void Xunit.TheoryData::AddRow(object[])
     IL_0059:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -2278,14 +2278,14 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void Xunit.TheoryData::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.TheoryData`9<T1,T2,T3,T4,
                                                            T5,T6,T7,T8,
                                                            T9>
        extends Xunit.TheoryData
 {
-  .method public hidebysig instance void
+  .method public hidebysig instance void 
           Add(!T1 p1,
               !T2 p2,
               !T3 p3,
@@ -2348,8 +2348,8 @@
     IL_005e:  stelem.ref
     IL_005f:  call       instance void Xunit.TheoryData::AddRow(object[])
     IL_0064:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -2357,14 +2357,14 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void Xunit.TheoryData::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.TheoryData`10<T1,T2,T3,T4,
                                                             T5,T6,T7,T8,
                                                             T9,T10>
        extends Xunit.TheoryData
 {
-  .method public hidebysig instance void
+  .method public hidebysig instance void 
           Add(!T1 p1,
               !T2 p2,
               !T3 p3,
@@ -2433,8 +2433,8 @@
     IL_0069:  stelem.ref
     IL_006a:  call       instance void Xunit.TheoryData::AddRow(object[])
     IL_006f:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -2442,7 +2442,7 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void Xunit.TheoryData::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi sealed beforefieldinit Xunit.TraitAttribute
        extends [System.Runtime]System.Attribute
@@ -2453,7 +2453,7 @@
                                                                               69 74 44 69 73 63 6F 76 65 72 65 72 0A 78 75 6E   // itDiscoverer.xun
                                                                               69 74 2E 63 6F 72 65 00 00 )                      // it.core..
                                                                                                                                      4D 75 6C 74 69 70 6C 65 01 )                      // Multiple.
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(string name,
                                string 'value') cil managed
   {
@@ -2462,7 +2462,7 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.Sdk.AssemblyTraitDiscoverer
        extends [System.Runtime]System.Object
@@ -2481,7 +2481,7 @@
     .field private int32 '<>l__initialThreadId'
     .field private class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo traitAttribute
     .field public class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo '<>3__traitAttribute'
-    .method public hidebysig specialname rtspecialname
+    .method public hidebysig specialname rtspecialname 
             instance void  .ctor(int32 '<>1__state') cil managed
     {
       // Code size       25 (0x19)
@@ -2496,7 +2496,7 @@
       IL_0013:  stfld      int32 Xunit.Sdk.AssemblyTraitDiscoverer/'<GetTraits>d__0'::'<>l__initialThreadId'
       IL_0018:  ret
     } // end of method '<GetTraits>d__0'::.ctor
-    .method private hidebysig newslot virtual final
+    .method private hidebysig newslot virtual final 
             instance void  System.IDisposable.Dispose() cil managed
     {
       .override [System.Runtime]System.IDisposable::Dispose
@@ -2504,7 +2504,7 @@
       .maxstack  8
       IL_0000:  ret
     } // end of method '<GetTraits>d__0'::System.IDisposable.Dispose
-    .method private hidebysig newslot virtual final
+    .method private hidebysig newslot virtual final 
             instance bool  MoveNext() cil managed
     {
       .override [System.Runtime]System.Collections.IEnumerator::MoveNext
@@ -2552,8 +2552,8 @@
       IL_0056:  ldc.i4.0
       IL_0057:  ret
     } // end of method '<GetTraits>d__0'::MoveNext
-    .method private hidebysig newslot specialname virtual final
-            instance valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>
+    .method private hidebysig newslot specialname virtual final 
+            instance valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string> 
             'System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<System.String,System.String>>.get_Current'() cil managed
     {
       .override  method instance !0 class [System.Runtime]System.Collections.Generic.IEnumerator`1<valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>>::get_Current()
@@ -2563,7 +2563,7 @@
       IL_0001:  ldfld      valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string> Xunit.Sdk.AssemblyTraitDiscoverer/'<GetTraits>d__0'::'<>2__current'
       IL_0006:  ret
     } // end of method '<GetTraits>d__0'::'System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<System.String,System.String>>.get_Current'
-    .method private hidebysig newslot virtual final
+    .method private hidebysig newslot virtual final 
             instance void  System.Collections.IEnumerator.Reset() cil managed
     {
       .override [System.Runtime]System.Collections.IEnumerator::Reset
@@ -2572,7 +2572,7 @@
       IL_0000:  newobj     instance void [System.Runtime]System.NotSupportedException::.ctor()
       IL_0005:  throw
     } // end of method '<GetTraits>d__0'::System.Collections.IEnumerator.Reset
-    .method private hidebysig newslot specialname virtual final
+    .method private hidebysig newslot specialname virtual final 
             instance object  System.Collections.IEnumerator.get_Current() cil managed
     {
       .override [System.Runtime]System.Collections.IEnumerator::get_Current
@@ -2583,8 +2583,8 @@
       IL_0006:  box        valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>
       IL_000b:  ret
     } // end of method '<GetTraits>d__0'::System.Collections.IEnumerator.get_Current
-    .method private hidebysig newslot virtual final
-            instance class [System.Runtime]System.Collections.Generic.IEnumerator`1<valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>>
+    .method private hidebysig newslot virtual final 
+            instance class [System.Runtime]System.Collections.Generic.IEnumerator`1<valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>> 
             'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.String>>.GetEnumerator'() cil managed
     {
       .override  method instance class [System.Runtime]System.Collections.Generic.IEnumerator`1<!0> class [System.Runtime]System.Collections.Generic.IEnumerable`1<valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>>::GetEnumerator()
@@ -2615,8 +2615,8 @@
       IL_0035:  ldloc.0
       IL_0036:  ret
     } // end of method '<GetTraits>d__0'::'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.String>>.GetEnumerator'
-    .method private hidebysig newslot virtual final
-            instance class [System.Runtime]System.Collections.IEnumerator
+    .method private hidebysig newslot virtual final 
+            instance class [System.Runtime]System.Collections.IEnumerator 
             System.Collections.IEnumerable.GetEnumerator() cil managed
     {
       .override [System.Runtime]System.Collections.IEnumerable::GetEnumerator
@@ -2635,9 +2635,9 @@
     {
       .get instance object Xunit.Sdk.AssemblyTraitDiscoverer/'<GetTraits>d__0'::System.Collections.IEnumerator.get_Current()
     } // end of property '<GetTraits>d__0'::System.Collections.IEnumerator.Current
-  }
-  .method public hidebysig newslot virtual
-          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>>
+  } 
+  .method public hidebysig newslot virtual 
+          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>> 
           GetTraits(class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo traitAttribute) cil managed
   {
                                                                                                                                                       65 6D 62 6C 79 54 72 61 69 74 44 69 73 63 6F 76   // emblyTraitDiscov
@@ -2651,8 +2651,8 @@
     IL_0008:  ldarg.1
     IL_0009:  stfld      class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo Xunit.Sdk.AssemblyTraitDiscoverer/'<GetTraits>d__0'::'<>3__traitAttribute'
     IL_000e:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -2660,28 +2660,28 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public abstract auto ansi beforefieldinit Xunit.Sdk.BeforeAfterTestAttribute
        extends [System.Runtime]System.Attribute
 {
                                                                                                                                      4D 75 6C 74 69 70 6C 65 01 54 02 09 49 6E 68 65   // Multiple.T..Inhe
                                                                                                                                      72 69 74 65 64 01 )                               // rited.
-  .method public hidebysig newslot virtual
+  .method public hidebysig newslot virtual 
           instance void  After(class [System.Reflection]System.Reflection.MethodInfo methodUnderTest) cil managed
   {
     // Code size       1 (0x1)
     .maxstack  8
     IL_0000:  ret
-  }
-  .method public hidebysig newslot virtual
+  } 
+  .method public hidebysig newslot virtual 
           instance void  Before(class [System.Reflection]System.Reflection.MethodInfo methodUnderTest) cil managed
   {
     // Code size       1 (0x1)
     .maxstack  8
     IL_0000:  ret
-  }
-  .method family hidebysig specialname rtspecialname
+  } 
+  .method family hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -2689,7 +2689,7 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public abstract auto ansi beforefieldinit Xunit.Sdk.DataAttribute
        extends [System.Runtime]System.Attribute
@@ -2701,12 +2701,12 @@
                                                                                                                                      4D 75 6C 74 69 70 6C 65 01 54 02 09 49 6E 68 65   // Multiple.T..Inhe
                                                                                                                                      72 69 74 65 64 01 )                               // rited.
   .field private string '<Skip>k__BackingField'
-  .method public hidebysig newslot abstract virtual
-          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]>
+  .method public hidebysig newslot abstract virtual 
+          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]> 
           GetData(class [System.Reflection]System.Reflection.MethodInfo testMethod) cil managed
   {
-  }
-  .method public hidebysig newslot specialname virtual
+  } 
+  .method public hidebysig newslot specialname virtual 
           instance string  get_Skip() cil managed
   {
     // Code size       7 (0x7)
@@ -2714,8 +2714,8 @@
     IL_0000:  ldarg.0
     IL_0001:  ldfld      string Xunit.Sdk.DataAttribute::'<Skip>k__BackingField'
     IL_0006:  ret
-  }
-  .method public hidebysig newslot specialname virtual
+  } 
+  .method public hidebysig newslot specialname virtual 
           instance void  set_Skip(string 'value') cil managed
   {
     // Code size       8 (0x8)
@@ -2724,8 +2724,8 @@
     IL_0001:  ldarg.1
     IL_0002:  stfld      string Xunit.Sdk.DataAttribute::'<Skip>k__BackingField'
     IL_0007:  ret
-  }
-  .method family hidebysig specialname rtspecialname
+  } 
+  .method family hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -2733,17 +2733,17 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
+  } 
   .property instance string Skip()
   {
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.Sdk.DataDiscoverer
        extends [System.Runtime]System.Object
        implements Xunit.Sdk.IDataDiscoverer
 {
-  .method public hidebysig newslot virtual
-          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]>
+  .method public hidebysig newslot virtual 
+          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]> 
           GetData(class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo dataAttribute,
                   class [xunit.abstractions]Xunit.Abstractions.IMethodInfo testMethod) cil managed
   {
@@ -2778,7 +2778,7 @@
       IL_002c:  stloc.3
       IL_002d:  leave.s    IL_0071
     }  // end .try
-    catch [System.Runtime]System.ArgumentException
+    catch [System.Runtime]System.ArgumentException 
     {
       IL_002f:  pop
       IL_0030:  ldloc.2
@@ -2808,8 +2808,8 @@
     IL_0070:  ret
     IL_0071:  ldloc.3
     IL_0072:  ret
-  }
-  .method public hidebysig newslot virtual
+  } 
+  .method public hidebysig newslot virtual 
           instance bool  SupportsDiscoveryEnumeration(class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo dataAttribute,
                                                       class [xunit.abstractions]Xunit.Abstractions.IMethodInfo testMethod) cil managed
   {
@@ -2817,8 +2817,8 @@
     .maxstack  8
     IL_0000:  ldc.i4.1
     IL_0001:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -2826,14 +2826,14 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi sealed beforefieldinit Xunit.Sdk.DataDiscovererAttribute
        extends [System.Runtime]System.Attribute
 {
                                                                                                                                      4D 75 6C 74 69 70 6C 65 00 54 02 09 49 6E 68 65   // Multiple.T..Inhe
                                                                                                                                      72 69 74 65 64 01 )                               // rited.
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(string typeName,
                                string assemblyName) cil managed
   {
@@ -2842,7 +2842,7 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.Sdk.ExceptionAggregator
        extends [System.Runtime]System.Object
@@ -2856,7 +2856,7 @@
     .field public class [System.Runtime]System.Func`1<class [System.Threading.Tasks]System.Threading.Tasks.Task> code
     .field public class Xunit.Sdk.ExceptionAggregator '<>4__this'
     .field private valuetype [System.Threading.Tasks]System.Runtime.CompilerServices.TaskAwaiter '<>u__1'
-    .method private hidebysig newslot virtual final
+    .method private hidebysig newslot virtual final 
             instance void  MoveNext() cil managed
     {
       .override [System.Threading.Tasks]System.Runtime.CompilerServices.IAsyncStateMachine::MoveNext
@@ -2920,7 +2920,7 @@
           IL_006c:  call       instance void [System.Threading.Tasks]System.Runtime.CompilerServices.TaskAwaiter::GetResult()
           IL_0071:  leave.s    IL_0087
         }  // end .try
-        catch [System.Runtime]System.Exception
+        catch [System.Runtime]System.Exception 
         {
           IL_0073:  stloc.3
           IL_0074:  ldloc.1
@@ -2932,7 +2932,7 @@
         }  // end handler
         IL_0087:  leave.s    IL_00a2
       }  // end .try
-      catch [System.Runtime]System.Exception
+      catch [System.Runtime]System.Exception 
       {
         IL_0089:  stloc.s    V_4
         IL_008b:  ldarg.0
@@ -2952,7 +2952,7 @@
       IL_00b0:  call       instance void [System.Threading.Tasks]System.Runtime.CompilerServices.AsyncTaskMethodBuilder::SetResult()
       IL_00b5:  ret
     } // end of method '<RunAsync>d__9'::MoveNext
-    .method private hidebysig newslot virtual final
+    .method private hidebysig newslot virtual final 
             instance void  SetStateMachine(class [System.Threading.Tasks]System.Runtime.CompilerServices.IAsyncStateMachine stateMachine) cil managed
     {
       .override [System.Threading.Tasks]System.Runtime.CompilerServices.IAsyncStateMachine::SetStateMachine
@@ -2964,7 +2964,7 @@
       IL_0007:  call       instance void [System.Threading.Tasks]System.Runtime.CompilerServices.AsyncTaskMethodBuilder::SetStateMachine(class [System.Threading.Tasks]System.Runtime.CompilerServices.IAsyncStateMachine)
       IL_000c:  ret
     } // end of method '<RunAsync>d__9'::SetStateMachine
-  }
+  } 
   .class auto ansi sealed nested private beforefieldinit '<RunAsync>d__10`1'<T>
          extends [System.Runtime]System.ValueType
          implements [System.Threading.Tasks]System.Runtime.CompilerServices.IAsyncStateMachine
@@ -2974,7 +2974,7 @@
     .field public class [System.Runtime]System.Func`1<class [System.Threading.Tasks]System.Threading.Tasks.Task`1<!T>> code
     .field public class Xunit.Sdk.ExceptionAggregator '<>4__this'
     .field private valuetype [System.Threading.Tasks]System.Runtime.CompilerServices.TaskAwaiter`1<!T> '<>u__1'
-    .method private hidebysig newslot virtual final
+    .method private hidebysig newslot virtual final 
             instance void  MoveNext() cil managed
     {
       .override [System.Threading.Tasks]System.Runtime.CompilerServices.IAsyncStateMachine::MoveNext
@@ -3040,7 +3040,7 @@
           IL_0071:  stloc.2
           IL_0072:  leave.s    IL_00ab
         }  // end .try
-        catch [System.Runtime]System.Exception
+        catch [System.Runtime]System.Exception 
         {
           IL_0074:  stloc.s    V_4
           IL_0076:  ldloc.1
@@ -3053,7 +3053,7 @@
           IL_0090:  leave.s    IL_00ab
         }  // end handler
       }  // end .try
-      catch [System.Runtime]System.Exception
+      catch [System.Runtime]System.Exception 
       {
         IL_0092:  stloc.s    V_5
         IL_0094:  ldarg.0
@@ -3074,7 +3074,7 @@
       IL_00ba:  call       instance void valuetype [System.Threading.Tasks]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<!T>::SetResult(!0)
       IL_00bf:  ret
     } // end of method '<RunAsync>d__10`1'::MoveNext
-    .method private hidebysig newslot virtual final
+    .method private hidebysig newslot virtual final 
             instance void  SetStateMachine(class [System.Threading.Tasks]System.Runtime.CompilerServices.IAsyncStateMachine stateMachine) cil managed
     {
       .override [System.Threading.Tasks]System.Runtime.CompilerServices.IAsyncStateMachine::SetStateMachine
@@ -3086,9 +3086,9 @@
       IL_0007:  call       instance void valuetype [System.Threading.Tasks]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<!T>::SetStateMachine(class [System.Threading.Tasks]System.Runtime.CompilerServices.IAsyncStateMachine)
       IL_000c:  ret
     } // end of method '<RunAsync>d__10`1'::SetStateMachine
-  }
+  } 
   .field private initonly class [System.Collections]System.Collections.Generic.List`1<class [System.Runtime]System.Exception> exceptions
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       18 (0x12)
@@ -3099,8 +3099,8 @@
     IL_0007:  newobj     instance void class [System.Collections]System.Collections.Generic.List`1<class [System.Runtime]System.Exception>::.ctor()
     IL_000c:  stfld      class [System.Collections]System.Collections.Generic.List`1<class [System.Runtime]System.Exception> Xunit.Sdk.ExceptionAggregator::exceptions
     IL_0011:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(class Xunit.Sdk.ExceptionAggregator parent) cil managed
   {
     // Code size       24 (0x18)
@@ -3113,8 +3113,8 @@
     IL_000d:  newobj     instance void class [System.Collections]System.Collections.Generic.List`1<class [System.Runtime]System.Exception>::.ctor(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!0>)
     IL_0012:  stfld      class [System.Collections]System.Collections.Generic.List`1<class [System.Runtime]System.Exception> Xunit.Sdk.ExceptionAggregator::exceptions
     IL_0017:  ret
-  }
-  .method public hidebysig specialname instance bool
+  } 
+  .method public hidebysig specialname instance bool 
           get_HasExceptions() cil managed
   {
     // Code size       15 (0xf)
@@ -3125,8 +3125,8 @@
     IL_000b:  ldc.i4.0
     IL_000c:  cgt
     IL_000e:  ret
-  }
-  .method public hidebysig instance void
+  } 
+  .method public hidebysig instance void 
           Add(class [System.Runtime]System.Exception ex) cil managed
   {
     // Code size       13 (0xd)
@@ -3136,8 +3136,8 @@
     IL_0006:  ldarg.1
     IL_0007:  callvirt   instance void class [System.Collections]System.Collections.Generic.List`1<class [System.Runtime]System.Exception>::Add(!0)
     IL_000c:  ret
-  }
-  .method public hidebysig instance void
+  } 
+  .method public hidebysig instance void 
           Aggregate(class Xunit.Sdk.ExceptionAggregator aggregator) cil managed
   {
     // Code size       18 (0x12)
@@ -3148,8 +3148,8 @@
     IL_0007:  ldfld      class [System.Collections]System.Collections.Generic.List`1<class [System.Runtime]System.Exception> Xunit.Sdk.ExceptionAggregator::exceptions
     IL_000c:  callvirt   instance void class [System.Collections]System.Collections.Generic.List`1<class [System.Runtime]System.Exception>::AddRange(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!0>)
     IL_0011:  ret
-  }
-  .method public hidebysig instance void
+  } 
+  .method public hidebysig instance void 
           Clear() cil managed
   {
     // Code size       12 (0xc)
@@ -3158,8 +3158,8 @@
     IL_0001:  ldfld      class [System.Collections]System.Collections.Generic.List`1<class [System.Runtime]System.Exception> Xunit.Sdk.ExceptionAggregator::exceptions
     IL_0006:  callvirt   instance void class [System.Collections]System.Collections.Generic.List`1<class [System.Runtime]System.Exception>::Clear()
     IL_000b:  ret
-  }
-  .method public hidebysig instance void
+  } 
+  .method public hidebysig instance void 
           Run(class [System.Runtime]System.Action code) cil managed
   {
     // Code size       29 (0x1d)
@@ -3171,7 +3171,7 @@
       IL_0001:  callvirt   instance void [System.Runtime]System.Action::Invoke()
       IL_0006:  leave.s    IL_001c
     }  // end .try
-    catch [System.Runtime]System.Exception
+    catch [System.Runtime]System.Exception 
     {
       IL_0008:  stloc.0
       IL_0009:  ldarg.0
@@ -3182,13 +3182,13 @@
       IL_001a:  leave.s    IL_001c
     }  // end handler
     IL_001c:  ret
-  }
-  .method public hidebysig instance class [System.Threading.Tasks]System.Threading.Tasks.Task
+  } 
+  .method public hidebysig instance class [System.Threading.Tasks]System.Threading.Tasks.Task 
           RunAsync(class [System.Runtime]System.Func`1<class [System.Threading.Tasks]System.Threading.Tasks.Task> code) cil managed
   {
                                                                                                                                                    65 70 74 69 6F 6E 41 67 67 72 65 67 61 74 6F 72   // eptionAggregator
                                                                                                                                                    2B 3C 52 75 6E 41 73 79 6E 63 3E 64 5F 5F 39 00   // +<RunAsync>d__9.
-                                                                                                                                                   00 )
+                                                                                                                                                   00 ) 
     // Code size       65 (0x41)
     .maxstack  2
     .locals init (valuetype Xunit.Sdk.ExceptionAggregator/'<RunAsync>d__9' V_0,
@@ -3215,8 +3215,8 @@
     IL_0036:  ldflda     valuetype [System.Threading.Tasks]System.Runtime.CompilerServices.AsyncTaskMethodBuilder Xunit.Sdk.ExceptionAggregator/'<RunAsync>d__9'::'<>t__builder'
     IL_003b:  call       instance class [System.Threading.Tasks]System.Threading.Tasks.Task [System.Threading.Tasks]System.Runtime.CompilerServices.AsyncTaskMethodBuilder::get_Task()
     IL_0040:  ret
-  }
-  .method public hidebysig instance class [System.Threading.Tasks]System.Threading.Tasks.Task`1<!!T>
+  } 
+  .method public hidebysig instance class [System.Threading.Tasks]System.Threading.Tasks.Task`1<!!T> 
           RunAsync<T>(class [System.Runtime]System.Func`1<class [System.Threading.Tasks]System.Threading.Tasks.Task`1<!!T>> code) cil managed
   {
                                                                                                                                                    65 70 74 69 6F 6E 41 67 67 72 65 67 61 74 6F 72   // eptionAggregator
@@ -3248,8 +3248,8 @@
     IL_0036:  ldflda     valuetype [System.Threading.Tasks]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<!0> valuetype Xunit.Sdk.ExceptionAggregator/'<RunAsync>d__10`1'<!!T>::'<>t__builder'
     IL_003b:  call       instance class [System.Threading.Tasks]System.Threading.Tasks.Task`1<!0> valuetype [System.Threading.Tasks]System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1<!!T>::get_Task()
     IL_0040:  ret
-  }
-  .method public hidebysig instance class [System.Runtime]System.Exception
+  } 
+  .method public hidebysig instance class [System.Runtime]System.Exception 
           ToException() cil managed
   {
     // Code size       54 (0x36)
@@ -3274,39 +3274,39 @@
     IL_002b:  ldfld      class [System.Collections]System.Collections.Generic.List`1<class [System.Runtime]System.Exception> Xunit.Sdk.ExceptionAggregator::exceptions
     IL_0030:  newobj     instance void [System.Threading.Tasks]System.AggregateException::.ctor(class [System.Runtime]System.Collections.Generic.IEnumerable`1<class [System.Runtime]System.Exception>)
     IL_0035:  ret
-  }
+  } 
   .property instance bool HasExceptions()
   {
-  }
+  } 
 }
 .class interface public abstract auto ansi Xunit.Sdk.IDataDiscoverer
 {
-  .method public hidebysig newslot abstract virtual
-          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]>
+  .method public hidebysig newslot abstract virtual 
+          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]> 
           GetData(class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo dataAttribute,
                   class [xunit.abstractions]Xunit.Abstractions.IMethodInfo testMethod) cil managed
   {
-  }
-  .method public hidebysig newslot abstract virtual
+  } 
+  .method public hidebysig newslot abstract virtual 
           instance bool  SupportsDiscoveryEnumeration(class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo dataAttribute,
                                                       class [xunit.abstractions]Xunit.Abstractions.IMethodInfo testMethod) cil managed
   {
-  }
+  } 
 }
 .class interface public abstract auto ansi Xunit.Sdk.IMessageBus
        implements [System.Runtime]System.IDisposable
 {
-  .method public hidebysig newslot abstract virtual
+  .method public hidebysig newslot abstract virtual 
           instance bool  QueueMessage(class [xunit.abstractions]Xunit.Abstractions.IMessageSinkMessage message) cil managed
   {
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.Sdk.InlineDataDiscoverer
        extends [System.Runtime]System.Object
        implements Xunit.Sdk.IDataDiscoverer
 {
-  .method public hidebysig newslot virtual
-          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]>
+  .method public hidebysig newslot virtual 
+          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]> 
           GetData(class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo dataAttribute,
                   class [xunit.abstractions]Xunit.Abstractions.IMethodInfo testMethod) cil managed
   {
@@ -3331,8 +3331,8 @@
     IL_0024:  call       !!0[] [System.Linq]System.Linq.Enumerable::ToArray<object>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>)
     IL_0029:  stelem.ref
     IL_002a:  ret
-  }
-  .method public hidebysig newslot virtual
+  } 
+  .method public hidebysig newslot virtual 
           instance bool  SupportsDiscoveryEnumeration(class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo dataAttribute,
                                                       class [xunit.abstractions]Xunit.Abstractions.IMethodInfo testMethod) cil managed
   {
@@ -3340,8 +3340,8 @@
     .maxstack  8
     IL_0000:  ldc.i4.1
     IL_0001:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -3349,106 +3349,106 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class interface public abstract auto ansi Xunit.Sdk.ITestCaseOrderer
 {
-  .method public hidebysig newslot abstract virtual
-          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!TTestCase>
+  .method public hidebysig newslot abstract virtual 
+          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!TTestCase> 
           OrderTestCases<([xunit.abstractions]Xunit.Abstractions.ITestCase) TTestCase>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!TTestCase> testCases) cil managed
   {
-  }
+  } 
 }
 .class interface public abstract auto ansi Xunit.Sdk.ITestFrameworkAttribute
 {
 }
 .class interface public abstract auto ansi Xunit.Sdk.ITestFrameworkTypeDiscoverer
 {
-  .method public hidebysig newslot abstract virtual
-          instance class [System.Runtime]System.Type
+  .method public hidebysig newslot abstract virtual 
+          instance class [System.Runtime]System.Type 
           GetTestFrameworkType(class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo attribute) cil managed
   {
-  }
+  } 
 }
 .class interface public abstract auto ansi Xunit.Sdk.ITraitAttribute
 {
 }
 .class interface public abstract auto ansi Xunit.Sdk.ITraitDiscoverer
 {
-  .method public hidebysig newslot abstract virtual
-          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>>
+  .method public hidebysig newslot abstract virtual 
+          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>> 
           GetTraits(class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo traitAttribute) cil managed
   {
-  }
+  } 
 }
 .class interface public abstract auto ansi Xunit.Sdk.IXunitTestCase
        implements [xunit.abstractions]Xunit.Abstractions.ITestCase,
                   [xunit.abstractions]Xunit.Abstractions.IXunitSerializable
 {
-  .method public hidebysig newslot specialname abstract virtual
-          instance class [System.Runtime]System.Exception
+  .method public hidebysig newslot specialname abstract virtual 
+          instance class [System.Runtime]System.Exception 
           get_InitializationException() cil managed
   {
-  }
-  .method public hidebysig newslot specialname abstract virtual
-          instance class [xunit.abstractions]Xunit.Abstractions.IMethodInfo
+  } 
+  .method public hidebysig newslot specialname abstract virtual 
+          instance class [xunit.abstractions]Xunit.Abstractions.IMethodInfo 
           get_Method() cil managed
   {
-  }
-  .method public hidebysig newslot specialname abstract virtual
+  } 
+  .method public hidebysig newslot specialname abstract virtual 
           instance int32  get_Timeout() cil managed
   {
-  }
-  .method public hidebysig newslot abstract virtual
-          instance class [System.Threading.Tasks]System.Threading.Tasks.Task`1<class Xunit.Sdk.RunSummary>
+  } 
+  .method public hidebysig newslot abstract virtual 
+          instance class [System.Threading.Tasks]System.Threading.Tasks.Task`1<class Xunit.Sdk.RunSummary> 
           RunAsync(class [xunit.abstractions]Xunit.Abstractions.IMessageSink diagnosticMessageSink,
                    class Xunit.Sdk.IMessageBus messageBus,
                    object[] constructorArguments,
                    class Xunit.Sdk.ExceptionAggregator aggregator,
                    class [System.Threading.Tasks]System.Threading.CancellationTokenSource cancellationTokenSource) cil managed
   {
-  }
+  } 
   .property instance class [System.Runtime]System.Exception
           InitializationException()
   {
-  }
+  } 
   .property instance class [xunit.abstractions]Xunit.Abstractions.IMethodInfo
           Method()
   {
-  }
+  } 
   .property instance int32 Timeout()
   {
-  }
+  } 
 }
 .class interface public abstract auto ansi Xunit.Sdk.IXunitTestCaseDiscoverer
 {
-  .method public hidebysig newslot abstract virtual
-          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<class Xunit.Sdk.IXunitTestCase>
+  .method public hidebysig newslot abstract virtual 
+          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<class Xunit.Sdk.IXunitTestCase> 
           Discover(class [xunit.abstractions]Xunit.Abstractions.ITestFrameworkDiscoveryOptions discoveryOptions,
                    class [xunit.abstractions]Xunit.Abstractions.ITestMethod testMethod,
                    class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo factAttribute) cil managed
   {
-  }
+  } 
 }
 .class interface public abstract auto ansi Xunit.Sdk.IXunitTestCollectionFactory
 {
-  .method public hidebysig newslot specialname abstract virtual
+  .method public hidebysig newslot specialname abstract virtual 
           instance string  get_DisplayName() cil managed
   {
-  }
-  .method public hidebysig newslot abstract virtual
-          instance class [xunit.abstractions]Xunit.Abstractions.ITestCollection
+  } 
+  .method public hidebysig newslot abstract virtual 
+          instance class [xunit.abstractions]Xunit.Abstractions.ITestCollection 
           Get(class [xunit.abstractions]Xunit.Abstractions.ITypeInfo testClass) cil managed
   {
-  }
+  } 
   .property instance string DisplayName()
   {
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.Sdk.MemberDataDiscoverer
        extends Xunit.Sdk.DataDiscoverer
 {
-  .method public hidebysig virtual instance bool
+  .method public hidebysig virtual instance bool 
           SupportsDiscoveryEnumeration(class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo dataAttribute,
                                        class [xunit.abstractions]Xunit.Abstractions.IMethodInfo testMethod) cil managed
   {
@@ -3460,8 +3460,8 @@
     IL_000b:  ldc.i4.0
     IL_000c:  ceq
     IL_000e:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -3469,14 +3469,14 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void Xunit.Sdk.DataDiscoverer::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi sealed beforefieldinit Xunit.Sdk.PlatformSpecificAssemblyAttribute
        extends [System.Runtime]System.Attribute
 {
                                                                                                                                      4D 75 6C 74 69 70 6C 65 00 54 02 09 49 6E 68 65   // Multiple.T..Inhe
                                                                                                                                      72 69 74 65 64 00 )                               // rited.
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -3484,7 +3484,7 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.Sdk.RunSummary
        extends [System.Runtime]System.Object
@@ -3493,7 +3493,7 @@
   .field public int32 Failed
   .field public int32 Skipped
   .field public valuetype [System.Runtime]System.Decimal Time
-  .method public hidebysig instance void
+  .method public hidebysig instance void 
           Aggregate(class Xunit.Sdk.RunSummary other) cil managed
   {
     // Code size       81 (0x51)
@@ -3528,8 +3528,8 @@
                                                                                                               valuetype [System.Runtime]System.Decimal)
     IL_004b:  stfld      valuetype [System.Runtime]System.Decimal Xunit.Sdk.RunSummary::Time
     IL_0050:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -3537,14 +3537,14 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi sealed beforefieldinit Xunit.Sdk.TestFrameworkDiscovererAttribute
        extends [System.Runtime]System.Attribute
 {
                                                                                                                                      4D 75 6C 74 69 70 6C 65 00 54 02 09 49 6E 68 65   // Multiple.T..Inhe
                                                                                                                                      72 69 74 65 64 01 )                               // rited.
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(string typeName,
                                string assemblyName) cil managed
   {
@@ -3553,7 +3553,7 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi beforefieldinit Xunit.Sdk.TraitDiscoverer
        extends [System.Runtime]System.Object
@@ -3572,7 +3572,7 @@
     .field private int32 '<>l__initialThreadId'
     .field private class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo traitAttribute
     .field public class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo '<>3__traitAttribute'
-    .method public hidebysig specialname rtspecialname
+    .method public hidebysig specialname rtspecialname 
             instance void  .ctor(int32 '<>1__state') cil managed
     {
       // Code size       25 (0x19)
@@ -3587,7 +3587,7 @@
       IL_0013:  stfld      int32 Xunit.Sdk.TraitDiscoverer/'<GetTraits>d__0'::'<>l__initialThreadId'
       IL_0018:  ret
     } // end of method '<GetTraits>d__0'::.ctor
-    .method private hidebysig newslot virtual final
+    .method private hidebysig newslot virtual final 
             instance void  System.IDisposable.Dispose() cil managed
     {
       .override [System.Runtime]System.IDisposable::Dispose
@@ -3595,7 +3595,7 @@
       .maxstack  8
       IL_0000:  ret
     } // end of method '<GetTraits>d__0'::System.IDisposable.Dispose
-    .method private hidebysig newslot virtual final
+    .method private hidebysig newslot virtual final 
             instance bool  MoveNext() cil managed
     {
       .override [System.Runtime]System.Collections.IEnumerator::MoveNext
@@ -3643,8 +3643,8 @@
       IL_0056:  ldc.i4.0
       IL_0057:  ret
     } // end of method '<GetTraits>d__0'::MoveNext
-    .method private hidebysig newslot specialname virtual final
-            instance valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>
+    .method private hidebysig newslot specialname virtual final 
+            instance valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string> 
             'System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<System.String,System.String>>.get_Current'() cil managed
     {
       .override  method instance !0 class [System.Runtime]System.Collections.Generic.IEnumerator`1<valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>>::get_Current()
@@ -3654,7 +3654,7 @@
       IL_0001:  ldfld      valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string> Xunit.Sdk.TraitDiscoverer/'<GetTraits>d__0'::'<>2__current'
       IL_0006:  ret
     } // end of method '<GetTraits>d__0'::'System.Collections.Generic.IEnumerator<System.Collections.Generic.KeyValuePair<System.String,System.String>>.get_Current'
-    .method private hidebysig newslot virtual final
+    .method private hidebysig newslot virtual final 
             instance void  System.Collections.IEnumerator.Reset() cil managed
     {
       .override [System.Runtime]System.Collections.IEnumerator::Reset
@@ -3663,7 +3663,7 @@
       IL_0000:  newobj     instance void [System.Runtime]System.NotSupportedException::.ctor()
       IL_0005:  throw
     } // end of method '<GetTraits>d__0'::System.Collections.IEnumerator.Reset
-    .method private hidebysig newslot specialname virtual final
+    .method private hidebysig newslot specialname virtual final 
             instance object  System.Collections.IEnumerator.get_Current() cil managed
     {
       .override [System.Runtime]System.Collections.IEnumerator::get_Current
@@ -3674,8 +3674,8 @@
       IL_0006:  box        valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>
       IL_000b:  ret
     } // end of method '<GetTraits>d__0'::System.Collections.IEnumerator.get_Current
-    .method private hidebysig newslot virtual final
-            instance class [System.Runtime]System.Collections.Generic.IEnumerator`1<valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>>
+    .method private hidebysig newslot virtual final 
+            instance class [System.Runtime]System.Collections.Generic.IEnumerator`1<valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>> 
             'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.String>>.GetEnumerator'() cil managed
     {
       .override  method instance class [System.Runtime]System.Collections.Generic.IEnumerator`1<!0> class [System.Runtime]System.Collections.Generic.IEnumerable`1<valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>>::GetEnumerator()
@@ -3706,8 +3706,8 @@
       IL_0035:  ldloc.0
       IL_0036:  ret
     } // end of method '<GetTraits>d__0'::'System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.String>>.GetEnumerator'
-    .method private hidebysig newslot virtual final
-            instance class [System.Runtime]System.Collections.IEnumerator
+    .method private hidebysig newslot virtual final 
+            instance class [System.Runtime]System.Collections.IEnumerator 
             System.Collections.IEnumerable.GetEnumerator() cil managed
     {
       .override [System.Runtime]System.Collections.IEnumerable::GetEnumerator
@@ -3726,9 +3726,9 @@
     {
       .get instance object Xunit.Sdk.TraitDiscoverer/'<GetTraits>d__0'::System.Collections.IEnumerator.get_Current()
     } // end of property '<GetTraits>d__0'::System.Collections.IEnumerator.Current
-  }
-  .method public hidebysig newslot virtual
-          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>>
+  } 
+  .method public hidebysig newslot virtual 
+          instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<valuetype [System.Runtime]System.Collections.Generic.KeyValuePair`2<string,string>> 
           GetTraits(class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo traitAttribute) cil managed
   {
                                                                                                                                                       69 74 44 69 73 63 6F 76 65 72 65 72 2B 3C 47 65   // itDiscoverer+<Ge
@@ -3741,8 +3741,8 @@
     IL_0008:  ldarg.1
     IL_0009:  stfld      class [xunit.abstractions]Xunit.Abstractions.IAttributeInfo Xunit.Sdk.TraitDiscoverer/'<GetTraits>d__0'::'<>3__traitAttribute'
     IL_000e:  ret
-  }
-  .method public hidebysig specialname rtspecialname
+  } 
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -3750,14 +3750,14 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi sealed beforefieldinit Xunit.Sdk.TraitDiscovererAttribute
        extends [System.Runtime]System.Attribute
 {
                                                                                                                                      4D 75 6C 74 69 70 6C 65 00 54 02 09 49 6E 68 65   // Multiple.T..Inhe
                                                                                                                                      72 69 74 65 64 01 )                               // rited.
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(string typeName,
                                string assemblyName) cil managed
   {
@@ -3766,14 +3766,14 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi sealed beforefieldinit Xunit.Sdk.XunitTestCaseDiscovererAttribute
        extends [System.Runtime]System.Attribute
 {
                                                                                                                                      4D 75 6C 74 69 70 6C 65 00 54 02 09 49 6E 68 65   // Multiple.T..Inhe
                                                                                                                                      72 69 74 65 64 01 )                               // rited.
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(string typeName,
                                string assemblyName) cil managed
   {
@@ -3782,7 +3782,7 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
+  } 
 }
 .class public auto ansi sealed Xunit.Sdk.TestMethodDisplay
        extends [System.Runtime]System.Enum
@@ -3810,7 +3810,7 @@
   {
     .field public object 'value'
     .field public int32 depth
-    .method public hidebysig specialname rtspecialname
+    .method public hidebysig specialname rtspecialname 
             instance void  .ctor() cil managed
     {
       // Code size       7 (0x7)
@@ -3819,7 +3819,7 @@
       IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
       IL_0006:  ret
     } // end of method '<>c__DisplayClass9_0'::.ctor
-    .method assembly hidebysig instance class '<>f__AnonymousType0`2'<string,string>
+    .method assembly hidebysig instance class '<>f__AnonymousType0`2'<string,string> 
             '<FormatComplexValue>b__1'(class [System.Reflection]System.Reflection.FieldInfo f) cil managed
     {
       // Code size       60 (0x3c)
@@ -3848,7 +3848,7 @@
                                                                                              !1)
       IL_003b:  ret
     } // end of method '<>c__DisplayClass9_0'::'<FormatComplexValue>b__1'
-    .method assembly hidebysig instance class '<>f__AnonymousType0`2'<string,string>
+    .method assembly hidebysig instance class '<>f__AnonymousType0`2'<string,string> 
             '<FormatComplexValue>b__3'(class [System.Reflection]System.Reflection.PropertyInfo p) cil managed
     {
       // Code size       60 (0x3c)
@@ -3877,13 +3877,13 @@
                                                                                              !1)
       IL_003b:  ret
     } // end of method '<>c__DisplayClass9_0'::'<FormatComplexValue>b__3'
-  }
+  } 
   .class auto ansi sealed nested private beforefieldinit '<>c__DisplayClass9_1'
          extends [System.Runtime]System.Object
   {
     .field public class [System.Reflection]System.Reflection.FieldInfo f
     .field public class Xunit.Sdk.ArgumentFormatter/'<>c__DisplayClass9_0' 'CS$<>8__locals1'
-    .method public hidebysig specialname rtspecialname
+    .method public hidebysig specialname rtspecialname 
             instance void  .ctor() cil managed
     {
       // Code size       7 (0x7)
@@ -3892,7 +3892,7 @@
       IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
       IL_0006:  ret
     } // end of method '<>c__DisplayClass9_1'::.ctor
-    .method assembly hidebysig instance object
+    .method assembly hidebysig instance object 
             '<FormatComplexValue>b__6'() cil managed
     {
       // Code size       23 (0x17)
@@ -3905,13 +3905,13 @@
       IL_0011:  callvirt   instance object [System.Reflection]System.Reflection.FieldInfo::GetValue(object)
       IL_0016:  ret
     } // end of method '<>c__DisplayClass9_1'::'<FormatComplexValue>b__6'
-  }
+  } 
   .class auto ansi sealed nested private beforefieldinit '<>c__DisplayClass9_2'
          extends [System.Runtime]System.Object
   {
     .field public class [System.Reflection]System.Reflection.PropertyInfo p
     .field public class Xunit.Sdk.ArgumentFormatter/'<>c__DisplayClass9_0' 'CS$<>8__locals2'
-    .method public hidebysig specialname rtspecialname
+    .method public hidebysig specialname rtspecialname 
             instance void  .ctor() cil managed
     {
       // Code size       7 (0x7)
@@ -3920,7 +3920,7 @@
       IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
       IL_0006:  ret
     } // end of method '<>c__DisplayClass9_2'::.ctor
-    .method assembly hidebysig instance object
+    .method assembly hidebysig instance object 
             '<FormatComplexValue>b__7'() cil managed
     {
       // Code size       23 (0x17)
@@ -3933,7 +3933,7 @@
       IL_0011:  callvirt   instance object [System.Reflection]System.Reflection.PropertyInfo::GetValue(object)
       IL_0016:  ret
     } // end of method '<>c__DisplayClass9_2'::'<FormatComplexValue>b__7'
-  }
+  } 
   .class auto ansi serializable sealed nested private beforefieldinit '<>c'
          extends [System.Runtime]System.Object
   {
@@ -3942,7 +3942,7 @@
     .field public static class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.PropertyInfo,bool> '<>9__9_2'
     .field public static class [System.Runtime]System.Func`2<class '<>f__AnonymousType0`2'<string,string>,string> '<>9__9_4'
     .field public static class [System.Runtime]System.Func`2<class '<>f__AnonymousType0`2'<string,string>,string> '<>9__9_5'
-    .method private hidebysig specialname rtspecialname static
+    .method private hidebysig specialname rtspecialname static 
             void  .cctor() cil managed
     {
       // Code size       11 (0xb)
@@ -3951,7 +3951,7 @@
       IL_0005:  stsfld     class Xunit.Sdk.ArgumentFormatter/'<>c' Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9'
       IL_000a:  ret
     } // end of method '<>c'::.cctor
-    .method public hidebysig specialname rtspecialname
+    .method public hidebysig specialname rtspecialname 
             instance void  .ctor() cil managed
     {
       // Code size       7 (0x7)
@@ -3960,7 +3960,7 @@
       IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
       IL_0006:  ret
     } // end of method '<>c'::.ctor
-    .method assembly hidebysig instance bool
+    .method assembly hidebysig instance bool 
             '<FormatComplexValue>b__9_0'(class [System.Reflection]System.Reflection.FieldInfo f) cil managed
     {
       // Code size       20 (0x14)
@@ -3976,7 +3976,7 @@
       IL_0012:  ldc.i4.0
       IL_0013:  ret
     } // end of method '<>c'::'<FormatComplexValue>b__9_0'
-    .method assembly hidebysig instance bool
+    .method assembly hidebysig instance bool 
             '<FormatComplexValue>b__9_2'(class [System.Reflection]System.Reflection.PropertyInfo p) cil managed
     {
       // Code size       38 (0x26)
@@ -3997,7 +3997,7 @@
       IL_0024:  ldc.i4.0
       IL_0025:  ret
     } // end of method '<>c'::'<FormatComplexValue>b__9_2'
-    .method assembly hidebysig instance string
+    .method assembly hidebysig instance string 
             '<FormatComplexValue>b__9_4'(class '<>f__AnonymousType0`2'<string,string> p) cil managed
     {
       // Code size       7 (0x7)
@@ -4006,7 +4006,7 @@
       IL_0001:  callvirt   instance !0 class '<>f__AnonymousType0`2'<string,string>::get_name()
       IL_0006:  ret
     } // end of method '<>c'::'<FormatComplexValue>b__9_4'
-    .method assembly hidebysig instance string
+    .method assembly hidebysig instance string 
             '<FormatComplexValue>b__9_5'(class '<>f__AnonymousType0`2'<string,string> p) cil managed
     {
       // Code size       35 (0x23)
@@ -4028,12 +4028,12 @@
                                                                         object[])
       IL_0022:  ret
     } // end of method '<>c'::'<FormatComplexValue>b__9_5'
-  }
+  } 
   .class auto ansi sealed nested private beforefieldinit '<>c__DisplayClass10_0'
          extends [System.Runtime]System.Object
   {
     .field public int32 depth
-    .method public hidebysig specialname rtspecialname
+    .method public hidebysig specialname rtspecialname 
             instance void  .ctor() cil managed
     {
       // Code size       7 (0x7)
@@ -4042,7 +4042,7 @@
       IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
       IL_0006:  ret
     } // end of method '<>c__DisplayClass10_0'::.ctor
-    .method assembly hidebysig instance string
+    .method assembly hidebysig instance string 
             '<FormatEnumerable>b__0'(object x) cil managed
     {
       // Code size       15 (0xf)
@@ -4056,7 +4056,7 @@
                                                                       int32)
       IL_000e:  ret
     } // end of method '<>c__DisplayClass10_0'::'<FormatEnumerable>b__0'
-  }
+  } 
   .field private static literal int32 MAX_DEPTH = int32(0x00000003)
   .field private static literal int32 MAX_ENUMERABLE_LENGTH = int32(0x00000005)
   .field private static literal int32 MAX_OBJECT_PARAMETER_COUNT = int32(0x00000005)
@@ -4064,7 +4064,7 @@
   .field private static initonly object[] EmptyObjects
   .field private static initonly class [System.Runtime]System.Type[] EmptyTypes
   .field private static initonly class [System.Collections]System.Collections.Generic.Dictionary`2<class [System.Reflection]System.Reflection.TypeInfo,string> TypeMappings
-  .method public hidebysig static string
+  .method public hidebysig static string 
           Format(object 'value') cil managed
   {
     // Code size       8 (0x8)
@@ -4074,8 +4074,8 @@
     IL_0002:  call       string Xunit.Sdk.ArgumentFormatter::Format(object,
                                                                     int32)
     IL_0007:  ret
-  }
-  .method private hidebysig static string
+  } 
+  .method private hidebysig static string 
           Format(object 'value',
                  int32 depth) cil managed
   {
@@ -4275,7 +4275,7 @@
         IL_01c0:  leave      IL_02e5
         IL_01c5:  leave.s    IL_01ca
       }  // end .try
-      catch [System.Runtime]System.Object
+      catch [System.Runtime]System.Object 
       {
         IL_01c7:  pop
         IL_01c8:  leave.s    IL_01ca
@@ -4375,7 +4375,7 @@
       IL_02b3:  stloc.s    V_6
       IL_02b5:  leave.s    IL_02e5
     }  // end .try
-    catch [System.Runtime]System.Exception
+    catch [System.Runtime]System.Exception 
     {
       IL_02b7:  stloc.s    V_13
       IL_02b9:  ldstr      "{0} was thrown formatting an object of type \"{1}\""
@@ -4399,8 +4399,8 @@
     }  // end handler
     IL_02e5:  ldloc.s    V_6
     IL_02e7:  ret
-  }
-  .method private hidebysig static string
+  } 
+  .method private hidebysig static string 
           FormatComplexValue(object 'value',
                              int32 depth,
                              class [System.Runtime]System.Type 'type') cil managed
@@ -4553,8 +4553,8 @@
     IL_0169:  call       string [System.Runtime]System.String::Format(string,
                                                                       object[])
     IL_016e:  ret
-  }
-  .method private hidebysig static string
+  } 
+  .method private hidebysig static string 
           FormatEnumerable(class [System.Runtime]System.Collections.Generic.IEnumerable`1<object> enumerableValues,
                            int32 depth) cil managed
   {
@@ -4613,8 +4613,8 @@
     IL_0070:  call       string [System.Runtime]System.String::Format(string,
                                                                       object[])
     IL_0075:  ret
-  }
-  .method private hidebysig static string
+  } 
+  .method private hidebysig static string 
           FormatTypeName(class [System.Runtime]System.Type 'type') cil managed
   {
     // Code size       313 (0x139)
@@ -4764,8 +4764,8 @@
     IL_0133:  call       string [System.Runtime]System.String::Concat(string,
                                                                       string)
     IL_0138:  ret
-  }
-  .method private hidebysig static string
+  } 
+  .method private hidebysig static string 
           WrapAndGetFormattedValue(class [System.Runtime]System.Func`1<object> getter,
                                    int32 depth) cil managed
   {
@@ -4785,7 +4785,7 @@
       IL_000e:  stloc.0
       IL_000f:  leave.s    IL_0038
     }  // end .try
-    catch [System.Runtime]System.Exception
+    catch [System.Runtime]System.Exception 
     {
       IL_0011:  stloc.1
       IL_0012:  ldstr      "(throws {0})"
@@ -4805,8 +4805,8 @@
     }  // end handler
     IL_0038:  ldloc.0
     IL_0039:  ret
-  }
-  .method private hidebysig static class [System.Runtime]System.Exception
+  } 
+  .method private hidebysig static class [System.Runtime]System.Exception 
           UnwrapException(class [System.Runtime]System.Exception ex) cil managed
   {
     // Code size       22 (0x16)
@@ -4823,8 +4823,8 @@
     IL_000d:  callvirt   instance class [System.Runtime]System.Exception [System.Runtime]System.Exception::get_InnerException()
     IL_0012:  starg.s    ex
     IL_0014:  br.s       IL_0000
-  }
-  .method private hidebysig static string
+  } 
+  .method private hidebysig static string 
           EscapeHexChars(string s) cil managed
   {
     // Code size       223 (0xdf)
@@ -4934,7 +4934,7 @@
     IL_00d8:  ldloc.0
     IL_00d9:  callvirt   instance string [System.Runtime]System.Object::ToString()
     IL_00de:  ret
-  }
+  } 
   .method private hidebysig static bool  TryGetEscapeSequence(char ch,
                                                               [out] string& 'value') cil managed
   {
@@ -5001,8 +5001,8 @@
     IL_006d:  ldnull
     IL_006e:  cgt.un
     IL_0070:  ret
-  }
-  .method private hidebysig specialname rtspecialname static
+  } 
+  .method private hidebysig specialname rtspecialname static 
           void  .cctor() cil managed
   {
     // Code size       423 (0x1a7)
@@ -5121,7 +5121,7 @@
                                                                                                                                                                           !1)
     IL_01a1:  stsfld     class [System.Collections]System.Collections.Generic.Dictionary`2<class [System.Reflection]System.Reflection.TypeInfo,string> Xunit.Sdk.ArgumentFormatter::TypeMappings
     IL_01a6:  ret
-  }
+  } 
 }
 .class private auto ansi beforefieldinit Xunit.Sdk.AssertEqualityComparer`1<T>
        extends [System.Runtime]System.Object
@@ -5133,7 +5133,7 @@
   {
     .field private initonly class [System.Runtime]System.Collections.IEqualityComparer innerComparer
     .field private static class [System.Reflection]System.Reflection.MethodInfo s_equalsMethod
-    .method public hidebysig specialname rtspecialname
+    .method public hidebysig specialname rtspecialname 
             instance void  .ctor(class [System.Runtime]System.Collections.IEqualityComparer innerComparer) cil managed
     {
       // Code size       14 (0xe)
@@ -5145,7 +5145,7 @@
       IL_0008:  stfld      class [System.Runtime]System.Collections.IEqualityComparer class Xunit.Sdk.AssertEqualityComparer`1/TypeErasedEqualityComparer<!T>::innerComparer
       IL_000d:  ret
     } // end of method TypeErasedEqualityComparer::.ctor
-    .method public hidebysig newslot virtual final
+    .method public hidebysig newslot virtual final 
             instance bool  Equals(object x,
                                   object y) cil managed
     {
@@ -5205,7 +5205,7 @@
       IL_007b:  unbox.any  [System.Runtime]System.Boolean
       IL_0080:  ret
     } // end of method TypeErasedEqualityComparer::Equals
-    .method private hidebysig instance bool
+    .method private hidebysig instance bool 
             EqualsGeneric<U>(!!U x,
                              !!U y) cil managed
     {
@@ -5220,7 +5220,7 @@
                                                                                                !0)
       IL_0012:  ret
     } // end of method TypeErasedEqualityComparer::EqualsGeneric
-    .method public hidebysig newslot virtual final
+    .method public hidebysig newslot virtual final 
             instance int32  GetHashCode(object obj) cil managed
     {
       // Code size       6 (0x6)
@@ -5228,12 +5228,12 @@
       IL_0000:  newobj     instance void [System.Runtime]System.NotImplementedException::.ctor()
       IL_0005:  throw
     } // end of method TypeErasedEqualityComparer::GetHashCode
-  }
+  } 
   .class auto ansi sealed nested private beforefieldinit '<>c__DisplayClass3_0'<T>
          extends [System.Runtime]System.Object
   {
     .field public class [System.Runtime]System.Collections.IEqualityComparer innerComparer
-    .method public hidebysig specialname rtspecialname
+    .method public hidebysig specialname rtspecialname 
             instance void  .ctor() cil managed
     {
       // Code size       7 (0x7)
@@ -5242,7 +5242,7 @@
       IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
       IL_0006:  ret
     } // end of method '<>c__DisplayClass3_0'::.ctor
-    .method assembly hidebysig instance class [System.Runtime]System.Collections.IEqualityComparer
+    .method assembly hidebysig instance class [System.Runtime]System.Collections.IEqualityComparer 
             '<.ctor>b__0'() cil managed
     {
       // Code size       16 (0x10)
@@ -5255,7 +5255,7 @@
       IL_000a:  ldsfld     class [System.Runtime]System.Collections.IEqualityComparer class Xunit.Sdk.AssertEqualityComparer`1<!T>::DefaultInnerComparer
       IL_000f:  ret
     } // end of method '<>c__DisplayClass3_0'::'<.ctor>b__0'
-  }
+  } 
   .class auto ansi serializable sealed nested private beforefieldinit '<>c'<T>
          extends [System.Runtime]System.Object
   {
@@ -5263,7 +5263,7 @@
     .field public static class [System.Runtime]System.Func`2<class [System.Runtime]System.Type,class [System.Reflection]System.Reflection.TypeInfo> '<>9__10_0'
     .field public static class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.TypeInfo,bool> '<>9__10_1'
     .field public static class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.TypeInfo,class [System.Runtime]System.Type> '<>9__10_2'
-    .method private hidebysig specialname rtspecialname static
+    .method private hidebysig specialname rtspecialname static 
             void  .cctor() cil managed
     {
       // Code size       11 (0xb)
@@ -5272,7 +5272,7 @@
       IL_0005:  stsfld     class Xunit.Sdk.AssertEqualityComparer`1/'<>c'<!0> class Xunit.Sdk.AssertEqualityComparer`1/'<>c'<!T>::'<>9'
       IL_000a:  ret
     } // end of method '<>c'::.cctor
-    .method public hidebysig specialname rtspecialname
+    .method public hidebysig specialname rtspecialname 
             instance void  .ctor() cil managed
     {
       // Code size       7 (0x7)
@@ -5281,7 +5281,7 @@
       IL_0001:  call       instance void [System.Runtime]System.Object::.ctor()
       IL_0006:  ret
     } // end of method '<>c'::.ctor
-    .method assembly hidebysig instance class [System.Reflection]System.Reflection.TypeInfo
+    .method assembly hidebysig instance class [System.Reflection]System.Reflection.TypeInfo 
             '<IsSet>b__10_0'(class [System.Runtime]System.Type i) cil managed
     {
       // Code size       7 (0x7)
@@ -5290,7 +5290,7 @@
       IL_0001:  call       class [System.Reflection]System.Reflection.TypeInfo [System.Reflection]System.Reflection.IntrospectionExtensions::GetTypeInfo(class [System.Runtime]System.Type)
       IL_0006:  ret
     } // end of method '<>c'::'<IsSet>b__10_0'
-    .method assembly hidebysig instance bool
+    .method assembly hidebysig instance bool 
             '<IsSet>b__10_1'(class [System.Reflection]System.Reflection.TypeInfo ti) cil managed
     {
       // Code size       7 (0x7)
@@ -5299,7 +5299,7 @@
       IL_0001:  callvirt   instance bool [System.Reflection]System.Reflection.TypeInfo::get_IsGenericType()
       IL_0006:  ret
     } // end of method '<>c'::'<IsSet>b__10_1'
-    .method assembly hidebysig instance class [System.Runtime]System.Type
+    .method assembly hidebysig instance class [System.Runtime]System.Type 
             '<IsSet>b__10_2'(class [System.Reflection]System.Reflection.TypeInfo ti) cil managed
     {
       // Code size       7 (0x7)
@@ -5308,12 +5308,12 @@
       IL_0001:  callvirt   instance class [System.Runtime]System.Type [System.Reflection]System.Reflection.TypeInfo::GetGenericTypeDefinition()
       IL_0006:  ret
     } // end of method '<>c'::'<IsSet>b__10_2'
-  }
+  } 
   .field private static initonly class [System.Runtime]System.Collections.IEqualityComparer DefaultInnerComparer
   .field private static initonly class [System.Reflection]System.Reflection.TypeInfo NullableTypeInfo
   .field private initonly class [System.Runtime]System.Func`1<class [System.Runtime]System.Collections.IEqualityComparer> innerComparerFactory
   .field private static class [System.Reflection]System.Reflection.MethodInfo s_compareTypedSetsMethod
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor([opt] class [System.Runtime]System.Collections.IEqualityComparer innerComparer) cil managed
   {
     .param [1] = nullref
@@ -5334,8 +5334,8 @@
                                                                                                                                               native int)
     IL_0020:  stfld      class [System.Runtime]System.Func`1<class [System.Runtime]System.Collections.IEqualityComparer> class Xunit.Sdk.AssertEqualityComparer`1<!T>::innerComparerFactory
     IL_0025:  ret
-  }
-  .method public hidebysig newslot virtual final
+  } 
+  .method public hidebysig newslot virtual final 
           instance bool  Equals(!T x,
                                 !T y) cil managed
   {
@@ -5428,7 +5428,7 @@
       IL_00bc:  stloc.s    V_11
       IL_00be:  leave      IL_02dc
     }  // end .try
-    catch [System.Runtime]System.Object
+    catch [System.Runtime]System.Object 
     {
       IL_00c3:  pop
       IL_00c4:  leave.s    IL_00c6
@@ -5450,7 +5450,7 @@
       IL_00e4:  stloc.s    V_11
       IL_00e6:  leave      IL_02dc
     }  // end .try
-    catch [System.Runtime]System.Object
+    catch [System.Runtime]System.Object 
     {
       IL_00eb:  pop
       IL_00ec:  leave.s    IL_00ee
@@ -5634,7 +5634,7 @@
       IL_02c3:  stloc.s    V_11
       IL_02c5:  leave.s    IL_02dc
     }  // end .try
-    catch [System.Runtime]System.Object
+    catch [System.Runtime]System.Object 
     {
       IL_02c7:  pop
       IL_02c8:  leave.s    IL_02ca
@@ -5648,8 +5648,8 @@
     IL_02db:  ret
     IL_02dc:  ldloc.s    V_11
     IL_02de:  ret
-  }
-  .method private hidebysig instance valuetype [System.Runtime]System.Nullable`1<bool>
+  } 
+  .method private hidebysig instance valuetype [System.Runtime]System.Nullable`1<bool> 
           CheckIfEnumerablesAreEqual(!T x,
                                      !T y) cil managed
   {
@@ -5745,8 +5745,8 @@
     }  // end handler
     IL_00b5:  ldloc.s    V_4
     IL_00b7:  ret
-  }
-  .method private hidebysig instance valuetype [System.Runtime]System.Nullable`1<bool>
+  } 
+  .method private hidebysig instance valuetype [System.Runtime]System.Nullable`1<bool> 
           CheckIfDictionariesAreEqual(!T x,
                                       !T y) cil managed
   {
@@ -5859,8 +5859,8 @@
     IL_00e8:  ret
     IL_00e9:  ldloc.s    V_4
     IL_00eb:  ret
-  }
-  .method private hidebysig instance valuetype [System.Runtime]System.Nullable`1<bool>
+  } 
+  .method private hidebysig instance valuetype [System.Runtime]System.Nullable`1<bool> 
           CheckIfSetsAreEqual(!T x,
                               !T y,
                               class [System.Reflection]System.Reflection.TypeInfo typeInfo) cil managed
@@ -5944,8 +5944,8 @@
     IL_00b7:  unbox.any  [System.Runtime]System.Boolean
     IL_00bc:  newobj     instance void valuetype [System.Runtime]System.Nullable`1<bool>::.ctor(!0)
     IL_00c1:  ret
-  }
-  .method private hidebysig instance bool
+  } 
+  .method private hidebysig instance bool 
           CompareTypedSets<R>(class [System.Runtime]System.Collections.IEnumerable enumX,
                               class [System.Runtime]System.Collections.IEnumerable enumY) cil managed
   {
@@ -5962,8 +5962,8 @@
     IL_0017:  ldloc.0
     IL_0018:  callvirt   instance bool class [System.Collections]System.Collections.Generic.HashSet`1<!!R>::SetEquals(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!0>)
     IL_001d:  ret
-  }
-  .method private hidebysig instance bool
+  } 
+  .method private hidebysig instance bool 
           IsSet(class [System.Reflection]System.Reflection.TypeInfo typeInfo) cil managed
   {
     // Code size       135 (0x87)
@@ -6012,16 +6012,16 @@
     IL_0081:  call       bool [System.Linq]System.Linq.Enumerable::Contains<class [System.Runtime]System.Type>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
                                                                                                                !!0)
     IL_0086:  ret
-  }
-  .method public hidebysig newslot virtual final
+  } 
+  .method public hidebysig newslot virtual final 
           instance int32  GetHashCode(!T obj) cil managed
   {
     // Code size       6 (0x6)
     .maxstack  8
     IL_0000:  newobj     instance void [System.Runtime]System.NotImplementedException::.ctor()
     IL_0005:  throw
-  }
-  .method private hidebysig specialname rtspecialname static
+  } 
+  .method private hidebysig specialname rtspecialname static 
           void  .cctor() cil managed
   {
     // Code size       37 (0x25)
@@ -6035,14 +6035,14 @@
     IL_001a:  call       class [System.Reflection]System.Reflection.TypeInfo [System.Reflection]System.Reflection.IntrospectionExtensions::GetTypeInfo(class [System.Runtime]System.Type)
     IL_001f:  stsfld     class [System.Reflection]System.Reflection.TypeInfo class Xunit.Sdk.AssertEqualityComparer`1<!T>::NullableTypeInfo
     IL_0024:  ret
-  }
+  } 
 }
 .class private auto ansi beforefieldinit Xunit.Sdk.AssertEqualityComparerAdapter`1<T>
        extends [System.Runtime]System.Object
        implements [System.Runtime]System.Collections.IEqualityComparer
 {
   .field private initonly class [System.Runtime]System.Collections.Generic.IEqualityComparer`1<!T> innerComparer
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(class [System.Runtime]System.Collections.Generic.IEqualityComparer`1<!T> innerComparer) cil managed
   {
     // Code size       14 (0xe)
@@ -6053,8 +6053,8 @@
     IL_0007:  ldarg.1
     IL_0008:  stfld      class [System.Runtime]System.Collections.Generic.IEqualityComparer`1<!0> class Xunit.Sdk.AssertEqualityComparerAdapter`1<!T>::innerComparer
     IL_000d:  ret
-  }
-  .method public hidebysig newslot virtual final
+  } 
+  .method public hidebysig newslot virtual final 
           instance bool  Equals(object x,
                                 object y) cil managed
   {
@@ -6069,15 +6069,15 @@
     IL_0012:  callvirt   instance bool class [System.Runtime]System.Collections.Generic.IEqualityComparer`1<!T>::Equals(!0,
                                                                                                                         !0)
     IL_0017:  ret
-  }
-  .method public hidebysig newslot virtual final
+  } 
+  .method public hidebysig newslot virtual final 
           instance int32  GetHashCode(object obj) cil managed
   {
     // Code size       6 (0x6)
     .maxstack  8
     IL_0000:  newobj     instance void [System.Runtime]System.NotImplementedException::.ctor()
     IL_0005:  throw
-  }
+  } 
 }
 .class public auto ansi sealed beforefieldinit Xunit.Extensions.PropertyDataAttribute
        extends [System.Runtime]System.Attribute
@@ -6087,7 +6087,7 @@
                                                                                   20 77 69 74 68 20 5B 4D 65 6D 62 65 72 44 61 74   //  with [MemberDat
                                                                                   61 5D 01 00 00 )                                  // a]...
   .field private class [System.Runtime]System.Type '<PropertyType>k__BackingField'
-  .method public hidebysig specialname rtspecialname
+  .method public hidebysig specialname rtspecialname 
           instance void  .ctor(string propertyName) cil managed
   {
     // Code size       7 (0x7)
@@ -6095,8 +6095,8 @@
     IL_0000:  ldarg.0
     IL_0001:  call       instance void [System.Runtime]System.Attribute::.ctor()
     IL_0006:  ret
-  }
-  .method public hidebysig specialname instance class [System.Runtime]System.Type
+  } 
+  .method public hidebysig specialname instance class [System.Runtime]System.Type 
           get_PropertyType() cil managed
   {
     // Code size       7 (0x7)
@@ -6104,8 +6104,8 @@
     IL_0000:  ldarg.0
     IL_0001:  ldfld      class [System.Runtime]System.Type Xunit.Extensions.PropertyDataAttribute::'<PropertyType>k__BackingField'
     IL_0006:  ret
-  }
-  .method public hidebysig specialname instance void
+  } 
+  .method public hidebysig specialname instance void 
           set_PropertyType(class [System.Runtime]System.Type 'value') cil managed
   {
     // Code size       8 (0x8)
@@ -6114,9 +6114,9 @@
     IL_0001:  ldarg.1
     IL_0002:  stfld      class [System.Runtime]System.Type Xunit.Extensions.PropertyDataAttribute::'<PropertyType>k__BackingField'
     IL_0007:  ret
-  }
+  } 
   .property instance class [System.Runtime]System.Type
           PropertyType()
   {
-  }
+  } 
 }
