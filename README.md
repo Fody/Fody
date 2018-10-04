@@ -226,6 +226,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Janitor](https://github.com/Fody/Janitor) Simplifies the implementation of [IDisposable](https://msdn.microsoft.com/en-us/library/system.idisposable.aspx).
   * [JetBrainsAnnotations](https://github.com/tom-englert/JetBrainsAnnotations.Fody) Converts all JetBrains ReSharper code annotation attributes to External Annotations.
   * [LoadAssembliesOnStartup](https://github.com/Fody/LoadAssembliesOnStartup) Loads references on startup by using the types in the module initializer
+  * [LoggerIsEnabled](https://github.com/wazowsk1/LoggerIsEnabled.Fody) Adds `ILogger.IsEnabled` check around the logging statement for the [Microsoft.Extensions.Logging](https://github.com/aspnet/Logging)
   * [MethodBoundaryAspect](https://github.com/vescon/MethodBoundaryAspect.Fody) Allows to decorate methods and hook into method start, method end and method exceptions (like PostSharp)
   * [MethodCache](https://github.com/Dresel/MethodCache) Caches return values of methods decorated with a `CacheAttribute`.
   * [MethodDecorator](https://github.com/Fody/MethodDecorator) Decorate arbitrary methods to run code before and after invocation.
