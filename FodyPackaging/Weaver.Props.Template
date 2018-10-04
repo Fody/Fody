@@ -1,12 +1,12 @@
-﻿<Project>
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
   <PropertyGroup>
-    <RuntimeToken Condition="$(MSBuildRuntimeType) == 'Core'">netclassicweaver</RuntimeToken>
-    <RuntimeToken Condition="$(MSBuildRuntimeType) != 'Core'">netstandardweaver</RuntimeToken>
+    <WeaverRuntimeToken Condition="$(MSBuildRuntimeType) != 'Core'">netclassicweaver</WeaverRuntimeToken>
+    <WeaverRuntimeToken Condition="$(MSBuildRuntimeType) == 'Core'">netstandardweaver</WeaverRuntimeToken>
   </PropertyGroup>
+
   <ItemGroup>
-    <FilesToAdd Include="$(MsBuildThisFileDirectory)..\$(RuntimeToken)\$(MSBuildThisFileName).dll" />
+    <WeaverFiles Include="$(MsBuildThisFileDirectory)..\$(WeaverRuntimeToken)\$(MSBuildThisFileName).dll" />
   </ItemGroup>
-  <ItemGroup>
-    <WeaverFiles Include="@(FilesToAdd)"/>
-  </ItemGroup>
+
 </Project>

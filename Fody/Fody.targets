@@ -73,9 +73,10 @@
       />
   </Target>
 
-  <!--Support for ncrunch-->
+  <!-- Support for NCrunch -->
   <ItemGroup  Condition="'$(NCrunch)' == '1'">
     <None Include="$(FodyAssemblyFile)\*.*" />
+    <None Include="@(WeaverFiles)" />
   </ItemGroup>
 
 </Project>
