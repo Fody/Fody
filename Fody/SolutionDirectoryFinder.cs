@@ -1,15 +1,15 @@
 using System.IO;
 
-class SolutionDirectoryFinder
+public class SolutionDirectoryFinder
 {
     public static string Find(string solutionDir, string nCrunchOriginalSolutionDir, string projectDirectory)
     {
-        if (nCrunchOriginalSolutionDir != null)
+        if (!string.IsNullOrEmpty(nCrunchOriginalSolutionDir))
         {
             return nCrunchOriginalSolutionDir;
         }
 
-        if (solutionDir != null)
+        if (!string.IsNullOrEmpty(solutionDir) && solutionDir != "*Undefined*")
         {
             return solutionDir;
         }
