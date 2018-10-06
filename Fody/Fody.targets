@@ -7,17 +7,17 @@
   <Choose>
     <When Condition="'$(MSBuildRuntimeType)'=='Core'">
       <PropertyGroup>
-        <FodyAssemblyFile>$(FodyPath)netstandardtask</FodyAssemblyFile>
-      </PropertyGroup>
+        <FodyAssemblyDirectory>$(FodyPath)netstandardtask</FodyAssemblyDirectory>
+    </PropertyGroup>
     </When>
     <Otherwise>
       <PropertyGroup>
-        <FodyAssemblyFile>$(FodyPath)netclassictask</FodyAssemblyFile>
+        <FodyAssemblyDirectory>$(FodyPath)netclassictask</FodyAssemblyDirectory>
       </PropertyGroup>
     </Otherwise>
   </Choose>
   <PropertyGroup>
-    <FodyAssembly>$(FodyAssemblyFile)\Fody.dll</FodyAssembly>
+    <FodyAssembly>$(FodyAssemblyDirectory)\Fody.dll</FodyAssembly>
   </PropertyGroup>
   <UsingTask
       TaskName="Fody.WeavingTask"
@@ -75,7 +75,7 @@
 
   <!-- Support for NCrunch -->
   <ItemGroup  Condition="'$(NCrunch)' == '1'">
-    <None Include="$(FodyAssemblyFile)\*.*" />
+    <None Include="$(FodyAssemblyDirectory)\*.*" />
     <None Include="@(WeaverFiles)" />
   </ItemGroup>
 
