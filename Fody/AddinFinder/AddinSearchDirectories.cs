@@ -34,7 +34,6 @@ public partial class AddinFinder
         var weaverFiles = weaverFilesFromProps.Concat(EnumerateToolsSolutionDirectoryWeavers())
             .Concat(EnumerateInSolutionWeavers());
 
-            //.OrderByDescending(AssemblyVersionReader.GetAssemblyVersion)
         weaversFromWellKnownPaths = BuildWeaversDictionary(weaverFiles);
     }
 
@@ -113,8 +112,8 @@ public partial class AddinFinder
     {
         return EnumerateOldStyleDirectories(directory)
             //TODO: using newest is a hack. will be removed when move from dir scanning to props file
-            .OrderByDescending(x=>x.Version)
-            .Select(x=>x.Assembly)
+            .OrderByDescending(x => x.Version)
+            .Select(x => x.Assembly)
             .Concat(EnumerateNewOrPaketStyleDirectories(directory)
             .Where(x => x != null))
             .Where(x => x != null);
@@ -158,18 +157,24 @@ public partial class AddinFinder
             var packageName = fileName.Substring(0, index + 5);
             var version = Version.Parse(fileName.Substring(index + 6).Split('-')[0]);
 
-            yield return new AssemblyAndVersion{Version = version, Assembly= GetAssemblyFromNugetDir(versionDirectory, packageName)};
+            yield return new AssemblyAndVersion { Version = version, Assembly = GetAssemblyFromNugetDir(versionDirectory, packageName) };
         }
+    }
+
+    static string GetSpecificDir(string versionDir)
+    {
+#if (NETSTANDARD2_0)
+            return Path.Combine(versionDir, "netstandardweaver");
+#elif (NET46)
+            return Path.Combine(versionDir, "netclassicweaver");
+#else
+        #error
+#endif
     }
 
     static string GetAssemblyFromNugetDir(string versionDir, string packageName)
     {
-#if (NETSTANDARD2_0)
-        var specificDir = Path.Combine(versionDir, "netstandardweaver");
-#endif
-#if (NET46)
-        var specificDir = Path.Combine(versionDir, "netclassicweaver");
-#endif
+        var specificDir = GetSpecificDir(versionDir);
 
         return GetAssemblyFromDir(specificDir, packageName)
                ?? GetAssemblyFromDir(versionDir, packageName);
@@ -202,6 +207,15 @@ public partial class AddinFinder
         {
             log($"  Skipped scanning '{solutionDirToolsDirectory}' since it doesn't exist.");
             return Enumerable.Empty<string>();
+        }
+
+        var specificDir = GetSpecificDir(solutionDirToolsDirectory);
+
+        if (Directory.Exists(specificDir))
+        {
+            log($"  Scanning SolutionDir/Tools directory convention: '{specificDir}'.");
+
+            return DirectoryEx.EnumerateFilesEndsWith(specificDir, WeaverDllSuffix, SearchOption.AllDirectories);
         }
 
         log($"  Scanning SolutionDir/Tools directory convention: '{solutionDirToolsDirectory}'.");
