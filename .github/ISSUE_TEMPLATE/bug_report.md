@@ -13,7 +13,7 @@ General questions about Fody or weavers should be placed on [StackOveflow](https
 
 Where relevant, ensure you are using the current stable versions of the following:
 
- * Fody (note for this you need an explicit NuGet reference to Fody in you csproj)
+ * Fody (note for this you need an explicit NuGet reference to Fody in your csproj)
  * Fody weavers
  * Visual Studio
  * [.NET Core SDK](https://www.microsoft.com/net/download)
