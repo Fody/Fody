@@ -156,7 +156,8 @@ public partial class AddinFinder
             var fileName = Path.GetFileName(versionDirectory);
             var index = fileName.IndexOf(".fody.", StringComparison.OrdinalIgnoreCase);
             var packageName = fileName.Substring(0, index + 5);
-            var version = Version.Parse(fileName.Substring(index + 6).Split('-')[0]);
+            if (!Version.TryParse(fileName.Substring(index + 6).Split('-')[0], out var version))
+                continue;
 
             yield return new AssemblyAndVersion{Version = version, Assembly= GetAssemblyFromNugetDir(versionDirectory, packageName)};
         }
