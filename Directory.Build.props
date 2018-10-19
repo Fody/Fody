@@ -16,6 +16,7 @@
     <PackageIconUrl>https://raw.github.com/Fody/Fody/master/package_icon.png</PackageIconUrl>
     <PackageTags>ILWeaving, Fody, Cecil, AOP</PackageTags>
   </PropertyGroup>
+
   <Target Name="IncludeAllInPackage">
     <ItemGroup>
       <TfmSpecificPackageFile Include="$(OutputPath)\*.*"
@@ -23,4 +24,19 @@
                               PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)" />
     </ItemGroup>
   </Target>
+
+  <!-- Global settings to run integration tests inline while building -->
+
+  <PropertyGroup>
+    <IsInlineIntegrationTestActive Condition="'$(MSBUILDDISABLENODERESUSE)'=='1'" >true</IsInlineIntegrationTestActive>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <WeaverFiles Include="$(SolutionDir)SampleWeaver.Fody\bin\$(Configuration)\Net46\SampleWeaver.Fody.dll" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <FodyAssembly>$(SolutionDir)Fody\bin\$(Configuration)\Net46\Fody.dll</FodyAssembly>
+  </PropertyGroup>
+
 </Project>

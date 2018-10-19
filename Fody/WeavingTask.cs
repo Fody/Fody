@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Build.Framework;
@@ -5,8 +6,6 @@ using Microsoft.Build.Utilities;
 
 namespace Fody
 {
-    using System;
-
     public class WeavingTask : Task, ICancelableTask
     {
         Processor processor;
@@ -49,9 +48,17 @@ namespace Fody
 
         public string DebugType { get; set; }
 
+        [Output]
+        public ITaskItem[] UpdatedReferenceCopyLocalFiles { get; set; }
+
         public override bool Execute()
         {
+            // System.Diagnostics.Debugger.Launch();
+
+            UpdatedReferenceCopyLocalFiles = ReferenceCopyLocalFiles;
+
             var referenceCopyLocalPaths = ReferenceCopyLocalFiles.Select(x => x.ItemSpec).ToList();
+
             var defineConstants = DefineConstants.GetConstants();
             processor = new Processor
             {
@@ -79,6 +86,17 @@ namespace Fody
             {
                 var weavers = processor.Weavers.Select(x => x.AssemblyName);
                 ExecutedWeavers = string.Join(";", weavers) + ";";
+
+                var updatedReferenceCopyLocalPaths = new HashSet<string>(processor.ReferenceCopyLocalPaths, StringComparer.OrdinalIgnoreCase);
+
+                var existingReferenceCopyLocalFiles = ReferenceCopyLocalFiles
+                    .Where(item => updatedReferenceCopyLocalPaths.Contains(item.ItemSpec));
+
+                var newReferenceCopyLocalFiles = updatedReferenceCopyLocalPaths
+                    .Except(referenceCopyLocalPaths)
+                    .Select(item => new TaskItem(item));
+
+                UpdatedReferenceCopyLocalFiles = existingReferenceCopyLocalFiles.Concat(newReferenceCopyLocalFiles).ToArray();
             }
 
             return success;

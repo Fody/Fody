@@ -40,7 +40,9 @@ public partial class Processor
 
     public virtual bool Execute()
     {
-        Logger.LogInfo($"Fody (version {typeof (Processor).Assembly.GetName().Version}) Executing");
+        var assembly = typeof (Processor).Assembly;
+
+        Logger.LogInfo($"Fody (version {assembly.GetName().Version} @ {assembly.CodeBase}) Executing");
 
         var stopwatch = Stopwatch.StartNew();
 
@@ -155,6 +157,8 @@ see https://github.com/Fody/Fody/wiki/SampleUsage");
             innerWeaver.DebugSymbols = DebugSymbols;
 
             innerWeaver.Execute();
+
+            ReferenceCopyLocalPaths = innerWeaver.ReferenceCopyLocalPaths;
         }
         innerWeaver = null;
     }
