@@ -47,7 +47,18 @@
       <Output
         TaskParameter="ExecutedWeavers"
         PropertyName="FodyExecutedWeavers" />
+
+      <Output
+        TaskParameter="UpdatedReferenceCopyLocalFiles"
+        ItemName="FodyUpdatedReferenceCopyLocalPaths" />
+
     </Fody.WeavingTask>
+
+    <ItemGroup>
+      <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" />
+      <ReferenceCopyLocalPaths Include="@(FodyUpdatedReferenceCopyLocalPaths)" />
+    </ItemGroup>
+
   </Target>
 
   <Target
