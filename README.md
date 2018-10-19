@@ -7,11 +7,13 @@
 ![Icon](https://raw.githubusercontent.com/Fody/Fody/master/package_icon.png)
 
 
-## Extensible tool for weaving .net assemblies 
+## Extensible tool for weaving .net assemblies
+
 
 ## Preamble
 
 This is a community driven OSS project. As such consumers of this project are expected to contribute back to keep this project alive. Contributions can be in the form of your time via fixing bugs, contributing features, adding doco, triaging issues, reviewing PRs, or answering questions from other community members. If you cannot commit to this, either contribute money to the [Fody OpenCollective](https://opencollective.com/fody/donate) or dont use this project.
+
 
 ## Introduction
 
@@ -20,7 +22,7 @@ Manipulating the IL of an assembly as part of a build requires a significant amo
 
 ## Support Fody
 
-If you dont have time to contribute code via PRs the you can support financially using [OpenCollective](https://opencollective.com/fody/donate).
+If you don't have time to contribute code via PRs the you can support financially using [OpenCollective](https://opencollective.com/fody/donate).
 
 [<img src="https://opencollective.com/Fody/donate/button@2x.png?color=blue" width="300px">](https://opencollective.com/Fody/donate)
 
@@ -35,6 +37,17 @@ Fody ships in two parts:
  1. Any number of ["addins" or "weavers"](#addins-list) which are all shipped in their own NuGet packages.
 
 The below examples will use [Virtuosity](https://github.com/Fody/Virtuosity).
+
+
+### Install Fody
+
+Since NuGet always defaults to the oldest, and most buggy, version of any dependency it is important to do a [NuGet install](https://docs.microsoft.com/en-us/nuget/tools/ps-ref-install-package) of Fody after installing any weaver.
+
+```
+Install-Package Fody
+```
+
+[Subscribe to Fody](https://libraries.io/nuget/Fody) on [Libraries.io](https://libraries.io) to get notified of releases of Fody.
 
 
 ### Add the nuget
@@ -52,15 +65,6 @@ Install-Package Virtuosity.Fody
 ```
 
 
-### Update Fody
-
-Since NuGet always defaults to the oldest, and most buggy, version of any dependency it is important to do a [NuGet update](https://docs.microsoft.com/en-us/nuget/tools/ps-ref-update-package) of Fody after installing any weaver.
-
-```
-Update-Package Fody
-```
-
-[Subscribe to Fody](https://libraries.io/nuget/Fody) on [Libraries.io](https://libraries.io) to get notified of releases of Fody.
 
 
 ### Add FodyWeavers.xml
@@ -285,15 +289,6 @@ The below addins are no longer maintained. Raise an issue in the specific projec
   * [Stiletto](https://github.com/benjamin-bader/stiletto) Compile-time static analysis and optimization for the Stiletto IoC library.
 
 
-
-## Projects built using Fody
-
-  * [Catel](http://catelproject.com/)
-  * [Enums.NET](https://github.com/TylerBrinkley/Enums.NET)
-  * [NServiceBus](https://particular.net/nservicebus)
-  * [Orchestra & all Orc.* components (30+)](https://github.com/WildGums)
-
-
 ## Icon
 
 <a href="http://thenounproject.com/noun/bird/#icon-No6726" target="_blank">Bird</a> designed by <a href="http://thenounproject.com/MARCOHS" target="_blank">Marco Hernandez</a> from The Noun Project
@@ -365,5 +360,3 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://opencollective.com/fody/sponsor/7/website" target="_blank"><img src="https://opencollective.com/fody/sponsor/7/avatar.svg"></a>
 <a href="https://opencollective.com/fody/sponsor/8/website" target="_blank"><img src="https://opencollective.com/fody/sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/fody/sponsor/9/website" target="_blank"><img src="https://opencollective.com/fody/sponsor/9/avatar.svg"></a>
-
-
