@@ -1,6 +1,11 @@
 ﻿{
   "Errors": [],
-  "Messages": [],
+  "Messages": [
+    {
+      "Text": "\tRemoving reference to 'Tests'.",
+      "MessageImportance": "Normal"
+    }
+  ],
   "Warnings": [],
   "AssemblyPath": "\fodytemp\NewName.dll",
   "FullName": "NewName, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"

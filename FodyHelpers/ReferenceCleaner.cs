@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Fody;
 using Mono.Cecil;
@@ -12,15 +14,23 @@ static class ReferenceCleaner
             return;
         }
 
-        var weaverName = weaver.GetType().Assembly.GetName().Name.ReplaceCaseless(".Fody", "");
-        var referenceToRemove = module.AssemblyReferences
-            .FirstOrDefault(x => x.Name == weaverName);
-        if (referenceToRemove == null)
+        var weaverLibName = weaver.GetType().Assembly.GetName().Name.ReplaceCaseless(".Fody", "");
+        log($"\tRemoving reference to '{weaverLibName}'.");
+
+        var referenceToRemove = module.AssemblyReferences.FirstOrDefault(x => x.Name == weaverLibName);
+        if (referenceToRemove != null)
         {
-            return;
+            module.AssemblyReferences.Remove(referenceToRemove);
         }
 
-        module.AssemblyReferences.Remove(referenceToRemove);
-        log($"\tRemoving reference to '{weaverName}'.");
+        var copyLocalFilesToRemove = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            weaverLibName + ".dll",
+            weaverLibName + ".xml",
+            weaverLibName + ".pdb",
+            weaverLibName + ".mdb" // TODO: Remove this when mdb becomes redundant
+        };
+
+        weaver.ReferenceCopyLocalPaths.RemoveAll(refPath => copyLocalFilesToRemove.Contains(Path.GetFileName(refPath)));
     }
 }

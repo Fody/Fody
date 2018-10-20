@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-
 using Fody;
 
 public class ModuleWeaver : BaseModuleWeaver
@@ -27,8 +26,14 @@ public class ModuleWeaver : BaseModuleWeaver
             ReferenceCopyLocalPaths.Remove(filePath);
             ReferenceCopyLocalPaths.Remove(Path.ChangeExtension(filePath, ".pdb"));
             ReferenceCopyLocalPaths.Remove(Path.ChangeExtension(filePath, ".xml"));
-        }
 
+            // Do not use ShouldCleanReference in order to test the above code
+            var assemblyRef = ModuleDefinition.AssemblyReferences.FirstOrDefault(i => i.Name == "SampleWeaver");
+            if (assemblyRef != null)
+            {
+                ModuleDefinition.AssemblyReferences.Remove(assemblyRef);
+            }
+        }
     }
 
     public override IEnumerable<string> GetAssembliesForScanning()
@@ -36,5 +41,5 @@ public class ModuleWeaver : BaseModuleWeaver
         yield break;
     }
 
-    public override bool ShouldCleanReference => true;
+    public override bool ShouldCleanReference => false;
 }
