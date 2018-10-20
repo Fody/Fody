@@ -9,8 +9,8 @@ public class ModuleWeaver : BaseModuleWeaver
 {
     public override void Execute()
     {
-        var intermediateFoder = Path.GetDirectoryName(ModuleDefinition.FileName);
-        var additionalFilePath = Path.Combine(intermediateFoder, "SomeExtraFile.txt");
+        var intermediateFolder = Path.GetDirectoryName(ModuleDefinition.FileName);
+        var additionalFilePath = Path.Combine(intermediateFolder, "SomeExtraFile.txt");
 
         File.WriteAllText(additionalFilePath, DateTime.Now.ToString(CultureInfo.InvariantCulture));
         ReferenceCopyLocalPaths.Add(additionalFilePath);
