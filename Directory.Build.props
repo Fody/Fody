@@ -25,10 +25,16 @@
     </ItemGroup>
   </Target>
 
+  <!-- Boost the debugging experience when building weavers -->
+
+  <ItemGroup>
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
+  </ItemGroup>
+  
   <!-- Global settings to run integration tests inline while building -->
 
   <PropertyGroup>
-    <IsInlineIntegrationTestActive Condition="'$(MSBUILDDISABLENODERESUSE)'=='1'" >true</IsInlineIntegrationTestActive>
+    <IsInlineIntegrationTestActive Condition="'$(MSBUILDDISABLENODERESUSE)'=='1' AND '$(MSBuildNodeCount)'=='1'">true</IsInlineIntegrationTestActive>
   </PropertyGroup>
 
   <ItemGroup>
