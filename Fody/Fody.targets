@@ -54,7 +54,7 @@
 
     </Fody.WeavingTask>
 
-    <ItemGroup>
+    <ItemGroup Condition="'$(FodyExecutedWeavers)'!=''">
       <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" />
       <ReferenceCopyLocalPaths Include="@(FodyUpdatedReferenceCopyLocalPaths)" />
     </ItemGroup>
