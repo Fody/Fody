@@ -6,6 +6,8 @@
     <FodyAssemblyDirectory Condition="'$(MSBuildRuntimeType)' == 'Core'">$(FodyPath)netstandardtask</FodyAssemblyDirectory>
     <FodyAssemblyDirectory Condition="'$(MSBuildRuntimeType)' != 'Core'">$(FodyPath)netclassictask</FodyAssemblyDirectory>
     <FodyAssembly Condition="'$(FodyAssembly)' == ''">$(FodyAssemblyDirectory)\Fody.dll</FodyAssembly>
+    <FodyIntermediateCopyLocalFilesCacheExt Condition="'$(FodyIntermediateCopyLocalFilesCacheExt)' == ''">.fodyiclfc</FodyIntermediateCopyLocalFilesCacheExt>
+    <FodyIntermediateCopyLocalFilesCachePath>@(IntermediateAssembly->'%(FullPath)')$(FodyIntermediateCopyLocalFilesCacheExt)</FodyIntermediateCopyLocalFilesCachePath>
   </PropertyGroup>
 
   <!-- Support for NCrunch -->
@@ -15,6 +17,7 @@
   </ItemGroup>
 
   <UsingTask TaskName="Fody.WeavingTask" AssemblyFile="$(FodyAssembly)" />
+  <UsingTask TaskName="Fody.UpdateReferenceCopyLocalTask" AssemblyFile="$(FodyAssembly)" />
   <UsingTask TaskName="Fody.VerifyTask" AssemblyFile="$(FodyAssembly)" />
 
   <Target
@@ -42,19 +45,34 @@
         MsBuildThisFileDirectory="$(MSBuildThisFileDirectory)"
         WeaverFiles="@(WeaverFiles)"
         NCrunchOriginalSolutionDirectory="$(NCrunchOriginalSolutionDir)"
+        IntermediateCopyLocalFilesCache="$(FodyIntermediateCopyLocalFilesCachePath)"
       >
 
       <Output
         TaskParameter="ExecutedWeavers"
         PropertyName="FodyExecutedWeavers" />
 
+    </Fody.WeavingTask>
+
+  </Target>
+
+  <Target
+      Name="FodyUpdateCopyLocalFilesTarget"
+      AfterTargets="FodyTarget"
+    >
+
+    <Fody.UpdateReferenceCopyLocalTask
+        ReferenceCopyLocalFiles="@(ReferenceCopyLocalPaths)"
+        IntermediateCopyLocalFilesCache="$(FodyIntermediateCopyLocalFilesCachePath)"
+      >
+
       <Output
         TaskParameter="UpdatedReferenceCopyLocalFiles"
         ItemName="FodyUpdatedReferenceCopyLocalPaths" />
 
-    </Fody.WeavingTask>
+    </Fody.UpdateReferenceCopyLocalTask>
 
-    <ItemGroup Condition="'$(FodyExecutedWeavers)'!=''">
+    <ItemGroup>
       <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" />
       <ReferenceCopyLocalPaths Include="@(FodyUpdatedReferenceCopyLocalPaths)" />
     </ItemGroup>

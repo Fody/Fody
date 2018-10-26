@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
@@ -48,14 +49,12 @@ namespace Fody
 
         public string DebugType { get; set; }
 
-        [Output]
-        public ITaskItem[] UpdatedReferenceCopyLocalFiles { get; set; }
+        [Required]
+        public string IntermediateCopyLocalFilesCache { get; set; }
 
         public override bool Execute()
         {
             // System.Diagnostics.Debugger.Launch();
-
-            UpdatedReferenceCopyLocalFiles = ReferenceCopyLocalFiles;
 
             var referenceCopyLocalPaths = ReferenceCopyLocalFiles.Select(x => x.ItemSpec).ToList();
 
@@ -82,21 +81,20 @@ namespace Fody
                 DebugSymbols = GetDebugSymbolsType()
             };
             var success = processor.Execute();
+
             if (success)
             {
                 var weavers = processor.Weavers.Select(x => x.AssemblyName);
                 ExecutedWeavers = string.Join(";", weavers) + ";";
 
-                var updatedReferenceCopyLocalPaths = new HashSet<string>(processor.ReferenceCopyLocalPaths, StringComparer.OrdinalIgnoreCase);
-
-                var existingReferenceCopyLocalFiles = ReferenceCopyLocalFiles
-                    .Where(item => updatedReferenceCopyLocalPaths.Contains(item.ItemSpec));
-
-                var newReferenceCopyLocalFiles = updatedReferenceCopyLocalPaths
-                    .Except(referenceCopyLocalPaths)
-                    .Select(item => new TaskItem(item));
-
-                UpdatedReferenceCopyLocalFiles = existingReferenceCopyLocalFiles.Concat(newReferenceCopyLocalFiles).ToArray();
+                File.WriteAllLines(IntermediateCopyLocalFilesCache, processor.ReferenceCopyLocalPaths);
+            }
+            else
+            {
+                if (File.Exists(IntermediateCopyLocalFilesCache))
+                {
+                    File.Delete(IntermediateCopyLocalFilesCache);
+                }
             }
 
             return success;
@@ -130,6 +128,47 @@ namespace Fody
         public void Cancel()
         {
             processor.Cancel();
+        }
+    }
+
+    public class UpdateReferenceCopyLocalTask : Task
+    {
+        [Required]
+        public ITaskItem[] ReferenceCopyLocalFiles { get; set; }
+
+        [Output]
+        public ITaskItem[] UpdatedReferenceCopyLocalFiles { get; set; }
+
+        [Required]
+        public string IntermediateCopyLocalFilesCache { get; set; }
+
+        public override bool Execute()
+        {
+            // System.Diagnostics.Debugger.Launch();
+
+            UpdatedReferenceCopyLocalFiles = ReferenceCopyLocalFiles;
+
+            InnerExecute();
+
+            return true;
+        }
+
+        private void InnerExecute()
+        {
+            if (string.IsNullOrEmpty(IntermediateCopyLocalFilesCache) || !File.Exists(IntermediateCopyLocalFilesCache))
+                return;
+
+            var updatedReferenceCopyLocalPaths = new HashSet<string>(File.ReadAllLines(IntermediateCopyLocalFilesCache), StringComparer.OrdinalIgnoreCase);
+            var referenceCopyLocalPaths = new HashSet<string>(ReferenceCopyLocalFiles.Select(x => x.ItemSpec), StringComparer.OrdinalIgnoreCase);
+
+            var existingReferenceCopyLocalFiles = ReferenceCopyLocalFiles
+                .Where(item => updatedReferenceCopyLocalPaths.Contains(item.ItemSpec));
+
+            var newReferenceCopyLocalFiles = updatedReferenceCopyLocalPaths
+                .Where(item => !referenceCopyLocalPaths.Contains(item))
+                .Select(item => new TaskItem(item));
+
+            UpdatedReferenceCopyLocalFiles = existingReferenceCopyLocalFiles.Concat(newReferenceCopyLocalFiles).ToArray();
         }
     }
 }
