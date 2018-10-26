@@ -28,8 +28,15 @@
   <!-- Boost the debugging experience when building weavers -->
 
   <ItemGroup>
-    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.8.3" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <DebugType>embedded</DebugType>
+    <Deterministic>true</Deterministic>
+    <DeterministicSourcePaths>true</DeterministicSourcePaths>
+  </PropertyGroup>
   
   <!-- Global settings to run integration tests inline while building -->
 
