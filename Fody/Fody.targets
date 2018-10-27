@@ -22,7 +22,7 @@
       AfterTargets="AfterCompile"
       Condition="Exists('@(IntermediateAssembly)') And $(DesignTimeBuild) != true And $(DisableFody) != true"
       DependsOnTargets="$(FodyDependsOnTargets)"
-      Inputs="@(IntermediateAssembly->'%(FullPath)');$(FodyKeyFilePath);$(ProjectWeaverXml)"
+      Inputs="@(IntermediateAssembly);$(ProjectWeaverXml)"
       Outputs="$(TargetPath)">
 
     <Fody.WeavingTask
