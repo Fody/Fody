@@ -6,8 +6,7 @@
     <FodyAssemblyDirectory Condition="'$(MSBuildRuntimeType)' == 'Core'">$(FodyPath)netstandardtask</FodyAssemblyDirectory>
     <FodyAssemblyDirectory Condition="'$(MSBuildRuntimeType)' != 'Core'">$(FodyPath)netclassictask</FodyAssemblyDirectory>
     <FodyAssembly Condition="'$(FodyAssembly)' == ''">$(FodyAssemblyDirectory)\Fody.dll</FodyAssembly>
-    <FodyIntermediateCopyLocalFilesCacheExt Condition="'$(FodyIntermediateCopyLocalFilesCacheExt)' == ''">.fodyiclfc</FodyIntermediateCopyLocalFilesCacheExt>
-    <FodyIntermediateCopyLocalFilesCachePath>@(IntermediateAssembly->'%(FullPath)')$(FodyIntermediateCopyLocalFilesCacheExt)</FodyIntermediateCopyLocalFilesCachePath>
+    <FodyIntermediateCopyLocalFilesCachePath Condition="'$(FodyIntermediateCopyLocalFilesCachePath)' == ''">@(IntermediateAssembly->'%(FullPath)').fodyiclfc</FodyIntermediateCopyLocalFilesCachePath>
   </PropertyGroup>
 
   <!-- Support for NCrunch -->
