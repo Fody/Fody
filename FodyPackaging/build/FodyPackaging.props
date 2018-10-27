@@ -1,9 +1,7 @@
 <Project>
   <PropertyGroup>
     <PackageId Condition="'$(PackageId)' == ''">$(MSBuildProjectName).Fody</PackageId>
-    <PackageLicenseUrl Condition="'$(PackageLicenseUrl)' == ''">http://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance Condition="'$(PackageRequireLicenseAcceptance)' == ''">false</PackageRequireLicenseAcceptance>
-    <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">http://github.com/Fody/$(SolutionName)</PackageProjectUrl>
     <PackageTags Condition="'$(PackageTags)' == ''">ILWeaving, Fody, Cecil, AOP</PackageTags>
     <PackageOutputPath Condition="'$(PackageOutputPath)' == ''">$(SolutionDir)nugets</PackageOutputPath>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,12 +10,36 @@
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <NoWarn>$(NoWarn);NU5118</NoWarn>
     <DisableFody>true</DisableFody>
-    <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">https://raw.githubusercontent.com/Fody/$(SolutionName)/master/package_icon.png</PackageIconUrl>
     <WeaverDirPath Condition="'$(WeaverDirPath)' == ''">..\$(PackageId)\bin\$(Configuration)\</WeaverDirPath>
     <WeaverPropsTemplate Condition="'$(WeaverPropsTemplate)' == ''">$(MSBuildThisFileDirectory)..\Weaver.Props.Template</WeaverPropsTemplate>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageIconFile Include="$(SolutionDir)*icon*.png" />
+    <PackageLicenseFile Include="$(SolutionDir)*license*" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <GitHubOrganization Condition="'$(GitHubOrganization)' == ''">Fody</GitHubOrganization>
+    <PackageIconFileName Condition="'$(PackageIconFileName)' == ''">@(PackageIconFile->'%(Filename)%(Extension)')</PackageIconFileName>
+    <PackageLicenseFileName Condition="'$(PackageLicenseFileName)' == ''">@(PackageLicenseFile->'%(Filename)%(Extension)')</PackageLicenseFileName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(GitHubOrganization)' == 'Fody'">
+    <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">https://raw.githubusercontent.com/Fody/$(SolutionName)/master/package_icon.png</PackageIconUrl>
+    <PackageLicenseUrl Condition="'$(PackageLicenseUrl)' == ''">http://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
+    <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">http://github.com/Fody/$(SolutionName)</PackageProjectUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(GitHubOrganization)' != 'Fody'">
+    <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">http://github.com/$(GitHubOrganization)/$(PackageId)</PackageProjectUrl>
+    <PackageIconUrl Condition="'$(PackageIconUrl)' == '' And Exists('$(SolutionDir)$(PackageIconFileName)')">https://raw.githubusercontent.com/$(GitHubOrganization)/$(PackageId)/master/$(PackageIconFileName)</PackageIconUrl>
+    <PackageLicenseUrl Condition="'$(PackageLicenseUrl)' == '' And Exists('$(SolutionDir)$(PackageLicenseFileName)')">https://raw.githubusercontent.com/$(GitHubOrganization)/$(PackageId)/master/$(PackageLicenseFileName)</PackageLicenseUrl>
+  </PropertyGroup>
+
   <ItemGroup>
     <!-- this project targets netstandard2.0 (unnecessarily) and has the below ref to work around this bug https://github.com/Microsoft/msbuild/issues/2661 -->
     <ProjectReference Include="..\$(PackageId)\$(PackageId).csproj" PrivateAssets="All" Condition="$(TargetFramework)=='fake'" />
   </ItemGroup>
+
 </Project>
