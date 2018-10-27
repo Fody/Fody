@@ -12,15 +12,17 @@
     <DisableFody>true</DisableFody>
     <WeaverDirPath Condition="'$(WeaverDirPath)' == ''">..\$(PackageId)\bin\$(Configuration)\</WeaverDirPath>
     <WeaverPropsTemplate Condition="'$(WeaverPropsTemplate)' == ''">$(MSBuildThisFileDirectory)..\Weaver.Props.Template</WeaverPropsTemplate>
+    <GitHubOrganization Condition="'$(GitHubOrganization)' == ''">Fody</GitHubOrganization>
+    <LocalGitRootFolder Condition="'$(LocalGitRootFolder)' == ''">$([MSBuild]::GetDirectoryNameOfFileAbove($(SolutionDir), .git\index))</LocalGitRootFolder>
+    <LocalGitRootFolder Condition="'$(LocalGitRootFolder)' == ''">$(SolutionDir)</LocalGitRootFolder>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageIconFile Include="$(SolutionDir)*icon*.png" />
-    <PackageLicenseFile Include="$(SolutionDir)*license*" />
+    <PackageIconFile Include="$(LocalGitRootFolder)*icon*.png" />
+    <PackageLicenseFile Include="$(LocalGitRootFolder)*license*" />
   </ItemGroup>
 
   <PropertyGroup>
-    <GitHubOrganization Condition="'$(GitHubOrganization)' == ''">Fody</GitHubOrganization>
     <PackageIconFileName Condition="'$(PackageIconFileName)' == ''">@(PackageIconFile->'%(Filename)%(Extension)')</PackageIconFileName>
     <PackageLicenseFileName Condition="'$(PackageLicenseFileName)' == ''">@(PackageLicenseFile->'%(Filename)%(Extension)')</PackageLicenseFileName>
   </PropertyGroup>
