@@ -32,10 +32,7 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl> 
-    <DebugType>embedded</DebugType>	
-    <Deterministic>true</Deterministic>	
-    <DeterministicSourcePaths>true</DeterministicSourcePaths>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
   
   <!-- Global settings to run integration tests inline while building -->
