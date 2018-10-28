@@ -6,7 +6,7 @@
     <FodyAssemblyDirectory Condition="'$(MSBuildRuntimeType)' == 'Core'">$(FodyPath)netstandardtask</FodyAssemblyDirectory>
     <FodyAssemblyDirectory Condition="'$(MSBuildRuntimeType)' != 'Core'">$(FodyPath)netclassictask</FodyAssemblyDirectory>
     <FodyAssembly Condition="'$(FodyAssembly)' == ''">$(FodyAssemblyDirectory)\Fody.dll</FodyAssembly>
-    <FodyIntermediateCopyLocalFilesCachePath Condition="'$(FodyIntermediateCopyLocalFilesCachePath)' == ''">@(IntermediateAssembly->'%(FullPath)').fodyiclfc</FodyIntermediateCopyLocalFilesCachePath>
+    <FodyCopyLocalFilesCache Condition="'$(FodyCopyLocalFilesCache)' == ''">$(MSBuildProjectFile).Fody.CopyLocal.cache</FodyCopyLocalFilesCache>
   </PropertyGroup>
 
   <!-- Support for NCrunch -->
@@ -44,7 +44,7 @@
         MsBuildThisFileDirectory="$(MSBuildThisFileDirectory)"
         WeaverFiles="@(WeaverFiles)"
         NCrunchOriginalSolutionDirectory="$(NCrunchOriginalSolutionDir)"
-        IntermediateCopyLocalFilesCache="$(FodyIntermediateCopyLocalFilesCachePath)"
+        IntermediateCopyLocalFilesCache="$(IntermediateOutputPath)$(FodyCopyLocalFilesCache)"
       >
 
       <Output
@@ -62,7 +62,7 @@
 
     <Fody.UpdateReferenceCopyLocalTask
         ReferenceCopyLocalFiles="@(ReferenceCopyLocalPaths)"
-        IntermediateCopyLocalFilesCache="$(FodyIntermediateCopyLocalFilesCachePath)"
+        IntermediateCopyLocalFilesCache="$(IntermediateOutputPath)$(FodyCopyLocalFilesCache)"
       >
 
       <Output
