@@ -106,6 +106,9 @@ namespace Fody
         /// A list of all the references marked as copy-local.
         /// A copy of the contents of the @(ReferenceCopyLocalPaths).
         /// </summary>
+        /// <remarks>
+        /// This list will be actively synced back to the build system, i.e. adding or removing items from this list will modify the @(ReferenceCopyLocalPaths) list of the current build.
+        /// </remarks>
         public List<string> ReferenceCopyLocalPaths { get; set; } = new List<string>();
 
         /// <summary>
