@@ -25,10 +25,20 @@
     </ItemGroup>
   </Target>
 
+  <!-- Boost the debugging experience when building weavers -->
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+  </PropertyGroup>
+  
   <!-- Global settings to run integration tests inline while building -->
 
   <PropertyGroup>
-    <IsInlineIntegrationTestActive Condition="'$(MSBUILDDISABLENODERESUSE)'=='1'" >true</IsInlineIntegrationTestActive>
+    <IsInlineIntegrationTestActive Condition="'$(MSBUILDDISABLENODERESUSE)'=='1' AND '$(MSBuildNodeCount)'=='1'">true</IsInlineIntegrationTestActive>
   </PropertyGroup>
 
   <ItemGroup>
