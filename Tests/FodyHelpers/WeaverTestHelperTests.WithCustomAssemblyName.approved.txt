@@ -3,7 +3,7 @@
   "Messages": [
     {
       "Text": "\tRemoving reference to 'Tests'.",
-      "MessageImportance": "Normal"
+      "MessageImportance": "Low"
     }
   ],
   "Warnings": [],

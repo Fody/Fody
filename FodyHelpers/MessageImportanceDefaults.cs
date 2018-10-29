@@ -8,7 +8,7 @@ namespace Fody
     [Obsolete(OnlyForTesting.Message)]
     public static class MessageImportanceDefaults
     {
-        public static readonly MessageImportance Debug = MessageImportance.Normal;
-        public static readonly MessageImportance Info = MessageImportance.High;
+        public static readonly MessageImportance Debug = MessageImportance.Low;
+        public static readonly MessageImportance Info = MessageImportance.Normal;
     }
 }
