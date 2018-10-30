@@ -35,8 +35,8 @@
 
   <PropertyGroup Condition="'$(GitHubOrganization)' != 'Fody'">
     <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">http://github.com/$(GitHubOrganization)/$(PackageId)</PackageProjectUrl>
-    <PackageIconUrl Condition="'$(PackageIconUrl)' == '' And Exists('$(LocalGitRootFolder)$(PackageIconFileName)')">https://raw.githubusercontent.com/$(GitHubOrganization)/$(PackageId)/master/$(PackageIconFileName)</PackageIconUrl>
-    <PackageLicenseUrl Condition="'$(PackageLicenseUrl)' == '' And Exists('$(LocalGitRootFolder)$(PackageLicenseFileName)')">https://raw.githubusercontent.com/$(GitHubOrganization)/$(PackageId)/master/$(PackageLicenseFileName)</PackageLicenseUrl>
+    <PackageIconUrl Condition="'$(PackageIconUrl)' == '' And '$(PackageIconFileName)' != ''">https://raw.githubusercontent.com/$(GitHubOrganization)/$(PackageId)/master/$(PackageIconFileName)</PackageIconUrl>
+    <PackageLicenseUrl Condition="'$(PackageLicenseUrl)' == '' And '$(PackageLicenseFileName)' != ''">https://raw.githubusercontent.com/$(GitHubOrganization)/$(PackageId)/master/$(PackageLicenseFileName)</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>
