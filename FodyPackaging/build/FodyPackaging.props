@@ -3,7 +3,10 @@
     <PackageId Condition="'$(PackageId)' == ''">$(MSBuildProjectName).Fody</PackageId>
     <PackageRequireLicenseAcceptance Condition="'$(PackageRequireLicenseAcceptance)' == ''">false</PackageRequireLicenseAcceptance>
     <PackageTags Condition="'$(PackageTags)' == ''">ILWeaving, Fody, Cecil, AOP</PackageTags>
-    <PackageOutputPath Condition="'$(PackageOutputPath)' == ''">$(SolutionDir)nugets</PackageOutputPath>
+    <FodySolutionDir Condition="'$(SolutionDir)' != '*Undefined*'">$(SolutionDir)</FodySolutionDir>
+    <FodySolutionDir Condition="'$(FodySolutionDir)' == ''">$(MSBuildProjectDirectory)</FodySolutionDir>
+    <FodySolutionDir Condition="!HasTrailingSlash('$(FodySolutionDir)')">$(FodySolutionDir)\</FodySolutionDir>
+    <PackageOutputPath Condition="'$(PackageOutputPath)' == ''">$(FodySolutionDir)nugets</PackageOutputPath>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeFodyFiles</TargetsForTfmSpecificContentInPackage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -13,8 +16,9 @@
     <WeaverDirPath Condition="'$(WeaverDirPath)' == ''">..\$(PackageId)\bin\$(Configuration)\</WeaverDirPath>
     <WeaverPropsTemplate Condition="'$(WeaverPropsTemplate)' == ''">$(MSBuildThisFileDirectory)..\Weaver.Props.Template</WeaverPropsTemplate>
     <GitHubOrganization Condition="'$(GitHubOrganization)' == ''">Fody</GitHubOrganization>
-    <LocalGitRootFolder Condition="'$(LocalGitRootFolder)' == ''">$([MSBuild]::GetDirectoryNameOfFileAbove($(SolutionDir), .git\index))</LocalGitRootFolder>
-    <LocalGitRootFolder Condition="'$(LocalGitRootFolder)' == ''">$(SolutionDir)</LocalGitRootFolder>
+    <LocalGitRootFolder Condition="'$(LocalGitRootFolder)' == ''">$([MSBuild]::GetDirectoryNameOfFileAbove('$(MSBuildProjectDirectory)', '.git\index'))</LocalGitRootFolder>
+    <LocalGitRootFolder Condition="'$(LocalGitRootFolder)' == ''">$(FodySolutionDir)</LocalGitRootFolder>
+    <LocalGitRootFolder Condition="!HasTrailingSlash('$(LocalGitRootFolder)')">$(LocalGitRootFolder)\</LocalGitRootFolder>
   </PropertyGroup>
 
   <ItemGroup>
