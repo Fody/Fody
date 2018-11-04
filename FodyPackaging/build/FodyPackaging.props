@@ -3,12 +3,12 @@
     <PackageId Condition="'$(PackageId)' == ''">$(MSBuildProjectName).Fody</PackageId>
     <PackageRequireLicenseAcceptance Condition="'$(PackageRequireLicenseAcceptance)' == ''">false</PackageRequireLicenseAcceptance>
     <PackageTags Condition="'$(PackageTags)' == ''">ILWeaving, Fody, Cecil, AOP</PackageTags>
-    <FodySolutionDir Condition="'$(SolutionDir)' != '*Undefined*'">$(SolutionDir)</FodySolutionDir>
+    <FodySolutionDir Condition="'$(FodySolutionDir)' == '' AND '$(SolutionDir)' != '*Undefined*'">$(SolutionDir)</FodySolutionDir>
     <FodySolutionDir Condition="'$(FodySolutionDir)' == ''">$(MSBuildProjectDirectory)</FodySolutionDir>
     <FodySolutionDir Condition="!HasTrailingSlash('$(FodySolutionDir)')">$(FodySolutionDir)\</FodySolutionDir>
     <PackageOutputPath Condition="'$(PackageOutputPath)' == ''">$(FodySolutionDir)nugets</PackageOutputPath>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeFodyFiles</TargetsForTfmSpecificContentInPackage>
+    <TargetsForTfmSpecificContentInPackage Condition="'$(SkipPackagingDefaultFiles)' != 'true'">$(TargetsForTfmSpecificContentInPackage);IncludeFodyFiles</TargetsForTfmSpecificContentInPackage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <NoWarn>$(NoWarn);NU5118</NoWarn>
