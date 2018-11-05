@@ -33,7 +33,7 @@ public static class ConfigFile
             }
             else
             {
-                logger.LogDebug($@"Could not file a FodyWeavers.xml at the project level ({projectConfigFilePath}). Some project types do not support using NuGet to add content files e.g. netstandard projects. In these cases it is necessary to manually add a FodyWeavers.xml to the project. Example content:
+                logger.LogError($@"Could not find a FodyWeavers.xml file at the project level ({projectConfigFilePath}). Some project types do not support using NuGet to add content files e.g. netstandard projects. In these cases it is necessary to manually add a FodyWeavers.xml to the project. Example content:
   <Weavers>
     <WeaverName/>
   </Weavers>
