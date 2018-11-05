@@ -32,15 +32,15 @@ namespace SampleTarget
             Assert.True(elapsed < TimeSpan.FromMinutes(1));
         }
 
-        [Fact(Skip = skipReason)]
-        public void SampleWeaverRemovedObsoleteDependenciesDuringBuild()
-        {
-            var targetFolder = AppDomain.CurrentDomain.BaseDirectory;
+        //[Fact(Skip = skipReason)]
+        //public void SampleWeaverRemovedObsoleteDependenciesDuringBuild()
+        //{
+        //    var targetFolder = AppDomain.CurrentDomain.BaseDirectory;
 
-            var sampleWeaverFiles = Directory.EnumerateFiles(targetFolder, "SampleWeaver.*");
+        //    var sampleWeaverFiles = Directory.EnumerateFiles(targetFolder, "SampleWeaver.*");
 
-            Assert.Empty(sampleWeaverFiles);
-        }
+        //    Assert.Empty(sampleWeaverFiles);
+        //}
 
         [Fact(Skip = skipReason)]
         public void NullGuardsAreActive()
