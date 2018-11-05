@@ -37,7 +37,7 @@
   <!-- Global settings to run integration tests inline while building -->
 
   <PropertyGroup>
-    <IsInlineIntegrationTestActive Condition="'$(MSBUILDDISABLENODERESUSE)'=='1' AND '$(MSBuildNodeCount)'=='1'">true</IsInlineIntegrationTestActive>
+    <IsInlineIntegrationTestActive Condition="'$(CI)'=='True' OR '$(MSBuildNodeCount)'=='1'">true</IsInlineIntegrationTestActive>
   </PropertyGroup>
 
   <ItemGroup>

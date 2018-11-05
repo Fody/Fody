@@ -21,6 +21,12 @@
     <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="SampleWeaver.Fody.xcf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <Target Name="CopyForIntegration" AfterTargets="AfterBuild">
     <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(SolutionDir)Tests\Fody\Packages\SampleWeaver.Fody.1.0.0.0\SampleWeaver.Fody.dll" />
   </Target>

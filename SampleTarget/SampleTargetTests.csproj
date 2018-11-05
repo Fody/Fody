@@ -4,6 +4,7 @@
     <TargetFramework>net46</TargetFramework>
     <IsPackable>false</IsPackable>
     <DefineConstants Condition="'$(IsInlineIntegrationTestActive)'=='true'">$(DefineConstants);IS_INLINE_INTEGRATION_TEST_ACTIVE</DefineConstants>
+    <FodyAssembly>$(SolutionDir)Fody\Bin\$(Configuration)\net46\Fody.dll</FodyAssembly>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,6 +19,12 @@
     <ProjectReference Include="..\SampleWeaver\SampleWeaver.csproj" />
   </ItemGroup>
   
-  <Import Project="$(SolutionDir)Fody\Fody.Targets" Condition="'$(IsInlineIntegrationTestActive)'=='true' AND Exists('$(SolutionDir)Fody\Fody.Targets')"/>
+  <Import Project="$(SolutionDir)Fody\Fody.Targets" Condition="'$(IsInlineIntegrationTestActive)'=='true' AND Exists('$(SolutionDir)Fody\Fody.Targets')" />
+
+  <ItemGroup>
+    <!-- Do NOT update these versions, it's for backward compatibility testing!!! -->
+    <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.10.0" />
+    <PackageReference Include="NullGuard.Fody" Version="1.8.5" />
+  </ItemGroup>
 
 </Project>
