@@ -29,7 +29,7 @@ public static class ConfigFile
             {
                 GenerateDefault(projectConfigFilePath, wellKnownWeaverFiles);
 
-                logger.LogError($@"Could not file a FodyWeavers.xml at the project level ({projectConfigFilePath}). A default file has been created. Please review the file and add it to your project.");
+                logger.LogError($@"Could not find a FodyWeavers.xml file at the project level ({projectConfigFilePath}). A default file has been created. Please review the file and add it to your project.");
             }
             else
             {
