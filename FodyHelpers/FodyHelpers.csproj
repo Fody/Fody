@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
@@ -7,6 +7,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Description>Helpers for Fody.</Description>
   </PropertyGroup>
+
   <ItemGroup Condition="$(TargetFramework) == 'net46'">
     <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\net40\Mono.Cecil.dll" />
     <Reference Include="Mono.Cecil.Mdb" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Mdb.dll" />
@@ -19,4 +20,9 @@
     <Reference Include="Mono.Cecil.Pdb" HintPath="..\Lib\Cecil\netstandard1.3\Mono.Cecil.Pdb.dll" />
     <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\netstandard1.3\Mono.Cecil.Rocks.dll" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="build\*" PackagePath="build" />
+  </ItemGroup>
+
 </Project>
