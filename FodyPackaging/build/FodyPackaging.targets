@@ -9,7 +9,12 @@
       <NetClassicFilesToInclude Include="$(WeaverDirPath)\net4*\$(PackageId).pdb" />
       <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2*\$(PackageId).dll" />
       <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2*\$(PackageId).pdb" />
+
+      <TfmSpecificPackageFile Include="$(WeaverPropsTempFile)" PackagePath="build" />
     </ItemGroup>
+
+    <Error Text="FodyPackaging: No NetClassic weavers found to include in package. Maybe the build order is wrong?" Condition="'@(NetClassicFilesToInclude)'==''" />
+    <Error Text="FodyPackaging: No NetStandard weavers found to include in package. Maybe the build order is wrong?" Condition="'@(NetStandardFilesToInclude)'==''" />
 
     <Copy SourceFiles="$(WeaverPropsTemplate)" DestinationFiles="$(WeaverPropsTempFile)" />
 
@@ -17,9 +22,6 @@
       <Output TaskParameter="Include" ItemName="TfmSpecificPackageFile" />
     </CreateItem>
     <CreateItem Include="@(NetStandardFilesToInclude)" AdditionalMetadata="PackagePath=netstandardweaver">
-      <Output TaskParameter="Include" ItemName="TfmSpecificPackageFile" />
-    </CreateItem>
-    <CreateItem Include="$(WeaverPropsTempFile)" AdditionalMetadata="PackagePath=build">
       <Output TaskParameter="Include" ItemName="TfmSpecificPackageFile" />
     </CreateItem>
 
