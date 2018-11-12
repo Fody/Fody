@@ -203,7 +203,6 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [AutoDependencyProperty](http://blog.angeloflogic.com/2014/12/no-more-dependencyproperty-with.html) Generates WPF DependencyProperty boilerplate from automatic C# properties.
   * [AutoProperties](https://github.com/tom-englert/AutoProperties.Fody) Gives you extended control over auto-properties, like directly accessing the backing field or intercepting getters and setters.
   * [AutoDI](https://github.com/Keboo/AutoDI) A dependency injection container and a framework to simplify working with dependency injection (DI). It is built on top of the Microsoft.Extensions.DependencyInjection.Abstractions.
-  * [AutoLazy](https://github.com/bcuff/AutoLazy) Automatically implements the double-checked locking pattern on specified properties and methods.
   * [BasicFodyAddin](https://github.com/Fody/BasicFodyAddin) A simple project meant to illustrate how to build an addin.
   * [Bindables](https://github.com/yusuf-gunaydin/Bindables) Converts your auto properties into Wpf dependency or attached properties. Allows specifying options, defining readonly properties, and calling property changed methods.
   * [Caseless](https://github.com/Fody/Caseless) Change string comparisons to be case insensitive.
@@ -229,6 +228,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Ionad](https://github.com/Fody/Ionad) Replaces static method calls. 
   * [Janitor](https://github.com/Fody/Janitor) Simplifies the implementation of [IDisposable](https://msdn.microsoft.com/en-us/library/system.idisposable.aspx).
   * [JetBrainsAnnotations](https://github.com/tom-englert/JetBrainsAnnotations.Fody) Converts all JetBrains ReSharper code annotation attributes to External Annotations.
+  * [Lazy](https://github.com/tom-englert/Lazy.Fody) Automates the plumbing around System.Lazy.
   * [LoadAssembliesOnStartup](https://github.com/Fody/LoadAssembliesOnStartup) Loads references on startup by using the types in the module initializer
   * [LoggerIsEnabled](https://github.com/wazowsk1/LoggerIsEnabled.Fody) Adds `ILogger.IsEnabled` check around the logging statement for the [Microsoft.Extensions.Logging](https://github.com/aspnet/Logging)
   * [MethodBoundaryAspect](https://github.com/vescon/MethodBoundaryAspect.Fody) Allows to decorate methods and hook into method start, method end and method exceptions (like PostSharp)
@@ -279,6 +279,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
 The below addins are no longer maintained. Raise an issue in the specific project if you would like to take ownership.
 
   * [ArraySlice](https://github.com/Codealike/arrayslice) ArraySlice allows to build shared memory array views without performance impact. It uses IL manipulation to achieve the fastest implementation.
+  * [AutoLazy](https://github.com/bcuff/AutoLazy) Automatically implements the double-checked locking pattern on specified properties and methods.
   * [Cilador](https://github.com/rileywhite/Cilador) Write your own [mixins](https://en.wikipedia.org/wiki/Mixin) in C# for code reuse without inheritance.
   * [Commander](https://github.com/DamianReeves/Commander.Fody) Injects ICommand properties and implementations for use in MVVM applications.
   * [Mixins](https://bitbucket.org/skwasiborski/mixins.fody/wiki/Home) A mixin is a class that provides a certain functionality to be inherited or just reused by a subclass.
