@@ -37,7 +37,7 @@ public static class XmlExtensions
                 value = XmlConvert.ToBoolean(attribute.Value);
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
                 throw new WeavingException($"Could not parse '{nodeName}' from '{attribute.Value}'.");
             }
