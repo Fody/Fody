@@ -34,7 +34,7 @@ public static class XmlExtensions
         {
             try
             {
-                value = XmlConvert.ToBoolean(attribute.Value);
+                value = XmlConvert.ToBoolean(attribute.Value.ToLowerInvariant());
                 return true;
             }
             catch
