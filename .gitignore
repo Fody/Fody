@@ -91,3 +91,5 @@ Fody/.DS_Store
 *.received.txt
 *.bak
 Integration/Directory.Build.props
+/SampleTarget/SampleTargetTests.ExternalAnnotations.xml
+/SampleTarget/FodyWeavers.xsd

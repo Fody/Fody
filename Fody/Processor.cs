@@ -68,7 +68,7 @@ public partial class Processor
 
         ValidateAssemblyPath();
 
-        ConfigFiles = ConfigFileFinder.FindWeaverConfigs(SolutionDirectory, ProjectDirectory, Logger);
+        ConfigFiles = ConfigFile.FindWeaverConfigs(SolutionDirectory, ProjectDirectory, Logger, WeaverFilesFromProps);
 
         if (!ShouldStartSinceFileChanged())
         {

@@ -1,0 +1,19 @@
+﻿<xs:complexType xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:all>
+    <xs:element name="Content" type="xs:string" minOccurs="0" maxOccurs="1">
+      <xs:annotation>
+        <xs:documentation>This is the documentation for the content</xs:documentation>
+      </xs:annotation>
+    </xs:element>
+  </xs:all>
+  <xs:attribute name="MyProperty" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>This is the documentation for my property</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="AnotherProperty" type="xs:string" >
+    <xs:annotation>
+      <xs:documentation>This is the documentation for another property</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+</xs:complexType>

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
 using Fody;
 
@@ -30,11 +32,15 @@ public static class XmlExtensions
         var attribute = config.Attribute(nodeName);
         if (attribute != null)
         {
-            if (bool.TryParse(attribute.Value, out value))
+            try
             {
+                value = XmlConvert.ToBoolean(attribute.Value.ToLowerInvariant());
                 return true;
             }
-            throw new WeavingException($"Could not parse '{nodeName}' from '{attribute.Value}'.");
+            catch
+            {
+                throw new WeavingException($"Could not parse '{nodeName}' from '{attribute.Value}'.");
+            }
         }
         value = false;
         return false;

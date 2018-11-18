@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
   </PropertyGroup>
+
   <ItemGroup Condition="$(TargetFramework) == 'net46'">
     <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\net40\Mono.Cecil.dll" />
     <Reference Include="Mono.Cecil.Mdb" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Mdb.dll" />
@@ -24,5 +26,7 @@
   <Target Name="CopyForIntegration" AfterTargets="AfterBuild">
     <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(SolutionDir)Tests\Fody\Packages\SampleWeaver.Fody.1.0.0.0\SampleWeaver.Fody.dll" />
   </Target>
+
+  <Import Project="$(SolutionDir)FodyHelpers\build\FodyHelpers.targets" />
 
 </Project>
