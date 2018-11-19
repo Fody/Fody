@@ -71,7 +71,7 @@
                 05 73 E0 3F 8A D6 65 C0 51 C6 3F BC 53 59 D4 95   // .s.?..e.Q.?.SY..
                 D4 B1 C6 10 24 EF 76 ED 9C 1E BB 47 1F ED 59 C9 ) // ....$.v....G..Y.
   .hash algorithm 0x00008004
-  .ver 2:4:0:4049
+  .ver 2:4:1:0
 }
 .mresource public Xunit.Resources.xunit.core.rd.xml
 {
@@ -389,8 +389,8 @@
   .method public hidebysig virtual instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]> 
           GetData(class [System.Reflection]System.Reflection.MethodInfo testMethod) cil managed
   {
-    // Code size       81 (0x51)
-    .maxstack  5
+    // Code size       92 (0x5c)
+    .maxstack  4
     .locals init (class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]> V_0)
     IL_0000:  ldarg.0
     IL_0001:  call       instance class [System.Runtime]System.Type Xunit.ClassDataAttribute::get_Class()
@@ -398,34 +398,40 @@
     IL_000b:  isinst     class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]>
     IL_0010:  stloc.0
     IL_0011:  ldloc.0
-    IL_0012:  brtrue.s   IL_004f
-    IL_0014:  ldstr      "{0} must implement IEnumerable<object[]> to be use"
-    + "d as ClassData for the test method named '{1}' on {2}"
-    IL_0019:  ldc.i4.3
-    IL_001a:  newarr     [System.Runtime]System.Object
-    IL_001f:  dup
-    IL_0020:  ldc.i4.0
-    IL_0021:  ldarg.0
-    IL_0022:  call       instance class [System.Runtime]System.Type Xunit.ClassDataAttribute::get_Class()
-    IL_0027:  callvirt   instance string [System.Runtime]System.Type::get_FullName()
-    IL_002c:  stelem.ref
-    IL_002d:  dup
-    IL_002e:  ldc.i4.1
-    IL_002f:  ldarg.1
-    IL_0030:  callvirt   instance string [System.Reflection]System.Reflection.MemberInfo::get_Name()
-    IL_0035:  stelem.ref
-    IL_0036:  dup
-    IL_0037:  ldc.i4.2
-    IL_0038:  ldarg.1
-    IL_0039:  callvirt   instance class [System.Runtime]System.Type [System.Reflection]System.Reflection.MemberInfo::get_DeclaringType()
-    IL_003e:  callvirt   instance string [System.Runtime]System.Type::get_FullName()
-    IL_0043:  stelem.ref
-    IL_0044:  call       string [System.Runtime]System.String::Format(string,
-                                                                      object[])
-    IL_0049:  newobj     instance void [System.Runtime]System.ArgumentException::.ctor(string)
-    IL_004e:  throw
-    IL_004f:  ldloc.0
-    IL_0050:  ret
+    IL_0012:  brtrue.s   IL_005a
+    IL_0014:  ldc.i4.5
+    IL_0015:  newarr     [System.Runtime]System.String
+    IL_001a:  dup
+    IL_001b:  ldc.i4.0
+    IL_001c:  ldarg.0
+    IL_001d:  call       instance class [System.Runtime]System.Type Xunit.ClassDataAttribute::get_Class()
+    IL_0022:  callvirt   instance string [System.Runtime]System.Type::get_FullName()
+    IL_0027:  stelem.ref
+    IL_0028:  dup
+    IL_0029:  ldc.i4.1
+    IL_002a:  ldstr      " must implement IEnumerable<object[]> to be used a"
+    + "s ClassData for the test method named '"
+    IL_002f:  stelem.ref
+    IL_0030:  dup
+    IL_0031:  ldc.i4.2
+    IL_0032:  ldarg.1
+    IL_0033:  callvirt   instance string [System.Reflection]System.Reflection.MemberInfo::get_Name()
+    IL_0038:  stelem.ref
+    IL_0039:  dup
+    IL_003a:  ldc.i4.3
+    IL_003b:  ldstr      "' on "
+    IL_0040:  stelem.ref
+    IL_0041:  dup
+    IL_0042:  ldc.i4.4
+    IL_0043:  ldarg.1
+    IL_0044:  callvirt   instance class [System.Runtime]System.Type [System.Reflection]System.Reflection.MemberInfo::get_DeclaringType()
+    IL_0049:  callvirt   instance string [System.Runtime]System.Type::get_FullName()
+    IL_004e:  stelem.ref
+    IL_004f:  call       string [System.Runtime]System.String::Concat(string[])
+    IL_0054:  newobj     instance void [System.Runtime]System.ArgumentException::.ctor(string)
+    IL_0059:  throw
+    IL_005a:  ldloc.0
+    IL_005b:  ret
   } 
   .property instance class [System.Runtime]System.Type
           Class()
@@ -1085,8 +1091,8 @@
   .method public hidebysig virtual instance class [System.Runtime]System.Collections.Generic.IEnumerable`1<object[]> 
           GetData(class [System.Reflection]System.Reflection.MethodInfo testMethod) cil managed
   {
-    // Code size       327 (0x147)
-    .maxstack  8
+    // Code size       348 (0x15c)
+    .maxstack  5
     .locals init (class Xunit.MemberDataAttributeBase/'<>c__DisplayClass17_0' V_0,
              class [System.Runtime]System.Type V_1,
              class [System.Runtime]System.Func`1<object> V_2,
@@ -1132,7 +1138,7 @@
     IL_0052:  call       instance class [System.Runtime]System.Func`1<object> Xunit.MemberDataAttributeBase::GetMethodAccessor(class [System.Runtime]System.Type)
     IL_0057:  stloc.2
     IL_0058:  ldloc.2
-    IL_0059:  brtrue     IL_00ee
+    IL_0059:  brtrue     IL_00f0
     IL_005e:  ldarg.0
     IL_005f:  call       instance object[] Xunit.MemberDataAttributeBase::get_Parameters()
     IL_0064:  dup
@@ -1145,93 +1151,104 @@
     IL_006d:  cgt.un
     IL_006f:  brtrue.s   IL_0078
     IL_0071:  ldstr      ""
-    IL_0076:  br.s       IL_00bf
-    IL_0078:  ldstr      " with parameter types: {0}"
-    IL_007d:  ldc.i4.1
-    IL_007e:  newarr     [System.Runtime]System.Object
-    IL_0083:  dup
-    IL_0084:  ldc.i4.0
-    IL_0085:  ldstr      ", "
-    IL_008a:  ldarg.0
-    IL_008b:  call       instance object[] Xunit.MemberDataAttributeBase::get_Parameters()
-    IL_0090:  ldsfld     class [System.Runtime]System.Func`2<object,string> Xunit.MemberDataAttributeBase/'<>c'::'<>9__17_1'
-    IL_0095:  dup
-    IL_0096:  brtrue.s   IL_00af
-    IL_0098:  pop
-    IL_0099:  ldsfld     class Xunit.MemberDataAttributeBase/'<>c' Xunit.MemberDataAttributeBase/'<>c'::'<>9'
-    IL_009e:  ldftn      instance string Xunit.MemberDataAttributeBase/'<>c'::'<GetData>b__17_1'(object)
-    IL_00a4:  newobj     instance void class [System.Runtime]System.Func`2<object,string>::.ctor(object,
+    IL_0076:  br.s       IL_00b6
+    IL_0078:  ldstr      " with parameter types: "
+    IL_007d:  ldstr      ", "
+    IL_0082:  ldarg.0
+    IL_0083:  call       instance object[] Xunit.MemberDataAttributeBase::get_Parameters()
+    IL_0088:  ldsfld     class [System.Runtime]System.Func`2<object,string> Xunit.MemberDataAttributeBase/'<>c'::'<>9__17_1'
+    IL_008d:  dup
+    IL_008e:  brtrue.s   IL_00a7
+    IL_0090:  pop
+    IL_0091:  ldsfld     class Xunit.MemberDataAttributeBase/'<>c' Xunit.MemberDataAttributeBase/'<>c'::'<>9'
+    IL_0096:  ldftn      instance string Xunit.MemberDataAttributeBase/'<>c'::'<GetData>b__17_1'(object)
+    IL_009c:  newobj     instance void class [System.Runtime]System.Func`2<object,string>::.ctor(object,
                                                                                                  native int)
-    IL_00a9:  dup
-    IL_00aa:  stsfld     class [System.Runtime]System.Func`2<object,string> Xunit.MemberDataAttributeBase/'<>c'::'<>9__17_1'
-    IL_00af:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!1> [System.Linq]System.Linq.Enumerable::Select<object,string>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
+    IL_00a1:  dup
+    IL_00a2:  stsfld     class [System.Runtime]System.Func`2<object,string> Xunit.MemberDataAttributeBase/'<>c'::'<>9__17_1'
+    IL_00a7:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!1> [System.Linq]System.Linq.Enumerable::Select<object,string>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
                                                                                                                                                         class [System.Runtime]System.Func`2<!!0,!!1>)
-    IL_00b4:  call       string [System.Runtime]System.String::Join(string,
+    IL_00ac:  call       string [System.Runtime]System.String::Join(string,
                                                                     class [System.Runtime]System.Collections.Generic.IEnumerable`1<string>)
-    IL_00b9:  stelem.ref
-    IL_00ba:  call       string [System.Runtime]System.String::Format(string,
-                                                                      object[])
-    IL_00bf:  stloc.s    V_5
-    IL_00c1:  ldstr      "Could not find public static member (property, fie"
-    + "ld, or method) named '{0}' on {1}{2}"
-    IL_00c6:  ldc.i4.3
-    IL_00c7:  newarr     [System.Runtime]System.Object
-    IL_00cc:  dup
-    IL_00cd:  ldc.i4.0
-    IL_00ce:  ldarg.0
-    IL_00cf:  call       instance string Xunit.MemberDataAttributeBase::get_MemberName()
-    IL_00d4:  stelem.ref
-    IL_00d5:  dup
-    IL_00d6:  ldc.i4.1
-    IL_00d7:  ldloc.1
-    IL_00d8:  callvirt   instance string [System.Runtime]System.Type::get_FullName()
-    IL_00dd:  stelem.ref
-    IL_00de:  dup
-    IL_00df:  ldc.i4.2
-    IL_00e0:  ldloc.s    V_5
-    IL_00e2:  stelem.ref
-    IL_00e3:  call       string [System.Runtime]System.String::Format(string,
-                                                                      object[])
-    IL_00e8:  newobj     instance void [System.Runtime]System.ArgumentException::.ctor(string)
-    IL_00ed:  throw
-    IL_00ee:  ldloc.2
-    IL_00ef:  callvirt   instance !0 class [System.Runtime]System.Func`1<object>::Invoke()
-    IL_00f4:  stloc.3
-    IL_00f5:  ldloc.3
-    IL_00f6:  brtrue.s   IL_00fa
-    IL_00f8:  ldnull
-    IL_00f9:  ret
-    IL_00fa:  ldloc.3
-    IL_00fb:  isinst     [System.Runtime]System.Collections.IEnumerable
-    IL_0100:  stloc.s    V_4
-    IL_0102:  ldloc.s    V_4
-    IL_0104:  brtrue.s   IL_012e
-    IL_0106:  ldstr      "Property {0} on {1} did not return IEnumerable"
-    IL_010b:  ldc.i4.2
-    IL_010c:  newarr     [System.Runtime]System.Object
-    IL_0111:  dup
-    IL_0112:  ldc.i4.0
-    IL_0113:  ldarg.0
-    IL_0114:  call       instance string Xunit.MemberDataAttributeBase::get_MemberName()
-    IL_0119:  stelem.ref
-    IL_011a:  dup
-    IL_011b:  ldc.i4.1
-    IL_011c:  ldloc.1
-    IL_011d:  callvirt   instance string [System.Runtime]System.Type::get_FullName()
-    IL_0122:  stelem.ref
-    IL_0123:  call       string [System.Runtime]System.String::Format(string,
-                                                                      object[])
-    IL_0128:  newobj     instance void [System.Runtime]System.ArgumentException::.ctor(string)
-    IL_012d:  throw
-    IL_012e:  ldloc.s    V_4
-    IL_0130:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::Cast<object>(class [System.Runtime]System.Collections.IEnumerable)
-    IL_0135:  ldloc.0
-    IL_0136:  ldftn      instance object[] Xunit.MemberDataAttributeBase/'<>c__DisplayClass17_0'::'<GetData>b__0'(object)
-    IL_013c:  newobj     instance void class [System.Runtime]System.Func`2<object,object[]>::.ctor(object,
+    IL_00b1:  call       string [System.Runtime]System.String::Concat(string,
+                                                                      string)
+    IL_00b6:  stloc.s    V_5
+    IL_00b8:  ldc.i4.5
+    IL_00b9:  newarr     [System.Runtime]System.String
+    IL_00be:  dup
+    IL_00bf:  ldc.i4.0
+    IL_00c0:  ldstr      "Could not find public static member (property, fie"
+    + "ld, or method) named '"
+    IL_00c5:  stelem.ref
+    IL_00c6:  dup
+    IL_00c7:  ldc.i4.1
+    IL_00c8:  ldarg.0
+    IL_00c9:  call       instance string Xunit.MemberDataAttributeBase::get_MemberName()
+    IL_00ce:  stelem.ref
+    IL_00cf:  dup
+    IL_00d0:  ldc.i4.2
+    IL_00d1:  ldstr      "' on "
+    IL_00d6:  stelem.ref
+    IL_00d7:  dup
+    IL_00d8:  ldc.i4.3
+    IL_00d9:  ldloc.1
+    IL_00da:  callvirt   instance string [System.Runtime]System.Type::get_FullName()
+    IL_00df:  stelem.ref
+    IL_00e0:  dup
+    IL_00e1:  ldc.i4.4
+    IL_00e2:  ldloc.s    V_5
+    IL_00e4:  stelem.ref
+    IL_00e5:  call       string [System.Runtime]System.String::Concat(string[])
+    IL_00ea:  newobj     instance void [System.Runtime]System.ArgumentException::.ctor(string)
+    IL_00ef:  throw
+    IL_00f0:  ldloc.2
+    IL_00f1:  callvirt   instance !0 class [System.Runtime]System.Func`1<object>::Invoke()
+    IL_00f6:  stloc.3
+    IL_00f7:  ldloc.3
+    IL_00f8:  brtrue.s   IL_00fc
+    IL_00fa:  ldnull
+    IL_00fb:  ret
+    IL_00fc:  ldloc.3
+    IL_00fd:  isinst     [System.Runtime]System.Collections.IEnumerable
+    IL_0102:  stloc.s    V_4
+    IL_0104:  ldloc.s    V_4
+    IL_0106:  brtrue.s   IL_0143
+    IL_0108:  ldc.i4.5
+    IL_0109:  newarr     [System.Runtime]System.String
+    IL_010e:  dup
+    IL_010f:  ldc.i4.0
+    IL_0110:  ldstr      "Property "
+    IL_0115:  stelem.ref
+    IL_0116:  dup
+    IL_0117:  ldc.i4.1
+    IL_0118:  ldarg.0
+    IL_0119:  call       instance string Xunit.MemberDataAttributeBase::get_MemberName()
+    IL_011e:  stelem.ref
+    IL_011f:  dup
+    IL_0120:  ldc.i4.2
+    IL_0121:  ldstr      " on "
+    IL_0126:  stelem.ref
+    IL_0127:  dup
+    IL_0128:  ldc.i4.3
+    IL_0129:  ldloc.1
+    IL_012a:  callvirt   instance string [System.Runtime]System.Type::get_FullName()
+    IL_012f:  stelem.ref
+    IL_0130:  dup
+    IL_0131:  ldc.i4.4
+    IL_0132:  ldstr      " did not return IEnumerable"
+    IL_0137:  stelem.ref
+    IL_0138:  call       string [System.Runtime]System.String::Concat(string[])
+    IL_013d:  newobj     instance void [System.Runtime]System.ArgumentException::.ctor(string)
+    IL_0142:  throw
+    IL_0143:  ldloc.s    V_4
+    IL_0145:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::Cast<object>(class [System.Runtime]System.Collections.IEnumerable)
+    IL_014a:  ldloc.0
+    IL_014b:  ldftn      instance object[] Xunit.MemberDataAttributeBase/'<>c__DisplayClass17_0'::'<GetData>b__0'(object)
+    IL_0151:  newobj     instance void class [System.Runtime]System.Func`2<object,object[]>::.ctor(object,
                                                                                                    native int)
-    IL_0141:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!1> [System.Linq]System.Linq.Enumerable::Select<object,object[]>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
+    IL_0156:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!1> [System.Linq]System.Linq.Enumerable::Select<object,object[]>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
                                                                                                                                                           class [System.Runtime]System.Func`2<!!0,!!1>)
-    IL_0146:  ret
+    IL_015b:  ret
   } 
   .method family hidebysig newslot abstract virtual 
           instance object[]  ConvertDataItem(class [System.Reflection]System.Reflection.MethodInfo testMethod,
@@ -1424,7 +1441,7 @@
   .method private hidebysig static bool  ParameterTypesCompatible(class [System.Reflection]System.Reflection.ParameterInfo[] parameters,
                                                                   class [System.Runtime]System.Type[] parameterTypes) cil managed
   {
-    // Code size       105 (0x69)
+    // Code size       100 (0x64)
     .maxstack  3
     .locals init (valuetype [System.Runtime]System.Nullable`1<int32> V_0,
              int32 V_1,
@@ -1448,47 +1465,44 @@
     IL_001b:  ldloca.s   V_0
     IL_001d:  call       instance !0 valuetype [System.Runtime]System.Nullable`1<int32>::GetValueOrDefault()
     IL_0022:  ldloc.1
-    IL_0023:  beq.s      IL_0028
-    IL_0025:  ldc.i4.1
-    IL_0026:  br.s       IL_0032
-    IL_0028:  ldloca.s   V_0
-    IL_002a:  call       instance bool valuetype [System.Runtime]System.Nullable`1<int32>::get_HasValue()
+    IL_0023:  ceq
+    IL_0025:  ldloca.s   V_0
+    IL_0027:  call       instance bool valuetype [System.Runtime]System.Nullable`1<int32>::get_HasValue()
+    IL_002c:  and
+    IL_002d:  brtrue.s   IL_0031
     IL_002f:  ldc.i4.0
-    IL_0030:  ceq
-    IL_0032:  brfalse.s  IL_0036
-    IL_0034:  ldc.i4.0
-    IL_0035:  ret
-    IL_0036:  ldc.i4.0
-    IL_0037:  stloc.3
-    IL_0038:  br.s       IL_0061
-    IL_003a:  ldarg.1
+    IL_0030:  ret
+    IL_0031:  ldc.i4.0
+    IL_0032:  stloc.3
+    IL_0033:  br.s       IL_005c
+    IL_0035:  ldarg.1
+    IL_0036:  ldloc.3
+    IL_0037:  ldelem.ref
+    IL_0038:  brfalse.s  IL_0058
+    IL_003a:  ldarg.0
     IL_003b:  ldloc.3
     IL_003c:  ldelem.ref
-    IL_003d:  brfalse.s  IL_005d
-    IL_003f:  ldarg.0
-    IL_0040:  ldloc.3
-    IL_0041:  ldelem.ref
-    IL_0042:  callvirt   instance class [System.Runtime]System.Type [System.Reflection]System.Reflection.ParameterInfo::get_ParameterType()
-    IL_0047:  call       class [System.Reflection]System.Reflection.TypeInfo [System.Reflection]System.Reflection.IntrospectionExtensions::GetTypeInfo(class [System.Runtime]System.Type)
-    IL_004c:  ldarg.1
-    IL_004d:  ldloc.3
-    IL_004e:  ldelem.ref
-    IL_004f:  call       class [System.Reflection]System.Reflection.TypeInfo [System.Reflection]System.Reflection.IntrospectionExtensions::GetTypeInfo(class [System.Runtime]System.Type)
-    IL_0054:  callvirt   instance bool [System.Reflection]System.Reflection.TypeInfo::IsAssignableFrom(class [System.Reflection]System.Reflection.TypeInfo)
-    IL_0059:  brtrue.s   IL_005d
-    IL_005b:  ldc.i4.0
-    IL_005c:  ret
-    IL_005d:  ldloc.3
-    IL_005e:  ldc.i4.1
-    IL_005f:  add
-    IL_0060:  stloc.3
-    IL_0061:  ldloc.3
-    IL_0062:  ldarg.0
-    IL_0063:  ldlen
-    IL_0064:  conv.i4
-    IL_0065:  blt.s      IL_003a
-    IL_0067:  ldc.i4.1
-    IL_0068:  ret
+    IL_003d:  callvirt   instance class [System.Runtime]System.Type [System.Reflection]System.Reflection.ParameterInfo::get_ParameterType()
+    IL_0042:  call       class [System.Reflection]System.Reflection.TypeInfo [System.Reflection]System.Reflection.IntrospectionExtensions::GetTypeInfo(class [System.Runtime]System.Type)
+    IL_0047:  ldarg.1
+    IL_0048:  ldloc.3
+    IL_0049:  ldelem.ref
+    IL_004a:  call       class [System.Reflection]System.Reflection.TypeInfo [System.Reflection]System.Reflection.IntrospectionExtensions::GetTypeInfo(class [System.Runtime]System.Type)
+    IL_004f:  callvirt   instance bool [System.Reflection]System.Reflection.TypeInfo::IsAssignableFrom(class [System.Reflection]System.Reflection.TypeInfo)
+    IL_0054:  brtrue.s   IL_0058
+    IL_0056:  ldc.i4.0
+    IL_0057:  ret
+    IL_0058:  ldloc.3
+    IL_0059:  ldc.i4.1
+    IL_005a:  add
+    IL_005b:  stloc.3
+    IL_005c:  ldloc.3
+    IL_005d:  ldarg.0
+    IL_005e:  ldlen
+    IL_005f:  conv.i4
+    IL_0060:  blt.s      IL_0035
+    IL_0062:  ldc.i4.1
+    IL_0063:  ret
   } 
   .property instance bool DisableDiscoveryEnumeration()
   {
@@ -4009,24 +4023,17 @@
     .method assembly hidebysig instance string 
             '<FormatComplexValue>b__9_5'(class '<>f__AnonymousType0`2'<string,string> p) cil managed
     {
-      // Code size       35 (0x23)
+      // Code size       23 (0x17)
       .maxstack  8
-      IL_0000:  ldstr      "{0} = {1}"
-      IL_0005:  ldc.i4.2
-      IL_0006:  newarr     [System.Runtime]System.Object
-      IL_000b:  dup
-      IL_000c:  ldc.i4.0
-      IL_000d:  ldarg.1
-      IL_000e:  callvirt   instance !0 class '<>f__AnonymousType0`2'<string,string>::get_name()
-      IL_0013:  stelem.ref
-      IL_0014:  dup
-      IL_0015:  ldc.i4.1
-      IL_0016:  ldarg.1
-      IL_0017:  callvirt   instance !1 class '<>f__AnonymousType0`2'<string,string>::get_value()
-      IL_001c:  stelem.ref
-      IL_001d:  call       string [System.Runtime]System.String::Format(string,
-                                                                        object[])
-      IL_0022:  ret
+      IL_0000:  ldarg.1
+      IL_0001:  callvirt   instance !0 class '<>f__AnonymousType0`2'<string,string>::get_name()
+      IL_0006:  ldstr      " = "
+      IL_000b:  ldarg.1
+      IL_000c:  callvirt   instance !1 class '<>f__AnonymousType0`2'<string,string>::get_value()
+      IL_0011:  call       string [System.Runtime]System.String::Concat(string,
+                                                                        string,
+                                                                        string)
+      IL_0016:  ret
     } // end of method '<>c'::'<FormatComplexValue>b__9_5'
   } 
   .class auto ansi sealed nested private beforefieldinit '<>c__DisplayClass10_0'
@@ -4079,8 +4086,8 @@
           Format(object 'value',
                  int32 depth) cil managed
   {
-    // Code size       744 (0x2e8)
-    .maxstack  8
+    // Code size       724 (0x2d4)
+    .maxstack  5
     .locals init (class [System.Runtime]System.Type V_0,
              string V_1,
              class [System.Runtime]System.Type V_2,
@@ -4103,310 +4110,295 @@
     IL_000a:  isinst     [System.Runtime]System.Type
     IL_000f:  stloc.0
     IL_0010:  ldloc.0
-    IL_0011:  brfalse.s  IL_002d
-    IL_0013:  ldstr      "typeof({0})"
-    IL_0018:  ldc.i4.1
-    IL_0019:  newarr     [System.Runtime]System.Object
-    IL_001e:  dup
-    IL_001f:  ldc.i4.0
-    IL_0020:  ldloc.0
-    IL_0021:  call       string Xunit.Sdk.ArgumentFormatter::FormatTypeName(class [System.Runtime]System.Type)
-    IL_0026:  stelem.ref
-    IL_0027:  call       string [System.Runtime]System.String::Format(string,
-                                                                      object[])
-    IL_002c:  ret
-    IL_002d:  nop
+    IL_0011:  brfalse.s  IL_0029
+    IL_0013:  ldstr      "typeof("
+    IL_0018:  ldloc.0
+    IL_0019:  call       string Xunit.Sdk.ArgumentFormatter::FormatTypeName(class [System.Runtime]System.Type)
+    IL_001e:  ldstr      ")"
+    IL_0023:  call       string [System.Runtime]System.String::Concat(string,
+                                                                      string,
+                                                                      string)
+    IL_0028:  ret
+    IL_0029:  nop
     .try
     {
-      IL_002e:  ldarg.0
-      IL_002f:  callvirt   instance class [System.Runtime]System.Type [System.Runtime]System.Object::GetType()
-      IL_0034:  call       class [System.Reflection]System.Reflection.TypeInfo [System.Reflection]System.Reflection.IntrospectionExtensions::GetTypeInfo(class [System.Runtime]System.Type)
-      IL_0039:  callvirt   instance bool [System.Reflection]System.Reflection.TypeInfo::get_IsEnum()
-      IL_003e:  brfalse.s  IL_005c
-      IL_0040:  ldarg.0
-      IL_0041:  callvirt   instance string [System.Runtime]System.Object::ToString()
-      IL_0046:  ldstr      ", "
-      IL_004b:  ldstr      " | "
-      IL_0050:  callvirt   instance string [System.Runtime]System.String::Replace(string,
+      IL_002a:  ldarg.0
+      IL_002b:  callvirt   instance class [System.Runtime]System.Type [System.Runtime]System.Object::GetType()
+      IL_0030:  call       class [System.Reflection]System.Reflection.TypeInfo [System.Reflection]System.Reflection.IntrospectionExtensions::GetTypeInfo(class [System.Runtime]System.Type)
+      IL_0035:  callvirt   instance bool [System.Reflection]System.Reflection.TypeInfo::get_IsEnum()
+      IL_003a:  brfalse.s  IL_0058
+      IL_003c:  ldarg.0
+      IL_003d:  callvirt   instance string [System.Runtime]System.Object::ToString()
+      IL_0042:  ldstr      ", "
+      IL_0047:  ldstr      " | "
+      IL_004c:  callvirt   instance string [System.Runtime]System.String::Replace(string,
                                                                                   string)
-      IL_0055:  stloc.s    V_6
-      IL_0057:  leave      IL_02e5
-      IL_005c:  ldarg.0
-      IL_005d:  isinst     [System.Runtime]System.Char
-      IL_0062:  brfalse    IL_010b
-      IL_0067:  ldarg.0
-      IL_0068:  unbox.any  [System.Runtime]System.Char
-      IL_006d:  stloc.s    V_7
-      IL_006f:  ldloc.s    V_7
-      IL_0071:  ldc.i4.s   39
-      IL_0073:  bne.un.s   IL_0081
-      IL_0075:  ldstr      "'\\''"
-      IL_007a:  stloc.s    V_6
-      IL_007c:  leave      IL_02e5
-      IL_0081:  ldloc.s    V_7
-      IL_0083:  ldloca.s   V_8
-      IL_0085:  call       bool Xunit.Sdk.ArgumentFormatter::TryGetEscapeSequence(char,
+      IL_0051:  stloc.s    V_6
+      IL_0053:  leave      IL_02d1
+      IL_0058:  ldarg.0
+      IL_0059:  isinst     [System.Runtime]System.Char
+      IL_005e:  brfalse    IL_0103
+      IL_0063:  ldarg.0
+      IL_0064:  unbox.any  [System.Runtime]System.Char
+      IL_0069:  stloc.s    V_7
+      IL_006b:  ldloc.s    V_7
+      IL_006d:  ldc.i4.s   39
+      IL_006f:  bne.un.s   IL_007d
+      IL_0071:  ldstr      "'\\''"
+      IL_0076:  stloc.s    V_6
+      IL_0078:  leave      IL_02d1
+      IL_007d:  ldloc.s    V_7
+      IL_007f:  ldloca.s   V_8
+      IL_0081:  call       bool Xunit.Sdk.ArgumentFormatter::TryGetEscapeSequence(char,
                                                                                   string&)
-      IL_008a:  brfalse.s  IL_00a8
-      IL_008c:  ldstr      "'{0}'"
-      IL_0091:  ldc.i4.1
-      IL_0092:  newarr     [System.Runtime]System.Object
-      IL_0097:  dup
-      IL_0098:  ldc.i4.0
-      IL_0099:  ldloc.s    V_8
-      IL_009b:  stelem.ref
-      IL_009c:  call       string [System.Runtime]System.String::Format(string,
+      IL_0086:  brfalse.s  IL_00a0
+      IL_0088:  ldstr      "'"
+      IL_008d:  ldloc.s    V_8
+      IL_008f:  ldstr      "'"
+      IL_0094:  call       string [System.Runtime]System.String::Concat(string,
+                                                                        string,
+                                                                        string)
+      IL_0099:  stloc.s    V_6
+      IL_009b:  leave      IL_02d1
+      IL_00a0:  ldloc.s    V_7
+      IL_00a2:  call       bool [System.Runtime]System.Char::IsLetterOrDigit(char)
+      IL_00a7:  brtrue.s   IL_00c1
+      IL_00a9:  ldloc.s    V_7
+      IL_00ab:  call       bool [System.Runtime]System.Char::IsPunctuation(char)
+      IL_00b0:  brtrue.s   IL_00c1
+      IL_00b2:  ldloc.s    V_7
+      IL_00b4:  call       bool [System.Runtime]System.Char::IsSymbol(char)
+      IL_00b9:  brtrue.s   IL_00c1
+      IL_00bb:  ldloc.s    V_7
+      IL_00bd:  ldc.i4.s   32
+      IL_00bf:  bne.un.s   IL_00e2
+      IL_00c1:  ldstr      "'{0}'"
+      IL_00c6:  ldc.i4.1
+      IL_00c7:  newarr     [System.Runtime]System.Object
+      IL_00cc:  dup
+      IL_00cd:  ldc.i4.0
+      IL_00ce:  ldloc.s    V_7
+      IL_00d0:  box        [System.Runtime]System.Char
+      IL_00d5:  stelem.ref
+      IL_00d6:  call       string [System.Runtime]System.String::Format(string,
                                                                         object[])
-      IL_00a1:  stloc.s    V_6
-      IL_00a3:  leave      IL_02e5
-      IL_00a8:  ldloc.s    V_7
-      IL_00aa:  call       bool [System.Runtime]System.Char::IsLetterOrDigit(char)
-      IL_00af:  brtrue.s   IL_00c9
-      IL_00b1:  ldloc.s    V_7
-      IL_00b3:  call       bool [System.Runtime]System.Char::IsPunctuation(char)
-      IL_00b8:  brtrue.s   IL_00c9
-      IL_00ba:  ldloc.s    V_7
-      IL_00bc:  call       bool [System.Runtime]System.Char::IsSymbol(char)
-      IL_00c1:  brtrue.s   IL_00c9
-      IL_00c3:  ldloc.s    V_7
-      IL_00c5:  ldc.i4.s   32
-      IL_00c7:  bne.un.s   IL_00ea
-      IL_00c9:  ldstr      "'{0}'"
-      IL_00ce:  ldc.i4.1
-      IL_00cf:  newarr     [System.Runtime]System.Object
-      IL_00d4:  dup
-      IL_00d5:  ldc.i4.0
-      IL_00d6:  ldloc.s    V_7
-      IL_00d8:  box        [System.Runtime]System.Char
-      IL_00dd:  stelem.ref
-      IL_00de:  call       string [System.Runtime]System.String::Format(string,
+      IL_00db:  stloc.s    V_6
+      IL_00dd:  leave      IL_02d1
+      IL_00e2:  ldstr      "0x{0:x4}"
+      IL_00e7:  ldc.i4.1
+      IL_00e8:  newarr     [System.Runtime]System.Object
+      IL_00ed:  dup
+      IL_00ee:  ldc.i4.0
+      IL_00ef:  ldloc.s    V_7
+      IL_00f1:  box        [System.Runtime]System.Int32
+      IL_00f6:  stelem.ref
+      IL_00f7:  call       string [System.Runtime]System.String::Format(string,
                                                                         object[])
-      IL_00e3:  stloc.s    V_6
-      IL_00e5:  leave      IL_02e5
-      IL_00ea:  ldstr      "0x{0:x4}"
-      IL_00ef:  ldc.i4.1
-      IL_00f0:  newarr     [System.Runtime]System.Object
-      IL_00f5:  dup
-      IL_00f6:  ldc.i4.0
-      IL_00f7:  ldloc.s    V_7
-      IL_00f9:  box        [System.Runtime]System.Int32
-      IL_00fe:  stelem.ref
-      IL_00ff:  call       string [System.Runtime]System.String::Format(string,
-                                                                        object[])
-      IL_0104:  stloc.s    V_6
-      IL_0106:  leave      IL_02e5
+      IL_00fc:  stloc.s    V_6
+      IL_00fe:  leave      IL_02d1
+      IL_0103:  ldarg.0
+      IL_0104:  isinst     [System.Runtime]System.DateTime
+      IL_0109:  brtrue.s   IL_0113
       IL_010b:  ldarg.0
-      IL_010c:  isinst     [System.Runtime]System.DateTime
-      IL_0111:  brtrue.s   IL_011b
-      IL_0113:  ldarg.0
-      IL_0114:  isinst     [System.Runtime]System.DateTimeOffset
-      IL_0119:  brfalse.s  IL_0136
-      IL_011b:  ldstr      "{0:o}"
-      IL_0120:  ldc.i4.1
-      IL_0121:  newarr     [System.Runtime]System.Object
-      IL_0126:  dup
-      IL_0127:  ldc.i4.0
-      IL_0128:  ldarg.0
-      IL_0129:  stelem.ref
-      IL_012a:  call       string [System.Runtime]System.String::Format(string,
+      IL_010c:  isinst     [System.Runtime]System.DateTimeOffset
+      IL_0111:  brfalse.s  IL_012e
+      IL_0113:  ldstr      "{0:o}"
+      IL_0118:  ldc.i4.1
+      IL_0119:  newarr     [System.Runtime]System.Object
+      IL_011e:  dup
+      IL_011f:  ldc.i4.0
+      IL_0120:  ldarg.0
+      IL_0121:  stelem.ref
+      IL_0122:  call       string [System.Runtime]System.String::Format(string,
                                                                         object[])
-      IL_012f:  stloc.s    V_6
-      IL_0131:  leave      IL_02e5
-      IL_0136:  ldarg.0
-      IL_0137:  isinst     [System.Runtime]System.String
-      IL_013c:  stloc.1
-      IL_013d:  ldloc.1
-      IL_013e:  brfalse.s  IL_01a4
-      IL_0140:  ldloc.1
-      IL_0141:  call       string Xunit.Sdk.ArgumentFormatter::EscapeHexChars(string)
-      IL_0146:  stloc.1
-      IL_0147:  ldloc.1
-      IL_0148:  ldstr      "\""
-      IL_014d:  ldstr      "\\\""
-      IL_0152:  callvirt   instance string [System.Runtime]System.String::Replace(string,
+      IL_0127:  stloc.s    V_6
+      IL_0129:  leave      IL_02d1
+      IL_012e:  ldarg.0
+      IL_012f:  isinst     [System.Runtime]System.String
+      IL_0134:  stloc.1
+      IL_0135:  ldloc.1
+      IL_0136:  brfalse.s  IL_0194
+      IL_0138:  ldloc.1
+      IL_0139:  call       string Xunit.Sdk.ArgumentFormatter::EscapeHexChars(string)
+      IL_013e:  stloc.1
+      IL_013f:  ldloc.1
+      IL_0140:  ldstr      "\""
+      IL_0145:  ldstr      "\\\""
+      IL_014a:  callvirt   instance string [System.Runtime]System.String::Replace(string,
                                                                                   string)
-      IL_0157:  stloc.1
-      IL_0158:  ldloc.1
-      IL_0159:  callvirt   instance int32 [System.Runtime]System.String::get_Length()
-      IL_015e:  ldc.i4.s   50
-      IL_0160:  ble.s      IL_0189
-      IL_0162:  ldloc.1
-      IL_0163:  ldc.i4.0
-      IL_0164:  ldc.i4.s   50
-      IL_0166:  callvirt   instance string [System.Runtime]System.String::Substring(int32,
+      IL_014f:  stloc.1
+      IL_0150:  ldloc.1
+      IL_0151:  callvirt   instance int32 [System.Runtime]System.String::get_Length()
+      IL_0156:  ldc.i4.s   50
+      IL_0158:  ble.s      IL_017d
+      IL_015a:  ldloc.1
+      IL_015b:  ldc.i4.0
+      IL_015c:  ldc.i4.s   50
+      IL_015e:  callvirt   instance string [System.Runtime]System.String::Substring(int32,
                                                                                     int32)
-      IL_016b:  stloc.s    V_9
-      IL_016d:  ldstr      "\"{0}\"..."
-      IL_0172:  ldc.i4.1
-      IL_0173:  newarr     [System.Runtime]System.Object
-      IL_0178:  dup
-      IL_0179:  ldc.i4.0
-      IL_017a:  ldloc.s    V_9
-      IL_017c:  stelem.ref
-      IL_017d:  call       string [System.Runtime]System.String::Format(string,
-                                                                        object[])
-      IL_0182:  stloc.s    V_6
-      IL_0184:  leave      IL_02e5
-      IL_0189:  ldstr      "\"{0}\""
-      IL_018e:  ldc.i4.1
-      IL_018f:  newarr     [System.Runtime]System.Object
-      IL_0194:  dup
-      IL_0195:  ldc.i4.0
-      IL_0196:  ldloc.1
-      IL_0197:  stelem.ref
-      IL_0198:  call       string [System.Runtime]System.String::Format(string,
-                                                                        object[])
-      IL_019d:  stloc.s    V_6
-      IL_019f:  leave      IL_02e5
-      IL_01a4:  nop
+      IL_0163:  stloc.s    V_9
+      IL_0165:  ldstr      "\""
+      IL_016a:  ldloc.s    V_9
+      IL_016c:  ldstr      "\"..."
+      IL_0171:  call       string [System.Runtime]System.String::Concat(string,
+                                                                        string,
+                                                                        string)
+      IL_0176:  stloc.s    V_6
+      IL_0178:  leave      IL_02d1
+      IL_017d:  ldstr      "\""
+      IL_0182:  ldloc.1
+      IL_0183:  ldstr      "\""
+      IL_0188:  call       string [System.Runtime]System.String::Concat(string,
+                                                                        string,
+                                                                        string)
+      IL_018d:  stloc.s    V_6
+      IL_018f:  leave      IL_02d1
+      IL_0194:  nop
       .try
       {
-        IL_01a5:  ldarg.0
-        IL_01a6:  isinst     [System.Runtime]System.Collections.IEnumerable
-        IL_01ab:  stloc.s    V_10
-        IL_01ad:  ldloc.s    V_10
-        IL_01af:  brfalse.s  IL_01c5
-        IL_01b1:  ldloc.s    V_10
-        IL_01b3:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::Cast<object>(class [System.Runtime]System.Collections.IEnumerable)
-        IL_01b8:  ldarg.1
-        IL_01b9:  call       string Xunit.Sdk.ArgumentFormatter::FormatEnumerable(class [System.Runtime]System.Collections.Generic.IEnumerable`1<object>,
+        IL_0195:  ldarg.0
+        IL_0196:  isinst     [System.Runtime]System.Collections.IEnumerable
+        IL_019b:  stloc.s    V_10
+        IL_019d:  ldloc.s    V_10
+        IL_019f:  brfalse.s  IL_01b5
+        IL_01a1:  ldloc.s    V_10
+        IL_01a3:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::Cast<object>(class [System.Runtime]System.Collections.IEnumerable)
+        IL_01a8:  ldarg.1
+        IL_01a9:  call       string Xunit.Sdk.ArgumentFormatter::FormatEnumerable(class [System.Runtime]System.Collections.Generic.IEnumerable`1<object>,
                                                                                   int32)
-        IL_01be:  stloc.s    V_6
-        IL_01c0:  leave      IL_02e5
-        IL_01c5:  leave.s    IL_01ca
+        IL_01ae:  stloc.s    V_6
+        IL_01b0:  leave      IL_02d1
+        IL_01b5:  leave.s    IL_01ba
       }  // end .try
       catch [System.Runtime]System.Object 
       {
-        IL_01c7:  pop
-        IL_01c8:  leave.s    IL_01ca
+        IL_01b7:  pop
+        IL_01b8:  leave.s    IL_01ba
       }  // end handler
-      IL_01ca:  ldarg.0
-      IL_01cb:  callvirt   instance class [System.Runtime]System.Type [System.Runtime]System.Object::GetType()
-      IL_01d0:  stloc.2
-      IL_01d1:  ldloc.2
-      IL_01d2:  call       class [System.Reflection]System.Reflection.TypeInfo [System.Reflection]System.Reflection.IntrospectionExtensions::GetTypeInfo(class [System.Runtime]System.Type)
-      IL_01d7:  stloc.3
-      IL_01d8:  ldloc.3
-      IL_01d9:  callvirt   instance bool [System.Reflection]System.Reflection.TypeInfo::get_IsValueType()
-      IL_01de:  brfalse.s  IL_01f2
-      IL_01e0:  ldarg.0
-      IL_01e1:  call       class [System.Globalization]System.Globalization.CultureInfo [System.Globalization]System.Globalization.CultureInfo::get_CurrentCulture()
-      IL_01e6:  call       string [System.Runtime.Extensions]System.Convert::ToString(object,
+      IL_01ba:  ldarg.0
+      IL_01bb:  callvirt   instance class [System.Runtime]System.Type [System.Runtime]System.Object::GetType()
+      IL_01c0:  stloc.2
+      IL_01c1:  ldloc.2
+      IL_01c2:  call       class [System.Reflection]System.Reflection.TypeInfo [System.Reflection]System.Reflection.IntrospectionExtensions::GetTypeInfo(class [System.Runtime]System.Type)
+      IL_01c7:  stloc.3
+      IL_01c8:  ldloc.3
+      IL_01c9:  callvirt   instance bool [System.Reflection]System.Reflection.TypeInfo::get_IsValueType()
+      IL_01ce:  brfalse.s  IL_01e2
+      IL_01d0:  ldarg.0
+      IL_01d1:  call       class [System.Globalization]System.Globalization.CultureInfo [System.Globalization]System.Globalization.CultureInfo::get_CurrentCulture()
+      IL_01d6:  call       string [System.Runtime.Extensions]System.Convert::ToString(object,
                                                                                       class [System.Runtime]System.IFormatProvider)
-      IL_01eb:  stloc.s    V_6
-      IL_01ed:  leave      IL_02e5
-      IL_01f2:  ldarg.0
-      IL_01f3:  isinst     [System.Threading.Tasks]System.Threading.Tasks.Task
-      IL_01f8:  stloc.s    V_4
-      IL_01fa:  ldloc.s    V_4
-      IL_01fc:  brfalse.s  IL_026c
-      IL_01fe:  ldloc.3
-      IL_01ff:  callvirt   instance class [System.Runtime]System.Type[] [System.Reflection]System.Reflection.TypeInfo::get_GenericTypeArguments()
-      IL_0204:  stloc.s    V_11
-      IL_0206:  ldloc.s    V_11
-      IL_0208:  ldlen
-      IL_0209:  brfalse.s  IL_023d
-      IL_020b:  ldstr      "Task<{0}>"
-      IL_0210:  ldc.i4.1
-      IL_0211:  newarr     [System.Runtime]System.Object
-      IL_0216:  dup
-      IL_0217:  ldc.i4.0
-      IL_0218:  ldstr      ","
-      IL_021d:  ldloc.s    V_11
-      IL_021f:  ldnull
-      IL_0220:  ldftn      string Xunit.Sdk.ArgumentFormatter::FormatTypeName(class [System.Runtime]System.Type)
-      IL_0226:  newobj     instance void class [System.Runtime]System.Func`2<class [System.Runtime]System.Type,string>::.ctor(object,
+      IL_01db:  stloc.s    V_6
+      IL_01dd:  leave      IL_02d1
+      IL_01e2:  ldarg.0
+      IL_01e3:  isinst     [System.Threading.Tasks]System.Threading.Tasks.Task
+      IL_01e8:  stloc.s    V_4
+      IL_01ea:  ldloc.s    V_4
+      IL_01ec:  brfalse.s  IL_0258
+      IL_01ee:  ldloc.3
+      IL_01ef:  callvirt   instance class [System.Runtime]System.Type[] [System.Reflection]System.Reflection.TypeInfo::get_GenericTypeArguments()
+      IL_01f4:  stloc.s    V_11
+      IL_01f6:  ldloc.s    V_11
+      IL_01f8:  ldlen
+      IL_01f9:  brfalse.s  IL_0229
+      IL_01fb:  ldstr      "Task<"
+      IL_0200:  ldstr      ","
+      IL_0205:  ldloc.s    V_11
+      IL_0207:  ldnull
+      IL_0208:  ldftn      string Xunit.Sdk.ArgumentFormatter::FormatTypeName(class [System.Runtime]System.Type)
+      IL_020e:  newobj     instance void class [System.Runtime]System.Func`2<class [System.Runtime]System.Type,string>::.ctor(object,
                                                                                                                               native int)
-      IL_022b:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!1> [System.Linq]System.Linq.Enumerable::Select<class [System.Runtime]System.Type,string>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
+      IL_0213:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!1> [System.Linq]System.Linq.Enumerable::Select<class [System.Runtime]System.Type,string>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
                                                                                                                                                                                      class [System.Runtime]System.Func`2<!!0,!!1>)
-      IL_0230:  call       string [System.Runtime]System.String::Join(string,
+      IL_0218:  call       string [System.Runtime]System.String::Join(string,
                                                                       class [System.Runtime]System.Collections.Generic.IEnumerable`1<string>)
-      IL_0235:  stelem.ref
-      IL_0236:  call       string [System.Runtime]System.String::Format(string,
+      IL_021d:  ldstr      ">"
+      IL_0222:  call       string [System.Runtime]System.String::Concat(string,
+                                                                        string,
+                                                                        string)
+      IL_0227:  br.s       IL_022e
+      IL_0229:  ldstr      "Task"
+      IL_022e:  stloc.s    V_12
+      IL_0230:  ldstr      "{0} {{ Status = {1} }}"
+      IL_0235:  ldc.i4.2
+      IL_0236:  newarr     [System.Runtime]System.Object
+      IL_023b:  dup
+      IL_023c:  ldc.i4.0
+      IL_023d:  ldloc.s    V_12
+      IL_023f:  stelem.ref
+      IL_0240:  dup
+      IL_0241:  ldc.i4.1
+      IL_0242:  ldloc.s    V_4
+      IL_0244:  callvirt   instance valuetype [System.Threading.Tasks]System.Threading.Tasks.TaskStatus [System.Threading.Tasks]System.Threading.Tasks.Task::get_Status()
+      IL_0249:  box        [System.Threading.Tasks]System.Threading.Tasks.TaskStatus
+      IL_024e:  stelem.ref
+      IL_024f:  call       string [System.Runtime]System.String::Format(string,
                                                                         object[])
-      IL_023b:  br.s       IL_0242
-      IL_023d:  ldstr      "Task"
-      IL_0242:  stloc.s    V_12
-      IL_0244:  ldstr      "{0} {{ Status = {1} }}"
-      IL_0249:  ldc.i4.2
-      IL_024a:  newarr     [System.Runtime]System.Object
-      IL_024f:  dup
-      IL_0250:  ldc.i4.0
-      IL_0251:  ldloc.s    V_12
-      IL_0253:  stelem.ref
-      IL_0254:  dup
-      IL_0255:  ldc.i4.1
-      IL_0256:  ldloc.s    V_4
-      IL_0258:  callvirt   instance valuetype [System.Threading.Tasks]System.Threading.Tasks.TaskStatus [System.Threading.Tasks]System.Threading.Tasks.Task::get_Status()
-      IL_025d:  box        [System.Threading.Tasks]System.Threading.Tasks.TaskStatus
-      IL_0262:  stelem.ref
-      IL_0263:  call       string [System.Runtime]System.String::Format(string,
-                                                                        object[])
-      IL_0268:  stloc.s    V_6
-      IL_026a:  leave.s    IL_02e5
-      IL_026c:  ldloc.2
-      IL_026d:  ldstr      "ToString"
-      IL_0272:  ldsfld     class [System.Runtime]System.Type[] Xunit.Sdk.ArgumentFormatter::EmptyTypes
-      IL_0277:  call       class [System.Reflection]System.Reflection.MethodInfo [System.Reflection.Extensions]System.Reflection.RuntimeReflectionExtensions::GetRuntimeMethod(class [System.Runtime]System.Type,
+      IL_0254:  stloc.s    V_6
+      IL_0256:  leave.s    IL_02d1
+      IL_0258:  ldloc.2
+      IL_0259:  ldstr      "ToString"
+      IL_025e:  ldsfld     class [System.Runtime]System.Type[] Xunit.Sdk.ArgumentFormatter::EmptyTypes
+      IL_0263:  call       class [System.Reflection]System.Reflection.MethodInfo [System.Reflection.Extensions]System.Reflection.RuntimeReflectionExtensions::GetRuntimeMethod(class [System.Runtime]System.Type,
                                                                                                                                                                                string,
                                                                                                                                                                                class [System.Runtime]System.Type[])
-      IL_027c:  stloc.s    V_5
-      IL_027e:  ldloc.s    V_5
-      IL_0280:  brfalse.s  IL_02ab
-      IL_0282:  ldloc.s    V_5
-      IL_0284:  callvirt   instance class [System.Runtime]System.Type [System.Reflection]System.Reflection.MemberInfo::get_DeclaringType()
-      IL_0289:  ldtoken    [System.Runtime]System.Object
-      IL_028e:  call       class [System.Runtime]System.Type [System.Runtime]System.Type::GetTypeFromHandle(valuetype [System.Runtime]System.RuntimeTypeHandle)
-      IL_0293:  beq.s      IL_02ab
-      IL_0295:  ldloc.s    V_5
-      IL_0297:  ldarg.0
-      IL_0298:  ldsfld     object[] Xunit.Sdk.ArgumentFormatter::EmptyObjects
-      IL_029d:  callvirt   instance object [System.Reflection]System.Reflection.MethodBase::Invoke(object,
+      IL_0268:  stloc.s    V_5
+      IL_026a:  ldloc.s    V_5
+      IL_026c:  brfalse.s  IL_0297
+      IL_026e:  ldloc.s    V_5
+      IL_0270:  callvirt   instance class [System.Runtime]System.Type [System.Reflection]System.Reflection.MemberInfo::get_DeclaringType()
+      IL_0275:  ldtoken    [System.Runtime]System.Object
+      IL_027a:  call       class [System.Runtime]System.Type [System.Runtime]System.Type::GetTypeFromHandle(valuetype [System.Runtime]System.RuntimeTypeHandle)
+      IL_027f:  beq.s      IL_0297
+      IL_0281:  ldloc.s    V_5
+      IL_0283:  ldarg.0
+      IL_0284:  ldsfld     object[] Xunit.Sdk.ArgumentFormatter::EmptyObjects
+      IL_0289:  callvirt   instance object [System.Reflection]System.Reflection.MethodBase::Invoke(object,
                                                                                                    object[])
-      IL_02a2:  castclass  [System.Runtime]System.String
-      IL_02a7:  stloc.s    V_6
-      IL_02a9:  leave.s    IL_02e5
-      IL_02ab:  ldarg.0
-      IL_02ac:  ldarg.1
-      IL_02ad:  ldloc.2
-      IL_02ae:  call       string Xunit.Sdk.ArgumentFormatter::FormatComplexValue(object,
+      IL_028e:  castclass  [System.Runtime]System.String
+      IL_0293:  stloc.s    V_6
+      IL_0295:  leave.s    IL_02d1
+      IL_0297:  ldarg.0
+      IL_0298:  ldarg.1
+      IL_0299:  ldloc.2
+      IL_029a:  call       string Xunit.Sdk.ArgumentFormatter::FormatComplexValue(object,
                                                                                   int32,
                                                                                   class [System.Runtime]System.Type)
-      IL_02b3:  stloc.s    V_6
-      IL_02b5:  leave.s    IL_02e5
+      IL_029f:  stloc.s    V_6
+      IL_02a1:  leave.s    IL_02d1
     }  // end .try
     catch [System.Runtime]System.Exception 
     {
-      IL_02b7:  stloc.s    V_13
-      IL_02b9:  ldstr      "{0} was thrown formatting an object of type \"{1}\""
-      IL_02be:  ldc.i4.2
-      IL_02bf:  newarr     [System.Runtime]System.Object
-      IL_02c4:  dup
-      IL_02c5:  ldc.i4.0
-      IL_02c6:  ldloc.s    V_13
-      IL_02c8:  callvirt   instance class [System.Runtime]System.Type [System.Runtime]System.Object::GetType()
-      IL_02cd:  callvirt   instance string [System.Runtime]System.Type::get_Name()
-      IL_02d2:  stelem.ref
-      IL_02d3:  dup
-      IL_02d4:  ldc.i4.1
-      IL_02d5:  ldarg.0
-      IL_02d6:  callvirt   instance class [System.Runtime]System.Type [System.Runtime]System.Object::GetType()
-      IL_02db:  stelem.ref
-      IL_02dc:  call       string [System.Runtime]System.String::Format(string,
+      IL_02a3:  stloc.s    V_13
+      IL_02a5:  ldstr      "{0} was thrown formatting an object of type \"{1}\""
+      IL_02aa:  ldc.i4.2
+      IL_02ab:  newarr     [System.Runtime]System.Object
+      IL_02b0:  dup
+      IL_02b1:  ldc.i4.0
+      IL_02b2:  ldloc.s    V_13
+      IL_02b4:  callvirt   instance class [System.Runtime]System.Type [System.Runtime]System.Object::GetType()
+      IL_02b9:  callvirt   instance string [System.Runtime]System.Type::get_Name()
+      IL_02be:  stelem.ref
+      IL_02bf:  dup
+      IL_02c0:  ldc.i4.1
+      IL_02c1:  ldarg.0
+      IL_02c2:  callvirt   instance class [System.Runtime]System.Type [System.Runtime]System.Object::GetType()
+      IL_02c7:  stelem.ref
+      IL_02c8:  call       string [System.Runtime]System.String::Format(string,
                                                                         object[])
-      IL_02e1:  stloc.s    V_6
-      IL_02e3:  leave.s    IL_02e5
+      IL_02cd:  stloc.s    V_6
+      IL_02cf:  leave.s    IL_02d1
     }  // end handler
-    IL_02e5:  ldloc.s    V_6
-    IL_02e7:  ret
+    IL_02d1:  ldloc.s    V_6
+    IL_02d3:  ret
   } 
   .method private hidebysig static string 
           FormatComplexValue(object 'value',
                              int32 depth,
                              class [System.Runtime]System.Type 'type') cil managed
   {
-    // Code size       367 (0x16f)
-    .maxstack  5
+    // Code size       342 (0x156)
+    .maxstack  4
     .locals init (class Xunit.Sdk.ArgumentFormatter/'<>c__DisplayClass9_0' V_0,
              class [System.Runtime]System.Collections.Generic.IEnumerable`1<class '<>f__AnonymousType0`2'<string,string>> V_1,
              class [System.Collections]System.Collections.Generic.List`1<class '<>f__AnonymousType0`2'<string,string>> V_2,
@@ -4422,144 +4414,129 @@
     IL_0014:  ldloc.0
     IL_0015:  ldfld      int32 Xunit.Sdk.ArgumentFormatter/'<>c__DisplayClass9_0'::depth
     IL_001a:  ldc.i4.3
-    IL_001b:  bne.un.s   IL_0037
-    IL_001d:  ldstr      "{0} {{ ... }}"
-    IL_0022:  ldc.i4.1
-    IL_0023:  newarr     [System.Runtime]System.Object
-    IL_0028:  dup
-    IL_0029:  ldc.i4.0
-    IL_002a:  ldarg.2
-    IL_002b:  callvirt   instance string [System.Runtime]System.Type::get_Name()
-    IL_0030:  stelem.ref
-    IL_0031:  call       string [System.Runtime]System.String::Format(string,
-                                                                      object[])
-    IL_0036:  ret
-    IL_0037:  ldarg.2
-    IL_0038:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<class [System.Reflection]System.Reflection.FieldInfo> [System.Reflection.Extensions]System.Reflection.RuntimeReflectionExtensions::GetRuntimeFields(class [System.Runtime]System.Type)
-    IL_003d:  ldsfld     class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.FieldInfo,bool> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_0'
-    IL_0042:  dup
-    IL_0043:  brtrue.s   IL_005c
-    IL_0045:  pop
-    IL_0046:  ldsfld     class Xunit.Sdk.ArgumentFormatter/'<>c' Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9'
-    IL_004b:  ldftn      instance bool Xunit.Sdk.ArgumentFormatter/'<>c'::'<FormatComplexValue>b__9_0'(class [System.Reflection]System.Reflection.FieldInfo)
-    IL_0051:  newobj     instance void class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.FieldInfo,bool>::.ctor(object,
-                                                                                                                                             native int)
-    IL_0056:  dup
-    IL_0057:  stsfld     class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.FieldInfo,bool> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_0'
-    IL_005c:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::Where<class [System.Reflection]System.Reflection.FieldInfo>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
-                                                                                                                                                                                              class [System.Runtime]System.Func`2<!!0,bool>)
-    IL_0061:  ldloc.0
-    IL_0062:  ldftn      instance class '<>f__AnonymousType0`2'<string,string> Xunit.Sdk.ArgumentFormatter/'<>c__DisplayClass9_0'::'<FormatComplexValue>b__1'(class [System.Reflection]System.Reflection.FieldInfo)
-    IL_0068:  newobj     instance void class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.FieldInfo,class '<>f__AnonymousType0`2'<string,string>>::.ctor(object,
-                                                                                                                                                                                     native int)
-    IL_006d:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!1> [System.Linq]System.Linq.Enumerable::Select<class [System.Reflection]System.Reflection.FieldInfo,class '<>f__AnonymousType0`2'<string,string>>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
-                                                                                                                                                                                                                                            class [System.Runtime]System.Func`2<!!0,!!1>)
-    IL_0072:  ldarg.2
-    IL_0073:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<class [System.Reflection]System.Reflection.PropertyInfo> [System.Reflection.Extensions]System.Reflection.RuntimeReflectionExtensions::GetRuntimeProperties(class [System.Runtime]System.Type)
-    IL_0078:  ldsfld     class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.PropertyInfo,bool> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_2'
-    IL_007d:  dup
-    IL_007e:  brtrue.s   IL_0097
-    IL_0080:  pop
-    IL_0081:  ldsfld     class Xunit.Sdk.ArgumentFormatter/'<>c' Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9'
-    IL_0086:  ldftn      instance bool Xunit.Sdk.ArgumentFormatter/'<>c'::'<FormatComplexValue>b__9_2'(class [System.Reflection]System.Reflection.PropertyInfo)
-    IL_008c:  newobj     instance void class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.PropertyInfo,bool>::.ctor(object,
-                                                                                                                                                native int)
-    IL_0091:  dup
-    IL_0092:  stsfld     class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.PropertyInfo,bool> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_2'
-    IL_0097:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::Where<class [System.Reflection]System.Reflection.PropertyInfo>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
-                                                                                                                                                                                                 class [System.Runtime]System.Func`2<!!0,bool>)
-    IL_009c:  ldloc.0
-    IL_009d:  ldftn      instance class '<>f__AnonymousType0`2'<string,string> Xunit.Sdk.ArgumentFormatter/'<>c__DisplayClass9_0'::'<FormatComplexValue>b__3'(class [System.Reflection]System.Reflection.PropertyInfo)
-    IL_00a3:  newobj     instance void class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.PropertyInfo,class '<>f__AnonymousType0`2'<string,string>>::.ctor(object,
-                                                                                                                                                                                        native int)
-    IL_00a8:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!1> [System.Linq]System.Linq.Enumerable::Select<class [System.Reflection]System.Reflection.PropertyInfo,class '<>f__AnonymousType0`2'<string,string>>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
-                                                                                                                                                                                                                                               class [System.Runtime]System.Func`2<!!0,!!1>)
-    IL_00ad:  stloc.1
-    IL_00ae:  ldloc.1
-    IL_00af:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::Concat<class '<>f__AnonymousType0`2'<string,string>>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
-                                                                                                                                                                                       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>)
-    IL_00b4:  ldsfld     class [System.Runtime]System.Func`2<class '<>f__AnonymousType0`2'<string,string>,string> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_4'
-    IL_00b9:  dup
-    IL_00ba:  brtrue.s   IL_00d3
-    IL_00bc:  pop
-    IL_00bd:  ldsfld     class Xunit.Sdk.ArgumentFormatter/'<>c' Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9'
-    IL_00c2:  ldftn      instance string Xunit.Sdk.ArgumentFormatter/'<>c'::'<FormatComplexValue>b__9_4'(class '<>f__AnonymousType0`2'<string,string>)
-    IL_00c8:  newobj     instance void class [System.Runtime]System.Func`2<class '<>f__AnonymousType0`2'<string,string>,string>::.ctor(object,
-                                                                                                                                       native int)
-    IL_00cd:  dup
-    IL_00ce:  stsfld     class [System.Runtime]System.Func`2<class '<>f__AnonymousType0`2'<string,string>,string> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_4'
-    IL_00d3:  call       class [System.Linq]System.Linq.IOrderedEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::OrderBy<class '<>f__AnonymousType0`2'<string,string>,string>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
-                                                                                                                                                                                    class [System.Runtime]System.Func`2<!!0,!!1>)
-    IL_00d8:  ldc.i4.6
-    IL_00d9:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::Take<class '<>f__AnonymousType0`2'<string,string>>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
-                                                                                                                                                                                     int32)
-    IL_00de:  call       class [System.Collections]System.Collections.Generic.List`1<!!0> [System.Linq]System.Linq.Enumerable::ToList<class '<>f__AnonymousType0`2'<string,string>>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>)
-    IL_00e3:  stloc.2
-    IL_00e4:  ldloc.2
-    IL_00e5:  callvirt   instance int32 class [System.Collections]System.Collections.Generic.List`1<class '<>f__AnonymousType0`2'<string,string>>::get_Count()
-    IL_00ea:  brtrue.s   IL_0106
-    IL_00ec:  ldstr      "{0} {{ }}"
-    IL_00f1:  ldc.i4.1
-    IL_00f2:  newarr     [System.Runtime]System.Object
-    IL_00f7:  dup
-    IL_00f8:  ldc.i4.0
-    IL_00f9:  ldarg.2
-    IL_00fa:  callvirt   instance string [System.Runtime]System.Type::get_Name()
-    IL_00ff:  stelem.ref
-    IL_0100:  call       string [System.Runtime]System.String::Format(string,
-                                                                      object[])
-    IL_0105:  ret
-    IL_0106:  ldstr      ", "
-    IL_010b:  ldloc.2
-    IL_010c:  ldc.i4.5
-    IL_010d:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::Take<class '<>f__AnonymousType0`2'<string,string>>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
-                                                                                                                                                                                     int32)
-    IL_0112:  ldsfld     class [System.Runtime]System.Func`2<class '<>f__AnonymousType0`2'<string,string>,string> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_5'
-    IL_0117:  dup
-    IL_0118:  brtrue.s   IL_0131
-    IL_011a:  pop
-    IL_011b:  ldsfld     class Xunit.Sdk.ArgumentFormatter/'<>c' Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9'
-    IL_0120:  ldftn      instance string Xunit.Sdk.ArgumentFormatter/'<>c'::'<FormatComplexValue>b__9_5'(class '<>f__AnonymousType0`2'<string,string>)
-    IL_0126:  newobj     instance void class [System.Runtime]System.Func`2<class '<>f__AnonymousType0`2'<string,string>,string>::.ctor(object,
-                                                                                                                                       native int)
-    IL_012b:  dup
-    IL_012c:  stsfld     class [System.Runtime]System.Func`2<class '<>f__AnonymousType0`2'<string,string>,string> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_5'
-    IL_0131:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!1> [System.Linq]System.Linq.Enumerable::Select<class '<>f__AnonymousType0`2'<string,string>,string>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
-                                                                                                                                                                                              class [System.Runtime]System.Func`2<!!0,!!1>)
-    IL_0136:  call       string [System.Runtime]System.String::Join(string,
-                                                                    class [System.Runtime]System.Collections.Generic.IEnumerable`1<string>)
-    IL_013b:  stloc.3
-    IL_013c:  ldloc.2
-    IL_013d:  callvirt   instance int32 class [System.Collections]System.Collections.Generic.List`1<class '<>f__AnonymousType0`2'<string,string>>::get_Count()
-    IL_0142:  ldc.i4.5
-    IL_0143:  ble.s      IL_0151
-    IL_0145:  ldloc.3
-    IL_0146:  ldstr      ", ..."
-    IL_014b:  call       string [System.Runtime]System.String::Concat(string,
+    IL_001b:  bne.un.s   IL_002e
+    IL_001d:  ldarg.2
+    IL_001e:  callvirt   instance string [System.Runtime]System.Type::get_Name()
+    IL_0023:  ldstr      " { ... }"
+    IL_0028:  call       string [System.Runtime]System.String::Concat(string,
                                                                       string)
-    IL_0150:  stloc.3
-    IL_0151:  ldstr      "{0} {{ {1} }}"
-    IL_0156:  ldc.i4.2
-    IL_0157:  newarr     [System.Runtime]System.Object
-    IL_015c:  dup
-    IL_015d:  ldc.i4.0
-    IL_015e:  ldarg.2
-    IL_015f:  callvirt   instance string [System.Runtime]System.Type::get_Name()
-    IL_0164:  stelem.ref
-    IL_0165:  dup
-    IL_0166:  ldc.i4.1
-    IL_0167:  ldloc.3
-    IL_0168:  stelem.ref
-    IL_0169:  call       string [System.Runtime]System.String::Format(string,
-                                                                      object[])
-    IL_016e:  ret
+    IL_002d:  ret
+    IL_002e:  ldarg.2
+    IL_002f:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<class [System.Reflection]System.Reflection.FieldInfo> [System.Reflection.Extensions]System.Reflection.RuntimeReflectionExtensions::GetRuntimeFields(class [System.Runtime]System.Type)
+    IL_0034:  ldsfld     class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.FieldInfo,bool> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_0'
+    IL_0039:  dup
+    IL_003a:  brtrue.s   IL_0053
+    IL_003c:  pop
+    IL_003d:  ldsfld     class Xunit.Sdk.ArgumentFormatter/'<>c' Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9'
+    IL_0042:  ldftn      instance bool Xunit.Sdk.ArgumentFormatter/'<>c'::'<FormatComplexValue>b__9_0'(class [System.Reflection]System.Reflection.FieldInfo)
+    IL_0048:  newobj     instance void class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.FieldInfo,bool>::.ctor(object,
+                                                                                                                                             native int)
+    IL_004d:  dup
+    IL_004e:  stsfld     class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.FieldInfo,bool> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_0'
+    IL_0053:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::Where<class [System.Reflection]System.Reflection.FieldInfo>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
+                                                                                                                                                                                              class [System.Runtime]System.Func`2<!!0,bool>)
+    IL_0058:  ldloc.0
+    IL_0059:  ldftn      instance class '<>f__AnonymousType0`2'<string,string> Xunit.Sdk.ArgumentFormatter/'<>c__DisplayClass9_0'::'<FormatComplexValue>b__1'(class [System.Reflection]System.Reflection.FieldInfo)
+    IL_005f:  newobj     instance void class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.FieldInfo,class '<>f__AnonymousType0`2'<string,string>>::.ctor(object,
+                                                                                                                                                                                     native int)
+    IL_0064:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!1> [System.Linq]System.Linq.Enumerable::Select<class [System.Reflection]System.Reflection.FieldInfo,class '<>f__AnonymousType0`2'<string,string>>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
+                                                                                                                                                                                                                                            class [System.Runtime]System.Func`2<!!0,!!1>)
+    IL_0069:  ldarg.2
+    IL_006a:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<class [System.Reflection]System.Reflection.PropertyInfo> [System.Reflection.Extensions]System.Reflection.RuntimeReflectionExtensions::GetRuntimeProperties(class [System.Runtime]System.Type)
+    IL_006f:  ldsfld     class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.PropertyInfo,bool> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_2'
+    IL_0074:  dup
+    IL_0075:  brtrue.s   IL_008e
+    IL_0077:  pop
+    IL_0078:  ldsfld     class Xunit.Sdk.ArgumentFormatter/'<>c' Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9'
+    IL_007d:  ldftn      instance bool Xunit.Sdk.ArgumentFormatter/'<>c'::'<FormatComplexValue>b__9_2'(class [System.Reflection]System.Reflection.PropertyInfo)
+    IL_0083:  newobj     instance void class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.PropertyInfo,bool>::.ctor(object,
+                                                                                                                                                native int)
+    IL_0088:  dup
+    IL_0089:  stsfld     class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.PropertyInfo,bool> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_2'
+    IL_008e:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::Where<class [System.Reflection]System.Reflection.PropertyInfo>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
+                                                                                                                                                                                                 class [System.Runtime]System.Func`2<!!0,bool>)
+    IL_0093:  ldloc.0
+    IL_0094:  ldftn      instance class '<>f__AnonymousType0`2'<string,string> Xunit.Sdk.ArgumentFormatter/'<>c__DisplayClass9_0'::'<FormatComplexValue>b__3'(class [System.Reflection]System.Reflection.PropertyInfo)
+    IL_009a:  newobj     instance void class [System.Runtime]System.Func`2<class [System.Reflection]System.Reflection.PropertyInfo,class '<>f__AnonymousType0`2'<string,string>>::.ctor(object,
+                                                                                                                                                                                        native int)
+    IL_009f:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!1> [System.Linq]System.Linq.Enumerable::Select<class [System.Reflection]System.Reflection.PropertyInfo,class '<>f__AnonymousType0`2'<string,string>>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
+                                                                                                                                                                                                                                               class [System.Runtime]System.Func`2<!!0,!!1>)
+    IL_00a4:  stloc.1
+    IL_00a5:  ldloc.1
+    IL_00a6:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::Concat<class '<>f__AnonymousType0`2'<string,string>>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
+                                                                                                                                                                                       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>)
+    IL_00ab:  ldsfld     class [System.Runtime]System.Func`2<class '<>f__AnonymousType0`2'<string,string>,string> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_4'
+    IL_00b0:  dup
+    IL_00b1:  brtrue.s   IL_00ca
+    IL_00b3:  pop
+    IL_00b4:  ldsfld     class Xunit.Sdk.ArgumentFormatter/'<>c' Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9'
+    IL_00b9:  ldftn      instance string Xunit.Sdk.ArgumentFormatter/'<>c'::'<FormatComplexValue>b__9_4'(class '<>f__AnonymousType0`2'<string,string>)
+    IL_00bf:  newobj     instance void class [System.Runtime]System.Func`2<class '<>f__AnonymousType0`2'<string,string>,string>::.ctor(object,
+                                                                                                                                       native int)
+    IL_00c4:  dup
+    IL_00c5:  stsfld     class [System.Runtime]System.Func`2<class '<>f__AnonymousType0`2'<string,string>,string> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_4'
+    IL_00ca:  call       class [System.Linq]System.Linq.IOrderedEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::OrderBy<class '<>f__AnonymousType0`2'<string,string>,string>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
+                                                                                                                                                                                    class [System.Runtime]System.Func`2<!!0,!!1>)
+    IL_00cf:  ldc.i4.6
+    IL_00d0:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::Take<class '<>f__AnonymousType0`2'<string,string>>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
+                                                                                                                                                                                     int32)
+    IL_00d5:  call       class [System.Collections]System.Collections.Generic.List`1<!!0> [System.Linq]System.Linq.Enumerable::ToList<class '<>f__AnonymousType0`2'<string,string>>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>)
+    IL_00da:  stloc.2
+    IL_00db:  ldloc.2
+    IL_00dc:  callvirt   instance int32 class [System.Collections]System.Collections.Generic.List`1<class '<>f__AnonymousType0`2'<string,string>>::get_Count()
+    IL_00e1:  brtrue.s   IL_00f4
+    IL_00e3:  ldarg.2
+    IL_00e4:  callvirt   instance string [System.Runtime]System.Type::get_Name()
+    IL_00e9:  ldstr      " { }"
+    IL_00ee:  call       string [System.Runtime]System.String::Concat(string,
+                                                                      string)
+    IL_00f3:  ret
+    IL_00f4:  ldstr      ", "
+    IL_00f9:  ldloc.2
+    IL_00fa:  ldc.i4.5
+    IL_00fb:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0> [System.Linq]System.Linq.Enumerable::Take<class '<>f__AnonymousType0`2'<string,string>>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
+                                                                                                                                                                                     int32)
+    IL_0100:  ldsfld     class [System.Runtime]System.Func`2<class '<>f__AnonymousType0`2'<string,string>,string> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_5'
+    IL_0105:  dup
+    IL_0106:  brtrue.s   IL_011f
+    IL_0108:  pop
+    IL_0109:  ldsfld     class Xunit.Sdk.ArgumentFormatter/'<>c' Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9'
+    IL_010e:  ldftn      instance string Xunit.Sdk.ArgumentFormatter/'<>c'::'<FormatComplexValue>b__9_5'(class '<>f__AnonymousType0`2'<string,string>)
+    IL_0114:  newobj     instance void class [System.Runtime]System.Func`2<class '<>f__AnonymousType0`2'<string,string>,string>::.ctor(object,
+                                                                                                                                       native int)
+    IL_0119:  dup
+    IL_011a:  stsfld     class [System.Runtime]System.Func`2<class '<>f__AnonymousType0`2'<string,string>,string> Xunit.Sdk.ArgumentFormatter/'<>c'::'<>9__9_5'
+    IL_011f:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!1> [System.Linq]System.Linq.Enumerable::Select<class '<>f__AnonymousType0`2'<string,string>,string>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
+                                                                                                                                                                                              class [System.Runtime]System.Func`2<!!0,!!1>)
+    IL_0124:  call       string [System.Runtime]System.String::Join(string,
+                                                                    class [System.Runtime]System.Collections.Generic.IEnumerable`1<string>)
+    IL_0129:  stloc.3
+    IL_012a:  ldloc.2
+    IL_012b:  callvirt   instance int32 class [System.Collections]System.Collections.Generic.List`1<class '<>f__AnonymousType0`2'<string,string>>::get_Count()
+    IL_0130:  ldc.i4.5
+    IL_0131:  ble.s      IL_013f
+    IL_0133:  ldloc.3
+    IL_0134:  ldstr      ", ..."
+    IL_0139:  call       string [System.Runtime]System.String::Concat(string,
+                                                                      string)
+    IL_013e:  stloc.3
+    IL_013f:  ldarg.2
+    IL_0140:  callvirt   instance string [System.Runtime]System.Type::get_Name()
+    IL_0145:  ldstr      " { "
+    IL_014a:  ldloc.3
+    IL_014b:  ldstr      " }"
+    IL_0150:  call       string [System.Runtime]System.String::Concat(string,
+                                                                      string,
+                                                                      string,
+                                                                      string)
+    IL_0155:  ret
   } 
   .method private hidebysig static string 
           FormatEnumerable(class [System.Runtime]System.Collections.Generic.IEnumerable`1<object> enumerableValues,
                            int32 depth) cil managed
   {
-    // Code size       118 (0x76)
-    .maxstack  5
+    // Code size       114 (0x72)
+    .maxstack  4
     .locals init (class Xunit.Sdk.ArgumentFormatter/'<>c__DisplayClass10_0' V_0,
              class [System.Collections]System.Collections.Generic.List`1<object> V_1,
              string V_2)
@@ -4603,22 +4580,19 @@
     IL_005b:  call       string [System.Runtime]System.String::Concat(string,
                                                                       string)
     IL_0060:  stloc.2
-    IL_0061:  ldstr      "[{0}]"
-    IL_0066:  ldc.i4.1
-    IL_0067:  newarr     [System.Runtime]System.Object
-    IL_006c:  dup
-    IL_006d:  ldc.i4.0
-    IL_006e:  ldloc.2
-    IL_006f:  stelem.ref
-    IL_0070:  call       string [System.Runtime]System.String::Format(string,
-                                                                      object[])
-    IL_0075:  ret
+    IL_0061:  ldstr      "["
+    IL_0066:  ldloc.2
+    IL_0067:  ldstr      "]"
+    IL_006c:  call       string [System.Runtime]System.String::Concat(string,
+                                                                      string,
+                                                                      string)
+    IL_0071:  ret
   } 
   .method private hidebysig static string 
           FormatTypeName(class [System.Runtime]System.Type 'type') cil managed
   {
-    // Code size       313 (0x139)
-    .maxstack  8
+    // Code size       290 (0x122)
+    .maxstack  6
     .locals init (class [System.Reflection]System.Reflection.TypeInfo V_0,
              string V_1,
              string V_2,
@@ -4630,147 +4604,133 @@
     IL_0006:  stloc.0
     IL_0007:  ldstr      ""
     IL_000c:  stloc.1
-    IL_000d:  br.s       IL_0048
+    IL_000d:  br.s       IL_003f
     IL_000f:  ldloc.0
     IL_0010:  callvirt   instance int32 [System.Reflection]System.Reflection.TypeInfo::GetArrayRank()
     IL_0015:  stloc.s    V_5
     IL_0017:  ldloc.1
-    IL_0018:  ldstr      "[{0}]"
-    IL_001d:  ldc.i4.1
-    IL_001e:  newarr     [System.Runtime]System.Object
-    IL_0023:  dup
-    IL_0024:  ldc.i4.0
-    IL_0025:  ldc.i4.s   44
-    IL_0027:  ldloc.s    V_5
-    IL_0029:  ldc.i4.1
-    IL_002a:  sub
-    IL_002b:  newobj     instance void [System.Runtime]System.String::.ctor(char,
+    IL_0018:  ldstr      "["
+    IL_001d:  ldc.i4.s   44
+    IL_001f:  ldloc.s    V_5
+    IL_0021:  ldc.i4.1
+    IL_0022:  sub
+    IL_0023:  newobj     instance void [System.Runtime]System.String::.ctor(char,
                                                                             int32)
-    IL_0030:  stelem.ref
-    IL_0031:  call       string [System.Runtime]System.String::Format(string,
-                                                                      object[])
-    IL_0036:  call       string [System.Runtime]System.String::Concat(string,
+    IL_0028:  ldstr      "]"
+    IL_002d:  call       string [System.Runtime]System.String::Concat(string,
+                                                                      string,
+                                                                      string,
                                                                       string)
-    IL_003b:  stloc.1
-    IL_003c:  ldloc.0
-    IL_003d:  callvirt   instance class [System.Runtime]System.Type [System.Reflection]System.Reflection.TypeInfo::GetElementType()
-    IL_0042:  call       class [System.Reflection]System.Reflection.TypeInfo [System.Reflection]System.Reflection.IntrospectionExtensions::GetTypeInfo(class [System.Runtime]System.Type)
-    IL_0047:  stloc.0
-    IL_0048:  ldloc.0
-    IL_0049:  callvirt   instance bool [System.Reflection]System.Reflection.TypeInfo::get_IsArray()
-    IL_004e:  brtrue.s   IL_000f
-    IL_0050:  ldsfld     class [System.Collections]System.Collections.Generic.Dictionary`2<class [System.Reflection]System.Reflection.TypeInfo,string> Xunit.Sdk.ArgumentFormatter::TypeMappings
-    IL_0055:  ldloc.0
-    IL_0056:  ldloca.s   V_2
-    IL_0058:  callvirt   instance bool class [System.Collections]System.Collections.Generic.Dictionary`2<class [System.Reflection]System.Reflection.TypeInfo,string>::TryGetValue(!0,
+    IL_0032:  stloc.1
+    IL_0033:  ldloc.0
+    IL_0034:  callvirt   instance class [System.Runtime]System.Type [System.Reflection]System.Reflection.TypeInfo::GetElementType()
+    IL_0039:  call       class [System.Reflection]System.Reflection.TypeInfo [System.Reflection]System.Reflection.IntrospectionExtensions::GetTypeInfo(class [System.Runtime]System.Type)
+    IL_003e:  stloc.0
+    IL_003f:  ldloc.0
+    IL_0040:  callvirt   instance bool [System.Reflection]System.Reflection.TypeInfo::get_IsArray()
+    IL_0045:  brtrue.s   IL_000f
+    IL_0047:  ldsfld     class [System.Collections]System.Collections.Generic.Dictionary`2<class [System.Reflection]System.Reflection.TypeInfo,string> Xunit.Sdk.ArgumentFormatter::TypeMappings
+    IL_004c:  ldloc.0
+    IL_004d:  ldloca.s   V_2
+    IL_004f:  callvirt   instance bool class [System.Collections]System.Collections.Generic.Dictionary`2<class [System.Reflection]System.Reflection.TypeInfo,string>::TryGetValue(!0,
                                                                                                                                                                                   !1&)
-    IL_005d:  brfalse.s  IL_0067
-    IL_005f:  ldloc.2
-    IL_0060:  ldloc.1
-    IL_0061:  call       string [System.Runtime]System.String::Concat(string,
+    IL_0054:  brfalse.s  IL_005e
+    IL_0056:  ldloc.2
+    IL_0057:  ldloc.1
+    IL_0058:  call       string [System.Runtime]System.String::Concat(string,
                                                                       string)
-    IL_0066:  ret
-    IL_0067:  ldloc.0
-    IL_0068:  callvirt   instance string [System.Reflection]System.Reflection.TypeInfo::get_FullName()
-    IL_006d:  stloc.3
-    IL_006e:  ldloc.3
-    IL_006f:  brtrue.s   IL_0078
-    IL_0071:  ldloc.0
-    IL_0072:  callvirt   instance string [System.Reflection]System.Reflection.MemberInfo::get_Name()
-    IL_0077:  ret
-    IL_0078:  ldloc.3
-    IL_0079:  ldc.i4.s   96
-    IL_007b:  callvirt   instance int32 [System.Runtime]System.String::IndexOf(char)
-    IL_0080:  stloc.s    V_4
-    IL_0082:  ldloc.s    V_4
-    IL_0084:  ldc.i4.0
-    IL_0085:  ble.s      IL_0091
-    IL_0087:  ldloc.3
-    IL_0088:  ldc.i4.0
-    IL_0089:  ldloc.s    V_4
-    IL_008b:  callvirt   instance string [System.Runtime]System.String::Substring(int32,
+    IL_005d:  ret
+    IL_005e:  ldloc.0
+    IL_005f:  callvirt   instance string [System.Reflection]System.Reflection.TypeInfo::get_FullName()
+    IL_0064:  stloc.3
+    IL_0065:  ldloc.3
+    IL_0066:  brtrue.s   IL_006f
+    IL_0068:  ldloc.0
+    IL_0069:  callvirt   instance string [System.Reflection]System.Reflection.MemberInfo::get_Name()
+    IL_006e:  ret
+    IL_006f:  ldloc.3
+    IL_0070:  ldc.i4.s   96
+    IL_0072:  callvirt   instance int32 [System.Runtime]System.String::IndexOf(char)
+    IL_0077:  stloc.s    V_4
+    IL_0079:  ldloc.s    V_4
+    IL_007b:  ldc.i4.0
+    IL_007c:  ble.s      IL_0088
+    IL_007e:  ldloc.3
+    IL_007f:  ldc.i4.0
+    IL_0080:  ldloc.s    V_4
+    IL_0082:  callvirt   instance string [System.Runtime]System.String::Substring(int32,
                                                                                   int32)
-    IL_0090:  stloc.3
-    IL_0091:  ldloc.0
-    IL_0092:  callvirt   instance bool [System.Reflection]System.Reflection.TypeInfo::get_IsGenericTypeDefinition()
-    IL_0097:  brfalse.s  IL_00c4
-    IL_0099:  ldstr      "{0}<{1}>"
-    IL_009e:  ldc.i4.2
-    IL_009f:  newarr     [System.Runtime]System.Object
-    IL_00a4:  dup
-    IL_00a5:  ldc.i4.0
-    IL_00a6:  ldloc.3
-    IL_00a7:  stelem.ref
-    IL_00a8:  dup
-    IL_00a9:  ldc.i4.1
-    IL_00aa:  ldc.i4.s   44
-    IL_00ac:  ldloc.0
-    IL_00ad:  callvirt   instance class [System.Runtime]System.Type[] [System.Reflection]System.Reflection.TypeInfo::get_GenericTypeParameters()
-    IL_00b2:  ldlen
-    IL_00b3:  conv.i4
-    IL_00b4:  ldc.i4.1
-    IL_00b5:  sub
-    IL_00b6:  newobj     instance void [System.Runtime]System.String::.ctor(char,
+    IL_0087:  stloc.3
+    IL_0088:  ldloc.0
+    IL_0089:  callvirt   instance bool [System.Reflection]System.Reflection.TypeInfo::get_IsGenericTypeDefinition()
+    IL_008e:  brfalse.s  IL_00b4
+    IL_0090:  ldloc.3
+    IL_0091:  ldstr      "<"
+    IL_0096:  ldc.i4.s   44
+    IL_0098:  ldloc.0
+    IL_0099:  callvirt   instance class [System.Runtime]System.Type[] [System.Reflection]System.Reflection.TypeInfo::get_GenericTypeParameters()
+    IL_009e:  ldlen
+    IL_009f:  conv.i4
+    IL_00a0:  ldc.i4.1
+    IL_00a1:  sub
+    IL_00a2:  newobj     instance void [System.Runtime]System.String::.ctor(char,
                                                                             int32)
-    IL_00bb:  stelem.ref
-    IL_00bc:  call       string [System.Runtime]System.String::Format(string,
-                                                                      object[])
-    IL_00c1:  stloc.3
-    IL_00c2:  br.s       IL_0131
-    IL_00c4:  ldloc.0
-    IL_00c5:  callvirt   instance bool [System.Reflection]System.Reflection.TypeInfo::get_IsGenericType()
-    IL_00ca:  brfalse.s  IL_0131
-    IL_00cc:  ldloc.0
-    IL_00cd:  callvirt   instance class [System.Runtime]System.Type [System.Reflection]System.Reflection.TypeInfo::GetGenericTypeDefinition()
-    IL_00d2:  ldtoken    [System.Runtime]System.Nullable`1
-    IL_00d7:  call       class [System.Runtime]System.Type [System.Runtime]System.Type::GetTypeFromHandle(valuetype [System.Runtime]System.RuntimeTypeHandle)
-    IL_00dc:  bne.un.s   IL_00f8
-    IL_00de:  ldloc.0
-    IL_00df:  callvirt   instance class [System.Runtime]System.Type[] [System.Reflection]System.Reflection.TypeInfo::get_GenericTypeArguments()
-    IL_00e4:  ldc.i4.0
-    IL_00e5:  ldelem.ref
-    IL_00e6:  call       string Xunit.Sdk.ArgumentFormatter::FormatTypeName(class [System.Runtime]System.Type)
-    IL_00eb:  ldstr      "\?"
-    IL_00f0:  call       string [System.Runtime]System.String::Concat(string,
+    IL_00a7:  ldstr      ">"
+    IL_00ac:  call       string [System.Runtime]System.String::Concat(string,
+                                                                      string,
+                                                                      string,
                                                                       string)
-    IL_00f5:  stloc.3
-    IL_00f6:  br.s       IL_0131
-    IL_00f8:  ldstr      "{0}<{1}>"
-    IL_00fd:  ldc.i4.2
-    IL_00fe:  newarr     [System.Runtime]System.Object
-    IL_0103:  dup
-    IL_0104:  ldc.i4.0
-    IL_0105:  ldloc.3
-    IL_0106:  stelem.ref
-    IL_0107:  dup
-    IL_0108:  ldc.i4.1
-    IL_0109:  ldstr      ", "
-    IL_010e:  ldloc.0
-    IL_010f:  callvirt   instance class [System.Runtime]System.Type[] [System.Reflection]System.Reflection.TypeInfo::get_GenericTypeArguments()
-    IL_0114:  ldnull
-    IL_0115:  ldftn      string Xunit.Sdk.ArgumentFormatter::FormatTypeName(class [System.Runtime]System.Type)
-    IL_011b:  newobj     instance void class [System.Runtime]System.Func`2<class [System.Runtime]System.Type,string>::.ctor(object,
+    IL_00b1:  stloc.3
+    IL_00b2:  br.s       IL_011a
+    IL_00b4:  ldloc.0
+    IL_00b5:  callvirt   instance bool [System.Reflection]System.Reflection.TypeInfo::get_IsGenericType()
+    IL_00ba:  brfalse.s  IL_011a
+    IL_00bc:  ldloc.0
+    IL_00bd:  callvirt   instance class [System.Runtime]System.Type [System.Reflection]System.Reflection.TypeInfo::GetGenericTypeDefinition()
+    IL_00c2:  ldtoken    [System.Runtime]System.Nullable`1
+    IL_00c7:  call       class [System.Runtime]System.Type [System.Runtime]System.Type::GetTypeFromHandle(valuetype [System.Runtime]System.RuntimeTypeHandle)
+    IL_00cc:  bne.un.s   IL_00e8
+    IL_00ce:  ldloc.0
+    IL_00cf:  callvirt   instance class [System.Runtime]System.Type[] [System.Reflection]System.Reflection.TypeInfo::get_GenericTypeArguments()
+    IL_00d4:  ldc.i4.0
+    IL_00d5:  ldelem.ref
+    IL_00d6:  call       string Xunit.Sdk.ArgumentFormatter::FormatTypeName(class [System.Runtime]System.Type)
+    IL_00db:  ldstr      "\?"
+    IL_00e0:  call       string [System.Runtime]System.String::Concat(string,
+                                                                      string)
+    IL_00e5:  stloc.3
+    IL_00e6:  br.s       IL_011a
+    IL_00e8:  ldloc.3
+    IL_00e9:  ldstr      "<"
+    IL_00ee:  ldstr      ", "
+    IL_00f3:  ldloc.0
+    IL_00f4:  callvirt   instance class [System.Runtime]System.Type[] [System.Reflection]System.Reflection.TypeInfo::get_GenericTypeArguments()
+    IL_00f9:  ldnull
+    IL_00fa:  ldftn      string Xunit.Sdk.ArgumentFormatter::FormatTypeName(class [System.Runtime]System.Type)
+    IL_0100:  newobj     instance void class [System.Runtime]System.Func`2<class [System.Runtime]System.Type,string>::.ctor(object,
                                                                                                                             native int)
-    IL_0120:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!1> [System.Linq]System.Linq.Enumerable::Select<class [System.Runtime]System.Type,string>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
+    IL_0105:  call       class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!1> [System.Linq]System.Linq.Enumerable::Select<class [System.Runtime]System.Type,string>(class [System.Runtime]System.Collections.Generic.IEnumerable`1<!!0>,
                                                                                                                                                                                    class [System.Runtime]System.Func`2<!!0,!!1>)
-    IL_0125:  call       string [System.Runtime]System.String::Join(string,
+    IL_010a:  call       string [System.Runtime]System.String::Join(string,
                                                                     class [System.Runtime]System.Collections.Generic.IEnumerable`1<string>)
-    IL_012a:  stelem.ref
-    IL_012b:  call       string [System.Runtime]System.String::Format(string,
-                                                                      object[])
-    IL_0130:  stloc.3
-    IL_0131:  ldloc.3
-    IL_0132:  ldloc.1
-    IL_0133:  call       string [System.Runtime]System.String::Concat(string,
+    IL_010f:  ldstr      ">"
+    IL_0114:  call       string [System.Runtime]System.String::Concat(string,
+                                                                      string,
+                                                                      string,
                                                                       string)
-    IL_0138:  ret
+    IL_0119:  stloc.3
+    IL_011a:  ldloc.3
+    IL_011b:  ldloc.1
+    IL_011c:  call       string [System.Runtime]System.String::Concat(string,
+                                                                      string)
+    IL_0121:  ret
   } 
   .method private hidebysig static string 
           WrapAndGetFormattedValue(class [System.Runtime]System.Func`1<object> getter,
                                    int32 depth) cil managed
   {
-    // Code size       58 (0x3a)
-    .maxstack  5
+    // Code size       54 (0x36)
+    .maxstack  3
     .locals init (string V_0,
              class [System.Runtime]System.Exception V_1)
     .try
@@ -4783,28 +4743,25 @@
       IL_0009:  call       string Xunit.Sdk.ArgumentFormatter::Format(object,
                                                                       int32)
       IL_000e:  stloc.0
-      IL_000f:  leave.s    IL_0038
+      IL_000f:  leave.s    IL_0034
     }  // end .try
     catch [System.Runtime]System.Exception 
     {
       IL_0011:  stloc.1
-      IL_0012:  ldstr      "(throws {0})"
-      IL_0017:  ldc.i4.1
-      IL_0018:  newarr     [System.Runtime]System.Object
-      IL_001d:  dup
-      IL_001e:  ldc.i4.0
-      IL_001f:  ldloc.1
-      IL_0020:  call       class [System.Runtime]System.Exception Xunit.Sdk.ArgumentFormatter::UnwrapException(class [System.Runtime]System.Exception)
-      IL_0025:  callvirt   instance class [System.Runtime]System.Type [System.Runtime]System.Object::GetType()
-      IL_002a:  callvirt   instance string [System.Runtime]System.Type::get_Name()
-      IL_002f:  stelem.ref
-      IL_0030:  call       string [System.Runtime]System.String::Format(string,
-                                                                        object[])
-      IL_0035:  stloc.0
-      IL_0036:  leave.s    IL_0038
+      IL_0012:  ldstr      "(throws "
+      IL_0017:  ldloc.1
+      IL_0018:  call       class [System.Runtime]System.Exception Xunit.Sdk.ArgumentFormatter::UnwrapException(class [System.Runtime]System.Exception)
+      IL_001d:  callvirt   instance class [System.Runtime]System.Type [System.Runtime]System.Object::GetType()
+      IL_0022:  callvirt   instance string [System.Runtime]System.Type::get_Name()
+      IL_0027:  ldstr      ")"
+      IL_002c:  call       string [System.Runtime]System.String::Concat(string,
+                                                                        string,
+                                                                        string)
+      IL_0031:  stloc.0
+      IL_0032:  leave.s    IL_0034
     }  // end handler
-    IL_0038:  ldloc.0
-    IL_0039:  ret
+    IL_0034:  ldloc.0
+    IL_0035:  ret
   } 
   .method private hidebysig static class [System.Runtime]System.Exception 
           UnwrapException(class [System.Runtime]System.Exception ex) cil managed
