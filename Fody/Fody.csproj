@@ -7,6 +7,8 @@
     <Description>Extensible tool for weaving .net assemblies.</Description>
     <DevelopmentDependency>true</DevelopmentDependency>
     <NuSpecFile>Fody.nuspec</NuSpecFile>
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <Target Name="SetPackageDependencies" BeforeTargets="GenerateNuspec">
     <PropertyGroup>
