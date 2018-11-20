@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-
 using Fody;
 
 public static class ConfigFile
 {
-    private static readonly XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");
-    private static readonly XNamespace schemaInstanceNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema-instance");
+    static XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");
+    static XNamespace schemaInstanceNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema-instance");
 
     public static List<string> FindWeaverConfigs(string solutionDirectoryPath, string projectDirectory, ILogger logger, IEnumerable<string> wellKnownWeaverFiles)
     {
@@ -29,7 +28,7 @@ public static class ConfigFile
             {
                 GenerateDefault(projectConfigFilePath, wellKnownWeaverFiles);
 
-                logger.LogError($@"Could not find a FodyWeavers.xml file at the project level ({projectConfigFilePath}). A default file has been created. Please review the file and add it to your project.");
+                logger.LogError($"Could not find a FodyWeavers.xml file at the project level ({projectConfigFilePath}). A default file has been created. Please review the file and add it to your project.");
             }
             else
             {
@@ -162,7 +161,7 @@ public static class ConfigFile
         }
         catch
         {
-            // anything wrong with the existing, ignore here, we will warn later... 
+            // anything wrong with the existing, ignore here, we will warn later...
         }
     }
 

@@ -153,10 +153,12 @@ namespace Fody
             return true;
         }
 
-        private void InnerExecute()
+        void InnerExecute()
         {
             if (string.IsNullOrEmpty(IntermediateCopyLocalFilesCache) || !File.Exists(IntermediateCopyLocalFilesCache))
+            {
                 return;
+            }
 
             var updatedReferenceCopyLocalPaths = new HashSet<string>(File.ReadAllLines(IntermediateCopyLocalFilesCache), StringComparer.OrdinalIgnoreCase);
             var referenceCopyLocalPaths = new HashSet<string>(ReferenceCopyLocalFiles.Select(x => x.ItemSpec), StringComparer.OrdinalIgnoreCase);
