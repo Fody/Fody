@@ -15,6 +15,7 @@ public partial class Processor
         {
             return;
         }
+
         Weavers = new List<WeaverEntry>();
         foreach (var configFile in ConfigFiles)
         {
@@ -22,18 +23,19 @@ public partial class Processor
             foreach (var element in xDocument.Root.Elements())
             {
                 var assemblyName = element.Name.LocalName;
-                var existing = Weavers.FirstOrDefault(x => string.Equals(x.AssemblyName, assemblyName,StringComparison.OrdinalIgnoreCase));
+                var existing = Weavers.FirstOrDefault(x => string.Equals(x.AssemblyName, assemblyName, StringComparison.OrdinalIgnoreCase));
                 var index = Weavers.Count;
                 if (existing != null)
                 {
                     index = Weavers.IndexOf(existing);
                     Weavers.Remove(existing);
                 }
+
                 var weaverEntry = new WeaverEntry
-                                      {
-                                          Element = element.ToString(SaveOptions.OmitDuplicateNamespaces),
-                                          AssemblyName = assemblyName
-                                      };
+                {
+                    Element = element.ToString(SaveOptions.OmitDuplicateNamespaces),
+                    AssemblyName = assemblyName
+                };
                 Weavers.Insert(index, weaverEntry);
             }
         }

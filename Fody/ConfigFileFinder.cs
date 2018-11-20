@@ -59,7 +59,9 @@ public static class ConfigFile
     static void GenerateDefault(string projectConfigFilePath, IEnumerable<string> wellKnownWeaverFiles)
     {
         if (wellKnownWeaverFiles == null)
+        {
             return;
+        }
 
         var weaverConfig = new XDocument(new XElement("Weavers", SchemaInstanceAttributes));
 
@@ -77,7 +79,9 @@ public static class ConfigFile
     static void CreateSchemaForConfig(string projectConfigFilePath, IEnumerable<string> wellKnownWeaverFiles)
     {
         if (wellKnownWeaverFiles == null)
+        {
             return;
+        }
 
         var schema = XDocument.Parse(Fody.Properties.Resources.FodyWeavers_SchemaTemplate);
 
@@ -91,10 +95,13 @@ public static class ConfigFile
 
         try
         {
-            if (File.Exists(filePath) && string.Equals(XDocument.Load(filePath).ToString(SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting), schema.ToString(SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting)))
+            if (File.Exists(filePath))
             {
-                // don't touch existing file if it is up to date
-                return;
+                if (string.Equals(XDocument.Load(filePath).ToString(SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting), schema.ToString(SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting)))
+                {
+                    // don't touch existing file if it is up to date
+                    return;
+                }
             }
         }
         catch
@@ -105,7 +112,7 @@ public static class ConfigFile
         schema.Save(filePath, SaveOptions.OmitDuplicateNamespaces);
     }
 
-    private static XElement CreateItemFragment(string weaverFile)
+    static XElement CreateItemFragment(string weaverFile)
     {
         var weaverName = WeaverNameFromFilePath(weaverFile);
 
@@ -134,7 +141,7 @@ public static class ConfigFile
         return element;
     }
 
-    private static string WeaverNameFromFilePath(string filePath)
+    static string WeaverNameFromFilePath(string filePath)
     {
         return Path.ChangeExtension(Path.GetFileNameWithoutExtension(filePath), null);
     }
@@ -142,7 +149,9 @@ public static class ConfigFile
     static void EnsureSchemaIsUpToDate(string projectConfigFilePath, IEnumerable<string> wellKnownWeaverFiles)
     {
         if (wellKnownWeaverFiles == null)
+        {
             return;
+        }
 
         try
         {
