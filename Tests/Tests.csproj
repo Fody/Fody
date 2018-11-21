@@ -33,9 +33,11 @@
     <Content Include="Fody\BadAssembly.dll" CopyToOutputDirectory="Always" />
     <Content Include="Fody\AddinFinderTest\**\*.*" CopyToOutputDirectory="Always" />
     <Content Include="Fody\Packages\SampleWeaver.Fody.1.0.0.0\SampleWeaver.Fody.dll" CopyToOutputDirectory="Always" />
+    <Content Include="Fody\ProjectWeaversReaderTests\Invalid.txt" />
     <Content Include="Fody\Solution\**\*.*" CopyToOutputDirectory="Always" />
     <Content Include="Fody\WeaversProjectFileFinder\**\*.*" CopyToOutputDirectory="Always" />
     <Content Include="Fody\ProjectWeaversReaderTests\*.xml" CopyToOutputDirectory="Always" />
+    <Content Include="Fody\ProjectWeaversReaderTests\*.txt" CopyToOutputDirectory="Always" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework) == 'net472'">
     <Reference Include="Microsoft.Build" />

@@ -42,14 +42,15 @@ public partial class Processor
     }
 
     static XDocument GetDocument(string configFilePath)
+    static XDocument GetDocument(string configFile)
     {
         try
         {
-            return XDocumentEx.Load(configFilePath);
+            return XDocumentEx.Load(configFile);
         }
         catch (XmlException exception)
         {
-            throw new WeavingException($"Could not read 'FodyWeavers.xml' because it has invalid xml. Message: '{exception.Message}'.");
+            throw new WeavingException($"Could not read '{configFile}' because it has invalid xml. Message: '{exception.Message}'.");
         }
     }
 }

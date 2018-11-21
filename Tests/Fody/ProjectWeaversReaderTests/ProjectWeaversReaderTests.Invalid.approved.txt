@@ -1,0 +1,1 @@
+﻿Could not read '\Fody\ProjectWeaversReaderTests\Invalid.txt' because it has invalid xml. Message: 'Unexpected end of file has occurred. The following elements are not closed: Weaves. Line 3, position 1.'.

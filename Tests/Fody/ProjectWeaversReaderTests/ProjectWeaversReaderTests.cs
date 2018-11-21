@@ -1,17 +1,29 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using ApprovalTests;
+using Fody;
 using Xunit;
 
 public class ProjectWeaversReaderTests : TestBase
 {
     [Fact]
+    public void Invalid()
+    {
+        var currentDirectory = AssemblyLocation.CurrentDirectory;
+        var path = Path.Combine(currentDirectory, @"Fody\ProjectWeaversReaderTests\Invalid.txt");
+
+        var exception = Assert.Throws<WeavingException>(() => Processor.ReadElements(path));
+        Approvals.Verify(exception.Message.Replace(currentDirectory, ""));
+    }
+
+    [Fact]
     public void Simple()
     {
         var processor = new Processor
-                        {
-                            ConfigFiles = GetPaths().ToList()
-                        };
+        {
+            ConfigFiles = GetPaths().ToList()
+        };
         processor.ReadProjectWeavers();
         var weavers = processor.Weavers;
         Assert.Equal(3, weavers.Count);
