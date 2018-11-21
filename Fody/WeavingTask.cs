@@ -54,8 +54,6 @@ namespace Fody
 
         public override bool Execute()
         {
-            // System.Diagnostics.Debugger.Launch();
-
             var referenceCopyLocalPaths = ReferenceCopyLocalFiles.Select(x => x.ItemSpec).ToList();
 
             var defineConstants = DefineConstants.GetConstants();
