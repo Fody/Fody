@@ -13,7 +13,7 @@ public class ProjectWeaversReaderTests : TestBase
         var currentDirectory = AssemblyLocation.CurrentDirectory;
         var path = Path.Combine(currentDirectory, @"Fody\ProjectWeaversReaderTests\Invalid.txt");
 
-        var exception = Assert.Throws<WeavingException>(() => Processor.ReadElements(path));
+        var exception = Assert.Throws<WeavingException>(() => Processor.GetDocument(path));
         Approvals.Verify(exception.Message.Replace(currentDirectory, ""));
     }
 

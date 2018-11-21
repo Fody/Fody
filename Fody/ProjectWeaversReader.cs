@@ -41,8 +41,7 @@ public partial class Processor
         }
     }
 
-    static XDocument GetDocument(string configFilePath)
-    static XDocument GetDocument(string configFile)
+    public static XDocument GetDocument(string configFile)
     {
         try
         {
