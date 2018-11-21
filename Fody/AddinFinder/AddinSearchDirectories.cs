@@ -34,7 +34,6 @@ public partial class AddinFinder
         var weaverFiles = weaverFilesFromProps.Concat(EnumerateToolsSolutionDirectoryWeavers())
             .Concat(EnumerateInSolutionWeavers());
 
-            //.OrderByDescending(AssemblyVersionReader.GetAssemblyVersion)
         weaversFromWellKnownPaths = BuildWeaversDictionary(weaverFiles);
     }
 
@@ -49,19 +48,6 @@ public partial class AddinFinder
         }
     }
 
-    class WeaverNameComparer : IEqualityComparer<string>
-    {
-        public bool Equals(string x, string y)
-        {
-            return string.Equals(GetAddinNameFromWeaverFile(x), GetAddinNameFromWeaverFile(y), StringComparison.OrdinalIgnoreCase);
-        }
-
-        public int GetHashCode(string obj)
-        {
-            return GetAddinNameFromWeaverFile(obj)?.GetHashCode() ?? 0;
-        }
-    }
-
     public static Dictionary<string, string> BuildWeaversDictionary(IEnumerable<string> weaverFiles)
     {
         return weaverFiles
@@ -69,7 +55,7 @@ public partial class AddinFinder
             .ToDictionary(GetAddinNameFromWeaverFile, StringComparer.OrdinalIgnoreCase);
     }
 
-    static string GetAddinNameFromWeaverFile(string filePath)
+    public static string GetAddinNameFromWeaverFile(string filePath)
     {
         if (filePath == null)
         {
@@ -99,11 +85,13 @@ public partial class AddinFinder
             log("  Skipped NuGetPackageRoot since it is not defined.");
             return Enumerable.Empty<string>();
         }
+
         if (!Directory.Exists(nuGetPackageRoot))
         {
             log($"  Skipped NuGetPackageRoot '{nuGetPackageRoot}' since it doesn't exist.");
             return Enumerable.Empty<string>();
         }
+
         log($"  Scanning NuGetPackageRoot '{nuGetPackageRoot}'.");
 
         return ScanDirectoryForPackages(nuGetPackageRoot);
@@ -113,10 +101,10 @@ public partial class AddinFinder
     {
         return EnumerateOldStyleDirectories(directory)
             //TODO: using newest is a hack. will be removed when move from dir scanning to props file
-            .OrderByDescending(x=>x.Version)
-            .Select(x=>x.Assembly)
+            .OrderByDescending(x => x.Version)
+            .Select(x => x.Assembly)
             .Concat(EnumerateNewOrPaketStyleDirectories(directory)
-            .Where(x => x != null))
+                .Where(x => x != null))
             .Where(x => x != null);
     }
 
@@ -144,11 +132,6 @@ public partial class AddinFinder
         }
     }
 
-    struct AssemblyAndVersion
-    {
-        public Version Version;
-        public string Assembly;
-    }
     static IEnumerable<AssemblyAndVersion> EnumerateOldStyleDirectories(string directory)
     {
         foreach (var versionDirectory in DirectoryEx.EnumerateDirectoriesContains(directory, ".fody."))
@@ -157,9 +140,11 @@ public partial class AddinFinder
             var index = fileName.IndexOf(".fody.", StringComparison.OrdinalIgnoreCase);
             var packageName = fileName.Substring(0, index + 5);
             if (!Version.TryParse(fileName.Substring(index + 6).Split('-')[0], out var version))
+            {
                 continue;
+            }
 
-            yield return new AssemblyAndVersion{Version = version, Assembly= GetAssemblyFromNugetDir(versionDirectory, packageName)};
+            yield return new AssemblyAndVersion {Version = version, Assembly = GetAssemblyFromNugetDir(versionDirectory, packageName)};
         }
     }
 
@@ -231,11 +216,13 @@ public partial class AddinFinder
             log("  Skipped directory from Nuget Config since it could not be derived.");
             return Enumerable.Empty<string>();
         }
+
         if (!Directory.Exists(packagesPathFromConfig))
         {
             log($"  Skipped directory from Nuget Config '{packagesPathFromConfig}' since it doesn't exist.");
             return Enumerable.Empty<string>();
         }
+
         log($"  Scanning directory from Nuget Config: {packagesPathFromConfig}'.");
 
         return ScanDirectoryForPackages(packagesPathFromConfig);
