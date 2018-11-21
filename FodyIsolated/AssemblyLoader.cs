@@ -7,7 +7,7 @@ public partial class InnerWeaver
 {
     static Dictionary<string, Assembly> assemblies = new Dictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
 
-    public virtual Assembly LoadWeaverAssembly(string assemblyPath)
+    public Assembly LoadWeaverAssembly(string assemblyPath)
     {
         if (assemblies.TryGetValue(assemblyPath, out var assembly))
         {
@@ -17,7 +17,7 @@ public partial class InnerWeaver
         Logger.LogDebug($"  Loading '{assemblyPath}' from disk.");
         var loadFromFile = LoadFromFile(assemblyPath);
 
-        VerifyCecilReference(loadFromFile);
+        CecilVersionChecker.VerifyCecilReference(loadFromFile);
         return assemblies[assemblyPath] = loadFromFile;
     }
 
