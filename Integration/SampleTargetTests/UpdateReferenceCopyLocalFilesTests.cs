@@ -1,7 +1,6 @@
 using System;
 using System.Globalization;
 using System.IO;
-
 using Xunit;
 
 [assembly: SampleWeaver.Sample]
