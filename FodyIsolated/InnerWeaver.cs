@@ -145,7 +145,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
             Logger.LogDebug($"Weaver '{weaverConfig.AssemblyPath}'.");
             Logger.LogDebug("  Initializing weaver");
-            var assembly = LoadAssembly(weaverConfig.AssemblyPath);
+            var assembly = LoadWeaverAssembly(weaverConfig.AssemblyPath);
             var weaverType = assembly.FindType(weaverConfig.TypeName);
 
             var delegateHolder = weaverType.GetDelegateHolderFromCache();

@@ -7,7 +7,7 @@ public partial class InnerWeaver
 {
     static Dictionary<string, Assembly> assemblies = new Dictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
 
-    public virtual Assembly LoadAssembly(string assemblyPath)
+    public virtual Assembly LoadWeaverAssembly(string assemblyPath)
     {
         if (assemblies.TryGetValue(assemblyPath, out var assembly))
         {
@@ -23,17 +23,7 @@ public partial class InnerWeaver
 
     public static Assembly LoadFromFile(string assemblyPath)
     {
-        var pdbPath = Path.ChangeExtension(assemblyPath, "pdb");
         var rawAssembly = File.ReadAllBytes(assemblyPath);
-        if (File.Exists(pdbPath))
-        {
-            return Assembly.Load(rawAssembly, File.ReadAllBytes(pdbPath));
-        }
-        var mdbPath = Path.ChangeExtension(assemblyPath, "mdb");
-        if (File.Exists(mdbPath))
-        {
-            return Assembly.Load(rawAssembly, File.ReadAllBytes(mdbPath));
-        }
         return Assembly.Load(rawAssembly);
     }
 }
