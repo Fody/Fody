@@ -20,7 +20,7 @@ public partial class InnerWeaver
             if (File.Exists(symbolsPath))
             {
                 File.Copy(symbolsPath, tempSymbols, true);
-                SymbolStream = File.OpenRead(tempSymbols);
+                SymbolStream = FileEx.OpenRead(tempSymbols);
             }
         }
 

@@ -59,7 +59,7 @@ public static class NugetConfigReader
         XDocument xDocument;
         try
         {
-            xDocument = XDocument.Load(nugetConfigPath);
+            xDocument = XDocumentEx.Load(nugetConfigPath);
         }
         catch (XmlException)
         {

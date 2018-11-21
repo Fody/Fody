@@ -97,7 +97,7 @@ public static class ConfigFile
         {
             if (File.Exists(filePath))
             {
-                if (string.Equals(XDocument.Load(filePath).ToString(SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting), schema.ToString(SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting)))
+                if (string.Equals(XDocumentEx.Load(filePath).ToString(SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting), schema.ToString(SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting)))
                 {
                     // don't touch existing file if it is up to date
                     return;
@@ -155,7 +155,7 @@ public static class ConfigFile
 
         try
         {
-            var doc = XDocument.Load(projectConfigFilePath);
+            var doc = XDocumentEx.Load(projectConfigFilePath);
 
             var hasNamespace = doc.Root.Attributes()
                 .Any(attr => !attr.IsNamespaceDeclaration && attr.Name.LocalName == "noNamespaceSchemaLocation" && string.Equals(attr.Value, "FodyWeavers.xsd", StringComparison.OrdinalIgnoreCase));

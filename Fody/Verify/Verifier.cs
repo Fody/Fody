@@ -83,7 +83,7 @@ public class Verifier
     {
         foreach (var configFile in weaverConfigs)
         {
-            var configXml = XDocument.Load(configFile);
+            var configXml = XDocumentEx.Load(configFile);
             var element = configXml.Root;
             if (element.TryReadBool("VerifyAssembly", out var value))
             {
@@ -97,7 +97,7 @@ public class Verifier
     {
         foreach (var configFile in weaverConfigs)
         {
-            var configXml = XDocument.Load(configFile);
+            var configXml = XDocumentEx.Load(configFile);
             var element = configXml.Root;
             var codesConfigs = (string) element.Attribute("VerifyIgnoreCodes");
             if (string.IsNullOrWhiteSpace(codesConfigs))

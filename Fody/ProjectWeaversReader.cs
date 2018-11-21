@@ -45,7 +45,7 @@ public partial class Processor
     {
         try
         {
-            return XDocument.Load(configFilePath);
+            return XDocumentEx.Load(configFilePath);
         }
         catch (XmlException exception)
         {
