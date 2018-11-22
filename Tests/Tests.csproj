@@ -31,7 +31,7 @@
     <Content Include="Fody\Verify\VerifierTests_*.*" CopyToOutputDirectory="Always" />
     <None Include="Fody\NugetPackagePathFinder\FakeSolutionWithNestedNugetConfig\.nuget\nuget.config" CopyToOutputDirectory="Always" />
     <Content Include="Fody\BadAssembly.dll" CopyToOutputDirectory="Always" />
-    <Content Include="Fody\AddinFinderTest\**\*.*" CopyToOutputDirectory="Always" />
+    <Content Include="Fody\AddinFinderTest\**\*.*" Exclude="Fody\AddinFinderTest\*.cs" CopyToOutputDirectory="Always" />
     <Content Include="Fody\Packages\SampleWeaver.Fody.1.0.0.0\SampleWeaver.Fody.dll" CopyToOutputDirectory="Always" />
     <Content Include="Fody\ProjectWeaversReaderTests\Invalid.txt" />
     <Content Include="Fody\Solution\**\*.*" CopyToOutputDirectory="Always" />
