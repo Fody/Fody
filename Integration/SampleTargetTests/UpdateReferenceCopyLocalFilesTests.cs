@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.IO;
+using JetBrains.Annotations;
 using Xunit;
 
 [assembly: SampleWeaver.Sample]
