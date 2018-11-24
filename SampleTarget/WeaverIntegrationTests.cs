@@ -1,7 +1,8 @@
+#if IS_INLINE_INTEGRATION_TEST_ACTIVE
+//  only test if environment variable MSBUILDDISABLENODERESUSE is set to 1";
 using System;
 using System.Globalization;
 using System.IO;
-
 using Xunit;
 
 [assembly: SampleWeaver.Sample]
@@ -12,13 +13,7 @@ namespace SampleTarget
 
     public class WeaverIntegrationTests
     {
-#if IS_INLINE_INTEGRATION_TEST_ACTIVE
-        private const string skipReason = null;
-#else
-        private const string skipReason = "Inline integration tests skipped, since environment variable MSBUILDDISABLENODERESUSE is not set to 1";
-#endif
-
-        [Fact(Skip = skipReason)]
+        [Fact]
         public void SampleWeaverAddedExtraFileDuringBuild()
         {
             var assemblyPath = new Uri(GetType().Assembly.CodeBase).LocalPath;
@@ -32,7 +27,7 @@ namespace SampleTarget
             Assert.True(elapsed < TimeSpan.FromMinutes(1));
         }
 
-        //[Fact(Skip = skipReason)]
+        //[Fact]
         //public void SampleWeaverRemovedObsoleteDependenciesDuringBuild()
         //{
         //    var targetFolder = AppDomain.CurrentDomain.BaseDirectory;
@@ -42,13 +37,13 @@ namespace SampleTarget
         //    Assert.Empty(sampleWeaverFiles);
         //}
 
-        [Fact(Skip = skipReason)]
+        [Fact]
         public void NullGuardsAreActive()
         {
             Assert.Throws<ArgumentNullException>(() => GuardedMethod(null));
         }
 
-        [Fact(Skip = skipReason)]
+        [Fact]
         public void WeaverConfigurationIsRead()
         {
             var type = Type.GetType("SampleWeaverTest.Configuration");
@@ -70,3 +65,5 @@ namespace SampleTarget
         }
     }
 }
+
+#endif
