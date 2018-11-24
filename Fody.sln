@@ -31,9 +31,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepoSync", "RepoSync\RepoSync.csproj", "{8C9C3B12-7F35-4E63-A230-E05F2F306A3D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWeaver", "SampleWeaver\SampleWeaver.csproj", "{C07F5786-84DD-460C-A846-50311562790D}"
-	ProjectSection(ProjectDependencies) = postProject
-		{2C10CBD1-5913-46D5-B705-0F3B46E68DD1} = {2C10CBD1-5913-46D5-B705-0F3B46E68DD1}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleTargetTests", "SampleTarget\SampleTargetTests.csproj", "{B4A955E6-0DC2-47C3-9F08-CA44823AA70F}"
 EndProject
