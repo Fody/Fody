@@ -14,7 +14,7 @@
     <NoWarn>$(NoWarn);NU5118</NoWarn>
     <DisableFody>true</DisableFody>
     <WeaverDirPath Condition="'$(WeaverDirPath)' == ''">..\$(PackageId)\bin\$(Configuration)\</WeaverDirPath>
-    <WeaverPropsTemplate Condition="'$(WeaverPropsTemplate)' == ''">$(MSBuildThisFileDirectory)..\Weaver.Props.Template</WeaverPropsTemplate>
+    <WeaverPropsFile Condition="'$(WeaverPropsFile)' == ''">$(MSBuildThisFileDirectory)..\Weaver.props</WeaverPropsFile>
     <GitHubOrganization Condition="'$(GitHubOrganization)' == ''">Fody</GitHubOrganization>
     <LocalGitRootFolder Condition="'$(LocalGitRootFolder)' == ''">$([MSBuild]::GetDirectoryNameOfFileAbove('$(MSBuildProjectDirectory)', '.git\index'))</LocalGitRootFolder>
     <LocalGitRootFolder Condition="'$(LocalGitRootFolder)' == ''">$(FodySolutionDir)</LocalGitRootFolder>
