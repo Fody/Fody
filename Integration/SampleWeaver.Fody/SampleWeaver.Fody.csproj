@@ -20,13 +20,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
+    <PackageReference Include="FodyHelpers" Version="$(IntegrationVersion)" />
   </ItemGroup>
 
   <Target Name="CopyForIntegration" AfterTargets="AfterBuild">
     <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(SolutionDir)Tests\Fody\Packages\SampleWeaver.Fody.1.0.0.0\SampleWeaver.Fody.dll" />
   </Target>
 
-  <Import Project="$(SolutionDir)FodyHelpers\build\FodyHelpers.targets" />
+  <Import Project="..\..\FodyHelpers\build\FodyHelpers.targets" />
 
 </Project>

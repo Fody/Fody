@@ -5,12 +5,15 @@
     <PackageOutputPath>$(ProjectDir)bin</PackageOutputPath>
   </PropertyGroup>
 
-  <Import Project="..\FodyPackaging\build\FodyPackaging.props" />
+  <Import Project="..\..\FodyPackaging\build\FodyPackaging.props" />
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.0;netstandard2.0;net40</TargetFrameworks>
   </PropertyGroup>
 
-  <Import Project="..\FodyPackaging\build\FodyPackaging.targets" />
+  <Import Project="..\..\FodyPackaging\build\FodyPackaging.targets" />
 
+  <ItemGroup>
+    <ProjectReference Include="..\SampleWeaver.Fody\SampleWeaver.Fody.csproj" Condition="'$(TargetFramework)'=='dummy'" />
+  </ItemGroup>
 </Project>

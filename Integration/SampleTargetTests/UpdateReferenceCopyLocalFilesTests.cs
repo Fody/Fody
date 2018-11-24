@@ -33,5 +33,31 @@ namespace SampleTarget
 
             Assert.Empty(sampleWeaverFiles);
         }
+        [Fact]
+        public void NullGuardsAreActive()
+        {
+            Assert.Throws<ArgumentNullException>(() => GuardedMethod(null));
+        }
+
+        [Fact]
+        public void WeaverConfigurationIsRead()
+        {
+            var type = Type.GetType("SampleWeaverTest.Configuration");
+            var content = (string)type.GetField("Content").GetValue(null);
+            const string expectedContent = "<SampleWeaver MyProperty=\"PropertyValue\">\r\n  <Content>Test</Content>\r\n</SampleWeaver>";
+
+            Assert.Equal(expectedContent, content);
+
+            var propertyValue = (string)type.GetField("PropertyValue").GetValue(null);
+            const string expectedPropertyValue = "PropertyValue";
+
+            Assert.Equal(expectedPropertyValue, propertyValue);
+        }
+
+        [NotNull]
+        public object GuardedMethod([NotNull] object parameter)
+        {
+            return parameter;
+        }
     }
 }
