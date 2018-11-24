@@ -9,4 +9,4 @@ test:
   assemblies:
     - '**\*Tests.dll'
 artifacts:
-- path: nugets\*.nupkg
+- path: nugets\Fody*.nupkg
