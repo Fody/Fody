@@ -11,7 +11,7 @@
   <ItemGroup>
     <Content Include="build\*" PackagePath="build" />
     <Content Include="buildMultiTargeting\*" PackagePath="buildMultiTargeting" />
-    <Content Include="Weaver.Props.Template" PackagePath="" />
+    <Content Include="Weaver.props" PackagePath="\" />
   </ItemGroup>
 
 </Project>

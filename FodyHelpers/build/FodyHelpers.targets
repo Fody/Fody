@@ -1,7 +1,7 @@
-﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project>
 
   <ItemGroup>
-    <None Update="$(MSBuildProjectDirectory)\$(MSBuildProjectName).xcf">
+    <None Update="$(MSBuildProjectName).xcf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

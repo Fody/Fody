@@ -1,31 +1,20 @@
 <Project>
   <Target Name="IncludeFodyFiles">
-    <PropertyGroup>
-      <WeaverPropsTempFile>$(ProjectDir)$(IntermediateOutputPath)$(PackageId).props</WeaverPropsTempFile>
-    </PropertyGroup>
-
     <ItemGroup>
       <NetClassicFilesToInclude Include="$(WeaverDirPath)\net4*\$(PackageId).dll" />
-      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net4*\$(PackageId).pdb" />
-      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net4*\$(PackageId).xcf" />
       <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2*\$(PackageId).dll" />
-      <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2*\$(PackageId).pdb" />
-      <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2*\$(PackageId).xcf" />
-
-      <TfmSpecificPackageFile Include="$(WeaverPropsTempFile)" PackagePath="build" />
     </ItemGroup>
 
     <Error Text="FodyPackaging: No NetClassic weavers found to include in package. Maybe the build order is wrong?" Condition="'@(NetClassicFilesToInclude)'==''" />
     <Error Text="FodyPackaging: No NetStandard weavers found to include in package. Maybe the build order is wrong?" Condition="'@(NetStandardFilesToInclude)'==''" />
 
-    <Copy SourceFiles="$(WeaverPropsTemplate)" DestinationFiles="$(WeaverPropsTempFile)" />
+    <ItemGroup>
+      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net4*\$(PackageId).xcf" />
+      <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2*\$(PackageId).xcf" />
 
-    <CreateItem Include="@(NetClassicFilesToInclude)" AdditionalMetadata="PackagePath=netclassicweaver">
-      <Output TaskParameter="Include" ItemName="TfmSpecificPackageFile" />
-    </CreateItem>
-    <CreateItem Include="@(NetStandardFilesToInclude)" AdditionalMetadata="PackagePath=netstandardweaver">
-      <Output TaskParameter="Include" ItemName="TfmSpecificPackageFile" />
-    </CreateItem>
-
+      <TfmSpecificPackageFile Include="@(NetClassicFilesToInclude)" PackagePath="netclassicweaver\%(Filename)%(Extension)" />
+      <TfmSpecificPackageFile Include="@(NetStandardFilesToInclude)" PackagePath="netstandardweaver\%(Filename)%(Extension)" />
+      <TfmSpecificPackageFile Include="$(WeaverPropsFile)" PackagePath="build\$(PackageId).props" />
+    </ItemGroup>
   </Target>
 </Project>
