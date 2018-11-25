@@ -15,5 +15,11 @@
     <PackageReference Include="Fody" Version="$(IntegrationVersion)" />
     <PackageReference Include="SampleWeaver.Fody" Version="$(IntegrationVersion)" />
   </ItemGroup>
-  
+
+  <!-- Do NOT update these versions, it's for backward compatibility testing!!! -->
+  <ItemGroup>
+    <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.10.0" />
+    <PackageReference Include="NullGuard.Fody" Version="1.8.5" />
+  </ItemGroup>
+
 </Project>

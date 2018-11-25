@@ -1,23 +1,20 @@
-#if IS_INLINE_INTEGRATION_TEST_ACTIVE
-//  only test if environment variable MSBUILDDISABLENODERESUSE is set to 1";
 using System;
 using System.Globalization;
 using System.IO;
+using JetBrains.Annotations;
 using Xunit;
 
 [assembly: SampleWeaver.Sample]
 
 namespace SampleTarget
 {
-    using JetBrains.Annotations;
-
-    public class WeaverIntegrationTests
+    public class PackagedWeaverTests
     {
         [Fact]
         public void SampleWeaverAddedExtraFileDuringBuild()
         {
             var assemblyPath = new Uri(GetType().Assembly.CodeBase).LocalPath;
-            var targetFolder = AppDomain.CurrentDomain.BaseDirectory;
+            var targetFolder = Path.GetDirectoryName(assemblyPath);
             var extraFilePath = Path.Combine(targetFolder, "SomeExtraFile.txt");
             var extraFileContent = File.ReadAllText(extraFilePath);
             var assemblyBuildTime = File.GetLastWriteTime(assemblyPath);
@@ -27,15 +24,16 @@ namespace SampleTarget
             Assert.True(elapsed < TimeSpan.FromMinutes(1));
         }
 
-        //[Fact]
-        //public void SampleWeaverRemovedObsoleteDependenciesDuringBuild()
-        //{
-        //    var targetFolder = AppDomain.CurrentDomain.BaseDirectory;
+        [Fact]
+        public void SampleWeaverRemovedObsoleteDependenciesDuringBuild()
+        {
+            var assemblyPath = new Uri(GetType().Assembly.CodeBase).LocalPath;
+            var targetFolder = Path.GetDirectoryName(assemblyPath);
 
-        //    var sampleWeaverFiles = Directory.EnumerateFiles(targetFolder, "SampleWeaver.*");
+            var sampleWeaverFiles = Directory.EnumerateFiles(targetFolder, "SampleWeaver.*");
 
-        //    Assert.Empty(sampleWeaverFiles);
-        //}
+            Assert.Empty(sampleWeaverFiles);
+        }
 
         [Fact]
         public void NullGuardsAreActive()
@@ -65,5 +63,3 @@ namespace SampleTarget
         }
     }
 }
-
-#endif
