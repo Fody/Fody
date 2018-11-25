@@ -258,7 +258,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Publicize](https://github.com/Fody/Publicize) Converts non-public members to public hidden members.
   * [QueryValidator](https://github.com/kamil-mrzyglod/QueryValidator.Fody) Validates your DB queries during a build.
   * [Realm](https://github.com/realm/realm-dotnet/tree/master/Weaver/RealmWeaver.Fody) Mobile database: a replacement for SQLite & ORMs.
-  * [ReactiveUI](https://github.com/kswoll/ReactiveUI.Fody) Generates [ReactiveUI](http://reactiveui.net/) `RaisePropertyChange` notifications for properties and `ObservableAsPropertyHelper` properties.
+  * [ReactiveUI.Fody](https://github.com/reactiveui/ReactiveUI) Generates [ReactiveUI](http://reactiveui.net/) `RaisePropertyChanged` notifications for properties and `OAPH`s.
   * [Resourcer](https://github.com/Fody/Resourcer) Simplifies reading embedded resources from an Assembly.
   * [RomanticWeb](http://romanticweb.net/) Fody weaver plugin for RomanticWeb instrumentation.
   * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration. 
