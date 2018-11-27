@@ -20,6 +20,7 @@
     <None Update="$(MSBuildProjectDirectory)\FodyWeavers.xsd">
       <Visible>false</Visible>
     </None>
+
   </ItemGroup>
 
   <UsingTask TaskName="Fody.WeavingTask" AssemblyFile="$(FodyAssembly)" />
