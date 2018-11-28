@@ -7,8 +7,8 @@ using Fody;
 
 public static class ConfigFile
 {
-    static XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");
-    static XNamespace schemaInstanceNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema-instance");
+    static readonly XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");
+    static readonly XNamespace schemaInstanceNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema-instance");
 
     public static List<string> FindWeaverConfigs(string solutionDirectoryPath, string projectDirectory, ILogger logger, IEnumerable<string> wellKnownWeaverFiles)
     {
@@ -156,6 +156,11 @@ public static class ConfigFile
         try
         {
             var doc = XDocumentEx.Load(projectConfigFilePath);
+
+            if (doc.Root.TryReadBool("GenerateXsd", out var generateXsd) && !generateXsd)
+            {
+                return;
+            }
 
             var hasNamespace = doc.Root.Attributes()
                 .Any(attr => !attr.IsNamespaceDeclaration && attr.Name.LocalName == "noNamespaceSchemaLocation" && string.Equals(attr.Value, "FodyWeavers.xsd", StringComparison.OrdinalIgnoreCase));

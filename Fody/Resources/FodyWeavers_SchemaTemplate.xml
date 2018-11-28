@@ -15,6 +15,11 @@
           <xs:documentation>A comma-separated list of error codes that can be safely ignored in assembly verification.</xs:documentation>
         </xs:annotation>
       </xs:attribute>
+      <xs:attribute name="GenerateXsd" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>'false' to turn off automatic generation of the XML Schema file.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
     </xs:complexType>
   </xs:element>
 </xs:schema>
