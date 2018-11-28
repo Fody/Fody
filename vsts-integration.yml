@@ -22,7 +22,7 @@ steps:
 
 - powershell: |
    (new-object Net.WebClient).DownloadString("https://raw.github.com/tom-englert/BuildScripts/master/BuildScripts.ps1") | iex
-   Project-SetVersion "Directory.Build.props"  | Build-AppendVersionToBuildNumber
+   Project-SetVersion "Directory.Build.props"
   displayName: 'Patch version'
 
 - task: VSBuild@1
