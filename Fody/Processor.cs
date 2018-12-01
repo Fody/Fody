@@ -120,6 +120,8 @@ see https://github.com/Fody/Fody/wiki/SampleUsage");
 
         ConfigureWhenNoWeaversFound();
 
+        ConfigFile.EnsureSchemaIsUpToDate(ProjectDirectory, WeaverFilesFromProps, Weavers);
+
         Logger.LogDebug($"Finished finding weavers {stopwatch.ElapsedMilliseconds}ms");
     }
 
