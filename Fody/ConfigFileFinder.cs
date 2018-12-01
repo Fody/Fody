@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -7,6 +8,7 @@ using Fody;
 
 public static class ConfigFile
 {
+    private const string FodyWeaversConfigFileName = "FodyWeavers.xml";
     static readonly XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");
     static readonly XNamespace schemaInstanceNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema-instance");
 
@@ -14,14 +16,14 @@ public static class ConfigFile
     {
         var files = new List<string>();
 
-        var solutionConfigFilePath = Path.Combine(solutionDirectoryPath, "FodyWeavers.xml");
+        var solutionConfigFilePath = Path.Combine(solutionDirectoryPath, FodyWeaversConfigFileName);
         if (File.Exists(solutionConfigFilePath))
         {
             files.Add(solutionConfigFilePath);
             logger.LogDebug($"Found path to weavers file '{solutionConfigFilePath}'.");
         }
 
-        var projectConfigFilePath = Path.Combine(projectDirectory, "FodyWeavers.xml");
+        var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
         if (!File.Exists(projectConfigFilePath))
         {
             if (!files.Any() && wellKnownWeaverFiles != null)
@@ -43,8 +45,6 @@ public static class ConfigFile
         {
             files.Add(projectConfigFilePath);
             logger.LogDebug($"Found path to weavers file '{projectConfigFilePath}'.");
-
-            EnsureSchemaIsUpToDate(projectConfigFilePath, wellKnownWeaverFiles);
         }
 
         if (files.Count == 0)
@@ -73,21 +73,32 @@ public static class ConfigFile
         weaverConfig.Root.Add(weaverEntries);
         weaverConfig.Save(projectConfigFilePath);
 
-        CreateSchemaForConfig(projectConfigFilePath, wellKnownWeaverFiles);
+        CreateSchemaForConfig(projectConfigFilePath, wellKnownWeaverFiles, null);
     }
 
-    static void CreateSchemaForConfig(string projectConfigFilePath, IEnumerable<string> wellKnownWeaverFiles)
+    static string GetWeaverName(WeaverEntry weaver)
     {
-        if (wellKnownWeaverFiles == null)
+        return string.IsNullOrEmpty(weaver.Element) ? weaver.TypeName : weaver.AssemblyName;
+    }
+
+    static void CreateSchemaForConfig(string projectConfigFilePath, IEnumerable<string> wellKnownWeaverFiles, IEnumerable<WeaverEntry> weavers)
+    {
+        var weaverFiles = weavers?.ToDictionary(GetWeaverName, weaver => weaver.AssemblyPath, StringComparer.OrdinalIgnoreCase)
+                          ?? new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+        if (wellKnownWeaverFiles != null)
         {
-            return;
+            foreach (var wellKnownWeaverFile in wellKnownWeaverFiles)
+            {
+                weaverFiles[WeaverNameFromFilePath(wellKnownWeaverFile)] = wellKnownWeaverFile;
+            }
         }
 
         var schema = XDocument.Parse(Fody.Properties.Resources.FodyWeavers_SchemaTemplate);
 
         var baseNode = schema.Descendants().FirstOrDefault(item => item.Name == schemaNamespace.GetName("all"));
 
-        var fragments = wellKnownWeaverFiles.Select(CreateItemFragment);
+        var fragments = weaverFiles.Select(CreateItemFragment);
 
         baseNode.Add(fragments);
 
@@ -112,9 +123,10 @@ public static class ConfigFile
         schema.Save(filePath, SaveOptions.OmitDuplicateNamespaces);
     }
 
-    static XElement CreateItemFragment(string weaverFile)
+    static XElement CreateItemFragment(KeyValuePair<string, string> weaver)
     {
-        var weaverName = WeaverNameFromFilePath(weaverFile);
+        var weaverName = weaver.Key;
+        var weaverFile = weaver.Value;
 
         var element = new XElement(schemaNamespace.GetName("element"),
             new XAttribute("name", weaverName),
@@ -146,15 +158,17 @@ public static class ConfigFile
         return Path.ChangeExtension(Path.GetFileNameWithoutExtension(filePath), null);
     }
 
-    static void EnsureSchemaIsUpToDate(string projectConfigFilePath, IEnumerable<string> wellKnownWeaverFiles)
+    public static void EnsureSchemaIsUpToDate(string projectDirectory, IEnumerable<string> wellKnownWeaverFiles, List<WeaverEntry> weavers)
     {
-        if (wellKnownWeaverFiles == null)
+        if (wellKnownWeaverFiles == null && weavers == null)
         {
             return;
         }
 
         try
         {
+            var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
+
             var doc = XDocumentEx.Load(projectConfigFilePath);
 
             if (doc.Root.TryReadBool("GenerateXsd", out var generateXsd) && !generateXsd)
@@ -171,7 +185,7 @@ public static class ConfigFile
                 doc.Save(projectConfigFilePath);
             }
 
-            CreateSchemaForConfig(projectConfigFilePath, wellKnownWeaverFiles);
+            CreateSchemaForConfig(projectConfigFilePath, wellKnownWeaverFiles, weavers);
         }
         catch
         {
@@ -181,7 +195,7 @@ public static class ConfigFile
 
     static XAttribute[] SchemaInstanceAttributes =>
 
-        new []
+        new[]
     {
         new XAttribute(XNamespace.Xmlns + "xsi", schemaInstanceNamespace.NamespaceName),
         new XAttribute(schemaInstanceNamespace.GetName("noNamespaceSchemaLocation"), "FodyWeavers.xsd"),
