@@ -83,16 +83,10 @@ public static class ConfigFile
 
     static void CreateSchemaForConfig(string projectConfigFilePath, IEnumerable<string> wellKnownWeaverFiles, IEnumerable<WeaverEntry> weavers)
     {
-        var weaverFiles = weavers?.ToDictionary(GetWeaverName, weaver => weaver.AssemblyPath, StringComparer.OrdinalIgnoreCase)
-                          ?? new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        var weaverFiles = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-        if (wellKnownWeaverFiles != null)
-        {
-            foreach (var wellKnownWeaverFile in wellKnownWeaverFiles)
-            {
-                weaverFiles[WeaverNameFromFilePath(wellKnownWeaverFile)] = wellKnownWeaverFile;
-            }
-        }
+        weaverFiles.MergeItemsFrom(weavers, GetWeaverName, weaver => weaver.AssemblyPath);
+        weaverFiles.MergeItemsFrom(wellKnownWeaverFiles, WeaverNameFromFilePath);
 
         var schema = XDocument.Parse(Fody.Properties.Resources.FodyWeavers_SchemaTemplate);
 
@@ -156,6 +150,22 @@ public static class ConfigFile
     static string WeaverNameFromFilePath(string filePath)
     {
         return Path.ChangeExtension(Path.GetFileNameWithoutExtension(filePath), null);
+    }
+
+    static void MergeItemsFrom<TKey, TValue>(this IDictionary<TKey, TValue> target, IEnumerable<TValue> items, Func<TValue, TKey> keySelector)
+    {
+        MergeItemsFrom(target, items, keySelector, value => value);
+    }
+
+    static void MergeItemsFrom<TKey, TValue, TItem>(this IDictionary<TKey, TValue> target, IEnumerable<TItem> items, Func<TItem, TKey> keySelector, Func<TItem, TValue> valueSelector)
+    {
+        if (items == null)
+            return;
+
+        foreach (var item in items)
+        {
+            target[keySelector(item)] = valueSelector(item);
+        }
     }
 
     public static void EnsureSchemaIsUpToDate(string projectDirectory, IEnumerable<string> wellKnownWeaverFiles, List<WeaverEntry> weavers)
