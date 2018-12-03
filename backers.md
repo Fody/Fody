@@ -11,7 +11,7 @@ Below you'll find a list of the people and organizations that have made signific
  * Intreba | [Open Collective](https://github.com/Intreba)
 
 
-## Significant code contributors
+## Significant contributors
 
  * Cameron MacFarland | [GitHub](https://github.com/distantcam)
  * Damian Reeves | [GitHub](https://github.com/DamianReeves)
