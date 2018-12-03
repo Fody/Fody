@@ -121,6 +121,62 @@ Thanks to all the backing developers! Support this project by [becoming a patron
 <!--- EndOpenCollectiveBackers -->
 
 
+
+## Licensing/Patron FAQ
+
+
+### Enforcement
+
+It is an honesty system with no code or legal enforcement. When raising an issue or a pull request, the users may be checked against [the list of backers](https://github.com/Fody/Fody/blob/master/backers.md), and that issue/PR may be closed without further examination.
+
+
+### So what OSS license are projects using?
+
+Fody is licensed under the [MIT](https://opensource.org/licenses/MIT)
+
+
+### Why charge for open source?
+
+ * [Open-Source Maintainers are Jerks!](https://vimeo.com/296579853)
+ * [FOSS is free as in toilet](http://unhandledexpression.com/general/2018/11/27/foss-is-free-as-in-toilet.html)
+ * [How to Charge for your Open Source](https://www.mikeperham.com/2015/11/23/how-to-charge-for-your-open-source/)
+ * [Sustain OSS: The Report](https://sustainoss.org/assets/pdf/SustainOSS-west-2017-report.pdf)
+ * [Open Source Maintainers Owe You Nothing](https://mikemcquaid.com/2018/03/19/open-source-maintainers-owe-you-nothing/)
+ * [Who should fund open source projects?](https://jaxenter.com/who-funds-open-source-projects-133222.html)
+ * [Apply at OSS Inc today](https://twitter.com/ryanchenkie/status/1067801413974032385)
+
+
+### But shouldn't OSS be completely free and supported by the community through their contributions?
+
+Yes in theory this is true, however the long term reality has shown this not to be the case. The vast majority of consumers of open source projects do not contribute enough to ensure those project survive. This results in a small core team spending large amounts of their own free time maintaining projects.
+
+
+### But it is MIT, can't I use it for free?
+
+Yes all projects are under [MIT](https://opensource.org/licenses/MIT) and you can ignore the community backing honesty system and use these project for free.
+
+
+### Do I need to be a Patron to contribute a Pull Request?
+
+Yes. You must be a Patron to be a user of the below NuGet packages. Contributing Pull Requests does not cancel this out. It may seem unfair to expect people both contribute PRs and also financially back this project. However it is important to remember the effort in reviewing and merging a PR is often similar to that of creating the PR. Also the project maintainers are committing to support that added code (feature or bug fix) for the life of the project.
+
+
+### Can I fork, re-use code, or start competing (possibly commercial) projects?
+
+Yes.
+
+
+### Do all developers in a company need to become Patrons?
+
+No. Only those coding against projects that directly, or indirectly, consume the Fody NuGet package.
+
+
+### What happens if I produce a libraries using Fody?
+
+Consumers of that produced library do not need to become Patrons.
+
+
+
 <a href="#" id="endofbacking"></a>
 
 
