@@ -154,7 +154,7 @@ Yes in theory this is true, however the long term reality has shown this not to 
 
 ### But it is MIT, can't I use it for free?
 
-Yes all projects are under [MIT](https://opensource.org/licenses/MIT) and you can ignore the community backing honesty system and use these project for free.
+Yes all projects are under [MIT](https://opensource.org/licenses/MIT) and you can ignore the community backing honesty system and use Fody for free.
 
 
 ### Do I need to be a Patron to contribute a Pull Request?
@@ -172,7 +172,7 @@ Yes.
 No. Only those coding against projects that directly, or indirectly, consume the Fody NuGet package.
 
 
-### What happens if I produce a libraries using Fody?
+### What happens if I produce a library using Fody?
 
 Consumers of that produced library do not need to become Patrons.
 
