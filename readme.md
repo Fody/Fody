@@ -126,6 +126,11 @@ Thanks to all the backing developers! Support this project by [becoming a patron
 **It is expected that all developers [become a Patron](https://opencollective.com/fody/order/3059) to use Fody.**
 
 
+### Is this all version?
+
+No, it will include version 3.3.3 and higher.
+
+
 ### Enforcement
 
 It is an honesty system with no code or legal enforcement. When raising an issue or a pull request, the users may be checked against [the list of backers](https://github.com/Fody/Fody/blob/master/backers.md), and that issue/PR may be closed without further examination.
