@@ -169,7 +169,7 @@ Yes. You must be a Patron to be a user of Fody. Contributing Pull Requests does 
 
 ### How does a company license for their developers?
 
-A company can [Create an Open Collective organization](https://opencollective.com/become-a-sponsor) and then allow their developers to draw on the funds from that organization. FAQ [here](https://opencollective.com/faq/backers)
+A company can [Create an Open Collective organization](https://opencollective.com/become-a-sponsor) and then allow their developers to draw on the funds from that organization. FAQ [here.](https://opencollective.com/faq/backers)
 
 
 ### Can I fork, re-use code, or start competing (possibly commercial) projects?
