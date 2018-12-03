@@ -13,7 +13,7 @@ Below you'll find a list of the people and organizations that have made signific
 
 ## Significant contributors
 
- * Cameron MacFarland | [GitHub](https://github.com/distantcam)
+ * Cameron MacFarland | [GitHub](https://github.com/distantcam) | [OpenCollective](https://opencollective.com/distantcam)
  * Damian Reeves | [GitHub](https://github.com/DamianReeves)
  * Geert van Horrik [GitHub](https://github.com/GeertvanHorrik) | [OpenCollective](https://opencollective.com/geertvanhorrik)
  * Lucas Trzesniewski | [GitHub](https://github.com/ltrzesniewski) | [OpenCollective](https://opencollective.com/lucas-trzesniewski)
