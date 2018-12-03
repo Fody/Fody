@@ -15,7 +15,7 @@ Manipulating the IL of an assembly as part of a build requires a significant amo
 
 ## Community backed
 
-**It is expected that all developers [become a Patron](https://opencollective.com/fody/order/3059) to use any of these libraries. [Go to licensing FAQ](https://github.com/Fody/Fody/blob/master/readme.md#licensingpatron-faq)**
+**It is expected that all developers [become a Patron](https://opencollective.com/fody/order/3059) to use Fody. [Go to licensing FAQ](https://github.com/Fody/Fody/blob/master/readme.md#licensingpatron-faq)**
 
 
 ### Platinum Sponsors
