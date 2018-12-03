@@ -3,7 +3,7 @@ name: Bug fix
 about: Create a bug fix to help us improve
 ---
 
-Where it is clear the below content has not read, the issue is likely to be closed with "please read the template". Please don't take offense at this. It is simply a time management decision. When someone raises an issue, without reading the template, then often too much time is spent going back and forth to obtain information that is outlined below.
+Where it is clear that the below content has not read, the issue is likely to be closed with "please read the template". Please don't take offense at this. It is simply a time management decision. When someone raises an issue, without reading the template, then often too much time is spent going back and forth to obtain information that is outlined below.
 
 
 #### Ensure you are a Patron
@@ -15,9 +15,9 @@ If you not able, or don't have the time, to implement the feature, and would pre
 
 #### Preamble
 
-Questions specific to IL manipulation should be placed on [StackOveflow](https://stackoverflow.com/) or the [Cecil mailing list](https://groups.google.com/forum/#!forum/mono-cecil).
+Questions specific to IL manipulation should be placed on [Stack Overflow](https://stackoverflow.com/) or the [Cecil mailing list](https://groups.google.com/forum/#!forum/mono-cecil).
 
-General questions about Fody or weavers should be placed on [StackOveflow](https://stackoverflow.com/) or the [Fody Gitter room](https://gitter.im/Fody/Fody)
+General questions about Fody or weavers should be placed on [Stack Overflow](https://stackoverflow.com/) or the [Fody Gitter room](https://gitter.im/Fody/Fody)
 
 Where relevant, ensure you are using the current stable versions of the following:
 

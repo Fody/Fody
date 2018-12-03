@@ -20,7 +20,7 @@ Manipulating the IL of an assembly as part of a build requires a significant amo
 
 ### Platinum Sponsors
 
-Support this project by [becoming a Platinum Sponsor](https://opencollective.com/fody/order/7089). A banner with your company logo will be added here with a link to your website. A "Sponsored by" text and link will be added the description of the NuGet Package for the life of your sponsorship. You also get 1 hour of remote support per month.
+Support this project by [becoming a Platinum Sponsor](https://opencollective.com/fody/order/7089). A banner with your company logo will be added here with a link to your website. A "Sponsored by" text and link will be added to the description of the NuGet Package for the life of your sponsorship. You also get 1 hour of remote support per month.
 
 <!--
 <a href="https://opencollective.com/fody/tiers/platinum/0/website"><img src="https://opencollective.com/fody/tiers/platinum/0/avatar.svg" height="100px"></a>
@@ -47,7 +47,7 @@ Support this project by [becoming a Gold Sponsor](https://opencollective.com/fod
 
 ### Silver Sponsors
 
-Support this project by [becoming a Silver Sponsors](https://opencollective.com/fody/order/7086). A medium company logo will be added here with a link to your website.
+Support this project by [becoming a Silver Sponsor](https://opencollective.com/fody/order/7086). A medium company logo will be added here with a link to your website.
 
 <!--
 <a href="https://opencollective.com/fody/tiers/silver/0/website"><img src="https://opencollective.com/fody/tiers/silver/0/avatar.svg" style="height:60px;"></a>
@@ -75,7 +75,7 @@ Support this project by [becoming a Silver Sponsors](https://opencollective.com/
 
 ### Bronze Sponsors
 
-Support this project by [becoming a Bronze Sponsors](https://opencollective.com/fody/order/7085). The company avatar will show up here with a link to your website. The avatar will also be added to all GitHub repositories under this organization.
+Support this project by [becoming a Bronze Sponsor](https://opencollective.com/fody/order/7085). The company avatar will show up here with a link to your website. The avatar will also be added to all GitHub repositories under this organization.
 
 <!--
 <img src="https://opencollective.com/fody/tiers/bronze.svg?width=890&avatarHeight=80&button=false">
