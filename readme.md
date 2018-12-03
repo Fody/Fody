@@ -131,11 +131,6 @@ Thanks to all the backing developers! Support this project by [becoming a patron
 It is an honesty system with no code or legal enforcement. When raising an issue or a pull request, the users may be checked against [the list of backers](https://github.com/Fody/Fody/blob/master/backers.md), and that issue/PR may be closed without further examination.
 
 
-### So what OSS license are projects using?
-
-Fody is licensed under the [MIT](https://opensource.org/licenses/MIT)
-
-
 ### Why charge for open source?
 
  * [Open-Source Maintainers are Jerks!](https://vimeo.com/296579853)
@@ -145,6 +140,11 @@ Fody is licensed under the [MIT](https://opensource.org/licenses/MIT)
  * [Open Source Maintainers Owe You Nothing](https://mikemcquaid.com/2018/03/19/open-source-maintainers-owe-you-nothing/)
  * [Who should fund open source projects?](https://jaxenter.com/who-funds-open-source-projects-133222.html)
  * [Apply at OSS Inc today](https://twitter.com/ryanchenkie/status/1067801413974032385)
+
+
+### So what OSS license are projects using?
+
+Fody is licensed under the [MIT](https://opensource.org/licenses/MIT)
 
 
 ### But shouldn't OSS be completely free and supported by the community through their contributions?
@@ -160,6 +160,11 @@ Yes all projects are under [MIT](https://opensource.org/licenses/MIT) and you ca
 ### Do I need to be a Patron to contribute a Pull Request?
 
 Yes. You must be a Patron to be a user of the below NuGet packages. Contributing Pull Requests does not cancel this out. It may seem unfair to expect people both contribute PRs and also financially back this project. However it is important to remember the effort in reviewing and merging a PR is often similar to that of creating the PR. Also the project maintainers are committing to support that added code (feature or bug fix) for the life of the project.
+
+
+### How does a company license for their developers?
+
+A company can [Create an OpenCollective organization](https://github.com/opencollective/opencollective/wiki/Creating-an-organization-profile) and then allow their developers to draw on the funds from that organization.
 
 
 ### Can I fork, re-use code, or start competing (possibly commercial) projects?
