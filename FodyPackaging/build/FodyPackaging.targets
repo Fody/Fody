@@ -11,6 +11,8 @@
     <ItemGroup>
       <NetClassicFilesToInclude Include="$(WeaverDirPath)\net4*\$(PackageId).xcf" />
       <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2*\$(PackageId).xcf" />
+      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net4*\$(PackageId).pdb" />
+      <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2*\$(PackageId).pdb" />
 
       <TfmSpecificPackageFile Include="@(NetClassicFilesToInclude)" PackagePath="netclassicweaver\%(Filename)%(Extension)" />
       <TfmSpecificPackageFile Include="@(NetStandardFilesToInclude)" PackagePath="netstandardweaver\%(Filename)%(Extension)" />
