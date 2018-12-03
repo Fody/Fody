@@ -11,6 +11,16 @@ Below you'll find a list of the people and organizations that have made signific
  * Intreba | [Open Collective](https://github.com/Intreba)
 
 
+## Significant code contributors
+
+ * Cameron MacFarland | [GitHub](https://github.com/distantcam)
+ * Damian Reeves | [GitHub](https://github.com/DamianReeves)
+ * Geert van Horrik [GitHub](https://github.com/GeertvanHorrik) | [OpenCollective](https://opencollective.com/geertvanhorrik)
+ * Lucas Trzesniewski | [GitHub](https://github.com/ltrzesniewski) | [OpenCollective](https://opencollective.com/lucas-trzesniewski)
+ * Simon Cropp | [GitHub](https://github.com/simoncropp) | [OpenCollective](https://opencollective.com/simoncropp)
+ * Tom Englert | [GitHub](https://github.com/tom-englert) | [OpenCollective](https://opencollective.com/thomas-englert)
+
+
 ## Once off backers
 
 <!-- https://opencollective.com/fody/backer.svg -->
@@ -25,11 +35,3 @@ Below you'll find a list of the people and organizations that have made signific
  * Jakub Suchy | [OpenCollective](https://opencollective.com/jakub-suchy) | [GitHub](https://github.com/jakubsuchybio)
  * Miha Markic | [OpenCollective](https://opencollective.com/mihamarkic) | [GitHub](https://twitter.com/mihamarkic)
  * Peter Major | [OpenCollective](https://opencollective.com/peter-major) | [GitHub](https://github.com/petermajor)
-
-
-## Significant code contributors
-
- * Geert van Horrik [GitHub](https://github.com/GeertvanHorrik) | [OpenCollective](https://opencollective.com/geertvanhorrik)
- * Lucas Trzesniewski | [GitHub](https://github.com/ltrzesniewski) | [OpenCollective](https://opencollective.com/lucas-trzesniewski)
- * Simon Cropp | [GitHub](https://github.com/simoncropp) | [OpenCollective](https://opencollective.com/simoncropp)
- * Tom Englert | [GitHub](https://github.com/tom-englert) | [OpenCollective](https://opencollective.com/thomas-englert)
