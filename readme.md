@@ -149,7 +149,12 @@ It is an honesty system with no code or legal enforcement. When raising an issue
 
 ### So what OSS license are projects using?
 
-Fody is licensed under the [MIT](https://opensource.org/licenses/MIT)
+Fody (all code, NuGets and binaries) are licensed under the [MIT](https://opensource.org/licenses/MIT).
+
+
+### Why not use a modified MIT license?
+
+Using any OSS license in a modified form causes significant problems with adoption of tools. There is no simplified guidance on using modified licenses. For example they are not included in [choose a license](https://choosealicense.com/) or [tldr legal](https://tldrlegal.com/). It often forces an organization to obtain approval from a legal department. It means any consuming tools need to ensure that the modified license does not propagate in an undesirable way.
 
 
 ### But shouldn't OSS be completely free and supported by the community through their contributions?
