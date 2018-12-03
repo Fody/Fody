@@ -10,7 +10,7 @@ Where it is clear the below content has not read, the issue is likely to be clos
 
 To raise a feature request you must be a [Patron of Fody](https://opencollective.com/fody/order/3059). The GitHub user will be verified against [Home/backers.md](https://github.com/Fody/Fody/blob/master/backers.md). See [Licensing/Patron FAQ](https://github.com/Fody/Fody#licensingpatron-faq) for more information.
 
-If you not able, or don't have the time, to implement the feature, and would prefer someone else implement it for you, consider proposing a [once off donation](https://opencollective.com/fody/donate) amount. When considering the amount, note that features can take many hours to implement.
+If you are not able, or don't have the time, to implement the feature, and would prefer someone else implement it for you, consider proposing a [once off donation](https://opencollective.com/fody/donate) amount. When considering the amount, note that features can take many hours to implement.
 
 
 #### Guidance
