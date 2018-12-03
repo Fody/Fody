@@ -123,6 +123,8 @@ Thanks to all the backing developers! Support this project by [becoming a patron
 
 ## Licensing/Patron FAQ
 
+**It is expected that all developers [become a Patron](https://opencollective.com/fody/order/3059) to use Fody.**
+
 
 ### Enforcement
 
