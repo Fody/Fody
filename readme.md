@@ -20,7 +20,7 @@ Manipulating the IL of an assembly as part of a build requires a significant amo
 
 ### Platinum Sponsors
 
-Support this project by [becoming a Platinum Sponsor](https://opencollective.com/fody/order/7089). A banner with your company logo will be added here with a link to your website. A "Sponsored by" text and link will be added the description of the NuGet Package for the life of your sponsorship. You also get 1 hour of remote support per month.
+Support this project by [becoming a Platinum Sponsor](https://opencollective.com/fody/order/7089). A banner with your company logo will be added here with a link to your website. A "Sponsored by" text and link will be added to the description of the NuGet Package for the life of your sponsorship. You also get 1 hour of remote support per month.
 
 <!--
 <a href="https://opencollective.com/fody/tiers/platinum/0/website"><img src="https://opencollective.com/fody/tiers/platinum/0/avatar.svg" height="100px"></a>
@@ -47,7 +47,7 @@ Support this project by [becoming a Gold Sponsor](https://opencollective.com/fod
 
 ### Silver Sponsors
 
-Support this project by [becoming a Silver Sponsors](https://opencollective.com/fody/order/7086). A medium company logo will be added here with a link to your website.
+Support this project by [becoming a Silver Sponsor](https://opencollective.com/fody/order/7086). A medium company logo will be added here with a link to your website.
 
 <!--
 <a href="https://opencollective.com/fody/tiers/silver/0/website"><img src="https://opencollective.com/fody/tiers/silver/0/avatar.svg" style="height:60px;"></a>
@@ -75,7 +75,7 @@ Support this project by [becoming a Silver Sponsors](https://opencollective.com/
 
 ### Bronze Sponsors
 
-Support this project by [becoming a Bronze Sponsors](https://opencollective.com/fody/order/7085). The company avatar will show up here with a link to your website. The avatar will also be added to all GitHub repositories under this organization.
+Support this project by [becoming a Bronze Sponsor](https://opencollective.com/fody/order/7085). The company avatar will show up here with a link to your website. The avatar will also be added to all GitHub repositories under this organization.
 
 <!--
 <img src="https://opencollective.com/fody/tiers/bronze.svg?width=890&avatarHeight=80&button=false">
@@ -228,7 +228,7 @@ To indicate what weavers run and in what order a `FodyWeavers.xml` file is used 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Weavers>
-  <WeaverName/> 
+  <WeaverName/>
 </Weavers>
 ```
 
@@ -237,7 +237,7 @@ e.g.
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <Weavers>
-  <Virtuosity/> 
+  <Virtuosity/>
 </Weavers>
 ```
 
@@ -259,7 +259,7 @@ Older versions of Visual Studio may still work, but are not actively supported. 
  * Classic .NET: See *Support ended* in [NET Framework version history](https://en.wikipedia.org/wiki/.NET_Framework_version_history#Overview). i.e only 4.5.2 and above is supported.
  * .NET core: Follows [.NET Core Support Policy](https://www.microsoft.com/net/core/support).
 
-No explicit code is in place to check for non supported versions, and throw an error. As such earlier versions of .net may work as a side effect. 
+No explicit code is in place to check for non supported versions, and throw an error. As such earlier versions of .net may work as a side effect.
 It's all up to the individual weavers that you use and what version they are able to support.
 
 Any bugs found must be reproduced in a supported version.
@@ -269,7 +269,7 @@ Downstream plugins are recommended to follow the above guidelines.
 
 ### Reasons
 
-While it may seam trivial to "implement support for earlier versions of .net" the long term support implications are too costly. For example to support earlier versions of .net require 
+While it may seam trivial to "implement support for earlier versions of .net" the long term support implications are too costly. For example to support earlier versions of .net require
 
  * Custom VMs to verify problems.
  * Added complexity to setting up build environment.
@@ -312,7 +312,7 @@ References
  * [Migrate from project.json to new VS 2017 SDK style projects](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-migrate)
 
 
-## Why? 
+## Why?
 
 This technique of "weaving" in new instructions is fantastically powerful. You can turn simple public properties into full [INotifyPropertyChanged implementations](https://github.com/Fody/PropertyChanged), add [checks for null arguments](https://github.com/Fody/NullGuard), add [Git hashes to your Assemblies](https://github.com/Fody/Stamp), even [make all your string comparisons case insensitive](https://github.com/Fody/Caseless).
 
@@ -374,7 +374,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Freezable](https://github.com/Fody/Freezable) Implements the Freezable pattern.
   * [InfoOf](https://github.com/Fody/InfoOf) Provides `methodof`, `propertyof` and `fieldof` equivalents of [`typeof`](https://msdn.microsoft.com/en-us/library/58918ffs.aspx).
   * [InlineIL](https://github.com/ltrzesniewski/InlineIL.Fody) Provides a way to embed arbitrary IL instructions in existing code.
-  * [Ionad](https://github.com/Fody/Ionad) Replaces static method calls. 
+  * [Ionad](https://github.com/Fody/Ionad) Replaces static method calls.
   * [Janitor](https://github.com/Fody/Janitor) Simplifies the implementation of [IDisposable](https://msdn.microsoft.com/en-us/library/system.idisposable.aspx).
   * [JetBrainsAnnotations](https://github.com/tom-englert/JetBrainsAnnotations.Fody) Converts all JetBrains ReSharper code annotation attributes to External Annotations.
   * [Lazy](https://github.com/tom-englert/Lazy.Fody) Automates the plumbing around System.Lazy.
@@ -400,11 +400,11 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [ReactiveUI.Fody](https://github.com/reactiveui/ReactiveUI) Generates [ReactiveUI](http://reactiveui.net/) `RaisePropertyChanged` notifications for properties and `OAPH`s.
   * [Resourcer](https://github.com/Fody/Resourcer) Simplifies reading embedded resources from an Assembly.
   * [RomanticWeb](http://romanticweb.net/) Fody weaver plugin for RomanticWeb instrumentation.
-  * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration. 
+  * [Spring](https://github.com/jorgehmv/FodySpring) Spring constructor configuration.
   * [Stamp](https://github.com/304NotModified/Fody.Stamp) Stamps an assembly with git data.
   * [StampSvn](https://github.com/krk/Stamp) Stamps an assembly with SVN data.
   * [StaticProxy](https://github.com/BrunoJuchli/StaticProxy.Fody) Proxy Generator, also for .net standard / .net core (.net standard 1.0+).
-  * [Substitute](https://github.com/tom-englert/Substitute.Fody) Substitute types with other types to e.g. intercept generated code 
+  * [Substitute](https://github.com/tom-englert/Substitute.Fody) Substitute types with other types to e.g. intercept generated code
   * [SexyProxy](https://github.com/kswoll/sexy-proxy) Proxy generator with support for async patterns.
   * [SwallowExceptions](https://github.com/duaneedwards/SwallowExceptions) Swallow Exceptions in targeted methods.
   * [TestFlask](https://github.com/FatihSahin/test-flask) Records your method args and responses to replay, assert and test.
