@@ -8,6 +8,7 @@
     <FodyAssembly Condition="'$(FodyAssembly)' == ''">$(FodyAssemblyDirectory)\Fody.dll</FodyAssembly>
     <FodyCopyLocalFilesCache Condition="'$(FodyCopyLocalFilesCache)' == ''">$(MSBuildProjectFile).Fody.CopyLocal.cache</FodyCopyLocalFilesCache>
     <DefaultItemExcludes>$(DefaultItemExcludes);FodyWeavers.xsd</DefaultItemExcludes>
+    <FodyGenerateXsd Condition="'$(FodyGenerateXsd)' == ''">true</FodyGenerateXsd>
   </PropertyGroup>
 
   <!-- Support for NCrunch -->
@@ -46,6 +47,7 @@
         WeaverFiles="@(WeaverFiles)"
         NCrunchOriginalSolutionDirectory="$(NCrunchOriginalSolutionDir)"
         IntermediateCopyLocalFilesCache="$(IntermediateOutputPath)$(FodyCopyLocalFilesCache)"
+        GenerateXsd="$(FodyGenerateXsd)"
       >
 
       <Output

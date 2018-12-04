@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -8,11 +7,11 @@ using Fody;
 
 public static class ConfigFile
 {
-    private const string FodyWeaversConfigFileName = "FodyWeavers.xml";
+    const string FodyWeaversConfigFileName = "FodyWeavers.xml";
     static readonly XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");
     static readonly XNamespace schemaInstanceNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema-instance");
 
-    public static List<string> FindWeaverConfigs(string solutionDirectoryPath, string projectDirectory, ILogger logger, IEnumerable<string> wellKnownWeaverFiles)
+    public static List<string> FindWeaverConfigs(string solutionDirectoryPath, string projectDirectory, ILogger logger, IEnumerable<string> wellKnownWeaverFiles, bool defaultGenerateXsd)
     {
         var files = new List<string>();
 
@@ -28,7 +27,7 @@ public static class ConfigFile
         {
             if (!files.Any() && wellKnownWeaverFiles != null)
             {
-                GenerateDefault(projectConfigFilePath, wellKnownWeaverFiles);
+                GenerateDefault(projectConfigFilePath, wellKnownWeaverFiles, defaultGenerateXsd);
 
                 logger.LogError($"Could not find a FodyWeavers.xml file at the project level ({projectConfigFilePath}). A default file has been created. Please review the file and add it to your project.");
             }
@@ -56,7 +55,7 @@ public static class ConfigFile
         return files;
     }
 
-    static void GenerateDefault(string projectConfigFilePath, IEnumerable<string> wellKnownWeaverFiles)
+    static void GenerateDefault(string projectConfigFilePath, IEnumerable<string> wellKnownWeaverFiles, bool defaultGenerateXsd)
     {
         if (wellKnownWeaverFiles == null)
         {
@@ -73,7 +72,10 @@ public static class ConfigFile
         weaverConfig.Root.Add(weaverEntries);
         weaverConfig.Save(projectConfigFilePath);
 
-        CreateSchemaForConfig(projectConfigFilePath, wellKnownWeaverFiles, null);
+        if (defaultGenerateXsd)
+        {
+            CreateSchemaForConfig(projectConfigFilePath, wellKnownWeaverFiles, null);
+        }
     }
 
     static string GetWeaverName(WeaverEntry weaver)
@@ -168,7 +170,7 @@ public static class ConfigFile
         }
     }
 
-    public static void EnsureSchemaIsUpToDate(string projectDirectory, IEnumerable<string> wellKnownWeaverFiles, List<WeaverEntry> weavers)
+    public static void EnsureSchemaIsUpToDate(string projectDirectory, IEnumerable<string> wellKnownWeaverFiles, List<WeaverEntry> weavers, bool defaultGenerateXsd)
     {
         if (wellKnownWeaverFiles == null && weavers == null)
         {
@@ -181,7 +183,14 @@ public static class ConfigFile
 
             var doc = XDocumentEx.Load(projectConfigFilePath);
 
-            if (doc.Root.TryReadBool("GenerateXsd", out var generateXsd) && !generateXsd)
+            if (doc.Root.TryReadBool("GenerateXsd", out var generateXsd))
+            {
+                if (!generateXsd)
+                {
+                    return;
+                }
+            }
+            else if (!defaultGenerateXsd)
             {
                 return;
             }
