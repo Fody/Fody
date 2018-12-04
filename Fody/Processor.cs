@@ -21,6 +21,7 @@ public partial class Processor
     public List<string> ReferenceCopyLocalPaths;
     public List<string> DefineConstants;
     public List<string> ConfigFiles;
+    public bool GenerateXsd;
     IInnerWeaver innerWeaver;
 
     AddinFinder addinFinder;
@@ -68,7 +69,7 @@ public partial class Processor
 
         ValidateAssemblyPath();
 
-        ConfigFiles = ConfigFile.FindWeaverConfigs(SolutionDirectory, ProjectDirectory, Logger, WeaverFilesFromProps);
+        ConfigFiles = ConfigFile.FindWeaverConfigs(SolutionDirectory, ProjectDirectory, Logger, WeaverFilesFromProps, GenerateXsd);
 
         if (!ShouldStartSinceFileChanged())
         {
@@ -120,7 +121,7 @@ see https://github.com/Fody/Fody/wiki/SampleUsage");
 
         ConfigureWhenNoWeaversFound();
 
-        ConfigFile.EnsureSchemaIsUpToDate(ProjectDirectory, WeaverFilesFromProps, Weavers);
+        ConfigFile.EnsureSchemaIsUpToDate(ProjectDirectory, WeaverFilesFromProps, Weavers, GenerateXsd);
 
         Logger.LogDebug($"Finished finding weavers {stopwatch.ElapsedMilliseconds}ms");
     }

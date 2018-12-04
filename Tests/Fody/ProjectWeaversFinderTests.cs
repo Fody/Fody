@@ -15,7 +15,7 @@ public class ProjectWeaversFinderTests : TestBase
         var searchDirectory = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyWeavers.xml");
 
         var weavingException = Assert.Throws<WeavingException>(
-            () => ConfigFile.FindWeaverConfigs(AssemblyLocation.CurrentDirectory, AssemblyLocation.CurrentDirectory, logger, null));
+            () => ConfigFile.FindWeaverConfigs(AssemblyLocation.CurrentDirectory, AssemblyLocation.CurrentDirectory, logger, null, false));
         Approvals.Verify(weavingException.Message.Replace(searchDirectory, "SearchDirectory"));
     }
 }

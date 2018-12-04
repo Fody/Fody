@@ -49,8 +49,8 @@ public class ConfigFileFinderTests : IDisposable
             Path.Combine(testDir, "WeaverWithSchema.Fody.dll")
         };
 
-        var configs = ConfigFile.FindWeaverConfigs(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object, wellKnownWeaverFiles);
-        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, null);
+        var configs = ConfigFile.FindWeaverConfigs(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object, wellKnownWeaverFiles, true);
+        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, null, true);
 
         Assert.Single(configs);
         Assert.Equal(xmlPath, configs[0]);
@@ -102,8 +102,8 @@ public class ConfigFileFinderTests : IDisposable
 
         var wellKnownWeaverFiles = new[] { @"something\TestWeaver.Fody.dll" };
 
-        var configs = ConfigFile.FindWeaverConfigs(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object, wellKnownWeaverFiles);
-        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, null);
+        var configs = ConfigFile.FindWeaverConfigs(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object, wellKnownWeaverFiles, true);
+        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, null, true);
 
         Assert.Single(configs);
         Assert.Equal(xmlPath, configs[0]);
@@ -113,5 +113,53 @@ public class ConfigFileFinderTests : IDisposable
         var xml = XDocumentEx.Load(xmlPath);
         Assert.NotNull(xml.Root);
         Assert.Null(xml.Root.Attribute(schemaInstanceNamespace + "noNamespaceSchemaLocation"));
+    }
+
+    [Fact]
+    public void ShouldOptOutOfXsdThroughMSBuildProperty()
+    {
+        File.WriteAllText(xmlPath, @"
+<Weavers>
+  <TestWeaver />
+</Weavers>
+");
+
+        var wellKnownWeaverFiles = new[] { @"something\TestWeaver.Fody.dll" };
+
+        var configs = ConfigFile.FindWeaverConfigs(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object, wellKnownWeaverFiles, false);
+        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, null, false);
+
+        Assert.Single(configs);
+        Assert.Equal(xmlPath, configs[0]);
+
+        Assert.False(File.Exists(xsdPath));
+
+        var xml = XDocumentEx.Load(xmlPath);
+        Assert.NotNull(xml.Root);
+        Assert.Null(xml.Root.Attribute(schemaInstanceNamespace + "noNamespaceSchemaLocation"));
+    }
+
+    [Fact]
+    public void XmlConfigShouldOverrideMSBuildPropertyForXsdGeneration()
+    {
+        File.WriteAllText(xmlPath, @"
+<Weavers GenerateXsd=""true"">
+  <TestWeaver />
+</Weavers>
+");
+
+        var wellKnownWeaverFiles = new[] { @"something\TestWeaver.Fody.dll" };
+
+        var configs = ConfigFile.FindWeaverConfigs(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object, wellKnownWeaverFiles, false);
+        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, null, false);
+
+        Assert.Single(configs);
+        Assert.Equal(xmlPath, configs[0]);
+
+        Assert.True(File.Exists(xsdPath));
+
+        var xml = XDocumentEx.Load(xmlPath);
+        Assert.NotNull(xml.Root);
+        Assert.Equal("FodyWeavers.xsd", xml.Root.Attribute(schemaInstanceNamespace + "noNamespaceSchemaLocation")?.Value);
     }
 }

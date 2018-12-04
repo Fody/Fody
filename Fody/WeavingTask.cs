@@ -52,6 +52,8 @@ namespace Fody
         [Required]
         public string IntermediateCopyLocalFilesCache { get; set; }
 
+        public bool GenerateXsd { get; set; }
+
         public override bool Execute()
         {
             var referenceCopyLocalPaths = ReferenceCopyLocalFiles.Select(x => x.ItemSpec).ToList();
@@ -76,7 +78,8 @@ namespace Fody
                 NuGetPackageRoot = NuGetPackageRoot,
                 MSBuildDirectory = MSBuildThisFileDirectory,
                 WeaverFilesFromProps = GetWeaverFilesFromProps(),
-                DebugSymbols = GetDebugSymbolsType()
+                DebugSymbols = GetDebugSymbolsType(),
+                GenerateXsd = GenerateXsd
             };
             var success = processor.Execute();
 
