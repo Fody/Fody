@@ -187,7 +187,10 @@ A organization can [Create an Open Collective organization](https://opencollecti
 
 ##### Apply a multiplier to the Patron cost
 
-The [Patron tier](https://opencollective.com/fody/order/3059) has no upper bound on the monthly amount. This allows an organization with multiple developers to pay a single monthly price. For example an organization with 10 developers using FOdy can pay $30 per month.
+The [Patron tier](https://opencollective.com/fody/order/3059) has no upper bound on the monthly amount. This allows an organization with multiple developers to pay a single monthly price. For example: 
+
+ * An organization with 5 developers would pay $15 per month, i.e. 5 x $3 per patron
+ * An organization with 10 developers would pay $30 per month, i.e. 10 x $3 per patron and so on.
 
 
 #### Do all developers in a organization need to become Patrons?
