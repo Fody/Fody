@@ -43,11 +43,15 @@ public class ConfigFileFinderTests : IDisposable
 </xs:complexType>
 ");
 
-        var configs = ConfigFile.FindWeaverConfigs(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object, new[]
+        var wellKnownWeaverFiles = new[]
         {
             @"something\TestWeaver.Fody.dll",
             Path.Combine(testDir, "WeaverWithSchema.Fody.dll")
-        });
+        };
+
+        var configs = ConfigFile.FindWeaverConfigs(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object, wellKnownWeaverFiles);
+
+        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, null);
 
         Assert.Single(configs);
         Assert.Equal(xmlPath, configs[0]);
