@@ -25,7 +25,6 @@ Below you'll find a list of the people and organizations that have made signific
 
 <!-- https://opencollective.com/fody/backer.svg -->
 
- * David Mcgrath | [OpenCollective](https://opencollective.com/anonymous57)
  * Jan-Pieter Zoutewelle | [GitHub](https://github.com/janpieterz) | [OpenCollective](https://opencollective.com/intreba-bv)
  * John Bayly | [OpenCollective](https://opencollective.com/john-bayly)
  * Kirk Woll | [OpenCollective](https://opencollective.com/kirk-woll) | [GitHub](https://github.com/kswoll)
