@@ -172,9 +172,18 @@ Yes all projects are under [MIT](https://opensource.org/licenses/MIT) and you ca
 Yes. You must be a Patron to be a user of Fody. Contributing Pull Requests does not cancel this out. It may seem unfair to expect people both contribute PRs and also financially back this project. However it is important to remember the effort in reviewing and merging a PR is often similar to that of creating the PR. Also the project maintainers are committing to support that added code (feature or bug fix) for the life of the project.
 
 
-### How does a company/organization license for their developers?
+### Organization licensing?
 
-A company/organization can [Create an Open Collective organization](https://opencollective.com/become-a-sponsor) and then allow their developers to draw on the funds from that organization. FAQ [here.](https://opencollective.com/faq/backers)
+There are two options for an organization (or company).
+
+#### Create an Open Collective organization
+
+A organization can [Create an Open Collective organization](https://opencollective.com/become-a-sponsor) and then allow their developers to draw on the funds from that organization. See [FAQ for backers](https://opencollective.com/faq/backers). This is the recommended option as it also opens up the opportunity for developers to back other projects they feel need support.
+
+
+#### Apply a multiplier to the Patron cost
+
+The [Patron tier](https://opencollective.com/fody/order/3059) has no upper bound on the monthly amount. This allows an organization with multiple developers to pay a single monthly price. For example an organization with 10 developers using FOdy can pay $30 per month.
 
 
 ### Do all developers in a company/organization need to become Patrons?
