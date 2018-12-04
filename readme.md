@@ -131,9 +131,9 @@ Thanks to all the backing developers! Support this project by [becoming a patron
 No, it will include version 3.3.3 and higher.
 
 
-### Enforcement
+### Honesty System / Enforcement
 
-It is an honesty system with no code or legal enforcement. When raising an issue or a pull request, the users may be checked against [the list of backers](https://github.com/Fody/Fody/blob/master/backers.md), and that issue/PR may be closed without further examination.
+It is an honesty system with no code or legal enforcement. When raising an issue or a pull request, the users may be checked against [the list of backers](https://github.com/Fody/Fody/blob/master/backers.md), and that issue/PR may be closed without further examination. If a individual or organization has no interest in the long term sustainability of Fody, then they are legally free to ignore the honesty system.
 
 
 ### Why charge for open source?
@@ -172,19 +172,29 @@ Yes all projects are under [MIT](https://opensource.org/licenses/MIT) and you ca
 Yes. You must be a Patron to be a user of Fody. Contributing Pull Requests does not cancel this out. It may seem unfair to expect people both contribute PRs and also financially back this project. However it is important to remember the effort in reviewing and merging a PR is often similar to that of creating the PR. Also the project maintainers are committing to support that added code (feature or bug fix) for the life of the project.
 
 
-### How does a company license for their developers?
+### How does a company/organization license for their developers?
 
-A company can [Create an Open Collective organization](https://opencollective.com/become-a-sponsor) and then allow their developers to draw on the funds from that organization. FAQ [here.](https://opencollective.com/faq/backers)
+A company/organization can [Create an Open Collective organization](https://opencollective.com/become-a-sponsor) and then allow their developers to draw on the funds from that organization. FAQ [here.](https://opencollective.com/faq/backers)
+
+
+### Do all developers in a company/organization need to become Patrons?
+
+No. Only those coding against projects that directly, or indirectly, consume the Fody NuGet package.
+
+
+### Can only one developer of an company/organization become a patron?
+
+Yes, since the only point of (optional) enforcement is when an issue or PR is raised, an company/organization can ignore the honesty system and route all issues and PRs though a single GitHub user account. However if a single GitHub user account is drawing on significant time to support, they may be requested to purchase some [hourly support](https://opencollective.com/fody/order/7087).
+
+
+### What about open source projects producing Fody weavers?
+
+It is be expected that the core team of maintainers of any open source projects that produce Fody weavers would become Patrons. Non core contributors do not need to become Patrons.
 
 
 ### Can I fork, re-use code, or start competing (possibly commercial) projects?
 
 Yes.
-
-
-### Do all developers in a company need to become Patrons?
-
-No. Only those coding against projects that directly, or indirectly, consume the Fody NuGet package.
 
 
 ### What happens if I produce a library using Fody?
@@ -481,101 +491,7 @@ The below addins are no longer maintained. Raise an issue in the specific projec
  * [Building From A Network Share](https://github.com/Fody/Fody/wiki/BuildingFromANetworkShare)
 
 
-## Sponsors and backers
-
-
-### Platinum Sponsors
-
-Support this project by [becoming a Platinum Sponsor](https://opencollective.com/fody/order/7089). A banner with company logo will show up here with a link to your website. A "Sponsored by" text and link will be added the description of the NuGet Package for the life of your sponsorship. You get 1 hour of remote support per month.
-
-<a href="https://opencollective.com/fody/tiers/platinum/0/website"><img src="https://opencollective.com/fody/tiers/platinum/0/avatar.svg"></a>
-
-
-### Gold Sponsors
-
-Support this project by [becoming a Gold Sponsor](https://opencollective.com/fody/order/7088). Your logo will show up here with a link to your website.
-
-<a href="https://opencollective.com/fody/tiers/gold/0/website"><img src="https://opencollective.com/fody/tiers/gold/0/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/gold/1/website"><img src="https://opencollective.com/fody/tiers/gold/1/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/gold/2/website"><img src="https://opencollective.com/fody/tiers/gold/2/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/gold/3/website"><img src="https://opencollective.com/fody/tiers/gold/3/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/gold/4/website"><img src="https://opencollective.com/fody/tiers/gold/4/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/gold/5/website"><img src="https://opencollective.com/fody/tiers/gold/5/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/gold/6/website"><img src="https://opencollective.com/fody/tiers/gold/6/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/gold/7/website"><img src="https://opencollective.com/fody/tiers/gold/7/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/gold/8/website"><img src="https://opencollective.com/fody/tiers/gold/8/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/gold/9/website"><img src="https://opencollective.com/fody/tiers/gold/9/avatar.svg"></a>
-
-
-### Silver Sponsors
-
-Support this project by [becoming a Silver Sponsors](https://opencollective.com/fody/order/7086). Your logo will show up here with a link to your website.
-
-<a href="https://opencollective.com/fody/tiers/silver/0/website"><img src="https://opencollective.com/fody/tiers/silver/0/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/1/website"><img src="https://opencollective.com/fody/tiers/silver/1/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/2/website"><img src="https://opencollective.com/fody/tiers/silver/2/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/3/website"><img src="https://opencollective.com/fody/tiers/silver/3/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/4/website"><img src="https://opencollective.com/fody/tiers/silver/4/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/5/website"><img src="https://opencollective.com/fody/tiers/silver/5/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/6/website"><img src="https://opencollective.com/fody/tiers/silver/6/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/7/website"><img src="https://opencollective.com/fody/tiers/silver/7/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/8/website"><img src="https://opencollective.com/fody/tiers/silver/8/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/9/website"><img src="https://opencollective.com/fody/tiers/silver/9/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/10/website"><img src="https://opencollective.com/fody/tiers/silver/10/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/11/website"><img src="https://opencollective.com/fody/tiers/silver/11/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/12/website"><img src="https://opencollective.com/fody/tiers/silver/12/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/13/website"><img src="https://opencollective.com/fody/tiers/silver/13/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/14/website"><img src="https://opencollective.com/fody/tiers/silver/14/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/15/website"><img src="https://opencollective.com/fody/tiers/silver/15/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/16/website"><img src="https://opencollective.com/fody/tiers/silver/16/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/17/website"><img src="https://opencollective.com/fody/tiers/silver/17/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/18/website"><img src="https://opencollective.com/fody/tiers/silver/18/avatar.svg"></a>
-<a href="https://opencollective.com/fody/tiers/silver/19/website"><img src="https://opencollective.com/fody/tiers/silver/19/avatar.svg"></a>
-
-
-### Bronze Sponsors
-
-Support this project by [becoming a Bronze Sponsors](https://opencollective.com/fody/order/7085). Your avatar will show up here with a link to your website.
-
-<img src="https://opencollective.com/fody/tiers/bronze.svg?width=890&avatarHeight=80&button=false">
-
-
-### Patrons
-
-Thanks to all the backing developers! Support this project by [becoming a patron](https://opencollective.com/fody/order/3059).
-
-<img src="https://opencollective.com/fody/tiers/patron.svg?width=890&avatarHeight=60&button=false">
-
-
-### Generous financial sponsors
-
-<a href="https://opencollective.com/fody/sponsor/0/website"><img src="https://opencollective.com/fody/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/fody/sponsor/1/website"><img src="https://opencollective.com/fody/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/fody/sponsor/2/website"><img src="https://opencollective.com/fody/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/fody/sponsor/3/website"><img src="https://opencollective.com/fody/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/fody/sponsor/4/website"><img src="https://opencollective.com/fody/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/fody/sponsor/5/website"><img src="https://opencollective.com/fody/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/fody/sponsor/6/website"><img src="https://opencollective.com/fody/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/fody/sponsor/7/website"><img src="https://opencollective.com/fody/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/fody/sponsor/8/website"><img src="https://opencollective.com/fody/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/fody/sponsor/9/website"><img src="https://opencollective.com/fody/sponsor/9/avatar.svg"></a>
-
-
-### Generous financial backers
-
-<a href="https://opencollective.com/fody/backer/0/website"><img src="https://opencollective.com/fody/backer/0/avatar.svg"></a>
-<a href="https://opencollective.com/fody/backer/1/website"><img src="https://opencollective.com/fody/backer/1/avatar.svg"></a>
-<a href="https://opencollective.com/fody/backer/2/website"><img src="https://opencollective.com/fody/backer/2/avatar.svg"></a>
-<a href="https://opencollective.com/fody/backer/3/website"><img src="https://opencollective.com/fody/backer/3/avatar.svg"></a>
-<a href="https://opencollective.com/fody/backer/4/website"><img src="https://opencollective.com/fody/backer/4/avatar.svg"></a>
-<a href="https://opencollective.com/fody/backer/5/website"><img src="https://opencollective.com/fody/backer/5/avatar.svg"></a>
-<a href="https://opencollective.com/fody/backer/6/website"><img src="https://opencollective.com/fody/backer/6/avatar.svg"></a>
-<a href="https://opencollective.com/fody/backer/7/website"><img src="https://opencollective.com/fody/backer/7/avatar.svg"></a>
-<a href="https://opencollective.com/fody/backer/8/website"><img src="https://opencollective.com/fody/backer/8/avatar.svg"></a>
-<a href="https://opencollective.com/fody/backer/9/website"><img src="https://opencollective.com/fody/backer/9/avatar.svg"></a>
-
-
-### Contributors
+## Contributors
 
 This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
 <a href="fody/contributors"><img src="https://opencollective.com/fody/contributors.svg?width=890" /></a>
