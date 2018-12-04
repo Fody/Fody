@@ -174,26 +174,30 @@ Yes. You must be a Patron to be a user of Fody. Contributing Pull Requests does 
 
 ### Organization licensing
 
-There are two options for an organization (or company).
 
-#### Create an Open Collective organization
+#### How to handle multiple developers
+
+There are two options for an organization.
+
+
+##### Create an Open Collective organization
 
 A organization can [Create an Open Collective organization](https://opencollective.com/become-a-sponsor) and then allow their developers to draw on the funds from that organization. See [FAQ for backers](https://opencollective.com/faq/backers). This is the recommended option as it also opens up the opportunity for developers to back other projects they feel need support.
 
 
-#### Apply a multiplier to the Patron cost
+##### Apply a multiplier to the Patron cost
 
 The [Patron tier](https://opencollective.com/fody/order/3059) has no upper bound on the monthly amount. This allows an organization with multiple developers to pay a single monthly price. For example an organization with 10 developers using FOdy can pay $30 per month.
 
 
-### Do all developers in a company/organization need to become Patrons?
+#### Do all developers in a organization need to become Patrons?
 
 No. Only those coding against projects that directly, or indirectly, consume the Fody NuGet package.
 
 
-### Can only one developer of an company/organization become a patron?
+#### Can only one developer of an organization become a patron?
 
-Yes, since the only point of (optional) enforcement is when an issue or PR is raised, an company/organization can ignore the honesty system and route all issues and PRs though a single GitHub user account. However if a single GitHub user account is drawing on significant time to support, they may be requested to purchase some [hourly support](https://opencollective.com/fody/order/7087).
+Yes, since the only point of (optional) enforcement is when an issue or PR is raised, an organization can ignore the honesty system and route all issues and PRs though a single GitHub user account. However if a single GitHub user account is drawing on significant time to support, they may be requested to purchase some [hourly support](https://opencollective.com/fody/order/7087).
 
 
 ### What about open source projects producing Fody weavers?
