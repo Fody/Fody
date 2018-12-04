@@ -50,7 +50,6 @@ public class ConfigFileFinderTests : IDisposable
         };
 
         var configs = ConfigFile.FindWeaverConfigs(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object, wellKnownWeaverFiles);
-
         ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, null);
 
         Assert.Single(configs);
@@ -81,7 +80,7 @@ public class ConfigFileFinderTests : IDisposable
         Assert.Null(elemWithSchema.Attribute("type"));
         Assert.Equal("0", elemWithSchema.Attribute("minOccurs")?.Value);
         Assert.Equal("1", elemWithSchema.Attribute("maxOccurs")?.Value);
-        
+
         var elemWithSchemaType = Assert.Single(elemWithSchema.Elements());
         Assert.NotNull(elemWithSchemaType);
         Assert.Equal("complexType", elemWithSchemaType.Name.LocalName);
@@ -101,7 +100,11 @@ public class ConfigFileFinderTests : IDisposable
 </Weavers>
 ");
 
-        var configs = ConfigFile.FindWeaverConfigs(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object, new[] {@"something\TestWeaver.Fody.dll"});
+        var wellKnownWeaverFiles = new[] { @"something\TestWeaver.Fody.dll" };
+
+        var configs = ConfigFile.FindWeaverConfigs(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object, wellKnownWeaverFiles);
+        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, null);
+
         Assert.Single(configs);
         Assert.Equal(xmlPath, configs[0]);
 
