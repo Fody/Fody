@@ -2,6 +2,8 @@
 
 Below you'll find a list of the people and organizations that have made significant  contributions. Please consider joining them in supporting open source by [becoming a Patron of Fody](https://opencollective.com/fody/order/3059).
 
+<!-- https://opencollective.com/fody/members/all.json -->
+
 
 ## Patrons
 

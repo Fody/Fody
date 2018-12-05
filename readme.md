@@ -133,7 +133,7 @@ No, it will include version 3.3.3 and higher.
 
 ### Honesty System / Enforcement
 
-It is an honesty system with no code or legal enforcement. When raising an issue or a pull request, the users may be checked against [the list of backers](https://github.com/Fody/Fody/blob/master/backers.md), and that issue/PR may be closed without further examination. If a individual or organization has no interest in the long term sustainability of Fody, then they are legally free to ignore the honesty system.
+It is an honesty system with no code or legal enforcement. When raising an issue or a pull request, the user may be checked to ensure they are a patron, and that issue/PR may be closed without further examination. If a individual or organization has no interest in the long term sustainability of Fody, then they are legally free to ignore the honesty system.
 
 
 ### Why charge for open source?

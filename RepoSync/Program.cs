@@ -15,6 +15,7 @@ class Program
         sync.AddSourceItem(TreeEntryTargetType.Blob, ".editorconfig", ".editorconfig");
         sync.AddSourceItem(TreeEntryTargetType.Blob, ".github/ISSUE_TEMPLATE/bug_report.md", ".github/ISSUE_TEMPLATE/bug_report.md");
         sync.AddSourceItem(TreeEntryTargetType.Blob, ".github/ISSUE_TEMPLATE/feature_request.md", ".github/ISSUE_TEMPLATE/feature_request.md");
+        sync.AddSourceItem(TreeEntryTargetType.Blob, ".github/pull_request_template.md", ".github/pull_request_template.md");
         sync.AddTarget("Fody", "Anotar", "master");
         sync.AddTarget("Fody", "AsyncErrorHandler", "master");
         sync.AddTarget("Fody", "BasicFodyAddin", "master");
