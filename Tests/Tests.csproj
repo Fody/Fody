@@ -11,15 +11,15 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="ApprovalTests" Version="3.0.18" />
-    <PackageReference Include="Moq" Version="4.10.0" />
-    <PackageReference Include="ObjectApproval" Version="2.3.0" />
+    <PackageReference Include="Moq" Version="4.10.1" />
+    <PackageReference Include="ObjectApproval" Version="3.0.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <Reference Include="Microsoft.CSharp" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <ProjectReference Include="..\DummyAssembly\DummyAssembly.csproj" />
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
     <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
@@ -50,7 +50,7 @@
     <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Rocks.dll" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework) == 'netcoreapp2.1'">
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.8.166" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.9.20" />
     <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\netstandard1.3\Mono.Cecil.dll" />
     <Reference Include="Mono.Cecil.Mdb" HintPath="..\Lib\Cecil\netstandard1.3\Mono.Cecil.Mdb.dll" />
     <Reference Include="Mono.Cecil.Pdb" HintPath="..\Lib\Cecil\netstandard1.3\Mono.Cecil.Pdb.dll" />

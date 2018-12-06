@@ -11,7 +11,7 @@ class Program
 
         var credentials = new Credentials(githubToken);
         var sync = new RepoSync(credentials, "Fody", "Fody", "master", Console.WriteLine);
-        sync.AddSourceItem(TreeEntryTargetType.Blob, "RepoSync/appveyor.yml", "appveyor.yml");
+        //sync.AddSourceItem(TreeEntryTargetType.Blob, "RepoSync/appveyor.yml", "appveyor.yml");
         sync.AddSourceItem(TreeEntryTargetType.Blob, ".editorconfig", ".editorconfig");
         sync.AddSourceItem(TreeEntryTargetType.Blob, ".github/ISSUE_TEMPLATE/bug_report.md", ".github/ISSUE_TEMPLATE/bug_report.md");
         sync.AddSourceItem(TreeEntryTargetType.Blob, ".github/ISSUE_TEMPLATE/feature_request.md", ".github/ISSUE_TEMPLATE/feature_request.md");
@@ -49,6 +49,6 @@ class Program
         sync.AddTarget("Fody", "Virtuosity", "master");
         sync.AddTarget("Fody", "Visualize", "master");
 
-        return sync.Sync();
+        return sync.Sync(SyncOutput.MergePullRequest);
     }
 }
