@@ -139,7 +139,7 @@ No, it will include version 3.3.3 and higher.
 
 ### Honesty System / Enforcement
 
-It is an honesty system with no code or legal enforcement. When raising an issue or a pull request, the user may be checked to ensure they are a patron, and that issue/PR may be closed without further examination. If a individual or organization has no interest in the long term sustainability of Fody, then they are legally free to ignore the honesty system.
+It is an honesty system with no code or legal enforcement. When raising an issue or a pull request, the GitHub Id may be checked to ensure they are a patron, and that issue/PR may be closed without further examination. This process will depend on the issue quality, your circumstances, and the impact on the larger user base. If a individual or organization has no interest in the long term sustainability of the project, then they are legally free to ignore the honesty system.
 
 
 ### Why charge for open source?
@@ -155,7 +155,7 @@ It is an honesty system with no code or legal enforcement. When raising an issue
 
 ### So what OSS license are projects using?
 
-Fody (all code, NuGets and binaries) are licensed under the [MIT](https://opensource.org/licenses/MIT).
+Fody (all code, NuGets and binaries) are under the [MIT License](https://opensource.org/licenses/MIT).
 
 
 ### Why not use a modified MIT license?
@@ -198,7 +198,7 @@ No. Only those coding against projects that directly, or indirectly, consume the
 
 #### Can only one developer of an organization become a patron?
 
-Yes, since the only point of (optional) enforcement is when an issue or PR is raised, an organization can ignore the honesty system and route all issues and PRs though a single GitHub user account. However if a single GitHub user account is drawing on significant time to support, they may be requested to purchase some [hourly support](https://opencollective.com/fody/order/7087).
+Yes, since the only point of (optional) enforcement is when an issue or PR is raised, then legally an organization can ignore the honesty system and route all issues and PRs though a single GitHub user account. However if a single GitHub user account is drawing on significant time to support, they may be requested to purchase some [hourly support](https://opencollective.com/fody/order/7087).
 
 
 ### What about open source projects producing Fody weavers?
