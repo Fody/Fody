@@ -15,7 +15,7 @@ Manipulating the IL of an assembly as part of a build requires a significant amo
 
 ## Community backed
 
-**It is expected that all developers [become a Patron](https://opencollective.com/fody/order/3059) to use Fody. [Go to licensing FAQ](https://github.com/Fody/Fody/blob/master/readme.md#licensingpatron-faq)**
+**It is expected that all developers [become a Patron on OpenCollective](https://opencollective.com/fody/order/3059) to use Fody. [Go to licensing FAQ](https://github.com/Fody/Fody/blob/master/readme.md#licensingpatron-faq)**
 
 
 ### Platinum Sponsors
@@ -120,10 +120,16 @@ Thanks to all the backing developers! Support this project by [becoming a patron
 <!--- EndOpenCollectiveBackers -->
 
 
+### Thanks to [JetBrains](https://www.jetbrains.com)
+
+For the generous donation of [ReSharper](https://www.jetbrains.com/resharper/) licenses.
+
+<a href="https://www.jetbrains.com/resharper"><img src="http://www.jetbrains.com/img/logos/logo_resharper_small.gif"/></a>
+
 
 ## Licensing/Patron FAQ
 
-**It is expected that all developers [become a Patron](https://opencollective.com/fody/order/3059) to use Fody.**
+**It is expected that all developers [become a Patron on OpenCollective](https://opencollective.com/fody/order/3059) to use Fody.**
 
 
 ### Is this all version?
