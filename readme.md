@@ -168,6 +168,17 @@ Using any OSS license in a modified form causes significant problems with adopti
 Yes in theory this is true, however the long term reality has shown this not to be the case. The vast majority of consumers of open source projects do not contribute enough to ensure those project survive. This results in a small core team spending large amounts of their own free time maintaining projects.
 
 
+### Is support now included as part of the cost?
+
+No. As per the MIT license:
+
+> the software is provided "as is", without warranty of any kind
+
+For a supported product, you should instead consider [Postsharp](https://www.postsharp.net/). Postsharp is a mature and supported product that can manipulate IL and achieve the same productivity gains as possible with Fody. Their [mission statement](https://www.postsharp.net/company) is: 
+
+> to help software developers stop writing boring repetitive code (we're looking at you, logging, caching, exception handling … !) and rather use their time and skills to produce clean, reliable software that is easier to maintain.
+
+
 ### But it is MIT, can't I use it for free?
 
 Yes all projects are under [MIT](https://opensource.org/licenses/MIT) and you can ignore the community backing honesty system and use Fody for free.
