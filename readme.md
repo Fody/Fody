@@ -132,7 +132,7 @@ For the generous donation of [ReSharper](https://www.jetbrains.com/resharper/) l
 **It is expected that all developers [become a Patron on OpenCollective](https://opencollective.com/fody/order/3059) to use Fody.**
 
 
-### Is this all version?
+### Is this all versions?
 
 No, it will include version 3.3.3 and higher.
 
