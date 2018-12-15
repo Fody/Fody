@@ -292,6 +292,8 @@ e.g.
 </Weavers>
 ```
 
+See [Configuration](https://github.com/Fody/Fody/wiki/Configuration) in the wiki for additional options.
+
 The [Project Configuration Manager](https://github.com/tom-englert/ProjectConfigurationManager/wiki/6.-Fody) provides an interactive tool that can support you configuring your weavers, which is especially helpful in solutions with many projects.
 
 
@@ -497,16 +499,15 @@ The below addins are no longer maintained. Raise an issue in the specific projec
 
 ## More Info
 
+ * [Wiki Home](https://github.com/Fody/Fody/wiki/Home)
+ * [Configuration](https://github.com/Fody/Fody/wiki/Configuration)
  * [AddinSearchPaths](https://github.com/Fody/Fody/wiki/AddinSearchPaths)
  * [DeployingAddinsAsNugets](https://github.com/Fody/Fody/wiki/DeployingAddinsAsNugets)
- * [Home](https://github.com/Fody/Fody/wiki/Home)
  * [HowToWriteAnAddin](https://github.com/Fody/Fody/wiki/HowToWriteAnAddin)
  * [InSolutionWeaving](https://github.com/Fody/Fody/wiki/InSolutionWeaving)
  * [AssemblyVerification](https://github.com/Fody/Fody/wiki/AssemblyVerification)
  * [ModuleWeaver](https://github.com/Fody/Fody/wiki/ModuleWeaver)
  * [PdbReWritingAndDebugging](https://github.com/Fody/Fody/wiki/PdbReWritingAndDebugging)
- * [SampleUsage](https://github.com/Fody/Fody/wiki/SampleUsage)
- * [Setup](https://github.com/Fody/Fody/wiki/Setup)
  * [SignedAssemblies](https://github.com/Fody/Fody/wiki/SignedAssemblies)
  * [SupportedRuntimesAndIde](https://github.com/Fody/Fody/wiki/SupportedRuntimesAndIde)
  * [TaskAddsAFlagInterface](https://github.com/Fody/Fody/wiki/TaskAddsAFlagInterface)
