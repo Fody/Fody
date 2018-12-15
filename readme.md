@@ -144,13 +144,14 @@ It is an honesty system with no code or legal enforcement. When raising an issue
 
 ### Why charge for open source?
 
- * [Open-Source Maintainers are Jerks!](https://vimeo.com/296579853)
- * [FOSS is free as in toilet](http://unhandledexpression.com/general/2018/11/27/foss-is-free-as-in-toilet.html)
- * [How to Charge for your Open Source](https://www.mikeperham.com/2015/11/23/how-to-charge-for-your-open-source/)
+ * [Open-Source Maintainers are Jerks! | Nick Randolph & Geoffrey Huntley](https://vimeo.com/296579853)
+ * [FOSS is free as in toilet | Geoffroy Couprie](http://unhandledexpression.com/general/2018/11/27/foss-is-free-as-in-toilet.html)
+ * [How to Charge for your Open Source | Mike Perham](https://www.mikeperham.com/2015/11/23/how-to-charge-for-your-open-source/)
  * [Sustain OSS: The Report](https://sustainoss.org/assets/pdf/SustainOSS-west-2017-report.pdf)
- * [Open Source Maintainers Owe You Nothing](https://mikemcquaid.com/2018/03/19/open-source-maintainers-owe-you-nothing/)
- * [Who should fund open source projects?](https://jaxenter.com/who-funds-open-source-projects-133222.html)
- * [Apply at OSS Inc today](https://twitter.com/ryanchenkie/status/1067801413974032385)
+ * [Open Source Maintainers Owe You Nothing | Mike McQuaid](https://mikemcquaid.com/2018/03/19/open-source-maintainers-owe-you-nothing/)
+ * [Who should fund open source projects? | Jane Elizabeth](https://jaxenter.com/who-funds-open-source-projects-133222.html)
+ * [Apply at OSS Inc today| Ryan Chenkie](https://twitter.com/ryanchenkie/status/1067801413974032385)
+ * [The Ethics of Unpaid Labor and the OSS Community | ashe dryden](https://www.ashedryden.com/blog/the-ethics-of-unpaid-labor-and-the-oss-community)
 
 
 ### So what OSS license are projects using?
