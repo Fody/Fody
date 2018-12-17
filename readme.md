@@ -77,14 +77,54 @@ Support this project by [becoming a Silver Sponsor](https://opencollective.com/f
 
 Support this project by [becoming a Bronze Sponsor](https://opencollective.com/fody/order/7085). The company avatar will show up here with a link to your website. The avatar will also be added to all GitHub repositories under this organization.
 
-<img src="https://opencollective.com/fody/tiers/bronze.svg?width=890&avatarHeight=80&button=false">
+
+<a href="https://opencollective.com/fody/tiers/bronze/0/website"><img src="https://opencollective.com/fody/tiers/bronze/0/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/1/website"><img src="https://opencollective.com/fody/tiers/bronze/1/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/2/website"><img src="https://opencollective.com/fody/tiers/bronze/2/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/3/website"><img src="https://opencollective.com/fody/tiers/bronze/3/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/4/website"><img src="https://opencollective.com/fody/tiers/bronze/4/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/5/website"><img src="https://opencollective.com/fody/tiers/bronze/5/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/6/website"><img src="https://opencollective.com/fody/tiers/bronze/6/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/7/website"><img src="https://opencollective.com/fody/tiers/bronze/7/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/8/website"><img src="https://opencollective.com/fody/tiers/bronze/8/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/9/website"><img src="https://opencollective.com/fody/tiers/bronze/9/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/10/website"><img src="https://opencollective.com/fody/tiers/bronze/10/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/11/website"><img src="https://opencollective.com/fody/tiers/bronze/11/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/12/website"><img src="https://opencollective.com/fody/tiers/bronze/12/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/13/website"><img src="https://opencollective.com/fody/tiers/bronze/13/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/14/website"><img src="https://opencollective.com/fody/tiers/bronze/14/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/15/website"><img src="https://opencollective.com/fody/tiers/bronze/15/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/16/website"><img src="https://opencollective.com/fody/tiers/bronze/16/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/17/website"><img src="https://opencollective.com/fody/tiers/bronze/17/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/18/website"><img src="https://opencollective.com/fody/tiers/bronze/18/avatar.svg" style="height:70px;"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/19/website"><img src="https://opencollective.com/fody/tiers/bronze/19/avatar.svg" style="height:70px;"></a>
 
 
 ### Patrons
 
 Thanks to all the backing developers! Support this project by [becoming a patron](https://opencollective.com/fody/order/3059).
 
-<img src="https://opencollective.com/fody/tiers/patron.svg?width=890&avatarHeight=60&button=false">
+<a href="https://opencollective.com/fody/tiers/patron/0/website"><img src="https://opencollective.com/fody/tiers/patron/0/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/1/website"><img src="https://opencollective.com/fody/tiers/patron/1/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/2/website"><img src="https://opencollective.com/fody/tiers/patron/2/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/3/website"><img src="https://opencollective.com/fody/tiers/patron/3/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/4/website"><img src="https://opencollective.com/fody/tiers/patron/4/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/5/website"><img src="https://opencollective.com/fody/tiers/patron/5/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/6/website"><img src="https://opencollective.com/fody/tiers/patron/6/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/7/website"><img src="https://opencollective.com/fody/tiers/patron/7/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/8/website"><img src="https://opencollective.com/fody/tiers/patron/8/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/9/website"><img src="https://opencollective.com/fody/tiers/patron/9/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/10/website"><img src="https://opencollective.com/fody/tiers/patron/10/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/11/website"><img src="https://opencollective.com/fody/tiers/patron/11/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/12/website"><img src="https://opencollective.com/fody/tiers/patron/12/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/13/website"><img src="https://opencollective.com/fody/tiers/patron/13/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/14/website"><img src="https://opencollective.com/fody/tiers/patron/14/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/15/website"><img src="https://opencollective.com/fody/tiers/patron/15/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/16/website"><img src="https://opencollective.com/fody/tiers/patron/16/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/17/website"><img src="https://opencollective.com/fody/tiers/patron/17/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/18/website"><img src="https://opencollective.com/fody/tiers/patron/18/avatar.svg" style="height:60px;"></a>
+<a href="https://opencollective.com/fody/tiers/patron/19/website"><img src="https://opencollective.com/fody/tiers/patron/19/avatar.svg" style="height:60px;"></a>
+
 
 
 ### Generous financial sponsors
