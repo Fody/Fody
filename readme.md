@@ -49,7 +49,7 @@ Support this project by [becoming a Silver Sponsor](https://opencollective.com/f
 Support this project by [becoming a Bronze Sponsor](https://opencollective.com/fody/order/7085). The company logo will show up here with a link to your website.
 
 
-<a href="https://opencollective.com/fody/tiers/bronze/0/website"><img src="https://opencollective.com/fody/tiers/bronze/0/avatar.svg?avatarHeight=90"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/0/website"><img src="https://opencollective.com/fody/tiers/bronze/0/avatar.svg?avatarHeight=100"></a>
 
 
 ### Patrons and sponsors
