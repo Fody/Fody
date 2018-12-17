@@ -54,12 +54,7 @@ Support this project by [becoming a Bronze Sponsor](https://opencollective.com/f
 
 ### Patrons
 
-Thanks to all the backing developers! Support this project by [becoming a patron](https://opencollective.com/fody/order/3059).
-
-<a href="https://opencollective.com/fody#contributors"><img src="https://opencollective.com/fody/tiers/patron.svg?width=890&avatarHeight=50&button=false"></a>
-
-
-### Generous financial sponsors
+Thanks to all the backers and sponsors! Support this project by [becoming a patron](https://opencollective.com/fody/order/3059).
 
 <a href="https://opencollective.com/fody#contributors">
 	<img src="https://opencollective.com/fody/sponsor.svg?width=890&avatarHeight=50&button=false">
