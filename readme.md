@@ -78,7 +78,7 @@ Support this project by [becoming a Silver Sponsor](https://opencollective.com/f
 Support this project by [becoming a Bronze Sponsor](https://opencollective.com/fody/order/7085). The company avatar will show up here with a link to your website. The avatar will also be added to all GitHub repositories under this organization.
 
 
-<a href="https://opencollective.com/fody/tiers/bronze/0/website"><img src="https://opencollective.com/fody/tiers/bronze/0/avatar.svg?avatarHeight=50"></a>
+<a href="https://opencollective.com/fody/tiers/bronze/0/website"><img src="https://opencollective.com/fody/tiers/bronze/0/avatar.svg?avatarHeight=80"></a>
 <a href="https://opencollective.com/fody/tiers/bronze/1/website"><img src="https://opencollective.com/fody/tiers/bronze/1/avatar.svg" style="height:70px;"></a>
 <a href="https://opencollective.com/fody/tiers/bronze/2/website"><img src="https://opencollective.com/fody/tiers/bronze/2/avatar.svg" style="height:70px;"></a>
 <a href="https://opencollective.com/fody/tiers/bronze/3/website"><img src="https://opencollective.com/fody/tiers/bronze/3/avatar.svg" style="height:70px;"></a>
