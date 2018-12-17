@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Fody" Version="$(IntegrationVersion)" />
-    <PackageReference Include="Virtuosity.Fody" Version="1.21.1" />
+    <PackageReference Include="Virtuosity.Fody" Version="1.21.3" />
+    <WeaverFiles Include="$(SolutionDir)Weavers\bin\$(Configuration)\$(TargetFramework)\Weavers.dll" WeaverClassNames="NamedWeaver;NamedWeaverFromBase;ModuleWeaver" />
   </ItemGroup>
 </Project>

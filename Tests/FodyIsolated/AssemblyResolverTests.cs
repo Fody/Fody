@@ -2,10 +2,13 @@
 using System.IO;
 using System.Linq;
 using DummyAssembly;
+using Moq;
 using Xunit;
 
 public class AssemblyResolverTests : TestBase
 {
+    readonly ILogger logger = new Mock<BuildLogger>(MockBehavior.Loose).Object;
+
     [Fact]
     public void ShouldFindReferenceByAssemblyName()
     {
@@ -15,7 +18,7 @@ public class AssemblyResolverTests : TestBase
             var assembly = typeof(Class1).Assembly;
             File.Copy(assembly.Location, assemblyPath, true);
 
-            var resolver = new AssemblyResolver(new NullLogger(), new[] {assemblyPath});
+            var resolver = new AssemblyResolver(logger, new[] {assemblyPath});
             using (var resolvedAssembly = resolver.Resolve(assembly.GetName().Name))
             {
                 Assert.Equal(assembly.FullName, resolvedAssembly.FullName);
@@ -30,14 +33,14 @@ public class AssemblyResolverTests : TestBase
     [Fact]
     void ShouldReturnNullWhenTheAssemblyIsNotFound()
     {
-        var resolver = new AssemblyResolver(new NullLogger(), Enumerable.Empty<string>());
+        var resolver = new AssemblyResolver(logger, Enumerable.Empty<string>());
         Assert.Null(resolver.Resolve("SomeNonExistingAssembly"));
     }
 
     [Fact]
     void ShouldGuessTheAssemblyNameFromTheFileNameIfTheAssemblyCannotBeLoaded()
     {
-        var resolver = new AssemblyResolver(new NullLogger(), new[] {Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\BadAssembly.dll")});
+        var resolver = new AssemblyResolver(logger, new[] {Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\BadAssembly.dll")});
         Assert.ThrowsAny<Exception>(() => resolver.Resolve("BadAssembly"));
     }
 }

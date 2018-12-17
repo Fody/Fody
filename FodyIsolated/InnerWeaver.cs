@@ -23,7 +23,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     public string AssemblyFilePath { get; set; }
     public string SolutionDirectoryPath { get; set; }
     public string References { get; set; }
-    public List<WeaverEntry> Weavers { get; set; }
+    public IList<WeaverEntry> Weavers { get; set; }
     public string KeyFilePath { get; set; }
     public bool SignAssembly { get; set; }
     public ILogger Logger { get; set; }
@@ -173,9 +173,9 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             {
                 cancelDelegate = weaver.Instance.Cancel;
 
-                Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
+                Logger.SetCurrentWeaverName(weaver.Config.AssemblyBaseName);
                 var startNew = Stopwatch.StartNew();
-                Logger.LogDebug("  Executing Weaver ");
+                Logger.LogInfo("  Executing Weaver ");
                 try
                 {
                     weaver.Instance.Execute();
@@ -184,7 +184,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
                 {
                     throw new Exception($"Failed to execute weaver {weaver.Config.AssemblyPath}", exception);
                 }
-                var finishedMessage = $"  Finished '{weaver.Config.AssemblyName}' in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
+                var finishedMessage = $"  Finished '{weaver.Config.AssemblyBaseName}' in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
                 Logger.LogDebug(finishedMessage);
 
                 ReferenceCleaner.CleanReferences(ModuleDefinition, weaver.Instance, Logger.LogDebug);
@@ -217,7 +217,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         foreach (var weaver in weaverInstances)
         {
             var configAssembly = weaver.Instance.GetType().Assembly;
-            var name = weaver.Config.AssemblyName.Replace(".", string.Empty);
+            var name = weaver.Config.ElementName.Replace(".", string.Empty);
             AddVersionField(configAssembly, name, typeDefinition);
         }
 
@@ -258,11 +258,11 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
             try
             {
-                Logger.SetCurrentWeaverName(weaver.Config.AssemblyName);
+                Logger.SetCurrentWeaverName(weaver.Config.AssemblyBaseName);
                 var stopwatch = Stopwatch.StartNew();
                 Logger.LogDebug("  Executing After Weaver");
                 weaver.Instance.AfterWeaving();
-                var finishedMessage = $"  Finished '{weaver.Config.AssemblyName}' in {stopwatch.ElapsedMilliseconds}ms {Environment.NewLine}";
+                var finishedMessage = $"  Finished '{weaver.Config.AssemblyBaseName}' in {stopwatch.ElapsedMilliseconds}ms {Environment.NewLine}";
                 Logger.LogDebug(finishedMessage);
             }
             finally

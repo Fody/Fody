@@ -57,14 +57,15 @@ namespace Fody
         public override bool Execute()
         {
             var referenceCopyLocalPaths = ReferenceCopyLocalFiles.Select(x => x.ItemSpec).ToList();
-
             var defineConstants = DefineConstants.GetConstants();
+            var buildLogger = new BuildLogger
+            {
+                BuildEngine = BuildEngine,
+            };
+
             processor = new Processor
             {
-                Logger = new BuildLogger
-                {
-                    BuildEngine = BuildEngine,
-                },
+                Logger = buildLogger,
                 AssemblyFilePath = AssemblyFile,
                 IntermediateDirectory = IntermediateDirectory,
                 KeyFilePath = KeyOriginatorFile ?? AssemblyOriginatorKeyFile,
@@ -75,17 +76,16 @@ namespace Fody
                 SolutionDirectory = SolutionDirectoryFinder.Find(SolutionDirectory, NCrunchOriginalSolutionDirectory, ProjectDirectory),
                 ReferenceCopyLocalPaths = referenceCopyLocalPaths,
                 DefineConstants = defineConstants,
-                NuGetPackageRoot = NuGetPackageRoot,
-                MSBuildDirectory = MSBuildThisFileDirectory,
-                WeaverFilesFromProps = GetWeaverFilesFromProps(),
+                Weavers = GetWeaversFromProps().Distinct(WeaverEntry.NameComparer).ToArray(),
                 DebugSymbols = GetDebugSymbolsType(),
                 GenerateXsd = GenerateXsd
             };
+
             var success = processor.Execute();
 
             if (success)
             {
-                var weavers = processor.Weavers.Select(x => x.AssemblyName);
+                var weavers = processor.Weavers.Select(x => x.ElementName);
                 ExecutedWeavers = string.Join(";", weavers) + ";";
 
                 File.WriteAllLines(IntermediateCopyLocalFilesCache, processor.ReferenceCopyLocalPaths);
@@ -101,14 +101,21 @@ namespace Fody
             return success;
         }
 
-        List<string> GetWeaverFilesFromProps()
+        IEnumerable<WeaverEntry> GetWeaversFromProps()
         {
             if (WeaverFiles == null)
             {
-                return new List<string>();
+                return Array.Empty<WeaverEntry>();
             }
-            return WeaverFiles.Select(x => x.ItemSpec)
-                .ToList();
+
+            return WeaverFiles
+                .Select(taskItem => new { taskItem.ItemSpec, ClassNames = GetConfiguredClassNames(taskItem) })
+                .SelectMany(entry => entry.ClassNames.Select(className => new WeaverEntry { AssemblyPath = entry.ItemSpec, ConfiguredTypeName = className }));
+        }
+
+        static IEnumerable<string> GetConfiguredClassNames(ITaskItem taskItem)
+        {
+            return taskItem.GetMetadata("WeaverClassNames").Split(';').Select(name => name.Trim()).Where(name => !string.IsNullOrEmpty(name)).DefaultIfEmpty();
         }
 
         DebugSymbolsType GetDebugSymbolsType()

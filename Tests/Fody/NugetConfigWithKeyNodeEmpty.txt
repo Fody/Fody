@@ -1,4 +1,0 @@
-﻿<configuration>
-  <config>
-  </config>
-</configuration>

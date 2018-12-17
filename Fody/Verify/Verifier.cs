@@ -69,20 +69,23 @@ public class Verifier
 
     public bool ReadShouldVerifyAssembly(out List<string> ignoreCodes)
     {
-        var weaverConfigs = ConfigFile.FindWeaverConfigs(SolutionDirectory, ProjectDirectory, Logger, null, false);
+        var weaverConfigs = ConfigFile.FindWeaverConfigFiles(SolutionDirectory, ProjectDirectory, Logger);
+
         ignoreCodes = ExtractVerifyIgnoreCodesConfigs(weaverConfigs).ToList();
+
         if (DefineConstants.Any(x => x == "FodyVerifyAssembly"))
         {
             return true;
         }
+
         return ExtractVerifyAssemblyFromConfigs(weaverConfigs);
     }
 
-    public static bool ExtractVerifyAssemblyFromConfigs(List<string> weaverConfigs)
+    public static bool ExtractVerifyAssemblyFromConfigs(IEnumerable<WeaverConfigFile> weaverConfigs)
     {
         foreach (var configFile in weaverConfigs)
         {
-            var configXml = XDocumentEx.Load(configFile);
+            var configXml = configFile.Document;
             var element = configXml.Root;
             if (element.TryReadBool("VerifyAssembly", out var value))
             {
@@ -92,13 +95,13 @@ public class Verifier
         return false;
     }
 
-    public static IEnumerable<string> ExtractVerifyIgnoreCodesConfigs(List<string> weaverConfigs)
+    public static IEnumerable<string> ExtractVerifyIgnoreCodesConfigs(IEnumerable<WeaverConfigFile> weaverConfigs)
     {
         foreach (var configFile in weaverConfigs)
         {
-            var configXml = XDocumentEx.Load(configFile);
+            var configXml = configFile.Document;
             var element = configXml.Root;
-            var codesConfigs = (string) element.Attribute("VerifyIgnoreCodes");
+            var codesConfigs = (string)element.Attribute("VerifyIgnoreCodes");
             if (string.IsNullOrWhiteSpace(codesConfigs))
             {
                 continue;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using Fody;
 
 public partial class Processor
 {
@@ -14,34 +15,32 @@ public partial class Processor
     public string DocumentationFilePath;
     public string References;
     public string SolutionDirectory;
-    public string NuGetPackageRoot;
-    public string MSBuildDirectory;
-    public List<string> WeaverFilesFromProps;
+    public IList<WeaverEntry> Weavers;
     public DebugSymbolsType DebugSymbols;
     public List<string> ReferenceCopyLocalPaths;
     public List<string> DefineConstants;
-    public List<string> ConfigFiles;
+
+    public IList<WeaverConfigFile> ConfigFiles;
+    public IDictionary<string, WeaverConfigEntry> ConfigEntries;
     public bool GenerateXsd;
     IInnerWeaver innerWeaver;
 
-    AddinFinder addinFinder;
     static Dictionary<string, IsolatedAssemblyLoadContext> solutionAssemblyLoadContexts =
         new Dictionary<string, IsolatedAssemblyLoadContext>(StringComparer.OrdinalIgnoreCase);
 
     public BuildLogger Logger;
-    static object locker;
+    static readonly object mutex = new object();
 
     public ContainsTypeChecker ContainsTypeChecker = new ContainsTypeChecker();
 
     static Processor()
     {
-        locker = new object();
         DomainAssemblyResolver.Connect();
     }
 
     public virtual bool Execute()
     {
-        var assembly = typeof (Processor).Assembly;
+        var assembly = typeof(Processor).Assembly;
 
         Logger.LogInfo($"Fody (version {assembly.GetName().Version} @ {assembly.CodeBase}) Executing");
 
@@ -59,71 +58,73 @@ public partial class Processor
         }
         finally
         {
+            stopwatch.Stop();
             Logger.LogInfo($"  Finished Fody {stopwatch.ElapsedMilliseconds}ms.");
         }
     }
 
     void Inner()
     {
-        ValidateProjectPath();
-
-        ValidateAssemblyPath();
-
-        ConfigFiles = ConfigFile.FindWeaverConfigs(SolutionDirectory, ProjectDirectory, Logger, WeaverFilesFromProps, GenerateXsd);
-
-        if (!ShouldStartSinceFileChanged())
+        if (Weavers.Count == 0)
         {
-            if (!CheckForWeaversXmlChanged())
-            {
-
-                FindWeavers();
-
-                if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
-                {
-                    Logger.LogError("A re-build is required because a weaver has changed.");
-                }
-            }
+            Logger.LogWarning(@"No weavers found. Add the desired weavers via their nuget package. See https://github.com/Fody/Fody/wiki on how to migrate InSolution or legacy weavers.");
             return;
         }
 
         ValidateSolutionPath();
+        ValidateProjectPath();
+        ValidateAssemblyPath();
 
-        FindWeavers();
+        ConfigFiles = ConfigFile.FindWeaverConfigFiles(SolutionDirectory, ProjectDirectory, Logger).ToArray();
 
-        if (Weavers.Count == 0)
+        if (!ConfigFiles.Any())
         {
-            Logger.LogWarning(@"No configured weavers. It is possible no weavers have been installed or a weaver has been installed into a project type that does not support install.ps1. It may be necessary to manually add that weaver to FodyWeavers.xm;. eg.
-<Weavers>
-    <WeaverName/>
-</Weavers>
-see https://github.com/Fody/Fody/wiki/SampleUsage");
-            return;
+            ConfigFile.GenerateDefault(ProjectDirectory, Weavers, GenerateXsd);
         }
-        lock (locker)
+
+        ConfigEntries = ConfigFile.ParseWeaverConfigEntries(ConfigFiles, Logger);
+
+        var extraEntries = ConfigEntries.Values
+            .Where(entry => !entry.ConfigFile.IsGlobal && !Weavers.Any(weaver => string.Equals(weaver.ElementName, entry.ElementName)))
+            .ToArray();
+
+        if (extraEntries.Any())
+        {
+            throw new WeavingException($"No weavers found for the configuration entries {string.Join(", ", extraEntries.Select(e => e.ElementName))}");
+        }
+
+        foreach (var weaver in Weavers)
+        {
+            if (ConfigEntries.TryGetValue(weaver.ElementName, out var config))
+            {
+                weaver.Element = config.Content;
+                weaver.ExecutionOrder = config.ExecutionOrder;
+            }
+            else
+            {
+                weaver.Element = $"<{weaver.ElementName} />";
+                weaver.ExecutionOrder = int.MaxValue;
+            }
+        }
+
+        if (TargeAssemblyHasAlreadyBeenProcessed())
+        {
+            if (WeaversConfigHistory.HasChanged(ConfigFiles) || WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
+            {
+                Logger.LogError("A re-build is required because a weaver has changed.");
+
+                return;
+            }
+        }
+
+        ConfigFile.EnsureSchemaIsUpToDate(ProjectDirectory, Weavers, GenerateXsd);
+
+        lock (mutex)
         {
             ExecuteInOwnAssemblyLoadContext();
         }
 
-        FlushWeaversXmlHistory();
-    }
-
-    void FindWeavers()
-    {
-        var stopwatch = Stopwatch.StartNew();
-        Logger.LogDebug("Finding weavers");
-        ReadProjectWeavers();
-        addinFinder = new AddinFinder(Logger.LogDebug, SolutionDirectory, MSBuildDirectory, NuGetPackageRoot, WeaverFilesFromProps);
-        addinFinder.FindAddinDirectories();
-
-        FindWeaverProjectFile();
-
-        ConfigureWhenWeaversFound();
-
-        ConfigureWhenNoWeaversFound();
-
-        ConfigFile.EnsureSchemaIsUpToDate(ProjectDirectory, WeaverFilesFromProps, Weavers, GenerateXsd);
-
-        Logger.LogDebug($"Finished finding weavers {stopwatch.ElapsedMilliseconds}ms");
+        WeaversConfigHistory.RegisterSnapshot(ConfigFiles);
     }
 
     void ExecuteInOwnAssemblyLoadContext()
@@ -152,7 +153,7 @@ see https://github.com/Fody/Fody/wiki/SampleUsage");
             innerWeaver.SignAssembly = SignAssembly;
             innerWeaver.Logger = Logger;
             innerWeaver.SolutionDirectoryPath = SolutionDirectory;
-            innerWeaver.Weavers = Weavers;
+            innerWeaver.Weavers = Weavers.OrderBy(weaver => weaver.ExecutionOrder).ToArray();
             innerWeaver.IntermediateDirectoryPath = IntermediateDirectory;
             innerWeaver.DefineConstants = DefineConstants;
             innerWeaver.ProjectDirectoryPath = ProjectDirectory;

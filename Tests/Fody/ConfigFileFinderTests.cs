@@ -43,17 +43,19 @@ public class ConfigFileFinderTests : IDisposable
 </xs:complexType>
 ");
 
-        var wellKnownWeaverFiles = new[]
+        var weavers = new[]
         {
-            @"something\TestWeaver.Fody.dll",
-            Path.Combine(testDir, "WeaverWithSchema.Fody.dll")
+            new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" },
+            new WeaverEntry { AssemblyPath = Path.Combine(testDir, "WeaverWithSchema.Fody.dll") }
         };
 
-        var configs = ConfigFile.FindWeaverConfigs(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object, wellKnownWeaverFiles, true);
-        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, null, true);
+        var configFiles = ConfigFile.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
 
-        Assert.Single(configs);
-        Assert.Equal(xmlPath, configs[0]);
+        ConfigFile.EnsureSchemaIsUpToDate(testDir, weavers, true);
+
+        Assert.Single(configFiles);
+        Assert.False(configFiles[0].IsGlobal);
+        Assert.Equal(xmlPath, configFiles[0].FilePath);
 
         Assert.True(File.Exists(xsdPath));
 
@@ -100,13 +102,13 @@ public class ConfigFileFinderTests : IDisposable
 </Weavers>
 ");
 
-        var wellKnownWeaverFiles = new[] { @"something\TestWeaver.Fody.dll" };
+        var wellKnownWeaverFiles = new[] { new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" } };
 
-        var configs = ConfigFile.FindWeaverConfigs(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object, wellKnownWeaverFiles, true);
-        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, null, true);
+        var configFiles = ConfigFile.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
+        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, true);
 
-        Assert.Single(configs);
-        Assert.Equal(xmlPath, configs[0]);
+        Assert.Single(configFiles);
+        Assert.Equal(xmlPath, configFiles[0].FilePath);
 
         Assert.False(File.Exists(xsdPath));
 
@@ -124,13 +126,13 @@ public class ConfigFileFinderTests : IDisposable
 </Weavers>
 ");
 
-        var wellKnownWeaverFiles = new[] { @"something\TestWeaver.Fody.dll" };
+        var wellKnownWeaverFiles = new[] { new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" } };
 
-        var configs = ConfigFile.FindWeaverConfigs(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object, wellKnownWeaverFiles, false);
-        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, null, false);
+        var configFiles = ConfigFile.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
+        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, false);
 
-        Assert.Single(configs);
-        Assert.Equal(xmlPath, configs[0]);
+        Assert.Single(configFiles);
+        Assert.Equal(xmlPath, configFiles[0].FilePath);
 
         Assert.False(File.Exists(xsdPath));
 
@@ -148,13 +150,13 @@ public class ConfigFileFinderTests : IDisposable
 </Weavers>
 ");
 
-        var wellKnownWeaverFiles = new[] { @"something\TestWeaver.Fody.dll" };
+        var wellKnownWeaverFiles = new[] { new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" } };
 
-        var configs = ConfigFile.FindWeaverConfigs(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object, wellKnownWeaverFiles, false);
-        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, null, false);
+        var configs = ConfigFile.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
+        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, false);
 
         Assert.Single(configs);
-        Assert.Equal(xmlPath, configs[0]);
+        Assert.Equal(xmlPath, configs[0].FilePath);
 
         Assert.True(File.Exists(xsdPath));
 
