@@ -62,8 +62,8 @@ Thanks to all the backing developers! Support this project by [becoming a patron
 ### Generous financial sponsors
 
 <a href="https://opencollective.com/fody#contributors">
-	<img src="https://opencollective.com/fody/sponsor.svg?width=890&avatarHeight=60&button=false">
-	<img src="https://opencollective.com/fody/backer.svg?width=890&avatarHeight=60&button=false">
+	<img src="https://opencollective.com/fody/sponsor.svg?width=890&avatarHeight=50&button=false">
+	<img src="https://opencollective.com/fody/backer.svg?width=890&avatarHeight=50&button=false">
 </a>
 
 
