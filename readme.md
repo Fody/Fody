@@ -31,7 +31,7 @@ Support this project by [becoming a Platinum Sponsor](https://opencollective.com
 
 Support this project by [becoming a Gold Sponsor](https://opencollective.com/fody/order/7088). A large company logo will be added here with a link to your website.
 
-<a href="https://www.postsharp.net"><img src="https://raw.githubusercontent.com/Fody/Home/master/logos/PostSharp.png"></a>
+<a href="https://www.postsharp.net?utm_source=fody&utm_medium=referral"><img src="https://raw.githubusercontent.com/Fody/Home/master/logos/PostSharp.png"></a>
 
 
 ### Silver Sponsors
@@ -121,9 +121,10 @@ No. As per the MIT license:
 
 > the software is provided "as is", without warranty of any kind
 
-For a supported product, you should instead consider [Postsharp](https://www.postsharp.net/). Postsharp is a mature and supported product that can manipulate IL and achieve the same productivity gains as possible with Fody. Their [mission statement](https://www.postsharp.net/company) is: 
+For a supported product, you should instead consider [PostSharp](https://www.postsharp.net/?utm_source=fody&utm_medium=referral).
+PostSharp is a mature and supported product that is used by Fortune 500 companies as well as startups, and it doesn't require knowledge of IL.
 
-> to help software developers stop writing boring repetitive code (we're looking at you, logging, caching, exception handling … !) and rather use their time and skills to produce clean, reliable software that is easier to maintain.
+They offer a free edition and their feature list includes: Aspect-Oriented Programming, Logging, INotifyPropertyChanged, Caching, Transactions, Security, Multithreading, Code Contracts, XAML plumbing, and Architecture Validation.
 
 
 ### But it is MIT, can't I use it for free?
