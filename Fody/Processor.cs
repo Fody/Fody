@@ -104,9 +104,16 @@ public partial class Processor
             }
             else
             {
-                throw new WeavingException($"No configuration entry found for the installed weaver {weaver.ElementName}. You need to add this weaver to your FodyWeavers.xml");
+                Logger.LogWarning($"No configuration entry found for the installed weaver {weaver.ElementName}. This weaver will be skipped. You may want to add this weaver to your FodyWeavers.xml");
             }
         }
+
+        ConfigFile.EnsureSchemaIsUpToDate(ProjectDirectory, Weavers, GenerateXsd);
+
+        Weavers = Weavers
+            .Where(weaver => weaver.Element != null)
+            .OrderBy(weaver => weaver.ExecutionOrder)
+            .ToArray();
 
         if (TargetAssemblyHasAlreadyBeenProcessed())
         {
@@ -117,8 +124,6 @@ public partial class Processor
                 return;
             }
         }
-
-        ConfigFile.EnsureSchemaIsUpToDate(ProjectDirectory, Weavers, GenerateXsd);
 
         lock (mutex)
         {
@@ -154,7 +159,7 @@ public partial class Processor
             innerWeaver.SignAssembly = SignAssembly;
             innerWeaver.Logger = Logger;
             innerWeaver.SolutionDirectoryPath = SolutionDirectory;
-            innerWeaver.Weavers = Weavers.OrderBy(weaver => weaver.ExecutionOrder).ToArray();
+            innerWeaver.Weavers = Weavers;
             innerWeaver.IntermediateDirectoryPath = IntermediateDirectory;
             innerWeaver.DefineConstants = DefineConstants;
             innerWeaver.ProjectDirectoryPath = ProjectDirectory;
