@@ -173,7 +173,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             {
                 cancelDelegate = weaver.Instance.Cancel;
 
-                Logger.SetCurrentWeaverName(weaver.Config.AssemblyBaseName);
+                Logger.SetCurrentWeaverName(weaver.Config.ElementName);
                 var startNew = Stopwatch.StartNew();
                 Logger.LogInfo("  Executing Weaver ");
                 try
@@ -184,7 +184,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
                 {
                     throw new Exception($"Failed to execute weaver {weaver.Config.AssemblyPath}", exception);
                 }
-                var finishedMessage = $"  Finished '{weaver.Config.AssemblyBaseName}' in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
+                var finishedMessage = $"  Finished '{weaver.Config.ElementName}' in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
                 Logger.LogDebug(finishedMessage);
 
                 ReferenceCleaner.CleanReferences(ModuleDefinition, weaver.Instance, Logger.LogDebug);
@@ -258,11 +258,11 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
             try
             {
-                Logger.SetCurrentWeaverName(weaver.Config.AssemblyBaseName);
+                Logger.SetCurrentWeaverName(weaver.Config.ElementName);
                 var stopwatch = Stopwatch.StartNew();
                 Logger.LogDebug("  Executing After Weaver");
                 weaver.Instance.AfterWeaving();
-                var finishedMessage = $"  Finished '{weaver.Config.AssemblyBaseName}' in {stopwatch.ElapsedMilliseconds}ms {Environment.NewLine}";
+                var finishedMessage = $"  Finished '{weaver.Config.ElementName}' in {stopwatch.ElapsedMilliseconds}ms {Environment.NewLine}";
                 Logger.LogDebug(finishedMessage);
             }
             finally

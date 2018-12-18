@@ -1,6 +1,6 @@
 public partial class Processor
 {
-    public virtual bool TargeAssemblyHasAlreadyBeenProcessed()
+    public virtual bool TargetAssemblyHasAlreadyBeenProcessed()
     {
         if (ContainsTypeChecker.Check(AssemblyFilePath, "ProcessedByFody"))
         {

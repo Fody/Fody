@@ -11,7 +11,7 @@ public class ShouldStartSinceFileChangedTests : TestBase
             Logger = new Mock<BuildLogger>().Object,
             AssemblyFilePath = typeof(string).Assembly.CodeBase.Replace("file:///", "")
         };
-        Assert.False(processor.TargeAssemblyHasAlreadyBeenProcessed());
+        Assert.False(processor.TargetAssemblyHasAlreadyBeenProcessed());
     }
 
     [Fact]
@@ -22,7 +22,7 @@ public class ShouldStartSinceFileChangedTests : TestBase
             Logger = new Mock<BuildLogger>().Object,
             AssemblyFilePath = GetType().Assembly.CodeBase.Replace("file:///", "")
         };
-        Assert.True(processor.TargeAssemblyHasAlreadyBeenProcessed());
+        Assert.True(processor.TargetAssemblyHasAlreadyBeenProcessed());
     }
 }
 

@@ -13,6 +13,6 @@ public class FileChangedCheckerTests : TestBase
             AssemblyFilePath = GetType().Assembly.Location
         };
 
-        Assert.False(processor.TargeAssemblyHasAlreadyBeenProcessed());
+        Assert.False(processor.TargetAssemblyHasAlreadyBeenProcessed());
     }
 }

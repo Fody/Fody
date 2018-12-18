@@ -102,10 +102,10 @@ public class ConfigFileFinderTests : IDisposable
 </Weavers>
 ");
 
-        var wellKnownWeaverFiles = new[] { new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" } };
+        var weavers = new[] { new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" } };
 
         var configFiles = ConfigFile.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
-        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, true);
+        ConfigFile.EnsureSchemaIsUpToDate(testDir, weavers, true);
 
         Assert.Single(configFiles);
         Assert.Equal(xmlPath, configFiles[0].FilePath);
@@ -126,10 +126,10 @@ public class ConfigFileFinderTests : IDisposable
 </Weavers>
 ");
 
-        var wellKnownWeaverFiles = new[] { new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" } };
+        var weavers = new[] { new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" } };
 
         var configFiles = ConfigFile.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
-        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, false);
+        ConfigFile.EnsureSchemaIsUpToDate(testDir, weavers, false);
 
         Assert.Single(configFiles);
         Assert.Equal(xmlPath, configFiles[0].FilePath);
@@ -150,10 +150,10 @@ public class ConfigFileFinderTests : IDisposable
 </Weavers>
 ");
 
-        var wellKnownWeaverFiles = new[] { new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" } };
+        var weavers = new[] { new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" } };
 
         var configs = ConfigFile.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
-        ConfigFile.EnsureSchemaIsUpToDate(testDir, wellKnownWeaverFiles, false);
+        ConfigFile.EnsureSchemaIsUpToDate(testDir, weavers, false);
 
         Assert.Single(configs);
         Assert.Equal(xmlPath, configs[0].FilePath);

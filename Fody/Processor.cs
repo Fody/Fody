@@ -107,7 +107,7 @@ public partial class Processor
             }
         }
 
-        if (TargeAssemblyHasAlreadyBeenProcessed())
+        if (TargetAssemblyHasAlreadyBeenProcessed())
         {
             if (WeaversConfigHistory.HasChanged(ConfigFiles) || WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
             {
