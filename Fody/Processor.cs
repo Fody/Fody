@@ -65,12 +65,6 @@ public partial class Processor
 
     void Inner()
     {
-        if (Weavers.Count == 0)
-        {
-            Logger.LogWarning(@"No weavers found. Add the desired weavers via their nuget package. See https://github.com/Fody/Fody/wiki on how to migrate InSolution or legacy weavers.");
-            return;
-        }
-
         ValidateSolutionPath();
         ValidateProjectPath();
         ValidateAssemblyPath();
@@ -79,7 +73,8 @@ public partial class Processor
 
         if (!ConfigFiles.Any())
         {
-            ConfigFile.GenerateDefault(ProjectDirectory, Weavers, GenerateXsd);
+            ConfigFiles = new[] { ConfigFile.GenerateDefault(ProjectDirectory, Weavers, GenerateXsd) };
+            Logger.LogWarning($"Could not find a FodyWeavers.xml file at the project level ({ProjectDirectory}). A default file has been created. Please review the file and add it to your project.");
         }
 
         ConfigEntries = ConfigFile.ParseWeaverConfigEntries(ConfigFiles, Logger);
@@ -88,9 +83,16 @@ public partial class Processor
             .Where(entry => !entry.ConfigFile.IsGlobal && !Weavers.Any(weaver => string.Equals(weaver.ElementName, entry.ElementName)))
             .ToArray();
 
+        const string missingWeaversHelp = "Add the desired weavers via their nuget package; see https://github.com/Fody/Fody/wiki on how to migrate InSolution, custom or legacy weavers.";
+
         if (extraEntries.Any())
         {
-            throw new WeavingException($"No weavers found for the configuration entries {string.Join(", ", extraEntries.Select(e => e.ElementName))}");
+            throw new WeavingException($"No weavers found for the configuration entries {string.Join(", ", extraEntries.Select(e => e.ElementName))}. " + missingWeaversHelp);
+        }
+
+        if (Weavers.Count == 0)
+        {
+            throw new WeavingException(@"No weavers found." + missingWeaversHelp);
         }
 
         foreach (var weaver in Weavers)
@@ -102,8 +104,7 @@ public partial class Processor
             }
             else
             {
-                weaver.Element = $"<{weaver.ElementName} />";
-                weaver.ExecutionOrder = int.MaxValue;
+                throw new WeavingException($"No configuration entry found for the installed weaver {weaver.ElementName}. You need to add this weaver to your FodyWeavers.xml");
             }
         }
 

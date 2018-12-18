@@ -83,12 +83,12 @@ public static class ConfigFile
         return entries;
     }
 
-    public static void GenerateDefault(string projectDirectory, IEnumerable<WeaverEntry> weaverEntries, bool generateXsd)
+    public static WeaverConfigFile GenerateDefault(string projectDirectory, IEnumerable<WeaverEntry> weaverEntries, bool generateXsd)
     {
         var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
 
         if (File.Exists(projectConfigFilePath))
-            return;
+            return new WeaverConfigFile(projectConfigFilePath);
 
         var root = new XElement("Weavers", SchemaInstanceAttributes);
         var weaverConfig = new XDocument(root);
@@ -104,6 +104,8 @@ public static class ConfigFile
         {
             CreateSchemaForConfig(projectConfigFilePath, weaverEntries);
         }
+
+        return new WeaverConfigFile(projectConfigFilePath);
     }
 
     static void CreateSchemaForConfig(string projectConfigFilePath, IEnumerable<WeaverEntry> weavers)
@@ -175,7 +177,7 @@ public static class ConfigFile
 
             var doc = XDocumentEx.Load(projectConfigFilePath);
 
-            if ((doc.Root.TryReadBool("GenerateXsd", out var generateXsd) || !defaultGenerateXsd) && !generateXsd)
+            if (!ShouldGenerateXsd(doc, defaultGenerateXsd))
             {
                 return;
             }
@@ -195,6 +197,16 @@ public static class ConfigFile
         {
             // anything wrong with the existing, ignore here, we will warn later...
         }
+    }
+
+    static bool ShouldGenerateXsd(XDocument doc, bool defaultGenerateXsd)
+    {
+        if (doc.Root.TryReadBool("GenerateXsd", out var generateXsd))
+        {
+            return generateXsd;
+        }
+
+        return defaultGenerateXsd;
     }
 
     static XAttribute[] SchemaInstanceAttributes =>
