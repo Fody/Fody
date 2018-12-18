@@ -39,14 +39,9 @@ Support this project by [becoming a Gold Sponsor](https://opencollective.com/fod
 Support this project by [becoming a Silver Sponsor](https://opencollective.com/fody/order/7086). A medium company logo will be added here with a link to your website.
 
 
-<!--
-<a href="https://opencollective.com/fody/tiers/silver/0/website"><img src="https://opencollective.com/fody/tiers/silver/0/avatar.svg?avatarHeight=70" style="height:60px;"></a>
--->
-
-
 ### Bronze Sponsors
 
-Support this project by [becoming a Bronze Sponsor](https://opencollective.com/fody/order/7085). The company logo will show up here with a link to your website.
+Support this project by [becoming a Bronze Sponsor](https://opencollective.com/fody/order/7085). The company avatar will show up here with a link to your OpenCollective Profile.
 
 
 <a href="https://opencollective.com/fody/tiers/bronze/0/website"><img src="https://opencollective.com/fody/tiers/bronze/0/avatar.svg?avatarHeight=100"></a>
@@ -75,7 +70,7 @@ For the generous donation of [ReSharper](https://www.jetbrains.com/resharper/) l
 
 ## Licensing/Patron FAQ
 
-**It is expected that all developers [become a Patron on OpenCollective](https://opencollective.com/fody/order/3059) to use Fody.**
+**It is expected that all developers using Fody [become a Patron on OpenCollective](https://opencollective.com/fody/order/3059) to use Fody.**
 
 
 ### Is this all versions?
@@ -151,7 +146,7 @@ There are two options for an organization.
 
 #### Do all developers in a organization need to become Patrons?
 
-No. Only those coding against projects that directly, or indirectly, consume the Fody NuGet package.
+No. Only those coding against projects that directly, or indirectly, consume the [Fody NuGet package](https://www.nuget.org/packages/Fody/).
 
 
 #### Can only one developer of an organization become a patron?
