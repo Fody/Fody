@@ -92,7 +92,7 @@ It is an honesty system with no code or legal enforcement. When raising an issue
  * [Open Source Maintainers Owe You Nothing | Mike McQuaid](https://mikemcquaid.com/2018/03/19/open-source-maintainers-owe-you-nothing/)
  * [Who should fund open source projects? | Jane Elizabeth](https://jaxenter.com/who-funds-open-source-projects-133222.html)
  * [Apply at OSS Inc today| Ryan Chenkie](https://twitter.com/ryanchenkie/status/1067801413974032385)
- * [The Ethics of Unpaid Labor and the OSS Community | ashe dryden](https://www.ashedryden.com/blog/the-ethics-of-unpaid-labor-and-the-oss-community)
+ * [The Ethics of Unpaid Labor and the OSS Community | Ashe Dryden](https://www.ashedryden.com/blog/the-ethics-of-unpaid-labor-and-the-oss-community)
 
 
 ### So what OSS license are projects using?
@@ -155,9 +155,9 @@ No. Only those coding against projects that directly, or indirectly, consume the
 Yes, since the only point of (optional) enforcement is when an issue or PR is raised, then legally an organization can ignore the honesty system and route all issues and PRs though a single GitHub user account. However if a single GitHub user account is drawing on significant time to support, they may be requested to purchase some [hourly support](https://opencollective.com/fody/order/7087).
 
 
-### What about open source projects producing Fody weavers?
+### What about open source projects consume or producing Fody weavers?
 
-It is be expected that the core team of maintainers of any open source projects that produce Fody weavers would become Patrons. Non core contributors do not need to become Patrons.
+It is be expected that the core team of maintainers of any open source projects that consume or produce Fody weavers would become Patrons. Non core contributors do not need to become Patrons. For example, in the context of GitHub, this would be any people with push access to the the repository. The reasoning is that if a project is utilizing Fody, that should not be a blocker for the larger community from contributing to the project.
 
 
 ### Can I fork, re-use code, or start competing (possibly commercial) projects?
