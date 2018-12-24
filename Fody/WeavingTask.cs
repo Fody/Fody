@@ -59,12 +59,14 @@ namespace Fody
             var referenceCopyLocalPaths = ReferenceCopyLocalFiles.Select(x => x.ItemSpec).ToList();
 
             var defineConstants = DefineConstants.GetConstants();
+            var buildLogger = new BuildLogger
+            {
+                BuildEngine = BuildEngine,
+            };
+
             processor = new Processor
             {
-                Logger = new BuildLogger
-                {
-                    BuildEngine = BuildEngine,
-                },
+                Logger = buildLogger,
                 AssemblyFilePath = AssemblyFile,
                 IntermediateDirectory = IntermediateDirectory,
                 KeyFilePath = KeyOriginatorFile ?? AssemblyOriginatorKeyFile,
@@ -88,7 +90,20 @@ namespace Fody
                 var weavers = processor.Weavers.Select(x => x.AssemblyName);
                 ExecutedWeavers = string.Join(";", weavers) + ";";
 
-                File.WriteAllLines(IntermediateCopyLocalFilesCache, processor.ReferenceCopyLocalPaths);
+                try
+                {
+                    File.WriteAllLines(IntermediateCopyLocalFilesCache, processor.ReferenceCopyLocalPaths);
+                }
+                catch (Exception ex)
+                {
+                    buildLogger.LogInfo("ProjectDirectory: " + ProjectDirectory);
+                    buildLogger.LogInfo("IntermediateDirectory: " + IntermediateDirectory);
+                    buildLogger.LogInfo("CurrentDirectory: " + Directory.GetCurrentDirectory());
+                    buildLogger.LogInfo("AssemblyFile: " + AssemblyFile);
+                    buildLogger.LogInfo("IntermediateCopyLocalFilesCache: " + IntermediateCopyLocalFilesCache);
+                    buildLogger.LogError("Error writing IntermediateCopyLocalFilesCache: " + ex.Message);
+                    return false;
+                }
             }
             else
             {
