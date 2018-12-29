@@ -25,19 +25,22 @@ public static class ConfigFile
         var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
         if (!File.Exists(projectConfigFilePath))
         {
-            if (!files.Any() && wellKnownWeaverFiles != null)
+            if (!files.Any())
             {
-                GenerateDefault(projectConfigFilePath, wellKnownWeaverFiles, defaultGenerateXsd);
+                if (wellKnownWeaverFiles != null)
+                {
+                    GenerateDefault(projectConfigFilePath, wellKnownWeaverFiles, defaultGenerateXsd);
 
-                logger.LogError($"Could not find a FodyWeavers.xml file at the project level ({projectConfigFilePath}). A default file has been created. Please review the file and add it to your project.");
-            }
-            else
-            {
-                logger.LogError($@"Could not find a FodyWeavers.xml file at the project level ({projectConfigFilePath}). Some project types do not support using NuGet to add content files e.g. netstandard projects. In these cases it is necessary to manually add a FodyWeavers.xml to the project. Example content:
+                    logger.LogError($"Could not find a FodyWeavers.xml file at the project level ({projectConfigFilePath}). A default file has been created. Please review the file and add it to your project.");
+                }
+                else
+                {
+                    logger.LogError($@"Could not find a FodyWeavers.xml file at the project level ({projectConfigFilePath}). Some project types do not support using NuGet to add content files e.g. netstandard projects. In these cases it is necessary to manually add a FodyWeavers.xml to the project. Example content:
   <Weavers>
     <WeaverName/>
   </Weavers>
   ");
+                }
             }
         }
         else
