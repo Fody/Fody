@@ -411,6 +411,7 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Vandelay](https://github.com/jasonwoods-7/Vandelay) Simplifies MEF importing\exporting.
   * [Visualize](https://github.com/Fody/Visualize) Adds debugger attributes to help visualize objects.
   * [Virtuosity](https://github.com/Fody/Virtuosity) Change all members to virtual.
+  * [WeakEventHandler](https://github.com/tom-englert/WeakEventHandler.Fody) Changes regular event handlers into weak event handlers by weaving a weak event adapter between source and subscriber.
   * [WeakEvents](https://github.com/adbancroft/WeakEvents.Fody) Automatic publishing of weak events via compile time code weaving and a supporting runtime library.
   * [With](https://github.com/mikhailshilkov/With.Fody) Methods to return copies of immutable objects with one property modified.
   * [YALF](https://github.com/sharpmonkey/YALF) Yet Another Logging Framework.
