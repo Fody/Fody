@@ -33,14 +33,14 @@
 
   <PropertyGroup Condition="'$(GitHubOrganization)' == 'Fody'">
     <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">https://raw.githubusercontent.com/Fody/$(SolutionName)/master/package_icon.png</PackageIconUrl>
-    <PackageLicenseUrl Condition="'$(PackageLicenseUrl)' == ''">http://www.opensource.org/licenses/mit-license.php</PackageLicenseUrl>
+    <PackageLicenseExpression Condition="'$(PackageLicenseUrl)' == '' AND '$(PackageLicenseExpression)' == '' AND '$(PackageLicenseFile)' == ''">MIT</PackageLicenseExpression>
     <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">http://github.com/Fody/$(SolutionName)</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(GitHubOrganization)' != 'Fody'">
     <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">http://github.com/$(GitHubOrganization)/$(PackageId)</PackageProjectUrl>
     <PackageIconUrl Condition="'$(PackageIconUrl)' == '' And '$(PackageIconFileName)' != ''">https://raw.githubusercontent.com/$(GitHubOrganization)/$(PackageId)/master/$(PackageIconFileName)</PackageIconUrl>
-    <PackageLicenseUrl Condition="'$(PackageLicenseUrl)' == '' And '$(PackageLicenseFileName)' != ''">https://raw.githubusercontent.com/$(GitHubOrganization)/$(PackageId)/master/$(PackageLicenseFileName)</PackageLicenseUrl>
+    <PackageLicenseFile Condition="'$(PackageLicenseExpression)' == '' AND '$(PackageLicenseFile)' == '' AND '$(PackageLicenseUrl)' == '' AND '$(PackageLicenseFileName)' != ''">$(PackageLicenseFileName)</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
