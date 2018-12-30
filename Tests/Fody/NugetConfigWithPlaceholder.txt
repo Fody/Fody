@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<configuration>
-  <config>
-    <!--  If value starts with "$\" then location is relative to this conf file. -->
-    <add key="repositorypath" value="$\Packages" />
-   </config>
-</configuration>

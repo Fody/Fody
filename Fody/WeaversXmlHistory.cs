@@ -1,38 +1,29 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 
-public partial class Processor
+public static class WeaversConfigHistory
 {
-    public static Dictionary<string, DateTime> TimeStamps = new Dictionary<string, DateTime>();
+    static string WeaverConfigsContent;
 
-    public virtual bool CheckForWeaversXmlChanged()
+    public static bool HasChanged(IEnumerable<WeaverConfigFile> configFiles)
     {
-        var changed = false;
-        foreach (var configFile in ConfigFiles)
+        var content = GetWeaverConfigsContent(configFiles);
+
+        if (WeaverConfigsContent != null && !string.Equals(WeaverConfigsContent, content))
         {
-            var timeStamp = File.GetLastWriteTimeUtc(configFile);
-            if (TimeStamps.TryGetValue(configFile, out var dateTime))
-            {
-                if (dateTime != timeStamp)
-                {
-                    Logger.LogError($"A re-build is required to apply the changes from '{configFile}'.");
-                    changed = true;
-                }
-            }
-            else
-            {
-                TimeStamps[configFile] = timeStamp;
-            }
+            return true;
         }
-        return changed;
+
+        return false;
     }
 
-    public virtual void FlushWeaversXmlHistory()
+    static string GetWeaverConfigsContent(IEnumerable<WeaverConfigFile> configFiles)
     {
-        foreach (var configFile in ConfigFiles)
-        {
-            TimeStamps[configFile] = File.GetLastWriteTimeUtc(configFile);
-        }
+        return string.Join("|", configFiles.Select(configFile => configFile.Document.ToString()));
+    }
+
+    public static void RegisterSnapshot(IEnumerable<WeaverConfigFile> configFiles)
+    {
+        WeaverConfigsContent = GetWeaverConfigsContent(configFiles);
     }
 }

@@ -4,10 +4,10 @@
   <xs:element name="Weavers">
     <xs:complexType>
       <xs:all>
+        <xs:element name="Virtuosity" minOccurs="0" maxOccurs="1" type="xs:anyType" />
         <xs:element name="NamedWeaver" minOccurs="0" maxOccurs="1" type="xs:anyType" />
         <xs:element name="NamedWeaverFromBase" minOccurs="0" maxOccurs="1" type="xs:anyType" />
         <xs:element name="ModuleWeaver" minOccurs="0" maxOccurs="1" type="xs:anyType" />
-        <xs:element name="Virtuosity" minOccurs="0" maxOccurs="1" type="xs:anyType" />
       </xs:all>
       <xs:attribute name="VerifyAssembly" type="xs:boolean">
         <xs:annotation>
@@ -17,6 +17,11 @@
       <xs:attribute name="VerifyIgnoreCodes" type="xs:string">
         <xs:annotation>
           <xs:documentation>A comma-separated list of error codes that can be safely ignored in assembly verification.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="GenerateXsd" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>'false' to turn off automatic generation of the XML Schema file.</xs:documentation>
         </xs:annotation>
       </xs:attribute>
     </xs:complexType>

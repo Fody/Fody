@@ -3,7 +3,27 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using Fody;
+
+public class WeaverConfigFile
+{
+    public bool IsGlobal;
+    public readonly string FilePath;
+    public readonly XDocument Document;
+
+    public WeaverConfigFile(string filePath)
+    {
+        FilePath = filePath;
+        Document = XDocumentEx.Load(FilePath);
+    }
+}
+
+public class WeaverConfigEntry
+{
+    public WeaverConfigFile ConfigFile;
+    public string ElementName;
+    public string Content;
+    public int ExecutionOrder;
+}
 
 public static class ConfigFile
 {
@@ -11,90 +31,90 @@ public static class ConfigFile
     static readonly XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");
     static readonly XNamespace schemaInstanceNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema-instance");
 
-    public static List<string> FindWeaverConfigs(string solutionDirectoryPath, string projectDirectory, ILogger logger, IEnumerable<string> wellKnownWeaverFiles, bool defaultGenerateXsd)
+    public static IEnumerable<WeaverConfigFile> FindWeaverConfigFiles(string solutionDirectoryPath, string projectDirectory, ILogger logger)
     {
-        var files = new List<string>();
-
-        var solutionConfigFilePath = Path.Combine(solutionDirectoryPath, FodyWeaversConfigFileName);
-        if (File.Exists(solutionConfigFilePath))
         {
-            files.Add(solutionConfigFilePath);
-            logger.LogDebug($"Found path to weavers file '{solutionConfigFilePath}'.");
-        }
+            var solutionConfigFilePath = Path.Combine(solutionDirectoryPath, FodyWeaversConfigFileName);
 
-        var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
-        if (!File.Exists(projectConfigFilePath))
-        {
-            if (!files.Any() && wellKnownWeaverFiles != null)
+            if (File.Exists(solutionConfigFilePath))
             {
-                GenerateDefault(projectConfigFilePath, wellKnownWeaverFiles, defaultGenerateXsd);
-
-                logger.LogError($"Could not find a FodyWeavers.xml file at the project level ({projectConfigFilePath}). A default file has been created. Please review the file and add it to your project.");
-            }
-            else
-            {
-                logger.LogError($@"Could not find a FodyWeavers.xml file at the project level ({projectConfigFilePath}). Some project types do not support using NuGet to add content files e.g. netstandard projects. In these cases it is necessary to manually add a FodyWeavers.xml to the project. Example content:
-  <Weavers>
-    <WeaverName/>
-  </Weavers>
-  ");
+                logger.LogDebug($"Found path to weavers file '{solutionConfigFilePath}'.");
+                yield return new WeaverConfigFile(solutionConfigFilePath) { IsGlobal = true };
             }
         }
-        else
-        {
-            files.Add(projectConfigFilePath);
-            logger.LogDebug($"Found path to weavers file '{projectConfigFilePath}'.");
-        }
 
-        if (files.Count == 0)
         {
-            var pathsSearched = string.Join("', '", solutionConfigFilePath, projectConfigFilePath);
-            throw new WeavingException($"Could not find path to weavers file. Searched '{pathsSearched}'.");
-        }
+            var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
 
-        return files;
+            if (File.Exists(projectConfigFilePath))
+            {
+                logger.LogDebug($"Found path to weavers file '{projectConfigFilePath}'.");
+                yield return new WeaverConfigFile(projectConfigFilePath);
+            }
+        }
     }
 
-    static void GenerateDefault(string projectConfigFilePath, IEnumerable<string> wellKnownWeaverFiles, bool defaultGenerateXsd)
+    public static IDictionary<string, WeaverConfigEntry> ParseWeaverConfigEntries(IEnumerable<WeaverConfigFile> configFiles, ILogger logger)
     {
-        if (wellKnownWeaverFiles == null)
+        var entries = new Dictionary<string, WeaverConfigEntry>(StringComparer.OrdinalIgnoreCase);
+        var executionOrders = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var configFile in configFiles)
         {
-            return;
+            foreach (var element in configFile.Document.Root.Elements())
+            {
+                var elementName = element.Name.LocalName;
+
+                if (!executionOrders.TryGetValue(elementName, out var executionOrder))
+                {
+                    executionOrders.Add(elementName, executionOrder = executionOrders.Count);
+                }
+
+                entries[elementName] = new WeaverConfigEntry
+                {
+                    ExecutionOrder = executionOrder,
+                    ConfigFile = configFile, 
+                    ElementName = elementName, 
+                    Content = element.ToString()
+                };
+            }
         }
 
-        var weaverConfig = new XDocument(new XElement("Weavers", SchemaInstanceAttributes));
+        return entries;
+    }
 
-        var weaverEntries = wellKnownWeaverFiles
-            .Select(WeaverNameFromFilePath)
-            .Select(name => new XElement(name))
+    public static WeaverConfigFile GenerateDefault(string projectDirectory, IEnumerable<WeaverEntry> weaverEntries, bool generateXsd)
+    {
+        var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
+
+        if (File.Exists(projectConfigFilePath))
+            return new WeaverConfigFile(projectConfigFilePath);
+
+        var root = new XElement("Weavers", SchemaInstanceAttributes);
+        var weaverConfig = new XDocument(root);
+
+        var elements = weaverEntries
+            .Select(entry => new XElement(entry.ElementName))
             .ToArray();
 
-        weaverConfig.Root.Add(weaverEntries);
+        root.Add(elements);
         weaverConfig.Save(projectConfigFilePath);
 
-        if (defaultGenerateXsd)
+        if (generateXsd)
         {
-            CreateSchemaForConfig(projectConfigFilePath, wellKnownWeaverFiles, null);
+            CreateSchemaForConfig(projectConfigFilePath, weaverEntries);
         }
+
+        return new WeaverConfigFile(projectConfigFilePath);
     }
 
-    static string GetWeaverName(WeaverEntry weaver)
+    static void CreateSchemaForConfig(string projectConfigFilePath, IEnumerable<WeaverEntry> weavers)
     {
-        return string.IsNullOrEmpty(weaver.Element) ? weaver.TypeName : weaver.AssemblyName;
-    }
-
-    static void CreateSchemaForConfig(string projectConfigFilePath, IEnumerable<string> wellKnownWeaverFiles, IEnumerable<WeaverEntry> weavers)
-    {
-        var weaverFiles = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-        weaverFiles.MergeItemsFrom(weavers, GetWeaverName, weaver => weaver.AssemblyPath);
-        weaverFiles.MergeItemsFrom(wellKnownWeaverFiles, WeaverNameFromFilePath);
-
         var schema = XDocument.Parse(Fody.Properties.Resources.FodyWeavers_SchemaTemplate);
 
         var baseNode = schema.Descendants().FirstOrDefault(item => item.Name == schemaNamespace.GetName("all"));
 
-        var fragments = weaverFiles.Select(CreateItemFragment);
+        var fragments = weavers.Select(CreateItemFragment);
 
         baseNode.Add(fragments);
 
@@ -119,13 +139,13 @@ public static class ConfigFile
         schema.Save(filePath, SaveOptions.OmitDuplicateNamespaces);
     }
 
-    static XElement CreateItemFragment(KeyValuePair<string, string> weaver)
+    static XElement CreateItemFragment(WeaverEntry weaver)
     {
-        var weaverName = weaver.Key;
-        var weaverFile = weaver.Value;
+        var elementName = weaver.ElementName;
+        var weaverFile = weaver.AssemblyPath;
 
         var element = new XElement(schemaNamespace.GetName("element"),
-            new XAttribute("name", weaverName),
+            new XAttribute("name", elementName),
             new XAttribute("minOccurs", 0),
             new XAttribute("maxOccurs", 1));
 
@@ -149,48 +169,15 @@ public static class ConfigFile
         return element;
     }
 
-    static string WeaverNameFromFilePath(string filePath)
+    public static void EnsureSchemaIsUpToDate(string projectDirectory, IEnumerable<WeaverEntry> weavers, bool defaultGenerateXsd)
     {
-        return Path.ChangeExtension(Path.GetFileNameWithoutExtension(filePath), null);
-    }
-
-    static void MergeItemsFrom<TKey, TValue>(this IDictionary<TKey, TValue> target, IEnumerable<TValue> items, Func<TValue, TKey> keySelector)
-    {
-        MergeItemsFrom(target, items, keySelector, value => value);
-    }
-
-    static void MergeItemsFrom<TKey, TValue, TItem>(this IDictionary<TKey, TValue> target, IEnumerable<TItem> items, Func<TItem, TKey> keySelector, Func<TItem, TValue> valueSelector)
-    {
-        if (items == null)
-            return;
-
-        foreach (var item in items)
-        {
-            target[keySelector(item)] = valueSelector(item);
-        }
-    }
-
-    public static void EnsureSchemaIsUpToDate(string projectDirectory, IEnumerable<string> wellKnownWeaverFiles, List<WeaverEntry> weavers, bool defaultGenerateXsd)
-    {
-        if (wellKnownWeaverFiles == null && weavers == null)
-        {
-            return;
-        }
-
         try
         {
             var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
 
             var doc = XDocumentEx.Load(projectConfigFilePath);
 
-            if (doc.Root.TryReadBool("GenerateXsd", out var generateXsd))
-            {
-                if (!generateXsd)
-                {
-                    return;
-                }
-            }
-            else if (!defaultGenerateXsd)
+            if (!ShouldGenerateXsd(doc, defaultGenerateXsd))
             {
                 return;
             }
@@ -204,12 +191,22 @@ public static class ConfigFile
                 doc.Save(projectConfigFilePath);
             }
 
-            CreateSchemaForConfig(projectConfigFilePath, wellKnownWeaverFiles, weavers);
+            CreateSchemaForConfig(projectConfigFilePath, weavers);
         }
         catch
         {
             // anything wrong with the existing, ignore here, we will warn later...
         }
+    }
+
+    static bool ShouldGenerateXsd(XDocument doc, bool defaultGenerateXsd)
+    {
+        if (doc.Root.TryReadBool("GenerateXsd", out var generateXsd))
+        {
+            return generateXsd;
+        }
+
+        return defaultGenerateXsd;
     }
 
     static XAttribute[] SchemaInstanceAttributes =>

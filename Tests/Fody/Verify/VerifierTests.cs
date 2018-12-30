@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Xunit;
@@ -9,9 +8,9 @@ public class VerifierTests : TestBase
     public void ExtractVerifyAssemblyFromConfig_NotExists()
     {
         var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\Verify\VerifierTests_NoVerifyAssembly.xml");
-        var verifyAssembly = Verifier.ExtractVerifyAssemblyFromConfigs(new List<string>
+        var verifyAssembly = Verifier.ExtractVerifyAssemblyFromConfigs(new[]
         {
-            filePath
+            new WeaverConfigFile(filePath)
         });
         Assert.False(verifyAssembly);
     }
@@ -20,9 +19,9 @@ public class VerifierTests : TestBase
     public void ExtractVerifyIgnoreCodels_NotExists()
     {
         var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\Verify\VerifierTests_NoVerifyIgnoreCodes.xml");
-        var verifyAssembly = Verifier.ExtractVerifyIgnoreCodesConfigs(new List<string>
+        var verifyAssembly = Verifier.ExtractVerifyIgnoreCodesConfigs(new[]
         {
-            filePath
+            new WeaverConfigFile(filePath)
         });
         Assert.Empty(verifyAssembly);
     }
@@ -31,11 +30,10 @@ public class VerifierTests : TestBase
     public void ExtractVerifyIgnoreCodels_WithCodeMultiple()
     {
         var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\Verify\VerifierTests_VerifyIgnoreCodes_Multiple.xml");
-        var verifyAssembly = Verifier.ExtractVerifyIgnoreCodesConfigs(new List<string>
+        var verifyAssembly = Verifier.ExtractVerifyIgnoreCodesConfigs(new[]
         {
-            filePath
-        })
-            .ToList();
+            new WeaverConfigFile(filePath)
+        }).ToList();
         Assert.Contains("myignorecode1", verifyAssembly);
         Assert.Contains("myignorecode2", verifyAssembly);
     }
@@ -44,11 +42,10 @@ public class VerifierTests : TestBase
     public void ExtractVerifyIgnoreCodels_WithCodeSingle()
     {
         var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\Verify\VerifierTests_VerifyIgnoreCodes_Single.xml");
-        var verifyAssembly = Verifier.ExtractVerifyIgnoreCodesConfigs(new List<string>
+        var verifyAssembly = Verifier.ExtractVerifyIgnoreCodesConfigs(new[]
         {
-            filePath
-        })
-            .ToList();
+            new WeaverConfigFile(filePath)
+        }).ToList();
         Assert.Contains("myignorecode1", verifyAssembly);
     }
 
@@ -56,9 +53,9 @@ public class VerifierTests : TestBase
     public void ExtractVerifyAssemblyFromConfig_WithTrue()
     {
         var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\Verify\VerifierTests_WithTrueVerifyAssembly.xml");
-        var verifyAssembly = Verifier.ExtractVerifyAssemblyFromConfigs(new List<string>
+        var verifyAssembly = Verifier.ExtractVerifyAssemblyFromConfigs(new[]
         {
-            filePath
+            new WeaverConfigFile(filePath)
         });
         Assert.True(verifyAssembly);
     }
@@ -67,9 +64,9 @@ public class VerifierTests : TestBase
     public void ExtractVerifyAssemblyFromConfig_WithFalse()
     {
         var filePath = Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\Verify\VerifierTests_WithFalseVerifyAssembly.xml");
-        var verifyAssembly = Verifier.ExtractVerifyAssemblyFromConfigs(new List<string>
+        var verifyAssembly = Verifier.ExtractVerifyAssemblyFromConfigs(new[]
         {
-            filePath
+            new WeaverConfigFile(filePath)
         });
         Assert.False(verifyAssembly);
     }

@@ -1,14 +1,23 @@
 using System.IO;
+using System.Xml;
 using System.Xml.Linq;
+
+using Fody;
 
 public static class XDocumentEx
 {
     public static XDocument Load(string path)
     {
-        using (var stream = FileEx.OpenRead(path))
-        using (var reader = new StreamReader(stream))
+        try
         {
-            return XDocument.Load(reader);
+            using (var reader = new StreamReader(FileEx.OpenRead(path)))
+            {
+                return XDocument.Load(reader);
+            }
+        }
+        catch (XmlException exception)
+        {
+            throw new WeavingException($"Could not read '{path}' because it has invalid xml. Message: '{exception.Message}'.");
         }
     }
 }

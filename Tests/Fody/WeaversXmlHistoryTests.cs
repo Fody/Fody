@@ -1,91 +1,53 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using Moq;
 using Xunit;
 
 public class WeaversXmlHistoryTests : TestBase
 {
     [Fact]
-    public void AddNewFile()
+    public void Test()
     {
         var fileName = Path.GetTempFileName();
+
         try
         {
-            var processor = new Processor
+            File.WriteAllText(fileName, "<Weavers />");
+
+            var configFiles1 = new[]
             {
-                ConfigFiles = new List<string>
-                                              {
-                                                  fileName
-                                              }
+                new WeaverConfigFile(fileName)
             };
-            processor.CheckForWeaversXmlChanged();
 
-            Assert.Equal(File.GetLastWriteTimeUtc(fileName), Processor.TimeStamps.First().Value);
+            var hasChanged = WeaversConfigHistory.HasChanged(configFiles1);
+
+            Assert.False(hasChanged);
+
+            WeaversConfigHistory.RegisterSnapshot(configFiles1);
+
+            var configFiles2 = new[]
+            {
+                new WeaverConfigFile(fileName)
+            };
+
+            hasChanged =  WeaversConfigHistory.HasChanged(configFiles2);
+
+            Assert.False(hasChanged);
+
+            WeaversConfigHistory.RegisterSnapshot(configFiles2);
+
+            File.WriteAllText(fileName, "<Weavers VerifyAssembly='true' />");
+
+            var configFiles3 = new[]
+            {
+                new WeaverConfigFile(fileName)
+            };
+
+            hasChanged =  WeaversConfigHistory.HasChanged(configFiles3);
+
+            Assert.True(hasChanged);
         }
         finally
         {
             File.Delete(fileName);
-            Processor.TimeStamps.Clear();
-        }
-    }
-
-    [Fact]
-    public void AddExistingFile()
-    {
-        var fileName = Path.GetTempFileName();
-        try
-        {
-            var processor = new Processor
-                            {
-                                ConfigFiles = new List<string>
-                                              {
-                                                  fileName
-                                              }
-                            };
-            processor.CheckForWeaversXmlChanged();
-            processor.CheckForWeaversXmlChanged();
-
-            Assert.Equal(File.GetLastWriteTimeUtc(fileName), Processor.TimeStamps.First().Value);
-        }
-        finally
-        {
-            File.Delete(fileName);
-            Processor.TimeStamps.Clear();
-        }
-    }
-
-    [Fact]
-    public void AddChangedFile()
-    {
-        var fileName = Path.GetTempFileName();
-        try
-        {
-            var expected = File.GetLastWriteTimeUtc(fileName);
-            var loggerMock = new Mock<BuildLogger>();
-            loggerMock.Setup(x => x.LogDebug(It.IsAny<string>()));
-
-            var processor = new Processor
-                            {
-                                Logger = loggerMock.Object,
-                                ConfigFiles = new List<string>
-                                              {
-                                                  fileName
-                                              }
-                            };
-            processor.CheckForWeaversXmlChanged();
-            File.SetLastWriteTimeUtc(fileName, DateTime.Now.AddHours(1));
-            processor.CheckForWeaversXmlChanged();
-
-            loggerMock.Verify();
-
-            Assert.Equal(expected, Processor.TimeStamps.First().Value);
-        }
-        finally
-        {
-            File.Delete(fileName);
-            Processor.TimeStamps.Clear();
         }
     }
 }
