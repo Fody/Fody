@@ -52,8 +52,8 @@ Support this project by [becoming a Bronze Sponsor](https://opencollective.com/f
 Thanks to all the backers and sponsors! Support this project by [becoming a patron](https://opencollective.com/fody/order/3059).
 
 <a href="https://opencollective.com/fody#contributors">
-	<img src="https://opencollective.com/fody/sponsor.svg?width=890&avatarHeight=50&button=false">
-	<img src="https://opencollective.com/fody/backer.svg?width=890&avatarHeight=50&button=false">
+​	<img src="https://opencollective.com/fody/sponsor.svg?width=890&avatarHeight=50&button=false">
+​	<img src="https://opencollective.com/fody/backer.svg?width=890&avatarHeight=50&button=false">
 </a>
 
 
@@ -342,7 +342,6 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
 ## Addins List
 
   * [Anotar](https://github.com/Fody/Anotar) Simplifies logging through a static class and some IL manipulation.
-  * [AssertMessage](https://github.com/Fody/AssertMessage) Generates 'message' from sourcecode and adds it to assertion.
   * [AsyncErrorHandler](https://github.com/Fody/AsyncErrorHandler) Integrates error handling into async and TPL code.
   * [AutoDependencyProperty](http://blog.angeloflogic.com/2014/12/no-more-dependencyproperty-with.html) Generates WPF DependencyProperty boilerplate from automatic C# properties.
   * [AutoProperties](https://github.com/tom-englert/AutoProperties.Fody) Gives you extended control over auto-properties, like directly accessing the backing field or intercepting getters and setters.
@@ -362,7 +361,6 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
   * [Equatable](https://github.com/tom-englert/Equatable.Fody) Generate Equals, GetHashCode and operators methods from explicit annotated fields and properties.
   * [Expose](https://github.com/kedarvaidya/Expose.Fody) Exposes members and optionally implements interface of a field declared in class.
   * [ExtraConstraints](https://github.com/Fody/ExtraConstraints) Facilitates adding constraints for Enum and Delegate to types and methods.
-  * [FactoryId](https://github.com/ramoneeza/FactoryId.Fody) Simplifies the implementation of Factory Method Pattern
   * [Fielder](https://github.com/Fody/Fielder) Converts public fields to public properties.
   * [FodyDependencyInjection](https://github.com/jorgehmv/FodyDependencyInjection) Dependency injection with Fody add-ins.
   * [Freezable](https://github.com/Fody/Freezable) Implements the Freezable pattern.
@@ -423,9 +421,11 @@ The name "Fody" comes from the small birds that belong to the weaver family [Plo
 The below addins are no longer maintained. Raise an issue in the specific project if you would like to take ownership.
 
   * [ArraySlice](https://github.com/Codealike/arrayslice) ArraySlice allows to build shared memory array views without performance impact. It uses IL manipulation to achieve the fastest implementation.
+  * [AssertMessage](https://github.com/Fody/AssertMessage) Generates 'message' from sourcecode and adds it to assertion.
   * [AutoLazy](https://github.com/bcuff/AutoLazy) Automatically implements the double-checked locking pattern on specified properties and methods.
   * [Cilador](https://github.com/rileywhite/Cilador) Write your own [mixins](https://en.wikipedia.org/wiki/Mixin) in C# for code reuse without inheritance.
   * [Commander](https://github.com/DamianReeves/Commander.Fody) Injects ICommand properties and implementations for use in MVVM applications.
+  * [FactoryId](https://github.com/ramoneeza/FactoryId.Fody) Simplifies the implementation of Factory Method Pattern
   * [Mixins](https://bitbucket.org/skwasiborski/mixins.fody/wiki/Home) A mixin is a class that provides a certain functionality to be inherited or just reused by a subclass.
   * [NameOf](https://github.com/NickStrupat/NameOf) Provides strongly typed access to a compile-time string representing the name of a variable, field, property, method, event, enum value, or type.
   * [RemoveReference](https://github.com/icnocop/RemoveReference.Fody) Facilitates removing references in a compiled assembly during a build.
