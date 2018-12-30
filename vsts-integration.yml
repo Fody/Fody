@@ -1,12 +1,6 @@
 resources:
 - repo: self
   clean: true
-queue:
-  name: Hosted VS2017
-  demands: 
-  - msbuild
-  - visualstudio
-  - vstest
 
 steps:
 - task: NuGetToolInstaller@0
