@@ -1,15 +1,14 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>$id$</id>
+    <id>Fody</id>
     <version>$version$</version>
     <authors>$authors$</authors>
-    <owners>$owners$</owners>
     <developmentDependency>true</developmentDependency>
-    <licenseUrl>$licenseUrl$</licenseUrl>
+    <license type="expression">MIT</license>
     <projectUrl>$projectUrl$</projectUrl>
     <iconUrl>$iconUrl$</iconUrl>
-    <requireLicenseAcceptance>$requireLicenseAcceptance$</requireLicenseAcceptance>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <copyright>$copyright$</copyright>
     <tags>$tags$</tags>

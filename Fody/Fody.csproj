@@ -12,7 +12,7 @@
   </PropertyGroup>
   <Target Name="SetPackageDependencies" BeforeTargets="GenerateNuspec">
     <PropertyGroup>
-      <NuspecProperties>configuration=$(Configuration);id=$(PackageId);version=$(PackageVersion);authors=$(Authors);owners=$(Authors);licenseUrl=$(PackageLicenseUrl);requireLicenseAcceptance=$(PackageRequireLicenseAcceptance);iconUrl=$(PackageIconUrl);projectUrl=$(PackageProjectUrl);description=$(Description);tags=$(PackageTags)</NuspecProperties>
+      <NuspecProperties>configuration=$(Configuration);version=$(PackageVersion);authors=$(Authors);iconUrl=$(PackageIconUrl);projectUrl=$(PackageProjectUrl);description=$(Description);tags=$(PackageTags)</NuspecProperties>
     </PropertyGroup>
   </Target>
   <ItemGroup>

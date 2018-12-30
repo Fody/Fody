@@ -7,7 +7,7 @@
     <NoWarn>CS1591</NoWarn>
     <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
     <NoPackageAnalysis>true</NoPackageAnalysis>
-    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeAllInPackage</TargetsForTfmSpecificContentInPackage>
