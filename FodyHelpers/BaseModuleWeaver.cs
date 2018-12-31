@@ -160,6 +160,4 @@ namespace Fody
         /// </summary>
         public virtual bool ShouldCleanReference => false;
     }
-
-    public delegate bool TryFindTypeFunc(string typeName, out TypeDefinition type);
 }

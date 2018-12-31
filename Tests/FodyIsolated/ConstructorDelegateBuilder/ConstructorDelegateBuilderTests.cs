@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Fody;
 using Xunit;
 
@@ -74,50 +73,5 @@ public class ConstructorDelegateBuilderTests : TestBase
 
     public class NestedPublicClass
     {
-    }
-}
-
-public class WithParamsClass
-{
-    // ReSharper disable once UnusedParameter.Local
-    public WithParamsClass(string foo)
-    {
-
-    }
-}
-
-public class ValidClass:BaseModuleWeaver
-{
-    public override void Execute()
-    {
-    }
-
-    public override IEnumerable<string> GetAssembliesForScanning()
-    {
-     yield break;
-    }
-}
-
-internal class InternalClass: BaseModuleWeaver
-{
-    public override void Execute()
-    {
-    }
-
-    public override IEnumerable<string> GetAssembliesForScanning()
-    {
-        yield break;
-    }
-}
-
-class PrivateClass: BaseModuleWeaver
-{
-    public override void Execute()
-    {
-    }
-
-    public override IEnumerable<string> GetAssembliesForScanning()
-    {
-        yield break;
     }
 }

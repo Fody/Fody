@@ -62,7 +62,6 @@ public class Verifier
         }
         finally
         {
-
             Logger.LogInfo($"  Finished verification in {stopwatch.ElapsedMilliseconds}ms.");
         }
     }

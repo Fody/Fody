@@ -30,7 +30,7 @@ public partial class InnerWeaver
         {
             return Assembly.Load(rawAssembly, File.ReadAllBytes(pdbPath));
         }
-        
+
         var mdbPath = Path.ChangeExtension(assemblyPath, "mdb");
         if (File.Exists(mdbPath))
         {

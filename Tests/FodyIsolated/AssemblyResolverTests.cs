@@ -7,7 +7,7 @@ using Xunit;
 
 public class AssemblyResolverTests : TestBase
 {
-    readonly ILogger logger = new Mock<BuildLogger>(MockBehavior.Loose).Object;
+    ILogger logger = new Mock<BuildLogger>(MockBehavior.Loose).Object;
 
     [Fact]
     public void ShouldFindReferenceByAssemblyName()

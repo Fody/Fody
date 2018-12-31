@@ -24,16 +24,15 @@ public static class ExceptionExtensions
             if (point == null)
             {
                 logger.LogError(exception.Message);
+                return;
             }
-            else
-            {
-                logger.LogError(exception.Message, point.Document.Url, point.StartLine, point.StartColumn, point.EndLine, point.EndColumn);
-            }
+
+            logger.LogError(exception.Message, point.Document.Url, point.StartLine, point.StartColumn, point.EndLine, point.EndColumn);
+
+            return;
         }
-        else
-        {
-            logger.LogError(exception.ToFriendlyString());
-        }
+
+        logger.LogError(exception.ToFriendlyString());
     }
 
     static SequencePoint GetSequencePoint(Exception exception)

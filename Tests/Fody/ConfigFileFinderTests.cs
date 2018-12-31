@@ -7,12 +7,12 @@ using Xunit;
 
 public class ConfigFileFinderTests : IDisposable
 {
-    static readonly XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");
-    static readonly XNamespace schemaInstanceNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema-instance");
+    static XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");
+    static XNamespace schemaInstanceNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema-instance");
 
-    readonly string testDir;
-    readonly string xmlPath;
-    readonly string xsdPath;
+    string testDir;
+    string xmlPath;
+    string xsdPath;
 
     public ConfigFileFinderTests()
     {

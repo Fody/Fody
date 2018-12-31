@@ -63,7 +63,9 @@ public static class ConfigFileFinder
         var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
 
         if (File.Exists(projectConfigFilePath))
+        {
             return new WeaverConfigFile(projectConfigFilePath);
+        }
 
         var root = new XElement("Weavers", SchemaInstanceAttributes);
         var weaverConfig = new XDocument(root);
@@ -99,7 +101,8 @@ public static class ConfigFileFinder
         {
             if (File.Exists(filePath))
             {
-                if (string.Equals(XDocumentEx.Load(filePath).ToString(SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting), schema.ToString(SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting)))
+                const SaveOptions saveOptions = SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting;
+                if (string.Equals(XDocumentEx.Load(filePath).ToString(saveOptions), schema.ToString(saveOptions)))
                 {
                     // don't touch existing file if it is up to date
                     return;
@@ -170,7 +173,7 @@ public static class ConfigFileFinder
         }
         catch
         {
-            // anything wrong with the existing, ignore here, we will warn later...
+            //TODO: anything wrong with the existing, ignore here, we will warn later...
         }
     }
 
@@ -185,10 +188,9 @@ public static class ConfigFileFinder
     }
 
     static XAttribute[] SchemaInstanceAttributes =>
-
         new[]
-    {
-        new XAttribute(XNamespace.Xmlns + "xsi", schemaInstanceNamespace.NamespaceName),
-        new XAttribute(schemaInstanceNamespace.GetName("noNamespaceSchemaLocation"), "FodyWeavers.xsd"),
-    };
+        {
+            new XAttribute(XNamespace.Xmlns + "xsi", schemaInstanceNamespace.NamespaceName),
+            new XAttribute(schemaInstanceNamespace.GetName("noNamespaceSchemaLocation"), "FodyWeavers.xsd"),
+        };
 }

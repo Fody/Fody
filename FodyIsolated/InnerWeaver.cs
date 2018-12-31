@@ -207,8 +207,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         Logger.LogDebug("  Adding weaving info");
         var startNew = Stopwatch.StartNew();
 
-        var typeAttributes = TypeAttributes.NotPublic |
-                             TypeAttributes.Class;
+        const TypeAttributes typeAttributes = TypeAttributes.NotPublic | TypeAttributes.Class;
         var typeDefinition = new TypeDefinition(null, "ProcessedByFody", typeAttributes, TypeSystem.ObjectReference);
         ModuleDefinition.Types.Add(typeDefinition);
 
@@ -235,10 +234,10 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             weaverVersion = fileVersionAttribute.Version;
         }
 
-        var fieldAttributes = FieldAttributes.Assembly |
-                              FieldAttributes.Literal |
-                              FieldAttributes.Static |
-                              FieldAttributes.HasDefault;
+        const FieldAttributes fieldAttributes = FieldAttributes.Assembly |
+                                                FieldAttributes.Literal |
+                                                FieldAttributes.Static |
+                                                FieldAttributes.HasDefault;
         var field = new FieldDefinition(name, fieldAttributes, TypeSystem.StringReference)
         {
             Constant = weaverVersion

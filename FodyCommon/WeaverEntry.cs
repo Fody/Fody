@@ -46,7 +46,7 @@ public class WeaverEntry
 
         if (string.Equals(extension, FodyFileNameSuffix, StringComparison.OrdinalIgnoreCase))
         {
-            assemblyName = Path.GetFileNameWithoutExtension(assemblyName);
+            return Path.GetFileNameWithoutExtension(assemblyName);
         }
 
         return assemblyName;
