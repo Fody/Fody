@@ -56,7 +56,9 @@ namespace Fody
 
         public override bool Execute()
         {
-            var referenceCopyLocalPaths = ReferenceCopyLocalFiles.Select(x => x.ItemSpec).ToList();
+            var referenceCopyLocalPaths = ReferenceCopyLocalFiles
+                .Select(x => x.ItemSpec)
+                .ToList();
             var defineConstants = DefineConstants.GetConstants();
             var buildLogger = new BuildLogger
             {
@@ -92,26 +94,26 @@ namespace Fody
                 {
                     File.WriteAllLines(IntermediateCopyLocalFilesCache, processor.ReferenceCopyLocalPaths);
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
                     buildLogger.LogInfo("ProjectDirectory: " + ProjectDirectory);
                     buildLogger.LogInfo("IntermediateDirectory: " + IntermediateDirectory);
                     buildLogger.LogInfo("CurrentDirectory: " + Directory.GetCurrentDirectory());
                     buildLogger.LogInfo("AssemblyFile: " + AssemblyFile);
                     buildLogger.LogInfo("IntermediateCopyLocalFilesCache: " + IntermediateCopyLocalFilesCache);
-                    buildLogger.LogError("Error writing IntermediateCopyLocalFilesCache: " + ex.Message);
+                    buildLogger.LogError("Error writing IntermediateCopyLocalFilesCache: " + exception.Message);
                     return false;
                 }
-            }
-            else
-            {
-                if (File.Exists(IntermediateCopyLocalFilesCache))
-                {
-                    File.Delete(IntermediateCopyLocalFilesCache);
-                }
+
+                return true;
             }
 
-            return success;
+            if (File.Exists(IntermediateCopyLocalFilesCache))
+            {
+                File.Delete(IntermediateCopyLocalFilesCache);
+            }
+
+            return false;
         }
 
         IEnumerable<WeaverEntry> GetWeaversFromProps()
@@ -122,13 +124,28 @@ namespace Fody
             }
 
             return WeaverFiles
-                .Select(taskItem => new { taskItem.ItemSpec, ClassNames = GetConfiguredClassNames(taskItem) })
-                .SelectMany(entry => entry.ClassNames.Select(className => new WeaverEntry { AssemblyPath = entry.ItemSpec, ConfiguredTypeName = className }));
+                .Select(
+                    taskItem => new
+                    {
+                        taskItem.ItemSpec,
+                        ClassNames = GetConfiguredClassNames(taskItem)
+                    })
+                .SelectMany(entry => entry.ClassNames.Select(
+                    className =>
+                        new WeaverEntry
+                        {
+                            AssemblyPath = entry.ItemSpec,
+                            ConfiguredTypeName = className
+                        }));
         }
 
         static IEnumerable<string> GetConfiguredClassNames(ITaskItem taskItem)
         {
-            return taskItem.GetMetadata("WeaverClassNames").Split(';').Select(name => name.Trim()).Where(name => !string.IsNullOrEmpty(name)).DefaultIfEmpty();
+            return taskItem.GetMetadata("WeaverClassNames")
+                .Split(';')
+                .Select(name => name.Trim())
+                .Where(name => !string.IsNullOrEmpty(name))
+                .DefaultIfEmpty();
         }
 
         DebugSymbolsType GetDebugSymbolsType()
