@@ -22,5 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
     <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" />
   </ItemGroup>
 </Project>
