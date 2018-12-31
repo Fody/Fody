@@ -161,7 +161,9 @@ public static class ConfigFileFinder
             }
 
             var hasNamespace = doc.Root.Attributes()
-                .Any(attr => !attr.IsNamespaceDeclaration && attr.Name.LocalName == "noNamespaceSchemaLocation" && string.Equals(attr.Value, "FodyWeavers.xsd", StringComparison.OrdinalIgnoreCase));
+                .Any(attr => !attr.IsNamespaceDeclaration &&
+                             attr.Name.LocalName == "noNamespaceSchemaLocation" &&
+                             string.Equals(attr.Value, "FodyWeavers.xsd", StringComparison.OrdinalIgnoreCase));
 
             if (!hasNamespace)
             {
