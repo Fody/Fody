@@ -92,7 +92,7 @@ BeforeOutput:
             return Regex.Replace(input, @"\[offset .*\]", "");
         }
 
-        static bool InnerVerify(string assemblyPath, IList<string> ignoreCodes, out string output, string workingDirectory = null)
+        static bool InnerVerify(string assemblyPath, List<string> ignoreCodes, out string output, string workingDirectory = null)
         {
             ignoreCodes.Add("0x80070002");
             ignoreCodes.Add("0x80131252");

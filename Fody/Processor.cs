@@ -15,12 +15,12 @@ public partial class Processor
     public string DocumentationFilePath;
     public string References;
     public string SolutionDirectory;
-    public IList<WeaverEntry> Weavers;
+    public List<WeaverEntry> Weavers;
     public DebugSymbolsType DebugSymbols;
     public List<string> ReferenceCopyLocalPaths;
     public List<string> DefineConstants;
 
-    public IList<WeaverConfigFile> ConfigFiles;
+    public List<WeaverConfigFile> ConfigFiles;
     public Dictionary<string, WeaverConfigEntry> ConfigEntries;
     public bool GenerateXsd;
     IInnerWeaver innerWeaver;
@@ -69,11 +69,14 @@ public partial class Processor
         ValidateProjectPath();
         ValidateAssemblyPath();
 
-        ConfigFiles = ConfigFileFinder.FindWeaverConfigFiles(SolutionDirectory, ProjectDirectory, Logger).ToArray();
+        ConfigFiles = ConfigFileFinder.FindWeaverConfigFiles(SolutionDirectory, ProjectDirectory, Logger).ToList();
 
         if (!ConfigFiles.Any())
         {
-            ConfigFiles = new[] { ConfigFileFinder.GenerateDefault(ProjectDirectory, Weavers, GenerateXsd) };
+            ConfigFiles = new List<WeaverConfigFile>
+            {
+                ConfigFileFinder.GenerateDefault(ProjectDirectory, Weavers, GenerateXsd)
+            };
             Logger.LogWarning($"Could not find a FodyWeavers.xml file at the project level ({ProjectDirectory}). A default file has been created. Please review the file and add it to your project.");
         }
 
@@ -113,7 +116,7 @@ public partial class Processor
         Weavers = Weavers
             .Where(weaver => weaver.Element != null)
             .OrderBy(weaver => weaver.ExecutionOrder)
-            .ToArray();
+            .ToList();
 
         if (TargetAssemblyHasAlreadyBeenProcessed())
         {

@@ -78,7 +78,7 @@ namespace Fody
                 SolutionDirectory = SolutionDirectoryFinder.Find(SolutionDirectory, NCrunchOriginalSolutionDirectory, ProjectDirectory),
                 ReferenceCopyLocalPaths = referenceCopyLocalPaths,
                 DefineConstants = defineConstants,
-                Weavers = GetWeaversFromProps().Distinct(WeaverEntry.NameComparer).ToArray(),
+                Weavers = GetWeaversFromProps().Distinct(WeaverEntry.NameComparer).ToList(),
                 DebugSymbols = GetDebugSymbolsType(),
                 GenerateXsd = GenerateXsd
             };

@@ -58,7 +58,7 @@ public static class ConfigFileFinder
         return entries;
     }
 
-    public static WeaverConfigFile GenerateDefault(string projectDirectory, IEnumerable<WeaverEntry> weaverEntries, bool generateXsd)
+    public static WeaverConfigFile GenerateDefault(string projectDirectory, List<WeaverEntry> weaverEntries, bool generateXsd)
     {
         var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
 
