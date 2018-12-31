@@ -37,6 +37,6 @@ public class SolutionPathValidatorTests : TestBase
 #pragma warning disable xUnit2015 // Do not use typeof expression to check the exception type
         var exception = Assert.Throws(typeof(WeavingException), paramName);
 #pragma warning restore xUnit2015 // Do not use typeof expression to check the exception type
-        Assert.Equal($"SolutionDir \"{Path.GetFullPath("aString")}\" does not exist.", exception.Message);
+        Assert.Equal($"SolutionDir '{Path.GetFullPath("aString")}' does not exist.", exception.Message);
     }
 }
