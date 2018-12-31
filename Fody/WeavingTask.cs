@@ -35,17 +35,10 @@ namespace Fody
         public string NCrunchOriginalSolutionDirectory { get; set; }
         public string SolutionDirectory { get; set; }
 
-        [Required]
-        public string MSBuildThisFileDirectory { get; set; }
-
         public string DefineConstants { get; set; }
-
-        public string Configuration { get; set; }
 
         [Output]
         public string ExecutedWeavers { get; private set; }
-
-        public string NuGetPackageRoot { get; set; }
 
         public string DebugType { get; set; }
 
