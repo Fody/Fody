@@ -69,15 +69,15 @@ public partial class Processor
         ValidateProjectPath();
         ValidateAssemblyPath();
 
-        ConfigFiles = ConfigFile.FindWeaverConfigFiles(SolutionDirectory, ProjectDirectory, Logger).ToArray();
+        ConfigFiles = ConfigFileFinder.FindWeaverConfigFiles(SolutionDirectory, ProjectDirectory, Logger).ToArray();
 
         if (!ConfigFiles.Any())
         {
-            ConfigFiles = new[] { ConfigFile.GenerateDefault(ProjectDirectory, Weavers, GenerateXsd) };
+            ConfigFiles = new[] { ConfigFileFinder.GenerateDefault(ProjectDirectory, Weavers, GenerateXsd) };
             Logger.LogWarning($"Could not find a FodyWeavers.xml file at the project level ({ProjectDirectory}). A default file has been created. Please review the file and add it to your project.");
         }
 
-        ConfigEntries = ConfigFile.ParseWeaverConfigEntries(ConfigFiles, Logger);
+        ConfigEntries = ConfigFileFinder.ParseWeaverConfigEntries(ConfigFiles, Logger);
 
         var extraEntries = ConfigEntries.Values
             .Where(entry => !entry.ConfigFile.IsGlobal && !Weavers.Any(weaver => string.Equals(weaver.ElementName, entry.ElementName)))
@@ -108,7 +108,7 @@ public partial class Processor
             }
         }
 
-        ConfigFile.EnsureSchemaIsUpToDate(ProjectDirectory, Weavers, GenerateXsd);
+        ConfigFileFinder.EnsureSchemaIsUpToDate(ProjectDirectory, Weavers, GenerateXsd);
 
         Weavers = Weavers
             .Where(weaver => weaver.Element != null)

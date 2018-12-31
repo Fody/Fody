@@ -4,28 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-public class WeaverConfigFile
-{
-    public bool IsGlobal;
-    public readonly string FilePath;
-    public readonly XDocument Document;
-
-    public WeaverConfigFile(string filePath)
-    {
-        FilePath = filePath;
-        Document = XDocumentEx.Load(FilePath);
-    }
-}
-
-public class WeaverConfigEntry
-{
-    public WeaverConfigFile ConfigFile;
-    public string ElementName;
-    public string Content;
-    public int ExecutionOrder;
-}
-
-public static class ConfigFile
+public static class ConfigFileFinder
 {
     const string FodyWeaversConfigFileName = "FodyWeavers.xml";
     static readonly XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");

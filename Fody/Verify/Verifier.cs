@@ -69,7 +69,7 @@ public class Verifier
 
     public bool ReadShouldVerifyAssembly(out List<string> ignoreCodes)
     {
-        var weaverConfigs = ConfigFile.FindWeaverConfigFiles(SolutionDirectory, ProjectDirectory, Logger);
+        var weaverConfigs = ConfigFileFinder.FindWeaverConfigFiles(SolutionDirectory, ProjectDirectory, Logger);
 
         ignoreCodes = ExtractVerifyIgnoreCodesConfigs(weaverConfigs).ToList();
 

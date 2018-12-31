@@ -49,9 +49,9 @@ public class ConfigFileFinderTests : IDisposable
             new WeaverEntry { AssemblyPath = Path.Combine(testDir, "WeaverWithSchema.Fody.dll") }
         };
 
-        var configFiles = ConfigFile.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
+        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
 
-        ConfigFile.EnsureSchemaIsUpToDate(testDir, weavers, true);
+        ConfigFileFinder.EnsureSchemaIsUpToDate(testDir, weavers, true);
 
         Assert.Single(configFiles);
         Assert.False(configFiles[0].IsGlobal);
@@ -104,8 +104,8 @@ public class ConfigFileFinderTests : IDisposable
 
         var weavers = new[] { new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" } };
 
-        var configFiles = ConfigFile.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
-        ConfigFile.EnsureSchemaIsUpToDate(testDir, weavers, true);
+        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
+        ConfigFileFinder.EnsureSchemaIsUpToDate(testDir, weavers, true);
 
         Assert.Single(configFiles);
         Assert.Equal(xmlPath, configFiles[0].FilePath);
@@ -128,8 +128,8 @@ public class ConfigFileFinderTests : IDisposable
 
         var weavers = new[] { new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" } };
 
-        var configFiles = ConfigFile.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
-        ConfigFile.EnsureSchemaIsUpToDate(testDir, weavers, false);
+        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
+        ConfigFileFinder.EnsureSchemaIsUpToDate(testDir, weavers, false);
 
         Assert.Single(configFiles);
         Assert.Equal(xmlPath, configFiles[0].FilePath);
@@ -152,8 +152,8 @@ public class ConfigFileFinderTests : IDisposable
 
         var weavers = new[] { new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" } };
 
-        var configs = ConfigFile.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
-        ConfigFile.EnsureSchemaIsUpToDate(testDir, weavers, false);
+        var configs = ConfigFileFinder.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
+        ConfigFileFinder.EnsureSchemaIsUpToDate(testDir, weavers, false);
 
         Assert.Single(configs);
         Assert.Equal(xmlPath, configs[0].FilePath);

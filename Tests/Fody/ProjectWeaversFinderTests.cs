@@ -8,7 +8,7 @@ public class ProjectWeaversFinderTests : TestBase
     {
         var logger = new Mock<BuildLogger>(MockBehavior.Loose).Object;
 
-        var configFiles = ConfigFile.FindWeaverConfigFiles(AssemblyLocation.CurrentDirectory, AssemblyLocation.CurrentDirectory, logger);
+        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(AssemblyLocation.CurrentDirectory, AssemblyLocation.CurrentDirectory, logger);
 
         Assert.Empty(configFiles);
     }
