@@ -77,7 +77,7 @@ public partial class Processor
             Logger.LogWarning($"Could not find a FodyWeavers.xml file at the project level ({ProjectDirectory}). A default file has been created. Please review the file and add it to your project.");
         }
 
-        ConfigEntries = ConfigFileFinder.ParseWeaverConfigEntries(ConfigFiles, Logger);
+        ConfigEntries = ConfigFileFinder.ParseWeaverConfigEntries(ConfigFiles);
 
         var extraEntries = ConfigEntries.Values
             .Where(entry => !entry.ConfigFile.IsGlobal && !Weavers.Any(weaver => string.Equals(weaver.ElementName, entry.ElementName)))

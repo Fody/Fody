@@ -29,7 +29,7 @@ public static class ConfigFileFinder
         }
     }
 
-    public static Dictionary<string, WeaverConfigEntry> ParseWeaverConfigEntries(IEnumerable<WeaverConfigFile> configFiles, ILogger logger)
+    public static Dictionary<string, WeaverConfigEntry> ParseWeaverConfigEntries(IEnumerable<WeaverConfigFile> configFiles)
     {
         var entries = new Dictionary<string, WeaverConfigEntry>(StringComparer.OrdinalIgnoreCase);
         var executionOrders = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
