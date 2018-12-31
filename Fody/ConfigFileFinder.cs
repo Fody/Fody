@@ -33,28 +33,24 @@ public static class ConfigFile
 
     public static IEnumerable<WeaverConfigFile> FindWeaverConfigFiles(string solutionDirectoryPath, string projectDirectory, ILogger logger)
     {
-        {
-            var solutionConfigFilePath = Path.Combine(solutionDirectoryPath, FodyWeaversConfigFileName);
+        var solutionConfigFilePath = Path.Combine(solutionDirectoryPath, FodyWeaversConfigFileName);
 
-            if (File.Exists(solutionConfigFilePath))
-            {
-                logger.LogDebug($"Found path to weavers file '{solutionConfigFilePath}'.");
-                yield return new WeaverConfigFile(solutionConfigFilePath) { IsGlobal = true };
-            }
+        if (File.Exists(solutionConfigFilePath))
+        {
+            logger.LogDebug($"Found path to weavers file '{solutionConfigFilePath}'.");
+            yield return new WeaverConfigFile(solutionConfigFilePath) {IsGlobal = true};
         }
 
-        {
-            var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
+        var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
 
-            if (File.Exists(projectConfigFilePath))
-            {
-                logger.LogDebug($"Found path to weavers file '{projectConfigFilePath}'.");
-                yield return new WeaverConfigFile(projectConfigFilePath);
-            }
+        if (File.Exists(projectConfigFilePath))
+        {
+            logger.LogDebug($"Found path to weavers file '{projectConfigFilePath}'.");
+            yield return new WeaverConfigFile(projectConfigFilePath);
         }
     }
 
-    public static IDictionary<string, WeaverConfigEntry> ParseWeaverConfigEntries(IEnumerable<WeaverConfigFile> configFiles, ILogger logger)
+    public static Dictionary<string, WeaverConfigEntry> ParseWeaverConfigEntries(IEnumerable<WeaverConfigFile> configFiles, ILogger logger)
     {
         var entries = new Dictionary<string, WeaverConfigEntry>(StringComparer.OrdinalIgnoreCase);
         var executionOrders = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
@@ -73,8 +69,8 @@ public static class ConfigFile
                 entries[elementName] = new WeaverConfigEntry
                 {
                     ExecutionOrder = executionOrder,
-                    ConfigFile = configFile, 
-                    ElementName = elementName, 
+                    ConfigFile = configFile,
+                    ElementName = elementName,
                     Content = element.ToString()
                 };
             }

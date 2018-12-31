@@ -21,7 +21,7 @@ public partial class Processor
     public List<string> DefineConstants;
 
     public IList<WeaverConfigFile> ConfigFiles;
-    public IDictionary<string, WeaverConfigEntry> ConfigEntries;
+    public Dictionary<string, WeaverConfigEntry> ConfigEntries;
     public bool GenerateXsd;
     IInnerWeaver innerWeaver;
 
@@ -92,7 +92,7 @@ public partial class Processor
 
         if (Weavers.Count == 0)
         {
-            throw new WeavingException(@"No weavers found." + missingWeaversHelp);
+            throw new WeavingException("No weavers found. " + missingWeaversHelp);
         }
 
         foreach (var weaver in Weavers)
@@ -135,19 +135,7 @@ public partial class Processor
 
     void ExecuteInOwnAssemblyLoadContext()
     {
-        if (solutionAssemblyLoadContexts.TryGetValue(SolutionDirectory, out var loadContext))
-        {
-            if (WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
-            {
-                Logger.LogDebug("A Weaver HasChanged so loading a new AssemblyLoadContext");
-                loadContext.Unload();
-                loadContext = solutionAssemblyLoadContexts[SolutionDirectory] = CreateAssemblyLoadContext();
-            }
-        }
-        else
-        {
-            loadContext = solutionAssemblyLoadContexts[SolutionDirectory] = CreateAssemblyLoadContext();
-        }
+        var loadContext = GetLoadContext();
 
         var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
         using (innerWeaver = (IInnerWeaver)loadContext.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver"))
@@ -171,6 +159,22 @@ public partial class Processor
             ReferenceCopyLocalPaths = innerWeaver.ReferenceCopyLocalPaths;
         }
         innerWeaver = null;
+    }
+
+    IsolatedAssemblyLoadContext GetLoadContext()
+    {
+        if (solutionAssemblyLoadContexts.TryGetValue(SolutionDirectory, out var loadContext))
+        {
+            if (!WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
+            {
+                return loadContext;
+            }
+
+            Logger.LogDebug("A Weaver HasChanged so loading a new AssemblyLoadContext");
+            loadContext.Unload();
+        }
+
+        return solutionAssemblyLoadContexts[SolutionDirectory] = CreateAssemblyLoadContext();
     }
 
     IsolatedAssemblyLoadContext CreateAssemblyLoadContext()
