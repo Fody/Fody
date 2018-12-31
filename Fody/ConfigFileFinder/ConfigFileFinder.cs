@@ -89,7 +89,7 @@ public static class ConfigFileFinder
     {
         var schema = XDocument.Parse(Fody.Properties.Resources.FodyWeavers_SchemaTemplate);
 
-        var baseNode = schema.Descendants().FirstOrDefault(item => item.Name == schemaNamespace.GetName("all"));
+        var baseNode = schema.Descendants().First(item => item.Name == schemaNamespace.GetName("all"));
 
         var fragments = weavers.Select(CreateItemFragment);
 
@@ -97,11 +97,11 @@ public static class ConfigFileFinder
 
         var filePath = Path.ChangeExtension(projectConfigFilePath, ".xsd");
 
+        const SaveOptions saveOptions = SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting;
         try
         {
             if (File.Exists(filePath))
             {
-                const SaveOptions saveOptions = SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting;
                 if (string.Equals(XDocumentEx.Load(filePath).ToString(saveOptions), schema.ToString(saveOptions)))
                 {
                     // don't touch existing file if it is up to date
