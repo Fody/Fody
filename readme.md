@@ -15,7 +15,7 @@ Manipulating the IL of an assembly as part of a build requires a significant amo
 
 ## Community backed
 
-**It is expected that all developers using Fody [become a Patron on OpenCollective](https://opencollective.com/fody/order/3059). [Go to licensing FAQ](https://github.com/Fody/Home/blob/master/licensing-patron-faq.md)**
+**It is expected that all developers using Fody [become a Patron on OpenCollective](https://opencollective.com/fody/order/3059). [Go to licensing FAQ](https://github.com/Fody/Home/blob/master/pages/licensing-patron-faq.md)**
 
 
 ### Platinum Sponsors
@@ -70,7 +70,7 @@ For the generous donation of [ReSharper](https://www.jetbrains.com/resharper/) l
 
 ## Licensing/Patron FAQ
 
-[Moved to Fody/Home: Licensing/Patron FAQ](https://github.com/Fody/Home/blob/master/licensing-patron-faq.md)
+[Moved to Fody/Home: Licensing/Patron FAQ](https://github.com/Fody/Home/blob/master/pages/licensing-patron-faq.md)
 
 
 <a href="#" id="endofbacking"></a>
@@ -228,11 +228,6 @@ Fody Uses [Mono.Cecil](http://www.mono-project.com/Cecil/)  and an add-in based 
  * No install required to build
  * No attributes required
  * No references required
-
-
-## Naming
-
-The name "Fody" comes from the small birds that belong to the weaver family [Ploceidae](http://en.wikipedia.org/wiki/Fody).
 
 
 ## Samples
