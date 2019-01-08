@@ -7,6 +7,8 @@
 
 Manipulating the IL of an assembly as part of a build requires a significant amount of plumbing code. This plumbing code involves knowledge of both the MSBuild and Visual Studio APIs. Fody attempts to eliminate that plumbing code through an extensible add-in model.
 
+**This is the codebase of core Fody engine. For more information on the larger Fody project see https://github.com/Fody/Home.**
+
 
 <!--- StartOpenCollectiveBackers -->
 
@@ -61,20 +63,12 @@ Thanks to all the backers and sponsors! Support this project by [becoming a patr
 <!--- EndOpenCollectiveBackers -->
 
 
-### Thanks to [JetBrains](https://www.jetbrains.com)
-
-For the generous donation of [ReSharper](https://www.jetbrains.com/resharper/) licenses.
-
-<a href="https://www.jetbrains.com/resharper"><img src="http://www.jetbrains.com/img/logos/logo_resharper_small.gif"/></a>
-
-
 ## Licensing/Patron FAQ
 
 [Moved to Fody/Home: Licensing/Patron FAQ](https://github.com/Fody/Home/blob/master/pages/licensing-patron-faq.md)
 
 
 <a href="#" id="endofbacking"></a>
-
 
 
 ## Usage
@@ -137,8 +131,6 @@ e.g.
 ```
 
 See [Configuration](https://github.com/Fody/Fody/wiki/Configuration) in the wiki for additional options.
-
-The [Project Configuration Manager](https://github.com/tom-englert/ProjectConfigurationManager/wiki/6.-Fody) provides an interactive tool that can support you configuring your weavers, which is especially helpful in solutions with many projects.
 
 
 ## Supported Visual Studio Versions
@@ -209,11 +201,6 @@ References
  * [Migrate from project.json to new VS 2017 SDK style projects](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-migrate)
 
 
-## Why?
-
-This technique of "weaving" in new instructions is fantastically powerful. You can turn simple public properties into full [INotifyPropertyChanged implementations](https://github.com/Fody/PropertyChanged), add [checks for null arguments](https://github.com/Fody/NullGuard), add [Git hashes to your Assemblies](https://github.com/Fody/Stamp), even [make all your string comparisons case insensitive](https://github.com/Fody/Caseless).
-
-
 ## The plumbing tasks Fody handles
 
   * Injection of the MSBuild task into the build pipeline
@@ -223,27 +210,16 @@ This technique of "weaving" in new instructions is fantastically powerful. You c
   * Re-applying the strong name if necessary
   * Saving the assembly and pdb
 
-Fody Uses [Mono.Cecil](http://www.mono-project.com/Cecil/)  and an add-in based approach to modifying the IL of .net assemblies at compile time.
+Fody Uses [Mono.Cecil](http://www.mono-project.com/Cecil/) and an add-in based approach to modifying the IL of .net assemblies at compile time.
 
  * No install required to build
  * No attributes required
  * No references required
 
 
-## Samples
-
- * [BasicFodyAddin](https://github.com/Fody/BasicFodyAddin) A simple project meant to illustrate how to build an addin.
- * [FodyAddinSamples](https://github.com/Fody/FodyAddinSamples) is a single solution that contains a working copy of every fody addin.
-
-
 ## Addins List
 
-[Moved to Fody/Home: Addins](https://github.com/Fody/Home/blob/master/pages/addins.md)
-
-
-## Icon
-
-<a href="http://thenounproject.com/noun/bird/#icon-No6726">Bird</a> designed by <a href="http://thenounproject.com/MARCOHS">Marco Hernandez</a> from The Noun Project
+[Moved to Fody/Home: Addins](https://github.com/Fody/Home/blob/master/pages/addins-list.md)
 
 
 ## More Info
