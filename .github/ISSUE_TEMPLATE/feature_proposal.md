@@ -8,7 +8,7 @@ Where it is clear that the below content has not read, the issue is likely to be
 
 #### You should already be a Patron
 
-To be using Fody you should be a [Patron](https://opencollective.com/fody/order/3059). See [Licensing/Patron FAQ](https://github.com/Fody/Fody#licensingpatron-faq). With that in mind, it is assumed anyone proposing a feature is already a Patron. As such your GitHub Id may be verified against [OpenCollective contributors](https://opencollective.com/fody#contributors). This process will depend on the quality of the proposal, your circumstances, and the impact on the larger user base.
+To be using Fody you should be a [Patron](https://opencollective.com/fody/order/3059). See [Licensing/Patron FAQ](https://github.com/Fody/Home/blob/master/pages/licensing-patron-faq.md). With that in mind, it is assumed anyone proposing a feature is already a Patron. As such your GitHub Id may be verified against [OpenCollective contributors](https://opencollective.com/fody#contributors). This process will depend on the quality of the proposal, your circumstances, and the impact on the larger user base.
 
 If you are not able, or don't have the time, to implement the feature, and would prefer someone else implement it for you, consider proposing a [once off donation](https://opencollective.com/fody/donate) amount. When considering the amount, note that features can take many hours to implement.
 
