@@ -54,6 +54,10 @@
 
     </Fody.WeavingTask>
 
+    <ItemGroup>
+      <FileWrites Include="$(IntermediateOutputPath)$(FodyCopyLocalFilesCache)" />
+    </ItemGroup>
+
   </Target>
 
   <Target
