@@ -31,8 +31,6 @@ public partial class Processor
     public BuildLogger Logger;
     static readonly object mutex = new object();
 
-    public ContainsTypeChecker ContainsTypeChecker = new ContainsTypeChecker();
-
     static Processor()
     {
         DomainAssemblyResolver.Connect();
@@ -118,22 +116,10 @@ public partial class Processor
             .OrderBy(weaver => weaver.ExecutionOrder)
             .ToList();
 
-        if (TargetAssemblyHasAlreadyBeenProcessed())
-        {
-            if (WeaversConfigHistory.HasChanged(ConfigFiles) || WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
-            {
-                Logger.LogError("A re-build is required because a weaver has changed.");
-
-                return;
-            }
-        }
-
         lock (mutex)
         {
             ExecuteInOwnAssemblyLoadContext();
         }
-
-        WeaversConfigHistory.RegisterSnapshot(ConfigFiles);
     }
 
     void ExecuteInOwnAssemblyLoadContext()
