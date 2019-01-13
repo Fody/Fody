@@ -220,7 +220,7 @@ Fody Uses [Mono.Cecil](http://www.mono-project.com/Cecil/) and an add-in based a
 
 ## Addins List
 
-[Moved to Fody/Home: Addins](https://github.com/Fody/Home/blob/master/pages/addins-list.md)
+[Moved to Fody/Home: Addins](https://github.com/Fody/Home/blob/master/pages/addins.md)
 
 
 ## More Info
