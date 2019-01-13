@@ -11,8 +11,9 @@
     <FodyGenerateXsd Condition="'$(FodyGenerateXsd)' == ''">true</FodyGenerateXsd>
   </PropertyGroup>
 
-  <ItemGroup>
-    <UpToDateCheckInput Include="$(ProjectWeaverXml)" Condition="Exists('$(ProjectWeaverXml)')" />
+  <ItemGroup Condition="Exists('$(ProjectWeaverXml)')">
+    <UpToDateCheckInput Include="$(ProjectWeaverXml)" />
+    <CustomAdditionalCompileInputs Include="$(ProjectWeaverXml)" />
   </ItemGroup>
 
   <!-- Support for NCrunch -->
