@@ -12,7 +12,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="ApprovalTests" Version="3.0.18" />
     <PackageReference Include="Moq" Version="4.10.1" />
-    <PackageReference Include="ObjectApproval" Version="4.0.0" />
+    <PackageReference Include="ObjectApproval" Version="5.1.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
