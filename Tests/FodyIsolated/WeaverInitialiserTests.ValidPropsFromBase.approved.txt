@@ -1,0 +1,20 @@
+﻿{
+  Config: {
+    foo: null
+  },
+  AssemblyFilePath: 'AssemblyFilePath',
+  ProjectDirectoryPath: 'ProjectDirectoryPath',
+  ProjectFilePath: 'ProjectFilePath',
+  DocumentationFilePath: 'DocumentationFile',
+  AddinDirectoryPath: 'c:\\FakePath',
+  SolutionDirectoryPath: 'SolutionDirectoryPath',
+  References: 'Ref1;Ref2',
+  ReferenceCopyLocalPaths: [
+    'CopyRef1',
+    'CopyRef2'
+  ],
+  DefineConstants: [
+    'Debug',
+    'Release'
+  ]
+}
