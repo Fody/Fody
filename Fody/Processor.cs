@@ -12,6 +12,7 @@ public partial class Processor
     public string KeyFilePath;
     public bool SignAssembly;
     public string ProjectDirectory;
+    public string ProjectFilePath;
     public string DocumentationFilePath;
     public string References;
     public string SolutionDirectory;
@@ -140,6 +141,7 @@ public partial class Processor
             innerWeaver.IntermediateDirectoryPath = IntermediateDirectory;
             innerWeaver.DefineConstants = DefineConstants;
             innerWeaver.ProjectDirectoryPath = ProjectDirectory;
+            innerWeaver.ProjectFilePath = ProjectFilePath;
             innerWeaver.DocumentationFilePath = DocumentationFilePath;
             innerWeaver.DebugSymbols = DebugSymbols;
 

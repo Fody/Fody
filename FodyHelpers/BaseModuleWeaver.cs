@@ -73,9 +73,15 @@ namespace Fody
 
         /// <summary>
         /// The full directory path of the target project.
-        /// A copy of $(ProjectDir).
+        /// A copy of $(MSBuildProjectDirectory).
         /// </summary>
         public string ProjectDirectoryPath { get; set; }
+
+        /// <summary>
+        /// The full file path of the target project.
+        /// A copy of $(MSBuildProjectFullPath).
+        /// </summary>
+        public string ProjectFilePath { get; set; }
 
         /// <summary>
         /// The full directory path of the XML documentation file,

@@ -40,6 +40,7 @@
         KeyOriginatorFile="$(KeyOriginatorFile)"
         AssemblyOriginatorKeyFile="$(AssemblyOriginatorKeyFile)"
         ProjectDirectory="$(MSBuildProjectDirectory)"
+        ProjectFile="$(MSBuildProjectFullPath)"
         SolutionDirectory="$(SolutionDir)"
         References="@(ReferencePath)"
         SignAssembly="$(SignAssembly)"

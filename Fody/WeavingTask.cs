@@ -23,6 +23,9 @@ namespace Fody
         [Required]
         public string ProjectDirectory { get; set; }
 
+        [Required]
+        public string ProjectFile { get; set; }
+
         public string DocumentationFile { get; set; }
 
         [Required]
@@ -66,6 +69,7 @@ namespace Fody
                 KeyFilePath = KeyOriginatorFile ?? AssemblyOriginatorKeyFile,
                 SignAssembly = SignAssembly,
                 ProjectDirectory = ProjectDirectory,
+                ProjectFilePath = ProjectFile,
                 DocumentationFilePath = DocumentationFile,
                 References = References,
                 SolutionDirectory = SolutionDirectoryFinder.Find(SolutionDirectory, NCrunchOriginalSolutionDirectory, ProjectDirectory),

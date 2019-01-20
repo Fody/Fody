@@ -38,6 +38,7 @@ public class WeaverInitialiserTests : TestBase
             Logger = new Mock<ILogger>().Object,
             AssemblyFilePath = "AssemblyFilePath",
             ProjectDirectoryPath = "ProjectDirectoryPath",
+            ProjectFilePath = "ProjectFilePath",
             SolutionDirectoryPath = "SolutionDirectoryPath",
             DocumentationFilePath = "DocumentationFile",
             ReferenceCopyLocalPaths = new List<string>
@@ -77,6 +78,7 @@ public class WeaverInitialiserTests : TestBase
         Assert.Equal(@"c:\FakePath", moduleWeaver.AddinDirectoryPath);
         Assert.Equal("AssemblyFilePath", moduleWeaver.AssemblyFilePath);
         Assert.Equal("ProjectDirectoryPath", moduleWeaver.ProjectDirectoryPath);
+        Assert.Equal("ProjectFilePath", moduleWeaver.ProjectFilePath);
         Assert.Equal("SolutionDirectoryPath", moduleWeaver.SolutionDirectoryPath);
         Assert.Equal("DocumentationFile", moduleWeaver.DocumentationFilePath);
     }

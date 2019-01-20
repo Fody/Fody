@@ -20,6 +20,7 @@ public partial class InnerWeaver
         weaverInstance.ReferenceCopyLocalPaths = ReferenceCopyLocalPaths;
         weaverInstance.SolutionDirectoryPath = SolutionDirectoryPath;
         weaverInstance.ProjectDirectoryPath = ProjectDirectoryPath;
+        weaverInstance.ProjectFilePath = ProjectFilePath;
         weaverInstance.DocumentationFilePath = DocumentationFilePath;
         weaverInstance.LogDebug = message => Logger.LogDebug("  " + message);
         weaverInstance.LogInfo = message => Logger.LogInfo("  " + message);
