@@ -27,13 +27,6 @@ public class WeaverInitialiserTests : TestBase
 
         SerializerBuilder.IgnoreMembersWithType<ModuleDefinition>();
         ObjectApprover.VerifyWithJson(moduleWeaver);
-        Assert.NotNull(moduleWeaver.LogDebug);
-        Assert.NotNull(moduleWeaver.LogInfo);
-        Assert.NotNull(moduleWeaver.LogWarning);
-        Assert.NotNull(moduleWeaver.LogWarningPoint);
-        Assert.NotNull(moduleWeaver.LogError);
-        Assert.NotNull(moduleWeaver.LogErrorPoint);
-        Assert.NotNull(moduleWeaver.LogMessage);
     }
 
     static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, AssemblyResolver resolver)
