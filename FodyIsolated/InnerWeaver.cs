@@ -24,7 +24,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
     public string AssemblyFilePath { get; set; }
     public string SolutionDirectoryPath { get; set; }
     public string References { get; set; }
-    public IList<WeaverEntry> Weavers { get; set; }
+    public List<WeaverEntry> Weavers { get; set; }
     public string KeyFilePath { get; set; }
     public bool SignAssembly { get; set; }
     public ILogger Logger { get; set; }
