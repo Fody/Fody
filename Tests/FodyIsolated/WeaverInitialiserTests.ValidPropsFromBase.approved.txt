@@ -46,7 +46,7 @@
   ProjectDirectoryPath: 'ProjectDirectoryPath',
   ProjectFilePath: 'ProjectFilePath',
   DocumentationFilePath: 'DocumentationFile',
-  AddinDirectoryPath: 'c:\\FakePath',
+  AddinDirectoryPath: 'c:\FakePath',
   SolutionDirectoryPath: 'SolutionDirectoryPath',
   References: 'Ref1;Ref2',
   ReferenceCopyLocalPaths: [
