@@ -47,6 +47,13 @@ namespace Fody
                 string line;
                 while ((line = process.StandardOutput.ReadLine()) != null)
                 {
+                    line=line.Trim();
+
+                    if (line.Length == 0)
+                    {
+                        continue;
+                    }
+
                     if (line.Contains(".line "))
                     {
                         continue;
@@ -63,11 +70,6 @@ namespace Fody
                     }
 
                     if (line.StartsWith("//0"))
-                    {
-                        continue;
-                    }
-
-                    if (line.Trim().Length == 0)
                     {
                         continue;
                     }
