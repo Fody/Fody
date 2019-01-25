@@ -20,7 +20,7 @@ namespace Fody
 
         public static readonly bool FoundIldasm;
 
-        public static string Decompile(string assemblyPath, string identifier = "")
+        public static string Decompile(string assemblyPath, string item = "")
         {
             Guard.AgainstNullAndEmpty(nameof(assemblyPath), assemblyPath);
             if (!FoundIldasm)
@@ -28,14 +28,14 @@ namespace Fody
                 throw new Exception("Could not find find ildasm.exe.");
             }
 
-            if (!string.IsNullOrEmpty(identifier))
+            if (!string.IsNullOrEmpty(item))
             {
-                identifier = $"/item:{identifier}";
+                item = $"/item:{item}";
             }
 
             var startInfo = new ProcessStartInfo(
                 fileName: ildasmPath,
-                arguments: $"\"{assemblyPath}\" /text /linenum /source {identifier}")
+                arguments: $"\"{assemblyPath}\" /text /linenum /source {item}")
             {
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
@@ -47,44 +47,55 @@ namespace Fody
                 string line;
                 while ((line = process.StandardOutput.ReadLine()) != null)
                 {
+                    line=line.Trim();
+
+                    if (line.Length == 0)
+                    {
+                        continue;
+                    }
+
                     if (line.Contains(".line "))
                     {
                         continue;
                     }
+
                     if (line.Contains(".custom instance void ["))
                     {
                         continue;
                     }
+
                     if (line.StartsWith("// "))
                     {
                         continue;
                     }
+
                     if (line.StartsWith("//0"))
                     {
                         continue;
                     }
-                    if (line.Trim().Length == 0)
-                    {
-                        continue;
-                    }
+
                     if (line.StartsWith("  } // end of "))
                     {
                         stringBuilder.AppendLine("  } ");
                         continue;
                     }
+
                     if (line.StartsWith("} // end of "))
                     {
                         stringBuilder.AppendLine("}");
                         continue;
                     }
+
                     if (line.StartsWith("    .get instance "))
                     {
                         continue;
                     }
+
                     if (line.StartsWith("    .set instance "))
                     {
                         continue;
                     }
+
                     if (line.Contains(".language '"))
                     {
                         continue;
@@ -92,6 +103,7 @@ namespace Fody
 
                     stringBuilder.AppendLine(line);
                 }
+
                 return stringBuilder.ToString();
             }
         }
