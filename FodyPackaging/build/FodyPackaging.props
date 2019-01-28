@@ -1,7 +1,6 @@
 <Project>
   <PropertyGroup>
     <PackageId Condition="'$(PackageId)' == ''">$(MSBuildProjectName).Fody</PackageId>
-    <PackageRequireLicenseAcceptance Condition="'$(PackageRequireLicenseAcceptance)' == ''">false</PackageRequireLicenseAcceptance>
     <PackageTags Condition="'$(PackageTags)' == ''">ILWeaving, Fody, Cecil, AOP</PackageTags>
     <FodySolutionDir Condition="'$(FodySolutionDir)' == '' AND '$(SolutionDir)' != '*Undefined*'">$(SolutionDir)</FodySolutionDir>
     <FodySolutionDir Condition="'$(FodySolutionDir)' == ''">$(MSBuildProjectDirectory)</FodySolutionDir>
