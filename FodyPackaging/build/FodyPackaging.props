@@ -32,7 +32,7 @@
 
   <PropertyGroup Condition="'$(GitHubOrganization)' == 'Fody'">
     <PackageIconUrl Condition="'$(PackageIconUrl)' == ''">https://raw.githubusercontent.com/Fody/$(SolutionName)/master/package_icon.png</PackageIconUrl>
-    <PackageLicenseExpression Condition="'$(PackageLicenseUrl)' == '' AND '$(PackageLicenseExpression)' == '' AND '$(PackageLicenseFile)' == ''">MIT</PackageLicenseExpression>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl Condition="'$(PackageProjectUrl)' == ''">http://github.com/Fody/$(SolutionName)</PackageProjectUrl>
   </PropertyGroup>
 
