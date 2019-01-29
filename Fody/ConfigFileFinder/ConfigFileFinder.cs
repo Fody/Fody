@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using Fody;
 
 public static class ConfigFileFinder
 {
@@ -98,20 +99,22 @@ public static class ConfigFileFinder
         var filePath = Path.ChangeExtension(projectConfigFilePath, ".xsd");
 
         const SaveOptions saveOptions = SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting;
-        try
+
+        if (File.Exists(filePath))
         {
-            if (File.Exists(filePath))
+            try
             {
-                if (string.Equals(XDocumentEx.Load(filePath).ToString(saveOptions), schema.ToString(saveOptions)))
+                var existing = XDocumentEx.Load(filePath).ToString(saveOptions);
+                if (string.Equals(existing, schema.ToString(saveOptions)))
                 {
                     // don't touch existing file if it is up to date
                     return;
                 }
             }
-        }
-        catch
-        {
-            // invalid xsd, overwrite always...
+            catch
+            {
+                // invalid xsd, overwrite always...
+            }
         }
 
         schema.Save(filePath, SaveOptions.OmitDuplicateNamespaces);
@@ -127,18 +130,18 @@ public static class ConfigFileFinder
             new XAttribute("minOccurs", 0),
             new XAttribute("maxOccurs", 1));
 
-        var fragmentFileName = Path.ChangeExtension(weaverFile, ".xcf");
+        var fragmentFile = Path.ChangeExtension(weaverFile, ".xcf");
 
-        if (File.Exists(fragmentFileName))
+        if (File.Exists(fragmentFile))
         {
             try
             {
-                element.Add(XElement.Parse(File.ReadAllText(fragmentFileName)));
+                element.Add(XElement.Parse(File.ReadAllText(fragmentFile)));
                 return element;
             }
-            catch
+            catch (Exception exception)
             {
-                // invalid fragment, ignore...
+                throw new WeavingException($"The fragment file ({fragmentFile}) could not be read. Exception message: {exception.Message}");
             }
         }
 
@@ -149,10 +152,9 @@ public static class ConfigFileFinder
 
     public static void EnsureSchemaIsUpToDate(string projectDirectory, IEnumerable<WeaverEntry> weavers, bool defaultGenerateXsd)
     {
+        var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
         try
         {
-            var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
-
             var doc = XDocumentEx.Load(projectConfigFilePath);
 
             if (!ShouldGenerateXsd(doc, defaultGenerateXsd))
@@ -173,9 +175,9 @@ public static class ConfigFileFinder
 
             CreateSchemaForConfig(projectConfigFilePath, weavers);
         }
-        catch
+        catch (Exception exception)
         {
-            //TODO: anything wrong with the existing, ignore here, we will warn later...
+            throw new WeavingException($"Failed to update schema for ({projectConfigFilePath}). Exception message: {exception.Message}");
         }
     }
 

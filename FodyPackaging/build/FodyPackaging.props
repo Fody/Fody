@@ -12,7 +12,7 @@
     <WeaverPropsFile Condition="'$(WeaverPropsFile)' == ''">$(MSBuildThisFileDirectory)..\Weaver.props</WeaverPropsFile>
   </PropertyGroup>
   <ItemGroup>
-    <!-- fake reference to the weaver project to work around this bug https://github.com/Microsoft/msbuild/issues/2661 -->
+    <!-- fake reference to the weaver project to work around https://github.com/Microsoft/msbuild/issues/2661 -->
     <ProjectReference Include="..\$(PackageId)\$(PackageId).csproj"
                       PrivateAssets="All"
                       Condition="$(TargetFramework)=='fake'" />
