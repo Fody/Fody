@@ -64,184 +64,37 @@ Thanks to all the backers and sponsors! Support this project by [becoming a patr
 <!--- EndOpenCollectiveBackers -->
 
 
-## Licensing/Patron FAQ
-
-[Moved to Fody/Home: Licensing/Patron FAQ](https://github.com/Fody/Home/blob/master/pages/licensing-patron-faq.md)
-
-
-<a href="#" id="endofbacking"></a>
-
-
-## Usage
-
-Install using [NuGet](https://docs.microsoft.com/en-au/nuget/). See [Using the package manager console](https://docs.microsoft.com/en-au/nuget/tools/package-manager-console) for more info.
-
-Fody ships in two parts:
-
- 1. The core "engine" shipped in the [Fody NuGet package](https://www.nuget.org/packages/Fody/)
- 1. Any number of ["addins" or "weavers"](#addins-list) which are all shipped in their own NuGet packages.
-
-The below examples will use [Virtuosity](https://github.com/Fody/Virtuosity).
-
-
-### Install Fody
-
-Since NuGet always defaults to the oldest, and most buggy, version of any dependency it is important to do a [NuGet install](https://docs.microsoft.com/en-us/nuget/tools/ps-ref-install-package) of Fody after installing any weaver.
-
-```
-Install-Package Fody
-```
-
-[Subscribe to Fody](https://libraries.io/nuget/Fody) on [Libraries.io](https://libraries.io) to get notified of releases of Fody.
-
-
-### Add the nuget
-
-[Install](https://docs.microsoft.com/en-us/nuget/tools/ps-ref-install-package) the package in the project:
-
-```
-Install-Package WeaverName.Fody
-```
-
-e.g.
-
-```
-Install-Package Virtuosity.Fody
-```
-
-
-### Add FodyWeavers.xml
-
-To indicate what weavers run and in what order a `FodyWeavers.xml` file is used at the project level. It needs to be added manually. It takes the following form:
-
-
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<Weavers>
-  <WeaverName/>
-</Weavers>
-```
-
-e.g.
-
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<Weavers>
-  <Virtuosity/>
-</Weavers>
-```
-
-See [Configuration](https://github.com/Fody/Fody/wiki/Configuration) in the wiki for additional options.
-
-
-## Supported Visual Studio Versions
-
-To build a project using Fody you will need:
-
- * Visual Studio 2017 or later
- * .Net >= 4.6
-
-Older versions of Visual Studio may still work, but are not actively supported. We do our best to not break backward compatibility, but can't guarantee this forever.
-
-
-## Supported Runtimes
-
- * Classic .NET: See *Support ended* in [NET Framework version history](https://en.wikipedia.org/wiki/.NET_Framework_version_history#Overview). i.e only 4.5.2 and above is supported.
- * .NET core: Follows [.NET Core Support Policy](https://www.microsoft.com/net/core/support).
-
-No explicit code is in place to check for non supported versions, and throw an error. As such earlier versions of .net may work as a side effect.
-It's all up to the individual weavers that you use and what version they are able to support.
-
-Any bugs found must be reproduced in a supported version.
-
-Downstream plugins are recommended to follow the above guidelines.
-
-
-### Reasons
-
-While it may seam trivial to "implement support for earlier versions of .net" the long term support implications are too costly. For example to support earlier versions of .net require
-
- * Custom VMs to verify problems.
- * Added complexity to setting up build environment.
- * Bugs in unsupported versions in .NET may be manifest as bugs in Fody.
-
-
-## Edit and continue
-
-Edit and continue is not supported. There is no extension point to re-weave an assembly after the edit part.
-
-
-## Project formats
-
-The following are not supported
-
- * Projects using the [project.json](https://docs.microsoft.com/en-us/nuget/schema/project-json).
- * Projects using the xproj.
- * Projects mixing the old `.csproj` format with new [`<PackageReference>` nodes](https://docs.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files#adding-a-packagereference).
-
-To tell the difference between the old and new csproj formats.
-
-The old format starts with
-
-```
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-```
-
-The new format starts with
-
-```
-<Project Sdk="Microsoft.NET.Sdk">
-```
-
-For all these scenarios is it instead recommended to move to the new VS 2017 SDK style projects.
-
-References
-
- * [Bye-Bye Project.json and .xproj and welcome back .csproj](http://www.talkingdotnet.com/bye-bye-project-json-xproj-welcome-back-csproj/)
- * [Project.json to MSBuild conversion guide](http://www.natemcmaster.com/blog/2017/01/19/project-json-to-csproj/)
- * [Migrate from project.json to new VS 2017 SDK style projects](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-migrate)
-
-
-## The plumbing tasks Fody handles
-
-  * Injection of the MSBuild task into the build pipeline
-  * Resolving the location of the assembly and pdb
-  * Abstracts the complexities of logging to MSBuild
-  * Reads the assembly and pdb into the Mono.Cecil object model
-  * Re-applying the strong name if necessary
-  * Saving the assembly and pdb
-
-Fody Uses [Mono.Cecil](http://www.mono-project.com/Cecil/) and an add-in based approach to modifying the IL of .net assemblies at compile time.
-
- * No install required to build
- * No attributes required
- * No references required
-
-
-## Addins List
-
-[Moved to Fody/Home: Addins](https://github.com/Fody/Home/blob/master/pages/addins.md)
-
-
-## More Info
-
- * [Wiki Home](https://github.com/Fody/Fody/wiki/Home)
- * [Configuration](https://github.com/Fody/Fody/wiki/Configuration)
- * [AddinSearchPaths](https://github.com/Fody/Fody/wiki/AddinSearchPaths)
- * [DeployingAddinsAsNugets](https://github.com/Fody/Fody/wiki/DeployingAddinsAsNugets)
- * [HowToWriteAnAddin](https://github.com/Fody/Fody/wiki/HowToWriteAnAddin)
- * [InSolutionWeaving](https://github.com/Fody/Fody/wiki/InSolutionWeaving)
- * [AssemblyVerification](https://github.com/Fody/Fody/wiki/AssemblyVerification)
- * [ModuleWeaver](https://github.com/Fody/Fody/wiki/ModuleWeaver)
- * [PdbReWritingAndDebugging](https://github.com/Fody/Fody/wiki/PdbReWritingAndDebugging)
- * [SignedAssemblies](https://github.com/Fody/Fody/wiki/SignedAssemblies)
- * [SupportedRuntimesAndIde](https://github.com/Fody/Fody/wiki/SupportedRuntimesAndIde)
- * [TaskAddsAFlagInterface](https://github.com/Fody/Fody/wiki/TaskAddsAFlagInterface)
- * [TaskCouldNotBeLoaded](https://github.com/Fody/Fody/wiki/TaskCouldNotBeLoaded)
- * [WeavingTaskOptions](https://github.com/Fody/Fody/wiki/WeavingTaskOptions)
- * [ThrowingAnExceptionFromAnAddin](https://github.com/Fody/Fody/wiki/ThrowingAnExceptionFromAnAddin)
- * [Mono Support](https://github.com/Fody/Fody/wiki/Mono)
- * [Building From A Network Share](https://github.com/Fody/Fody/wiki/BuildingFromANetworkShare)
+## Documentation and Further Learning
+
+  * [Licensing and patron FAQ](https://github.com/Fody/Home/tree/master/pages/licensing-patron-faq.md)<br>
+    **It is expected that all developers using Fody [become a Patron on OpenCollective](https://opencollective.com/fody/order/3059).** See [Licensing/Patron FAQ](https://github.com/Fody/Home/tree/master/pages/licensing-patron-faq.md) for more information.
+  * [Usage](https://github.com/Fody/Home/tree/master/pages/usage.md)<br>
+    Introduction to using Fody.
+  * [Configuration](https://github.com/Fody/Home/tree/master/pages/configuration.md)<br>
+    All configuration options for Fody.
+  * [Addin discovery](https://github.com/Fody/Home/tree/master/pages/addin-discovery.md)<br>
+    How addins are resolved.
+  * [List of Fody weavers/addins](https://github.com/Fody/Home/tree/master/pages/addins.md)<br>
+  * [FodyAddinSamples](https://github.com/Fody/FodyAddinSamples)<br>
+    A GitHub repo that contains a working sample of every Fody addin.
+  * [Common errors](https://github.com/Fody/Home/tree/master/pages/common-errors.md)
+  * [In solution weaving](https://github.com/Fody/Home/tree/master/pages/in-solution-weaving.md)<br>
+    Writing an addin that manipulates IL within the same solution.
+  * [ProcessedByFody class](https://github.com/Fody/Home/tree/master/pages/processedbyfody-class.md)<br>
+    Marker class added to target assemblies for diagnostic purposes.
+  * [Strong naming](https://github.com/Fody/Home/tree/master/pages/strong-naming.md)
+  * [Supported runtimes and IDE](https://github.com/Fody/Home/tree/master/pages/supported-runtimes-and-ide.md)
+  * [Addin development](https://github.com/Fody/Home/tree/master/pages/addin-development.md)<br>
+    Building a new Fody addin.
+  * [Addin packaging](https://github.com/Fody/Home/tree/master/pages/addin-packaging.md)<br>
+    Packaging and deployment of Fody weavers.
+  * [BasicFodyAddin](/BasicFodyAddin)<br>
+    A simple project meant to illustrate how to build an addin.
+  * [Fody Project Configuration Manager](https://github.com/tom-englert/ProjectConfigurationManager/wiki/6.-Fody)<br>
+    Provides an interactive tool that can support configuring weavers, which is especially helpful in solutions with many projects.
+  * [Backers tracking/info](https://github.com/Fody/Home/tree/master/pages/backers.md)
+  * [Donations](https://github.com/Fody/Home/tree/master/pages/donations.md)<br>
+    Every month the Fody project will donate a portion of funding raised to a charity or other cause.
 
 
 ## Contributors
