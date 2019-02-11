@@ -31,7 +31,7 @@
       Condition="Exists('@(IntermediateAssembly)') And $(DesignTimeBuild) != true And $(DisableFody) != true"
       DependsOnTargets="$(FodyDependsOnTargets)"
       Inputs="@(IntermediateAssembly);$(ProjectWeaverXml)"
-      Outputs="$(TargetPath)">
+      Outputs="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache">
 
     <Fody.WeavingTask
         AssemblyFile="@(IntermediateAssembly)"
