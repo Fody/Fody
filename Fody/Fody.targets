@@ -60,7 +60,7 @@
     </Fody.WeavingTask>
 
     <ItemGroup>
-      <FileWrites Include="$(IntermediateOutputPath)$(FodyCopyLocalFilesCache)" />
+      <FileWrites Include="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache" />
     </ItemGroup>
 
   </Target>
@@ -72,7 +72,7 @@
 
     <Fody.UpdateReferenceCopyLocalTask
         ReferenceCopyLocalFiles="@(ReferenceCopyLocalPaths)"
-        IntermediateCopyLocalFilesCache="$(IntermediateOutputPath)$(FodyCopyLocalFilesCache)"
+        IntermediateCopyLocalFilesCache="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache"
       >
 
       <Output
