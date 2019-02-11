@@ -6,7 +6,6 @@
     <FodyAssemblyDirectory Condition="'$(MSBuildRuntimeType)' == 'Core'">$(FodyPath)netstandardtask</FodyAssemblyDirectory>
     <FodyAssemblyDirectory Condition="'$(MSBuildRuntimeType)' != 'Core'">$(FodyPath)netclassictask</FodyAssemblyDirectory>
     <FodyAssembly Condition="'$(FodyAssembly)' == ''">$(FodyAssemblyDirectory)\Fody.dll</FodyAssembly>
-    <FodyCopyLocalFilesCache Condition="'$(FodyCopyLocalFilesCache)' == ''">$(MSBuildProjectFile).Fody.CopyLocal.cache</FodyCopyLocalFilesCache>
     <DefaultItemExcludes>$(DefaultItemExcludes);FodyWeavers.xsd</DefaultItemExcludes>
     <FodyGenerateXsd Condition="'$(FodyGenerateXsd)' == ''">true</FodyGenerateXsd>
   </PropertyGroup>
@@ -50,7 +49,7 @@
         DocumentationFile="@(DocFileItem->'%(FullPath)')"
         WeaverFiles="@(WeaverFiles)"
         NCrunchOriginalSolutionDirectory="$(NCrunchOriginalSolutionDir)"
-        IntermediateCopyLocalFilesCache="$(IntermediateOutputPath)$(FodyCopyLocalFilesCache)"
+        IntermediateCopyLocalFilesCache="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache"
         GenerateXsd="$(FodyGenerateXsd)"
       >
 
