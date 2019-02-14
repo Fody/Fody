@@ -13,6 +13,8 @@
     <PackageProjectUrl>http://github.com/Fody/Fody</PackageProjectUrl>
     <PackageIconUrl>https://raw.github.com/Fody/Fody/master/package_icon.png</PackageIconUrl>
     <PackageTags>ILWeaving, Fody, Cecil, AOP</PackageTags>
+    <!-- Boost the debugging experience when building weavers -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
   </PropertyGroup>
 
   <Target Name="IncludeAllInPackage">
@@ -22,12 +24,6 @@
                               PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)" />
     </ItemGroup>
   </Target>
-
-  <!-- Boost the debugging experience when building weavers -->
-
-  <PropertyGroup>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-  </PropertyGroup>
 
   <ItemGroup>
     <WeaverFiles Include="$(SolutionDir)SampleWeaver.Fody\bin\$(Configuration)\Net46\SampleWeaver.Fody.dll" />
