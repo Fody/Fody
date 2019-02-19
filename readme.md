@@ -75,6 +75,7 @@ Thanks to all the backers and sponsors! Support this project by [becoming a patr
   * [Addin discovery](https://github.com/Fody/Home/tree/master/pages/addin-discovery.md)<br>
     How addins are resolved.
   * [List of Fody weavers/addins](https://github.com/Fody/Home/tree/master/pages/addins.md)<br>
+  * [Changelog](https://github.com/Fody/Fody/milestones?state=closed)
   * [FodyAddinSamples](https://github.com/Fody/FodyAddinSamples)<br>
     A GitHub repo that contains a working sample of every Fody addin.
   * [Common errors](https://github.com/Fody/Home/tree/master/pages/common-errors.md)
