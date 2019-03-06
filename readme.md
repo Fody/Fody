@@ -22,15 +22,6 @@ Fody requires significant effort to maintain. As such it relies on financial con
 [Go to licensing FAQ](https://github.com/Fody/Home/blob/master/pages/licensing-patron-faq.md) for more information.
 
 
-### Platinum Sponsors
-
-Support this project by [becoming a Platinum Sponsor](https://opencollective.com/fody/order/7089). A banner with your company logo will be added here with a link to your website. A "Sponsored by" text and link will be added to the description of the NuGet Package for the life of your sponsorship. You also get 1 hour of remote support per month.
-
-<!--
-<a href="https://opencollective.com/fody/tiers/platinum/0/website"><img src="https://opencollective.com/fody/tiers/platinum/0/avatar.svg" height="100px"></a>
--->
-
-
 ### Gold Sponsors
 
 Support this project by [becoming a Gold Sponsor](https://opencollective.com/fody/order/7088). A large company logo will be added here with a link to your website.
