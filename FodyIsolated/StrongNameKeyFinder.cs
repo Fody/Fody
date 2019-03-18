@@ -1,7 +1,7 @@
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using Fody;
+using Mono.Cecil;
 
 public partial class InnerWeaver
 {
@@ -25,7 +25,7 @@ public partial class InnerWeaver
             }
 
             var fileBytes = File.ReadAllBytes(keyFilePath);
-            StrongNameKeyPair = new StrongNameKeyPair(fileBytes);
+            StrongNameKeyPair = new Mono.Cecil.StrongNameKeyPair(fileBytes);
 
 #if (!NETSTANDARD)
             //TODO: StrongNameKeyPair.PublicKey doesnt work on netcore
