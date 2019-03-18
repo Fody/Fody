@@ -6,6 +6,9 @@ using Fody;
 public partial class InnerWeaver
 {
     public StrongNameKeyPair StrongNameKeyPair;
+#if (!NETSTANDARD)
+    public byte[] PublicKey;
+#endif
 
     public virtual void FindStrongNameKey()
     {
@@ -24,21 +27,23 @@ public partial class InnerWeaver
             var fileBytes = File.ReadAllBytes(keyFilePath);
             StrongNameKeyPair = new StrongNameKeyPair(fileBytes);
 
+#if (!NETSTANDARD)
             //TODO: StrongNameKeyPair.PublicKey doesnt work on netcore
-            //try
-            //{
-            //    // Ensure that we can generate the public key from the key file. This requires the private key to
-            //    // work. If we cannot generate the public key, an ArgumentException will be thrown. In this case,
-            //    // the assembly is delay-signed with a public only keyfile.
-            //    PublicKey = StrongNameKeyPair.PublicKey;
-            //}
-            //catch(ArgumentException)
-            //{
-            //    // We know that we cannot sign the assembly with this keyfile. Let's assume that it is a public
-            //    // only keyfile and pass along all the bytes.
-            //    StrongNameKeyPair = null;
-            //    PublicKey = fileBytes;
-            //}
+            try
+            {
+                // Ensure that we can generate the public key from the key file. This requires the private key to
+                // work. If we cannot generate the public key, an ArgumentException will be thrown. In this case,
+                // the assembly is delay-signed with a public only keyfile.
+                PublicKey = StrongNameKeyPair.PublicKey;
+            }
+            catch(System.ArgumentException)
+            {
+                // We know that we cannot sign the assembly with this keyfile. Let's assume that it is a public
+                // only keyfile and pass along all the bytes.
+                StrongNameKeyPair = null;
+                PublicKey = fileBytes;
+            }
+#endif
         }
     }
 

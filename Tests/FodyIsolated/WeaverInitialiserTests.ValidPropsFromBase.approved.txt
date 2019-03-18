@@ -5,17 +5,17 @@
   LogDebug: {
     Type: 'Action<String>',
     Target: 'InnerWeaver',
-    Method: 'Void <SetProperties>b__100_0(System.String)'
+    Method: 'Void <SetProperties>b__99_0(System.String)'
   },
   LogInfo: {
     Type: 'Action<String>',
     Target: 'InnerWeaver',
-    Method: 'Void <SetProperties>b__100_1(System.String)'
+    Method: 'Void <SetProperties>b__99_1(System.String)'
   },
   LogMessage: {
     Type: 'Action<String, MessageImportance>',
     Target: 'InnerWeaver',
-    Method: 'Void <SetProperties>b__100_2(System.String, Fody.MessageImportance)'
+    Method: 'Void <SetProperties>b__99_2(System.String, Fody.MessageImportance)'
   },
   LogWarning: {
     Type: 'Action<String>',
@@ -40,7 +40,7 @@
   ResolveAssembly: {
     Type: 'Func<String, AssemblyDefinition>',
     Target: 'InnerWeaver',
-    Method: 'Mono.Cecil.AssemblyDefinition <SetProperties>b__100_3(System.String)'
+    Method: 'Mono.Cecil.AssemblyDefinition <SetProperties>b__99_3(System.String)'
   },
   AssemblyFilePath: 'AssemblyFilePath',
   ProjectDirectoryPath: 'ProjectDirectoryPath',
