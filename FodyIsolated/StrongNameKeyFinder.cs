@@ -1,7 +1,12 @@
 using System.IO;
 using System.Linq;
 using Fody;
-using Mono.Cecil;
+
+#if (NETSTANDARD)
+using StrongNameKeyPair=Mono.Cecil.StrongNameKeyPair;
+#else
+using StrongNameKeyPair=System.Reflection.StrongNameKeyPair;
+#endif
 
 public partial class InnerWeaver
 {
