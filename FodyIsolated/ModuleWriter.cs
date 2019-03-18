@@ -17,7 +17,8 @@ public partial class InnerWeaver
                 SymbolWriterProvider = debugWriterProvider,
             };
 
-        ModuleDefinition.Assembly.Name.PublicKey = PublicKey;
+        //TODO: cecil should handle the patching
+        //ModuleDefinition.Assembly.Name.PublicKey = PublicKey;
         ModuleDefinition.Write(AssemblyFilePath, parameters);
         Logger.LogDebug($"  Finished writing assembly {stopwatch.ElapsedMilliseconds}ms.");
     }
