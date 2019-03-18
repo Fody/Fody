@@ -6,9 +6,7 @@ using Mono.Cecil;
 public partial class InnerWeaver
 {
     public StrongNameKeyPair StrongNameKeyPair;
-#if (!NETSTANDARD)
     public byte[] PublicKey;
-#endif
 
     public virtual void FindStrongNameKey()
     {
@@ -25,10 +23,8 @@ public partial class InnerWeaver
             }
 
             var fileBytes = File.ReadAllBytes(keyFilePath);
-            StrongNameKeyPair = new Mono.Cecil.StrongNameKeyPair(fileBytes);
+            StrongNameKeyPair = new StrongNameKeyPair(fileBytes);
 
-#if (!NETSTANDARD)
-            //TODO: StrongNameKeyPair.PublicKey doesnt work on netcore
             try
             {
                 // Ensure that we can generate the public key from the key file. This requires the private key to
@@ -43,7 +39,6 @@ public partial class InnerWeaver
                 StrongNameKeyPair = null;
                 PublicKey = fileBytes;
             }
-#endif
         }
     }
 
