@@ -26,7 +26,16 @@ public class WeaverInitialiserTests : TestBase
         innerWeaver.SetProperties(weaverEntry, moduleWeaver);
 
         SerializerBuilder.IgnoreMembersWithType<ModuleDefinition>();
-        ObjectApprover.VerifyWithJson(moduleWeaver);
+        ObjectApprover.VerifyWithJson(moduleWeaver,
+            x=>x
+                .Replace("<SetProperties>b__99_0","SetProperties")
+                .Replace("<SetProperties>b__100_0","SetProperties")
+                .Replace("<SetProperties>b__99_1","SetProperties")
+                .Replace("<SetProperties>b__100_1","SetProperties")
+                .Replace("<SetProperties>b__99_2","SetProperties")
+                .Replace("<SetProperties>b__100_2","SetProperties")
+                .Replace("<SetProperties>b__99_3","SetProperties")
+                .Replace("<SetProperties>b__100_3","SetProperties"));
     }
 
     static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, AssemblyResolver resolver)

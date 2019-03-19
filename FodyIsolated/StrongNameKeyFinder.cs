@@ -1,8 +1,12 @@
-using System;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using Fody;
+
+#if (NETSTANDARD)
+using StrongNameKeyPair=Mono.Cecil.StrongNameKeyPair;
+#else
+using StrongNameKeyPair=System.Reflection.StrongNameKeyPair;
+#endif
 
 public partial class InnerWeaver
 {
@@ -33,7 +37,7 @@ public partial class InnerWeaver
                 // the assembly is delay-signed with a public only keyfile.
                 PublicKey = StrongNameKeyPair.PublicKey;
             }
-            catch(ArgumentException)
+            catch(System.ArgumentException)
             {
                 // We know that we cannot sign the assembly with this keyfile. Let's assume that it is a public
                 // only keyfile and pass along all the bytes.

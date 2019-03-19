@@ -10,9 +10,9 @@ public partial class InnerWeaver
 
         var parameters = new WriterParameters
             {
-#if NET46
+#pragma warning disable 618
                 StrongNameKeyPair = StrongNameKeyPair,
-#endif
+#pragma warning restore 618
                 WriteSymbols = debugWriterProvider != null,
                 SymbolWriterProvider = debugWriterProvider,
             };
