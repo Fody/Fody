@@ -85,7 +85,7 @@ public partial class Processor
             .Where(entry => !entry.ConfigFile.IsGlobal && !Weavers.Any(weaver => string.Equals(weaver.ElementName, entry.ElementName)))
             .ToArray();
 
-        const string missingWeaversHelp = "Add the desired weavers via their nuget package; see https://github.com/Fody/Fody/wiki on how to migrate InSolution, custom or legacy weavers.";
+        const string missingWeaversHelp = "Add the desired weavers via their nuget package.";
 
         if (extraEntries.Any())
         {
