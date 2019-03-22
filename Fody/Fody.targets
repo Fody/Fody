@@ -1,7 +1,7 @@
 ﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <ProjectWeaverXml Condition="$(ProjectWeaverXml) == '' Or $(ProjectWeaverXml) == '*Undefined*'">$(ProjectDir)FodyWeavers.xml</ProjectWeaverXml>
+    <ProjectWeaverXml Condition="'$(ProjectWeaverXml)' == ''">$(ProjectDir)FodyWeavers.xml</ProjectWeaverXml>
     <FodyPath Condition="$(FodyPath) == '' Or $(FodyPath) == '*Undefined*'">$(MSBuildThisFileDirectory)..\</FodyPath>
     <FodyAssemblyDirectory Condition="'$(MSBuildRuntimeType)' == 'Core'">$(FodyPath)netstandardtask</FodyAssemblyDirectory>
     <FodyAssemblyDirectory Condition="'$(MSBuildRuntimeType)' != 'Core'">$(FodyPath)netclassictask</FodyAssemblyDirectory>
