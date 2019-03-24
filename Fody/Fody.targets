@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <ProjectWeaverXml Condition="'$(ProjectWeaverXml)' == ''">$(ProjectDir)FodyWeavers.xml</ProjectWeaverXml>
-    <FodyPath Condition="$(FodyPath) == '' Or $(FodyPath) == '*Undefined*'">$(MSBuildThisFileDirectory)..\</FodyPath>
+    <FodyPath Condition="'$(FodyPath)' == ''">$(MSBuildThisFileDirectory)..\</FodyPath>
     <FodyAssemblyDirectory Condition="'$(MSBuildRuntimeType)' == 'Core'">$(FodyPath)netstandardtask</FodyAssemblyDirectory>
     <FodyAssemblyDirectory Condition="'$(MSBuildRuntimeType)' != 'Core'">$(FodyPath)netclassictask</FodyAssemblyDirectory>
     <FodyAssembly Condition="'$(FodyAssembly)' == ''">$(FodyAssemblyDirectory)\Fody.dll</FodyAssembly>
