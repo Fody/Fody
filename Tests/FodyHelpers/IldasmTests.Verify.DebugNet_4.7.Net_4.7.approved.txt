@@ -1,0 +1,65 @@
+﻿.assembly extern mscorlib
+{
+.publickeytoken = (B7 7A 5C 56 19 34 E0 89 )                         // .z\V.4..
+.ver 4:0:0:0
+}
+.assembly DummyAssembly
+{
+63 65 70 74 69 6F 6E 54 68 72 6F 77 73 01 )       // ceptionThrows.
+2C 56 65 72 73 69 6F 6E 3D 76 34 2E 36 01 00 54   // ,Version=v4.6..T
+0E 14 46 72 61 6D 65 77 6F 72 6B 44 69 73 70 6C   // ..FrameworkDispl
+61 79 4E 61 6D 65 12 2E 4E 45 54 20 46 72 61 6D   // ayName..NET Fram
+65 77 6F 72 6B 20 34 2E 36 )                      // ework 4.6
+.hash algorithm 0x00008004
+.ver 0:0:0:0
+}
+.module DummyAssembly.dll
+.imagebase 0x10000000
+.file alignment 0x00000200
+.stackreserve 0x00100000
+.subsystem 0x0003       // WINDOWS_CUI
+.corflags 0x00000001    //  ILONLY
+.class public auto ansi beforefieldinit DummyAssembly.Class1
+extends [mscorlib]System.Object
+{
+.field private int32 'field'
+.method public hidebysig instance void
+Method(int32 param) cil managed
+{
+.maxstack  3
+.locals init (bool V_0)
+IL_0000:  nop
+IL_0001:  ldarg.0
+IL_0002:  ldarg.1
+IL_0003:  stfld      int32 DummyAssembly.Class1::'field'
+IL_0008:  ldarg.1
+IL_0009:  ldc.i4.1
+IL_000a:  add
+IL_000b:  starg.s    param
+IL_000d:  ldarg.1
+IL_000e:  ldarg.0
+IL_000f:  ldfld      int32 DummyAssembly.Class1::'field'
+IL_0014:  ceq
+IL_0016:  stloc.0
+IL_0017:  ldloc.0
+IL_0018:  brfalse.s  IL_002a
+IL_001a:  nop
+IL_001b:  ldarg.0
+IL_001c:  ldarg.0
+IL_001d:  ldfld      int32 DummyAssembly.Class1::'field'
+IL_0022:  ldc.i4.1
+IL_0023:  sub
+IL_0024:  stfld      int32 DummyAssembly.Class1::'field'
+IL_0029:  nop
+IL_002a:  ret
+}
+.method public hidebysig specialname rtspecialname
+instance void  .ctor() cil managed
+{
+.maxstack  8
+IL_0000:  ldarg.0
+IL_0001:  call       instance void [mscorlib]System.Object::.ctor()
+IL_0006:  nop
+IL_0007:  ret
+}
+}

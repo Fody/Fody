@@ -7,18 +7,31 @@ using Xunit;
 // ReSharper disable UnusedVariable
 
 #pragma warning disable 618
-public class IldasmTests : TestBase
+public class IldasmTests :
+    TestBase,
+    IDisposable
 {
+    IDisposable disposable;
+
     [Fact]
     public void StaticPathResolution()
     {
         Assert.True(Ildasm.FoundIldasm);
     }
 
+    public IldasmTests()
+    {
+#if DEBUG
+        disposable = NamerFactory.AsEnvironmentSpecificTest(() => "Debug" + ApprovalResults.GetDotNetRuntime(true));
+#else
+        disposable = NamerFactory.AsEnvironmentSpecificTest(() => "Release" + ApprovalResults.GetDotNetRuntime(true));
+#endif
+    }
+
     [Fact]
     public void VerifyMethod()
     {
-        var verify = Ildasm.Decompile(GetAssemblyPath(),"DummyAssembly.Class1::Method");
+        var verify = Ildasm.Decompile(GetAssemblyPath(), "DummyAssembly.Class1::Method");
         using (ApprovalResults.UniqueForRuntime())
         {
             Approvals.Verify(verify);
@@ -41,5 +54,10 @@ public class IldasmTests : TestBase
 
         var uri = new UriBuilder(assembly.CodeBase);
         return Uri.UnescapeDataString(uri.Path);
+    }
+
+    public void Dispose()
+    {
+        disposable.Dispose();
     }
 }
