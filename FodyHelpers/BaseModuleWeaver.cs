@@ -11,10 +11,12 @@ namespace Fody
     /// </summary>
     public abstract class BaseModuleWeaver
     {
+        static XElement Empty = new XElement("Empty");
+
         /// <summary>
         /// The full element XML from FodyWeavers.xml.
         /// </summary>
-        public XElement Config { get; set; }
+        public XElement Config { get; set; } = Empty;
 
         /// <summary>
         /// Handler for writing a log entry at the <see cref="MessageImportance.Low"/> level.
