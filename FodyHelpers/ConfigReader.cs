@@ -1,3 +1,5 @@
+using System;
+using System.Linq.Expressions;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -9,6 +11,7 @@ namespace Fody
     /// </summary>
     public static class ConfigReader
     {
+
         /// <summary>
         /// Read a bool from an attribute named <paramref name="name"/>.
         /// </summary>

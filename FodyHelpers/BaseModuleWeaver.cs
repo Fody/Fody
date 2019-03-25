@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
@@ -9,15 +8,8 @@ namespace Fody
     /// <summary>
     /// Base class for module weavers.
     /// </summary>
-    public abstract class BaseModuleWeaver
+    public abstract partial class BaseModuleWeaver
     {
-        static XElement Empty = new XElement("Empty");
-
-        /// <summary>
-        /// The full element XML from FodyWeavers.xml.
-        /// </summary>
-        public XElement Config { get; set; } = Empty;
-
         /// <summary>
         /// Handler for writing a log entry at the <see cref="MessageImportance.Low"/> level.
         /// </summary>
