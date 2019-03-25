@@ -88,7 +88,6 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         return null;
     }
 
-#pragma warning disable 618
     public TypeCache TypeCache;
     public void Execute()
     {

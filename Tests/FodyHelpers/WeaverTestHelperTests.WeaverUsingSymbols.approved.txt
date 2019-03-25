@@ -8,5 +8,5 @@
   ],
   Warnings: [],
   AssemblyPath: '\fodytemp\DummyAssembly.dll',
-  FullName: 'DummyAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+  FullName: 'DummyAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=1ca091877d12ca03'
 }

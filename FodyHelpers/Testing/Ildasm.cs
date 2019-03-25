@@ -2,8 +2,6 @@
 using System.Diagnostics;
 using System.Text;
 
-#pragma warning disable 618
-
 namespace Fody
 {
     /// <summary>

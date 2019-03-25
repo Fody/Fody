@@ -74,9 +74,7 @@ namespace Fody
 
             try
             {
-#pragma warning disable 618
                 return Assembly.LoadWithPartialName(name);
-#pragma warning restore 618
             }
             catch (FileNotFoundException)
             {

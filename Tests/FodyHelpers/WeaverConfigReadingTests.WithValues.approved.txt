@@ -1,0 +1,4 @@
+﻿{
+  BoolMember: true,
+  StringMember: 'Foo'
+}

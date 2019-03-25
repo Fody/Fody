@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Fody;
-#pragma warning disable 618
 
 public class Verifier
 {
