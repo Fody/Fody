@@ -1,9 +1,6 @@
-using System;
-using System.Linq.Expressions;
 using System.Xml;
 using System.Xml.Linq;
 
-#pragma warning disable 618
 namespace Fody
 {
     /// <summary>

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Xml.Linq;
-using Mono.Cecil;
-using Mono.Cecil.Cil;
+using SetBool = System.Action<Fody.BaseModuleWeaver, bool>;
+using GetBool = System.Func<Fody.BaseModuleWeaver, bool>;
 
 namespace Fody
 {
@@ -21,7 +19,7 @@ namespace Fody
         static ParameterExpression targetParameter = Expression.Parameter(typeof(BaseModuleWeaver));
         static ParameterExpression boolParameter = Expression.Parameter(typeof(bool));
 
-        ConcurrentDictionary<Tuple<Type,string>, Action<BaseModuleWeaver, bool>> boolSetters = new ConcurrentDictionary<Tuple<Type,string>, Action<BaseModuleWeaver, bool>>();
+        static ConcurrentDictionary<(Type, string member), (GetBool getter, SetBool setter)> boolAccessor = new ConcurrentDictionary<(Type, string member), (GetBool, SetBool)>();
 
         /// <summary>
         /// Assign a field from <see cref="Config"/>.
@@ -29,18 +27,22 @@ namespace Fody
         protected void AssignFromConfig(Expression<Func<bool>> field)
         {
             Guard.AgainstNull(nameof(field), field);
+
             var memberExpression = (MemberExpression) field.Body;
-            var compile = field.Compile();
+            var name = memberExpression.Member.Name;
 
-            var value = Config.ReadBool(memberExpression.Member.Name, compile());
-            var assignExp = Expression.Assign(memberExpression, boolParameter);
+            var accessor = boolAccessor.GetOrAdd((GetType(), name),
+                x =>
+                {
+                    var getLambda = Expression.Lambda<GetBool>(memberExpression, targetParameter);
 
-            var setterExpression = Expression.Lambda<Action<BaseModuleWeaver, bool>>(assignExp, targetParameter, boolParameter);
-            var setter = setterExpression.Compile();
+                    var assignExp = Expression.Assign(memberExpression, boolParameter);
+                    var setLambda = Expression.Lambda<SetBool>(assignExp, targetParameter, boolParameter);
+                    return (getLambda.Compile(), setLambda.Compile());
+                });
 
-            setter(this, value);
-
-            Debug.WriteLine(value);
+            var value = accessor.getter(this);
+            accessor.setter(this, value);
         }
     }
 }

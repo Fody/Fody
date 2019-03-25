@@ -31,7 +31,6 @@ public class WeaverInitialiserTests : TestBase
 
     static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, AssemblyResolver resolver)
     {
-#pragma warning disable 618
         return new InnerWeaver
         {
             Logger = new Mock<ILogger>().Object,

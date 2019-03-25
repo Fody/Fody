@@ -5,9 +5,6 @@ using ObjectApproval;
 using Xunit;
 // ReSharper disable UnusedVariable
 
-//using Xunit;
-
-#pragma warning disable 618
 public class WeaverTestHelperTests : TestBase
 {
     [Fact]
