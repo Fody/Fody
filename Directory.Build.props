@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
   <PropertyGroup>
-    <Version>4.2.1</Version>
+    <Version>5.0.0-beta.1</Version>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <LangVersion>latest</LangVersion>
     <NoWarn>CS1591;CS0618</NoWarn>
@@ -26,11 +26,11 @@
   </Target>
 
   <ItemGroup>
-    <WeaverFiles Include="$(SolutionDir)SampleWeaver.Fody\bin\$(Configuration)\Net46\SampleWeaver.Fody.dll" />
+    <WeaverFiles Include="$(SolutionDir)SampleWeaver.Fody\bin\$(Configuration)\Net472\SampleWeaver.Fody.dll" />
   </ItemGroup>
 
   <PropertyGroup>
-    <FodyAssembly>$(SolutionDir)Fody\bin\$(Configuration)\Net46\Fody.dll</FodyAssembly>
+    <FodyAssembly>$(SolutionDir)Fody\bin\$(Configuration)\Net472\Fody.dll</FodyAssembly>
   </PropertyGroup>
 
 </Project>
