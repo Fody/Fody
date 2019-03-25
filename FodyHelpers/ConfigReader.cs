@@ -14,10 +14,7 @@ namespace Fody
         /// </summary>
         public static bool ReadBool(this XElement element, string name, bool defaultValue = false)
         {
-            if (element == null)
-            {
-                return defaultValue;
-            }
+            Guard.AgainstNull(nameof(element), element);
             Guard.AgainstNullAndEmpty(nameof(name), name);
             var attribute = element.Attribute(name);
             if (attribute == null)
