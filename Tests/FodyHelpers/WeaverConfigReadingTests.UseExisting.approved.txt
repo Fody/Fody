@@ -1,4 +1,4 @@
 ﻿{
   BoolMember: true,
-  StringMember: 'Foo'
+  StringMember: 'foo'
 }
