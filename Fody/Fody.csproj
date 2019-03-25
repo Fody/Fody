@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
     <Description>Extensible tool for weaving .net assemblies.</Description>
@@ -23,7 +23,7 @@
   <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0'">
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="15.9.20" PrivateAssets="All" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework) == 'net46'">
+  <ItemGroup Condition="$(TargetFramework) == 'net472'">
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Tasks.v4.0" />

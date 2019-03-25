@@ -6,10 +6,10 @@
 .assembly DummyAssembly
 {
 63 65 70 74 69 6F 6E 54 68 72 6F 77 73 01 )       // ceptionThrows.
-2C 56 65 72 73 69 6F 6E 3D 76 34 2E 36 01 00 54   // ,Version=v4.6..T
-0E 14 46 72 61 6D 65 77 6F 72 6B 44 69 73 70 6C   // ..FrameworkDispl
-61 79 4E 61 6D 65 12 2E 4E 45 54 20 46 72 61 6D   // ayName..NET Fram
-65 77 6F 72 6B 20 34 2E 36 )                      // ework 4.6
+2C 56 65 72 73 69 6F 6E 3D 76 34 2E 37 2E 32 01   // ,Version=v4.7.2.
+00 54 0E 14 46 72 61 6D 65 77 6F 72 6B 44 69 73   // .T..FrameworkDis
+70 6C 61 79 4E 61 6D 65 14 2E 4E 45 54 20 46 72   // playName..NET Fr
+61 6D 65 77 6F 72 6B 20 34 2E 37 2E 32 )          // amework 4.7.2
 .hash algorithm 0x00008004
 .ver 0:0:0:0
 }

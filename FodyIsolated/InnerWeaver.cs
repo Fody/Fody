@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-#if NET46
+#if NET472
 using System.Runtime.Remoting;
 #endif
 using Fody;
@@ -14,7 +14,6 @@ using Mono.Cecil.Pdb;
 using Mono.Cecil.Rocks;
 using FieldAttributes = Mono.Cecil.FieldAttributes;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
-#pragma warning disable 618
 
 public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 {
@@ -292,7 +291,7 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
 
     public void Dispose()
     {
-#if NET46
+#if NET472
         //Disconnects the remoting channel(s) of this object and all nested objects.
         RemotingServices.Disconnect(this);
 #endif

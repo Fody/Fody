@@ -1,4 +1,4 @@
-﻿#if NET46
+﻿#if NET472
 using System;
 public class IsolatedAssemblyLoadContext
 {
