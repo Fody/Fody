@@ -5,9 +5,9 @@
       <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2*\$(PackageId).dll" />
     </ItemGroup>
 
-    <Error Text="FodyPackaging: No NetClassic weavers found to include in package. Maybe the build order is wrong?"
+    <Error Text="FodyPackaging: No NetClassic weaver found. $(ProjectName) should have a Project Dependency on $(PackageId)."
            Condition="'@(NetClassicFilesToInclude)'==''" />
-    <Error Text="FodyPackaging: No NetStandard weavers found to include in package. Maybe the build order is wrong?"
+    <Error Text="FodyPackaging: No NetStandard weaver found. $(ProjectName) should have a Project Dependency on $(PackageId)."
            Condition="'@(NetStandardFilesToInclude)'==''" />
 
     <ItemGroup>
