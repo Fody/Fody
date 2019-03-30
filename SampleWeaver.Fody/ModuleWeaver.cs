@@ -4,30 +4,30 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using Fody;
-
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 
-public class ModuleWeaver : BaseModuleWeaver
+public class ModuleWeaver :
+    BaseModuleWeaver
 {
     public override void Execute()
     {
-        var typeDefinition = new TypeDefinition("SampleWeaverTest", "Configuration", TypeAttributes.Class | TypeAttributes.NotPublic | TypeAttributes.Sealed | TypeAttributes.Abstract | TypeAttributes.AutoClass | TypeAttributes.AnsiClass, TypeSystem.ObjectReference);
+        var type = new TypeDefinition("SampleWeaverTest", "Configuration", TypeAttributes.Class | TypeAttributes.NotPublic | TypeAttributes.Sealed | TypeAttributes.Abstract | TypeAttributes.AutoClass | TypeAttributes.AnsiClass, TypeSystem.ObjectReference);
         var contentFieldDefinition = new FieldDefinition("Content", FieldAttributes.Public | FieldAttributes.Static, TypeSystem.StringReference);
         var propertyFieldDefinition = new FieldDefinition("PropertyValue", FieldAttributes.Public | FieldAttributes.Static, TypeSystem.StringReference);
-        var methodDefinition = new MethodDefinition(".cctor", MethodAttributes.Static | MethodAttributes.Private | MethodAttributes.HideBySig | MethodAttributes.RTSpecialName | MethodAttributes.SpecialName, TypeSystem.VoidReference);
+        var method = new MethodDefinition(".cctor", MethodAttributes.Static | MethodAttributes.Private | MethodAttributes.HideBySig | MethodAttributes.RTSpecialName | MethodAttributes.SpecialName, TypeSystem.VoidReference);
 
-        methodDefinition.Body.Instructions.Add(Instruction.Create(OpCodes.Ldstr, Config?.ToString() ?? "Missing"));
-        methodDefinition.Body.Instructions.Add(Instruction.Create(OpCodes.Stsfld, contentFieldDefinition));
-        methodDefinition.Body.Instructions.Add(Instruction.Create(OpCodes.Ldstr, Config?.Attribute("MyProperty")?.Value ?? "Missing"));
-        methodDefinition.Body.Instructions.Add(Instruction.Create(OpCodes.Stsfld, propertyFieldDefinition));
-        methodDefinition.Body.Instructions.Add(Instruction.Create(OpCodes.Ret));
+        var instructions = method.Body.Instructions;
+        instructions.Add(Instruction.Create(OpCodes.Ldstr, Config?.ToString() ?? "Missing"));
+        instructions.Add(Instruction.Create(OpCodes.Stsfld, contentFieldDefinition));
+        instructions.Add(Instruction.Create(OpCodes.Ldstr, Config?.Attribute("MyProperty")?.Value ?? "Missing"));
+        instructions.Add(Instruction.Create(OpCodes.Stsfld, propertyFieldDefinition));
+        instructions.Add(Instruction.Create(OpCodes.Ret));
 
-        typeDefinition.Fields.Add(contentFieldDefinition);
-        typeDefinition.Fields.Add(propertyFieldDefinition);
-        typeDefinition.Methods.Add(methodDefinition);
-        ModuleDefinition.Types.Add(typeDefinition);
-
+        type.Fields.Add(contentFieldDefinition);
+        type.Fields.Add(propertyFieldDefinition);
+        type.Methods.Add(method);
+        ModuleDefinition.Types.Add(type);
 
         var intermediateFolder = Path.GetDirectoryName(ModuleDefinition.FileName);
         var additionalFilePath = Path.Combine(intermediateFolder, "SomeExtraFile.txt");
@@ -38,21 +38,23 @@ public class ModuleWeaver : BaseModuleWeaver
         var customAttributes = ModuleDefinition.Assembly.CustomAttributes;
 
         var sampleAttr = customAttributes.FirstOrDefault(attr => attr.AttributeType.Name == "SampleAttribute");
-        if (sampleAttr != null)
+        if (sampleAttr == null)
         {
-            customAttributes.Remove(sampleAttr);
-            var filePath = sampleAttr.AttributeType.Resolve().Module.FileName;
+            return;
+        }
 
-            ReferenceCopyLocalPaths.Remove(filePath);
-            ReferenceCopyLocalPaths.Remove(Path.ChangeExtension(filePath, ".pdb"));
-            ReferenceCopyLocalPaths.Remove(Path.ChangeExtension(filePath, ".xml"));
+        customAttributes.Remove(sampleAttr);
+        var filePath = sampleAttr.AttributeType.Resolve().Module.FileName;
 
-            // Do not use ShouldCleanReference in order to test the above code
-            var assemblyRef = ModuleDefinition.AssemblyReferences.FirstOrDefault(i => i.Name == "SampleWeaver");
-            if (assemblyRef != null)
-            {
-                ModuleDefinition.AssemblyReferences.Remove(assemblyRef);
-            }
+        ReferenceCopyLocalPaths.Remove(filePath);
+        ReferenceCopyLocalPaths.Remove(Path.ChangeExtension(filePath, ".pdb"));
+        ReferenceCopyLocalPaths.Remove(Path.ChangeExtension(filePath, ".xml"));
+
+        // Do not use ShouldCleanReference in order to test the above code
+        var assemblyRef = ModuleDefinition.AssemblyReferences.FirstOrDefault(i => i.Name == "SampleWeaver");
+        if (assemblyRef != null)
+        {
+            ModuleDefinition.AssemblyReferences.Remove(assemblyRef);
         }
     }
 
