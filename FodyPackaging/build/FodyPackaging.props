@@ -11,10 +11,4 @@
     <WeaverDirPath Condition="'$(WeaverDirPath)' == ''">..\$(PackageId)\bin\$(Configuration)\</WeaverDirPath>
     <WeaverPropsFile Condition="'$(WeaverPropsFile)' == ''">$(MSBuildThisFileDirectory)..\Weaver.props</WeaverPropsFile>
   </PropertyGroup>
-  <ItemGroup>
-    <!-- fake reference to the weaver project to work around https://github.com/Microsoft/msbuild/issues/2661 -->
-    <ProjectReference Include="..\$(PackageId)\$(PackageId).csproj"
-                      PrivateAssets="All"
-                      Condition="$(TargetFramework)=='fake'" />
-  </ItemGroup>
 </Project>
