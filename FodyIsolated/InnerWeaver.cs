@@ -144,18 +144,18 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             Logger.LogDebug($"Weaver '{weaverConfig.AssemblyPath}'.");
             Logger.LogDebug("  Initializing weaver");
             var assembly = LoadWeaverAssembly(weaverConfig.AssemblyPath);
-            var weaverType = assembly.FindType(weaverConfig.TypeName);
+            var type = assembly.FindType(weaverConfig.TypeName);
 
-            var delegateHolder = weaverType.GetDelegateHolderFromCache();
-            var weaverInstance = delegateHolder();
-            var weaverHolder = new WeaverHolder
+            var accessor = type.GetAccessorFromCache();
+            var instance = accessor.Constructor();
+            var holder = new WeaverHolder
             {
-                Instance = weaverInstance,
+                Instance = instance,
                 Config = weaverConfig
             };
-            weaverInstances.Add(weaverHolder);
+            weaverInstances.Add(holder);
 
-            SetProperties(weaverConfig, weaverInstance);
+            SetProperties(weaverConfig, instance);
         }
     }
 
