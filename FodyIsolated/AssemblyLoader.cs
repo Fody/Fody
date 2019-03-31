@@ -17,7 +17,6 @@ public partial class InnerWeaver
         Logger.LogDebug($"  Loading '{assemblyPath}' from disk.");
         var loadFromFile = LoadFromFile(assemblyPath);
 
-        CecilVersionChecker.VerifyCecilReference(loadFromFile);
         return assemblies[assemblyPath] = loadFromFile;
     }
 
