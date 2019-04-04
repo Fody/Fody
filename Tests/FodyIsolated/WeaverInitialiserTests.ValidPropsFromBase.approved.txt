@@ -1,4 +1,7 @@
 ﻿{
+  Config: {
+    foo: null
+  },
   LogDebug: {
     Type: 'Action<String>',
     Target: 'InnerWeaver',
@@ -63,8 +66,5 @@
     Type: 'TryFindTypeFunc',
     Target: 'TypeCache',
     Method: 'Boolean TryFindType(System.String, Mono.Cecil.TypeDefinition ByRef)'
-  },
-  Config: {
-    foo: null
   }
 }
