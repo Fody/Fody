@@ -6,7 +6,7 @@ using Moq;
 using ObjectApproval;
 using Xunit;
 
-public class WeaverInitialiserTests : TestBase
+public class WeaverInitialiserTests
 {
     [Fact]
     public void ValidPropsFromBase()

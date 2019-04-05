@@ -2,7 +2,7 @@ using ApprovalTests;
 using Fody;
 using Xunit;
 
-public class ProjectWeaversReaderTests : TestBase
+public class ProjectWeaversReaderTests
 {
     [Fact]
     public void Invalid()

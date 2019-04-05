@@ -4,10 +4,10 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-public class AssemblyVersionTests : TestBase
+public class AssemblyVersionTests
 {
     [Fact]
-    void ShouldReadTheSameFodyCommonVersionInfoFromAssemblyAttributeAndFile()
+    public void ShouldReadTheSameFodyCommonVersionInfoFromAssemblyAttributeAndFile()
     {
         var asm = Assembly.Load("FodyCommon");
         var attrs = asm.GetCustomAttributes(typeof(AssemblyFileVersionAttribute));

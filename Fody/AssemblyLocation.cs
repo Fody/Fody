@@ -15,5 +15,5 @@ public static class AssemblyLocation
         CurrentDirectory = Path.GetDirectoryName(path);
     }
 
-    public static string CurrentDirectory;
+    public static readonly string CurrentDirectory;
 }

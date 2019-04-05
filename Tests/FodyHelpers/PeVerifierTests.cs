@@ -6,8 +6,9 @@ using Mono.Cecil;
 using Xunit;
 // ReSharper disable UnusedVariable
 
-public class PeVerifierTests : TestBase
+public class PeVerifierTests
 {
+    string assemblyPath = "Tests.dll";
     [Fact]
     public void StaticPathResolution()
     {
@@ -17,7 +18,7 @@ public class PeVerifierTests : TestBase
     [Fact]
     public void Should_verify_current_assembly()
     {
-        var verify = PeVerifier.Verify(GetAssemblyPath(), GetIgnoreCodes(), out var output);
+        var verify = PeVerifier.Verify(assemblyPath, GetIgnoreCodes(), out var output);
         Assert.True(verify);
         Assert.NotNull(output);
     }
@@ -25,7 +26,6 @@ public class PeVerifierTests : TestBase
     [Fact]
     public void Same_assembly_should_not_throw()
     {
-        var assemblyPath = GetAssemblyPath().ToLowerInvariant();
         Directory.CreateDirectory("temp");
         var newAssemblyPath = Path.GetFullPath("temp/temp.dll");
         File.Copy(assemblyPath, newAssemblyPath, true);
@@ -36,7 +36,7 @@ public class PeVerifierTests : TestBase
 
     static string[] GetIgnoreCodes()
     {
-        return new[] { "0x80070002", "0x80131869" };
+        return new[] {"0x80070002", "0x80131869"};
     }
 
     [Fact]
@@ -53,7 +53,6 @@ public class PeVerifierTests : TestBase
     [Fact]
     public void Invalid_assembly_should_throw()
     {
-        var assemblyPath = GetAssemblyPath().ToLowerInvariant();
         Directory.CreateDirectory("temp");
         var newAssemblyPath = Path.GetFullPath("temp/temp.dll");
         File.Copy(assemblyPath, newAssemblyPath, true);
@@ -65,13 +64,5 @@ public class PeVerifierTests : TestBase
 
         Assert.Throws<Exception>(() => PeVerifier.ThrowIfDifferent(assemblyPath, newAssemblyPath));
         File.Delete(newAssemblyPath);
-    }
-
-    static string GetAssemblyPath()
-    {
-        var assembly = typeof(TestBase).Assembly;
-
-        var uri = new UriBuilder(assembly.CodeBase);
-        return Uri.UnescapeDataString(uri.Path);
     }
 }

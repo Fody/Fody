@@ -2,7 +2,7 @@ using System;
 using Moq;
 using Xunit;
 
-public class ProjectWeaversFinderTests : TestBase
+public class ProjectWeaversFinderTests
 {
     [Fact]
     public void NotFound()

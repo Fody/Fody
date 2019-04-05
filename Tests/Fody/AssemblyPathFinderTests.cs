@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Xunit;
 
-public class AssemblyLocationTests : TestBase
+public class AssemblyLocationTests
 {
     [Fact]
     public void Foo()

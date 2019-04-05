@@ -2,7 +2,7 @@ using System.Linq;
 using Fody;
 using Xunit;
 
-public class ReferenceTests : TestBase
+public class ReferenceTests
 {
     [Fact]
     public void Ensure_fody_has_no_reference_to_Cecil()

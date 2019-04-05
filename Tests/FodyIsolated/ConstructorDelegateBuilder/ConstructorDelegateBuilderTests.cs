@@ -2,7 +2,7 @@ using System;
 using Fody;
 using Xunit;
 
-public class ConstructorDelegateBuilderTests : TestBase
+public class ConstructorDelegateBuilderTests
 {
     [Fact]
     public void Should_throw_When_is_abstract_type()

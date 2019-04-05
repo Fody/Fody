@@ -1,8 +1,7 @@
-using System.IO;
 using System.Linq;
 using Xunit;
 
-public class VerifierTests : TestBase
+public class VerifierTests
 {
     [Fact]
     public void ExtractVerifyAssemblyFromConfig_NotExists()

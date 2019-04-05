@@ -5,7 +5,7 @@ using DummyAssembly;
 using Moq;
 using Xunit;
 
-public class AssemblyResolverTests : TestBase
+public class AssemblyResolverTests
 {
     ILogger logger = new Mock<BuildLogger>(MockBehavior.Loose).Object;
 

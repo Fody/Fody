@@ -7,7 +7,6 @@ using Xunit;
 // ReSharper disable UnusedVariable
 
 public class IldasmTests :
-    TestBase,
     IDisposable
 {
     IDisposable disposable;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.IO;
 
 [Obsolete("Not for public use")]
 public static class Guard
@@ -25,6 +26,15 @@ public static class Guard
         if (value !=null && string.IsNullOrWhiteSpace(value))
         {
             throw new ArgumentNullException(argumentName);
+        }
+    }
+
+    public static void FileExists(string argumentName, string path)
+    {
+        Guard.AgainstNullAndEmpty(nameof(path),path);
+        if (!File.Exists(path))
+        {
+            throw new ArgumentException($"File not found. Path: {path}");
         }
     }
 

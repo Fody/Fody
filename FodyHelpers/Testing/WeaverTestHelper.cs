@@ -23,7 +23,7 @@ namespace Fody
             IEnumerable<string> ignoreCodes = null)
         {
             assemblyPath = Path.GetFullPath(assemblyPath);
-            Guard.AgainstEmpty(nameof(assemblyPath), assemblyPath);
+            Guard.FileExists(nameof(assemblyPath), assemblyPath);
             var fodyTempDir = Path.Combine(Path.GetDirectoryName(assemblyPath), "fodytemp");
             Directory.CreateDirectory(fodyTempDir);
 

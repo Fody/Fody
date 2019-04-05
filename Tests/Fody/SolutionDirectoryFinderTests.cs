@@ -2,7 +2,7 @@
 using System.IO;
 using Xunit;
 
-public class SolutionDirectoryFinderTests : TestBase
+public class SolutionDirectoryFinderTests
 {
     [Fact]
     public void ReturnNCrunchSolutionWhenPresent()

@@ -1,6 +1,6 @@
 using Xunit;
 
-public class TypeFinderTest : TestBase
+public class TypeFinderTest
 {
     [Fact]
     public void Valid()

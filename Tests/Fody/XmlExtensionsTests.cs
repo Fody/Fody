@@ -3,7 +3,7 @@ using System.Linq;
 using System.Xml.Linq;
 using Xunit;
 
-public class XmlExtensionsTests : TestBase
+public class XmlExtensionsTests
 {
     [Fact]
     public void Simple()

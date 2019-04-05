@@ -4,7 +4,7 @@ using Fody;
 using Moq;
 using Xunit;
 
-public class SolutionPathValidatorTests : TestBase
+public class SolutionPathValidatorTests
 {
     [Fact]
     public void Valid()

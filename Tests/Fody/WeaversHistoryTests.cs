@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Xunit;
 
-public class WeaversHistoryTests : TestBase
+public class WeaversHistoryTests
 {
     [Fact]
     public void AddNewFile()

@@ -5,7 +5,7 @@ using ObjectApproval;
 using Xunit;
 // ReSharper disable UnusedVariable
 
-public class WeaverTestHelperTests : TestBase
+public class WeaverTestHelperTests
 {
     [Fact]
     public void Run()
