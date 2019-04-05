@@ -40,7 +40,7 @@ public class AssemblyResolverTests : TestBase
     [Fact]
     public void ShouldGuessTheAssemblyNameFromTheFileNameIfTheAssemblyCannotBeLoaded()
     {
-        var resolver = new AssemblyResolver(logger, new[] {Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\BadAssembly.dll")});
+        var resolver = new AssemblyResolver(logger, new[] {@"Fody\BadAssembly.dll"});
         Assert.ThrowsAny<Exception>(() => resolver.Resolve("BadAssembly"));
     }
 }
