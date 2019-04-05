@@ -10,9 +10,8 @@ public class WeaverTestHelperTests
     [Fact]
     public void Run()
     {
-        var assemblyPath = Path.Combine(CodeBaseLocation.CurrentDirectory, "DummyAssembly.dll");
         var weaver = new TargetWeaver();
-        var result = weaver.ExecuteTestRun(assemblyPath);
+        var result = weaver.ExecuteTestRun("DummyAssembly.dll");
         Verify(result);
     }
 
@@ -31,13 +30,13 @@ public class WeaverTestHelperTests
 
     static string ScrubCurrentDirectory(string s)
     {
-        return s.Replace(@"\\", @"\").Replace(CodeBaseLocation.CurrentDirectory, "");
+        return s.Replace(@"\\", @"\").Replace(Environment.CurrentDirectory, "");
     }
 
     [Fact]
     public void WithCustomAssemblyName()
     {
-        var assemblyPath = Path.Combine(CodeBaseLocation.CurrentDirectory, "DummyAssembly.dll");
+        var assemblyPath = Path.Combine(Environment.CurrentDirectory, "DummyAssembly.dll");
         var weaver = new TargetWeaver();
         var result = weaver.ExecuteTestRun(
             assemblyPath: assemblyPath,
@@ -49,7 +48,7 @@ public class WeaverTestHelperTests
     public void WeaverUsingSymbols()
     {
         var start = DateTime.Now;
-        var assemblyPath = Path.Combine(CodeBaseLocation.CurrentDirectory, "DummyAssembly.dll");
+        var assemblyPath = Path.Combine(Environment.CurrentDirectory, "DummyAssembly.dll");
         var weaver = new WeaverUsingSymbols();
         var result = weaver.ExecuteTestRun(assemblyPath);
 
