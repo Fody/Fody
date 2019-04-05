@@ -31,14 +31,14 @@ public class AssemblyResolverTests : TestBase
     }
 
     [Fact]
-    void ShouldReturnNullWhenTheAssemblyIsNotFound()
+    public void ShouldReturnNullWhenTheAssemblyIsNotFound()
     {
         var resolver = new AssemblyResolver(logger, Enumerable.Empty<string>());
         Assert.Null(resolver.Resolve("SomeNonExistingAssembly"));
     }
 
     [Fact]
-    void ShouldGuessTheAssemblyNameFromTheFileNameIfTheAssemblyCannotBeLoaded()
+    public void ShouldGuessTheAssemblyNameFromTheFileNameIfTheAssemblyCannotBeLoaded()
     {
         var resolver = new AssemblyResolver(logger, new[] {Path.Combine(AssemblyLocation.CurrentDirectory, @"Fody\BadAssembly.dll")});
         Assert.ThrowsAny<Exception>(() => resolver.Resolve("BadAssembly"));
