@@ -6,7 +6,7 @@ public class ToFriendlyStringTests : TestBase
     [Fact(Skip = "todo")]
     public void ToFriendlyName()
     {
-        var currentDirectory = AssemblyLocation.CurrentDirectory.ToLowerInvariant()
+        var currentDirectory = Environment.CurrentDirectory.ToLowerInvariant()
             .Replace(@"bin\debug", string.Empty)
             .Replace(@"bin\release", string.Empty);
         try
