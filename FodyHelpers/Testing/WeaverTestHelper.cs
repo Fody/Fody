@@ -22,7 +22,8 @@ namespace Fody
             string assemblyName = null,
             IEnumerable<string> ignoreCodes = null)
         {
-            assemblyPath = Path.Combine(CodeBaseLocation.CurrentDirectory, assemblyPath);
+            assemblyPath = Path.GetFullPath(assemblyPath);
+            Guard.AgainstEmpty(nameof(assemblyPath), assemblyPath);
             var fodyTempDir = Path.Combine(Path.GetDirectoryName(assemblyPath), "fodytemp");
             Directory.CreateDirectory(fodyTempDir);
 
