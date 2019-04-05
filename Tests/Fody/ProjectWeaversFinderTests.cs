@@ -1,3 +1,4 @@
+using System;
 using Moq;
 using Xunit;
 
@@ -8,7 +9,7 @@ public class ProjectWeaversFinderTests : TestBase
     {
         var logger = new Mock<BuildLogger>(MockBehavior.Loose).Object;
 
-        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(AssemblyLocation.CurrentDirectory, AssemblyLocation.CurrentDirectory, logger);
+        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(Environment.CurrentDirectory, Environment.CurrentDirectory, logger);
 
         Assert.Empty(configFiles);
     }
