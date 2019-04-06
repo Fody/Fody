@@ -15,11 +15,10 @@ public partial class InnerWeaver
 
         if (debugReaderProvider != null && DebugSymbols != DebugSymbolsType.Embedded)
         {
-            var symbolsPath = pdbFound ? pdbPath : mdbPath;
-            tempSymbols = $"{symbolsPath}.tmp";
-            if (File.Exists(symbolsPath))
+            tempSymbols = $"{pdbPath}.tmp";
+            if (File.Exists(pdbPath))
             {
-                File.Copy(symbolsPath, tempSymbols, true);
+                File.Copy(pdbPath, tempSymbols, true);
                 SymbolStream = FileEx.OpenRead(tempSymbols);
             }
         }

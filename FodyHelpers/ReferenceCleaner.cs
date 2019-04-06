@@ -27,8 +27,7 @@ static class ReferenceCleaner
         {
             weaverLibName + ".dll",
             weaverLibName + ".xml",
-            weaverLibName + ".pdb",
-            weaverLibName + ".mdb" // TODO: Remove this when mdb becomes redundant
+            weaverLibName + ".pdb"
         };
 
         weaver.ReferenceCopyLocalPaths.RemoveAll(refPath => copyLocalFilesToRemove.Contains(Path.GetFileName(refPath)));

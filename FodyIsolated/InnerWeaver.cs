@@ -9,7 +9,6 @@ using System.Runtime.Remoting;
 #endif
 using Fody;
 using Mono.Cecil;
-using Mono.Cecil.Mdb;
 using Mono.Cecil.Pdb;
 using Mono.Cecil.Rocks;
 using FieldAttributes = Mono.Cecil.FieldAttributes;
@@ -57,11 +56,6 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         if (assemblyName == "Mono.Cecil.Pdb")
         {
             return typeof(PdbReaderProvider).Assembly;
-        }
-
-        if (assemblyName == "Mono.Cecil.Mdb")
-        {
-            return typeof(MdbReaderProvider).Assembly;
         }
 
         foreach (var weaverPath in Weavers.Select(x => x.AssemblyPath))
