@@ -61,7 +61,7 @@ namespace Fody
                 return false;
             }
 
-            assemblyLocation = assembly.GetAssemblyLocation();
+            assemblyLocation = assembly.Location;
             return true;
         }
 
