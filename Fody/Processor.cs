@@ -15,7 +15,6 @@ public partial class Processor
     public string References = null!;
     public string SolutionDirectory = null!;
     public List<WeaverEntry> Weavers = null!;
-    public DebugSymbolsType DebugSymbols;
     public List<string> ReferenceCopyLocalPaths = null!;
     public List<string> DefineConstants = null!;
 
@@ -140,7 +139,6 @@ public partial class Processor
             innerWeaver.ProjectDirectoryPath = ProjectDirectory;
             innerWeaver.ProjectFilePath = ProjectFilePath;
             innerWeaver.DocumentationFilePath = DocumentationFilePath;
-            innerWeaver.DebugSymbols = DebugSymbols;
 
             innerWeaver.Execute();
 
