@@ -1,23 +1,17 @@
 <Project>
   <Target Name="IncludeFodyFiles">
-    <ItemGroup>
-      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net472\$(PackageId).dll" />
-      <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2.0\$(PackageId).dll" />
-    </ItemGroup>
+    <PropertyGroup>
+      <WeaverFile>$(WeaverDirPath)\netstandard2.0\$(PackageId).dll</WeaverFile>
+    </PropertyGroup>
 
-    <Error Text="FodyPackaging: No NetClassic weaver found. $(ProjectName) should have a Project Dependency on $(PackageId)."
-           Condition="'@(NetClassicFilesToInclude)'==''" />
-    <Error Text="FodyPackaging: No NetStandard weaver found. $(ProjectName) should have a Project Dependency on $(PackageId)."
-           Condition="'@(NetStandardFilesToInclude)'==''" />
+    <Error Text="FodyPackaging: No weaver found at $(WeaverFile). $(ProjectName) should have a Project Dependency on $(PackageId)."
+           Condition="!Exists($(WeaverFile))" />
 
     <ItemGroup>
-      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net472\$(PackageId).xcf" />
-      <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2.0\$(PackageId).xcf" />
-
-      <TfmSpecificPackageFile Include="@(NetClassicFilesToInclude)"
-                              PackagePath="netclassicweaver\%(Filename)%(Extension)" />
-      <TfmSpecificPackageFile Include="@(NetStandardFilesToInclude)"
-                              PackagePath="netstandardweaver\%(Filename)%(Extension)" />
+      <TfmSpecificPackageFile Include="$(WeaverDirPath)\netstandard2.0\$(PackageId).xcf"
+                              PackagePath="weaver\$(PackageId).xcf" />
+      <TfmSpecificPackageFile Include="$(WeaverFile)"
+                              PackagePath="weaver\$(PackageId).dll" />
       <TfmSpecificPackageFile Include="$(WeaverPropsFile)"
                               PackagePath="build\$(PackageId).props" />
     </ItemGroup>
