@@ -6,12 +6,15 @@ using System.Linq;
 using Fody;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
+using Mono.Cecil.Rocks;
 
 public class ModuleWeaver :
     BaseModuleWeaver
 {
     public override void Execute()
     {
+        VerifySymbols();
+
         var type = new TypeDefinition("SampleWeaverTest", "Configuration", TypeAttributes.Class | TypeAttributes.NotPublic | TypeAttributes.Sealed | TypeAttributes.Abstract | TypeAttributes.AutoClass | TypeAttributes.AnsiClass, TypeSystem.ObjectReference);
         var contentField = new FieldDefinition("Content", FieldAttributes.Public | FieldAttributes.Static, TypeSystem.StringReference);
         var propertyField = new FieldDefinition("PropertyValue", FieldAttributes.Public | FieldAttributes.Static, TypeSystem.StringReference);
@@ -55,6 +58,44 @@ public class ModuleWeaver :
         if (assemblyRef != null)
         {
             ModuleDefinition.AssemblyReferences.Remove(assemblyRef);
+        }
+    }
+
+    void VerifySymbols()
+    {
+        LogInfo("Verify Symbols");
+
+        var anyMethod = ModuleDefinition.GetTypes()
+            .Where(type => type.IsClass)
+            .SelectMany(type => type.GetMethods())
+            .FirstOrDefault();
+
+        if (anyMethod == null)
+        {
+            LogInfo("Assembly has no type with a method, symbol verifying skipped");
+            return;
+        }
+
+        var shouldHaveSymbols = ModuleDefinition.Assembly.CustomAttributes.All(attr => attr.AttributeType.Name != "NoSymbolsMarkerAttribute");
+        LogInfo("Assembly should have symbols: " + shouldHaveSymbols);
+        var hasSymbols = HasSymbols(anyMethod);
+        LogInfo("Assembly has symbols: " + hasSymbols);
+
+        if (shouldHaveSymbols != hasSymbols)
+        {
+            LogError($"Unexpected symbols in assembly {ModuleDefinition.FileName}, should have: {shouldHaveSymbols}, but has: {hasSymbols}");
+        }
+    }
+
+    bool HasSymbols(MethodDefinition method)
+    {
+        try
+        {
+            return ModuleDefinition.SymbolReader.Read(method).HasSequencePoints;
+        }
+        catch
+        {
+            return false;
         }
     }
 
