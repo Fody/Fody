@@ -1,7 +1,3 @@
 <Project>
-  <Target
-    Name="ErrorForMultiFrameworkTarget"
-    AfterTargets="AfterCompile">
-    <Error Text="FodyPackaging expects the weaving project to target only netstandard2.0 in a TargetFramework node: &lt;TargetFramework&gt;netstandard2.0&lt;/TargetFramework&gt;" />
-  </Target>
+  <Import Project="../build/FodyPackaging.targets" />
 </Project>
