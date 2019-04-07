@@ -1,8 +1,7 @@
 ﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <WeaverRuntimeToken Condition="$(MSBuildRuntimeType) != 'Core'">netclassicweaver</WeaverRuntimeToken>
-    <WeaverRuntimeToken Condition="$(MSBuildRuntimeType) == 'Core'">netstandardweaver</WeaverRuntimeToken>
+    <WeaverRuntimeToken>netstandardweaver</WeaverRuntimeToken>
   </PropertyGroup>
 
   <ItemGroup>

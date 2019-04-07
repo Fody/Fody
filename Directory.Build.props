@@ -27,11 +27,11 @@
   </Target>
 
   <ItemGroup>
-    <WeaverFiles Include="$(SolutionDir)SampleWeaver.Fody\bin\$(Configuration)\Net472\SampleWeaver.Fody.dll" />
+    <WeaverFiles Include="$(SolutionDir)SampleWeaver.Fody\bin\$(Configuration)\netstandard2.0\SampleWeaver.Fody.dll" />
   </ItemGroup>
 
   <PropertyGroup>
-    <FodyAssembly>$(SolutionDir)Fody\bin\$(Configuration)\Net472\Fody.dll</FodyAssembly>
+    <FodyAssembly>$(SolutionDir)Fody\bin\$(Configuration)\netstandard2.0\Fody.dll</FodyAssembly>
   </PropertyGroup>
 
 </Project>
