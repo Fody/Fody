@@ -1,7 +1,7 @@
 <Project>
   <Target Name="IncludeFodyFiles">
     <ItemGroup>
-      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net475\$(PackageId).dll" />
+      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net472\$(PackageId).dll" />
       <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2.0\$(PackageId).dll" />
     </ItemGroup>
 
@@ -11,7 +11,7 @@
            Condition="'@(NetStandardFilesToInclude)'==''" />
 
     <ItemGroup>
-      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net475\$(PackageId).xcf" />
+      <NetClassicFilesToInclude Include="$(WeaverDirPath)\net472\$(PackageId).xcf" />
       <NetStandardFilesToInclude Include="$(WeaverDirPath)\netstandard2.0\$(PackageId).xcf" />
 
       <TfmSpecificPackageFile Include="@(NetClassicFilesToInclude)"
