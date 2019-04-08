@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
 using Fody;
 
@@ -77,6 +78,15 @@ public static class ConfigFileFinder
 
         root.Add(elements);
         weaverConfig.Save(projectConfigFilePath);
+
+        var writerSettings = new XmlWriterSettings
+        {
+            OmitXmlDeclaration = true
+        };
+        using (var writer = XmlWriter.Create(projectConfigFilePath, writerSettings))
+        {
+            weaverConfig.Save(writer);
+        }
 
         if (generateXsd)
         {

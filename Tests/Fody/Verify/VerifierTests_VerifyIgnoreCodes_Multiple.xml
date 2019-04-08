@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Weavers VerifyIgnoreCodes="myignorecode1,myignorecode2">
+﻿<Weavers VerifyIgnoreCodes="myignorecode1,myignorecode2">
   <ModuleInit />
   <Anotar.Catel />
 </Weavers>
