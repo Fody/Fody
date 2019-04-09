@@ -81,7 +81,8 @@ public static class ConfigFileFinder
 
         var writerSettings = new XmlWriterSettings
         {
-            OmitXmlDeclaration = true
+            OmitXmlDeclaration = true,
+            Indent = true
         };
         using (var writer = XmlWriter.Create(projectConfigFilePath, writerSettings))
         {
