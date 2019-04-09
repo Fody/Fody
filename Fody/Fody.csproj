@@ -18,15 +18,8 @@
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" PrivateAssets="All" />
     <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" PrivateAssets="All" />
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" PrivateAssets="All" />
-  </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0'">
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.0.461" PrivateAssets="All" />
-  </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework) == 'net472'">
-    <Reference Include="Microsoft.Build" />
-    <Reference Include="Microsoft.Build.Framework" />
-    <Reference Include="Microsoft.Build.Tasks.v4.0" />
-    <Reference Include="Microsoft.Build.Utilities.v4.0" />
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
@@ -40,9 +33,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" />
   </ItemGroup>
 
   <Target Name="PreparePackagesForIntegrationSolution" BeforeTargets="GenerateNuspec">
