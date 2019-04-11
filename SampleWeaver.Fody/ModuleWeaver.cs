@@ -13,7 +13,7 @@ public class ModuleWeaver :
 {
     public override void Execute()
     {
-        VerifySymbols();
+        ValidateSymbols();
 
         var type = new TypeDefinition("SampleWeaverTest", "Configuration", TypeAttributes.Class | TypeAttributes.NotPublic | TypeAttributes.Sealed | TypeAttributes.Abstract | TypeAttributes.AutoClass | TypeAttributes.AnsiClass, TypeSystem.ObjectReference);
         var contentField = new FieldDefinition("Content", FieldAttributes.Public | FieldAttributes.Static, TypeSystem.StringReference);
@@ -61,42 +61,46 @@ public class ModuleWeaver :
         }
     }
 
-    void VerifySymbols()
+    void ValidateSymbols()
     {
-        LogInfo("Verify Symbols");
+        const string SymbolValidationAttributeTypeName = "SampleWeaver.SymbolValidationAttribute";
+        const string SymbolValidationAttributePropertyName = "HasSymbols";
 
-        var anyMethod = ModuleDefinition.GetTypes()
+        LogInfo("Validate Symbols");
+
+        var methodInfos = ModuleDefinition.GetTypes()
             .Where(type => type.IsClass)
             .SelectMany(type => type.GetMethods())
-            .FirstOrDefault();
+            .Select(method => new { method, attribute = method.GetAttribute(SymbolValidationAttributeTypeName) })
+            .Where(item => item.attribute != null)
+            .ToList();
 
-        if (anyMethod == null)
+        if (!methodInfos.Any())
         {
-            LogInfo("Assembly has no type with a method, symbol verifying skipped");
+            LogInfo("Assembly has no method with a [SymbolValidation] attribute, symbol validation skipped");
             return;
         }
 
-        var shouldHaveSymbols = ModuleDefinition.Assembly.CustomAttributes.All(attr => attr.AttributeType.Name != "NoSymbolsMarkerAttribute");
-        LogInfo("Assembly should have symbols: " + shouldHaveSymbols);
-        var hasSymbols = HasSymbols(anyMethod);
-        LogInfo("Assembly has symbols: " + hasSymbols);
-
-        if (shouldHaveSymbols != hasSymbols)
+        foreach (var methodInfo in methodInfos)
         {
-            LogError($"Unexpected symbols in assembly {ModuleDefinition.FileName}, should have: {shouldHaveSymbols}, but has: {hasSymbols}");
+            LogInfo("Validating method " + methodInfo.method.FullName);
+
+            var shouldHaveSymbols = methodInfo.attribute.GetPropertyValue(SymbolValidationAttributePropertyName, true);
+            LogInfo("Assembly should have symbols: " + shouldHaveSymbols);
+
+            var hasSymbols = HasSymbols(methodInfo.method);
+            LogInfo("Assembly has symbols: " + hasSymbols);
+
+            if (shouldHaveSymbols != hasSymbols)
+            {
+                LogError($"Unexpected symbols in assembly {ModuleDefinition.FileName}, should have: {shouldHaveSymbols}, but has: {hasSymbols}");
+            }
         }
     }
 
     bool HasSymbols(MethodDefinition method)
     {
-        try
-        {
-            return ModuleDefinition.SymbolReader.Read(method).HasSequencePoints;
-        }
-        catch
-        {
-            return false;
-        }
+        return ModuleDefinition.SymbolReader?.Read(method)?.HasSequencePoints == true;
     }
 
     public override IEnumerable<string> GetAssembliesForScanning()
@@ -105,4 +109,25 @@ public class ModuleWeaver :
     }
 
     public override bool ShouldCleanReference => false;
+}
+
+static class AttributeExtensionMethods
+{
+    public static CustomAttribute GetAttribute(this ICustomAttributeProvider attributeProvider, string attributeName)
+    {
+        return attributeProvider?.CustomAttributes.GetAttribute(attributeName);
+    }
+
+    public static CustomAttribute GetAttribute(this IEnumerable<CustomAttribute> attributes, string attributeName)
+    {
+        return attributes?.FirstOrDefault(attribute => attribute.Constructor.DeclaringType.FullName == attributeName);
+    }
+
+    public static T GetPropertyValue<T>(this CustomAttribute attribute, string propertyName, T defaultValue)
+    {
+        return attribute.Properties.Where(p => p.Name == propertyName)
+            .Select(p => (T)p.Argument.Value)
+            .DefaultIfEmpty(defaultValue)
+            .Single();
+    }
 }
