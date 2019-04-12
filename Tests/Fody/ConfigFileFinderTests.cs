@@ -4,8 +4,10 @@ using System.Linq;
 using System.Xml.Linq;
 using Moq;
 using Xunit;
+using Xunit.Abstractions;
 
-public class ConfigFileFinderTests : IDisposable
+public class ConfigFileFinderTests  :
+    XunitLoggingBase
 {
     static XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");
     static XNamespace schemaInstanceNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema-instance");
@@ -14,7 +16,8 @@ public class ConfigFileFinderTests : IDisposable
     string xmlPath;
     string xsdPath;
 
-    public ConfigFileFinderTests()
+    public ConfigFileFinderTests(ITestOutputHelper output) :
+        base(output)
     {
         testDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("D"));
         Directory.CreateDirectory(testDir);
@@ -23,9 +26,10 @@ public class ConfigFileFinderTests : IDisposable
         xsdPath = Path.Combine(testDir, "FodyWeavers.xsd");
     }
 
-    public void Dispose()
+    public override void Dispose()
     {
         Directory.Delete(testDir, true);
+        base.Dispose();
     }
 
     [Fact]

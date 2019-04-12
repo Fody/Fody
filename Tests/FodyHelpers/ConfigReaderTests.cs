@@ -1,8 +1,10 @@
 using System.Xml.Linq;
 using Fody;
 using Xunit;
+using Xunit.Abstractions;
 
-public class ConfigReaderTests
+public class ConfigReaderTests :
+    XunitLoggingBase
 {
     [Fact]
     public void Simple()
@@ -35,5 +37,10 @@ public class ConfigReaderTests
         var xElementFalse = XElement.Parse("<Node Name=''/>");
         var exception = Assert.Throws<WeavingException>(() => xElementFalse.ReadBool("Name", false));
         ApprovalTests.Approvals.Verify(exception.Message);
+    }
+
+    public ConfigReaderTests(ITestOutputHelper output) : 
+        base(output)
+    {
     }
 }

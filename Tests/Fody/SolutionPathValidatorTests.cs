@@ -3,8 +3,10 @@ using System.IO;
 using Fody;
 using Moq;
 using Xunit;
+using Xunit.Abstractions;
 
-public class SolutionPathValidatorTests
+public class SolutionPathValidatorTests :
+    XunitLoggingBase
 {
     [Fact]
     public void Valid()
@@ -38,5 +40,10 @@ public class SolutionPathValidatorTests
         var exception = Assert.Throws(typeof(WeavingException), paramName);
 #pragma warning restore xUnit2015 // Do not use typeof expression to check the exception type
         Assert.Equal($"SolutionDir '{Path.GetFullPath("aString")}' does not exist.", exception.Message);
+    }
+
+    public SolutionPathValidatorTests(ITestOutputHelper output) :
+        base(output)
+    {
     }
 }

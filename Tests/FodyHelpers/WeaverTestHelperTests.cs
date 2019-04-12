@@ -3,9 +3,12 @@ using System.IO;
 using Fody;
 using ObjectApproval;
 using Xunit;
+using Xunit.Abstractions;
+
 // ReSharper disable UnusedVariable
 
-public class WeaverTestHelperTests
+public class WeaverTestHelperTests :
+    XunitLoggingBase
 {
     [Fact]
     public void Run()
@@ -59,5 +62,10 @@ public class WeaverTestHelperTests
         Assert.True(start <= symbolsFileInfo.LastWriteTime);
 
         Verify(result);
+    }
+
+    public WeaverTestHelperTests(ITestOutputHelper output) :
+        base(output)
+    {
     }
 }

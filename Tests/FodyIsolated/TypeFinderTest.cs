@@ -1,6 +1,8 @@
 using Xunit;
+using Xunit.Abstractions;
 
-public class TypeFinderTest
+public class TypeFinderTest :
+    XunitLoggingBase
 {
     [Fact]
     public void Valid()
@@ -14,5 +16,10 @@ public class TypeFinderTest
     {
         var assembly = GetType().Assembly;
         Assert.Null(assembly.FindType("ModuleWeaver"));
+    }
+
+    public TypeFinderTest(ITestOutputHelper output) : 
+        base(output)
+    {
     }
 }

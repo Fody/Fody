@@ -1,8 +1,10 @@
 using ApprovalTests;
 using Fody;
 using Xunit;
+using Xunit.Abstractions;
 
-public class ProjectWeaversReaderTests
+public class ProjectWeaversReaderTests :
+    XunitLoggingBase
 {
     [Fact]
     public void Invalid()
@@ -11,5 +13,10 @@ public class ProjectWeaversReaderTests
 
         var exception = Assert.Throws<WeavingException>(() => XDocumentEx.Load(path));
         Approvals.Verify(exception.Message);
+    }
+
+    public ProjectWeaversReaderTests(ITestOutputHelper output) : 
+        base(output)
+    {
     }
 }

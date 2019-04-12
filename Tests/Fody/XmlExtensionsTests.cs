@@ -2,8 +2,10 @@
 using System.Linq;
 using System.Xml.Linq;
 using Xunit;
+using Xunit.Abstractions;
 
-public class XmlExtensionsTests
+public class XmlExtensionsTests :
+    XunitLoggingBase
 {
     [Fact]
     public void Simple()
@@ -57,5 +59,10 @@ public class XmlExtensionsTests
         xDocument.StripNamespace();
         var tables = xDocument.Descendants("table");
         Trace.WriteLine(tables.Count());
+    }
+
+    public XmlExtensionsTests(ITestOutputHelper output) :
+        base(output)
+    {
     }
 }

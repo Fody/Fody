@@ -1,7 +1,9 @@
 ﻿using System;
 using Xunit;
+using Xunit.Abstractions;
 
-public class ToFriendlyStringTests
+public class ToFriendlyStringTests :
+    XunitLoggingBase
 {
     [Fact(Skip = "todo")]
     public void ToFriendlyName()
@@ -46,5 +48,10 @@ void throwexception2()
     void ThrowException2()
     {
         throw new Exception("Foo");
+    }
+
+    public ToFriendlyStringTests(ITestOutputHelper output) :
+        base(output)
+    {
     }
 }

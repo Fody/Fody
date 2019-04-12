@@ -4,8 +4,10 @@ using System.Linq;
 using DummyAssembly;
 using Moq;
 using Xunit;
+using Xunit.Abstractions;
 
-public class AssemblyResolverTests
+public class AssemblyResolverTests :
+    XunitLoggingBase
 {
     ILogger logger = new Mock<BuildLogger>(MockBehavior.Loose).Object;
 
@@ -42,5 +44,10 @@ public class AssemblyResolverTests
     {
         var resolver = new AssemblyResolver(logger, new[] {@"Fody\BadAssembly.dll"});
         Assert.ThrowsAny<Exception>(() => resolver.Resolve("BadAssembly"));
+    }
+
+    public AssemblyResolverTests(ITestOutputHelper output) :
+        base(output)
+    {
     }
 }

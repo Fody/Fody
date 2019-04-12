@@ -2,8 +2,10 @@ using System;
 using System.IO;
 using System.Linq;
 using Xunit;
+using Xunit.Abstractions;
 
-public class WeaversHistoryTests
+public class WeaversHistoryTests :
+    XunitLoggingBase
 {
     [Fact]
     public void AddNewFile()
@@ -56,5 +58,10 @@ public class WeaversHistoryTests
             File.Delete(fileName);
             WeaversHistory.TimeStamps.Clear();
         }
+    }
+
+    public WeaversHistoryTests(ITestOutputHelper output) :
+        base(output)
+    {
     }
 }

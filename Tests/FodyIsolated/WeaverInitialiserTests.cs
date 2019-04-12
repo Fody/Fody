@@ -5,8 +5,10 @@ using Mono.Cecil;
 using Moq;
 using ObjectApproval;
 using Xunit;
+using Xunit.Abstractions;
 
-public class WeaverInitialiserTests
+public class WeaverInitialiserTests :
+    XunitLoggingBase
 {
     [Fact]
     public void ValidPropsFromBase()
@@ -54,6 +56,11 @@ public class WeaverInitialiserTests
             assemblyResolver = resolver,
             TypeCache = new TypeCache(resolver.Resolve)
         };
+    }
+
+    public WeaverInitialiserTests(ITestOutputHelper output) :
+        base(output)
+    {
     }
 }
 
