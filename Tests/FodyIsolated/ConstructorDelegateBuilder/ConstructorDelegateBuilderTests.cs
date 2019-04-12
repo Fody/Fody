@@ -1,8 +1,10 @@
 using System;
 using Fody;
 using Xunit;
+using Xunit.Abstractions;
 
-public class ConstructorDelegateBuilderTests
+public class ConstructorDelegateBuilderTests :
+    XunitLoggingBase
 {
     [Fact]
     public void Should_throw_When_is_abstract_type()
@@ -72,6 +74,11 @@ public class ConstructorDelegateBuilderTests
     }
 
     public class NestedPublicClass
+    {
+    }
+
+    public ConstructorDelegateBuilderTests(ITestOutputHelper output) :
+        base(output)
     {
     }
 }

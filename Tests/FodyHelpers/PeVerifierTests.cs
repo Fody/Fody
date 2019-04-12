@@ -4,9 +4,12 @@ using ApprovalTests;
 using Fody;
 using Mono.Cecil;
 using Xunit;
+using Xunit.Abstractions;
+
 // ReSharper disable UnusedVariable
 
-public class PeVerifierTests
+public class PeVerifierTests :
+    XunitLoggingBase
 {
     string assemblyPath = "Tests.dll";
     [Fact]
@@ -64,5 +67,10 @@ public class PeVerifierTests
 
         Assert.Throws<Exception>(() => PeVerifier.ThrowIfDifferent(assemblyPath, newAssemblyPath));
         File.Delete(newAssemblyPath);
+    }
+
+    public PeVerifierTests(ITestOutputHelper output) :
+        base(output)
+    {
     }
 }
