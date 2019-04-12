@@ -5,7 +5,9 @@ using Mono.Cecil.Cil;
 
 namespace Fody
 {
-    [Obsolete(OnlyForTesting.Message)]
+    /// <summary>
+    /// Only for test usage. Only for development purposes when building Fody addins. The API may change in minor releases.
+    /// </summary>
     public class TestResult
     {
         List<LogMessage> messages = new List<LogMessage>();

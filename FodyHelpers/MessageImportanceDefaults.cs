@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace Fody
+﻿namespace Fody
 {
     /// <summary>
     /// Defaults for <see cref="MessageImportance"/> when writing to <see cref="BaseModuleWeaver.LogDebug"/> and <see cref="BaseModuleWeaver.LogInfo"/>.
+    /// Only for test usage. Only for development purposes when building Fody addins. The API may change in minor releases.
     /// </summary>
-    [Obsolete(OnlyForTesting.Message)]
     public static class MessageImportanceDefaults
     {
         public static readonly MessageImportance Debug = MessageImportance.Low;

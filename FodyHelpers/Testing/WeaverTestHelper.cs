@@ -9,8 +9,8 @@ namespace Fody
 {
     /// <summary>
     /// Uses <see cref="Assembly.CodeBase"/> to derive the current directory.
+    /// Only for test usage. Only for development purposes when building Fody addins. The API may change in minor releases.
     /// </summary>
-    [Obsolete(OnlyForTesting.Message)]
     public static class WeaverTestHelper
     {
         public static TestResult ExecuteTestRun(
