@@ -7,7 +7,7 @@ using Mono.Cecil;
 
 namespace Fody
 {
-    class MockAssemblyResolver : IAssemblyResolver
+    public class TestAssemblyResolver : IAssemblyResolver
     {
         Dictionary<string, AssemblyDefinition> definitions = new Dictionary<string, AssemblyDefinition>(StringComparer.OrdinalIgnoreCase);
 

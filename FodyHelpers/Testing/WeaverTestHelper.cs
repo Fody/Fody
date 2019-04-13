@@ -42,7 +42,7 @@ namespace Fody
 
             var targetAssemblyPath = Path.Combine(fodyTempDir, targetFileName);
 
-            using (var assemblyResolver = new MockAssemblyResolver())
+            using (var assemblyResolver = new TestAssemblyResolver())
             {
                 var typeCache = CacheTypes(weaver, assemblyResolver);
 
@@ -113,7 +113,7 @@ namespace Fody
             return platform.StartsWith("win", StringComparison.OrdinalIgnoreCase);
         }
 
-        static TypeCache CacheTypes(BaseModuleWeaver weaver, MockAssemblyResolver assemblyResolver)
+        static TypeCache CacheTypes(BaseModuleWeaver weaver, TestAssemblyResolver assemblyResolver)
         {
             var typeCache = new TypeCache(assemblyResolver.Resolve);
             typeCache.BuildAssembliesToScan(weaver);
