@@ -71,10 +71,6 @@ namespace Fody
             {
                 return typeof(GeneratedCodeAttribute).Assembly;
             }
-            if (string.Equals(name, "mscorlib", StringComparison.OrdinalIgnoreCase))
-            {
-                return typeof(object).Assembly;
-            }
 
             try
             {
