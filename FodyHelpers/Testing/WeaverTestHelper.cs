@@ -27,8 +27,6 @@ namespace Fody
             var fodyTempDir = Path.Combine(Path.GetDirectoryName(assemblyPath), "fodytemp");
             Directory.CreateDirectory(fodyTempDir);
 
-            IoHelper.PurgeDirectory(fodyTempDir);
-
             string targetFileName;
             if (assemblyName == null)
             {
@@ -41,6 +39,7 @@ namespace Fody
             }
 
             var targetAssemblyPath = Path.Combine(fodyTempDir, targetFileName);
+            File.Delete(targetAssemblyPath);
 
             using (var assemblyResolver = new TestAssemblyResolver())
             {
