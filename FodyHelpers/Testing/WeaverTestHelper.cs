@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Mono.Cecil;
+using Mono.Cecil.Cil;
 
 namespace Fody
 {
@@ -20,7 +21,8 @@ namespace Fody
             Action<ModuleDefinition> afterExecuteCallback = null,
             Action<ModuleDefinition> beforeExecuteCallback = null,
             string assemblyName = null,
-            IEnumerable<string> ignoreCodes = null)
+            IEnumerable<string> ignoreCodes = null,
+            bool writeSymbols = false)
         {
             assemblyPath = Path.GetFullPath(assemblyPath);
             Guard.FileExists(nameof(assemblyPath), assemblyPath);
@@ -79,8 +81,12 @@ namespace Fody
 
                     var writerParameters = new WriterParameters
                     {
-                        WriteSymbols = true
+                        WriteSymbols = writeSymbols
                     };
+                    if (writeSymbols)
+                    {
+                        writerParameters.SymbolWriterProvider = new EmbeddedPortablePdbWriterProvider();
+                    }
 
                     module.Write(targetAssemblyPath, writerParameters);
                 }
