@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using Fody;
+using Mono.Cecil;
 using ObjectApproval;
 using Xunit;
 using Xunit.Abstractions;
@@ -53,13 +54,9 @@ public class WeaverTestHelperTests :
         var start = DateTime.Now;
         var assemblyPath = Path.Combine(Environment.CurrentDirectory, "DummyAssembly.dll");
         var weaver = new WeaverUsingSymbols();
-        var result = weaver.ExecuteTestRun(assemblyPath);
-
-        var symbolsPath = Path.ChangeExtension(result.AssemblyPath, ".pdb");
-        var symbolsFileInfo = new FileInfo(symbolsPath);
-
-        Assert.True(symbolsFileInfo.Exists);
-        Assert.True(start <= symbolsFileInfo.LastWriteTime);
+        var result = weaver.ExecuteTestRun(assemblyPath, writeSymbols:true);
+        var module = ModuleDefinition.ReadModule(assemblyPath,new ReaderParameters {ReadSymbols = true});
+        Assert.True(module.HasSymbols);
 
         Verify(result);
     }
