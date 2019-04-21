@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
@@ -7,11 +6,9 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <IsTool>true</IsTool>
   </PropertyGroup>
-
   <ItemGroup>
     <Content Include="build\*" PackagePath="build" />
     <Content Include="buildMultiTargeting\*" PackagePath="buildMultiTargeting" />
     <Content Include="Weaver.props" PackagePath="\" />
   </ItemGroup>
-
 </Project>

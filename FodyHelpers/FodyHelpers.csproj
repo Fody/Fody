@@ -8,16 +8,13 @@
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.dll" />
     <Reference Include="Mono.Cecil.Pdb" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.Pdb.dll" />
     <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.Rocks.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="build\*" PackagePath="build" />
     <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" />
   </ItemGroup>
-
+  <ItemGroup>
+    <Content Include="build\*" PackagePath="build" />
+  </ItemGroup>
 </Project>

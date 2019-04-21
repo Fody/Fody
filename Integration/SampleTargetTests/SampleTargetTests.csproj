@@ -1,17 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Fody" Version="$(IntegrationVersion)" />
     <PackageReference Include="SampleWeaver.Fody" Version="$(IntegrationVersion)" />
   </ItemGroup>
@@ -21,5 +16,4 @@
     <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.10.0" />
     <PackageReference Include="NullGuard.Fody" Version="1.8.5" />
   </ItemGroup>
-
 </Project>
