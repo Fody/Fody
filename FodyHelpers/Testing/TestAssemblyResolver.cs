@@ -7,6 +7,9 @@ using Mono.Cecil;
 
 namespace Fody
 {
+    /// <summary>
+    /// Only for test usage. Only for development purposes when building Fody addins. The API may change in minor releases.
+    /// </summary>
     public class TestAssemblyResolver : IAssemblyResolver
     {
         Dictionary<string, AssemblyDefinition> definitions = new Dictionary<string, AssemblyDefinition>(StringComparer.OrdinalIgnoreCase);
