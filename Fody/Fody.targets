@@ -1,17 +1,17 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <ProjectWeaverXml Condition="'$(ProjectWeaverXml)' == ''">$(ProjectDir)FodyWeavers.xml</ProjectWeaverXml>
-    <FodyPath Condition="'$(FodyPath)' == ''">$(MSBuildThisFileDirectory)..\</FodyPath>
-    <FodyAssemblyDirectory Condition="'$(MSBuildRuntimeType)' == 'Core'">$(FodyPath)netstandardtask</FodyAssemblyDirectory>
-    <FodyAssemblyDirectory Condition="'$(MSBuildRuntimeType)' != 'Core'">$(FodyPath)netclassictask</FodyAssemblyDirectory>
-    <FodyAssembly Condition="'$(FodyAssembly)' == ''">$(FodyAssemblyDirectory)\Fody.dll</FodyAssembly>
+    <ProjectWeaverXml Condition="$(ProjectWeaverXml) == ''">$(ProjectDir)FodyWeavers.xml</ProjectWeaverXml>
+    <FodyPath Condition="$(FodyPath) == ''">$(MSBuildThisFileDirectory)..\</FodyPath>
+    <FodyAssemblyDirectory Condition="$(MSBuildRuntimeType) == 'Core'">$(FodyPath)netstandardtask</FodyAssemblyDirectory>
+    <FodyAssemblyDirectory Condition="$(MSBuildRuntimeType) != 'Core'">$(FodyPath)netclassictask</FodyAssemblyDirectory>
+    <FodyAssembly Condition="$(FodyAssembly) == ''">$(FodyAssemblyDirectory)\Fody.dll</FodyAssembly>
     <DefaultItemExcludes>$(DefaultItemExcludes);FodyWeavers.xsd</DefaultItemExcludes>
-    <FodyGenerateXsd Condition="'$(FodyGenerateXsd)' == ''">true</FodyGenerateXsd>
+    <FodyGenerateXsd Condition="$(FodyGenerateXsd) == ''">true</FodyGenerateXsd>
     <MsBuildMajorVersion>$([System.Version]::Parse($(MSBuildVersion)).Major)</MsBuildMajorVersion>
   </PropertyGroup>
 
-  <ItemGroup Condition="Exists('$(ProjectWeaverXml)')">
+  <ItemGroup Condition="Exists($(ProjectWeaverXml))">
     <UpToDateCheckInput Include="$(ProjectWeaverXml)" />
     <CustomAdditionalCompileInputs Include="$(ProjectWeaverXml)" />
   </ItemGroup>
@@ -29,7 +29,7 @@
   <Target
       Name="FodyTarget"
       AfterTargets="AfterCompile"
-      Condition="Exists('@(IntermediateAssembly)') And $(DesignTimeBuild) != true And $(DisableFody) != true"
+      Condition="Exists(@(IntermediateAssembly)) And $(DesignTimeBuild) != true And $(DisableFody) != true"
       DependsOnTargets="$(FodyDependsOnTargets)"
       Inputs="@(IntermediateAssembly);$(ProjectWeaverXml)"
       Outputs="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache">
