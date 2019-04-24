@@ -11,7 +11,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeAllInPackage</TargetsForTfmSpecificContentInPackage>
-    <PackageProjectUrl>http://github.com/Fody/Fody</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Fody/Fody</PackageProjectUrl>
     <PackageIconUrl>https://raw.github.com/Fody/Fody/master/package_icon.png</PackageIconUrl>
     <PackageTags>ILWeaving, Fody, Cecil, AOP</PackageTags>
     <!-- Boost the debugging experience when building weavers -->
