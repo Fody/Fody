@@ -19,7 +19,7 @@
   },
   LogWarning: {
     Type: 'Action<String>',
-    Target: 'ILoggerProxy',
+    Target: 'MockBuildLogger',
     Method: 'Void LogWarning(System.String)'
   },
   LogWarningPoint: {
@@ -29,7 +29,7 @@
   },
   LogError: {
     Type: 'Action<String>',
-    Target: 'ILoggerProxy',
+    Target: 'MockBuildLogger',
     Method: 'Void LogError(System.String)'
   },
   LogErrorPoint: {

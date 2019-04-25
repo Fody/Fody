@@ -5,7 +5,6 @@ using Microsoft.Build.Framework;
 public class BuildLogger : MarshalByRefObject, ILogger
 {
     public IBuildEngine BuildEngine { get; set; }
-    public bool ErrorOccurred;
     string currentWeaverName;
 
     public virtual void SetCurrentWeaverName(string weaverName)
@@ -47,6 +46,8 @@ public class BuildLogger : MarshalByRefObject, ILogger
     {
         LogError(message, null, 0, 0, 0, 0);
     }
+
+    public bool ErrorOccurred { get; private set; }
 
     public virtual void LogError(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
     {

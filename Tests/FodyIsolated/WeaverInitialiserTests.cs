@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Fody;
 using Mono.Cecil;
-using Moq;
 using ObjectApproval;
 using Xunit;
 using Xunit.Abstractions;
@@ -35,7 +34,7 @@ public class WeaverInitialiserTests :
     {
         return new InnerWeaver
         {
-            Logger = new Mock<ILogger>().Object,
+            Logger = new MockBuildLogger(),
             AssemblyFilePath = "AssemblyFilePath",
             ProjectDirectoryPath = "ProjectDirectoryPath",
             ProjectFilePath = "ProjectFilePath",

@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using Fody;
-using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -11,18 +10,14 @@ public class SolutionPathValidatorTests :
     [Fact]
     public void Valid()
     {
-        var loggerMock = new Mock<BuildLogger>();
-
-        loggerMock.Setup(x => x.LogDebug(It.Is<string>(y => y.Contains(Environment.CurrentDirectory))));
-        var buildLogger = loggerMock.Object;
+        var loggerMock = new MockBuildLogger();
 
         var processor = new Processor
         {
-            Logger = buildLogger,
+            Logger = loggerMock,
             SolutionDirectory = Environment.CurrentDirectory
         };
         processor.ValidateSolutionPath();
-        loggerMock.Verify();
     }
 
     [Fact]

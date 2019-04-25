@@ -1,5 +1,4 @@
 using System;
-using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -9,7 +8,7 @@ public class ProjectWeaversFinderTests :
     [Fact]
     public void NotFound()
     {
-        var logger = new Mock<BuildLogger>(MockBehavior.Loose).Object;
+        var logger = new MockBuildLogger();
 
         var configFiles = ConfigFileFinder.FindWeaverConfigFiles(Environment.CurrentDirectory, Environment.CurrentDirectory, logger);
 

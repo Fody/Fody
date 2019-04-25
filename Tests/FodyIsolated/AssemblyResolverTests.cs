@@ -2,14 +2,13 @@
 using System.IO;
 using System.Linq;
 using DummyAssembly;
-using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
 public class AssemblyResolverTests :
     XunitLoggingBase
 {
-    ILogger logger = new Mock<BuildLogger>(MockBehavior.Loose).Object;
+    ILogger logger = new MockBuildLogger();
 
     [Fact]
     public void ShouldFindReferenceByAssemblyName()

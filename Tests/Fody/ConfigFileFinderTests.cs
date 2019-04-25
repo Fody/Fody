@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
-using Moq;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -49,11 +48,17 @@ public class ConfigFileFinderTests  :
 
         var weavers = new[]
         {
-            new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" },
-            new WeaverEntry { AssemblyPath = Path.Combine(testDir, "WeaverWithSchema.Fody.dll") }
+            new WeaverEntry
+            {
+                AssemblyPath = @"something\TestWeaver.Fody.dll"
+            },
+            new WeaverEntry
+            {
+                AssemblyPath = Path.Combine(testDir, "WeaverWithSchema.Fody.dll")
+            }
         };
 
-        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
+        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new MockBuildLogger()).ToArray();
 
         ConfigFileFinder.EnsureSchemaIsUpToDate(testDir, weavers, true);
 
@@ -106,9 +111,15 @@ public class ConfigFileFinderTests  :
 </Weavers>
 ");
 
-        var weavers = new[] { new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" } };
+        var weavers = new[]
+        {
+            new WeaverEntry
+            {
+                AssemblyPath = @"something\TestWeaver.Fody.dll"
+            }
+        };
 
-        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
+        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new MockBuildLogger()).ToArray();
         ConfigFileFinder.EnsureSchemaIsUpToDate(testDir, weavers, true);
 
         Assert.Single(configFiles);
@@ -130,9 +141,15 @@ public class ConfigFileFinderTests  :
 </Weavers>
 ");
 
-        var weavers = new[] { new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" } };
+        var weavers = new[]
+        {
+            new WeaverEntry
+            {
+                AssemblyPath = @"something\TestWeaver.Fody.dll"
+            }
+        };
 
-        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
+        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new MockBuildLogger()).ToArray();
         ConfigFileFinder.EnsureSchemaIsUpToDate(testDir, weavers, false);
 
         Assert.Single(configFiles);
@@ -154,9 +171,15 @@ public class ConfigFileFinderTests  :
 </Weavers>
 ");
 
-        var weavers = new[] { new WeaverEntry { AssemblyPath = @"something\TestWeaver.Fody.dll" } };
+        var weavers = new[]
+        {
+            new WeaverEntry
+            {
+                AssemblyPath = @"something\TestWeaver.Fody.dll"
+            }
+        };
 
-        var configs = ConfigFileFinder.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new Mock<BuildLogger>().Object).ToArray();
+        var configs = ConfigFileFinder.FindWeaverConfigFiles(Guid.NewGuid().ToString(), testDir, new MockBuildLogger()).ToArray();
         ConfigFileFinder.EnsureSchemaIsUpToDate(testDir, weavers, false);
 
         Assert.Single(configs);

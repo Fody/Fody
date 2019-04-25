@@ -29,7 +29,7 @@ public partial class Processor
     static Dictionary<string, IsolatedAssemblyLoadContext> solutionAssemblyLoadContexts =
         new Dictionary<string, IsolatedAssemblyLoadContext>(StringComparer.OrdinalIgnoreCase);
 
-    public BuildLogger Logger;
+    public ILogger Logger;
     static readonly object mutex = new object();
 
     static Processor()
