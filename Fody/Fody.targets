@@ -9,7 +9,6 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);FodyWeavers.xsd</DefaultItemExcludes>
     <FodyGenerateXsd Condition="$(FodyGenerateXsd) == ''">true</FodyGenerateXsd>
     <MsBuildMajorVersion>$([System.Version]::Parse($(MSBuildVersion)).Major)</MsBuildMajorVersion>
-    <IsVsOnMac Condition="'$(VisualStudioVersion)' == '15.0' And $([MSBuild]::IsOsPlatform(OSX))">true</IsVsOnMac>
   </PropertyGroup>
 
   <ItemGroup Condition="Exists($(ProjectWeaverXml))">
@@ -35,7 +34,7 @@
       Inputs="@(IntermediateAssembly);$(ProjectWeaverXml)"
       Outputs="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache">
 
-    <Error Condition="($(MsBuildMajorVersion) &lt; 16) And $(IsVsOnMac) != true"
+    <Error Condition="($(MsBuildMajorVersion) &lt; 16) And $([MSBuild]::IsOsPlatform(OSX)) != true"
            Text="Fody is only supported on MSBuild 16 and above. Current version: $(MsBuildMajorVersion)." />
     <Fody.WeavingTask
         AssemblyFile="@(IntermediateAssembly)"
