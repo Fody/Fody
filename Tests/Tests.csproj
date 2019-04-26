@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
     <PackageReference Include="ApprovalTests" Version="3.0.22" />
-    <PackageReference Include="ObjectApproval" Version="8.2.0" />
+    <PackageReference Include="ObjectApproval" Version="8.3.0" />
     <PackageReference Include="Xunit" Version="2.4.1" />
     <PackageReference Include="XunitLogger" Version="1.3.1" />
     <Reference Include="Microsoft.CSharp" />
