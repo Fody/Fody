@@ -92,6 +92,11 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
             GetSymbolProviders();
             assemblyResolver = new AssemblyResolver(Logger, SplitReferences);
             ReadModule();
+            if (ModuleDefinition.Types.Any(x => x.Name == "ProcessedByFody"))
+            {
+                Logger.LogWarning($"The assembly has already been processed by Fody. Weaving aborted. Path: {AssemblyFilePath} ");
+                return;
+            }
             AppDomain.CurrentDomain.AssemblyResolve += assemblyResolve;
             TypeCache = new TypeCache(assemblyResolver.Resolve);
             InitialiseWeavers();
