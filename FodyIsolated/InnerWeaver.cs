@@ -201,7 +201,10 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
         var startNew = Stopwatch.StartNew();
 
         const TypeAttributes typeAttributes = TypeAttributes.NotPublic | TypeAttributes.Class;
-        var typeDefinition = new TypeDefinition(null, "ProcessedByFody", typeAttributes, TypeSystem.ObjectReference);
+
+        // need to qualify the namespace to avoid linker issues
+        var nameSpace = ModuleDefinition.Name;
+        var typeDefinition = new TypeDefinition(nameSpace, "ProcessedByFody", typeAttributes, TypeSystem.ObjectReference);
         ModuleDefinition.Types.Add(typeDefinition);
 
         AddVersionField(typeof(IInnerWeaver).Assembly, "FodyVersion", typeDefinition);
