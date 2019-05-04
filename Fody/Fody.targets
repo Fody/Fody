@@ -35,7 +35,8 @@
       Inputs="@(IntermediateAssembly);$(ProjectWeaverXml)"
       Outputs="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache">
 
-    <Error Condition="($(MsBuildMajorVersion) &lt; 16) And $([MSBuild]::IsOsPlatform(OSX)) != true"
+    <!-- TODO: remove the OS check when netcore3 can be deployed to MacOS -->
+    <Error Condition="($(MsBuildMajorVersion) &lt; 16) And $(OS) == 'Windows_NT'"
            Text="Fody is only supported on MSBuild 16 and above. Current version: $(MsBuildMajorVersion)." />
     <Fody.WeavingTask
         AssemblyFile="@(IntermediateAssembly)"
