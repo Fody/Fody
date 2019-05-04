@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <!-- Support for NCrunch -->
-  <ItemGroup Condition="'$(NCrunch)' == '1'">
+  <ItemGroup Condition="'$(NCrunch)' == '1' and '$(TargetFramework)' == '' and '$(TargetFrameworks)' == ''">
     <None Include="$(FodyAssemblyDirectory)\*.*" />
     <None Include="@(WeaverFiles)" />
   </ItemGroup>
