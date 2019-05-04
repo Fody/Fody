@@ -17,6 +17,12 @@
     <CustomAdditionalCompileInputs Include="$(ProjectWeaverXml)" />
   </ItemGroup>
 
+  <!-- Support for NCrunch -->
+  <ItemGroup Condition="'$(NCrunch)' == '1'">
+    <None Include="$(FodyAssemblyDirectory)\*.*" />
+    <None Include="@(WeaverFiles)" />
+  </ItemGroup>
+
   <UsingTask TaskName="Fody.WeavingTask" AssemblyFile="$(FodyAssembly)" />
   <UsingTask TaskName="Fody.UpdateReferenceCopyLocalTask" AssemblyFile="$(FodyAssembly)" />
   <UsingTask TaskName="Fody.VerifyTask" AssemblyFile="$(FodyAssembly)" />
