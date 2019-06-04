@@ -1,4 +1,4 @@
-image: Visual Studio 2019 Preview
+image: Visual Studio 2019
 skip_commits:
   message: /Merge pull request.*/
 build_script:
