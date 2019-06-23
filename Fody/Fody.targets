@@ -35,7 +35,7 @@
       Inputs="@(IntermediateAssembly);$(ProjectWeaverXml)"
       Outputs="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache">
 
-    <Error Condition="($(MsBuildMajorVersion) &lt; 16)
+    <Error Condition="($(MsBuildMajorVersion) &lt; 16)"
            Text="Fody is only supported on MSBuild 16 and above. Current version: $(MsBuildMajorVersion)." />
     <Fody.WeavingTask
         AssemblyFile="@(IntermediateAssembly)"
