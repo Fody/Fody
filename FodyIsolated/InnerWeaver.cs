@@ -14,7 +14,9 @@ using Mono.Cecil.Rocks;
 using FieldAttributes = Mono.Cecil.FieldAttributes;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
 
-public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
+public partial class InnerWeaver :
+    MarshalByRefObject,
+    IInnerWeaver
 {
     public string ProjectDirectoryPath { get; set; }
     public string ProjectFilePath { get; set; }
@@ -178,10 +180,15 @@ public partial class InnerWeaver : MarshalByRefObject, IInnerWeaver
                 {
                     weaver.Instance.Execute();
                 }
+                catch (WeavingException)
+                {
+                    throw;
+                }
                 catch (Exception exception)
                 {
                     throw new Exception($"Failed to execute weaver {weaver.Config.AssemblyPath}", exception);
                 }
+
                 var finishedMessage = $"  Finished '{weaver.Config.ElementName}' in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
                 Logger.LogDebug(finishedMessage);
 
