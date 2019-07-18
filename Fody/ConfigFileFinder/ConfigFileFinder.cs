@@ -99,7 +99,8 @@ public static class ConfigFileFinder
 
     static void CreateSchemaForConfig(string projectConfigFilePath, IEnumerable<WeaverEntry> weavers)
     {
-        var schema = XDocument.Parse(Fody.Properties.Resources.FodyWeavers_SchemaTemplate);
+        var template = Fody.Properties.Resources.FodyWeavers_SchemaTemplate;
+        var schema = XDocument.Parse(template);
 
         var baseNode = schema.Descendants().First(item => item.Name == schemaNamespace.GetName("all"));
 
@@ -161,13 +162,20 @@ public static class ConfigFileFinder
         return element;
     }
 
-    public static void EnsureSchemaIsUpToDate(string projectDirectory, IEnumerable<WeaverEntry> weavers, bool defaultGenerateXsd)
+    public static void EnsureSchemaIsUpToDate(string solutionDirectory, string projectDirectory, IEnumerable<WeaverEntry> weavers, bool defaultGenerateXsd)
     {
         var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
+        var solutionConfigFilePath = Path.Combine(solutionDirectory, FodyWeaversConfigFileName);
+        if (File.Exists(projectConfigFilePath))
+            EnsureSchemaIsUpToDate(projectConfigFilePath, XDocumentEx.Load(projectConfigFilePath), weavers, defaultGenerateXsd);
+        if (File.Exists(solutionConfigFilePath))
+            EnsureSchemaIsUpToDate(solutionConfigFilePath, XDocumentEx.Load(solutionConfigFilePath), weavers, defaultGenerateXsd);
+    }
+
+    private static void EnsureSchemaIsUpToDate(string filePath, XDocument doc, IEnumerable<WeaverEntry> weavers, bool defaultGenerateXsd) 
+    {
         try
         {
-            var doc = XDocumentEx.Load(projectConfigFilePath);
-
             if (!ShouldGenerateXsd(doc, defaultGenerateXsd))
             {
                 return;
@@ -181,14 +189,14 @@ public static class ConfigFileFinder
             if (!hasNamespace)
             {
                 doc.Root.Add(SchemaInstanceAttributes);
-                doc.Save(projectConfigFilePath);
+                doc.Save(filePath);
             }
 
-            CreateSchemaForConfig(projectConfigFilePath, weavers);
+            CreateSchemaForConfig(filePath, weavers);
         }
         catch (Exception exception)
         {
-            throw new WeavingException($"Failed to update schema for ({projectConfigFilePath}). Exception message: {exception.Message}");
+            throw new WeavingException($"Failed to update schema for ({filePath}). Exception message: {exception.Message}");
         }
     }
 
