@@ -99,8 +99,7 @@ public static class ConfigFileFinder
 
     static void CreateSchemaForConfig(string projectConfigFilePath, IEnumerable<WeaverEntry> weavers)
     {
-        var template = Fody.Properties.Resources.FodyWeavers_SchemaTemplate;
-        var schema = XDocument.Parse(template);
+        var schema = XDocument.Parse(Fody.Properties.Resources.FodyWeavers_SchemaTemplate);
 
         var baseNode = schema.Descendants().First(item => item.Name == schemaNamespace.GetName("all"));
 
