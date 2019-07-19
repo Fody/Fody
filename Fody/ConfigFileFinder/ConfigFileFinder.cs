@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Fody;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
-using Fody;
 
 public static class ConfigFileFinder
 {
@@ -166,16 +166,12 @@ public static class ConfigFileFinder
     {
         var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
         var solutionConfigFilePath = Path.Combine(solutionDirectory, FodyWeaversConfigFileName);
-        if (File.Exists(projectConfigFilePath))
-            EnsureSchemaIsUpToDate(projectConfigFilePath, XDocumentEx.Load(projectConfigFilePath), weavers, defaultGenerateXsd);
-        if (File.Exists(solutionConfigFilePath))
-            EnsureSchemaIsUpToDate(solutionConfigFilePath, XDocumentEx.Load(solutionConfigFilePath), weavers, defaultGenerateXsd);
-    }
-
-    private static void EnsureSchemaIsUpToDate(string filePath, XDocument doc, IEnumerable<WeaverEntry> weavers, bool defaultGenerateXsd) 
-    {
         try
         {
+            if (!File.Exists(projectConfigFilePath) && File.Exists(solutionConfigFilePath))
+                return;
+
+            var doc = XDocumentEx.Load(projectConfigFilePath);
             if (!ShouldGenerateXsd(doc, defaultGenerateXsd))
             {
                 return;
@@ -189,14 +185,14 @@ public static class ConfigFileFinder
             if (!hasNamespace)
             {
                 doc.Root.Add(SchemaInstanceAttributes);
-                doc.Save(filePath);
+                doc.Save(projectConfigFilePath);
             }
 
-            CreateSchemaForConfig(filePath, weavers);
+            CreateSchemaForConfig(projectConfigFilePath, weavers);
         }
         catch (Exception exception)
         {
-            throw new WeavingException($"Failed to update schema for ({filePath}). Exception message: {exception.Message}");
+            throw new WeavingException($"Failed to update schema for ({projectConfigFilePath}). Exception message: {exception.Message}");
         }
     }
 

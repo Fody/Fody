@@ -173,7 +173,7 @@ public class ConfigFileFinderTests  :
     }
 
     [Fact]
-    public void ShouldOptOutOfXsdThroughMSBuildProperty_OnlySolutionWideConfig()
+    public void ShouldNotCreateXsd_OnlySolutionWideConfig()
     {
         // Deliberately not writing the file in the project dir.
         if (File.Exists(xmlPath))
@@ -193,7 +193,7 @@ public class ConfigFileFinderTests  :
         };
 
         var configFiles = ConfigFileFinder.FindWeaverConfigFiles(slnDir, testDir, new MockBuildLogger()).ToArray();
-        ConfigFileFinder.EnsureSchemaIsUpToDate(slnDir, testDir, weavers, false);
+        ConfigFileFinder.EnsureSchemaIsUpToDate(slnDir, testDir, weavers, true);
 
         Assert.Single(configFiles);
         Assert.Equal(slnXmlPath, configFiles[0].FilePath);
@@ -203,77 +203,6 @@ public class ConfigFileFinderTests  :
         var xml = XDocumentEx.Load(slnXmlPath);
         Assert.NotNull(xml.Root);
         Assert.Null(xml.Root.Attribute(schemaInstanceNamespace + "noNamespaceSchemaLocation"));
-    }
-
-    [Fact]
-    public void ShouldCreateXsd_OnlySolutionWideConfig()
-    {
-        File.WriteAllText(slnXmlPath, @"
-<Weavers>
-  <TestWeaver />
-</Weavers>
-");
-
-        File.WriteAllText(Path.Combine(slnDir, "WeaverWithSchema.Fody.xcf"), @"
-<xs:complexType xmlns:xs=""http://www.w3.org/2001/XMLSchema"">
-  <xs:attribute name=""TestAttribute"" type=""xs:string"" />
-</xs:complexType>
-");
-
-        var weavers = new[]
-        {
-            new WeaverEntry
-            {
-                AssemblyPath = @"something\TestWeaver.Fody.dll"
-            },
-            new WeaverEntry
-            {
-                AssemblyPath = Path.Combine(slnDir, "WeaverWithSchema.Fody.dll")
-            }
-        };
-
-        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(slnDir, testDir, new MockBuildLogger()).ToArray();
-
-        ConfigFileFinder.EnsureSchemaIsUpToDate(slnDir, testDir, weavers, true);
-
-        Assert.Single(configFiles);
-        Assert.True(configFiles[0].IsGlobal);
-        Assert.Equal(slnXmlPath, configFiles[0].FilePath);
-
-        Assert.True(File.Exists(slnXsdPath));
-
-        var xml = XDocumentEx.Load(slnXmlPath);
-        Assert.NotNull(xml.Root);
-        Assert.Equal("FodyWeavers.xsd", xml.Root.Attribute(schemaInstanceNamespace + "noNamespaceSchemaLocation")?.Value);
-
-        var xsd = XDocumentEx.Load(slnXsdPath);
-        Assert.NotNull(xsd.Root);
-        var elements = xsd.Root.Descendants(schemaNamespace + "all").First().Elements().ToList();
-
-        Assert.Equal(2, elements.Count);
-
-        var defaultElem = elements[0];
-        Assert.Equal("element", defaultElem.Name.LocalName);
-        Assert.Equal("TestWeaver", defaultElem.Attribute("name")?.Value);
-        Assert.Equal("xs:anyType", defaultElem.Attribute("type")?.Value);
-        Assert.Equal("0", defaultElem.Attribute("minOccurs")?.Value);
-        Assert.Equal("1", defaultElem.Attribute("maxOccurs")?.Value);
-
-        var elemWithSchema = elements[1];
-        Assert.Equal("element", elemWithSchema.Name.LocalName);
-        Assert.Equal("WeaverWithSchema", elemWithSchema.Attribute("name")?.Value);
-        Assert.Null(elemWithSchema.Attribute("type"));
-        Assert.Equal("0", elemWithSchema.Attribute("minOccurs")?.Value);
-        Assert.Equal("1", elemWithSchema.Attribute("maxOccurs")?.Value);
-
-        var elemWithSchemaType = Assert.Single(elemWithSchema.Elements());
-        Assert.NotNull(elemWithSchemaType);
-        Assert.Equal("complexType", elemWithSchemaType.Name.LocalName);
-
-        var elemWithSchemaTypeAttr = Assert.Single(elemWithSchemaType.Elements());
-        Assert.NotNull(elemWithSchemaTypeAttr);
-        Assert.Equal("attribute", elemWithSchemaTypeAttr.Name.LocalName);
-        Assert.Equal("TestAttribute", elemWithSchemaTypeAttr.Attribute("name")?.Value);
     }
 
     [Fact]
