@@ -27,7 +27,7 @@ public class WeaverInitialiserTests :
         innerWeaver.SetProperties(weaverEntry, moduleWeaver);
 
         SerializerBuilder.IgnoreMembersWithType<ModuleDefinition>();
-        ObjectApprover.VerifyWithJson(moduleWeaver);
+        ObjectApprover.Verify(moduleWeaver);
     }
 
     static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, AssemblyResolver resolver)

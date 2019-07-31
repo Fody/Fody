@@ -21,7 +21,7 @@ public class WeaverTestHelperTests :
 
     static void Verify(TestResult result)
     {
-        ObjectApprover.VerifyWithJson(new
+        ObjectApprover.Verify(new
             {
                 result.Errors,
                 result.Messages,
