@@ -2,11 +2,8 @@ using System;
 using System.IO;
 using Fody;
 using Mono.Cecil;
-using ObjectApproval;
 using Xunit;
 using Xunit.Abstractions;
-
-// ReSharper disable UnusedVariable
 
 public class WeaverTestHelperTests :
     XunitLoggingBase
