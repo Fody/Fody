@@ -12,7 +12,7 @@
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.0.461" />
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-    <PackageReference Include="ApprovalTests" Version="4.0.0" />
+    <PackageReference Include="ApprovalTests" Version="4.2.0" />
     <PackageReference Include="ObjectApproval" Version="11.0.0" />
     <PackageReference Include="Xunit" Version="2.4.1" />
     <PackageReference Include="XunitLogger" Version="2.4.0" />
