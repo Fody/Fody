@@ -48,7 +48,6 @@ public class WeaverTestHelperTests :
     [Fact]
     public void WeaverUsingSymbols()
     {
-        var start = DateTime.Now;
         var assemblyPath = Path.Combine(Environment.CurrentDirectory, "DummyAssembly.dll");
         var weaver = new WeaverUsingSymbols();
         var result = weaver.ExecuteTestRun(assemblyPath, writeSymbols:true);
