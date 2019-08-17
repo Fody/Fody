@@ -1,6 +1,6 @@
 image: Visual Studio 2019
 skip_commits:
-  message: /Merge pull request.*/
+  message: /doco|Merge pull request.*/
 build_script:
 - cmd: |
     msbuild -restore Fody.sln /p:Configuration=Release /verbosity:minimal

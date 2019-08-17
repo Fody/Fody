@@ -2,11 +2,8 @@ using System;
 using System.IO;
 using Fody;
 using Mono.Cecil;
-using ObjectApproval;
 using Xunit;
 using Xunit.Abstractions;
-
-// ReSharper disable UnusedVariable
 
 public class WeaverTestHelperTests :
     XunitLoggingBase
@@ -21,7 +18,7 @@ public class WeaverTestHelperTests :
 
     static void Verify(TestResult result)
     {
-        ObjectApprover.VerifyWithJson(new
+        ObjectApprover.Verify(new
             {
                 result.Errors,
                 result.Messages,
@@ -51,7 +48,6 @@ public class WeaverTestHelperTests :
     [Fact]
     public void WeaverUsingSymbols()
     {
-        var start = DateTime.Now;
         var assemblyPath = Path.Combine(Environment.CurrentDirectory, "DummyAssembly.dll");
         var weaver = new WeaverUsingSymbols();
         var result = weaver.ExecuteTestRun(assemblyPath, writeSymbols:true);

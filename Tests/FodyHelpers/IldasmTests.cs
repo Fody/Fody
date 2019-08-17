@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using ApprovalTests;
 using ApprovalTests.Namers;
 using DummyAssembly;
@@ -20,9 +21,9 @@ public class IldasmTests :
     public IldasmTests()
     {
 #if DEBUG
-        disposable = NamerFactory.AsEnvironmentSpecificTest(() => "Debug" + ApprovalResults.GetDotNetRuntime(true));
+        disposable = NamerFactory.AsEnvironmentSpecificTest(() => "Debug" + ApprovalResults.GetDotNetRuntime(true, RuntimeInformation.FrameworkDescription));
 #else
-        disposable = NamerFactory.AsEnvironmentSpecificTest(() => "Release" + ApprovalResults.GetDotNetRuntime(true));
+        disposable = NamerFactory.AsEnvironmentSpecificTest(() => "Release" + ApprovalResults.GetDotNetRuntime(true, RuntimeInformation.FrameworkDescription));
 #endif
     }
 
@@ -30,17 +31,22 @@ public class IldasmTests :
     public void VerifyMethod()
     {
         var verify = Ildasm.Decompile(GetAssemblyPath(), "DummyAssembly.Class1::Method");
-        using (ApprovalResults.UniqueForRuntime())
+        using (UniqueForRuntime())
         {
             Approvals.Verify(verify);
         }
+    }
+
+    static IDisposable UniqueForRuntime(bool throwOnError = true)
+    {
+        return NamerFactory.AsEnvironmentSpecificTest(() => ApprovalResults.GetDotNetRuntime(throwOnError, RuntimeInformation.FrameworkDescription));
     }
 
     [Fact]
     public void Verify()
     {
         var verify = Ildasm.Decompile(GetAssemblyPath());
-        using (ApprovalResults.UniqueForRuntime())
+        using (UniqueForRuntime())
         {
             Approvals.Verify(verify);
         }
