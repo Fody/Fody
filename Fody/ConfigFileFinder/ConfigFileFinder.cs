@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Fody;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
-using Fody;
 
 public static class ConfigFileFinder
 {
@@ -161,13 +161,16 @@ public static class ConfigFileFinder
         return element;
     }
 
-    public static void EnsureSchemaIsUpToDate(string projectDirectory, IEnumerable<WeaverEntry> weavers, bool defaultGenerateXsd)
+    public static void EnsureSchemaIsUpToDate(string solutionDirectory, string projectDirectory, IEnumerable<WeaverEntry> weavers, bool defaultGenerateXsd)
     {
         var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
+        var solutionConfigFilePath = Path.Combine(solutionDirectory, FodyWeaversConfigFileName);
         try
         {
-            var doc = XDocumentEx.Load(projectConfigFilePath);
+            if (!File.Exists(projectConfigFilePath) && File.Exists(solutionConfigFilePath))
+                return;
 
+            var doc = XDocumentEx.Load(projectConfigFilePath);
             if (!ShouldGenerateXsd(doc, defaultGenerateXsd))
             {
                 return;

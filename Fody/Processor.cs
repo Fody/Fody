@@ -110,7 +110,7 @@ public partial class Processor
             }
         }
 
-        ConfigFileFinder.EnsureSchemaIsUpToDate(ProjectDirectory, Weavers, GenerateXsd);
+        ConfigFileFinder.EnsureSchemaIsUpToDate(SolutionDirectory, ProjectDirectory, Weavers, GenerateXsd);
 
         Weavers = Weavers
             .Where(weaver => weaver.Element != null)
