@@ -2,12 +2,12 @@ image: Visual Studio 2019
 skip_commits:
   message: /doco|Merge pull request.*/
 build_script:
-- cmd: |
-    msbuild -restore Fody.sln /p:Configuration=Release /verbosity:minimal
-    msbuild -restore Integration\Integration.sln /p:Configuration=Release /verbosity:minimal
-    msbuild Integration\Tests\Tests.csproj /target:Restore
-test:
-  assemblies:
-    - '**\*Tests.dll'
+- ps: >-
+    dotnet build Fody.sln --configuration Release
+    dotnet build Integration\Integration.sln --configuration Release
+
+    dotnet test Fody.sln --configuration Release --no-build --no-restore
+    dotnet test Integration\Integration.sln --configuration Release --no-build --no-restore
+test: off
 artifacts:
 - path: nugets\*.nupkg
