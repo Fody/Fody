@@ -164,7 +164,7 @@ public partial class InnerWeaver :
 
         if (FodyVersion.WeaverRequiresUpdate(assembly, out var referencedVersion))
         {
-            Logger.LogWarning($"Weavers should reference at least the current major version of Fody (version {FodyVersion.Major}). The weaver in {assembly.GetName().Name} references version {referencedVersion}. This may result in incompatibilities at build time such as MissingMethodException being thrown.");
+            Logger.LogWarning($"Weavers should reference at least the current major version of Fody (version {FodyVersion.Major}). The weaver in {assembly.GetName().Name} references version {referencedVersion}. This may result in incompatibilities at build time such as MissingMethodException being thrown.", "FodyVersionMismatch");
             weaverHolder.IsUsingOldFodyVersion = true;
         }
 

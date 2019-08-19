@@ -32,14 +32,14 @@ public class BuildLogger : MarshalByRefObject, ILogger
         BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", (Microsoft.Build.Framework.MessageImportance)MessageImportanceDefaults.Info));
     }
 
-    public virtual void LogWarning(string message)
+    public virtual void LogWarning(string message, string code)
     {
-        LogWarning(message, null, 0, 0, 0, 0);
+        LogWarning(message, null, 0, 0, 0, 0, code);
     }
 
-    public virtual void LogWarning(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
+    public virtual void LogWarning(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string code)
     {
-        BuildEngine.LogWarningEvent(new BuildWarningEventArgs("", "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber, PrependMessage(message), "", "Fody"));
+        BuildEngine.LogWarningEvent(new BuildWarningEventArgs("", code ?? "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber, PrependMessage(message), "", "Fody"));
     }
 
     public virtual void LogError(string message)

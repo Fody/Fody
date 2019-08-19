@@ -25,7 +25,7 @@ public partial class InnerWeaver
         weaverInstance.LogDebug = message => Logger.LogDebug("  " + message);
         weaverInstance.LogInfo = message => Logger.LogInfo("  " + message);
         weaverInstance.LogMessage = (message, importance) => Logger.LogMessage("  " + message, (int)importance);
-        weaverInstance.LogWarning = Logger.LogWarning;
+        weaverInstance.LogWarning = s => Logger.LogWarning(s);
         weaverInstance.LogWarningPoint = LogWarningPoint;
         weaverInstance.LogError = Logger.LogError;
         weaverInstance.LogErrorPoint = LogErrorPoint;
