@@ -19,8 +19,8 @@
   },
   LogWarning: {
     Type: 'Action<String>',
-    Target: 'MockBuildLogger',
-    Method: 'Void LogWarning(System.String)'
+    Target: 'InnerWeaver',
+    Method: 'Void SetProperties(System.String)'
   },
   LogWarningPoint: {
     Type: 'Action<String, SequencePoint>',

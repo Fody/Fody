@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
+using ApprovalTests.Namers;
 using Fody;
 using Mono.Cecil;
 using ObjectApproval;
@@ -9,6 +12,8 @@ using Xunit.Abstractions;
 public class WeaverInitialiserTests :
     XunitLoggingBase
 {
+    IDisposable disposable;
+
     [Fact]
     public void ValidPropsFromBase()
     {
@@ -60,6 +65,17 @@ public class WeaverInitialiserTests :
     public WeaverInitialiserTests(ITestOutputHelper output) :
         base(output)
     {
+#if DEBUG
+        disposable = NamerFactory.AsEnvironmentSpecificTest(() => ApprovalResults.GetDotNetRuntime(true, RuntimeInformation.FrameworkDescription));
+#else
+        disposable = NamerFactory.AsEnvironmentSpecificTest(() => ApprovalResults.GetDotNetRuntime(true, RuntimeInformation.FrameworkDescription));
+#endif
+    }
+
+    public override void Dispose()
+    {
+        disposable.Dispose();
+        base.Dispose();
     }
 }
 
