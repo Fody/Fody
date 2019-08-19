@@ -1,7 +1,5 @@
 using System;
-using System.Runtime.InteropServices;
 using ApprovalTests;
-using ApprovalTests.Namers;
 using DummyAssembly;
 using Fody;
 using Xunit;
@@ -20,36 +18,21 @@ public class IldasmTests :
 
     public IldasmTests()
     {
-#if DEBUG
-        disposable = NamerFactory.AsEnvironmentSpecificTest(() => "Debug" + ApprovalResults.GetDotNetRuntime(true, RuntimeInformation.FrameworkDescription));
-#else
-        disposable = NamerFactory.AsEnvironmentSpecificTest(() => "Release" + ApprovalResults.GetDotNetRuntime(true, RuntimeInformation.FrameworkDescription));
-#endif
+        disposable = RuntimeNamer.BuildForRuntimeAndConfig();
     }
 
     [Fact]
     public void VerifyMethod()
     {
         var verify = Ildasm.Decompile(GetAssemblyPath(), "DummyAssembly.Class1::Method");
-        using (UniqueForRuntime())
-        {
-            Approvals.Verify(verify);
-        }
-    }
-
-    static IDisposable UniqueForRuntime(bool throwOnError = true)
-    {
-        return NamerFactory.AsEnvironmentSpecificTest(() => ApprovalResults.GetDotNetRuntime(throwOnError, RuntimeInformation.FrameworkDescription));
+        Approvals.Verify(verify);
     }
 
     [Fact]
     public void Verify()
     {
         var verify = Ildasm.Decompile(GetAssemblyPath());
-        using (UniqueForRuntime())
-        {
-            Approvals.Verify(verify);
-        }
+        Approvals.Verify(verify);
     }
 
     static string GetAssemblyPath()

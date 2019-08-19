@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using ApprovalTests.Namers;
 using Fody;
 using Mono.Cecil;
 using ObjectApproval;
@@ -65,7 +63,7 @@ public class WeaverInitialiserTests :
     public WeaverInitialiserTests(ITestOutputHelper output) :
         base(output)
     {
-        disposable = RuntimeNamer.Build();
+        disposable = RuntimeNamer.BuildForRuntime();
     }
 
     public override void Dispose()
