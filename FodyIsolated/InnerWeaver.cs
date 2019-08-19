@@ -142,30 +142,36 @@ public partial class InnerWeaver :
                 return;
             }
 
-            Logger.LogDebug($"Weaver '{weaverConfig.AssemblyPath}'.");
-            Logger.LogDebug("  Initializing weaver");
-            var assembly = LoadWeaverAssembly(weaverConfig.AssemblyPath);
-            var weaverType = assembly.FindType(weaverConfig.TypeName);
-
-            var delegateHolder = weaverType.GetDelegateHolderFromCache();
-            var weaverInstance = delegateHolder();
-            var weaverHolder = new WeaverHolder
-            {
-                Instance = weaverInstance,
-                Config = weaverConfig
-            };
-
-            if (FodyVersion.WeaverRequiresUpdate(assembly, out var referencedVersion))
-            {
-                Logger.LogWarning($"Weavers should reference at least the current major version of Fody (version {FodyVersion.Major}). The weaver in {assembly.GetName().Name} references version {referencedVersion}. This may result in incompatibilities at build time such as MissingMethodException being thrown.");
-                weaverHolder.IsUsingOldFodyVersion = true;
-            }
-            weaverHolder.FodyVersion = referencedVersion;
-
+            var weaverHolder = InitialiseWeaver(weaverConfig);
             weaverInstances.Add(weaverHolder);
-
-            SetProperties(weaverConfig, weaverInstance);
         }
+    }
+
+    WeaverHolder InitialiseWeaver(WeaverEntry weaverConfig)
+    {
+        Logger.LogDebug($"Weaver '{weaverConfig.AssemblyPath}'.");
+        Logger.LogDebug("  Initializing weaver");
+        var assembly = LoadWeaverAssembly(weaverConfig.AssemblyPath);
+        var weaverType = assembly.FindType(weaverConfig.TypeName);
+
+        var delegateHolder = weaverType.GetDelegateHolderFromCache();
+        var weaverInstance = delegateHolder();
+        var weaverHolder = new WeaverHolder
+        {
+            Instance = weaverInstance,
+            Config = weaverConfig
+        };
+
+        if (FodyVersion.WeaverRequiresUpdate(assembly, out var referencedVersion))
+        {
+            Logger.LogWarning($"Weavers should reference at least the current major version of Fody (version {FodyVersion.Major}). The weaver in {assembly.GetName().Name} references version {referencedVersion}. This may result in incompatibilities at build time such as MissingMethodException being thrown.");
+            weaverHolder.IsUsingOldFodyVersion = true;
+        }
+
+        weaverHolder.FodyVersion = referencedVersion;
+
+        SetProperties(weaverConfig, weaverInstance);
+        return weaverHolder;
     }
 
     void ExecuteWeavers()
@@ -194,7 +200,7 @@ public partial class InnerWeaver :
                 }
                 catch (MissingMemberException exception) when (weaver.IsUsingOldFodyVersion)
                 {
-                    throw new WeavingException($"Failed to execute weaver {weaver.Config.AssemblyPath} due to a MissingMemberException. Message: {exception.Message}. This is likely die to the weaver referencing an old version ({weaver.FodyVersion}) of Fody.");
+                    throw new WeavingException($"Failed to execute weaver {weaver.Config.AssemblyPath} due to a MissingMemberException. Message: {exception.Message}. This is likely due to the weaver referencing an old version ({weaver.FodyVersion}) of Fody.");
                 }
                 catch (Exception exception)
                 {
