@@ -65,11 +65,7 @@ public class WeaverInitialiserTests :
     public WeaverInitialiserTests(ITestOutputHelper output) :
         base(output)
     {
-#if DEBUG
-        disposable = NamerFactory.AsEnvironmentSpecificTest(() => ApprovalResults.GetDotNetRuntime(true, RuntimeInformation.FrameworkDescription));
-#else
-        disposable = NamerFactory.AsEnvironmentSpecificTest(() => ApprovalResults.GetDotNetRuntime(true, RuntimeInformation.FrameworkDescription));
-#endif
+        disposable = RuntimeNamer.Build();
     }
 
     public override void Dispose()
