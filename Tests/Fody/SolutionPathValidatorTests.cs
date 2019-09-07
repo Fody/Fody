@@ -5,7 +5,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 public class SolutionPathValidatorTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     [Fact]
     public void Valid()

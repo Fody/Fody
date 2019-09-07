@@ -5,7 +5,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 public class WeaversHistoryTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     [Fact]
     public void AddNewFile()

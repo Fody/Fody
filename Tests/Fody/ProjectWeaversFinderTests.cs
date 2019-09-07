@@ -3,7 +3,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 public class ProjectWeaversFinderTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     [Fact]
     public void NotFound()

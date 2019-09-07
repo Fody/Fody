@@ -6,7 +6,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 public class WeaverTestHelperTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     [Fact]
     public void Run()

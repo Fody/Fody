@@ -8,7 +8,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 public class WeaverInitialiserTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     IDisposable disposable;
 

@@ -2,7 +2,7 @@
 using Xunit.Abstractions;
 
 public class FodyVersionTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     [Fact]
     public void FindFodyHelpersReference()

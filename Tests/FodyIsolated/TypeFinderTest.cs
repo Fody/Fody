@@ -2,7 +2,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 public class TypeFinderTest :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     [Fact]
     public void Valid()

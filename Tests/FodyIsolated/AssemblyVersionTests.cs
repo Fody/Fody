@@ -6,7 +6,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 public class AssemblyVersionTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     [Fact]
     public void ShouldReadTheSameFodyCommonVersionInfoFromAssemblyAttributeAndFile()

@@ -3,7 +3,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 public class AssemblyLocationTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     [Fact]
     public void Foo()

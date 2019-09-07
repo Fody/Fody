@@ -4,7 +4,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 public class ReferenceTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     [Fact]
     public void Ensure_fody_has_no_reference_to_Cecil()

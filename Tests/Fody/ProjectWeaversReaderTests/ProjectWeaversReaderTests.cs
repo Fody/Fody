@@ -4,7 +4,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 public class ProjectWeaversReaderTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     [Fact]
     public void Invalid()

@@ -3,7 +3,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 public class VerifierTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     [Fact]
     public void ExtractVerifyAssemblyFromConfig_NotExists()

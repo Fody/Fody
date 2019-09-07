@@ -9,7 +9,7 @@ using Xunit.Abstractions;
 // ReSharper disable UnusedVariable
 
 public class PeVerifierTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     string assemblyPath = "Tests.dll";
     [Fact]

@@ -4,7 +4,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 public class SolutionDirectoryFinderTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     [Fact]
     public void ReturnNCrunchSolutionWhenPresent()

@@ -4,7 +4,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 public class ConstructorDelegateBuilderTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     [Fact]
     public void Should_throw_When_is_abstract_type()

@@ -5,7 +5,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 public class XmlExtensionsTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     [Fact]
     public void Simple()

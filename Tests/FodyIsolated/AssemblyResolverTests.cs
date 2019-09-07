@@ -6,7 +6,7 @@ using Xunit;
 using Xunit.Abstractions;
 
 public class AssemblyResolverTests :
-    XunitLoggingBase
+    XunitApprovalBase
 {
     ILogger logger = new MockBuildLogger();
 
