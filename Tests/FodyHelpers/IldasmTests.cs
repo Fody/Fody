@@ -3,10 +3,10 @@ using ApprovalTests;
 using DummyAssembly;
 using Fody;
 using Xunit;
-// ReSharper disable UnusedVariable
+using Xunit.Abstractions;
 
 public class IldasmTests :
-    IDisposable
+    XunitApprovalBase
 {
     IDisposable disposable;
 
@@ -16,7 +16,8 @@ public class IldasmTests :
         Assert.True(Ildasm.FoundIldasm);
     }
 
-    public IldasmTests()
+    public IldasmTests(ITestOutputHelper outputHelper) :
+        base(outputHelper)
     {
         disposable = RuntimeNamer.BuildForRuntimeAndConfig();
     }
@@ -43,8 +44,9 @@ public class IldasmTests :
         return Uri.UnescapeDataString(uri.Path);
     }
 
-    public void Dispose()
+    public override void Dispose()
     {
         disposable.Dispose();
+        base.Dispose();
     }
 }
