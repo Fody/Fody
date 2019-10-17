@@ -10,10 +10,8 @@ public static class XDocumentEx
     {
         try
         {
-            using (var reader = new StreamReader(FileEx.OpenRead(path)))
-            {
-                return XDocument.Load(reader);
-            }
+            using var reader = new StreamReader(FileEx.OpenRead(path));
+            return XDocument.Load(reader);
         }
         catch (XmlException exception)
         {

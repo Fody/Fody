@@ -43,73 +43,71 @@ namespace Fody
             var targetAssemblyPath = Path.Combine(fodyTempDir, targetFileName);
             File.Delete(targetAssemblyPath);
 
-            using (var assemblyResolver = new TestAssemblyResolver())
+            using var assemblyResolver = new TestAssemblyResolver();
+            var typeCache = CacheTypes(weaver, assemblyResolver);
+
+            var testStatus = new TestResult();
+            weaver.LogDebug = text => testStatus.AddMessage(text, MessageImportanceDefaults.Debug);
+            weaver.LogInfo = text => testStatus.AddMessage(text, MessageImportanceDefaults.Info);
+            weaver.LogMessage = (text, messageImportance) => testStatus.AddMessage(text, messageImportance);
+            weaver.LogWarning = text => testStatus.AddWarning(text, null);
+            weaver.LogWarningPoint = (text, sequencePoint) => testStatus.AddWarning(text, sequencePoint);
+            weaver.LogError = text => testStatus.AddError(text, null);
+            weaver.LogErrorPoint = (text, sequencePoint) => testStatus.AddError(text, sequencePoint);
+            weaver.AssemblyFilePath = assemblyPath;
+            weaver.FindType = typeCache.FindType;
+            weaver.TryFindType = typeCache.TryFindType;
+            weaver.ResolveAssembly = assemblyResolver.Resolve;
+            var readerParameters = new ReaderParameters
             {
-                var typeCache = CacheTypes(weaver, assemblyResolver);
+                AssemblyResolver = assemblyResolver,
+                SymbolReaderProvider = new SymbolReaderProvider(),
+                ReadWrite = false,
+                ReadSymbols = true,
+            };
 
-                var testStatus = new TestResult();
-                weaver.LogDebug = text => testStatus.AddMessage(text, MessageImportanceDefaults.Debug);
-                weaver.LogInfo = text => testStatus.AddMessage(text, MessageImportanceDefaults.Info);
-                weaver.LogMessage = (text, messageImportance) => testStatus.AddMessage(text, messageImportance);
-                weaver.LogWarning = text => testStatus.AddWarning(text, null);
-                weaver.LogWarningPoint = (text, sequencePoint) => testStatus.AddWarning(text, sequencePoint);
-                weaver.LogError = text => testStatus.AddError(text, null);
-                weaver.LogErrorPoint = (text, sequencePoint) => testStatus.AddError(text, sequencePoint);
-                weaver.AssemblyFilePath = assemblyPath;
-                weaver.FindType = typeCache.FindType;
-                weaver.TryFindType = typeCache.TryFindType;
-                weaver.ResolveAssembly = assemblyResolver.Resolve;
-                var readerParameters = new ReaderParameters
+            using (var module = ModuleDefinition.ReadModule(assemblyPath, readerParameters))
+            {
+                module.Assembly.Name.Name = assemblyName;
+                weaver.ModuleDefinition = module;
+                weaver.TypeSystem = new TypeSystem(typeCache.FindType, module);
+                beforeExecuteCallback?.Invoke(module);
+
+                weaver.Execute();
+                ReferenceCleaner.CleanReferences(module, weaver, weaver.LogDebug);
+
+                afterExecuteCallback?.Invoke(module);
+
+                var writerParameters = new WriterParameters
                 {
-                    AssemblyResolver = assemblyResolver,
-                    SymbolReaderProvider = new SymbolReaderProvider(),
-                    ReadWrite = false,
-                    ReadSymbols = true,
+                    WriteSymbols = writeSymbols
                 };
-
-                using (var module = ModuleDefinition.ReadModule(assemblyPath, readerParameters))
+                if (writeSymbols)
                 {
-                    module.Assembly.Name.Name = assemblyName;
-                    weaver.ModuleDefinition = module;
-                    weaver.TypeSystem = new TypeSystem(typeCache.FindType, module);
-                    beforeExecuteCallback?.Invoke(module);
-
-                    weaver.Execute();
-                    ReferenceCleaner.CleanReferences(module, weaver, weaver.LogDebug);
-
-                    afterExecuteCallback?.Invoke(module);
-
-                    var writerParameters = new WriterParameters
-                    {
-                        WriteSymbols = writeSymbols
-                    };
-                    if (writeSymbols)
-                    {
-                        writerParameters.SymbolWriterProvider = new EmbeddedPortablePdbWriterProvider();
-                    }
-
-                    module.Write(targetAssemblyPath, writerParameters);
+                    writerParameters.SymbolWriterProvider = new EmbeddedPortablePdbWriterProvider();
                 }
 
-                if (runPeVerify && IsWindows())
-                {
-                    List<string> ignoreList;
-                    if (ignoreCodes == null)
-                    {
-                        ignoreList = new List<string>();
-                    }
-                    else
-                    {
-                        ignoreList = ignoreCodes.ToList();
-                    }
-
-                    PeVerifier.ThrowIfDifferent(assemblyPath, targetAssemblyPath, ignoreList, Path.GetDirectoryName(assemblyPath));
-                }
-
-                testStatus.Assembly = Assembly.Load(File.ReadAllBytes(targetAssemblyPath));
-                testStatus.AssemblyPath = targetAssemblyPath;
-                return testStatus;
+                module.Write(targetAssemblyPath, writerParameters);
             }
+
+            if (runPeVerify && IsWindows())
+            {
+                List<string> ignoreList;
+                if (ignoreCodes == null)
+                {
+                    ignoreList = new List<string>();
+                }
+                else
+                {
+                    ignoreList = ignoreCodes.ToList();
+                }
+
+                PeVerifier.ThrowIfDifferent(assemblyPath, targetAssemblyPath, ignoreList, Path.GetDirectoryName(assemblyPath));
+            }
+
+            testStatus.Assembly = Assembly.Load(File.ReadAllBytes(targetAssemblyPath));
+            testStatus.AssemblyPath = targetAssemblyPath;
+            return testStatus;
         }
 
         static bool IsWindows()
