@@ -103,7 +103,7 @@ public partial class InnerWeaver :
             TypeCache = new TypeCache(assemblyResolver.Resolve);
             InitialiseWeavers();
 
-            TypeCache.BuildAssembliesToScan(weaverInstances.Select(x=>x.Instance));
+            TypeCache.BuildAssembliesToScan(weaverInstances.Select(x => x.Instance));
             InitialiseTypeSystem();
             ExecuteWeavers();
             AddWeavingInfo();
@@ -116,11 +116,11 @@ public partial class InnerWeaver :
         }
         catch (Exception exception)
         {
-            AppDomain.CurrentDomain.AssemblyResolve -= assemblyResolve;
             Logger.LogException(exception);
         }
         finally
         {
+            AppDomain.CurrentDomain.AssemblyResolve -= assemblyResolve;
             ModuleDefinition?.Dispose();
             CleanupTempSymbolsAndAssembly();
             assemblyResolver?.Dispose();
