@@ -16,11 +16,9 @@
   <files>
     <file src=".\bin\$configuration$\net472\Fody*.dll" target="netclassictask" />
     <file src=".\bin\$configuration$\net472\Mono*.dll" target="netclassictask" />
-    <file src=".\bin\$configuration$\net472\Fody*.pdb" target="netclassictask" />
     <file src=".\bin\$configuration$\net472\Mono*.pdb" target="netclassictask" />
     <file src=".\bin\$configuration$\netstandard2.0\Fody*.dll" target="netstandardtask" />
     <file src=".\bin\$configuration$\netstandard2.0\Mono*.dll" target="netstandardtask" />
-    <file src=".\bin\$configuration$\netstandard2.0\Fody*.pdb" target="netstandardtask" />
     <file src=".\bin\$configuration$\netstandard2.0\Mono*.pdb" target="netstandardtask" />
     <file src="Fody.targets" target="build" />
   </files>
