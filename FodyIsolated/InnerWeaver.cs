@@ -9,8 +9,6 @@ using System.Runtime.Remoting;
 #endif
 using Fody;
 using Mono.Cecil;
-using Mono.Cecil.Pdb;
-using Mono.Cecil.Rocks;
 using FieldAttributes = Mono.Cecil.FieldAttributes;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
 
@@ -18,6 +16,10 @@ public partial class InnerWeaver :
     MarshalByRefObject,
     IInnerWeaver
 {
+    static InnerWeaver()
+    {
+        StaticAssemblyResolve.Init();
+    }
     public string ProjectDirectoryPath { get; set; }
     public string ProjectFilePath { get; set; }
     public string DocumentationFilePath { get; set; }
@@ -40,25 +42,6 @@ public partial class InnerWeaver :
     Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
     {
         var assemblyName = new AssemblyName(args.Name).Name;
-        if (assemblyName == "FodyHelpers")
-        {
-            return typeof(BaseModuleWeaver).Assembly;
-        }
-
-        if (assemblyName == "Mono.Cecil")
-        {
-            return typeof(ModuleDefinition).Assembly;
-        }
-
-        if (assemblyName == "Mono.Cecil.Rocks")
-        {
-            return typeof(MethodBodyRocks).Assembly;
-        }
-
-        if (assemblyName == "Mono.Cecil.Pdb")
-        {
-            return typeof(PdbReaderProvider).Assembly;
-        }
 
         foreach (var weaverPath in Weavers.Select(x => x.AssemblyPath))
         {
