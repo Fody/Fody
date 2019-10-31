@@ -25,8 +25,8 @@ public partial class InnerWeaver :
     {
         fodyHelpersAssembly = typeof(BaseModuleWeaver).Assembly;
         cecilAssembly = Assembly.LoadFrom(Path.Combine(AssemblyLocation.CurrentDirectory, "Mono.Cecil.dll"));
-        cecilRocksAssembly = Assembly.LoadFrom(Path.Combine(AssemblyLocation.CurrentDirectory, "Mono.Cecil.Pdb.dll"));
-        cecilPdbAssembly = Assembly.LoadFrom(Path.Combine(AssemblyLocation.CurrentDirectory, "Mono.Cecil.Rocks.dll"));
+        cecilRocksAssembly = Assembly.LoadFrom(Path.Combine(AssemblyLocation.CurrentDirectory, "Mono.Cecil.Rocks.dll"));
+        cecilPdbAssembly = Assembly.LoadFrom(Path.Combine(AssemblyLocation.CurrentDirectory, "Mono.Cecil.Pdb.dll"));
     }
 
     public string ProjectDirectoryPath { get; set; }
