@@ -9,8 +9,6 @@ using System.Runtime.Remoting;
 #endif
 using Fody;
 using Mono.Cecil;
-using Mono.Cecil.Pdb;
-using Mono.Cecil.Rocks;
 using FieldAttributes = Mono.Cecil.FieldAttributes;
 using TypeAttributes = Mono.Cecil.TypeAttributes;
 
@@ -18,6 +16,19 @@ public partial class InnerWeaver :
     MarshalByRefObject,
     IInnerWeaver
 {
+    static Assembly fodyHelpersAssembly;
+    static Assembly cecilAssembly;
+    static Assembly cecilRocksAssembly;
+    static Assembly cecilPdbAssembly;
+
+    static InnerWeaver()
+    {
+        fodyHelpersAssembly = typeof(BaseModuleWeaver).Assembly;
+        cecilAssembly = Assembly.LoadFrom(Path.Combine(AssemblyLocation.CurrentDirectory, "Mono.Cecil.dll"));
+        cecilRocksAssembly = Assembly.LoadFrom(Path.Combine(AssemblyLocation.CurrentDirectory, "Mono.Cecil.Pdb.dll"));
+        cecilPdbAssembly = Assembly.LoadFrom(Path.Combine(AssemblyLocation.CurrentDirectory, "Mono.Cecil.Rocks.dll"));
+    }
+
     public string ProjectDirectoryPath { get; set; }
     public string ProjectFilePath { get; set; }
     public string DocumentationFilePath { get; set; }
@@ -39,25 +50,26 @@ public partial class InnerWeaver :
 
     Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
     {
-        var assemblyName = new AssemblyName(args.Name).Name;
+        var name = new AssemblyName(args.Name);
+        var assemblyName = name.Name;
         if (assemblyName == "FodyHelpers")
         {
-            return typeof(BaseModuleWeaver).Assembly;
+            return fodyHelpersAssembly;
         }
 
         if (assemblyName == "Mono.Cecil")
         {
-            return typeof(ModuleDefinition).Assembly;
+            return cecilAssembly;
         }
 
         if (assemblyName == "Mono.Cecil.Rocks")
         {
-            return typeof(MethodBodyRocks).Assembly;
+            return cecilRocksAssembly;
         }
 
         if (assemblyName == "Mono.Cecil.Pdb")
         {
-            return typeof(PdbReaderProvider).Assembly;
+            return cecilPdbAssembly;
         }
 
         foreach (var weaverPath in Weavers.Select(x => x.AssemblyPath))
@@ -85,6 +97,7 @@ public partial class InnerWeaver :
     }
 
     public TypeCache TypeCache;
+
     public void Execute()
     {
         ResolveEventHandler assemblyResolve = CurrentDomain_AssemblyResolve;
@@ -99,6 +112,7 @@ public partial class InnerWeaver :
                 Logger.LogWarning($"The assembly has already been processed by Fody. Weaving aborted. Path: {AssemblyFilePath} ");
                 return;
             }
+
             AppDomain.CurrentDomain.AssemblyResolve += assemblyResolve;
             TypeCache = new TypeCache(assemblyResolver.Resolve);
             InitialiseWeavers();
@@ -251,7 +265,7 @@ public partial class InnerWeaver :
     {
         var weaverVersion = "0.0.0.0";
         var attrs = assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute));
-        var fileVersionAttribute = (AssemblyFileVersionAttribute)attrs.FirstOrDefault();
+        var fileVersionAttribute = (AssemblyFileVersionAttribute) attrs.FirstOrDefault();
         if (fileVersionAttribute != null)
         {
             weaverVersion = fileVersionAttribute.Version;
