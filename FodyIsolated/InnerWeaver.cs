@@ -90,6 +90,7 @@ public partial class InnerWeaver :
         ResolveEventHandler assemblyResolve = CurrentDomain_AssemblyResolve;
         try
         {
+            AppDomain.CurrentDomain.AssemblyResolve += assemblyResolve;
             SplitUpReferences();
             GetSymbolProviders();
             assemblyResolver = new AssemblyResolver(Logger, SplitReferences);
@@ -99,7 +100,6 @@ public partial class InnerWeaver :
                 Logger.LogWarning($"The assembly has already been processed by Fody. Weaving aborted. Path: {AssemblyFilePath} ");
                 return;
             }
-            AppDomain.CurrentDomain.AssemblyResolve += assemblyResolve;
             TypeCache = new TypeCache(assemblyResolver.Resolve);
             InitialiseWeavers();
 
