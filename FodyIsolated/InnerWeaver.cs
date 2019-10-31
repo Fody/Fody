@@ -45,20 +45,20 @@ public partial class InnerWeaver :
             return typeof(BaseModuleWeaver).Assembly;
         }
 
-        if (assemblyName == "Mono.Cecil")
-        {
-            return typeof(ModuleDefinition).Assembly;
-        }
+        //if (assemblyName == "Mono.Cecil")
+        //{
+        //    return typeof(ModuleDefinition).Assembly;
+        //}
 
-        if (assemblyName == "Mono.Cecil.Rocks")
-        {
-            return typeof(MethodBodyRocks).Assembly;
-        }
+        //if (assemblyName == "Mono.Cecil.Rocks")
+        //{
+        //    return typeof(MethodBodyRocks).Assembly;
+        //}
 
-        if (assemblyName == "Mono.Cecil.Pdb")
-        {
-            return typeof(PdbReaderProvider).Assembly;
-        }
+        //if (assemblyName == "Mono.Cecil.Pdb")
+        //{
+        //    return typeof(PdbReaderProvider).Assembly;
+        //}
 
         foreach (var weaverPath in Weavers.Select(x => x.AssemblyPath))
         {
