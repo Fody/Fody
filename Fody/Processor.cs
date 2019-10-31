@@ -128,6 +128,7 @@ public partial class Processor
         var loadContext = GetLoadContext();
 
         var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
+        Logger.LogDebug($"LoadContext AssemblyFile: {assemblyFile}");
         using (innerWeaver = (IInnerWeaver)loadContext.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver"))
         {
             innerWeaver.AssemblyFilePath = AssemblyFilePath;
