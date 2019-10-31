@@ -1,21 +1,24 @@
-﻿#if NET472
+﻿using System.IO;
+#if NET472
 using System;
+
 public class IsolatedAssemblyLoadContext
 {
     AppDomain appDomain;
 
-    public IsolatedAssemblyLoadContext(string friendlyName, string applicationBase)
+    public IsolatedAssemblyLoadContext()
     {
         var appDomainSetup = new AppDomainSetup
         {
-            ApplicationBase = applicationBase,
+            ApplicationBase = AssemblyLocation.CurrentDirectory,
         };
-        appDomain = AppDomain.CreateDomain(friendlyName, null, appDomainSetup);
+        appDomain = AppDomain.CreateDomain("Fody AppDomain", null, appDomainSetup);
     }
 
-    public object CreateInstanceFromAndUnwrap(string assemblyPath, string typeName)
+    public object CreateInstanceFromAndUnwrap()
     {
-        return appDomain.CreateInstanceFromAndUnwrap(assemblyPath, typeName);
+        var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
+        return appDomain.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver");
     }
 
     public void Unload()
@@ -29,22 +32,16 @@ using System.Runtime.Loader;
 
 public class IsolatedAssemblyLoadContext : AssemblyLoadContext
 {
-    // ReSharper disable UnusedParameter.Local
-    public IsolatedAssemblyLoadContext(string friendlyName, string applicationBase)
-    {
-    }
-    // ReSharper restore UnusedParameter.Local
-
-    /// <inheritdoc />
     protected override Assembly Load(AssemblyName assemblyName)
     {
         return null;
     }
 
-    public object CreateInstanceFromAndUnwrap(string assemblyPath, string typeName)
+    public object CreateInstanceFromAndUnwrap()
     {
-        var assembly = LoadFromAssemblyPath(assemblyPath);
-        return assembly.CreateInstance(typeName);
+        var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
+        var assembly = LoadFromAssemblyPath(assemblyFile);
+        return assembly.CreateInstance("InnerWeaver");
     }
 
     public void Unload()

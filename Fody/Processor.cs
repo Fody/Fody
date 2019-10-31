@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using Fody;
 
@@ -127,9 +126,7 @@ public partial class Processor
     {
         var loadContext = GetLoadContext();
 
-        var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
-        Logger.LogDebug($"LoadContext AssemblyFile: {assemblyFile}");
-        using (innerWeaver = (IInnerWeaver)loadContext.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver"))
+        using (innerWeaver = (IInnerWeaver)loadContext.CreateInstanceFromAndUnwrap())
         {
             innerWeaver.AssemblyFilePath = AssemblyFilePath;
             innerWeaver.References = References;
@@ -172,7 +169,7 @@ public partial class Processor
     IsolatedAssemblyLoadContext CreateAssemblyLoadContext()
     {
         Logger.LogDebug("Creating a new AssemblyLoadContext");
-        return new IsolatedAssemblyLoadContext($"Fody Domain for '{SolutionDirectory}'", AssemblyLocation.CurrentDirectory);
+        return new IsolatedAssemblyLoadContext();
     }
 
     public void Cancel()
