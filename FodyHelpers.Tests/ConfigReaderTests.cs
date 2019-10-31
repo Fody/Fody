@@ -39,7 +39,7 @@ public class ConfigReaderTests :
         ApprovalTests.Approvals.Verify(exception.Message);
     }
 
-    public ConfigReaderTests(ITestOutputHelper output) : 
+    public ConfigReaderTests(ITestOutputHelper output) :
         base(output)
     {
     }
