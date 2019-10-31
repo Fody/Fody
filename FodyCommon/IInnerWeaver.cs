@@ -17,7 +17,9 @@ public interface IInnerWeaver : IDisposable
     string ProjectFilePath { get; set; }
     string DocumentationFilePath { get; set; }
     DebugSymbolsType DebugSymbols { get; set; }
-
+    #if(NETSTANDARD)
+    IsolatedAssemblyLoadContext LoadContext { get; set; }
+    #endif
     void Execute();
     void Cancel();
 }

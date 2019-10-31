@@ -125,7 +125,7 @@ public partial class Processor
     {
         var loadContext = GetLoadContext();
 
-        using (innerWeaver = (IInnerWeaver)loadContext.CreateInstanceFromAndUnwrap())
+        using (innerWeaver = loadContext.CreateInstanceFromAndUnwrap())
         {
             innerWeaver.AssemblyFilePath = AssemblyFilePath;
             innerWeaver.References = References;
