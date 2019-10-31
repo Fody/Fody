@@ -1,5 +1,5 @@
+using System;
 using ApprovalTests;
-using Fody;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -11,11 +11,11 @@ public class ProjectWeaversReaderTests :
     {
         var path =  @"Fody\ProjectWeaversReaderTests\Invalid.txt";
 
-        var exception = Assert.Throws<WeavingException>(() => XDocumentEx.Load(path));
+        var exception = Assert.ThrowsAny<Exception>(() => XDocumentEx.Load(path));
         Approvals.Verify(exception.Message);
     }
 
-    public ProjectWeaversReaderTests(ITestOutputHelper output) : 
+    public ProjectWeaversReaderTests(ITestOutputHelper output) :
         base(output)
     {
     }

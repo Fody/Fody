@@ -15,10 +15,15 @@
     </PropertyGroup>
   </Target>
   <ItemGroup>
+    <Compile Include="..\FodyHelpers\Guard.cs" Link="Guard.cs" />
+    <Compile Include="..\FodyHelpers\MessageImportance.cs" Link="MessageImportance.cs" />
+    <Compile Include="..\FodyHelpers\MessageImportanceDefaults.cs" Link="MessageImportanceDefaults.cs" />
+    <Compile Include="..\FodyHelpers\Testing\PeVerifier.cs" Link="Verify\PeVerifier.cs" />
+    <Compile Include="..\FodyHelpers\Testing\SdkToolFinder.cs" Link="Verify\SdkToolFinder.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" PrivateAssets="All" />
-    <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" PrivateAssets="All" />
-    <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" PrivateAssets="All" />
-    <PackageReference Condition="$(Configuration)=='Release'" Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01"  PrivateAssets="All" />
+    <PackageReference Condition="$(Configuration)=='Release'" Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0'">
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.3.0" PrivateAssets="All" />

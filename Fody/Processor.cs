@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using Fody;
 
 public partial class Processor
 {
@@ -41,7 +40,7 @@ public partial class Processor
     {
         var assembly = typeof(Processor).Assembly;
 
-        Logger.LogInfo($"Fody (version {FodyVersion.Version} @ {assembly.CodeBase}) Executing");
+        Logger.LogInfo($"Fody (version {typeof(Processor).Assembly.GetName().Version} @ {assembly.CodeBase}) Executing");
 
         var stopwatch = Stopwatch.StartNew();
 
