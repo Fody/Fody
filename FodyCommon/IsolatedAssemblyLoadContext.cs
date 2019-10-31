@@ -24,6 +24,7 @@ public class IsolatedAssemblyLoadContext
     }
 }
 #else
+using System.IO;
 using System.Reflection;
 using System.Runtime.Loader;
 
@@ -38,7 +39,13 @@ public class IsolatedAssemblyLoadContext : AssemblyLoadContext
     /// <inheritdoc />
     protected override Assembly Load(AssemblyName assemblyName)
     {
-        return null;
+        var defaultAssembly = Default.LoadFromAssemblyName(assemblyName);
+        if (defaultAssembly != null)
+        {
+            return defaultAssembly;
+        }
+
+        return LoadFromAssemblyPath(Path.Combine(AssemblyLocation.CurrentDirectory, assemblyName.Name + ".dll"));
     }
 
     public object CreateInstanceFromAndUnwrap(string assemblyPath, string typeName)
