@@ -14,35 +14,28 @@
       <NuspecProperties>configuration=$(Configuration);version=$(PackageVersion);authors=$(Authors);iconUrl=$(PackageIconUrl);projectUrl=$(PackageProjectUrl);description=$(Description);tags=$(PackageTags)</NuspecProperties>
     </PropertyGroup>
   </Target>
-  <ItemGroup>
-    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" PrivateAssets="All" />
-    <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" PrivateAssets="All" />
-    <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" PrivateAssets="All" />
-    <PackageReference Condition="$(Configuration)=='Release'" Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01"  PrivateAssets="All" />
-  </ItemGroup>
   <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0'">
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.3.0" PrivateAssets="All" />
-    <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.dll" />
-    <Reference Include="Mono.Cecil.Pdb" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.Pdb.dll" />
-    <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.Rocks.dll" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework) == 'net472'">
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Tasks.v4.0" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
-    <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\net40\Mono.Cecil.dll" />
-    <Reference Include="Mono.Cecil.Pdb" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Pdb.dll" />
-    <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Rocks.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\FodyHelpers\Guard.cs" Link="Guard.cs" />
+    <Compile Include="..\FodyHelpers\MessageImportance.cs" Link="MessageImportance.cs" />
+    <Compile Include="..\FodyHelpers\MessageImportanceDefaults.cs" Link="MessageImportanceDefaults.cs" />
+    <Compile Include="..\FodyHelpers\Testing\PeVerifier.cs" Link="Verify\PeVerifier.cs" />
+    <Compile Include="..\FodyHelpers\Testing\SdkToolFinder.cs" Link="Verify\SdkToolFinder.cs" />
+    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" PrivateAssets="All" />
+    <PackageReference Condition="$(Configuration)=='Release'" Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01" PrivateAssets="All" />
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

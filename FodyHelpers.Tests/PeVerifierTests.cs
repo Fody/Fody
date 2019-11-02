@@ -11,7 +11,7 @@ using Xunit.Abstractions;
 public class PeVerifierTests :
     XunitApprovalBase
 {
-    string assemblyPath = "Tests.dll";
+    string assemblyPath = "FodyHelpers.Tests.dll";
     [Fact]
     public void StaticPathResolution()
     {

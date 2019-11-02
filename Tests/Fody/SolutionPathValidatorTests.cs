@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using Fody;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -23,7 +22,7 @@ public class SolutionPathValidatorTests :
     [Fact]
     public void InValid()
     {
-        Action paramName = () =>
+        Action action = () =>
         {
             var processor = new Processor
             {
@@ -31,9 +30,7 @@ public class SolutionPathValidatorTests :
             };
             processor.ValidateSolutionPath();
         };
-#pragma warning disable xUnit2015 // Do not use typeof expression to check the exception type
-        var exception = Assert.Throws(typeof(WeavingException), paramName);
-#pragma warning restore xUnit2015 // Do not use typeof expression to check the exception type
+        var exception = Assert.ThrowsAny<Exception>(action);
         Assert.Equal($"SolutionDir '{Path.GetFullPath("aString")}' does not exist.", exception.Message);
     }
 

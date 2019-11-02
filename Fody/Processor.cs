@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Fody;
 
 public partial class Processor
 {
@@ -40,7 +39,7 @@ public partial class Processor
     {
         var assembly = typeof(Processor).Assembly;
 
-        Logger.LogInfo($"Fody (version {FodyVersion.Version} @ {assembly.CodeBase}) Executing");
+        Logger.LogInfo($"Fody (version {typeof(Processor).Assembly.GetName().Version} @ {assembly.CodeBase}) Executing");
 
         var stopwatch = Stopwatch.StartNew();
 
@@ -126,7 +125,7 @@ public partial class Processor
     {
         var loadContext = GetLoadContext();
 
-        using (innerWeaver = (IInnerWeaver)loadContext.CreateInstanceFromAndUnwrap())
+        using (innerWeaver = loadContext.CreateInstanceFromAndUnwrap())
         {
             innerWeaver.AssemblyFilePath = AssemblyFilePath;
             innerWeaver.References = References;

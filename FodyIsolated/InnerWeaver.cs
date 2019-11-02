@@ -32,6 +32,9 @@ public partial class InnerWeaver :
     public List<string> ReferenceCopyLocalPaths { get; set; }
     public List<string> DefineConstants { get; set; }
     public DebugSymbolsType DebugSymbols { get; set; }
+    #if (NETSTANDARD)
+    public IsolatedAssemblyLoadContext LoadContext { get; set; }
+    #endif
     bool cancelRequested;
     List<WeaverHolder> weaverInstances = new List<WeaverHolder>();
     Action cancelDelegate;
