@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWeaver", "SampleWeave
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyHelpers.Tests", "FodyHelpers.Tests\FodyHelpers.Tests.csproj", "{68109B11-B125-47D2-A188-15D8793DEC6F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssemblyWithNoSymbols", "AssemblyWithNoSymbols\AssemblyWithNoSymbols.csproj", "{7E18A70B-31D6-4435-BD88-1415078B7D84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{68109B11-B125-47D2-A188-15D8793DEC6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68109B11-B125-47D2-A188-15D8793DEC6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68109B11-B125-47D2-A188-15D8793DEC6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E18A70B-31D6-4435-BD88-1415078B7D84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E18A70B-31D6-4435-BD88-1415078B7D84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E18A70B-31D6-4435-BD88-1415078B7D84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E18A70B-31D6-4435-BD88-1415078B7D84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

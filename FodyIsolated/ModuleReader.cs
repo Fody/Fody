@@ -5,7 +5,21 @@ public partial class InnerWeaver
     public ModuleDefinition ModuleDefinition = null!;
     bool hasSymbols;
 
-    public virtual void ReadModule()
+    public void ReadModule()
+    {
+        var result = ReadModule(AssemblyFilePath,assemblyResolver);
+        hasSymbols = result.hasSymbols;
+        if (hasSymbols)
+        {
+            Logger.LogInfo("Debug symbols disabled.");
+        }
+
+        ModuleDefinition = result.module;
+    }
+
+    public static (ModuleDefinition module, bool hasSymbols) ReadModule(
+        string assemblyFilePath,
+        AssemblyResolver assemblyResolver)
     {
         var readerParameters = new ReaderParameters
         {
@@ -13,16 +27,18 @@ public partial class InnerWeaver
             InMemory = true
         };
 
-        ModuleDefinition = ModuleDefinition.ReadModule(AssemblyFilePath, readerParameters);
+        var module = ModuleDefinition.ReadModule(assemblyFilePath, readerParameters);
 
+        var hasSymbols = false;
         try
         {
-            ModuleDefinition.ReadSymbols();
+            module.ReadSymbols();
             hasSymbols = true;
         }
         catch
         {
-            Logger.LogInfo("Debug symbols disabled.");
         }
+
+        return (module, hasSymbols);
     }
 }
