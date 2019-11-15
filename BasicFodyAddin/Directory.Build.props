@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Version>1.2.0</Version>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+</Project>

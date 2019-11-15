@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<xs:complexType xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:attribute name="Namespace"
+                type="xs:string">
+    <xs:annotation>
+      <xs:documentation>Namespace to use for the injected type</xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+</xs:complexType>
