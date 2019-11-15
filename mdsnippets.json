@@ -1,0 +1,7 @@
+﻿{
+  "UrlsAsSnippets": [
+    "https://raw.githubusercontent.com/Fody/Fody/master/FodyPackaging/Weaver.props",
+    "https://raw.githubusercontent.com/Fody/Fody/master/FodyPackaging/build/FodyPackaging.props",
+    "https://raw.githubusercontent.com/Fody/Fody/master/FodyPackaging/build/FodyPackaging.targets"
+  ]
+}
