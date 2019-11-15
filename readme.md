@@ -1,13 +1,8 @@
-[![AppVeyor](https://img.shields.io/appveyor/ci/SimonCropp/fody/master.svg?style=flat&max-age=86400&label=appveyor)](https://ci.appveyor.com/project/SimonCropp/fody/branch/master)
-[![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg?style=flat&max-age=86400)](https://gitter.im/Fody/Fody)
-[![NuGet Status](https://img.shields.io/nuget/v/Fody.svg?style=flat&max-age=86400)](https://www.nuget.org/packages/Fody/)
-[![Patrons on Open Collective](https://opencollective.com/fody/tiers/patron/badge.svg)](#patrons)
+# <img src="https://github.com/Fody/Home/raw/master/images/fody.png" height="40px"> Fody
 
-### <img src="https://raw.githubusercontent.com/Fody/Fody/master/package_icon.png" height="28px"> Extensible tool for weaving .net assemblies
+The Home repository is the starting point for people to learn about Fody, the project.
 
-Manipulating the IL of an assembly as part of a build requires a significant amount of plumbing code. This plumbing code involves knowledge of both the MSBuild and Visual Studio APIs. Fody attempts to eliminate that plumbing code through an extensible add-in model.
-
-**This is the codebase of core Fody engine. For more information on the larger Fody project see https://github.com/Fody/Home.**
+Fody is an extensible tool for weaving .net assemblies. It enables the manipulating the IL of an assembly as part of a build requires a significant amount of plumbing code. This plumbing code involves knowledge of both the MSBuild and Visual Studio APIs. Fody attempts to eliminate that plumbing code through an extensible add-in model. This technique is very powerful, for example you can turn simple properties into full [INotifyPropertyChanged implementations](https://github.com/Fody/PropertyChanged), add [checks for null arguments](https://github.com/Fody/NullGuard), add [Method Timings](https://github.com/Fody/MethodTimer), even [make all your string comparisons case insensitive](https://github.com/Fody/Caseless).
 
 
 <!--- StartOpenCollectiveBackers -->
@@ -40,7 +35,6 @@ Support this project by [becoming a Silver Sponsor](https://opencollective.com/f
 
 Support this project by [becoming a Bronze Sponsor](https://opencollective.com/fody/order/7085). The company avatar will show up here with a link to your OpenCollective Profile.
 
-
 <a href="https://opencollective.com/fody/tiers/bronze/0/website"><img src="https://opencollective.com/fody/tiers/bronze/0/avatar.svg?avatarHeight=100"></a>
 
 
@@ -51,8 +45,30 @@ Thanks to all the backers and sponsors! Support this project by [becoming a patr
 <a href="https://opencollective.com/fody#contributors"><img src="https://opencollective.com/fody/sponsor.svg?width=890&avatarHeight=50&button=false"><img src="https://opencollective.com/fody/backer.svg?width=890&avatarHeight=50&button=false"></a>
 
 
-
 <!--- EndOpenCollectiveBackers -->
+
+<a href="#" id="endofbacking"></a>
+
+## Main Fody code repository
+
+The codebase of core Fody engine located at https://github.com/Fody/Fody.
+
+[![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg?style=flat&max-age=86400)](https://gitter.im/Fody/Fody)
+
+## The plumbing tasks Fody handles
+
+  * Injection of the MSBuild task into the build pipeline
+  * Resolving the location of the assembly and pdb
+  * Abstracts the complexities of logging to MSBuild
+  * Reads the assembly and pdb into the Mono.Cecil object model
+  * Re-applying the strong name if necessary
+  * Saving the assembly and pdb
+
+Fody Uses [Mono.Cecil](http://www.mono-project.com/Cecil/) and an add-in based approach to modifying the IL of .net assemblies at compile time.
+
+ * No install required to build.
+ * Attributes are optional depending on the weavers used.
+ * No runtime dependencies need to be deployed.
 
 
 ## Documentation and Further Learning
@@ -89,7 +105,19 @@ Thanks to all the backers and sponsors! Support this project by [becoming a patr
     Every month the Fody project will donate a portion of funding raised to a charity or other cause.
 
 
-## Contributors
+## Naming
 
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
-<a href="https://github.com/Fody/Fody/graphs/contributors"><img src="https://opencollective.com/fody/contributors.svg?width=890&button=false" /></a>
+The name "Fody" comes from the small birds that belong to the weaver family [Ploceidae](http://en.wikipedia.org/wiki/Fody).
+
+
+## Credits
+
+Thanks to the following
+
+ * [Jb Evain](https://github.com/jbevain) for the use of [Mono Cecil](https://github.com/jbevain/cecil)
+ * [GitHub](https://github.com/) for project hosting
+ * [JetBrains](https://www.jetbrains.com/resharper/) for the generous donation of [ReSharper](https://www.jetbrains.com/resharper/) licenses.
+ * [xUnit](https://xunit.github.io/)
+ * [AppVeyor](https://www.appveyor.com/) and [Travis CI](https://travis-ci.org/) for build and CI infrastructure
+ * [NuGet](https://www.nuget.org/) for package delivery
+ * [The Noun Project](https://thenounproject.com) for the <a href="https://thenounproject.com/noun/bird/#icon-No6726">Bird</a> icon designed by <a href="https://thenounproject.com/MARCOHS">Marco Hernandez</a>
