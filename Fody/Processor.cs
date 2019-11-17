@@ -14,6 +14,7 @@ public partial class Processor
     public string DocumentationFilePath;
     public string References;
     public string SolutionDirectory;
+    public string BuildConfiguration;
     public List<WeaverEntry> Weavers;
     public DebugSymbolsType DebugSymbols;
     public List<string> ReferenceCopyLocalPaths;
@@ -66,7 +67,7 @@ public partial class Processor
         ValidateProjectPath();
         ValidateAssemblyPath();
 
-        ConfigFiles = ConfigFileFinder.FindWeaverConfigFiles(SolutionDirectory, ProjectDirectory, Logger).ToList();
+        ConfigFiles = ConfigFileFinder.FindWeaverConfigFiles(SolutionDirectory, ProjectDirectory, BuildConfiguration, Logger).ToList();
 
         if (!ConfigFiles.Any())
         {

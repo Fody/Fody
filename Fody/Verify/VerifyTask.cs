@@ -12,6 +12,8 @@ namespace Fody
         public string ProjectDirectory { get; set; }
         [Required]
         public string TargetPath { get; set; }
+        
+        public string BuildConfiguration { get; set; }
 
         public override bool Execute()
         {
@@ -24,6 +26,7 @@ namespace Fody
                 },
                 SolutionDirectory = SolutionDirectoryFinder.Find(SolutionDirectory, NCrunchOriginalSolutionDirectory, ProjectDirectory),
                 ProjectDirectory = ProjectDirectory,
+                BuildConfiguration = BuildConfiguration,
                 DefineConstants = defineConstants,
                 TargetPath = TargetPath,
             };

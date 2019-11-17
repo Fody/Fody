@@ -68,7 +68,7 @@ public class ConfigFileFinderTests  :
             }
         };
 
-        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(slnDir, testDir, new MockBuildLogger()).ToArray();
+        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(slnDir, testDir, "Release", new MockBuildLogger()).ToArray();
 
         ConfigFileFinder.EnsureSchemaIsUpToDate(slnDir, testDir, weavers, true);
 
@@ -129,7 +129,7 @@ public class ConfigFileFinderTests  :
             }
         };
 
-        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(slnDir, testDir, new MockBuildLogger()).ToArray();
+        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(slnDir, testDir, "Release", new MockBuildLogger()).ToArray();
         ConfigFileFinder.EnsureSchemaIsUpToDate(slnDir, testDir, weavers, true);
 
         Assert.Single(configFiles);
@@ -159,7 +159,7 @@ public class ConfigFileFinderTests  :
             }
         };
 
-        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(slnDir, testDir, new MockBuildLogger()).ToArray();
+        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(slnDir, testDir, "Release", new MockBuildLogger()).ToArray();
         ConfigFileFinder.EnsureSchemaIsUpToDate(slnDir, testDir, weavers, false);
 
         Assert.Single(configFiles);
@@ -192,7 +192,7 @@ public class ConfigFileFinderTests  :
             }
         };
 
-        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(slnDir, testDir, new MockBuildLogger()).ToArray();
+        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(slnDir, testDir, "Release", new MockBuildLogger()).ToArray();
         ConfigFileFinder.EnsureSchemaIsUpToDate(slnDir, testDir, weavers, true);
 
         Assert.Single(configFiles);
@@ -222,7 +222,7 @@ public class ConfigFileFinderTests  :
             }
         };
 
-        var configs = ConfigFileFinder.FindWeaverConfigFiles(slnDir, testDir, new MockBuildLogger()).ToArray();
+        var configs = ConfigFileFinder.FindWeaverConfigFiles(slnDir, testDir, "Release", new MockBuildLogger()).ToArray();
         ConfigFileFinder.EnsureSchemaIsUpToDate(slnDir, testDir, weavers, false);
 
         Assert.Single(configs);

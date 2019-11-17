@@ -11,22 +11,30 @@ public static class ConfigFileFinder
     static readonly XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");
     static readonly XNamespace schemaInstanceNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema-instance");
 
-    public static IEnumerable<WeaverConfigFile> FindWeaverConfigFiles(string solutionDirectoryPath, string projectDirectory, ILogger logger)
+    public static IEnumerable<WeaverConfigFile> FindWeaverConfigFiles(string solutionDirectoryPath, string projectDirectory, string buildConfiguration, ILogger logger)
     {
-        var solutionConfigFilePath = Path.Combine(solutionDirectoryPath, FodyWeaversConfigFileName);
-
-        if (File.Exists(solutionConfigFilePath))
+        var directories = new[] {solutionDirectoryPath, projectDirectory};
+        string[] fileNames;
+        if (string.IsNullOrWhiteSpace(buildConfiguration))
         {
-            logger.LogDebug($"Found path to weavers file '{solutionConfigFilePath}'.");
-            yield return new WeaverConfigFile(solutionConfigFilePath) {IsGlobal = true};
+            fileNames = new[] {FodyWeaversConfigFileName};
+        }
+        else
+        {
+            fileNames = new[] {FodyWeaversConfigFileName, $"FodyWeavers.{buildConfiguration}.xml"};
         }
 
-        var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
+        var results = from dir in directories
+            from file in fileNames
+            let fullPath = Path.Combine(dir, file)
+            where File.Exists(fullPath)
+            select fullPath;
 
-        if (File.Exists(projectConfigFilePath))
+        foreach (var path in results)
         {
-            logger.LogDebug($"Found path to weavers file '{projectConfigFilePath}'.");
-            yield return new WeaverConfigFile(projectConfigFilePath);
+            
+            logger.LogDebug($"Found path to weavers file '{path}'.");
+            yield return new WeaverConfigFile(path);
         }
     }
 

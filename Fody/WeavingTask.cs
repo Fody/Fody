@@ -10,6 +10,7 @@ namespace Fody
     public class WeavingTask : Task, ICancelableTask
     {
         Processor processor;
+        public string BuildConfiguration { get; set; }
         [Required]
         public string AssemblyFile { set; get; }
 
@@ -70,6 +71,7 @@ namespace Fody
                 SignAssembly = SignAssembly,
                 ProjectDirectory = ProjectDirectory,
                 ProjectFilePath = ProjectFile,
+                BuildConfiguration = BuildConfiguration,
                 DocumentationFilePath = DocumentationFile,
                 References = References,
                 SolutionDirectory = SolutionDirectoryFinder.Find(SolutionDirectory, NCrunchOriginalSolutionDirectory, ProjectDirectory),

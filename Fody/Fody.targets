@@ -39,6 +39,7 @@
            Text="Fody is only supported on MSBuild 16 and above. Current version: $(MsBuildMajorVersion)." />
     <Fody.WeavingTask
         AssemblyFile="@(IntermediateAssembly)"
+        BuildConfiguration="Configuration"
         IntermediateDirectory="$(ProjectDir)$(IntermediateOutputPath)"
         KeyOriginatorFile="$(KeyOriginatorFile)"
         AssemblyOriginatorKeyFile="$(AssemblyOriginatorKeyFile)"
@@ -103,8 +104,14 @@
         TargetPath="$(TargetPath)"
         SolutionDirectory="$(SolutionDir)"
         DefineConstants="$(DefineConstants)"
+        BuildConfiguration="$(Configuration)"
         NCrunchOriginalSolutionDirectory="$(NCrunchOriginalSolutionDir)"
       />
   </Target>
 
+  <ItemGroup>
+    <None Update="$(ProjectDir)FodyWeavers.*.xml" >
+      <DependentUpon>FodyWeavers.xml</DependentUpon>      
+    </None>
+  </ItemGroup>
 </Project>
