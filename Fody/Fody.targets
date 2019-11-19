@@ -110,7 +110,7 @@
   </Target>
 
   <ItemGroup>
-    <None Update="$(ProjectDir)FodyWeavers.*.xml" >
+    <None Update="FodyWeavers.*.xml" >
       <DependentUpon>FodyWeavers.xml</DependentUpon>      
     </None>
   </ItemGroup>
