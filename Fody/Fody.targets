@@ -39,7 +39,7 @@
            Text="Fody is only supported on MSBuild 16 and above. Current version: $(MsBuildMajorVersion)." />
     <Fody.WeavingTask
         AssemblyFile="@(IntermediateAssembly)"
-        BuildConfiguration="Configuration"
+        BuildConfiguration="$(Configuration)"
         IntermediateDirectory="$(ProjectDir)$(IntermediateOutputPath)"
         KeyOriginatorFile="$(KeyOriginatorFile)"
         AssemblyOriginatorKeyFile="$(AssemblyOriginatorKeyFile)"
