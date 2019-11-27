@@ -1,9 +1,10 @@
 using System.Linq;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 public class VerifierTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact]
     public void ExtractVerifyAssemblyFromConfig_NotExists()

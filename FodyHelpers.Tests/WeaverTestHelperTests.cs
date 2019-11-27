@@ -1,60 +1,56 @@
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using Fody;
 using Mono.Cecil;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 public class WeaverTestHelperTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact]
-    public void Run()
+    public Task Run()
     {
         var weaver = new TargetWeaver();
         var result = weaver.ExecuteTestRun("DummyAssembly.dll");
-        Verify(result);
+        return Verify(result);
     }
 
-    static void Verify(TestResult result)
+    Task Verify(TestResult result)
     {
-        ObjectApprover.Verify(new
-            {
-                result.Errors,
-                result.Messages,
-                result.Warnings,
-                result.AssemblyPath,
-                result.Assembly.FullName
-            },
-            ScrubCurrentDirectory);
-    }
-
-    static string ScrubCurrentDirectory(string s)
-    {
-        return s.Replace(@"\\", @"\").Replace(Environment.CurrentDirectory, "");
+        return Verify(new
+        {
+            result.Errors,
+            result.Messages,
+            result.Warnings,
+            result.AssemblyPath,
+            result.Assembly.FullName
+        });
     }
 
     [Fact]
-    public void WithCustomAssemblyName()
+    public Task WithCustomAssemblyName()
     {
         var assemblyPath = Path.Combine(Environment.CurrentDirectory, "DummyAssembly.dll");
         var weaver = new TargetWeaver();
         var result = weaver.ExecuteTestRun(
             assemblyPath: assemblyPath,
             assemblyName: "NewName");
-        Verify(result);
+        return Verify(result);
     }
 
     [Fact]
-    public void WeaverUsingSymbols()
+    public Task WeaverUsingSymbols()
     {
         var assemblyPath = Path.Combine(Environment.CurrentDirectory, "DummyAssembly.dll");
         var weaver = new WeaverUsingSymbols();
-        var result = weaver.ExecuteTestRun(assemblyPath, writeSymbols:true);
-        var module = ModuleDefinition.ReadModule(assemblyPath,new ReaderParameters {ReadSymbols = true});
+        var result = weaver.ExecuteTestRun(assemblyPath, writeSymbols: true);
+        var module = ModuleDefinition.ReadModule(assemblyPath, new ReaderParameters {ReadSymbols = true});
         Assert.True(module.HasSymbols);
 
-        Verify(result);
+        return Verify(result);
     }
 
     public WeaverTestHelperTests(ITestOutputHelper output) :

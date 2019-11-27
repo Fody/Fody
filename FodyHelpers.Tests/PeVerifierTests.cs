@@ -1,6 +1,7 @@
 using System;
 using System.IO;
-using ApprovalTests;
+using System.Threading.Tasks;
+using VerifyXunit;
 using Fody;
 using Mono.Cecil;
 using Xunit;
@@ -9,7 +10,7 @@ using Xunit.Abstractions;
 // ReSharper disable UnusedVariable
 
 public class PeVerifierTests :
-    XunitApprovalBase
+    VerifyBase
 {
     string assemblyPath = "FodyHelpers.Tests.dll";
     [Fact]
@@ -43,14 +44,14 @@ public class PeVerifierTests :
     }
 
     [Fact]
-    public void TrimLineNumbers()
+    public Task TrimLineNumbers()
     {
         var text = PeVerifier.TrimLineNumbers(@"
 [IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::MethodWithAmp][offset 0x00000002][found Native Int][expected unmanaged pointer] Unexpected type on the stack.
 [IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::get_NullProperty][offset 0x00000006][found unmanaged pointer][expected unmanaged pointer] Unexpected type on the stack.
 [IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::set_NullProperty][offset 0x00000001] Unmanaged pointers are not a verifiable type.
 3 Error(s) Verifying C:\Code\Fody\net452\AssemblyToProcess.dll");
-        Approvals.Verify(text);
+        return Verify(text);
     }
 
     [Fact]

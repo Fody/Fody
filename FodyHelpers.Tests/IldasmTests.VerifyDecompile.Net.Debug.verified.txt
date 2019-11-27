@@ -1,0 +1,75 @@
+.assembly extern mscorlib
+{
+.publickeytoken = (B7 7A 5C 56 19 34 E0 89 )                         // .z\V.4..
+.ver 4:0:0:0
+}
+.assembly DummyAssembly
+{
+63 65 70 74 69 6F 6E 54 68 72 6F 77 73 01 )       // ceptionThrows.
+2C 56 65 72 73 69 6F 6E 3D 76 34 2E 37 2E 32 01   // ,Version=v4.7.2.
+00 54 0E 14 46 72 61 6D 65 77 6F 72 6B 44 69 73   // .T..FrameworkDis
+70 6C 61 79 4E 61 6D 65 14 2E 4E 45 54 20 46 72   // playName..NET Fr
+61 6D 65 77 6F 72 6B 20 34 2E 37 2E 32 )          // amework 4.7.2
+.publickey = (00 24 00 00 04 80 00 00 94 00 00 00 06 02 00 00   // .$..............
+00 24 00 00 52 53 41 31 00 04 00 00 01 00 01 00   // .$..RSA1........
+F1 DB 6E 31 BB 3D E8 56 7F 99 17 49 72 F4 AD 7A   // ..n1.=.V...Ir..z
+91 DB 64 35 05 81 9C BA A8 2E D2 7A 9B FA 39 1E   // ..d5.......z..9.
+1B D7 2C BD 4A 1E B4 C9 3F 71 22 94 6B 92 6A 96   // ..,.J...?q".k.j.
+72 61 6F 8A 2B EF 45 DA BB 3C 8A C6 55 B3 65 DF   // rao.+.E..<..U.e.
+D5 A1 E7 FE 49 E0 89 D9 E3 54 49 98 88 BB 49 BD   // ....I....TI...I.
+B4 E9 43 3C 16 A5 EF 61 D5 2D 3E 39 A5 90 23 36   // ..C<...a.->9..#6
+59 21 6E C8 57 53 98 1E 42 04 D3 B6 50 DB ED 65   // Y!n.WS..B...P..e
+3B 11 6D A2 C3 03 99 A6 F1 A0 41 96 EA 58 7B EC ) // ;.m.......A..X{.
+.hash algorithm 0x00008004
+.ver 0:0:0:0
+}
+.module DummyAssembly.dll
+.imagebase 0x10000000
+.file alignment 0x00000200
+.stackreserve 0x00100000
+.subsystem 0x0003       // WINDOWS_CUI
+.corflags 0x00000009    //  ILONLY
+.class public auto ansi beforefieldinit DummyAssembly.Class1
+extends [mscorlib]System.Object
+{
+.field private int32 'field'
+.method public hidebysig instance void
+Method(int32 param) cil managed
+{
+.maxstack  3
+.locals init (bool V_0)
+IL_0000:  nop
+IL_0001:  ldarg.0
+IL_0002:  ldarg.1
+IL_0003:  stfld      int32 DummyAssembly.Class1::'field'
+IL_0008:  ldarg.1
+IL_0009:  ldc.i4.1
+IL_000a:  add
+IL_000b:  starg.s    param
+IL_000d:  ldarg.1
+IL_000e:  ldarg.0
+IL_000f:  ldfld      int32 DummyAssembly.Class1::'field'
+IL_0014:  ceq
+IL_0016:  stloc.0
+IL_0017:  ldloc.0
+IL_0018:  brfalse.s  IL_002a
+IL_001a:  nop
+IL_001b:  ldarg.0
+IL_001c:  ldarg.0
+IL_001d:  ldfld      int32 DummyAssembly.Class1::'field'
+IL_0022:  ldc.i4.1
+IL_0023:  sub
+IL_0024:  stfld      int32 DummyAssembly.Class1::'field'
+IL_0029:  nop
+IL_002a:  ret
+}
+.method public hidebysig specialname rtspecialname
+instance void  .ctor() cil managed
+{
+.maxstack  8
+IL_0000:  ldarg.0
+IL_0001:  call       instance void [mscorlib]System.Object::.ctor()
+IL_0006:  nop
+IL_0007:  ret
+}
+}

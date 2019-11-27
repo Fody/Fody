@@ -1,11 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 public class XmlExtensionsTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact]
     public void Simple()

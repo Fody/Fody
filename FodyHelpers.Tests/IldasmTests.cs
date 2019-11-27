@@ -1,15 +1,14 @@
 using System;
-using ApprovalTests;
+using System.Threading.Tasks;
+using VerifyXunit;
 using DummyAssembly;
 using Fody;
 using Xunit;
 using Xunit.Abstractions;
 
 public class IldasmTests :
-    XunitApprovalBase
+    VerifyBase
 {
-    IDisposable disposable;
-
     [Fact]
     public void StaticPathResolution()
     {
@@ -19,21 +18,22 @@ public class IldasmTests :
     public IldasmTests(ITestOutputHelper outputHelper) :
         base(outputHelper)
     {
-        disposable = RuntimeNamer.BuildForRuntimeAndConfig();
+        UniqueForAssemblyConfiguration();
+        UniqueForRuntime();
     }
 
     [Fact]
-    public void VerifyMethod()
+    public Task VerifyMethod()
     {
         var verify = Ildasm.Decompile(GetAssemblyPath(), "DummyAssembly.Class1::Method");
-        Approvals.Verify(verify);
+        return Verify(verify);
     }
 
     [Fact]
-    public void Verify()
+    public Task VerifyDecompile()
     {
         var verify = Ildasm.Decompile(GetAssemblyPath());
-        Approvals.Verify(verify);
+        return Verify(verify);
     }
 
     static string GetAssemblyPath()
@@ -42,11 +42,5 @@ public class IldasmTests :
 
         var uri = new UriBuilder(assembly.CodeBase);
         return Uri.UnescapeDataString(uri.Path);
-    }
-
-    public override void Dispose()
-    {
-        disposable.Dispose();
-        base.Dispose();
     }
 }

@@ -1,0 +1,10 @@
+{
+  Messages: [
+    {
+      Text: '\tRemoving reference to \'FodyHelpers.Tests\'.',
+      MessageImportance: 'Low'
+    }
+  ],
+  AssemblyPath: 'CurrentDirectoryfodytemp\NewName.dll',
+  FullName: 'NewName, Version=0.0.0.0, Culture=neutral, PublicKeyToken=1ca091877d12ca03'
+}

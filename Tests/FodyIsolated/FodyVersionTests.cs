@@ -1,8 +1,9 @@
-﻿using Xunit;
+﻿using VerifyXunit;
+using Xunit;
 using Xunit.Abstractions;
 
 public class FodyVersionTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact]
     public void FindFodyHelpersReference()

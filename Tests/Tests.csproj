@@ -2,21 +2,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net472;netcoreapp2.2</TargetFrameworks>
-    <Optimize>False</Optimize>
     <SignAssembly>true</SignAssembly>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.3.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
-    <PackageReference Include="ApprovalTests" Version="4.4.0" />
-    <PackageReference Include="ObjectApproval" Version="11.2.1" />
+    <PackageReference Include="XunitContext" Version="1.5.1" />
+    <PackageReference Include="Verify.Xunit" Version="1.0.0-beta.21" />
     <PackageReference Include="Xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
-    <PackageReference Include="Xunit.ApprovalTests" Version="4.6.0" />
     <Reference Include="Microsoft.CSharp" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <ProjectReference Include="..\DummyAssembly\DummyAssembly.csproj" />

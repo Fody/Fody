@@ -1,9 +1,10 @@
 ﻿using System;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 public class ToFriendlyStringTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact(Skip = "todo")]
     public void ToFriendlyName()

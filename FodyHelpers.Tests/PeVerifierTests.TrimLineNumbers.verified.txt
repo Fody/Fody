@@ -1,4 +1,4 @@
-﻿
+
 [IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::MethodWithAmp] Unexpected type on the stack.
 [IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::get_NullProperty] Unexpected type on the stack.
 [IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::set_NullProperty] Unmanaged pointers are not a verifiable type.

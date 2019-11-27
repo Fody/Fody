@@ -1,9 +1,10 @@
 using System.Diagnostics;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 public class AssemblyLocationTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact]
     public void Foo()
@@ -12,7 +13,7 @@ public class AssemblyLocationTests :
         Trace.WriteLine(currentDirectory);
     }
 
-    public AssemblyLocationTests(ITestOutputHelper output) : 
+    public AssemblyLocationTests(ITestOutputHelper output) :
         base(output)
     {
     }

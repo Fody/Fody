@@ -1,19 +1,17 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Fody;
 using Mono.Cecil;
-using ObjectApproval;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 public class WeaverInitialiserTests :
-    XunitApprovalBase
+    VerifyBase
 {
-    IDisposable disposable;
-
     [Fact]
-    public void ValidPropsFromBase()
+    public Task ValidPropsFromBase()
     {
         var moduleDefinition = ModuleDefinition.CreateModule("Foo", ModuleKind.Dll);
 
@@ -28,9 +26,12 @@ public class WeaverInitialiserTests :
         };
         var moduleWeaver = new ValidFromBaseModuleWeaver();
         innerWeaver.SetProperties(weaverEntry, moduleWeaver);
+        ModifySerialization(settings =>
+        {
+            settings.IgnoreMembersWithType<ModuleDefinition>();
+        });
 
-        SerializerBuilder.IgnoreMembersWithType<ModuleDefinition>();
-        ObjectApprover.Verify(moduleWeaver);
+        return Verify(moduleWeaver);
     }
 
     static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, AssemblyResolver resolver)
@@ -63,13 +64,7 @@ public class WeaverInitialiserTests :
     public WeaverInitialiserTests(ITestOutputHelper output) :
         base(output)
     {
-        disposable = RuntimeNamer.BuildForRuntime();
-    }
-
-    public override void Dispose()
-    {
-        disposable.Dispose();
-        base.Dispose();
+        UniqueForRuntime();
     }
 }
 

@@ -1,9 +1,10 @@
 using System;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 public class ProjectWeaversFinderTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact]
     public void NotFound()

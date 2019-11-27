@@ -1,0 +1,70 @@
+{
+  Config: {
+    foo: null
+  },
+  LogDebug: {
+    Type: 'Action<String>',
+    Target: 'InnerWeaver',
+    Method: 'Void SetProperties(System.String)'
+  },
+  LogInfo: {
+    Type: 'Action<String>',
+    Target: 'InnerWeaver',
+    Method: 'Void SetProperties(System.String)'
+  },
+  LogMessage: {
+    Type: 'Action<String, MessageImportance>',
+    Target: 'InnerWeaver',
+    Method: 'Void SetProperties(System.String, Fody.MessageImportance)'
+  },
+  LogWarning: {
+    Type: 'Action<String>',
+    Target: 'InnerWeaver',
+    Method: 'Void SetProperties(System.String)'
+  },
+  LogWarningPoint: {
+    Type: 'Action<String, SequencePoint>',
+    Target: 'InnerWeaver',
+    Method: 'Void LogWarningPoint(System.String, Mono.Cecil.Cil.SequencePoint)'
+  },
+  LogError: {
+    Type: 'Action<String>',
+    Target: 'MockBuildLogger',
+    Method: 'Void LogError(System.String)'
+  },
+  LogErrorPoint: {
+    Type: 'Action<String, SequencePoint>',
+    Target: 'InnerWeaver',
+    Method: 'Void LogErrorPoint(System.String, Mono.Cecil.Cil.SequencePoint)'
+  },
+  ResolveAssembly: {
+    Type: 'Func<String, AssemblyDefinition>',
+    Target: 'InnerWeaver',
+    Method: 'Mono.Cecil.AssemblyDefinition SetProperties(System.String)'
+  },
+  AssemblyFilePath: 'AssemblyFilePath',
+  ProjectDirectoryPath: 'ProjectDirectoryPath',
+  ProjectFilePath: 'ProjectFilePath',
+  DocumentationFilePath: 'DocumentationFile',
+  AddinDirectoryPath: 'c:\FakePath',
+  SolutionDirectoryPath: 'SolutionDirectoryPath',
+  References: 'Ref1;Ref2',
+  ReferenceCopyLocalPaths: [
+    'CopyRef1',
+    'CopyRef2'
+  ],
+  DefineConstants: [
+    'Debug',
+    'Release'
+  ],
+  FindType: {
+    Type: 'Func<String, TypeDefinition>',
+    Target: 'TypeCache',
+    Method: 'Mono.Cecil.TypeDefinition FindType(System.String)'
+  },
+  TryFindType: {
+    Type: 'TryFindTypeFunc',
+    Target: 'TypeCache',
+    Method: 'Boolean TryFindType(System.String, Mono.Cecil.TypeDefinition ByRef)'
+  }
+}

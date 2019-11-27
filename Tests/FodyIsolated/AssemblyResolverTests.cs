@@ -2,11 +2,12 @@
 using System.IO;
 using System.Linq;
 using DummyAssembly;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 public class AssemblyResolverTests :
-    XunitApprovalBase
+    VerifyBase
 {
     ILogger logger = new MockBuildLogger();
 

@@ -2,11 +2,12 @@
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 public class ConfigFileFinderTests  :
-    XunitApprovalBase
+    VerifyBase
 {
     static XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");
     static XNamespace schemaInstanceNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema-instance");

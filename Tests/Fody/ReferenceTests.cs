@@ -1,10 +1,11 @@
 using System.Linq;
 using Fody;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 public class ReferenceTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact]
     public void Ensure_fody_has_no_reference_to_Cecil()

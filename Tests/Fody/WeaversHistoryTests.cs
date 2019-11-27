@@ -1,11 +1,12 @@
 using System;
 using System.IO;
 using System.Linq;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 public class WeaversHistoryTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact]
     public void AddNewFile()

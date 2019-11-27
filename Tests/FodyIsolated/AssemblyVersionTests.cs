@@ -2,11 +2,12 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 public class AssemblyVersionTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact]
     public void ShouldReadTheSameFodyCommonVersionInfoFromAssemblyAttributeAndFile()

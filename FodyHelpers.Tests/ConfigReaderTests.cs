@@ -1,10 +1,12 @@
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Fody;
+using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
 
 public class ConfigReaderTests :
-    XunitApprovalBase
+    VerifyBase
 {
     [Fact]
     public void Simple()
@@ -24,19 +26,19 @@ public class ConfigReaderTests :
     }
 
     [Fact]
-    public void Whitespace()
+    public Task Whitespace()
     {
         var xElementFalse = XElement.Parse("<Node Name=' '/>");
         var exception = Assert.Throws<WeavingException>(() => xElementFalse.ReadBool("Name", false));
-        ApprovalTests.Approvals.Verify(exception.Message);
+        return Verify(exception.Message);
     }
 
     [Fact]
-    public void Empty()
+    public Task Empty()
     {
         var xElementFalse = XElement.Parse("<Node Name=''/>");
         var exception = Assert.Throws<WeavingException>(() => xElementFalse.ReadBool("Name", false));
-        ApprovalTests.Approvals.Verify(exception.Message);
+        return Verify(exception.Message);
     }
 
     public ConfigReaderTests(ITestOutputHelper output) :

@@ -1,0 +1,34 @@
+.class public auto ansi beforefieldinit DummyAssembly.Class1
+extends [mscorlib]System.Object
+{
+.method public hidebysig instance void
+Method(int32 param) cil managed
+{
+.maxstack  3
+.locals init (bool V_0)
+IL_0000:  nop
+IL_0001:  ldarg.0
+IL_0002:  ldarg.1
+IL_0003:  stfld      int32 DummyAssembly.Class1::'field'
+IL_0008:  ldarg.1
+IL_0009:  ldc.i4.1
+IL_000a:  add
+IL_000b:  starg.s    param
+IL_000d:  ldarg.1
+IL_000e:  ldarg.0
+IL_000f:  ldfld      int32 DummyAssembly.Class1::'field'
+IL_0014:  ceq
+IL_0016:  stloc.0
+IL_0017:  ldloc.0
+IL_0018:  brfalse.s  IL_002a
+IL_001a:  nop
+IL_001b:  ldarg.0
+IL_001c:  ldarg.0
+IL_001d:  ldfld      int32 DummyAssembly.Class1::'field'
+IL_0022:  ldc.i4.1
+IL_0023:  sub
+IL_0024:  stfld      int32 DummyAssembly.Class1::'field'
+IL_0029:  nop
+IL_002a:  ret
+}
+}
