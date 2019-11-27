@@ -11,6 +11,5 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Condition="$(Configuration)=='Release'" Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Condition="$(Configuration)=='Release'" Include="Microsoft.SourceLink.GitHub" Version="1.0.0"  PrivateAssets="All" />
   </ItemGroup>
 </Project>
