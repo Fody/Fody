@@ -13,6 +13,7 @@
     <PackageReference Include="Verify.Xunit" Version="1.0.0-beta.21" />
     <PackageReference Include="Xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+    <PackageReference Include="Xunit.ApprovalTests" Version="4.7.0" />
     <Reference Include="Microsoft.CSharp" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <ProjectReference Include="..\DummyAssembly\DummyAssembly.csproj" />
