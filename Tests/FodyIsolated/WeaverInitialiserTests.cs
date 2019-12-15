@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Fody;
 using Mono.Cecil;
+using Verify;
 using VerifyXunit;
 using Xunit;
 using Xunit.Abstractions;
@@ -26,12 +27,10 @@ public class WeaverInitialiserTests :
         };
         var moduleWeaver = new ValidFromBaseModuleWeaver();
         innerWeaver.SetProperties(weaverEntry, moduleWeaver);
-        ModifySerialization(settings =>
-        {
-            settings.IgnoreMembersWithType<ModuleDefinition>();
-        });
-
-        return Verify(moduleWeaver);
+        var verifySettings = new VerifySettings();
+        verifySettings.ModifySerialization(settings => { settings.IgnoreMembersWithType<ModuleDefinition>(); });
+        verifySettings.UniqueForRuntime();
+        return Verify(moduleWeaver, verifySettings);
     }
 
     static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, AssemblyResolver resolver)
@@ -64,7 +63,6 @@ public class WeaverInitialiserTests :
     public WeaverInitialiserTests(ITestOutputHelper output) :
         base(output)
     {
-        UniqueForRuntime();
     }
 }
 
