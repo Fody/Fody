@@ -1,10 +1,8 @@
 using System;
 using System.IO;
 using Xunit;
-using Xunit.Abstractions;
 
-public class ModuleReaderTests :
-    XunitApprovalBase
+public class ModuleReaderTests 
 {
     [Fact]
     public void WithSymbols()
@@ -22,10 +20,5 @@ public class ModuleReaderTests :
         var result = InnerWeaver.ReadModule(assemblyPath, new AssemblyResolver());
         Assert.NotNull(result.module);
         Assert.False(result.hasSymbols);
-    }
-
-    public ModuleReaderTests(ITestOutputHelper output) :
-        base(output)
-    {
     }
 }
