@@ -5,10 +5,10 @@
     <version>$version$</version>
     <authors>$authors$</authors>
     <developmentDependency>true</developmentDependency>
-    <license type="expression">MIT</license>
+    <license type="file">License.txt</license>
     <projectUrl>$projectUrl$</projectUrl>
     <iconUrl>$iconUrl$</iconUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
     <copyright>$copyright$</copyright>
     <tags>$tags$</tags>
@@ -28,5 +28,6 @@
     <file src="..\Lib\Cecil\netstandard2.0\Mono*.*" target="netstandardtask" />
 
     <file src="Fody.targets" target="build" />
+    <file src="..\License.txt"  />
   </files>
 </package>

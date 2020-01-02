@@ -1,6 +1,12 @@
-The MIT License
+It is expected that all developers become a Patron to use this library.
 
-Copyright (c) Simon Cropp and contributors
+https://github.com/Fody/Home/blob/master/pages/licensing-patron-faq.md
+
+From a legal and liability perspective the MIT License applies:
+
+MIT License
+
+Copyright (c) Simon Cropp
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
