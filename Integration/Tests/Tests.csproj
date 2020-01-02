@@ -4,12 +4,12 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="System.Reflection.Metadata" Version="1.7.0" />
+    <PackageReference Include="System.Reflection.Metadata" Version="1.8.0" />
     <PackageReference Include="Xunit" Version="2.4.1" />
     <PackageReference Include="XunitContext" Version="1.5.1" />
     <PackageReference Include="Verify.Xunit" Version="1.0.0-beta.15" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
     <ProjectReference Include="..\WithEmbeddedPdb\WithEmbeddedPdb.csproj" />
     <ProjectReference Include="..\WithNoPdb\WithNoPdb.csproj" />
     <ProjectReference Include="..\WithNugetAndInSolutionWeavers\WithNugetAndInSolutionWeavers.csproj" />
