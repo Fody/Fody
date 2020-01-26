@@ -1,9 +1,3 @@
-It is expected that all developers become a Patron to use this library.
-
-https://github.com/Fody/Home/blob/master/pages/licensing-patron-faq.md
-
-From a legal and liability perspective the MIT License applies:
-
 MIT License
 
 Copyright (c) Simon Cropp
