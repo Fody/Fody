@@ -1,0 +1,19 @@
+name: on-tag-do-release
+on:
+  push:
+    tags:
+      - '[0-9]+\.[0-9]+\.[0-9]+'
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+    - name: Run
+      run: |
+        dotnet tool install --global GitReleaseManager.Tool
+        tag="${GITHUB_REF:10}"
+        owner="${GITHUB_REPOSITORY%/*}"
+        repo="${GITHUB_REPOSITORY#*/}"
+        dotnet-gitreleasemanager create -m ${tag} --token ${{secrets.GITHUB_TOKEN}} -o ${owner} -r ${repo}
+        dotnet-gitreleasemanager close -m ${tag} --token ${{secrets.GITHUB_TOKEN}} -o ${owner} -r ${repo}
+        dotnet-gitreleasemanager publish -t ${tag} --token ${{secrets.GITHUB_TOKEN}} -o ${owner} -r ${repo}
+      shell: bash
