@@ -11,10 +11,6 @@ public class AssemblyResolver : IAssemblyResolver
     List<string> splitReferences;
     Dictionary<string, AssemblyDefinition> assemblyDefinitionCache = new Dictionary<string, AssemblyDefinition>(StringComparer.InvariantCultureIgnoreCase);
 
-    public AssemblyResolver()
-    {
-    }
-
     public AssemblyResolver(ILogger logger, IEnumerable<string> splitReferences)
     {
         referenceDictionary = new Dictionary<string, string>();
@@ -58,11 +54,6 @@ public class AssemblyResolver : IAssemblyResolver
         {
             throw new Exception($"Could not read '{file}'.", exception);
         }
-    }
-
-    public virtual AssemblyDefinition Resolve(string assemblyName)
-    {
-        return Resolve(new AssemblyNameReference(assemblyName, null));
     }
 
     public virtual AssemblyDefinition Resolve(AssemblyNameReference assemblyNameReference)

@@ -33,7 +33,7 @@ public class WeaverInitialiserTests :
         return Verify(moduleWeaver, verifySettings);
     }
 
-    static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, AssemblyResolver resolver)
+    static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, IAssemblyResolver resolver)
     {
         return new InnerWeaver
         {
