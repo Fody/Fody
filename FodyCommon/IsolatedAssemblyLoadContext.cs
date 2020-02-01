@@ -37,7 +37,7 @@ using System.Runtime.Loader;
 public class IsolatedAssemblyLoadContext :
     AssemblyLoadContext
 {
-    protected override Assembly Load(AssemblyName assemblyName)
+    protected override Assembly? Load(AssemblyName assemblyName)
     {
         if (assemblyName.Name == "FodyCommon")
         {
