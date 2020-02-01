@@ -47,12 +47,12 @@ public static class ConfigFileFinder
                 }
 
                 entries[elementName] = new WeaverConfigEntry
-                {
-                    ExecutionOrder = executionOrder,
-                    ConfigFile = configFile,
-                    ElementName = elementName,
-                    Content = element.ToString()
-                };
+                (
+                    executionOrder: executionOrder,
+                    configFile: configFile,
+                    elementName: elementName,
+                    content: element.ToString()
+                );
             }
         }
 
