@@ -16,8 +16,7 @@ public class WeaverUsingSymbols : BaseModuleWeaver
 
         foreach (var method in methods)
         {
-            var sequencePoints = ModuleDefinition.SymbolReader?.Read(method)?.SequencePoints;
-            Assert.NotNull(sequencePoints);
+            var sequencePoints = ModuleDefinition.SymbolReader.Read(method).SequencePoints;
             total += sequencePoints.Count;
         }
 

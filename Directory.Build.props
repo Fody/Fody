@@ -15,6 +15,7 @@
     <PackageIconUrl>https://raw.github.com/Fody/Fody/master/package_icon.png</PackageIconUrl>
     <PackageTags>ILWeaving, Fody, Cecil, AOP</PackageTags>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <Target Name="IncludeAllInPackage">

@@ -6,14 +6,14 @@ public class TargetWeaver : BaseModuleWeaver
 {
     public override void Execute()
     {
-        var type = FindType("System.Boolean");
+        var result = TryFindType("System.Boolean", out var type);
+        Assert.True(result);
+        Assert.NotNull(type);
+
+        type = FindType("System.Boolean");
         Assert.NotNull(type);
 
         type = FindType("Boolean");
-        Assert.NotNull(type);
-
-        var result = TryFindType("System.Boolean", out type);
-        Assert.True(result);
         Assert.NotNull(type);
 
         result = TryFindType("Boolean", out type);

@@ -1,6 +1,7 @@
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using Mono.Cecil;
@@ -22,12 +23,12 @@ namespace Fody
             }
         }
 
-        public AssemblyDefinition Resolve(AssemblyNameReference name)
+        public AssemblyDefinition? Resolve(AssemblyNameReference name)
         {
             return Resolve(name.Name);
         }
 
-        public AssemblyDefinition Resolve(string name)
+        public AssemblyDefinition? Resolve(string name)
         {
             if (!definitions.TryGetValue(name, out var definition))
             {
@@ -42,7 +43,9 @@ namespace Fody
             return definition;
         }
 
-        static bool TryGetAssemblyLocation(string name, out string assemblyLocation)
+        static bool TryGetAssemblyLocation(
+            string name,
+            [NotNullWhen(true)] out string? assemblyLocation)
         {
 #if (NETSTANDARD2_0)
             if (string.Equals(name, "netstandard", StringComparison.OrdinalIgnoreCase))
@@ -68,7 +71,7 @@ namespace Fody
             return true;
         }
 
-        static Assembly GetAssembly(string name)
+        static Assembly? GetAssembly(string name)
         {
             if (string.Equals(name, "System", StringComparison.OrdinalIgnoreCase))
             {
@@ -96,7 +99,7 @@ namespace Fody
             return AssemblyDefinition.ReadAssembly(assemblyLocation, readerParameters);
         }
 
-        public AssemblyDefinition Resolve(AssemblyNameReference name, ReaderParameters parameters)
+        public AssemblyDefinition? Resolve(AssemblyNameReference name, ReaderParameters parameters)
         {
             return Resolve(name);
         }

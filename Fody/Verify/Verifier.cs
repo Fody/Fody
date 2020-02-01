@@ -7,11 +7,11 @@ using Fody;
 
 public class Verifier
 {
-    public ILogger Logger;
-    public string SolutionDirectory;
-    public List<string> DefineConstants;
-    public string ProjectDirectory;
-    public string TargetPath;
+    public ILogger Logger = null!;
+    public string SolutionDirectory = null!;
+    public List<string> DefineConstants = null!;
+    public string ProjectDirectory = null!;
+    public string TargetPath = null!;
 
     public bool Verify()
     {

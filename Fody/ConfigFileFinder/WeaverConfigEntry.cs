@@ -1,7 +1,8 @@
 ﻿public class WeaverConfigEntry
 {
-    public WeaverConfigFile ConfigFile;
-    public string ElementName;
-    public string Content;
+    //TODO:
+    public WeaverConfigFile ConfigFile = null!;
+    public string ElementName = null!;
+    public string Content = null!;
     public int ExecutionOrder;
 }

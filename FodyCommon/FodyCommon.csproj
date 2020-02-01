@@ -5,7 +5,6 @@
     <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0'">
     <PackageReference Include="System.Runtime.Loader" Version="4.3.0" />

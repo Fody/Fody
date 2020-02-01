@@ -29,6 +29,7 @@
     <Compile Include="..\FodyHelpers\MessageImportanceDefaults.cs" Link="MessageImportanceDefaults.cs" />
     <Compile Include="..\FodyHelpers\Testing\PeVerifier.cs" Link="Verify\PeVerifier.cs" />
     <Compile Include="..\FodyHelpers\Testing\SdkToolFinder.cs" Link="Verify\SdkToolFinder.cs" />
+    <PackageReference Include="Nullable" Version="1.2.0" PrivateAssets="All" />
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" PrivateAssets="All" />
     <PackageReference Condition="$(Configuration)=='Release'" Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     <Compile Update="Properties\Resources.Designer.cs">

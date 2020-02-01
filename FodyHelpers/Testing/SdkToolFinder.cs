@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 
@@ -19,7 +20,7 @@ static class SdkToolFinder
 
     static bool foundToolsDirectory;
 
-    public static bool TryFindTool(string tool, out string path)
+    public static bool TryFindTool(string tool, [NotNullWhen(true)] out string? path)
     {
         var programFilesPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
         windowsSdkDirectory = Path.Combine(programFilesPath, @"Microsoft SDKs\Windows");

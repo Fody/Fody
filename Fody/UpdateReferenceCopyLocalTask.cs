@@ -10,13 +10,13 @@ namespace Fody
     public class UpdateReferenceCopyLocalTask : Task
     {
         [Required]
-        public ITaskItem[] ReferenceCopyLocalFiles { get; set; }
+        public ITaskItem[] ReferenceCopyLocalFiles { get; set; } = null!;
 
         [Output]
-        public ITaskItem[] UpdatedReferenceCopyLocalFiles { get; set; }
+        public ITaskItem[] UpdatedReferenceCopyLocalFiles { get; set; } = null!;
 
         [Required]
-        public string IntermediateCopyLocalFilesCache { get; set; }
+        public string IntermediateCopyLocalFilesCache { get; set; } = null!;
 
         public override bool Execute()
         {

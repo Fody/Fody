@@ -56,59 +56,59 @@ namespace Fody
         /// <summary>
         /// Handler for resolving <see cref="AssemblyDefinition"/>s.
         /// </summary>
-        public Func<string, AssemblyDefinition> ResolveAssembly { get; set; }
+        public Func<string, AssemblyDefinition?> ResolveAssembly { get; set; } = null!;
 
         /// <summary>
         /// An instance of <see cref="Mono.Cecil.ModuleDefinition"/> for processing.
         /// </summary>
-        public ModuleDefinition ModuleDefinition { get; set; }
+        public ModuleDefinition ModuleDefinition { get; set; } = null!;
 
         /// <summary>
         /// Commonly used <see cref="TypeReference"/>s.
         /// </summary>
-        public TypeSystem TypeSystem { get; set; }
+        public TypeSystem TypeSystem { get; set; } = null!;
 
         /// <summary>
         /// The full path of the target assembly.
         /// </summary>
-        public string AssemblyFilePath { get; set; }
+        public string AssemblyFilePath { get; set; } = null!;
 
         /// <summary>
         /// The full directory path of the target project.
         /// A copy of $(MSBuildProjectDirectory).
         /// </summary>
-        public string ProjectDirectoryPath { get; set; }
+        public string ProjectDirectoryPath { get; set; } = null!;
 
         /// <summary>
         /// The full file path of the target project.
         /// A copy of $(MSBuildProjectFullPath).
         /// </summary>
-        public string ProjectFilePath { get; set; }
+        public string ProjectFilePath { get; set; } = null!;
 
         /// <summary>
         /// The full directory path of the XML documentation file,
         /// if generating the documentation file is enabled in the project.
         /// A copy of @(DocFileItem->'%(FullPath)').
         /// </summary>
-        public string DocumentationFilePath { get; set; }
+        public string DocumentationFilePath { get; set; } = null!;
 
         /// <summary>
         /// The full directory path of the current weaver.
         /// </summary>
-        public string AddinDirectoryPath { get; set; }
+        public string AddinDirectoryPath { get; set; } = null!;
 
         /// <summary>
         /// The full directory path of the current solution.
         /// A copy of `$(SolutionDir)` or, if it does not exist, a copy of `$(MSBuildProjectDirectory)..\..\..\`. OPTIONAL
         /// </summary>
-        public string SolutionDirectoryPath { get; set; }
+        public string SolutionDirectoryPath { get; set; } = null!;
 
         /// <summary>
         /// A semicolon delimited string that contains
         /// all the references for the target project.
         /// A copy of the contents of the @(ReferencePath).
         /// </summary>
-        public string References { get; set; }
+        public string References { get; set; } = null!;
 
         /// <summary>
         /// A list of all the references marked as copy-local.
@@ -153,7 +153,7 @@ namespace Fody
         /// Handler for searching for a type.
         /// Uses all assemblies listed from calling <see cref="GetAssembliesForScanning"/> on all weavers.
         /// </summary>
-        public TryFindTypeFunc TryFindType { get; set; } = (string name, out TypeDefinition type) => throw new WeavingException($"{nameof(TryFindType)} has not been set.");
+        public TryFindTypeFunc TryFindType { get; set; } = (string name, out TypeDefinition? type) => throw new WeavingException($"{nameof(TryFindType)} has not been set.");
 
         /// <summary>
         /// Called after all weaving has occurred and the module has been saved.
