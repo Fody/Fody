@@ -38,7 +38,7 @@ public partial class InnerWeaver :
     bool cancelRequested;
     List<WeaverHolder> weaverInstances = new List<WeaverHolder>();
     Action cancelDelegate;
-    public AssemblyResolver assemblyResolver;
+    public IAssemblyResolver assemblyResolver;
 
     Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
     {
