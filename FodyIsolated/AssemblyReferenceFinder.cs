@@ -4,7 +4,7 @@ using System.Linq;
 
 public partial class InnerWeaver
 {
-    public List<string> SplitReferences;
+    public List<string> SplitReferences = null!;
 
     public virtual void SplitUpReferences()
     {

@@ -3,10 +3,10 @@ using Mono.Cecil;
 
 public partial class InnerWeaver
 {
-    public ModuleDefinition ModuleDefinition;
-    public FileStream SymbolStream;
-    string tempAssembly;
-    string tempSymbols;
+    public ModuleDefinition ModuleDefinition = null!;
+    public FileStream? SymbolStream;
+    string tempAssembly = null!;
+    string? tempSymbols;
 
     public virtual void ReadModule()
     {

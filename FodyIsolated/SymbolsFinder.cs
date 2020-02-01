@@ -5,9 +5,9 @@ using Mono.Cecil.Pdb;
 public partial class InnerWeaver
 {
     bool pdbFound;
-    ISymbolReaderProvider debugReaderProvider;
-    ISymbolWriterProvider debugWriterProvider;
-    string pdbPath;
+    ISymbolReaderProvider? debugReaderProvider;
+    ISymbolWriterProvider? debugWriterProvider;
+    string pdbPath = null!;
 
     void GetSymbolProviders()
     {

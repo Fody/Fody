@@ -2,8 +2,16 @@ using Fody;
 
 public class WeaverHolder
 {
-    public BaseModuleWeaver Instance;
-    public WeaverEntry Config;
+    public WeaverHolder(
+        BaseModuleWeaver instance,
+        WeaverEntry config)
+    {
+        Instance = instance;
+        Config = config;
+    }
+
+    public BaseModuleWeaver Instance { get; }
+    public WeaverEntry Config { get; }
     public bool IsUsingOldFodyVersion;
     public int FodyVersion;
 }

@@ -56,12 +56,12 @@ public class AssemblyResolver : IAssemblyResolver
         }
     }
 
-    public virtual AssemblyDefinition Resolve(AssemblyNameReference assemblyNameReference)
+    public virtual AssemblyDefinition? Resolve(AssemblyNameReference assemblyNameReference)
     {
         return Resolve(assemblyNameReference, new ReaderParameters());
     }
 
-    public virtual AssemblyDefinition Resolve(AssemblyNameReference assemblyNameReference, ReaderParameters parameters)
+    public virtual AssemblyDefinition? Resolve(AssemblyNameReference assemblyNameReference, ReaderParameters parameters)
     {
         if (parameters == null)
         {
