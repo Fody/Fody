@@ -7,7 +7,13 @@ namespace Fody
     /// </summary>
     public class SequencePointMessage
     {
-        public string Text { get; internal set; }
-        public SequencePoint SequencePoint { get; internal set; }
+        public SequencePointMessage(string text, SequencePoint? sequencePoint)
+        {
+            Text = text;
+            SequencePoint = sequencePoint;
+        }
+
+        public string Text { get; }
+        public SequencePoint? SequencePoint { get; }
     }
 }

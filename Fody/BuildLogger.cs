@@ -2,10 +2,12 @@ using System;
 using Fody;
 using Microsoft.Build.Framework;
 
-public class BuildLogger : MarshalByRefObject, ILogger
+public class BuildLogger :
+    MarshalByRefObject, 
+    ILogger
 {
-    public IBuildEngine BuildEngine { get; set; }
-    string currentWeaverName;
+    public IBuildEngine BuildEngine { get; set; } = null!;
+    string? currentWeaverName;
 
     public virtual void SetCurrentWeaverName(string weaverName)
     {
@@ -37,7 +39,7 @@ public class BuildLogger : MarshalByRefObject, ILogger
         LogWarning(message, null, 0, 0, 0, 0, code);
     }
 
-    public virtual void LogWarning(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string code)
+    public virtual void LogWarning(string message, string? file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string code)
     {
         BuildEngine.LogWarningEvent(new BuildWarningEventArgs("", code ?? "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber, PrependMessage(message), "", "Fody"));
     }
@@ -49,7 +51,7 @@ public class BuildLogger : MarshalByRefObject, ILogger
 
     public bool ErrorOccurred { get; private set; }
 
-    public virtual void LogError(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
+    public virtual void LogError(string message, string? file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
     {
         ErrorOccurred = true;
         BuildEngine.LogErrorEvent(new BuildErrorEventArgs("", "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber, PrependMessage(message), "", "Fody"));

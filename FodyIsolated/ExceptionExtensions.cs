@@ -35,16 +35,16 @@ public static class ExceptionExtensions
         logger.LogError(exception.ToFriendlyString());
     }
 
-    static SequencePoint GetSequencePoint(Exception exception)
+    static SequencePoint? GetSequencePoint(Exception exception)
     {
         var exceptionType = exception.GetType();
         var sequencePointProperty = exceptionType.GetProperty("SequencePoint", BindingFlags.Public | BindingFlags.Instance);
-        var sequencePoint = (SequencePoint)sequencePointProperty?.GetValue(exception, null);
+        var sequencePoint = (SequencePoint?)sequencePointProperty?.GetValue(exception, null);
         if (sequencePoint != null)
         {
             return sequencePoint;
         }
         var sequencePointField = exceptionType.GetField("SequencePoint", BindingFlags.Public | BindingFlags.Instance);
-        return (SequencePoint)sequencePointField?.GetValue(exception);
+        return (SequencePoint?)sequencePointField?.GetValue(exception);
     }
 }

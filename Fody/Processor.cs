@@ -5,29 +5,29 @@ using System.Linq;
 
 public partial class Processor
 {
-    public string AssemblyFilePath;
-    public string IntermediateDirectory;
-    public string KeyFilePath;
+    public string AssemblyFilePath = null!;
+    public string IntermediateDirectory = null!;
+    public string KeyFilePath = null!;
     public bool SignAssembly;
-    public string ProjectDirectory;
-    public string ProjectFilePath;
-    public string DocumentationFilePath;
-    public string References;
-    public string SolutionDirectory;
-    public List<WeaverEntry> Weavers;
+    public string ProjectDirectory = null!;
+    public string ProjectFilePath = null!;
+    public string DocumentationFilePath = null!;
+    public string References = null!;
+    public string SolutionDirectory = null!;
+    public List<WeaverEntry> Weavers = null!;
     public DebugSymbolsType DebugSymbols;
-    public List<string> ReferenceCopyLocalPaths;
-    public List<string> DefineConstants;
+    public List<string> ReferenceCopyLocalPaths = null!;
+    public List<string> DefineConstants = null!;
 
-    public List<WeaverConfigFile> ConfigFiles;
-    public Dictionary<string, WeaverConfigEntry> ConfigEntries;
+    public List<WeaverConfigFile> ConfigFiles = null!;
+    public Dictionary<string, WeaverConfigEntry> ConfigEntries = null!;
     public bool GenerateXsd;
-    IInnerWeaver innerWeaver;
+    IInnerWeaver? innerWeaver;
 
     static Dictionary<string, IsolatedAssemblyLoadContext> solutionAssemblyLoadContexts =
         new Dictionary<string, IsolatedAssemblyLoadContext>(StringComparer.OrdinalIgnoreCase);
 
-    public ILogger Logger;
+    public ILogger Logger = null!;
     static readonly object mutex = new object();
 
     static Processor()

@@ -3,15 +3,16 @@ using Microsoft.Build.Utilities;
 
 namespace Fody
 {
-    public class VerifyTask : Task
+    public class VerifyTask :
+        Task
     {
-        public string NCrunchOriginalSolutionDirectory { get; set; }
-        public string SolutionDirectory { get; set; }
-        public string DefineConstants { get; set; }
+        public string? NCrunchOriginalSolutionDirectory { get; set; } = null!;
+        public string? SolutionDirectory { get; set; }
+        public string DefineConstants { get; set; } = null!;
         [Required]
-        public string ProjectDirectory { get; set; }
+        public string ProjectDirectory { get; set; } = null!;
         [Required]
-        public string TargetPath { get; set; }
+        public string TargetPath { get; set; } = null!;
 
         public override bool Execute()
         {

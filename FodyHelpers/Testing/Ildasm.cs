@@ -9,7 +9,7 @@ namespace Fody
     /// </summary>
     public static class Ildasm
     {
-        static string ildasmPath;
+        static string? ildasmPath;
 
         static Ildasm()
         {

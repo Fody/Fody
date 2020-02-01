@@ -5,7 +5,13 @@ namespace Fody
     /// </summary>
     public class LogMessage
     {
-        public string Text { get; internal set; }
-        public object MessageImportance { get; internal set; }
+        public LogMessage(string text, object messageImportance)
+        {
+            Text = text;
+            MessageImportance = messageImportance;
+        }
+
+        public string Text { get; }
+        public object MessageImportance { get; }
     }
 }

@@ -7,46 +7,48 @@ using Microsoft.Build.Utilities;
 
 namespace Fody
 {
-    public class WeavingTask : Task, ICancelableTask
+    public class WeavingTask : 
+        Task,
+        ICancelableTask
     {
-        Processor processor;
+        Processor processor = null!;
         [Required]
-        public string AssemblyFile { set; get; }
+        public string AssemblyFile { set; get; } = null!;
 
         [Required]
-        public string IntermediateDirectory { get; set; }
-        public string KeyOriginatorFile { get; set; }
-        public string AssemblyOriginatorKeyFile { get; set; }
+        public string IntermediateDirectory { get; set; } = null!;
+        public string KeyOriginatorFile { get; set; } = null!;
+        public string AssemblyOriginatorKeyFile { get; set; } = null!;
 
         public bool SignAssembly { get; set; }
 
         [Required]
-        public string ProjectDirectory { get; set; }
+        public string ProjectDirectory { get; set; } = null!;
 
         [Required]
-        public string ProjectFile { get; set; }
+        public string ProjectFile { get; set; } = null!;
 
-        public string DocumentationFile { get; set; }
-
-        [Required]
-        public string References { get; set; }
+        public string DocumentationFile { get; set; } = null!;
 
         [Required]
-        public ITaskItem[] ReferenceCopyLocalFiles { get; set; }
-        public ITaskItem[] WeaverFiles { get; set; }
+        public string References { get; set; } = null!;
 
-        public string NCrunchOriginalSolutionDirectory { get; set; }
-        public string SolutionDirectory { get; set; }
+        [Required]
+        public ITaskItem[] ReferenceCopyLocalFiles { get; set; } = null!;
+        public ITaskItem[] WeaverFiles { get; set; } = null!;
 
-        public string DefineConstants { get; set; }
+        public string NCrunchOriginalSolutionDirectory { get; set; } = null!;
+        public string SolutionDirectory { get; set; } = null!;
+
+        public string DefineConstants { get; set; } = null!;
 
         [Output]
-        public string ExecutedWeavers { get; private set; }
+        public string ExecutedWeavers { get; private set; } = null!;
 
-        public string DebugType { get; set; }
+        public string DebugType { get; set; } = null!;
 
         [Required]
-        public string IntermediateCopyLocalFilesCache { get; set; }
+        public string IntermediateCopyLocalFilesCache { get; set; } = null!;
 
         public bool GenerateXsd { get; set; }
 

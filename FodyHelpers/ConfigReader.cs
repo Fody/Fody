@@ -4,7 +4,7 @@ using Fody;
 
 static class ConfigReader
 {
-    public static string ReadString(this XElement element, string name, string defaultValue = null)
+    public static string? ReadString(this XElement element, string name, string? defaultValue = null)
     {
         Guard.AgainstNull(nameof(element), element);
         Guard.AgainstNullAndEmpty(nameof(name), name);

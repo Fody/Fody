@@ -14,11 +14,7 @@ namespace Fody
 
         internal void AddMessage(string text, MessageImportance messageImportance)
         {
-            var message = new LogMessage
-            {
-                Text = text,
-                MessageImportance = messageImportance
-            };
+            var message = new LogMessage(text, messageImportance);
             messages.Add(message);
         }
 
@@ -26,13 +22,9 @@ namespace Fody
 
         List<SequencePointMessage> warnings = new List<SequencePointMessage>();
 
-        internal void AddWarning(string text, SequencePoint sequencePoint)
+        internal void AddWarning(string text, SequencePoint? sequencePoint)
         {
-            var message = new SequencePointMessage
-            {
-                Text = text,
-                SequencePoint = sequencePoint
-            };
+            var message = new SequencePointMessage(text, sequencePoint);
             warnings.Add(message);
         }
 
@@ -40,19 +32,15 @@ namespace Fody
 
         List<SequencePointMessage> errors = new List<SequencePointMessage>();
 
-        internal void AddError(string text, SequencePoint sequencePoint)
+        internal void AddError(string text, SequencePoint? sequencePoint)
         {
-            var message = new SequencePointMessage
-            {
-                Text = text,
-                SequencePoint = sequencePoint
-            };
+            var message = new SequencePointMessage(text, sequencePoint);
             errors.Add(message);
         }
 
         public IReadOnlyList<SequencePointMessage> Errors => errors;
-        public Assembly Assembly { get; internal set; }
-        public string AssemblyPath { get; internal set; }
+        public Assembly Assembly { get; internal set; } = null!;
+        public string AssemblyPath { get; internal set; } = null!;
 
         public dynamic GetInstance(string className)
         {

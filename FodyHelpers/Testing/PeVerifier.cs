@@ -14,14 +14,18 @@ namespace Fody
     public static class PeVerifier
     {
         public static readonly bool FoundPeVerify;
-        static string peverifyPath;
+        static string? peverifyPath;
 
         static PeVerifier()
         {
             FoundPeVerify = SdkToolFinder.TryFindTool("peverify", out peverifyPath);
         }
 
-        public static bool Verify(string assemblyPath, IEnumerable<string> ignoreCodes, out string output, string workingDirectory = null)
+        public static bool Verify(
+            string assemblyPath,
+            IEnumerable<string> ignoreCodes, 
+            out string output,
+            string? workingDirectory = null)
         {
             Guard.AgainstNullAndEmpty(nameof(assemblyPath), assemblyPath);
             Guard.AgainstNull(nameof(ignoreCodes), ignoreCodes);
@@ -48,7 +52,13 @@ namespace Fody
             return InnerVerify(assemblyPath, ignoreCodes.ToList(), out output, workingDirectory);
         }
 
-        public static bool Verify(string beforeAssemblyPath, string afterAssemblyPath, IEnumerable<string> ignoreCodes, out string beforeOutput, out string afterOutput, string workingDirectory = null)
+        public static bool Verify(
+            string beforeAssemblyPath, 
+            string afterAssemblyPath,
+            IEnumerable<string> ignoreCodes,
+            out string beforeOutput,
+            out string afterOutput, 
+            string? workingDirectory = null)
         {
             Guard.AgainstNullAndEmpty(nameof(beforeAssemblyPath), beforeAssemblyPath);
             Guard.AgainstNullAndEmpty(nameof(afterAssemblyPath), afterAssemblyPath);
@@ -61,14 +71,21 @@ namespace Fody
             return afterOutput == beforeOutput;
         }
 
-        public static void ThrowIfDifferent(string beforeAssemblyPath, string afterAssemblyPath, string workingDirectory = null)
+        public static void ThrowIfDifferent(
+            string beforeAssemblyPath,
+            string afterAssemblyPath, 
+            string? workingDirectory = null)
         {
             Guard.AgainstNullAndEmpty(nameof(beforeAssemblyPath), beforeAssemblyPath);
             Guard.AgainstNullAndEmpty(nameof(afterAssemblyPath), afterAssemblyPath);
             ThrowIfDifferent(beforeAssemblyPath, afterAssemblyPath, Enumerable.Empty<string>(), workingDirectory);
         }
 
-        public static void ThrowIfDifferent(string beforeAssemblyPath, string afterAssemblyPath, IEnumerable<string> ignoreCodes, string workingDirectory = null)
+        public static void ThrowIfDifferent(
+            string beforeAssemblyPath, 
+            string afterAssemblyPath,
+            IEnumerable<string> ignoreCodes, 
+            string? workingDirectory = null)
         {
             Guard.AgainstNullAndEmpty(nameof(beforeAssemblyPath), beforeAssemblyPath);
             Guard.AgainstNullAndEmpty(nameof(afterAssemblyPath), afterAssemblyPath);
@@ -92,7 +109,11 @@ BeforeOutput:
             return Regex.Replace(input, @"\[offset .*\]", "");
         }
 
-        static bool InnerVerify(string assemblyPath, List<string> ignoreCodes, out string output, string workingDirectory = null)
+        static bool InnerVerify(
+            string assemblyPath, 
+            List<string> ignoreCodes, 
+            out string output, 
+            string? workingDirectory = null)
         {
             ignoreCodes.Add("0x80070002");
             ignoreCodes.Add("0x80131252");

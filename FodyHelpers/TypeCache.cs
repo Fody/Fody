@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Mono.Cecil;
 
@@ -10,7 +11,7 @@ namespace Fody
     /// </summary>
     public class TypeCache
     {
-        Func<string, AssemblyDefinition> resolve;
+        Func<string, AssemblyDefinition?> resolve;
 
         public static List<string> defaultAssemblies = new List<string>
         {
@@ -23,7 +24,7 @@ namespace Fody
 
         Dictionary<string, TypeDefinition> cachedTypes = new Dictionary<string, TypeDefinition>();
 
-        public TypeCache(Func<string, AssemblyDefinition> resolve)
+        public TypeCache(Func<string, AssemblyDefinition?> resolve)
         {
             this.resolve = resolve;
         }
@@ -104,20 +105,20 @@ namespace Fody
 
         public virtual TypeDefinition FindType(string typeName)
         {
-            if (cachedTypes.TryGetValue(typeName, out var type))
+            if (cachedTypes.TryGetValue(typeName, out var cacheType))
             {
-                return type;
+                return cacheType;
             }
 
-            if (FindFromValues(typeName, out type))
+            if (FindFromValues(typeName, out var fromValueType))
             {
-                return type;
+                return fromValueType;
             }
 
             throw new WeavingException($"Could not find '{typeName}'.");
         }
 
-        bool FindFromValues(string typeName, out TypeDefinition type)
+        bool FindFromValues(string typeName, [NotNullWhen(true)] out TypeDefinition? type)
         {
             if (!typeName.Contains('.'))
             {
@@ -143,7 +144,7 @@ namespace Fody
             return false;
         }
 
-        public virtual bool TryFindType(string typeName, out TypeDefinition type)
+        public virtual bool TryFindType(string typeName, [NotNullWhen(true)] out TypeDefinition? type)
         {
             if (cachedTypes.TryGetValue(typeName, out type))
             {

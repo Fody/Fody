@@ -11,8 +11,8 @@ using StrongNameKeyPair=System.Reflection.StrongNameKeyPair;
 
 public partial class InnerWeaver
 {
-    public StrongNameKeyPair StrongNameKeyPair;
-    public byte[] PublicKey;
+    public StrongNameKeyPair? StrongNameKeyPair;
+    public byte[]? PublicKey;
 
     public virtual void FindStrongNameKey()
     {
@@ -48,7 +48,7 @@ public partial class InnerWeaver
         }
     }
 
-    string GetKeyFilePath()
+    string? GetKeyFilePath()
     {
         if (KeyFilePath != null)
         {

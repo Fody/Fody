@@ -18,10 +18,10 @@ namespace Fody
             this BaseModuleWeaver weaver,
             string assemblyPath,
             bool runPeVerify = true,
-            Action<ModuleDefinition> afterExecuteCallback = null,
-            Action<ModuleDefinition> beforeExecuteCallback = null,
-            string assemblyName = null,
-            IEnumerable<string> ignoreCodes = null,
+            Action<ModuleDefinition>? afterExecuteCallback = null,
+            Action<ModuleDefinition>? beforeExecuteCallback = null,
+            string? assemblyName = null,
+            IEnumerable<string>? ignoreCodes = null,
             bool writeSymbols = false)
         {
             assemblyPath = Path.GetFullPath(assemblyPath);
