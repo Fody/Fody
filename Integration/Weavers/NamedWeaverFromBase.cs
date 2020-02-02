@@ -13,7 +13,7 @@ public class NamedWeaverFromBase : BaseModuleWeaver
             attributes: TypeAttributes.Public,
             baseType: TypeSystem.ObjectReference);
         ModuleDefinition.Types.Add(typeDefinition);
-        var foundType = FindType("System.Boolean");
+        var foundType = FindTypeDefinition("System.Boolean");
         if (foundType == null)
         {
             throw new WeavingException("Expected to find System.Boolean");
