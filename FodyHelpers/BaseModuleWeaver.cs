@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Xml.Linq;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
@@ -17,40 +18,129 @@ namespace Fody
         /// The full element XML from FodyWeavers.xml.
         /// </summary>
         public XElement Config { get; set; } = Empty;
+        
+        /// <summary>
+        /// Write a log entry to MSBuild with the <see cref="MessageImportance.Low"/> level
+        /// </summary>
+        public virtual void WriteDebug(string message)
+        {
+            Guard.AgainstNullAndEmpty(nameof(message), message);
+            LogDebug(message);
+        }
 
         /// <summary>
         /// Handler for writing a log entry at the <see cref="MessageImportance.Low"/> level.
         /// </summary>
+        [Obsolete("Use WriteDebug", false)]
         public Action<string> LogDebug { get; set; } = m => { };
+        
+        /// <summary>
+        /// Write a log entry to MSBuild with the <see cref="MessageImportance.Normal"/> level
+        /// </summary>
+        public virtual void WriteInfo(string message)
+        {
+            Guard.AgainstNullAndEmpty(nameof(message), message);
+            LogInfo(message);
+        }
 
         /// <summary>
         /// Handler for writing a log entry at the <see cref="MessageImportance.Normal"/> level.
         /// </summary>
+        [Obsolete("Use WriteInfo", false)]
         public Action<string> LogInfo { get; set; } = m => { };
+
+        /// <summary>
+        /// Write a log entry to MSBuild with <paramref name="importance"/> level
+        /// </summary>
+        public virtual void WriteMessage(string message, MessageImportance importance)
+        {
+            Guard.AgainstNullAndEmpty(nameof(message), message);
+            LogMessage(message, importance);
+        }
 
         /// <summary>
         /// Handler for writing a log entry at a specific <see cref="MessageImportance"/> level.
         /// </summary>
+        [Obsolete("Use WriteMessage", false)]
         public Action<string, MessageImportance> LogMessage { get; set; } = (m, p) => { };
+        
+        /// <summary>
+        /// Write a warning to MSBuild.
+        /// </summary>
+        public virtual void WriteWarning(string message)
+        {
+            Guard.AgainstNullAndEmpty(nameof(message), message);
+            LogWarning(message);
+        }
+
+        /// <summary>
+        /// Write a warning to MSBuild and use <paramref name="sequencePoint"/> for the file and line information.
+        /// </summary>
+        public virtual void WriteWarning(string message, SequencePoint? sequencePoint)
+        {
+            Guard.AgainstNullAndEmpty(nameof(message), message);
+            LogWarningPoint(message, sequencePoint);
+        }
+
+        /// <summary>
+        /// Write a warning to MSBuild and use <paramref name="method"/> for the file and line information.
+        /// </summary>
+        public virtual void WriteWarning(string message, MethodDefinition method)
+        {
+            Guard.AgainstNullAndEmpty(nameof(message), message);
+            Guard.AgainstNull(nameof(method), method);
+            LogWarningPoint(message, method.GetSequencePoint());
+        }
 
         /// <summary>
         /// Handler for writing a warning.
         /// </summary>
+        [Obsolete("Use WriteWarning", false)]
         public Action<string> LogWarning { get; set; } = m => { };
 
         /// <summary>
         /// Handler for writing a warning at a specific point in the code
         /// </summary>
+        [Obsolete("Use WriteWarning", false)]
         public Action<string, SequencePoint?> LogWarningPoint { get; set; } = (m, p) => { };
+        
+        /// <summary>
+        /// Write an error to MSBuild.
+        /// </summary>
+        public virtual void WriteError(string message)
+        {
+            Guard.AgainstNullAndEmpty(nameof(message), message);
+            LogError(message);
+        }
+
+        /// <summary>
+        /// Write an error to MSBuild and use <paramref name="sequencePoint"/> for the file and line information.
+        /// </summary>
+        public virtual void WriteError(string message, SequencePoint? sequencePoint)
+        {
+            Guard.AgainstNullAndEmpty(nameof(message), message);
+            LogErrorPoint(message, sequencePoint);
+        }
+        
+        /// <summary>
+        /// Write a error to MSBuild and use <paramref name="method"/> for the file and line information.
+        /// </summary>
+        public virtual void WriteError(string message, MethodDefinition method)
+        {
+            Guard.AgainstNullAndEmpty(nameof(message), message);
+            LogErrorPoint(message, method.GetSequencePoint());
+        }
 
         /// <summary>
         /// Handler for writing an error.
         /// </summary>
+        [Obsolete("Use WriteError", false)]
         public Action<string> LogError { get; set; } = m => { };
 
         /// <summary>
         /// Handler for writing an error at a specific point in the code.
         /// </summary>
+        [Obsolete("Use WriteError", false)]
         public Action<string, SequencePoint?> LogErrorPoint { get; set; } = (m, p) => { };
 
         /// <summary>
@@ -144,15 +234,35 @@ namespace Fody
         public abstract IEnumerable<string> GetAssembliesForScanning();
 
         /// <summary>
-        /// Handler for searching for a type.
+        /// Find a <see cref="TypeDefinition"/>.
         /// Uses all assemblies listed from calling <see cref="GetAssembliesForScanning"/> on all weavers.
         /// </summary>
-        public Func<string, TypeDefinition> FindType { get; set; } = _ => throw new WeavingException($"{nameof(FindType)} has not been set.");
+        public TypeDefinition FindTypeDefinition(string name)
+        {
+            return FindType(name);
+        }
 
         /// <summary>
         /// Handler for searching for a type.
         /// Uses all assemblies listed from calling <see cref="GetAssembliesForScanning"/> on all weavers.
         /// </summary>
+        [Obsolete("Use FindTypeDefinition", false)]
+        public Func<string, TypeDefinition> FindType { get; set; } = _ => throw new WeavingException($"{nameof(FindType)} has not been set.");
+        
+        /// <summary>
+        /// Find a <see cref="TypeDefinition"/>.
+        /// Uses all assemblies listed from calling <see cref="GetAssembliesForScanning"/> on all weavers.
+        /// </summary>
+        public bool TryFindTypeDefinition(string name, [NotNullWhen(true)] out TypeDefinition? type)
+        {
+            return TryFindType(name, out type);
+        }
+
+        /// <summary>
+        /// Handler for searching for a type.
+        /// Uses all assemblies listed from calling <see cref="GetAssembliesForScanning"/> on all weavers.
+        /// </summary>
+        [Obsolete("Use TryFindTypeDefinition", false)]
         public TryFindTypeFunc TryFindType { get; set; } = (string name, out TypeDefinition? type) => throw new WeavingException($"{nameof(TryFindType)} has not been set.");
 
         /// <summary>

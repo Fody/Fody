@@ -28,8 +28,13 @@ public class WeaverInitialiserTests :
         var moduleWeaver = new ValidFromBaseModuleWeaver();
         innerWeaver.SetProperties(weaverEntry, moduleWeaver);
         var verifySettings = new VerifySettings();
-        verifySettings.ModifySerialization(settings => { settings.IgnoreMembersWithType<ModuleDefinition>(); });
+        verifySettings.ModifySerialization(settings =>
+        {
+            settings.IgnoreMembersWithType<ModuleDefinition>();
+            settings.IncludeObsoletes();
+        });
         verifySettings.UniqueForRuntime();
+
         return Verify(moduleWeaver, verifySettings);
     }
 
