@@ -1,6 +1,7 @@
 ﻿public class WeaverConfigEntry
 {
-    public WeaverConfigEntry(WeaverConfigFile configFile,
+    public WeaverConfigEntry(
+        WeaverConfigFile configFile,
         string elementName,
         string content,
         int executionOrder)
