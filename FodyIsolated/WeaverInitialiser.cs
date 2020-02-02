@@ -35,7 +35,7 @@ public partial class InnerWeaver
         weaverInstance.ResolveAssembly = assemblyName => assemblyResolver.Resolve(assemblyName);
     }
 
-    void LogWarningPoint(string message, SequencePoint point)
+    void LogWarningPoint(string message, SequencePoint? point)
     {
         if (point == null)
         {
@@ -47,7 +47,7 @@ public partial class InnerWeaver
         }
     }
 
-    void LogErrorPoint(string message, SequencePoint point)
+    void LogErrorPoint(string message, SequencePoint? point)
     {
         if (point == null)
         {

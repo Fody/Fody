@@ -41,7 +41,7 @@ namespace Fody
         /// <summary>
         /// Handler for writing a warning at a specific point in the code
         /// </summary>
-        public Action<string, SequencePoint> LogWarningPoint { get; set; } = (m, p) => { };
+        public Action<string, SequencePoint?> LogWarningPoint { get; set; } = (m, p) => { };
 
         /// <summary>
         /// Handler for writing an error.
@@ -51,7 +51,7 @@ namespace Fody
         /// <summary>
         /// Handler for writing an error at a specific point in the code.
         /// </summary>
-        public Action<string, SequencePoint> LogErrorPoint { get; set; } = (m, p) => { };
+        public Action<string, SequencePoint?> LogErrorPoint { get; set; } = (m, p) => { };
 
         /// <summary>
         /// Handler for resolving <see cref="AssemblyDefinition"/>s.
