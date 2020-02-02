@@ -13,19 +13,19 @@ public class ModuleWeaver :
     public override void Execute()
     {
         var type = new TypeDefinition("SampleWeaverTest", "Configuration", TypeAttributes.Class | TypeAttributes.NotPublic | TypeAttributes.Sealed | TypeAttributes.Abstract | TypeAttributes.AutoClass | TypeAttributes.AnsiClass, TypeSystem.ObjectReference);
-        var contentFieldDefinition = new FieldDefinition("Content", FieldAttributes.Public | FieldAttributes.Static, TypeSystem.StringReference);
-        var propertyFieldDefinition = new FieldDefinition("PropertyValue", FieldAttributes.Public | FieldAttributes.Static, TypeSystem.StringReference);
+        var contentField = new FieldDefinition("Content", FieldAttributes.Public | FieldAttributes.Static, TypeSystem.StringReference);
+        var propertyField = new FieldDefinition("PropertyValue", FieldAttributes.Public | FieldAttributes.Static, TypeSystem.StringReference);
         var method = new MethodDefinition(".cctor", MethodAttributes.Static | MethodAttributes.Private | MethodAttributes.HideBySig | MethodAttributes.RTSpecialName | MethodAttributes.SpecialName, TypeSystem.VoidReference);
 
         var instructions = method.Body.Instructions;
         instructions.Add(Instruction.Create(OpCodes.Ldstr, Config?.ToString() ?? "Missing"));
-        instructions.Add(Instruction.Create(OpCodes.Stsfld, contentFieldDefinition));
+        instructions.Add(Instruction.Create(OpCodes.Stsfld, contentField));
         instructions.Add(Instruction.Create(OpCodes.Ldstr, Config?.Attribute("MyProperty")?.Value ?? "Missing"));
-        instructions.Add(Instruction.Create(OpCodes.Stsfld, propertyFieldDefinition));
+        instructions.Add(Instruction.Create(OpCodes.Stsfld, propertyField));
         instructions.Add(Instruction.Create(OpCodes.Ret));
 
-        type.Fields.Add(contentFieldDefinition);
-        type.Fields.Add(propertyFieldDefinition);
+        type.Fields.Add(contentField);
+        type.Fields.Add(propertyField);
         type.Methods.Add(method);
         ModuleDefinition.Types.Add(type);
 
