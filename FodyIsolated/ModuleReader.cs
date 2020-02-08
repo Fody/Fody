@@ -19,7 +19,7 @@ public partial class InnerWeaver
 
     public static (ModuleDefinition module, bool hasSymbols) ReadModule(
         string assemblyFilePath,
-        AssemblyResolver assemblyResolver)
+        IAssemblyResolver assemblyResolver)
     {
         var readerParameters = new ReaderParameters
         {

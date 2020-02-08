@@ -113,12 +113,12 @@ public class ModuleWeaver :
 
 static class AttributeExtensionMethods
 {
-    public static CustomAttribute GetAttribute(this ICustomAttributeProvider attributeProvider, string attributeName)
+    public static CustomAttribute? GetAttribute(this ICustomAttributeProvider? attributeProvider, string attributeName)
     {
         return attributeProvider?.CustomAttributes.GetAttribute(attributeName);
     }
 
-    public static CustomAttribute GetAttribute(this IEnumerable<CustomAttribute> attributes, string attributeName)
+    public static CustomAttribute? GetAttribute(this IEnumerable<CustomAttribute>? attributes, string attributeName)
     {
         return attributes?.FirstOrDefault(attribute => attribute.Constructor.DeclaringType.FullName == attributeName);
     }

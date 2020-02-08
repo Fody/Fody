@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using Xunit;
 
 public class ModuleReaderTests 
@@ -8,7 +9,7 @@ public class ModuleReaderTests
     public void WithSymbols()
     {
         var assemblyPath = Path.Combine(Environment.CurrentDirectory, "DummyAssembly.dll");
-        var result = InnerWeaver.ReadModule(assemblyPath, new AssemblyResolver());
+        var result = InnerWeaver.ReadModule(assemblyPath, new AssemblyResolver(new MockBuildLogger(), Enumerable.Empty<string>()));
         Assert.NotNull(result.module);
         Assert.True(result.hasSymbols);
     }
@@ -17,7 +18,7 @@ public class ModuleReaderTests
     public void NoSymbols()
     {
         var assemblyPath = Path.Combine(Environment.CurrentDirectory, "AssemblyWithNoSymbols.dll");
-        var result = InnerWeaver.ReadModule(assemblyPath, new AssemblyResolver());
+        var result = InnerWeaver.ReadModule(assemblyPath, new AssemblyResolver(new MockBuildLogger(), Enumerable.Empty<string>()));
         Assert.NotNull(result.module);
         Assert.False(result.hasSymbols);
     }
