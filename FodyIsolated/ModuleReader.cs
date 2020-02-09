@@ -7,11 +7,11 @@ public partial class InnerWeaver
 
     public void ReadModule()
     {
-        var result = ReadModule(AssemblyFilePath,assemblyResolver);
+        var result = ReadModule(AssemblyFilePath, assemblyResolver);
         hasSymbols = result.hasSymbols;
-        if (hasSymbols)
+        if (!hasSymbols)
         {
-            Logger.LogInfo("Debug symbols disabled.");
+            Logger.LogInfo("Module has no debug symbols.");
         }
 
         ModuleDefinition = result.module;
