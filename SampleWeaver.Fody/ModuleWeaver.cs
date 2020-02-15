@@ -68,12 +68,7 @@ public class ModuleWeaver :
 
         LogInfo("Validate Symbols");
 
-        var methodInfos = ModuleDefinition.GetTypes()
-            .Where(type => type.IsClass)
-            .SelectMany(type => type.GetMethods())
-            .Select(method => new { method, attribute = method.GetAttribute(SymbolValidationAttributeTypeName) })
-            .Where(item => item.attribute != null)
-            .ToList();
+        var methodInfos = GetMethodInfos(SymbolValidationAttributeTypeName).ToList();
 
         if (!methodInfos.Any())
         {
@@ -96,6 +91,16 @@ public class ModuleWeaver :
                 LogError($"Unexpected symbols in assembly {ModuleDefinition.FileName}, should have: {shouldHaveSymbols}, but has: {hasSymbols}");
             }
         }
+    }
+
+    IEnumerable<(MethodDefinition method, CustomAttribute attribute)> GetMethodInfos(string SymbolValidationAttributeTypeName)
+    {
+        return from type in ModuleDefinition.GetTypes()
+                .Where(x => x.IsClass)
+            from method in type.GetMethods()
+            let attribute = method.GetAttribute(SymbolValidationAttributeTypeName)
+            where attribute != null
+            select (method, attribute);
     }
 
     bool HasSymbols(MethodDefinition method)
