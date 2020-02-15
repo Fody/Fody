@@ -45,8 +45,6 @@ namespace Fody
         [Output]
         public string ExecutedWeavers { get; private set; } = null!;
 
-        public string DebugType { get; set; } = null!;
-
         [Required]
         public string IntermediateCopyLocalFilesCache { get; set; } = null!;
 
@@ -78,7 +76,6 @@ namespace Fody
                 ReferenceCopyLocalPaths = referenceCopyLocalPaths,
                 DefineConstants = defineConstants,
                 Weavers = GetWeaversFromProps().Distinct(WeaverEntry.NameComparer).ToList(),
-                DebugSymbols = GetDebugSymbolsType(),
                 GenerateXsd = GenerateXsd
             };
 
@@ -145,21 +142,6 @@ namespace Fody
                 .Select(name => name.Trim())
                 .Where(name => !string.IsNullOrEmpty(name))
                 .DefaultIfEmpty();
-        }
-
-        DebugSymbolsType GetDebugSymbolsType()
-        {
-            if (string.Equals(DebugType, "none", StringComparison.OrdinalIgnoreCase))
-            {
-                return DebugSymbolsType.None;
-            }
-
-            if (string.Equals(DebugType, "embedded", StringComparison.OrdinalIgnoreCase))
-            {
-                return DebugSymbolsType.Embedded;
-            }
-
-            return DebugSymbolsType.External;
         }
 
         public void Cancel()

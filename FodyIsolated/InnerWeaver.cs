@@ -31,7 +31,6 @@ public partial class InnerWeaver :
     public string IntermediateDirectoryPath { get; set; } = null!;
     public List<string> ReferenceCopyLocalPaths { get; set; } = null!;
     public List<string> DefineConstants { get; set; } = null!;
-    public DebugSymbolsType DebugSymbols { get; set; }
     #if (NETSTANDARD)
     public IsolatedAssemblyLoadContext LoadContext { get; set; } = null!;
     #endif
@@ -95,7 +94,6 @@ public partial class InnerWeaver :
         {
             AppDomain.CurrentDomain.AssemblyResolve += assemblyResolve;
             SplitUpReferences();
-            GetSymbolProviders();
             assemblyResolver = new AssemblyResolver(Logger, SplitReferences);
             ReadModule();
             if (ModuleDefinition.Types.Any(x => x.Name == "ProcessedByFody"))
@@ -113,7 +111,6 @@ public partial class InnerWeaver :
             FindStrongNameKey();
             WriteModule();
             ModuleDefinition?.Dispose();
-            CleanupTempSymbolsAndAssembly();
             ExecuteAfterWeavers();
             DisposeWeavers();
         }
@@ -125,7 +122,6 @@ public partial class InnerWeaver :
         {
             AppDomain.CurrentDomain.AssemblyResolve -= assemblyResolve;
             ModuleDefinition?.Dispose();
-            CleanupTempSymbolsAndAssembly();
             assemblyResolver?.Dispose();
         }
     }

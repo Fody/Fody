@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Fody" Version="$(IntegrationVersion)" />
+    <PackageReference Include="SampleWeaver.Fody" Version="$(IntegrationVersion)" />
     <PackageReference Include="Virtuosity.Fody" Version="1.21.3" />
   </ItemGroup>
   <Target Name="VerifyThereAreNoWeaversInOutput" AfterTargets="AfterBuild">

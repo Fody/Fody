@@ -49,7 +49,6 @@
         SignAssembly="$(SignAssembly)"
         ReferenceCopyLocalFiles="@(ReferenceCopyLocalPaths)"
         DefineConstants="$(DefineConstants)"
-        DebugType="$(DebugType)"
         DocumentationFile="@(DocFileItem->'%(FullPath)')"
         WeaverFiles="@(WeaverFiles)"
         NCrunchOriginalSolutionDirectory="$(NCrunchOriginalSolutionDir)"
