@@ -18,7 +18,7 @@ namespace Fody
         /// The full element XML from FodyWeavers.xml.
         /// </summary>
         public XElement Config { get; set; } = Empty;
-        
+
         /// <summary>
         /// Write a log entry to MSBuild with the <see cref="MessageImportance.Low"/> level
         /// </summary>
@@ -33,7 +33,7 @@ namespace Fody
         /// </summary>
         [Obsolete("Use WriteDebug", false)]
         public Action<string> LogDebug { get; set; } = m => { };
-        
+
         /// <summary>
         /// Write a log entry to MSBuild with the <see cref="MessageImportance.Normal"/> level
         /// </summary>
@@ -63,7 +63,7 @@ namespace Fody
         /// </summary>
         [Obsolete("Use WriteMessage", false)]
         public Action<string, MessageImportance> LogMessage { get; set; } = (m, p) => { };
-        
+
         /// <summary>
         /// Write a warning to MSBuild.
         /// </summary>
@@ -103,7 +103,7 @@ namespace Fody
         /// </summary>
         [Obsolete("Use WriteWarning", false)]
         public Action<string, SequencePoint?> LogWarningPoint { get; set; } = (m, p) => { };
-        
+
         /// <summary>
         /// Write an error to MSBuild.
         /// </summary>
@@ -121,7 +121,7 @@ namespace Fody
             Guard.AgainstNullAndEmpty(nameof(message), message);
             LogErrorPoint(message, sequencePoint);
         }
-        
+
         /// <summary>
         /// Write a error to MSBuild and use <paramref name="method"/> for the file and line information.
         /// </summary>
@@ -248,7 +248,7 @@ namespace Fody
         /// </summary>
         [Obsolete("Use FindTypeDefinition", false)]
         public Func<string, TypeDefinition> FindType { get; set; } = _ => throw new WeavingException($"{nameof(FindType)} has not been set.");
-        
+
         /// <summary>
         /// Find a <see cref="TypeDefinition"/>.
         /// Uses all assemblies listed from calling <see cref="GetAssembliesForScanning"/> on all weavers.

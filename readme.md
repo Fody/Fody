@@ -17,39 +17,39 @@ Manipulating the IL of an assembly as part of a build requires a significant amo
 
 ## Community backed
 
-Fody requires significant effort to maintain. As such it relies on financial contributions from the community and sponsorship to ensure its long term viability. **It is expected that all developers using Fody [become a Patron on OpenCollective](https://opencollective.com/fody/order/3059).**
+Fody requires significant effort to maintain. As such it relies on financial support to ensure its long term viability.
 
-[Go to licensing FAQ](https://github.com/Fody/Home/blob/master/pages/licensing-patron-faq.md) for more information.
+**It is expected that all developers using Fody either [become a Patron on OpenCollective](https://opencollective.com/fody/contribute/patron-3059), or have a [Tidelift Subscription](https://tidelift.com/subscription/pkg/nuget-fody?utm_source=nuget-fody&utm_medium=referral&utm_campaign=enterprise).**
+
+[See Licensing/Patron FAQ](https://github.com/Fody/Home/blob/master/pages/licensing-patron-faq.md) for more information.
 
 
 ### Gold Sponsors
 
-Support this project by [becoming a Gold Sponsor](https://opencollective.com/fody/order/7088). A large company logo will be added here with a link to your website.
+Support this project by [becoming a Gold Sponsor](https://opencollective.com/fody/contribute/gold-7088). A large company logo will be added here with a link to your website.
 
 <a href="https://www.postsharp.net?utm_source=fody&utm_medium=referral"><img alt="PostSharp" src="https://raw.githubusercontent.com/Fody/Home/master/images/postsharp.png"></a>
 
 
 ### Silver Sponsors
 
-Support this project by [becoming a Silver Sponsor](https://opencollective.com/fody/order/7086). A medium company logo will be added here with a link to your website.
+Support this project by [becoming a Silver Sponsor](https://opencollective.com/fody/contribute/silver-7086). A medium company logo will be added here with a link to your website.
 
-<a href="https://particular.net/"><img alt="Particular Software" width="200px" src="https://raw.githubusercontent.com/Fody/Home/master/images/particular.svg?sanitize=true"></a>
+<a href="https://www.gresearch.co.uk/"><img alt="G-Research" width="120px" src="https://raw.githubusercontent.com/Fody/Home/master/images/g-research.svg?sanitize=true"></a> <a href="https://particular.net/"><img alt="Particular Software" width="200px" src="https://raw.githubusercontent.com/Fody/Home/master/images/particular.svg?sanitize=true"></a>
 
 
 ### Bronze Sponsors
 
-Support this project by [becoming a Bronze Sponsor](https://opencollective.com/fody/order/7085). The company avatar will show up here with a link to your OpenCollective Profile.
-
+Support this project by [becoming a Bronze Sponsor](https://opencollective.com/fody/contribute/bronze-7085). The company avatar will show up here with a link to your OpenCollective Profile.
 
 <a href="https://opencollective.com/fody/tiers/bronze/0/website"><img src="https://opencollective.com/fody/tiers/bronze/0/avatar.svg?avatarHeight=100"></a>
 
 
 ### Patrons and sponsors
 
-Thanks to all the backers and sponsors! Support this project by [becoming a patron](https://opencollective.com/fody/order/3059).
+Thanks to all the backers and sponsors! Support this project by [becoming a patron](https://opencollective.com/fody/contribute/patron-3059).
 
 <a href="https://opencollective.com/fody#contributors"><img src="https://opencollective.com/fody/sponsor.svg?width=890&avatarHeight=50&button=false"><img src="https://opencollective.com/fody/backer.svg?width=890&avatarHeight=50&button=false"></a>
-
 
 
 <!--- EndOpenCollectiveBackers -->
