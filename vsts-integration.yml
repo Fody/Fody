@@ -2,29 +2,23 @@ resources:
 - repo: self
   clean: true
 
+pool:
+  vmImage: 'windows-latest'
+
 steps:
-- task: NuGetToolInstaller@0
-  displayName: 'Use NuGet 4.4.1'
-  inputs:
-    versionSpec: 4.4.1
-    checkLatest: true
-
-- task: NuGetCommand@2
-  displayName: 'NuGet restore'
-  inputs:
-    restoreSolution: 'Fody.sln'
-
 - powershell: |
    (new-object Net.WebClient).DownloadString("https://raw.github.com/tom-englert/BuildScripts/master/BuildScripts.ps1") | iex
    Project-SetVersion "Directory.Build.props"  | Build-AppendVersionToBuildNumber
   displayName: 'Patch version'
 
-- task: VSBuild@1
-  displayName: 'Build solution'
+- task: MSBuild@1
+  displayName: 'Build Solution'
   inputs:
     solution: 'Fody.sln'
     platform: 'any cpu'
     configuration: 'release'
+    msbuildArguments: '-restore'
+    clean: true
 
 - task: VSTest@2
   displayName: 'VsTest - testAssemblies'
