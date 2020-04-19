@@ -13,7 +13,6 @@ jobs:
         tag="${GITHUB_REF:10}"
         owner="${GITHUB_REPOSITORY%/*}"
         repo="${GITHUB_REPOSITORY#*/}"
-        dotnet-gitreleasemanager label --token ${{secrets.GITHUB_TOKEN}} -o ${owner} -r ${repo}
         dotnet-gitreleasemanager create -m ${tag} --token ${{secrets.GITHUB_TOKEN}} -o ${owner} -r ${repo}
         dotnet-gitreleasemanager close -m ${tag} --token ${{secrets.GITHUB_TOKEN}} -o ${owner} -r ${repo}
         dotnet-gitreleasemanager publish -t ${tag} --token ${{secrets.GITHUB_TOKEN}} -o ${owner} -r ${repo}
