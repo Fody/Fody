@@ -68,9 +68,7 @@ public static partial class ExtensionMethods
 {
     public static IEnumerable<XElement> GetChildren(this XElement element, string name)
     {
-        return element.Descendants()
-            .Where(item => item.Parent == element)
-            .Where(item => item.Name.LocalName == name);
+        return element.Elements().Where(item => item.Name.LocalName == name);
     }
 
     public static string? GetAttributeOrNode(this XElement element, string name)
