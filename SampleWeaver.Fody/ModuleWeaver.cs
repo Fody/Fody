@@ -96,11 +96,11 @@ public class ModuleWeaver :
     IEnumerable<(MethodDefinition method, CustomAttribute attribute)> GetMethodInfos(string symbolValidationAttributeTypeName)
     {
         return from type in ModuleDefinition.GetTypes()
-                .Where(x => x.IsClass)
-            from method in type.GetMethods()
-            let attribute = method.GetAttribute(symbolValidationAttributeTypeName)
-            where attribute != null
-            select (method, attribute);
+               where type.IsClass
+               from method in type.GetMethods()
+               let attribute = method.ConsumeAttribute(symbolValidationAttributeTypeName)
+               where attribute != null
+               select (method, attribute);
     }
 
     bool HasSymbols(MethodDefinition method)
@@ -113,19 +113,23 @@ public class ModuleWeaver :
         yield break;
     }
 
+    // Do not use ShouldCleanReference in order to test the above code
     public override bool ShouldCleanReference => false;
 }
 
 static class AttributeExtensionMethods
 {
-    public static CustomAttribute? GetAttribute(this ICustomAttributeProvider? attributeProvider, string attributeName)
+    public static CustomAttribute? ConsumeAttribute(this ICustomAttributeProvider attributeProvider, string attributeName)
     {
-        return attributeProvider?.CustomAttributes.GetAttribute(attributeName);
-    }
+        var attributes = attributeProvider.CustomAttributes;
+        var matches = attributes.Where(attribute => attribute.Constructor.DeclaringType.FullName == attributeName).ToList();
 
-    public static CustomAttribute? GetAttribute(this IEnumerable<CustomAttribute>? attributes, string attributeName)
-    {
-        return attributes?.FirstOrDefault(attribute => attribute.Constructor.DeclaringType.FullName == attributeName);
+        foreach (var match in matches)
+        {
+            attributes.Remove(match);
+        }
+
+        return matches.FirstOrDefault();
     }
 
     public static T GetPropertyValue<T>(this CustomAttribute attribute, string propertyName, T defaultValue)
