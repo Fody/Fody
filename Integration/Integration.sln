@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WithEmbeddedPdb", "WithEmbe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleTargetTests", "SampleTargetTests\SampleTargetTests.csproj", "{88BE1B06-7318-410F-80E6-35A8F55545A5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleTargetTestsWithConfigOverride", "SampleTargetTestsWithConfigOverride\SampleTargetTestsWithConfigOverride.csproj", "{24CA46E0-3674-47E2-A038-CFE8E4549F23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleTargetWithConfigOverrideTests", "SampleTargetWithConfigOverrideTests\SampleTargetWithConfigOverrideTests.csproj", "{24CA46E0-3674-47E2-A038-CFE8E4549F23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
