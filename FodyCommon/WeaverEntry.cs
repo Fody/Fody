@@ -20,6 +20,11 @@ public class WeaverEntry
     public string Element = null!;
 
     /// <summary>
+    /// The source of the configuration element.
+    /// </summary>
+    public string? ConfigurationSource;
+
+    /// <summary>
     /// The name of the element containing the configuration.
     /// </summary>
     public string ElementName => ConfiguredTypeName ?? AssemblyBaseName;
