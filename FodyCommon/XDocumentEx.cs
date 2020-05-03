@@ -13,7 +13,19 @@ public static class XDocumentEx
         }
         catch (XmlException exception)
         {
-            throw new WeavingException($"Could not read '{path}' because it has invalid xml. Message: '{exception.Message}'.");
+            throw new WeavingException($"Could not read '{path}' because it has invalid XML. Message: '{exception.Message}'.");
+        }
+    }
+
+    public static XDocument Parse(string text)
+    {
+        try
+        {
+            return XDocument.Parse(text);
+        }
+        catch (XmlException exception)
+        {
+            throw new WeavingException($"Could not parse XML. Message: '{exception.Message}'.");
         }
     }
 }

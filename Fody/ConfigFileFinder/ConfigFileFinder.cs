@@ -11,14 +11,14 @@ public static class ConfigFileFinder
     static readonly XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");
     static readonly XNamespace schemaInstanceNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema-instance");
 
-    public static IEnumerable<WeaverConfigFile> FindWeaverConfigFiles(string solutionDirectoryPath, string projectDirectory, ILogger logger)
+    public static IEnumerable<WeaverConfigFile> FindWeaverConfigFiles(string? weaverConfiguration, string solutionDirectoryPath, string projectDirectory, ILogger logger)
     {
         var solutionConfigFilePath = Path.Combine(solutionDirectoryPath, FodyWeaversConfigFileName);
 
         if (File.Exists(solutionConfigFilePath))
         {
             logger.LogDebug($"Found path to weavers file '{solutionConfigFilePath}'.");
-            yield return new WeaverConfigFile(solutionConfigFilePath) {IsGlobal = true};
+            yield return new WeaverConfigFile(solutionConfigFilePath, true);
         }
 
         var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
@@ -27,6 +27,12 @@ public static class ConfigFileFinder
         {
             logger.LogDebug($"Found path to weavers file '{projectConfigFilePath}'.");
             yield return new WeaverConfigFile(projectConfigFilePath);
+        }
+
+        if (!string.IsNullOrEmpty(weaverConfiguration))
+        {
+            logger.LogDebug("Found weaver configuration in project.");
+            yield return new WeaverConfigFile(XDocumentEx.Parse(weaverConfiguration!));
         }
     }
 
@@ -160,13 +166,12 @@ public static class ConfigFileFinder
         return element;
     }
 
-    public static void EnsureSchemaIsUpToDate(string solutionDirectory, string projectDirectory, IEnumerable<WeaverEntry> weavers, bool defaultGenerateXsd)
+    public static void EnsureSchemaIsUpToDate(string projectDirectory, IEnumerable<WeaverEntry> weavers, bool defaultGenerateXsd)
     {
         var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
-        var solutionConfigFilePath = Path.Combine(solutionDirectory, FodyWeaversConfigFileName);
         try
         {
-            if (!File.Exists(projectConfigFilePath) && File.Exists(solutionConfigFilePath))
+            if (!File.Exists(projectConfigFilePath))
                 return;
 
             var doc = XDocumentEx.Load(projectConfigFilePath);

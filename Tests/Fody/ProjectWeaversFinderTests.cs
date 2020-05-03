@@ -11,7 +11,7 @@ public class ProjectWeaversFinderTests :
     {
         var logger = new MockBuildLogger();
 
-        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(Environment.CurrentDirectory, Environment.CurrentDirectory, logger);
+        var configFiles = ConfigFileFinder.FindWeaverConfigFiles(null, Environment.CurrentDirectory, Environment.CurrentDirectory, logger);
 
         Assert.Empty(configFiles);
     }

@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WithEmbeddedPdb", "WithEmbe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleTargetTests", "SampleTargetTests\SampleTargetTests.csproj", "{88BE1B06-7318-410F-80E6-35A8F55545A5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleTargetTestsWithConfigOverride", "SampleTargetTestsWithConfigOverride\SampleTargetTestsWithConfigOverride.csproj", "{24CA46E0-3674-47E2-A038-CFE8E4549F23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{88BE1B06-7318-410F-80E6-35A8F55545A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88BE1B06-7318-410F-80E6-35A8F55545A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88BE1B06-7318-410F-80E6-35A8F55545A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24CA46E0-3674-47E2-A038-CFE8E4549F23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24CA46E0-3674-47E2-A038-CFE8E4549F23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24CA46E0-3674-47E2-A038-CFE8E4549F23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24CA46E0-3674-47E2-A038-CFE8E4549F23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,6 +3,23 @@
     <TargetFrameworks>net472;netcoreapp3.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <MyPropertyValue>CustomPropertyValue</MyPropertyValue>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <WeaverConfiguration>
+      <Weavers>
+        <SampleWeaver MyProperty="$(MyPropertyValue)">
+          <Content>Override</Content>
+        </SampleWeaver>
+        <NullGuard IncludeDebugAssert="false" />
+        <JetBrainsAnnotations />
+      </Weavers>
+    </WeaverConfiguration>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
@@ -16,4 +33,5 @@
     <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.10.0" />
     <PackageReference Include="NullGuard.Fody" Version="1.8.5" />
   </ItemGroup>
+
 </Project>

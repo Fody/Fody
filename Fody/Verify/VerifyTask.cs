@@ -14,6 +14,8 @@ namespace Fody
         [Required]
         public string TargetPath { get; set; } = null!;
 
+        public string? WeaverConfiguration { get; set; }
+
         public override bool Execute()
         {
             var defineConstants = DefineConstants.GetConstants();
@@ -24,6 +26,7 @@ namespace Fody
                     BuildEngine = BuildEngine,
                 },
                 SolutionDirectory = SolutionDirectoryFinder.Find(SolutionDirectory, NCrunchOriginalSolutionDirectory, ProjectDirectory),
+                WeaverConfiguration = WeaverConfiguration,
                 ProjectDirectory = ProjectDirectory,
                 DefineConstants = defineConstants,
                 TargetPath = TargetPath,

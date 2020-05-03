@@ -35,7 +35,9 @@ namespace Fody
 
         [Required]
         public ITaskItem[] ReferenceCopyLocalFiles { get; set; } = null!;
+        [Required]
         public ITaskItem[] WeaverFiles { get; set; } = null!;
+        public string? WeaverConfiguration { get; set; }
 
         public string NCrunchOriginalSolutionDirectory { get; set; } = null!;
         public string SolutionDirectory { get; set; } = null!;
@@ -76,6 +78,7 @@ namespace Fody
                 ReferenceCopyLocalPaths = referenceCopyLocalPaths,
                 DefineConstants = defineConstants,
                 Weavers = GetWeaversFromProps().Distinct(WeaverEntry.NameComparer).ToList(),
+                WeaverConfiguration = WeaverConfiguration,
                 GenerateXsd = GenerateXsd
             };
 

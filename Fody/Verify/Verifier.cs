@@ -9,6 +9,7 @@ public class Verifier
 {
     public ILogger Logger = null!;
     public string SolutionDirectory = null!;
+    public string? WeaverConfiguration;
     public List<string> DefineConstants = null!;
     public string ProjectDirectory = null!;
     public string TargetPath = null!;
@@ -67,7 +68,10 @@ public class Verifier
 
     public bool ReadShouldVerifyAssembly(out List<string> ignoreCodes)
     {
-        var weaverConfigs = ConfigFileFinder.FindWeaverConfigFiles(SolutionDirectory, ProjectDirectory, Logger).ToList();
+        var weaverConfigs = ConfigFileFinder
+            .FindWeaverConfigFiles(WeaverConfiguration, SolutionDirectory, ProjectDirectory, Logger)
+            .Reverse()
+            .ToList();
 
         ignoreCodes = ExtractVerifyIgnoreCodesConfigs(weaverConfigs).ToList();
 
