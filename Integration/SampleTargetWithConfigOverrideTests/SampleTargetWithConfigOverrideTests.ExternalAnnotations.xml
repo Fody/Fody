@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<assembly name="SampleTargetTests">
+<assembly name="SampleTargetWithConfigOverrideTests">
   <member name="M:SampleTarget.PackagedWeaverTests.GuardedMethod(System.Object)">
     <attribute ctor="M:JetBrains.Annotations.NotNullAttribute.#ctor" />
     <parameter name="parameter">
