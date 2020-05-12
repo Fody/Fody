@@ -30,6 +30,11 @@ public class WeaverEntry
     public string ElementName => ConfiguredTypeName ?? AssemblyBaseName;
 
     /// <summary>
+    /// The assembly name including the ".Fody" suffix.
+    /// </summary>
+    public string WeaverName => Path.GetFileNameWithoutExtension(AssemblyPath);
+
+    /// <summary>
     /// The assembly name excluding the ".Fody" suffix.
     /// </summary>
     string AssemblyBaseName => ExtractAssemblyBaseName(AssemblyPath);
@@ -48,6 +53,16 @@ public class WeaverEntry
     /// The type name of the weaver class as read from the configuration; maybe <c>null</c> to use the default "ModuleWeaver".
     /// </summary>
     public string ConfiguredTypeName = null!;
+
+    /// <summary>
+    /// The value of the PrivateAssets metadata item for the package reference, or null if unknown.
+    /// </summary>
+    public string? PrivateAssets;
+
+    /// <summary>
+    /// The value of the IncludeAssets metadata item for the package reference, or null if unknown.
+    /// </summary>
+    public string? IncludeAssets;
 
     static string ExtractAssemblyBaseName(string assemblyPath)
     {

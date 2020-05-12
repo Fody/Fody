@@ -52,6 +52,7 @@
         DocumentationFile="@(DocFileItem->'%(FullPath)')"
         WeaverFiles="@(WeaverFiles)"
         WeaverConfiguration="$(WeaverConfiguration)"
+        PackageReferences="@(PackageReference)"
         NCrunchOriginalSolutionDirectory="$(NCrunchOriginalSolutionDir)"
         IntermediateCopyLocalFilesCache="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache"
         GenerateXsd="$(FodyGenerateXsd)"

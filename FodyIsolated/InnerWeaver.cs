@@ -103,7 +103,7 @@ public partial class InnerWeaver :
             }
             TypeCache = new TypeCache(assemblyResolver.Resolve);
             InitialiseWeavers();
-            ValidatePackageReferenceSettings(weaverInstances, ProjectFilePath, Logger);
+            ValidatePackageReferenceSettings(weaverInstances, Logger);
             TypeCache.BuildAssembliesToScan(weaverInstances.Select(x => x.Instance));
             InitialiseTypeSystem();
             ExecuteWeavers();
