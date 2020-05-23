@@ -33,13 +33,17 @@ public partial class InnerWeaver
 
     public static IEnumerable<string> GetPackageReferenceValidationErrors(WeaverEntry weaver)
     {
-        if (weaver.PrivateAssets != null
-            && !string.Equals(weaver.PrivateAssets, "All", StringComparison.OrdinalIgnoreCase))
+        if (!weaver.HasPackageReference)
+        {
+            yield break;
+        }
+
+        if (!string.Equals(weaver.PrivateAssets, "All", StringComparison.OrdinalIgnoreCase))
         {
             yield return $"The package reference for {weaver.WeaverName} does not contain PrivateAssets='All'";
         }
 
-        if (!string.IsNullOrEmpty(weaver.IncludeAssets)
+        if (weaver.IncludeAssets != string.Empty
             && !string.Equals(weaver.IncludeAssets, "All", StringComparison.OrdinalIgnoreCase)
             && !weaver.IncludeAssets!.Split(';').Select(item => item.Trim()).Contains("compile", StringComparer.OrdinalIgnoreCase))
         {

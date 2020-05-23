@@ -55,12 +55,19 @@ public class WeaverEntry
     public string ConfiguredTypeName = null!;
 
     /// <summary>
-    /// The value of the PrivateAssets metadata item for the package reference, or null if unknown.
+    /// True if a PackageReference element item matching the weaver has been found.
+    /// </summary>
+    public bool HasPackageReference => PrivateAssets != null;
+
+    /// <summary>
+    /// The value of the PrivateAssets metadata item for the package reference.
+    /// It will be an empty string when the metadata item is missing, and null if the package reference is not found.
     /// </summary>
     public string? PrivateAssets;
 
     /// <summary>
-    /// The value of the IncludeAssets metadata item for the package reference, or null if unknown.
+    /// The value of the IncludeAssets metadata item for the package reference.
+    /// It will be an empty string when the metadata item is missing, and null if the package reference is not found.
     /// </summary>
     public string? IncludeAssets;
 
