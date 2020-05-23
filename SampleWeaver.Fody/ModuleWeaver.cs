@@ -93,12 +93,12 @@ public class ModuleWeaver :
         }
     }
 
-    IEnumerable<(MethodDefinition method, CustomAttribute attribute)> GetMethodInfos(string SymbolValidationAttributeTypeName)
+    IEnumerable<(MethodDefinition method, CustomAttribute attribute)> GetMethodInfos(string symbolValidationAttributeTypeName)
     {
         return from type in ModuleDefinition.GetTypes()
                 .Where(x => x.IsClass)
             from method in type.GetMethods()
-            let attribute = method.GetAttribute(SymbolValidationAttributeTypeName)
+            let attribute = method.GetAttribute(symbolValidationAttributeTypeName)
             where attribute != null
             select (method, attribute);
     }
