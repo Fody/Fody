@@ -226,7 +226,8 @@ public partial class InnerWeaver :
         var startNew = Stopwatch.StartNew();
 
         const TypeAttributes typeAttributes = TypeAttributes.NotPublic | TypeAttributes.Class;
-        var typeDefinition = new TypeDefinition($"{ModuleDefinition.Assembly.Name.Name}_Fody", "ProcessedByFody", typeAttributes, TypeSystem.ObjectReference);
+        var classPrefix = ModuleDefinition.Assembly.Name.Name.Replace(".","");
+        var typeDefinition = new TypeDefinition(null, $"{classPrefix}_ProcessedByFody", typeAttributes, TypeSystem.ObjectReference);
         ModuleDefinition.Types.Add(typeDefinition);
 
         AddVersionField(typeof(IInnerWeaver).Assembly, "FodyVersion", typeDefinition);
