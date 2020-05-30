@@ -17,8 +17,8 @@ namespace Fody
 
         [Required]
         public string IntermediateDirectory { get; set; } = null!;
-        public string KeyOriginatorFile { get; set; } = null!;
-        public string AssemblyOriginatorKeyFile { get; set; } = null!;
+        public string? KeyOriginatorFile { get; set; }
+        public string? AssemblyOriginatorKeyFile { get; set; }
 
         public bool SignAssembly { get; set; }
 
@@ -28,7 +28,7 @@ namespace Fody
         [Required]
         public string ProjectFile { get; set; } = null!;
 
-        public string DocumentationFile { get; set; } = null!;
+        public string? DocumentationFile { get; set; }
 
         [Required]
         public string References { get; set; } = null!;
@@ -38,12 +38,12 @@ namespace Fody
         [Required]
         public ITaskItem[] WeaverFiles { get; set; } = null!;
         public string? WeaverConfiguration { get; set; }
-        public ITaskItem[] PackageReferences { get; set; } = null!;
+        public ITaskItem[]? PackageReferences { get; set; }
 
-        public string NCrunchOriginalSolutionDirectory { get; set; } = null!;
-        public string SolutionDirectory { get; set; } = null!;
+        public string? NCrunchOriginalSolutionDirectory { get; set; }
+        public string? SolutionDirectory { get; set; }
 
-        public string DefineConstants { get; set; } = null!;
+        public string? DefineConstants { get; set; }
 
         [Output]
         public string ExecutedWeavers { get; private set; } = null!;

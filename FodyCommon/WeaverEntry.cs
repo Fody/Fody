@@ -17,7 +17,7 @@ public class WeaverEntry
     /// <summary>
     /// The content of the XML element containing the configuration.
     /// </summary>
-    public string Element = null!;
+    public string? Element;
 
     /// <summary>
     /// The source of the configuration element.
@@ -52,7 +52,7 @@ public class WeaverEntry
     /// <summary>
     /// The type name of the weaver class as read from the configuration; maybe <c>null</c> to use the default "ModuleWeaver".
     /// </summary>
-    public string ConfiguredTypeName = null!;
+    public string? ConfiguredTypeName;
 
     /// <summary>
     /// True if a PackageReference element item matching the weaver has been found.
@@ -87,7 +87,7 @@ public class WeaverEntry
 
     class WeaverNameComparer : IEqualityComparer<WeaverEntry>
     {
-        public bool Equals(WeaverEntry x, WeaverEntry y)
+        public bool Equals(WeaverEntry? x, WeaverEntry? y)
         {
             return x?.ElementName == y?.ElementName;
         }

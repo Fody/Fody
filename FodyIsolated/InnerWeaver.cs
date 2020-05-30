@@ -20,12 +20,12 @@ public partial class InnerWeaver :
 {
     public string ProjectDirectoryPath { get; set; } = null!;
     public string ProjectFilePath { get; set; } = null!;
-    public string DocumentationFilePath { get; set; } = null!;
+    public string? DocumentationFilePath { get; set; }
     public string AssemblyFilePath { get; set; } = null!;
     public string SolutionDirectoryPath { get; set; } = null!;
     public string References { get; set; } = null!;
     public List<WeaverEntry> Weavers { get; set; } = null!;
-    public string KeyFilePath { get; set; } = null!;
+    public string? KeyFilePath { get; set; }
     public bool SignAssembly { get; set; }
     public ILogger Logger { get; set; }= null!;
     public string IntermediateDirectoryPath { get; set; } = null!;
@@ -142,16 +142,25 @@ public partial class InnerWeaver :
             }
 
             var weaverHolder = InitialiseWeaver(weaverConfig);
-            weaverInstances.Add(weaverHolder);
+            if (weaverHolder != null)
+            {
+                weaverInstances.Add(weaverHolder);
+            }
         }
     }
 
-    WeaverHolder InitialiseWeaver(WeaverEntry weaverConfig)
+    WeaverHolder? InitialiseWeaver(WeaverEntry weaverConfig)
     {
         Logger.LogDebug($"Weaver '{weaverConfig.AssemblyPath}'.");
         Logger.LogDebug("  Initializing weaver");
         var assembly = LoadWeaverAssembly(weaverConfig.AssemblyPath);
         var weaverType = assembly.FindType(weaverConfig.TypeName);
+
+        if (weaverType == null)
+        {
+            Logger.LogError($"Could not find weaver type {weaverConfig.TypeName} in {weaverConfig.WeaverName}");
+            return null;
+        }
 
         var delegateHolder = weaverType.GetDelegateHolderFromCache();
         var weaverInstance = delegateHolder();

@@ -18,7 +18,7 @@ namespace Fody
 
         public static readonly bool FoundIldasm;
 
-        public static string Decompile(string assemblyPath, string item = "")
+        public static string Decompile(string assemblyPath, string? item = "")
         {
             Guard.AgainstNullAndEmpty(nameof(assemblyPath), assemblyPath);
             if (!FoundIldasm)

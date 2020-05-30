@@ -21,15 +21,15 @@
     {
     }
 
-    public void LogWarning(string message, string code)
+    public void LogWarning(string message, string? code)
     {
     }
 
-    public void LogWarning(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string code)
+    public void LogWarning(string message, string? file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string? code)
     {
     }
 
-    public void LogError(string message, string file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
+    public void LogError(string message, string? file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber)
     {
     }
 
