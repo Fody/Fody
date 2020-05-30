@@ -5,7 +5,7 @@ public interface IInnerWeaver : IDisposable
 {
     string AssemblyFilePath { get; set; }
     string References { get; set; }
-    string KeyFilePath { get; set; }
+    string? KeyFilePath { get; set; }
     bool SignAssembly { get; set; }
     List<WeaverEntry> Weavers { get; set; }
     ILogger Logger { get; set; }
@@ -15,7 +15,7 @@ public interface IInnerWeaver : IDisposable
     List<string> DefineConstants { get; set; }
     string ProjectDirectoryPath { get; set; }
     string ProjectFilePath { get; set; }
-    string DocumentationFilePath { get; set; }
+    string? DocumentationFilePath { get; set; }
     #if(NETSTANDARD)
     IsolatedAssemblyLoadContext LoadContext { get; set; }
     #endif

@@ -2,17 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Xml.Linq;
 
 public partial class Processor
 {
     public string AssemblyFilePath = null!;
     public string IntermediateDirectory = null!;
-    public string KeyFilePath = null!;
+    public string? KeyFilePath;
     public bool SignAssembly;
     public string ProjectDirectory = null!;
     public string ProjectFilePath = null!;
-    public string DocumentationFilePath = null!;
+    public string? DocumentationFilePath;
     public string References = null!;
     public string SolutionDirectory = null!;
     public List<WeaverEntry> Weavers = null!;

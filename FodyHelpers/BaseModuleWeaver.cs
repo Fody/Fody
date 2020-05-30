@@ -180,7 +180,7 @@ namespace Fody
         /// if generating the documentation file is enabled in the project.
         /// A copy of @(DocFileItem->'%(FullPath)').
         /// </summary>
-        public string DocumentationFilePath { get; set; } = null!;
+        public string? DocumentationFilePath { get; set; }
 
         /// <summary>
         /// The full directory path of the current weaver.

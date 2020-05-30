@@ -9,7 +9,7 @@ public static class DomainAssemblyResolver
         AppDomain.CurrentDomain.AssemblyResolve += (sender, args) => GetAssembly(args.Name);
     }
 
-    public static Assembly GetAssembly(string name)
+    public static Assembly? GetAssembly(string name)
     {
         return AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(x => string.Equals(x.FullName, name, StringComparison.OrdinalIgnoreCase));
     }

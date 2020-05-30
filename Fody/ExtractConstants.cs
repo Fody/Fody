@@ -3,7 +3,7 @@ using System.Linq;
 
 static class ExtractConstants
 {
-    internal static List<string> GetConstants(this string input)
+    internal static List<string> GetConstants(this string? input)
     {
         if (input == null)
         {

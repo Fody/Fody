@@ -34,12 +34,12 @@ public class BuildLogger :
         BuildEngine.LogMessageEvent(new BuildMessageEventArgs(GetIndent() + PrependMessage(message), "", "Fody", (Microsoft.Build.Framework.MessageImportance)MessageImportanceDefaults.Info));
     }
 
-    public virtual void LogWarning(string message, string code)
+    public virtual void LogWarning(string message, string? code)
     {
         LogWarning(message, null, 0, 0, 0, 0, code);
     }
 
-    public virtual void LogWarning(string message, string? file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string code)
+    public virtual void LogWarning(string message, string? file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string? code)
     {
         BuildEngine.LogWarningEvent(new BuildWarningEventArgs("", code ?? "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber, PrependMessage(message), "", "Fody"));
     }

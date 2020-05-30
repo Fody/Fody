@@ -5,7 +5,7 @@ using Fody;
 
 public static class TypeFinder
 {
-    public static Type FindType(this Assembly readAssembly, string typeName)
+    public static Type? FindType(this Assembly readAssembly, string typeName)
     {
         try
         {

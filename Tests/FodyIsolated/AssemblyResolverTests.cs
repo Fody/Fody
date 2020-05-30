@@ -22,7 +22,7 @@ public class AssemblyResolverTests :
 
             var resolver = new AssemblyResolver(logger, new[] {assemblyPath});
             using var resolvedAssembly = resolver.Resolve(assembly.GetName().Name);
-            Assert.Equal(assembly.FullName, resolvedAssembly.FullName);
+            Assert.Equal(assembly.FullName, resolvedAssembly!.FullName);
         }
         finally
         {
