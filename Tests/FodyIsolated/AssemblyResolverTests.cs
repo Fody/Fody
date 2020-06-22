@@ -2,12 +2,9 @@
 using System.IO;
 using System.Linq;
 using DummyAssembly;
-using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
-public class AssemblyResolverTests :
-    VerifyBase
+public class AssemblyResolverTests
 {
     ILogger logger = new MockBuildLogger();
 
@@ -42,10 +39,5 @@ public class AssemblyResolverTests :
     {
         var resolver = new AssemblyResolver(logger, new[] {@"Fody\BadAssembly.dll"});
         Assert.ThrowsAny<Exception>(() => resolver.Resolve("BadAssembly"));
-    }
-
-    public AssemblyResolverTests(ITestOutputHelper output) :
-        base(output)
-    {
     }
 }

@@ -2,22 +2,16 @@ using System;
 using System.Threading.Tasks;
 using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
-public class ProjectWeaversReaderTests :
-    VerifyBase
+[UsesVerify]
+public class ProjectWeaversReaderTests
 {
     [Fact]
     public Task Invalid()
     {
-        var path =  @"Fody\ProjectWeaversReaderTests\Invalid.txt";
+        var path = @"Fody\ProjectWeaversReaderTests\Invalid.txt";
 
         var exception = Assert.ThrowsAny<Exception>(() => XDocumentEx.Load(path));
-        return Verify(exception.Message);
-    }
-
-    public ProjectWeaversReaderTests(ITestOutputHelper output) :
-        base(output)
-    {
+        return VerifyXunit.Verifier.Verify(exception!.Message);
     }
 }

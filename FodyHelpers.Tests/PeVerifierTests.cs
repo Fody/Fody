@@ -5,12 +5,10 @@ using VerifyXunit;
 using Fody;
 using Mono.Cecil;
 using Xunit;
-using Xunit.Abstractions;
 
 // ReSharper disable UnusedVariable
-
-public class PeVerifierTests :
-    VerifyBase
+[UsesVerify]
+public class PeVerifierTests
 {
     string assemblyPath = "FodyHelpers.Tests.dll";
     [Fact]
@@ -51,7 +49,7 @@ public class PeVerifierTests :
 [IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::get_NullProperty][offset 0x00000006][found unmanaged pointer][expected unmanaged pointer] Unexpected type on the stack.
 [IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::set_NullProperty][offset 0x00000001] Unmanaged pointers are not a verifiable type.
 3 Error(s) Verifying C:\Code\Fody\net452\AssemblyToProcess.dll");
-        return Verify(text);
+        return Verifier.Verify(text);
     }
 
     [Fact]
@@ -68,10 +66,5 @@ public class PeVerifierTests :
 
         Assert.Throws<Exception>(() => PeVerifier.ThrowIfDifferent(assemblyPath, newAssemblyPath));
         File.Delete(newAssemblyPath);
-    }
-
-    public PeVerifierTests(ITestOutputHelper output) :
-        base(output)
-    {
     }
 }

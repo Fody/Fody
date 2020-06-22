@@ -2,12 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
-public class AssemblyVersionTests :
-    VerifyBase
+public class AssemblyVersionTests
 {
     [Fact]
     public void ShouldReadTheSameFodyCommonVersionInfoFromAssemblyAttributeAndFile()
@@ -21,10 +18,5 @@ public class AssemblyVersionTests :
         var fileVersion = FileVersionInfo.GetVersionInfo(Path.GetFullPath(asm.Location));
 
         Assert.Equal(fileVersion.FileVersion, asmFileVersionAttribute.Version);
-    }
-
-    public AssemblyVersionTests(ITestOutputHelper output) :
-        base(output)
-    {
     }
 }

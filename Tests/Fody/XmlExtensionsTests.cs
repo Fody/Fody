@@ -1,12 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
-using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
-public class XmlExtensionsTests :
-    VerifyBase
+public class XmlExtensionsTests
 {
     [Fact]
     public void Simple()
@@ -60,10 +57,5 @@ public class XmlExtensionsTests :
         xDocument.StripNamespace();
         var tables = xDocument.Descendants("table");
         Trace.WriteLine(tables.Count());
-    }
-
-    public XmlExtensionsTests(ITestOutputHelper output) :
-        base(output)
-    {
     }
 }

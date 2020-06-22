@@ -1,11 +1,8 @@
 ﻿using System;
 using System.IO;
-using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
-public class SolutionDirectoryFinderTests :
-    VerifyBase
+public class SolutionDirectoryFinderTests
 {
     [Fact]
     public void ReturnNCrunchSolutionWhenPresent()
@@ -33,9 +30,5 @@ public class SolutionDirectoryFinderTests :
     {
         var result = SolutionDirectoryFinder.Find("*Undefined*", null, Environment.CurrentDirectory);
         Assert.Equal(Path.GetDirectoryName(Environment.CurrentDirectory), result);
-    }
-
-    public SolutionDirectoryFinderTests(ITestOutputHelper output) : base(output)
-    {
     }
 }

@@ -3,10 +3,9 @@ using System.Xml.Linq;
 using Fody;
 using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
-public class ConfigReaderTests :
-    VerifyBase
+[UsesVerify]
+public class ConfigReaderTests
 {
     [Fact]
     public void Simple()
@@ -30,7 +29,7 @@ public class ConfigReaderTests :
     {
         var xElementFalse = XElement.Parse("<Node Name=' '/>");
         var exception = Assert.Throws<WeavingException>(() => xElementFalse.ReadBool("Name", false));
-        return Verify(exception.Message);
+        return Verifier.Verify(exception.Message);
     }
 
     [Fact]
@@ -38,11 +37,6 @@ public class ConfigReaderTests :
     {
         var xElementFalse = XElement.Parse("<Node Name=''/>");
         var exception = Assert.Throws<WeavingException>(() => xElementFalse.ReadBool("Name", false));
-        return Verify(exception.Message);
-    }
-
-    public ConfigReaderTests(ITestOutputHelper output) :
-        base(output)
-    {
+        return Verifier.Verify(exception.Message);
     }
 }

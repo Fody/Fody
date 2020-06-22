@@ -1,10 +1,7 @@
 using System.Linq;
-using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
-public class VerifierTests :
-    VerifyBase
+public class VerifierTests
 {
     [Fact]
     public void ExtractVerifyAssemblyFromConfig_NotExists()
@@ -65,10 +62,5 @@ public class VerifierTests :
             new WeaverConfigFile(@"Fody\Verify\VerifierTests_WithFalseVerifyAssembly.xml")
         });
         Assert.False(verifyAssembly);
-    }
-
-    public VerifierTests(ITestOutputHelper output) :
-        base(output)
-    {
     }
 }

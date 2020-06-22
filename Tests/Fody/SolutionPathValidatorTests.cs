@@ -1,11 +1,8 @@
 using System;
 using System.IO;
-using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
-public class SolutionPathValidatorTests :
-    VerifyBase
+public class SolutionPathValidatorTests
 {
     [Fact]
     public void Valid()
@@ -33,10 +30,5 @@ public class SolutionPathValidatorTests :
         };
         var exception = Assert.ThrowsAny<Exception>(action);
         Assert.Equal($"SolutionDir '{Path.GetFullPath("aString")}' does not exist.", exception.Message);
-    }
-
-    public SolutionPathValidatorTests(ITestOutputHelper output) :
-        base(output)
-    {
     }
 }

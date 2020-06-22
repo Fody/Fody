@@ -1,12 +1,9 @@
 using System;
 using System.IO;
 using System.Linq;
-using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
-public class WeaversHistoryTests :
-    VerifyBase
+public class WeaversHistoryTests
 {
     [Fact]
     public void AddNewFile()
@@ -59,10 +56,5 @@ public class WeaversHistoryTests :
             File.Delete(fileName);
             WeaversHistory.TimeStamps.Clear();
         }
-    }
-
-    public WeaversHistoryTests(ITestOutputHelper output) :
-        base(output)
-    {
     }
 }

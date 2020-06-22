@@ -5,10 +5,9 @@ using Fody;
 using Mono.Cecil;
 using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
-public class WeaverTestHelperTests :
-    VerifyBase
+[UsesVerify]
+public class WeaverTestHelperTests
 {
     [Fact]
     public Task Run()
@@ -20,7 +19,7 @@ public class WeaverTestHelperTests :
 
     Task Verify(TestResult result)
     {
-        return Verify(new
+        return Verifier.Verify(new
         {
             result.Errors,
             result.Messages,
@@ -51,10 +50,5 @@ public class WeaverTestHelperTests :
         Assert.True(module.HasSymbols);
 
         return Verify(result);
-    }
-
-    public WeaverTestHelperTests(ITestOutputHelper output) :
-        base(output)
-    {
     }
 }

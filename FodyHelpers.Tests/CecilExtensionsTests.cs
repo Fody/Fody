@@ -4,12 +4,9 @@ using System.Linq;
 using Fody;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
-using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
-public class CecilExtensionsTests :
-    VerifyBase
+public class CecilExtensionsTests
 {
     [Fact]
     public void GetSequencePointWithNoSymbols()
@@ -37,10 +34,5 @@ public class CecilExtensionsTests :
         return module.GetType("DummyAssembly.Class1").Methods
             .Single(x => x.Name == "Method")
             .GetSequencePoint();
-    }
-
-    public CecilExtensionsTests(ITestOutputHelper output) :
-        base(output)
-    {
     }
 }

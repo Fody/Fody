@@ -1,18 +1,10 @@
-﻿using VerifyXunit;
-using Xunit;
-using Xunit.Abstractions;
+﻿using Xunit;
 
-public class FodyVersionTests :
-    VerifyBase
+public class FodyVersionTests
 {
     [Fact]
     public void FindFodyHelpersReference()
     {
         Assert.Equal("FodyHelpers", FodyVersion.FindFodyHelpersReference(GetType().Assembly).Name);
-    }
-
-    public FodyVersionTests(ITestOutputHelper output) :
-        base(output)
-    {
     }
 }

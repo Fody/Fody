@@ -3,13 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Fody;
 using Mono.Cecil;
-using Verify;
+using VerifyTests;
 using VerifyXunit;
 using Xunit;
-using Xunit.Abstractions;
 
-public class WeaverInitialiserTests :
-    VerifyBase
+[UsesVerify]
+public class WeaverInitialiserTests
 {
     [Fact]
     public Task ValidPropsFromBase()
@@ -35,7 +34,7 @@ public class WeaverInitialiserTests :
         });
         verifySettings.UniqueForRuntime();
 
-        return Verify(moduleWeaver, verifySettings);
+        return VerifyXunit.Verifier.Verify(moduleWeaver, verifySettings);
     }
 
     static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, IAssemblyResolver resolver)
@@ -63,11 +62,6 @@ public class WeaverInitialiserTests :
             assemblyResolver = resolver,
             TypeCache = new TypeCache(resolver.Resolve)
         };
-    }
-
-    public WeaverInitialiserTests(ITestOutputHelper output) :
-        base(output)
-    {
     }
 }
 
