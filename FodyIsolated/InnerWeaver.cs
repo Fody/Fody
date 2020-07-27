@@ -96,7 +96,8 @@ public partial class InnerWeaver :
             SplitUpReferences();
             assemblyResolver = new AssemblyResolver(Logger, SplitReferences);
             ReadModule();
-            if (ModuleDefinition.Types.Any(x => x.Name == GetWeavingInfoClassName()))
+            var weavingInfoClassName = GetWeavingInfoClassName(); 
+            if (ModuleDefinition.Types.Any(x => x.Name == weavingInfoClassName))
             {
                 Logger.LogWarning($"The assembly has already been processed by Fody. Weaving aborted. Path: {AssemblyFilePath} ");
                 return;
