@@ -213,7 +213,7 @@ public partial class InnerWeaver :
                     throw new Exception($"Failed to execute weaver {weaver.Config.AssemblyPath}", exception);
                 }
 
-                var finishedMessage = $"  Finished '{weaver.Config.ElementName}' in {startNew.ElapsedMSilliseconds}ms {Environment.NewLine}";
+                var finishedMessage = $"  Finished '{weaver.Config.ElementName}' in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
                 Logger.LogDebug(finishedMessage);
 
                 ReferenceCleaner.CleanReferences(ModuleDefinition, weaver.Instance, Logger.LogDebug);
