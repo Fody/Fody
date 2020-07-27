@@ -96,7 +96,7 @@ public partial class InnerWeaver :
             SplitUpReferences();
             assemblyResolver = new AssemblyResolver(Logger, SplitReferences);
             ReadModule();
-            var weavingInfoClassName = GetWeavingInfoClassName(); 
+            var weavingInfoClassName = GetWeavingInfoClassName();
             if (ModuleDefinition.Types.Any(x => x.Name == weavingInfoClassName))
             {
                 Logger.LogWarning($"The assembly has already been processed by Fody. Weaving aborted. Path: {AssemblyFilePath} ");
@@ -213,7 +213,7 @@ public partial class InnerWeaver :
                     throw new Exception($"Failed to execute weaver {weaver.Config.AssemblyPath}", exception);
                 }
 
-                var finishedMessage = $"  Finished '{weaver.Config.ElementName}' in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
+                var finishedMessage = $"  Finished '{weaver.Config.ElementName}' in {startNew.ElapsedMSilliseconds}ms {Environment.NewLine}";
                 Logger.LogDebug(finishedMessage);
 
                 ReferenceCleaner.CleanReferences(ModuleDefinition, weaver.Instance, Logger.LogDebug);
@@ -255,8 +255,8 @@ public partial class InnerWeaver :
 
     string GetWeavingInfoClassName()
     {
-      var classPrefix = ModuleDefinition.Assembly.Name.Name.Replace(".", "");
-      return $"{classPrefix}_ProcessedByFody";
+        var classPrefix = ModuleDefinition.Assembly.Name.Name.Replace(".", "");
+        return $"{classPrefix}_ProcessedByFody";
     }
 
     void AddVersionField(Assembly assembly, string name, TypeDefinition typeDefinition)
