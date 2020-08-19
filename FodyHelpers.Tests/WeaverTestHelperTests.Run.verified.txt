@@ -1,7 +1,7 @@
 {
   Messages: [
     {
-      Text: '\tRemoving reference to \'FodyHelpers.Tests\'.',
+      Text: "\tRemoving reference to 'FodyHelpers.Tests'.",
       MessageImportance: 'Low'
     }
   ],
