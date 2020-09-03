@@ -1,6 +1,6 @@
 using Mono.Cecil;
 
-public static class AssemblyResolverHelper 
+public static class AssemblyResolverHelper
 {
     public static AssemblyDefinition? Resolve(this IAssemblyResolver resolver, string assemblyName)
     {
