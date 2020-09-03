@@ -78,12 +78,12 @@ public class ModuleWeaver :
 
         foreach (var methodInfo in methodInfos)
         {
-            LogInfo("Validating method " + methodInfo.method.FullName);
+            LogInfo("Validating method " + methodInfo.Method.FullName);
 
-            var shouldHaveSymbols = methodInfo.attribute.GetPropertyValue(SymbolValidationAttributePropertyName, true);
+            var shouldHaveSymbols = methodInfo.Attribute.GetPropertyValue(SymbolValidationAttributePropertyName, true);
             LogInfo("Assembly should have symbols: " + shouldHaveSymbols);
 
-            var hasSymbols = HasSymbols(methodInfo.method);
+            var hasSymbols = HasSymbols(methodInfo.Method);
             LogInfo("Assembly has symbols: " + hasSymbols);
 
             if (shouldHaveSymbols != hasSymbols)
@@ -93,14 +93,14 @@ public class ModuleWeaver :
         }
     }
 
-    IEnumerable<(MethodDefinition method, CustomAttribute attribute)> GetMethodInfos(string symbolValidationAttributeTypeName)
+    IEnumerable<MethodInfos> GetMethodInfos(string symbolValidationAttributeTypeName)
     {
         return from type in ModuleDefinition.GetTypes()
                where type.IsClass
                from method in type.GetMethods()
                let attribute = method.ConsumeAttribute(symbolValidationAttributeTypeName)
                where attribute != null
-               select (method, attribute);
+               select new MethodInfos(method, attribute);
     }
 
     bool HasSymbols(MethodDefinition method)
@@ -115,6 +115,18 @@ public class ModuleWeaver :
 
     // Do not use ShouldCleanReference in order to test the above code
     public override bool ShouldCleanReference => false;
+}
+
+class MethodInfos
+{
+    public MethodDefinition Method { get; }
+    public CustomAttribute Attribute { get; }
+
+    public MethodInfos(MethodDefinition method, CustomAttribute attribute)
+    {
+        Method = method;
+        Attribute = attribute;
+    }
 }
 
 static class AttributeExtensionMethods
