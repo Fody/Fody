@@ -208,6 +208,10 @@ public partial class InnerWeaver :
                 {
                     throw new WeavingException($"Failed to execute weaver {weaver.Config.AssemblyPath} due to a MissingMemberException. Message: {exception.Message}. This is likely due to the weaver referencing an old version ({weaver.FodyVersion}) of Fody.");
                 }
+                catch (FileNotFoundException exception) when (exception.Message.Contains(nameof(ValueTuple)))
+                {
+                    throw new Exception($"Failed to execute weaver {weaver.Config.AssemblyPath} due to a failure to load ValueTuple.", exception);
+                }
                 catch (Exception exception)
                 {
                     throw new Exception($"Failed to execute weaver {weaver.Config.AssemblyPath}", exception);
