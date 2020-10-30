@@ -7,7 +7,7 @@ using Microsoft.Build.Utilities;
 
 namespace Fody
 {
-    public class WeavingTask : 
+    public class WeavingTask :
         Task,
         ICancelableTask
     {
@@ -55,6 +55,7 @@ namespace Fody
 
         public override bool Execute()
         {
+            
             var referenceCopyLocalPaths = ReferenceCopyLocalFiles
                 .Select(x => x.ItemSpec)
                 .ToList();
