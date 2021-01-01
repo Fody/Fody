@@ -269,7 +269,7 @@ The recommended work around is to avoid using ValueTuple inside a weaver.", exce
     {
         var weaverVersion = "0.0.0.0";
         var attrs = assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute));
-        var fileVersionAttribute = (AssemblyFileVersionAttribute)attrs.FirstOrDefault();
+        var fileVersionAttribute = (AssemblyFileVersionAttribute?)attrs.FirstOrDefault();
         if (fileVersionAttribute != null)
         {
             weaverVersion = fileVersionAttribute.Version;

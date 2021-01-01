@@ -42,10 +42,8 @@ public class AssemblyResolver : IAssemblyResolver
         {
             return assembly;
         }
-        if (parameters.AssemblyResolver == null)
-        {
-            parameters.AssemblyResolver = this;
-        }
+
+        parameters.AssemblyResolver ??= this;
         try
         {
             return assemblyDefinitionCache[file] = AssemblyDefinition.ReadAssembly(file, parameters);
@@ -61,12 +59,9 @@ public class AssemblyResolver : IAssemblyResolver
         return Resolve(assemblyNameReference, new ReaderParameters());
     }
 
-    public virtual AssemblyDefinition? Resolve(AssemblyNameReference assemblyNameReference, ReaderParameters parameters)
+    public virtual AssemblyDefinition? Resolve(AssemblyNameReference assemblyNameReference, ReaderParameters? parameters)
     {
-        if (parameters == null)
-        {
-            parameters = new ReaderParameters();
-        }
+        parameters ??= new ReaderParameters();
 
         if (referenceDictionary.TryGetValue(assemblyNameReference.Name, out var fileFromDerivedReferences))
         {

@@ -5,6 +5,6 @@
       MessageImportance: Low
     }
   ],
-  AssemblyPath: CurrentDirectory\fodytemp\NewName.dll,
+  AssemblyPath: {CurrentDirectory}\fodytemp\NewName.dll,
   FullName: NewName, Version=0.0.0.0, Culture=neutral, PublicKeyToken=1ca091877d12ca03
 }

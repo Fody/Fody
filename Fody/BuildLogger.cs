@@ -3,7 +3,7 @@ using Fody;
 using Microsoft.Build.Framework;
 
 public class BuildLogger :
-    MarshalByRefObject, 
+    MarshalByRefObject,
     ILogger
 {
     public IBuildEngine BuildEngine { get; set; } = null!;

@@ -55,7 +55,6 @@ namespace Fody
 
         public override bool Execute()
         {
-            
             var referenceCopyLocalPaths = ReferenceCopyLocalFiles
                 .Select(x => x.ItemSpec)
                 .ToList();

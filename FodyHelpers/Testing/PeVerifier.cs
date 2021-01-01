@@ -23,7 +23,7 @@ namespace Fody
 
         public static bool Verify(
             string assemblyPath,
-            IEnumerable<string> ignoreCodes, 
+            IEnumerable<string> ignoreCodes,
             out string output,
             string? workingDirectory = null)
         {
@@ -53,11 +53,11 @@ namespace Fody
         }
 
         public static bool Verify(
-            string beforeAssemblyPath, 
+            string beforeAssemblyPath,
             string afterAssemblyPath,
             IEnumerable<string> ignoreCodes,
             out string beforeOutput,
-            out string afterOutput, 
+            out string afterOutput,
             string? workingDirectory = null)
         {
             Guard.AgainstNullAndEmpty(nameof(beforeAssemblyPath), beforeAssemblyPath);
@@ -73,7 +73,7 @@ namespace Fody
 
         public static void ThrowIfDifferent(
             string beforeAssemblyPath,
-            string afterAssemblyPath, 
+            string afterAssemblyPath,
             string? workingDirectory = null)
         {
             Guard.AgainstNullAndEmpty(nameof(beforeAssemblyPath), beforeAssemblyPath);
@@ -82,9 +82,9 @@ namespace Fody
         }
 
         public static void ThrowIfDifferent(
-            string beforeAssemblyPath, 
+            string beforeAssemblyPath,
             string afterAssemblyPath,
-            IEnumerable<string> ignoreCodes, 
+            IEnumerable<string> ignoreCodes,
             string? workingDirectory = null)
         {
             Guard.AgainstNullAndEmpty(nameof(beforeAssemblyPath), beforeAssemblyPath);
@@ -110,17 +110,14 @@ BeforeOutput:
         }
 
         static bool InnerVerify(
-            string assemblyPath, 
-            List<string> ignoreCodes, 
-            out string output, 
+            string assemblyPath,
+            List<string> ignoreCodes,
+            out string output,
             string? workingDirectory = null)
         {
             ignoreCodes.Add("0x80070002");
             ignoreCodes.Add("0x80131252");
-            if (workingDirectory == null)
-            {
-                workingDirectory = Path.GetDirectoryName(assemblyPath);
-            }
+            workingDirectory ??= Path.GetDirectoryName(assemblyPath);
             var processStartInfo = new ProcessStartInfo(peverifyPath)
             {
                 Arguments = $"\"{assemblyPath}\" /hresult /nologo /ignore={string.Join(",", ignoreCodes)}",
@@ -130,20 +127,18 @@ BeforeOutput:
                 RedirectStandardOutput = true
             };
 
-            using (var process = Process.Start(processStartInfo))
+            using var process = Process.Start(processStartInfo);
+            output = process.StandardOutput.ReadToEnd();
+            output = Regex.Replace(output, "^All Classes and Methods.*", "");
+            output = output.Trim();
+            if (!process.WaitForExit(10000))
             {
-                output = process.StandardOutput.ReadToEnd();
-                output = Regex.Replace(output, "^All Classes and Methods.*", "");
-                output = output.Trim();
-                if (!process.WaitForExit(10000))
-                {
-                    throw new Exception("PeVerify failed to exit");
-                }
+                throw new Exception("PeVerify failed to exit");
+            }
 
-                if (process.ExitCode != 0)
-                {
-                    return false;
-                }
+            if (process.ExitCode != 0)
+            {
+                return false;
             }
 
             return true;
