@@ -18,7 +18,7 @@ public class AssemblyResolverTests
             File.Copy(assembly.Location, assemblyPath, true);
 
             var resolver = new AssemblyResolver(logger, new[] {assemblyPath});
-            using var resolvedAssembly = resolver.Resolve(assembly.GetName().Name);
+            using var resolvedAssembly = resolver.Resolve(assembly.GetName().Name!);
             Assert.Equal(assembly.FullName, resolvedAssembly!.FullName);
         }
         finally
