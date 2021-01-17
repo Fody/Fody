@@ -41,6 +41,25 @@ public class WeaverTestHelperTests
     }
 
     [Fact]
+    public Task WithCustomExeAssemblyName()
+    {
+        var assemblyPath = Path.Combine(Environment.CurrentDirectory, "DummyExeAssembly.exe");
+        try
+        {
+            var weaver = new TargetWeaver();
+            var result = weaver.ExecuteTestRun(
+                assemblyPath: assemblyPath,
+                assemblyName: "NewName");
+            return Verify(result);
+        }
+        catch (BadImageFormatException) when (AppContext.TargetFrameworkName!.StartsWith(".NETCoreApp"))
+        {
+            // The .NET Core DummyExeAssembly.exe file makes Mono.Cecil throw a BadImageFormatException ¯\_(ツ)_/¯
+            return Task.CompletedTask;
+        }
+    }
+
+    [Fact]
     public Task WeaverUsingSymbols()
     {
         var assemblyPath = Path.Combine(Environment.CurrentDirectory, "DummyAssembly.dll");
