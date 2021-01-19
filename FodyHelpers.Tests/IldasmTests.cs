@@ -42,7 +42,7 @@ public class IldasmTests
     {
         var assembly = typeof(Class1).Assembly;
 
-        var uri = new UriBuilder(assembly.CodeBase);
+        var uri = new UriBuilder(assembly.CodeBase!);
         return Uri.UnescapeDataString(uri.Path);
     }
 }
