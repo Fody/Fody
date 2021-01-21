@@ -37,7 +37,8 @@ namespace Fody
             }
             else
             {
-                targetFileName = assemblyName + ".dll";
+                var extension = Path.GetExtension(assemblyPath);
+                targetFileName = assemblyName + (string.IsNullOrEmpty(extension) ? ".dll" : extension);
             }
 
             var targetAssemblyPath = Path.Combine(fodyTempDir, targetFileName);

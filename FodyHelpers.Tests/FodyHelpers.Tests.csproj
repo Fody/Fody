@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;netcoreapp2.2</TargetFrameworks>
+    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
@@ -14,18 +14,19 @@
     <Reference Include="Microsoft.CSharp" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <ProjectReference Include="..\DummyAssembly\DummyAssembly.csproj" />
+    <ProjectReference Include="..\DummyExeAssembly\DummyExeAssembly.csproj" />
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
     <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" />
     <ProjectReference Include="..\SampleWeaver.Fody\SampleWeaver.Fody.csproj" />
     <PackageReference Include="Nullable" Version="1.3.0" PrivateAssets="All" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework) == 'net472'">
+  <ItemGroup Condition="$(TargetFrameworkIdentifier) == '.NETFramework'">
     <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\net40\Mono.Cecil.dll" />
     <Reference Include="Mono.Cecil.Pdb" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Pdb.dll" />
     <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Rocks.dll" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework) == 'netcoreapp2.2'">
+  <ItemGroup Condition="$(TargetFrameworkIdentifier) == '.NETCoreApp'">
     <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.dll" />
     <Reference Include="Mono.Cecil.Pdb" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.Pdb.dll" />
     <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.Rocks.dll" />
