@@ -1,23 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Mono.Cecil;
 
 public class AssemblyResolver : IAssemblyResolver
 {
     Dictionary<string, string> referenceDictionary;
     ILogger logger;
-    List<string> splitReferences;
     Dictionary<string, AssemblyDefinition> assemblyDefinitionCache = new Dictionary<string, AssemblyDefinition>(StringComparer.InvariantCultureIgnoreCase);
 
     public AssemblyResolver(ILogger logger, IEnumerable<string> splitReferences)
     {
         referenceDictionary = new Dictionary<string, string>();
         this.logger = logger;
-        this.splitReferences = splitReferences.ToList();
 
-        foreach (var filePath in this.splitReferences)
+        foreach (var filePath in splitReferences)
         {
             referenceDictionary[GetAssemblyName(filePath)] = filePath;
         }
