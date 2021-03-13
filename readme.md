@@ -87,7 +87,7 @@ Thanks to all the backers and sponsors! Support this project by [becoming a patr
     Building a new Fody addin.
   * [Addin packaging](https://github.com/Fody/Home/tree/master/pages/addin-packaging.md)<br>
     Packaging and deployment of Fody weavers.
-  * [BasicFodyAddin](/BasicFodyAddin)<br>
+  * [BasicFodyAddin](https://github.com/Fody/Home/tree/master/BasicFodyAddin)<br>
     A simple project meant to illustrate how to build an addin.
   * [Fody Project Configuration Manager](https://github.com/tom-englert/ProjectConfigurationManager/wiki/6.-Fody)<br>
     Provides an interactive tool that can support configuring weavers, which is especially helpful in solutions with many projects.
