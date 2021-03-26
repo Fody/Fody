@@ -87,6 +87,8 @@
     </Fody.UpdateReferenceCopyLocalTask>
 
     <ItemGroup>
+      <FodyRemovedReferenceCopyLocalPaths Include="@(ReferenceCopyLocalPaths)" />
+      <FodyRemovedReferenceCopyLocalPaths Remove="@(FodyUpdatedReferenceCopyLocalPaths)" />
       <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" />
       <ReferenceCopyLocalPaths Include="@(FodyUpdatedReferenceCopyLocalPaths)" />
     </ItemGroup>
