@@ -16,6 +16,8 @@
     <PackageTags>ILWeaving, Fody, Cecil, AOP</PackageTags>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Nullable>enable</Nullable>
+    <!-- work around https://github.com/dotnet/msbuild/issues/4303 -->
+    <AddSyntheticProjectReferencesForSolutionDependencies>false</AddSyntheticProjectReferencesForSolutionDependencies>
   </PropertyGroup>
 
   <Target Name="IncludeAllInPackage">
