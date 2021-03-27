@@ -30,12 +30,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWeaver", "SampleWeaver\SampleWeaver.csproj", "{C07F5786-84DD-460C-A846-50311562790D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2C10CBD1-5913-46D5-B705-0F3B46E68DD1} = {2C10CBD1-5913-46D5-B705-0F3B46E68DD1}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyHelpers.Tests", "FodyHelpers.Tests\FodyHelpers.Tests.csproj", "{68109B11-B125-47D2-A188-15D8793DEC6F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssemblyWithNoSymbols", "AssemblyWithNoSymbols\AssemblyWithNoSymbols.csproj", "{7E18A70B-31D6-4435-BD88-1415078B7D84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DummyExeAssembly", "DummyExeAssembly\DummyExeAssembly.csproj", "{BF644933-57CD-48A0-AC2B-FCF46459359B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DummyExeAssembly", "DummyExeAssembly\DummyExeAssembly.csproj", "{BF644933-57CD-48A0-AC2B-FCF46459359B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
