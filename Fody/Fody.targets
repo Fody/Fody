@@ -47,6 +47,7 @@
         SolutionDirectory="$(SolutionDir)"
         References="@(ReferencePath)"
         SignAssembly="$(SignAssembly)"
+        DelaySign="$(DelaySign)"
         ReferenceCopyLocalFiles="@(ReferenceCopyLocalPaths)"
         DefineConstants="$(DefineConstants)"
         DocumentationFile="@(DocFileItem->'%(FullPath)')"

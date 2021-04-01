@@ -27,13 +27,14 @@ public partial class InnerWeaver :
     public List<WeaverEntry> Weavers { get; set; } = null!;
     public string? KeyFilePath { get; set; }
     public bool SignAssembly { get; set; }
-    public ILogger Logger { get; set; }= null!;
+    public bool DelaySign { get; set; }
+    public ILogger Logger { get; set; } = null!;
     public string IntermediateDirectoryPath { get; set; } = null!;
     public List<string> ReferenceCopyLocalPaths { get; set; } = null!;
     public List<string> DefineConstants { get; set; } = null!;
-    #if (NETSTANDARD)
+#if (NETSTANDARD)
     public IsolatedAssemblyLoadContext LoadContext { get; set; } = null!;
-    #endif
+#endif
     bool cancelRequested;
     List<WeaverHolder> weaverInstances = new List<WeaverHolder>();
     Action? cancelDelegate;

@@ -7,6 +7,7 @@ public interface IInnerWeaver : IDisposable
     string References { get; set; }
     string? KeyFilePath { get; set; }
     bool SignAssembly { get; set; }
+    bool DelaySign { get; set; }
     List<WeaverEntry> Weavers { get; set; }
     ILogger Logger { get; set; }
     string IntermediateDirectoryPath { get; set; }

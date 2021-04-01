@@ -4,9 +4,9 @@ using System.Linq;
 using Fody;
 
 #if (NETSTANDARD)
-using StrongNameKeyPair=Mono.Cecil.StrongNameKeyPair;
+using StrongNameKeyPair = Mono.Cecil.StrongNameKeyPair;
 #else
-using StrongNameKeyPair=System.Reflection.StrongNameKeyPair;
+using StrongNameKeyPair = System.Reflection.StrongNameKeyPair;
 #endif
 
 public partial class InnerWeaver
@@ -29,22 +29,31 @@ public partial class InnerWeaver
             }
 
             var fileBytes = File.ReadAllBytes(keyFilePath);
-            StrongNameKeyPair = new StrongNameKeyPair(fileBytes);
 
-            try
+            if (!DelaySign)
             {
-                // Ensure that we can generate the public key from the key file. This requires the private key to
-                // work. If we cannot generate the public key, an ArgumentException will be thrown. In this case,
-                // the assembly is delay-signed with a public only keyfile.
-                PublicKey = StrongNameKeyPair.PublicKey;
+                try
+                {
+                    StrongNameKeyPair = new StrongNameKeyPair(fileBytes);
+                    // Ensure that we can generate the public key from the key file. This requires the private key to
+                    // work. If we cannot generate the public key, an ArgumentException will be thrown. In this case,
+                    // the assembly is delay-signed with a public only keyfile.
+                    // Note: The NETSTANDARD implementation of StrongNameKeyPair.PublicKey does never throw here.
+                    PublicKey = StrongNameKeyPair.PublicKey;
+                    return;
+
+                }
+                catch (ArgumentException)
+                {
+                }
             }
-            catch(ArgumentException)
-            {
-                // We know that we cannot sign the assembly with this keyfile. Let's assume that it is a public
-                // only keyfile and pass along all the bytes.
-                StrongNameKeyPair = null;
-                PublicKey = fileBytes;
-            }
+
+            // Fall back to delay signing, this was the original behavior, however that does not work in NETSTANDARD (s.a.)
+
+            // We know that we cannot sign the assembly with this keyfile. Let's assume that it is a public
+            // only keyfile and pass along all the bytes.
+            StrongNameKeyPair = null;
+            PublicKey = fileBytes;
         }
     }
 
@@ -63,7 +72,7 @@ public partial class InnerWeaver
             .FirstOrDefault(x => x.AttributeType.Name == "AssemblyKeyFileAttribute");
         if (assemblyKeyFileAttribute != null)
         {
-            var keyFileSuffix = (string) assemblyKeyFileAttribute.ConstructorArguments.First().Value;
+            var keyFileSuffix = (string)assemblyKeyFileAttribute.ConstructorArguments.First().Value;
             var keyFilePath = Path.Combine(IntermediateDirectoryPath, keyFileSuffix);
             Logger.LogDebug($"Using strong name key from [AssemblyKeyFileAttribute(\"{keyFileSuffix}\")] '{keyFilePath}'");
             return keyFilePath;
