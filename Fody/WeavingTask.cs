@@ -21,6 +21,7 @@ namespace Fody
         public string? AssemblyOriginatorKeyFile { get; set; }
 
         public bool SignAssembly { get; set; }
+        public bool DelaySign { get; set; }
 
         [Required]
         public string ProjectDirectory { get; set; } = null!;
@@ -71,6 +72,7 @@ namespace Fody
                 IntermediateDirectory = IntermediateDirectory,
                 KeyFilePath = KeyOriginatorFile ?? AssemblyOriginatorKeyFile,
                 SignAssembly = SignAssembly,
+                DelaySign = DelaySign,
                 ProjectDirectory = ProjectDirectory,
                 ProjectFilePath = ProjectFile,
                 DocumentationFilePath = DocumentationFile,

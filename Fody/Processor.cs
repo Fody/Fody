@@ -9,6 +9,7 @@ public partial class Processor
     public string IntermediateDirectory = null!;
     public string? KeyFilePath;
     public bool SignAssembly;
+    public bool DelaySign;
     public string ProjectDirectory = null!;
     public string ProjectFilePath = null!;
     public string? DocumentationFilePath;
@@ -134,6 +135,7 @@ public partial class Processor
             innerWeaver.KeyFilePath = KeyFilePath;
             innerWeaver.ReferenceCopyLocalPaths = ReferenceCopyLocalPaths;
             innerWeaver.SignAssembly = SignAssembly;
+            innerWeaver.DelaySign = DelaySign;
             innerWeaver.Logger = Logger;
             innerWeaver.SolutionDirectoryPath = SolutionDirectory;
             innerWeaver.Weavers = Weavers;
