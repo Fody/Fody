@@ -5,7 +5,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.9.0" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.10.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageReference Include="Verify.Xunit" Version="11.17.0" />
