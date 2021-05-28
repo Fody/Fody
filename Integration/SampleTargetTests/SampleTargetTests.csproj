@@ -4,7 +4,7 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" PrivateAssets="all" />
     <PackageReference Include="Fody" Version="$(IntegrationVersion)" />
@@ -13,7 +13,7 @@
 
   <!-- Do NOT update these versions, it's for backward compatibility testing!!! -->
   <ItemGroup>
-    <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.10.0" />
-    <PackageReference Include="NullGuard.Fody" Version="1.8.5" />
+    <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.17.0" />
+    <PackageReference Include="NullGuard.Fody" Version="3.0.0" />
   </ItemGroup>
 </Project>
