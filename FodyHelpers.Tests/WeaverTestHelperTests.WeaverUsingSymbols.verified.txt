@@ -1,7 +1,7 @@
 {
   Messages: [
     {
-      Text: 	Removing reference to 'FodyHelpers.Tests'.,
+      Text: Removing reference to 'FodyHelpers.Tests'.,
       MessageImportance: Low
     }
   ],

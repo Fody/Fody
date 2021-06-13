@@ -100,7 +100,7 @@ public partial class InnerWeaver :
             var weavingInfoClassName = GetWeavingInfoClassName();
             if (ModuleDefinition.Types.Any(x => x.Name == weavingInfoClassName))
             {
-                Logger.LogWarning($"The assembly has already been processed by Fody. Weaving aborted. Path: {AssemblyFilePath} ");
+                Logger.LogWarning($"The assembly has already been processed by Fody. Weaving aborted. Path: {AssemblyFilePath}");
                 return;
             }
             TypeCache = new TypeCache(assemblyResolver.Resolve);
@@ -195,8 +195,8 @@ public partial class InnerWeaver :
 
                 Logger.SetCurrentWeaverName(weaver.Config.ElementName);
                 var startNew = Stopwatch.StartNew();
-                Logger.LogInfo("  Executing Weaver ");
-                Logger.LogDebug($"  Configuration source: {weaver.Config.ConfigurationSource}");
+                Logger.LogInfo("Executing weaver");
+                Logger.LogDebug($"Configuration source: {weaver.Config.ConfigurationSource}");
                 try
                 {
                     weaver.Instance.Execute();
@@ -220,8 +220,7 @@ The recommended work around is to avoid using ValueTuple inside a weaver.", exce
                     throw new Exception($"Failed to execute weaver {weaver.Config.AssemblyPath}", exception);
                 }
 
-                var finishedMessage = $"  Finished '{weaver.Config.ElementName}' in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
-                Logger.LogDebug(finishedMessage);
+                Logger.LogDebug($"Finished '{weaver.Config.ElementName}' in {startNew.ElapsedMilliseconds}ms");
 
                 ReferenceCleaner.CleanReferences(ModuleDefinition, weaver.Instance, Logger.LogDebug);
             }
@@ -240,7 +239,7 @@ The recommended work around is to avoid using ValueTuple inside a weaver.", exce
             return;
         }
 
-        Logger.LogDebug("  Adding weaving info");
+        Logger.LogDebug("Adding weaving info");
         var startNew = Stopwatch.StartNew();
 
         const TypeAttributes typeAttributes = TypeAttributes.NotPublic | TypeAttributes.Class;
@@ -256,8 +255,7 @@ The recommended work around is to avoid using ValueTuple inside a weaver.", exce
             AddVersionField(configAssembly, name, typeDefinition);
         }
 
-        var finishedMessage = $"  Finished in {startNew.ElapsedMilliseconds}ms {Environment.NewLine}";
-        Logger.LogDebug(finishedMessage);
+        Logger.LogDebug($"Finished in {startNew.ElapsedMilliseconds}ms");
     }
 
     string GetWeavingInfoClassName()
@@ -301,10 +299,9 @@ The recommended work around is to avoid using ValueTuple inside a weaver.", exce
             {
                 Logger.SetCurrentWeaverName(weaver.Config.ElementName);
                 var stopwatch = Stopwatch.StartNew();
-                Logger.LogDebug("  Executing After Weaver");
+                Logger.LogDebug("Executing After Weaver");
                 weaver.Instance.AfterWeaving();
-                var finishedMessage = $"  Finished '{weaver.Config.ElementName}' in {stopwatch.ElapsedMilliseconds}ms {Environment.NewLine}";
-                Logger.LogDebug(finishedMessage);
+                Logger.LogDebug($"Finished '{weaver.Config.ElementName}' in {stopwatch.ElapsedMilliseconds}ms");
             }
             finally
             {

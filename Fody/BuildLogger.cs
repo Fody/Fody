@@ -59,7 +59,7 @@ public class BuildLogger :
 
     string GetIndent()
     {
-        return currentWeaverName == null ? "  " : "    ";
+        return currentWeaverName == null ? "" : "  ";
     }
 
     string PrependMessage(string message)
