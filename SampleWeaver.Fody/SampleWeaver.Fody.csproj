@@ -1,17 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <Import Project="..\FodyHelpers\build\FodyHelpers.props" />
 
   <ItemGroup>
+    <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Nullable" Version="1.3.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.dll" />
     <Reference Include="Mono.Cecil.Pdb" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.Pdb.dll" />
     <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.Rocks.dll" />
-    <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
   </ItemGroup>
 
   <Target Name="CopyForIntegration" AfterTargets="AfterBuild">

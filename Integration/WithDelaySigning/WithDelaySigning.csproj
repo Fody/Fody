@@ -5,8 +5,12 @@
     <DelaySign>true</DelaySign>
     <AssemblyOriginatorKeyFile>public.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Fody" Version="$(IntegrationVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
     <WeaverFiles Include="$(SolutionDir)Weavers\bin\$(Configuration)\netstandard2.0\Weavers.dll" />
   </ItemGroup>
 </Project>

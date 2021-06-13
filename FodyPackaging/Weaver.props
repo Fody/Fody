@@ -1,4 +1,4 @@
-﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project>
   <ItemGroup>
     <WeaverFiles Include="$(MsBuildThisFileDirectory)..\weaver\$(MSBuildThisFileName).dll" />
   </ItemGroup>

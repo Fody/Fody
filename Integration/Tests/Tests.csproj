@@ -1,8 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>net472;netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WithEmbeddedPdb\WithEmbeddedPdb.csproj" />
+    <ProjectReference Include="..\WithNoPdb\WithNoPdb.csproj" />
+    <ProjectReference Include="..\WithNugetAndInSolutionWeavers\WithNugetAndInSolutionWeavers.csproj" />
+    <ProjectReference Include="..\WithNugetWeavers\WithNugetWeavers.csproj" />
+    <ProjectReference Include="..\WithOnlyInSolutionWeaver\WithOnlyInSolutionWeaver.csproj" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="System.Reflection.Metadata" Version="5.0.0" />
     <PackageReference Include="Xunit" Version="2.4.1" />
@@ -10,10 +18,5 @@
     <PackageReference Include="Verify.Xunit" Version="11.18.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" PrivateAssets="all" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
-    <ProjectReference Include="..\WithEmbeddedPdb\WithEmbeddedPdb.csproj" />
-    <ProjectReference Include="..\WithNoPdb\WithNoPdb.csproj" />
-    <ProjectReference Include="..\WithNugetAndInSolutionWeavers\WithNugetAndInSolutionWeavers.csproj" />
-    <ProjectReference Include="..\WithNugetWeavers\WithNugetWeavers.csproj" />
-    <ProjectReference Include="..\WithOnlyInSolutionWeaver\WithOnlyInSolutionWeaver.csproj" />
   </ItemGroup>
 </Project>
