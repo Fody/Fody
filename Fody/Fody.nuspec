@@ -13,8 +13,8 @@
     <copyright>$copyright$</copyright>
     <tags>$tags$</tags>
   </metadata>
-  <files>
 
+  <files>
     <file src=".\bin\$configuration$\net472\Fody.dll" target="netclassictask" />
     <file src="..\FodyHelpers\bin\$configuration$\netstandard2.0\FodyHelpers.dll" target="netclassictask" />
     <file src="..\FodyCommon\bin\$configuration$\net472\FodyCommon.dll" target="netclassictask" />

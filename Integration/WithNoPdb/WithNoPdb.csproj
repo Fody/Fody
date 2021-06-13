@@ -4,6 +4,7 @@
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Fody" Version="$(IntegrationVersion)" />
     <PackageReference Include="SampleWeaver.Fody" Version="$(IntegrationVersion)" />

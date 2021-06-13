@@ -2,13 +2,16 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Fody" Version="$(IntegrationVersion)" />
     <PackageReference Include="SampleWeaver.Fody" Version="$(IntegrationVersion)" />
     <PackageReference Include="Virtuosity.Fody" Version="1.21.3" />
   </ItemGroup>
+
   <Target Name="VerifyThereAreNoWeaversInOutput" AfterTargets="AfterBuild">
     <Error Condition="Exists('$(OutDir)Virtuosity.dll')"
            Text="Virtuosity.dll found in build output" />
   </Target>
+
 </Project>

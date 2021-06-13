@@ -2,9 +2,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Fody" Version="$(IntegrationVersion)" />
     <PackageReference Include="Virtuosity.Fody" Version="1.21.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <WeaverFiles Include="$(SolutionDir)Weavers\bin\$(Configuration)\netstandard2.0\Weavers.dll" WeaverClassNames="NamedWeaver;NamedWeaverFromBase;ModuleWeaver" />
   </ItemGroup>
 </Project>

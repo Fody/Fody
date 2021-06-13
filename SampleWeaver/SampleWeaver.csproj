@@ -3,9 +3,12 @@
     <!-- This is just to test FodyPackaging, use local output path -->
     <PackageOutputPath>$(ProjectDir)bin</PackageOutputPath>
   </PropertyGroup>
+
   <Import Project="..\FodyPackaging\build\FodyPackaging.props" />
+
   <PropertyGroup>
     <TargetFrameworks>netstandard1.0;netstandard2.0;net472</TargetFrameworks>
   </PropertyGroup>
+
   <Import Project="..\FodyPackaging\build\FodyPackaging.targets" />
 </Project>
