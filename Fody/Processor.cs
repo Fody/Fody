@@ -58,7 +58,7 @@ public partial class Processor
         finally
         {
             stopwatch.Stop();
-            Logger.LogInfo($"  Finished Fody {stopwatch.ElapsedMilliseconds}ms.");
+            Logger.LogInfo($"Finished Fody {stopwatch.ElapsedMilliseconds}ms.");
         }
     }
 
