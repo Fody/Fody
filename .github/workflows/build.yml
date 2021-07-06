@@ -1,0 +1,43 @@
+
+name: Build
+on: [push, pull_request]
+
+env:
+  DOTNET_NOLOGO: 1
+
+jobs:
+  windows:
+    name: Windows
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.x
+
+      - name: Restore Fody
+        run: dotnet restore Fody.sln
+
+      - name: Build Fody
+        run: dotnet build --configuration Release --no-restore Fody.sln
+
+      - name: Test Fody
+        run: dotnet test --configuration Release --no-build Fody.sln
+
+      - name: Restore Integration
+        run: dotnet restore Integration/Integration.sln
+
+      - name: Build Integration
+        run: dotnet build --configuration Release --no-restore Integration/Integration.sln
+
+      - name: Test Integration
+        run: dotnet test --configuration Release --no-build Integration/Integration.sln
+
+      - name: Upload NuGet
+        uses: actions/upload-artifact@v2
+        with:
+          name: NuGet
+          path: nugets/*.nupkg
