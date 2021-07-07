@@ -46,7 +46,7 @@ namespace SampleTarget
         {
             var type = Type.GetType("SampleWeaverTest.Configuration");
             var content = (string)type.GetField("Content").GetValue(null);
-            const string expectedContent = "<SampleWeaver MyProperty=\"PropertyValue\">\r\n  <Content>Test</Content>\r\n</SampleWeaver>";
+            var expectedContent = "<SampleWeaver MyProperty=\"PropertyValue\">\r\n  <Content>Test</Content>\r\n</SampleWeaver>".Replace("\r\n", Environment.NewLine);
 
             Assert.Equal(expectedContent, content);
 
