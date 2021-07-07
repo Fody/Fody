@@ -24,13 +24,13 @@ jobs:
     displayName: 'Build Integration'
     inputs:
       command: 'build'
-      projects: 'Integration\Integration.sln'
+      projects: 'Integration/Integration.sln'
       arguments: $(buildArgs)
   - task: DotNetCoreCLI@2
     displayName: 'Test Integration'
     inputs:
       command: 'test'
-      projects: 'Integration\Integration.sln'
+      projects: 'Integration/Integration.sln'
       arguments: $(testArgs)
 
 
