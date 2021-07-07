@@ -30,6 +30,6 @@ jobs:
     inputs:
       command: 'test'
       projects: 'Integration\Integration.sln'
-      arguments: $(buildArgs)
+      arguments: $(testArgs)
 
 

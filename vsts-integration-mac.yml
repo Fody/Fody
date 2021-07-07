@@ -5,6 +5,7 @@ jobs:
 - job: 'DotnetBuild'
   variables:
     buildArgs: '-property:configuration=release'
+    testArgs: '$(buildArgs) -f netcoreapp3.1'
   steps:
   - task: DotNetCoreCLI@2
     displayName: 'Build Fody'
@@ -17,7 +18,7 @@ jobs:
     inputs:
       command: 'test'
       projects: 'Fody.sln'
-      arguments: $(buildArgs)
+      arguments: $(testArgs)
   - task: DotNetCoreCLI@2
     displayName: 'Build Integration'
     inputs:
@@ -29,6 +30,6 @@ jobs:
     inputs:
       command: 'test'
       projects: 'Integration\Integration.sln'
-      arguments: $(buildArgs)
+      arguments: $(testArgs)
 
 
