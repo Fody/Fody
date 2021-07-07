@@ -41,3 +41,39 @@ jobs:
         with:
           name: NuGet
           path: nugets/*.nupkg
+
+  linux:
+    name: Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup .NET 3.1
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.x
+
+      - name: Setup .NET 5
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+
+      - name: Restore Fody
+        run: dotnet restore Fody.sln
+
+      - name: Build Fody
+        run: dotnet build --configuration Release --no-restore Fody.sln
+
+# TODO Uncomment this when tests pass on Linux
+#      - name: Test Fody
+#        run: dotnet test --configuration Release --framework netcoreapp3.1 --no-build Fody.sln
+
+      - name: Restore Integration
+        run: dotnet restore Integration/Integration.sln
+
+      - name: Build Integration
+        run: dotnet build --configuration Release --no-restore Integration/Integration.sln
+
+      - name: Test Integration
+        run: dotnet test --configuration Release --framework netcoreapp3.1 --no-build Integration/Integration.sln
