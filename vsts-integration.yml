@@ -76,7 +76,7 @@ jobs:
       arguments: $(buildArgs)
 
 
-- job: 'DotnetBuild-Mac'
+- job: 'DotnetBuild_Mac'
   pool:
     vmImage: 'macOS-latest'
   steps:
@@ -107,7 +107,7 @@ jobs:
       arguments: $(testArgs)
 
 
-- job: 'DotnetBuild-Linux'
+- job: 'DotnetBuild_Linux'
   pool:
     vmImage: 'ubuntu-latest'
   steps:
