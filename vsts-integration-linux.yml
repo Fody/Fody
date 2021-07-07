@@ -15,6 +15,7 @@ jobs:
       arguments: $(buildArgs)
   - task: DotNetCoreCLI@2
     displayName: 'Test Fody'
+    enabled: false
     inputs:
       command: 'test'
       projects: 'Fody.sln'
