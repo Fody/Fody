@@ -77,3 +77,28 @@ jobs:
 
       - name: Test Integration
         run: dotnet test --configuration Release --framework netcoreapp3.1 --no-build Integration/Integration.sln
+
+  windows-vs:
+    name: Windows VS
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
+
+      - name: Setup VSTest
+        uses: darenm/Setup-VSTest@v1
+
+      - name: Build Fody
+        run: msbuild -restore Fody.sln /p:Configuration=Release /verbosity:minimal
+
+      - name: Test Fody
+        run: vstest.console Tests/bin/Release/net472/Tests.dll
+
+      - name: Build Integration
+        run: msbuild -restore Integration/Integration.sln /p:Configuration=Release /verbosity:minimal
+
+      - name: Test Integration
+        run: vstest.console Integration/Tests/bin/Release/net472/Tests.dll
