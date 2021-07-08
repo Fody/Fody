@@ -1,0 +1,13 @@
+image: Visual Studio 2019
+skip_commits:
+  message: /docs|Merge pull request.*/
+build_script:
+- cmd: |
+    msbuild -restore Fody.sln /p:Configuration=Release /verbosity:minimal
+    msbuild -restore Integration\Integration.sln /p:Configuration=Release /verbosity:minimal
+    msbuild Integration\Tests\Tests.csproj /target:Restore
+test:
+  assemblies:
+    - '**\*Tests.dll'
+artifacts:
+- path: nugets\*.nupkg
