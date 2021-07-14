@@ -12,7 +12,6 @@ jobs:
      (new-object Net.WebClient).DownloadString("https://raw.github.com/tom-englert/BuildScripts/master/BuildScripts.ps1") | iex
      Project-SetVersion "Directory.Build.props"  | Build-AppendVersionToBuildNumber
     displayName: 'Patch version'
-
   - task: MSBuild@1
     displayName: 'Build Solution'
     inputs:
@@ -21,7 +20,6 @@ jobs:
       configuration: 'release'
       msbuildArguments: '-restore'
       clean: true
-
   - task: VSTest@2
     displayName: 'VsTest - testAssemblies'
     inputs:
@@ -30,7 +28,6 @@ jobs:
        !**\obj\**
       platform: 'any cpu'
       configuration: 'release'
-
   - task: CopyFiles@2
     displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
     inputs:
@@ -38,7 +35,6 @@ jobs:
       Contents: 'nugets\*.nupkg'
       TargetFolder: '$(build.artifactstagingdirectory)'
       flattenFolders: true
-
   - task: PublishBuildArtifacts@1
     displayName: 'Publish Artifact: nuget'
     inputs:
@@ -136,3 +132,33 @@ jobs:
       command: 'test'
       projects: 'Integration/Integration.sln'
       arguments: $(testArgs)
+
+- job: 'Integration_VS2017'
+  dependsOn: 'MSBuild'
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+  - task: DownloadBuildArtifacts@0
+    inputs:
+      buildType: 'current'
+      downloadType: 'single'
+      artifactName: 'Nuget'
+      downloadPath: './PackageIntegrationTest'
+  - task: VSBuild@1
+    displayName: 'Build solution'
+    inputs:
+      solution: 'PackageIntegrationTest/PackageIntegrationTest.sln'
+      vsVersion: '15.0'
+      msbuildArgs: '-restore'
+      platform: 'any cpu'
+      configuration: 'release'
+  - task: VSTest@2
+    displayName: 'Test solution'
+    inputs:
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: |
+        **\*test*.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
+      searchFolder: '$(System.DefaultWorkingDirectory)/PackageIntegrationTest'
+      vsTestVersion: '15.0'
