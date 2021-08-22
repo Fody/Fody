@@ -16,7 +16,7 @@
   <ItemGroup>
     <PackageReference Include="Nullable" Version="1.3.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" Condition="$(Configuration) == 'Release'" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.10.0" Condition="$(TargetFramework) == 'netstandard2.0'" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="16.11.0" Condition="$(TargetFramework) == 'netstandard2.0'" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework) == 'net472'">
