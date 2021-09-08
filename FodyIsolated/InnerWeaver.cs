@@ -195,7 +195,8 @@ public partial class InnerWeaver :
 
                 Logger.SetCurrentWeaverName(weaver.Config.ElementName);
                 var startNew = Stopwatch.StartNew();
-                Logger.LogInfo("Executing weaver");
+                var assembly = weaver.Instance.GetType().Assembly;
+                Logger.LogInfo($"Executing weaver {weaver.Config.ElementName} v{assembly.GetVersion()}");
                 Logger.LogDebug($"Configuration source: {weaver.Config.ConfigurationSource}");
                 try
                 {
