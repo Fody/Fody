@@ -19,7 +19,7 @@
     <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.Rocks.dll" />
   </ItemGroup>
 
-  <Target Name="CopyForIntegration" AfterTargets="AfterBuild">
+  <Target Name="CopyForIntegration" AfterTargets="PostBuildEvent">
     <Copy SourceFiles="$(TargetPath)" DestinationFiles="..\Tests\Fody\Packages\SampleWeaver.Fody.1.0.0.0\SampleWeaver.Fody.dll" />
   </Target>
 
