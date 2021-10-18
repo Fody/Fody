@@ -1,44 +1,44 @@
-{
+﻿{
   Config: {
     foo: null
   },
   LogDebug: {
-    Type: Action<String>,
+    Type: Action<string>,
     Target: InnerWeaver,
     Method: Void SetProperties(System.String)
   },
   LogInfo: {
-    Type: Action<String>,
+    Type: Action<string>,
     Target: InnerWeaver,
     Method: Void SetProperties(System.String)
   },
   LogMessage: {
-    Type: Action<String, MessageImportance>,
+    Type: Action<string, MessageImportance>,
     Target: InnerWeaver,
     Method: Void SetProperties(System.String, Fody.MessageImportance)
   },
   LogWarning: {
-    Type: Action<String>,
+    Type: Action<string>,
     Target: InnerWeaver,
     Method: Void SetProperties(System.String)
   },
   LogWarningPoint: {
-    Type: Action<String, SequencePoint>,
+    Type: Action<string, SequencePoint>,
     Target: InnerWeaver,
     Method: Void LogWarningPoint(System.String, Mono.Cecil.Cil.SequencePoint)
   },
   LogError: {
-    Type: Action<String>,
+    Type: Action<string>,
     Target: MockBuildLogger,
     Method: Void LogError(System.String)
   },
   LogErrorPoint: {
-    Type: Action<String, SequencePoint>,
+    Type: Action<string, SequencePoint>,
     Target: InnerWeaver,
     Method: Void LogErrorPoint(System.String, Mono.Cecil.Cil.SequencePoint)
   },
   ResolveAssembly: {
-    Type: Func<String, AssemblyDefinition>,
+    Type: Func<string, AssemblyDefinition>,
     Target: InnerWeaver,
     Method: Mono.Cecil.AssemblyDefinition SetProperties(System.String)
   },
@@ -58,7 +58,7 @@
     Release
   ],
   FindType: {
-    Type: Func<String, TypeDefinition>,
+    Type: Func<string, TypeDefinition>,
     Target: TypeCache,
     Method: Mono.Cecil.TypeDefinition FindType(System.String)
   },
