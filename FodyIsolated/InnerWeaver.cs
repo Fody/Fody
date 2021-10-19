@@ -100,7 +100,7 @@ public partial class InnerWeaver :
             var weavingInfoClassName = GetWeavingInfoClassName();
             if (ModuleDefinition.Types.Any(x => x.Name == weavingInfoClassName))
             {
-                Logger.LogWarning($"The assembly has already been processed by Fody. Weaving aborted. Path: {AssemblyFilePath}");
+                Logger.LogDebug($"The assembly has already been processed by Fody. Weaving aborted. Path: {AssemblyFilePath}");
                 return;
             }
             TypeCache = new TypeCache(assemblyResolver.Resolve);
