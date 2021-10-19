@@ -29,7 +29,7 @@
   <Target
       Name="FodyTarget"
       AfterTargets="AfterCompile"
-      Condition="Exists(@(IntermediateAssembly)) And $(DesignTimeBuild) != true And $(DisableFody) != true"
+      Condition="Exists(@(IntermediateAssembly)) And ($(DesignTimeBuild) != true Or $(BuildingForLiveUnitTesting) == true) And $(DisableFody) != true"
       DependsOnTargets="$(FodyDependsOnTargets)"
       Inputs="@(IntermediateAssembly);$(ProjectWeaverXml)"
       Outputs="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache">
