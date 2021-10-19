@@ -31,7 +31,7 @@ namespace Fody
             Guard.AgainstNull(nameof(ignoreCodes), ignoreCodes);
             if (!FoundPeVerify)
             {
-                throw new Exception("Could not find find peverify.exe in.");
+                throw new Exception("Could not find peverify.exe.");
             }
 
             if (ignoreCodes == null)

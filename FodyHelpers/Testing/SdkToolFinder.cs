@@ -22,8 +22,6 @@ static class SdkToolFinder
 
     public static bool TryFindTool(string tool, [NotNullWhen(true)] out string? path)
     {
-        var programFilesPath = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-        windowsSdkDirectory = Path.Combine(programFilesPath, @"Microsoft SDKs\Windows");
         if (!foundToolsDirectory)
         {
             path = null;
