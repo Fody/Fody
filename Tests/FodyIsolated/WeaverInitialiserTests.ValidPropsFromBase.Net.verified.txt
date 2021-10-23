@@ -42,6 +42,7 @@
     Target: InnerWeaver,
     Method: Mono.Cecil.AssemblyDefinition SetProperties(System.String)
   },
+  AssemblyResolver: {},
   AssemblyFilePath: AssemblyFilePath,
   ProjectDirectoryPath: ProjectDirectoryPath,
   ProjectFilePath: ProjectFilePath,

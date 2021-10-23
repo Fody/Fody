@@ -33,6 +33,7 @@ public partial class InnerWeaver
         weaverInstance.FindType = TypeCache.FindType;
         weaverInstance.TryFindType = TypeCache.TryFindType;
         weaverInstance.ResolveAssembly = assemblyName => assemblyResolver.Resolve(assemblyName);
+        weaverInstance.AssemblyResolver = assemblyResolver;
     }
 
     void LogWarningPoint(string message, SequencePoint? point)

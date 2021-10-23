@@ -142,11 +142,16 @@ namespace Fody
         /// </summary>
         [Obsolete("Use WriteError", false)]
         public Action<string, SequencePoint?> LogErrorPoint { get; set; } = (m, p) => { };
-
+        
         /// <summary>
         /// Handler for resolving <see cref="AssemblyDefinition"/>s.
         /// </summary>
         public Func<string, AssemblyDefinition?> ResolveAssembly { get; set; } = null!;
+
+        /// <summary>
+        /// The current <see cref="IAssemblyResolver"/>s.
+        /// </summary>
+        public IAssemblyResolver AssemblyResolver { get; set; } = null!;
 
         /// <summary>
         /// An instance of <see cref="Mono.Cecil.ModuleDefinition"/> for processing.
