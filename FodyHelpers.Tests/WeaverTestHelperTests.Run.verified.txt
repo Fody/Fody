@@ -5,6 +5,6 @@
       MessageImportance: Low
     }
   ],
-  AssemblyPath: {CurrentDirectory}\fodytemp\DummyAssembly.dll,
+  AssemblyPath: {CurrentDirectory}fodytemp\DummyAssembly.dll,
   FullName: DummyAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=1ca091877d12ca03
 }
