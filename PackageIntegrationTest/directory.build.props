@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <Target Name="BypassFodyVSVersionCheck" BeforeTargets="FodyTarget">
+    <PropertyGroup>
+      <MsBuildMajorVersion>16</MsBuildMajorVersion>
+    </PropertyGroup>
+  </Target>
+</Project>

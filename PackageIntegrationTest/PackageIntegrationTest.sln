@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApplication", "SampleApplication\SampleApplication.csproj", "{6D40DD0A-792C-45D3-B0B5-8E1887A00C91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{D4711722-E256-4AE0-BA9F-2E3BFD9DE7A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{49AB41C8-4837-45C3-98FB-B7D5F35AD30E}"
+	ProjectSection(SolutionItems) = preProject
+		directory.build.props = directory.build.props
+		nuget.config = nuget.config
+		vsts2017.yml = vsts2017.yml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6D40DD0A-792C-45D3-B0B5-8E1887A00C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D40DD0A-792C-45D3-B0B5-8E1887A00C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D40DD0A-792C-45D3-B0B5-8E1887A00C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D40DD0A-792C-45D3-B0B5-8E1887A00C91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4711722-E256-4AE0-BA9F-2E3BFD9DE7A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4711722-E256-4AE0-BA9F-2E3BFD9DE7A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4711722-E256-4AE0-BA9F-2E3BFD9DE7A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4711722-E256-4AE0-BA9F-2E3BFD9DE7A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {14CDA413-B71C-4B99-A8F4-D827289D7A00}
+	EndGlobalSection
+EndGlobal
