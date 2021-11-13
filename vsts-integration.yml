@@ -2,6 +2,12 @@ variables:
   buildArgs: '-c Release'
   testArgs: '$(buildArgs) -f netcoreapp3.1 --no-build'
 
+resources:
+  repositories:
+    - repository: FodyIntegrationTest
+      type: github
+      endpoint: tom-englert
+      name: tom-englert/FodyIntegrationTest
 
 jobs:
 - job: 'Master'
@@ -103,16 +109,17 @@ jobs:
   pool:
     vmImage: $(image)
   steps:
+  - checkout: FodyIntegrationTest
   - task: DownloadBuildArtifacts@0
     inputs:
       buildType: 'current'
       downloadType: 'single'
       artifactName: 'Nuget'
-      downloadPath: './PackageIntegrationTest'
+      downloadPath: '.'
   - task: VSBuild@1
     displayName: 'Build solution'
     inputs:
-      solution: 'PackageIntegrationTest/PackageIntegrationTest.sln'
+      solution: 'FodyIntegrationTest.sln'
       vsVersion: $(vsVersion)
       msbuildArgs: '-restore'
       platform: 'any cpu'
@@ -121,5 +128,5 @@ jobs:
     displayName: 'Test'
     inputs:
       command: 'test'
-      projects: 'PackageIntegrationTest\Test\Test.csproj'
+      projects: 'Test\Test.csproj'
       arguments: --no-build -c Release
