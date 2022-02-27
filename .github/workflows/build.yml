@@ -13,15 +13,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup .NET 3.1
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 3.1.x
-
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: |
+            3.1.x
+            6.0.x
 
       - name: Restore Fody
         run: dotnet restore Fody.sln
@@ -54,15 +51,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup .NET 3.1
+      - name: Setup .NET
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.x
-
-      - name: Setup .NET 5
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 5.0.x
+          dotnet-version: |
+            3.1.x
+            6.0.x
 
       - name: Restore Fody
         run: dotnet restore Fody.sln
