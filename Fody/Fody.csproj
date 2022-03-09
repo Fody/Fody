@@ -13,7 +13,7 @@
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" PrivateAssets="All" />
     <PackageReference Include="Nullable" Version="1.3.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" Condition="$(Configuration) == 'Release'" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.1.0" PrivateAssets="All" />
     <Compile Include="..\FodyHelpers\Guard.cs" Link="Guard.cs" />
     <Compile Include="..\FodyHelpers\MessageImportance.cs" Link="MessageImportance.cs" />
     <Compile Include="..\FodyHelpers\MessageImportanceDefaults.cs" Link="MessageImportanceDefaults.cs" />
