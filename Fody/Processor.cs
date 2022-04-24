@@ -19,6 +19,7 @@ public partial class Processor
     public string? WeaverConfiguration;
 
     public List<string> ReferenceCopyLocalPaths = null!;
+    public List<string> RuntimeCopyLocalPaths = null!;
     public List<string> DefineConstants = null!;
 
     public List<WeaverConfigFile> ConfigFiles = null!;
@@ -134,6 +135,7 @@ public partial class Processor
             innerWeaver.References = References;
             innerWeaver.KeyFilePath = KeyFilePath;
             innerWeaver.ReferenceCopyLocalPaths = ReferenceCopyLocalPaths;
+            innerWeaver.RuntimeCopyLocalPaths = RuntimeCopyLocalPaths;
             innerWeaver.SignAssembly = SignAssembly;
             innerWeaver.DelaySign = DelaySign;
             innerWeaver.Logger = Logger;
@@ -148,6 +150,7 @@ public partial class Processor
             innerWeaver.Execute();
 
             ReferenceCopyLocalPaths = innerWeaver.ReferenceCopyLocalPaths;
+            RuntimeCopyLocalPaths = innerWeaver.RuntimeCopyLocalPaths;
         }
         innerWeaver = null;
     }

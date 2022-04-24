@@ -7,20 +7,20 @@ using Microsoft.Build.Utilities;
 
 namespace Fody
 {
-    public class UpdateReferenceCopyLocalTask : Task
+    public class UpdateCopyLocalTask : Task
     {
         [Required]
-        public ITaskItem[] ReferenceCopyLocalFiles { get; set; } = null!;
+        public ITaskItem[] CopyLocalFiles { get; set; } = null!;
 
         [Output]
-        public ITaskItem[] UpdatedReferenceCopyLocalFiles { get; set; } = null!;
+        public ITaskItem[] UpdatedCopyLocalFiles { get; set; } = null!;
 
         [Required]
         public string IntermediateCopyLocalFilesCache { get; set; } = null!;
 
         public override bool Execute()
         {
-            UpdatedReferenceCopyLocalFiles = ReferenceCopyLocalFiles;
+            UpdatedCopyLocalFiles = CopyLocalFiles;
 
             InnerExecute();
 
@@ -35,16 +35,16 @@ namespace Fody
             }
 
             var updatedReferenceCopyLocalPaths = new HashSet<string>(File.ReadAllLines(IntermediateCopyLocalFilesCache), StringComparer.OrdinalIgnoreCase);
-            var referenceCopyLocalPaths = new HashSet<string>(ReferenceCopyLocalFiles.Select(x => x.ItemSpec), StringComparer.OrdinalIgnoreCase);
+            var referenceCopyLocalPaths = new HashSet<string>(CopyLocalFiles.Select(x => x.ItemSpec), StringComparer.OrdinalIgnoreCase);
 
-            var existingReferenceCopyLocalFiles = ReferenceCopyLocalFiles
+            var existingReferenceCopyLocalFiles = CopyLocalFiles
                 .Where(item => updatedReferenceCopyLocalPaths.Contains(item.ItemSpec));
 
             var newReferenceCopyLocalFiles = updatedReferenceCopyLocalPaths
                 .Where(item => !referenceCopyLocalPaths.Contains(item))
                 .Select(item => new TaskItem(item));
 
-            UpdatedReferenceCopyLocalFiles = existingReferenceCopyLocalFiles.Concat(newReferenceCopyLocalFiles).ToArray();
+            UpdatedCopyLocalFiles = existingReferenceCopyLocalFiles.Concat(newReferenceCopyLocalFiles).ToArray();
         }
     }
 }

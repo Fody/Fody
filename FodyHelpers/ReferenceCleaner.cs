@@ -7,7 +7,7 @@ using Mono.Cecil;
 
 static class ReferenceCleaner
 {
-    public static void CleanReferences(ModuleDefinition module, BaseModuleWeaver weaver, Action<string> log)
+    public static void CleanReferences(ModuleDefinition module, BaseModuleWeaver weaver, List<string> referenceCopyLocalPaths, List<string> runtimeCopyLocalPaths, Action<string> log)
     {
         if (!weaver.ShouldCleanReference)
         {
@@ -30,6 +30,7 @@ static class ReferenceCleaner
             weaverLibName + ".pdb"
         };
 
-        weaver.ReferenceCopyLocalPaths.RemoveAll(refPath => copyLocalFilesToRemove.Contains(Path.GetFileName(refPath)));
+        referenceCopyLocalPaths.RemoveAll(refPath => copyLocalFilesToRemove.Contains(Path.GetFileName(refPath)));
+        runtimeCopyLocalPaths.RemoveAll(refPath => copyLocalFilesToRemove.Contains(Path.GetFileName(refPath)));
     }
 }
