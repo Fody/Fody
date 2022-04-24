@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Xml.Linq;
 using Fody;
@@ -34,6 +35,15 @@ public partial class InnerWeaver
         weaverInstance.TryFindType = TypeCache.TryFindType;
         weaverInstance.ResolveAssembly = assemblyName => assemblyResolver.Resolve(assemblyName);
         weaverInstance.AssemblyResolver = assemblyResolver;
+
+        try
+        {
+            weaverInstance.RuntimeCopyLocalPaths = RuntimeCopyLocalPaths;
+        }
+        catch (MissingMemberException)
+        {
+            // Older weavers don't have this property...
+        }
     }
 
     void LogWarningPoint(string message, SequencePoint? point)

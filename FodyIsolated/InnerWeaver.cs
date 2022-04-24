@@ -31,6 +31,7 @@ public partial class InnerWeaver :
     public ILogger Logger { get; set; } = null!;
     public string IntermediateDirectoryPath { get; set; } = null!;
     public List<string> ReferenceCopyLocalPaths { get; set; } = null!;
+    public List<string> RuntimeCopyLocalPaths { get; set; } = null!;
     public List<string> DefineConstants { get; set; } = null!;
 #if (NETSTANDARD)
     public IsolatedAssemblyLoadContext LoadContext { get; set; } = null!;
@@ -223,7 +224,7 @@ The recommended work around is to avoid using ValueTuple inside a weaver.", exce
 
                 Logger.LogDebug($"Finished '{weaver.Config.ElementName}' in {startNew.ElapsedMilliseconds}ms");
 
-                ReferenceCleaner.CleanReferences(ModuleDefinition, weaver.Instance, Logger.LogDebug);
+                ReferenceCleaner.CleanReferences(ModuleDefinition, weaver.Instance, ReferenceCopyLocalPaths, RuntimeCopyLocalPaths, Logger.LogDebug);
             }
             finally
             {

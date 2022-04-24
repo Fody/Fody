@@ -37,6 +37,8 @@ namespace Fody
         [Required]
         public ITaskItem[] ReferenceCopyLocalFiles { get; set; } = null!;
         [Required]
+        public ITaskItem[] RuntimeCopyLocalFiles { get; set; } = null!;
+        [Required]
         public ITaskItem[] WeaverFiles { get; set; } = null!;
         public string? WeaverConfiguration { get; set; }
         public ITaskItem[]? PackageReferences { get; set; }
@@ -51,12 +53,17 @@ namespace Fody
 
         [Required]
         public string IntermediateCopyLocalFilesCache { get; set; } = null!;
+        [Required]
+        public string RuntimeCopyLocalFilesCache { get; set; } = null!;
 
         public bool GenerateXsd { get; set; }
 
         public override bool Execute()
         {
             var referenceCopyLocalPaths = ReferenceCopyLocalFiles
+                .Select(x => x.ItemSpec)
+                .ToList();
+            var runtimeCopyLocalPaths = RuntimeCopyLocalFiles
                 .Select(x => x.ItemSpec)
                 .ToList();
             var defineConstants = DefineConstants.GetConstants();
@@ -79,6 +86,7 @@ namespace Fody
                 References = References,
                 SolutionDirectory = SolutionDirectoryFinder.Find(SolutionDirectory, NCrunchOriginalSolutionDirectory, ProjectDirectory),
                 ReferenceCopyLocalPaths = referenceCopyLocalPaths,
+                RuntimeCopyLocalPaths = runtimeCopyLocalPaths,
                 DefineConstants = defineConstants,
                 Weavers = GetWeaversFromProps(),
                 WeaverConfiguration = WeaverConfiguration,
@@ -95,6 +103,7 @@ namespace Fody
                 try
                 {
                     File.WriteAllLines(IntermediateCopyLocalFilesCache, processor.ReferenceCopyLocalPaths);
+                    File.WriteAllLines(RuntimeCopyLocalFilesCache, processor.RuntimeCopyLocalPaths);
                 }
                 catch (Exception exception)
                 {
@@ -103,7 +112,8 @@ namespace Fody
                     buildLogger.LogInfo("CurrentDirectory: " + Directory.GetCurrentDirectory());
                     buildLogger.LogInfo("AssemblyFile: " + AssemblyFile);
                     buildLogger.LogInfo("IntermediateCopyLocalFilesCache: " + IntermediateCopyLocalFilesCache);
-                    buildLogger.LogError("Error writing IntermediateCopyLocalFilesCache: " + exception.Message);
+                    buildLogger.LogInfo("RuntimeCopyLocalFilesCache: " + RuntimeCopyLocalFilesCache);
+                    buildLogger.LogError("Error writing Intermediate/Runtime-CopyLocalFilesCache: " + exception.Message);
                     return false;
                 }
 
@@ -113,6 +123,10 @@ namespace Fody
             if (File.Exists(IntermediateCopyLocalFilesCache))
             {
                 File.Delete(IntermediateCopyLocalFilesCache);
+            }
+            if (File.Exists(RuntimeCopyLocalFilesCache))
+            {
+                File.Delete(RuntimeCopyLocalFilesCache);
             }
 
             return false;

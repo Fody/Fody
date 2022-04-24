@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <UsingTask TaskName="Fody.WeavingTask" AssemblyFile="$(FodyAssembly)" />
-  <UsingTask TaskName="Fody.UpdateReferenceCopyLocalTask" AssemblyFile="$(FodyAssembly)" />
+  <UsingTask TaskName="Fody.UpdateCopyLocalTask" AssemblyFile="$(FodyAssembly)" />
   <UsingTask TaskName="Fody.VerifyTask" AssemblyFile="$(FodyAssembly)" />
 
   <Target
@@ -32,7 +32,7 @@
       Condition="Exists(@(IntermediateAssembly)) And ($(DesignTimeBuild) != true Or $(BuildingForLiveUnitTesting) == true) And $(DisableFody) != true"
       DependsOnTargets="$(FodyDependsOnTargets)"
       Inputs="@(IntermediateAssembly);$(ProjectWeaverXml)"
-      Outputs="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache">
+      Outputs="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache;$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.RuntimeCopyLocal.cache">
 
     <Error Condition="($(MsBuildMajorVersion) &lt; 16)"
            Text="Fody is only supported on MSBuild 16 and above. Current version: $(MsBuildMajorVersion)." />
@@ -49,6 +49,7 @@
         SignAssembly="$(SignAssembly)"
         DelaySign="$(DelaySign)"
         ReferenceCopyLocalFiles="@(ReferenceCopyLocalPaths)"
+        RuntimeCopyLocalFiles="@(RuntimeCopyLocalItems)"
         DefineConstants="$(DefineConstants)"
         DocumentationFile="@(DocFileItem->'%(FullPath)')"
         WeaverFiles="@(WeaverFiles)"
@@ -56,6 +57,7 @@
         PackageReferences="@(PackageReference)"
         NCrunchOriginalSolutionDirectory="$(NCrunchOriginalSolutionDir)"
         IntermediateCopyLocalFilesCache="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache"
+        RuntimeCopyLocalFilesCache="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.RuntimeCopyLocal.cache"
         GenerateXsd="$(FodyGenerateXsd)"
       >
 
@@ -67,31 +69,57 @@
 
     <ItemGroup>
       <FileWrites Include="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache" />
+      <FileWrites Include="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.RuntimeCopyLocal.cache" />
     </ItemGroup>
 
   </Target>
 
   <Target
-      Name="FodyUpdateCopyLocalFilesTarget"
+      Name="FodyUpdateReferenceCopyLocalFilesTarget"
       AfterTargets="FodyTarget"
     >
 
-    <Fody.UpdateReferenceCopyLocalTask
-        ReferenceCopyLocalFiles="@(ReferenceCopyLocalPaths)"
+    <Fody.UpdateCopyLocalTask
+        CopyLocalFiles="@(ReferenceCopyLocalPaths)"
         IntermediateCopyLocalFilesCache="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache"
       >
 
       <Output
-        TaskParameter="UpdatedReferenceCopyLocalFiles"
+        TaskParameter="UpdatedCopyLocalFiles"
         ItemName="FodyUpdatedReferenceCopyLocalPaths" />
 
-    </Fody.UpdateReferenceCopyLocalTask>
+    </Fody.UpdateCopyLocalTask>
 
     <ItemGroup>
       <FodyRemovedReferenceCopyLocalPaths Include="@(ReferenceCopyLocalPaths)" />
       <FodyRemovedReferenceCopyLocalPaths Remove="@(FodyUpdatedReferenceCopyLocalPaths)" />
       <ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" />
       <ReferenceCopyLocalPaths Include="@(FodyUpdatedReferenceCopyLocalPaths)" />
+    </ItemGroup>
+
+  </Target>
+
+  <Target
+      Name="FodyUpdateRuntimeCopyLocalItemsTarget"
+      AfterTargets="FodyUpdateReferenceCopyLocalFilesTarget"
+    >
+
+    <Fody.UpdateCopyLocalTask
+        CopyLocalFiles="@(RuntimeCopyLocalItems)"
+        IntermediateCopyLocalFilesCache="$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.RuntimeCopyLocal.cache"
+      >
+
+      <Output
+        TaskParameter="UpdatedCopyLocalFiles"
+        ItemName="FodyUpdatedRuntimeCopyLocalItems" />
+
+    </Fody.UpdateCopyLocalTask>
+
+    <ItemGroup>
+      <FodyRemovedRuntimeCopyLocalPaths Include="@(RuntimeCopyLocalItems)" />
+      <FodyRemovedRuntimeCopyLocalPaths Remove="@(FodyUpdatedRuntimeCopyLocalItems)" />
+      <RuntimeCopyLocalItems Remove="@(RuntimeCopyLocalItems)" />
+      <RuntimeCopyLocalItems Include="@(FodyUpdatedRuntimeCopyLocalItems)" />
     </ItemGroup>
 
   </Target>

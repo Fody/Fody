@@ -36,6 +36,20 @@ namespace SampleTarget
         }
 
         [Fact]
+        public void SampleWeaverRemovedWeaverFromDepsJsonDuringBuild()
+        {
+            var assemblyPath = new Uri(GetType().Assembly.CodeBase).LocalPath;
+            var depsJson = Path.ChangeExtension(assemblyPath, "deps.json");
+
+            if (!File.Exists(depsJson))
+                return;
+
+            var content = File.ReadAllText(depsJson);
+
+            Assert.DoesNotContain("\"lib/netstandard2.0/SampleWeaver.dll\":", content);
+        }
+
+        [Fact]
         public void NullGuardsAreActive()
         {
             Assert.Throws<ArgumentNullException>(() => GuardedMethod(null));

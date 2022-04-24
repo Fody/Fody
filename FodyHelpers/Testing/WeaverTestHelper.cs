@@ -76,7 +76,7 @@ namespace Fody
                 beforeExecuteCallback?.Invoke(module);
 
                 weaver.Execute();
-                ReferenceCleaner.CleanReferences(module, weaver, weaver.LogDebug);
+                ReferenceCleaner.CleanReferences(module, weaver, weaver.ReferenceCopyLocalPaths, weaver.RuntimeCopyLocalPaths, weaver.LogDebug);
 
                 afterExecuteCallback?.Invoke(module);
 

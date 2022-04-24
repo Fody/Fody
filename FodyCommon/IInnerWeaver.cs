@@ -13,6 +13,7 @@ public interface IInnerWeaver : IDisposable
     string IntermediateDirectoryPath { get; set; }
     string SolutionDirectoryPath { get; set; }
     List<string> ReferenceCopyLocalPaths { get; set; }
+    List<string> RuntimeCopyLocalPaths { get; set; }
     List<string> DefineConstants { get; set; }
     string ProjectDirectoryPath { get; set; }
     string ProjectFilePath { get; set; }

@@ -53,6 +53,10 @@ public class ModuleWeaver :
         ReferenceCopyLocalPaths.Remove(Path.ChangeExtension(filePath, ".pdb"));
         ReferenceCopyLocalPaths.Remove(Path.ChangeExtension(filePath, ".xml"));
 
+        RuntimeCopyLocalPaths.Remove(filePath);
+        RuntimeCopyLocalPaths.Remove(Path.ChangeExtension(filePath, ".pdb"));
+        RuntimeCopyLocalPaths.Remove(Path.ChangeExtension(filePath, ".xml"));
+
         // Do not use ShouldCleanReference in order to test the above code
         var assemblyRef = ModuleDefinition.AssemblyReferences.FirstOrDefault(i => i.Name == "SampleWeaver");
         if (assemblyRef != null)
