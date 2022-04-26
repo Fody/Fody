@@ -101,7 +101,7 @@
 
   <Target
       Name="FodyUpdateRuntimeCopyLocalItemsTarget"
-      AfterTargets="FodyUpdateReferenceCopyLocalFilesTarget"
+      AfterTargets="FodyTarget"
     >
 
     <Fody.UpdateCopyLocalTask
@@ -116,8 +116,8 @@
     </Fody.UpdateCopyLocalTask>
 
     <ItemGroup>
-      <FodyRemovedRuntimeCopyLocalPaths Include="@(RuntimeCopyLocalItems)" />
-      <FodyRemovedRuntimeCopyLocalPaths Remove="@(FodyUpdatedRuntimeCopyLocalItems)" />
+      <FodyRemovedRuntimeCopyLocalItems Include="@(RuntimeCopyLocalItems)" />
+      <FodyRemovedRuntimeCopyLocalItems Remove="@(FodyUpdatedRuntimeCopyLocalItems)" />
       <RuntimeCopyLocalItems Remove="@(RuntimeCopyLocalItems)" />
       <RuntimeCopyLocalItems Include="@(FodyUpdatedRuntimeCopyLocalItems)" />
     </ItemGroup>
