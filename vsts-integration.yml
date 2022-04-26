@@ -103,9 +103,6 @@ jobs:
      'VS2019':
        image: 'windows-2019'
        vsVersion: '16.0'
-     'VS2017':
-       image: 'vs2017-win2016'
-       vsVersion: '15.0'
   pool:
     vmImage: $(image)
   steps:
