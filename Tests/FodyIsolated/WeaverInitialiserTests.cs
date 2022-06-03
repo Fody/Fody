@@ -27,11 +27,8 @@ public class WeaverInitialiserTests
         var moduleWeaver = new ValidFromBaseModuleWeaver();
         innerWeaver.SetProperties(weaverEntry, moduleWeaver);
         var verifySettings = new VerifySettings();
-        verifySettings.ModifySerialization(settings =>
-        {
-            settings.IgnoreMembersWithType<ModuleDefinition>();
-            settings.IncludeObsoletes();
-        });
+        verifySettings.IgnoreMembersWithType<ModuleDefinition>();
+        verifySettings.IncludeObsoletes();
         verifySettings.UniqueForRuntime();
 
         return VerifyXunit.Verifier.Verify(moduleWeaver, verifySettings);

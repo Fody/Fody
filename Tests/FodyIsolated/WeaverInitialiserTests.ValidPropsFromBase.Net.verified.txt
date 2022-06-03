@@ -1,4 +1,5 @@
 {
+  ExecuteCalled: false,
   Config: {
     foo: null
   },
@@ -67,5 +68,6 @@
     Type: TryFindTypeFunc,
     Target: TypeCache,
     Method: Boolean TryFindType(System.String, Mono.Cecil.TypeDefinition ByRef)
-  }
+  },
+  ShouldCleanReference: false
 }
