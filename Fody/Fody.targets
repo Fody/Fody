@@ -77,6 +77,8 @@
   <Target
       Name="FodyUpdateReferenceCopyLocalFilesTarget"
       AfterTargets="FodyTarget"
+      Inputs="@(ReferenceCopyLocalPaths);$(IntermediateOutputPath)$(MSBuildProjectFile).Fody.CopyLocal.cache"
+      Outputs="@(FodyUpdatedReferenceCopyLocalPaths)"
     >
 
     <Fody.UpdateCopyLocalTask
