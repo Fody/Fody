@@ -1,4 +1,7 @@
 image: Visual Studio 2022
+environment:
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 build_script:
 - cmd: |
     msbuild -restore Fody.sln /p:Configuration=Release /verbosity:minimal
