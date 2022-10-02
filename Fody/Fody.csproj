@@ -37,7 +37,7 @@
   </Target>
 
   <Target Name="PreparePackagesForIntegrationSolution" BeforeTargets="GenerateNuspec">
-    <RemoveDir Directories="$(SolutionDir)packages" />
+    <RemoveDir Directories="$(PackageOutputPath)" />
     <WriteLinesToFile Lines="&lt;Project&gt;&lt;PropertyGroup&gt;&lt;IntegrationVersion&gt;$(PackageVersion)&lt;/IntegrationVersion&gt;&lt;/PropertyGroup&gt;&lt;/Project&gt;" File="..\Integration\Directory.Build.props" Overwrite="true" />
   </Target>
 

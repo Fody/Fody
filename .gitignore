@@ -93,3 +93,4 @@ Fody/.DS_Store
 Integration/Directory.Build.props
 /SampleTarget/SampleTargetTests.ExternalAnnotations.xml
 /SampleTarget/FodyWeavers.xsd
+msbuild.binlog

@@ -13,13 +13,20 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" Condition="$(Configuration) == 'Release'" PrivateAssets="All" />
   </ItemGroup>
 
+  <!-- Using Cecil directly via project reference generates package dependencies to non-existing cecil packages => use ReferenceOutputAssembly="false" and reference the binaries directly -->
   <ItemGroup>
-    <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.dll" />
-    <Reference Include="Mono.Cecil.Pdb" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.Pdb.dll" />
-    <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.Rocks.dll" />
+    <ProjectReference Include="..\cecil\Mono.Cecil.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\cecil\rocks\Mono.Cecil.Rocks.csproj" ReferenceOutputAssembly="false"/>
+    <ProjectReference Include="..\cecil\symbols\pdb\Mono.Cecil.Pdb.csproj" ReferenceOutputAssembly="false"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Cecil" HintPath="..\cecil\Lib\$(Configuration)\netstandard2.0\Mono.Cecil.dll" />
+    <Reference Include="Mono.Cecil.Pdb" HintPath="..\cecil\Lib\$(Configuration)\netstandard2.0\Mono.Cecil.Pdb.dll" />
+    <Reference Include="Mono.Cecil.Rocks" HintPath="..\cecil\Lib\$(Configuration)\netstandard2.0\Mono.Cecil.Rocks.dll" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="build\*" PackagePath="build" />
   </ItemGroup>
+
 </Project>

@@ -5,10 +5,10 @@
     <LangVersion>10.0</LangVersion>
     <NoWarn>CS1591;CS0618</NoWarn>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Key.snk</AssemblyOriginatorKeyFile>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageOutputPath>$(SolutionDir)nugets</PackageOutputPath>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)nugets</PackageOutputPath>
     <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeAllInPackage</TargetsForTfmSpecificContentInPackage>
     <PackageProjectUrl>https://github.com/Fody/Fody</PackageProjectUrl>
     <PackageIconUrl>https://raw.github.com/Fody/Fody/master/package_icon.png</PackageIconUrl>

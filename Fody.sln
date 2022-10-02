@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29201.188
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 16.0.29201.188
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fody", "Fody\Fody.csproj", "{64880F43-E6C1-428E-B00A-E0374697B5CF}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -24,9 +24,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyPackaging", "FodyPackag
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CDCDDCD6-6958-4352-AF0C-C589ECD51C0D}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
 		Directory.Build.props = Directory.Build.props
 		readme.md = readme.md
-		.github\workflows\build.yml = .github\workflows\build.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWeaver", "SampleWeaver\SampleWeaver.csproj", "{C07F5786-84DD-460C-A846-50311562790D}"
@@ -39,6 +39,17 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AssemblyWithNoSymbols", "AssemblyWithNoSymbols\AssemblyWithNoSymbols.csproj", "{7E18A70B-31D6-4435-BD88-1415078B7D84}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DummyExeAssembly", "DummyExeAssembly\DummyExeAssembly.csproj", "{BF644933-57CD-48A0-AC2B-FCF46459359B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mono.Cecil", "cecil\Mono.Cecil.csproj", "{16C3FA32-4775-497F-8794-DD5AF13CFE22}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mono.Cecil.Pdb", "cecil\symbols\pdb\Mono.Cecil.Pdb.csproj", "{4D22D51C-4230-46AF-8657-4FD757D9C8BC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mono.Cecil.Rocks", "cecil\rocks\Mono.Cecil.Rocks.csproj", "{70E05599-64EE-4C11-A2F8-EE4113309039}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cecil", "cecil", "{FE2F1D5B-5931-413B-B376-DD491BD63610}"
+	ProjectSection(SolutionItems) = preProject
+		cecil\Directory.Build.props = cecil\Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,9 +105,26 @@ Global
 		{BF644933-57CD-48A0-AC2B-FCF46459359B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF644933-57CD-48A0-AC2B-FCF46459359B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF644933-57CD-48A0-AC2B-FCF46459359B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16C3FA32-4775-497F-8794-DD5AF13CFE22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16C3FA32-4775-497F-8794-DD5AF13CFE22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16C3FA32-4775-497F-8794-DD5AF13CFE22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16C3FA32-4775-497F-8794-DD5AF13CFE22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D22D51C-4230-46AF-8657-4FD757D9C8BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D22D51C-4230-46AF-8657-4FD757D9C8BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D22D51C-4230-46AF-8657-4FD757D9C8BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D22D51C-4230-46AF-8657-4FD757D9C8BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70E05599-64EE-4C11-A2F8-EE4113309039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70E05599-64EE-4C11-A2F8-EE4113309039}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70E05599-64EE-4C11-A2F8-EE4113309039}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70E05599-64EE-4C11-A2F8-EE4113309039}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{16C3FA32-4775-497F-8794-DD5AF13CFE22} = {FE2F1D5B-5931-413B-B376-DD491BD63610}
+		{4D22D51C-4230-46AF-8657-4FD757D9C8BC} = {FE2F1D5B-5931-413B-B376-DD491BD63610}
+		{70E05599-64EE-4C11-A2F8-EE4113309039} = {FE2F1D5B-5931-413B-B376-DD491BD63610}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {777F54B0-1B85-4977-B2AF-C4493CAAEBB8}
