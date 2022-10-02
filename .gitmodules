@@ -1,0 +1,4 @@
+[submodule "cecil"]
+	path = cecil
+	url = https://github.com/Fody/cecil
+	branch = fody3

@@ -27,16 +27,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFrameworkIdentifier) == '.NETFramework'">
-    <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\net40\Mono.Cecil.dll" />
-    <Reference Include="Mono.Cecil.Pdb" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Pdb.dll" />
-    <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\net40\Mono.Cecil.Rocks.dll" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" Aliases="msbuild4" />
-  </ItemGroup>
-
-  <ItemGroup Condition="$(TargetFrameworkIdentifier) == '.NETCoreApp'">
-    <Reference Include="Mono.Cecil" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.dll" />
-    <Reference Include="Mono.Cecil.Pdb" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.Pdb.dll" />
-    <Reference Include="Mono.Cecil.Rocks" HintPath="..\Lib\Cecil\netstandard2.0\Mono.Cecil.Rocks.dll" />
   </ItemGroup>
 
   <ItemGroup>
