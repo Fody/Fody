@@ -4,7 +4,7 @@ using System.IO;
 
 public static class WeaversHistory
 {
-    public static Dictionary<string, DateTime> TimeStamps = new Dictionary<string, DateTime>(StringComparer.OrdinalIgnoreCase);
+    public static Dictionary<string, DateTime> TimeStamps = new(StringComparer.OrdinalIgnoreCase);
 
     public static bool HasChanged(IEnumerable<string> weaverPaths)
     {

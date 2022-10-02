@@ -4,7 +4,7 @@ using System.Reflection;
 
 public partial class InnerWeaver
 {
-    static Dictionary<string, Assembly> assemblies = new Dictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
+    static Dictionary<string, Assembly> assemblies = new(StringComparer.OrdinalIgnoreCase);
 
     public Assembly LoadWeaverAssembly(string assemblyPath)
     {

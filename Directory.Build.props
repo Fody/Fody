@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Version>6.6.3</Version>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>10.0</LangVersion>
     <NoWarn>CS1591;CS0618</NoWarn>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(SolutionDir)Key.snk</AssemblyOriginatorKeyFile>

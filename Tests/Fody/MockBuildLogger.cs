@@ -1,4 +1,4 @@
-﻿public class MockBuildLogger : 
+﻿public class MockBuildLogger :
     ILogger
 {
     public void SetCurrentWeaverName(string weaverName)

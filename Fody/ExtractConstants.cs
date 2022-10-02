@@ -7,7 +7,7 @@ static class ExtractConstants
     {
         if (input == null)
         {
-            return new List<string>();
+            return new();
         }
         return input.Split(';').ToList();
     }

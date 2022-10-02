@@ -10,16 +10,14 @@ using Xunit;
 public class IldasmTests
 {
     [Fact]
-    public void StaticPathResolution()
-    {
+    public void StaticPathResolution() =>
         Assert.True(Ildasm.FoundIldasm);
-    }
 
     VerifySettings verifySettings;
 
     public IldasmTests()
     {
-        verifySettings = new VerifySettings();
+        verifySettings = new();
         verifySettings.UniqueForAssemblyConfiguration();
         verifySettings.UniqueForRuntime();
     }

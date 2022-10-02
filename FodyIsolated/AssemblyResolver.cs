@@ -7,11 +7,11 @@ public class AssemblyResolver : IAssemblyResolver
 {
     Dictionary<string, string> referenceDictionary;
     ILogger logger;
-    Dictionary<string, AssemblyDefinition> assemblyDefinitionCache = new Dictionary<string, AssemblyDefinition>(StringComparer.InvariantCultureIgnoreCase);
+    Dictionary<string, AssemblyDefinition> assemblyDefinitionCache = new(StringComparer.InvariantCultureIgnoreCase);
 
     public AssemblyResolver(ILogger logger, IEnumerable<string> splitReferences)
     {
-        referenceDictionary = new Dictionary<string, string>();
+        referenceDictionary = new();
         this.logger = logger;
 
         foreach (var filePath in splitReferences)
@@ -24,7 +24,7 @@ public class AssemblyResolver : IAssemblyResolver
     {
         try
         {
-            return GetAssembly(filePath, new ReaderParameters(ReadingMode.Deferred)).Name.Name;
+            return GetAssembly(filePath, new(ReadingMode.Deferred)).Name.Name;
         }
         catch (Exception ex)
         {
@@ -47,18 +47,16 @@ public class AssemblyResolver : IAssemblyResolver
         }
         catch (Exception exception)
         {
-            throw new Exception($"Could not read '{file}'.", exception);
+            throw new($"Could not read '{file}'.", exception);
         }
     }
 
-    public virtual AssemblyDefinition? Resolve(AssemblyNameReference assemblyNameReference)
-    {
-        return Resolve(assemblyNameReference, new ReaderParameters());
-    }
+    public virtual AssemblyDefinition? Resolve(AssemblyNameReference assemblyNameReference) =>
+        Resolve(assemblyNameReference, new());
 
     public virtual AssemblyDefinition? Resolve(AssemblyNameReference assemblyNameReference, ReaderParameters? parameters)
     {
-        parameters ??= new ReaderParameters();
+        parameters ??= new();
 
         if (referenceDictionary.TryGetValue(assemblyNameReference.Name, out var fileFromDerivedReferences))
         {

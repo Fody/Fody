@@ -7,10 +7,8 @@ class SymbolReaderProvider : ISymbolReaderProvider
 {
     DefaultSymbolReaderProvider inner;
 
-    public SymbolReaderProvider()
-    {
-        inner = new DefaultSymbolReaderProvider(false);
-    }
+    public SymbolReaderProvider() =>
+        inner = new(false);
 
     public ISymbolReader? GetSymbolReader(ModuleDefinition module, string fileName)
     {
@@ -24,8 +22,6 @@ class SymbolReaderProvider : ISymbolReaderProvider
         return inner.GetSymbolReader(module, uwpAssemblyPath);
     }
 
-    public ISymbolReader? GetSymbolReader(ModuleDefinition module, Stream symbolStream)
-    {
+    public ISymbolReader? GetSymbolReader(ModuleDefinition module, Stream symbolStream) =>
         throw new NotSupportedException();
-    }
 }
