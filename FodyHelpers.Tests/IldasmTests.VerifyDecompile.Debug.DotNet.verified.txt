@@ -1,4 +1,4 @@
-.assembly extern netstandard
+﻿.assembly extern netstandard
 {
 .publickeytoken = (CC 7B 13 FF CD 2D DD 51 )                         // .{...-.Q
 .ver 2:0:0:0
@@ -35,25 +35,32 @@ extends [netstandard]System.Object
 .method public hidebysig instance void
 Method(int32 param) cil managed
 {
-.maxstack  8
-IL_0000:  ldarg.0
-IL_0001:  ldarg.1
-IL_0002:  stfld      int32 DummyAssembly.Class1::'field'
-IL_0007:  ldarg.1
-IL_0008:  ldc.i4.1
-IL_0009:  add
-IL_000a:  starg.s    param
-IL_000c:  ldarg.1
-IL_000d:  ldarg.0
-IL_000e:  ldfld      int32 DummyAssembly.Class1::'field'
-IL_0013:  bne.un.s   IL_0023
-IL_0015:  ldarg.0
-IL_0016:  ldarg.0
-IL_0017:  ldfld      int32 DummyAssembly.Class1::'field'
-IL_001c:  ldc.i4.1
-IL_001d:  sub
-IL_001e:  stfld      int32 DummyAssembly.Class1::'field'
-IL_0023:  ret
+.maxstack  3
+.locals init (bool V_0)
+IL_0000:  nop
+IL_0001:  ldarg.0
+IL_0002:  ldarg.1
+IL_0003:  stfld      int32 DummyAssembly.Class1::'field'
+IL_0008:  ldarg.1
+IL_0009:  ldc.i4.1
+IL_000a:  add
+IL_000b:  starg.s    param
+IL_000d:  ldarg.1
+IL_000e:  ldarg.0
+IL_000f:  ldfld      int32 DummyAssembly.Class1::'field'
+IL_0014:  ceq
+IL_0016:  stloc.0
+IL_0017:  ldloc.0
+IL_0018:  brfalse.s  IL_002a
+IL_001a:  nop
+IL_001b:  ldarg.0
+IL_001c:  ldarg.0
+IL_001d:  ldfld      int32 DummyAssembly.Class1::'field'
+IL_0022:  ldc.i4.1
+IL_0023:  sub
+IL_0024:  stfld      int32 DummyAssembly.Class1::'field'
+IL_0029:  nop
+IL_002a:  ret
 }
 .method public hidebysig specialname rtspecialname
 instance void  .ctor() cil managed
@@ -61,6 +68,7 @@ instance void  .ctor() cil managed
 .maxstack  8
 IL_0000:  ldarg.0
 IL_0001:  call       instance void [netstandard]System.Object::.ctor()
-IL_0006:  ret
+IL_0006:  nop
+IL_0007:  ret
 }
 }

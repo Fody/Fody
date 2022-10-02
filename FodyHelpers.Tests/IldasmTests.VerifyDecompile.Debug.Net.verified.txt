@@ -1,15 +1,15 @@
-.assembly extern netstandard
+﻿.assembly extern mscorlib
 {
-.publickeytoken = (CC 7B 13 FF CD 2D DD 51 )                         // .{...-.Q
-.ver 2:0:0:0
+.publickeytoken = (B7 7A 5C 56 19 34 E0 89 )                         // .z\V.4..
+.ver 4:0:0:0
 }
 .assembly DummyAssembly
 {
 63 65 70 74 69 6F 6E 54 68 72 6F 77 73 01 )       // ceptionThrows.
-56 65 72 73 69 6F 6E 3D 76 32 2E 30 01 00 54 0E   // Version=v2.0..T.
-14 46 72 61 6D 65 77 6F 72 6B 44 69 73 70 6C 61   // .FrameworkDispla
-79 4E 61 6D 65 11 2E 4E 45 54 20 53 74 61 6E 64   // yName..NET Stand
-61 72 64 20 32 2E 30 )                            // ard 2.0
+2C 56 65 72 73 69 6F 6E 3D 76 34 2E 37 2E 32 01   // ,Version=v4.7.2.
+00 54 0E 14 46 72 61 6D 65 77 6F 72 6B 44 69 73   // .T..FrameworkDis
+70 6C 61 79 4E 61 6D 65 14 2E 4E 45 54 20 46 72   // playName..NET Fr
+61 6D 65 77 6F 72 6B 20 34 2E 37 2E 32 )          // amework 4.7.2
 .publickey = (00 24 00 00 04 80 00 00 94 00 00 00 06 02 00 00   // .$..............
 00 24 00 00 52 53 41 31 00 04 00 00 01 00 01 00   // .$..RSA1........
 F1 DB 6E 31 BB 3D E8 56 7F 99 17 49 72 F4 AD 7A   // ..n1.=.V...Ir..z
@@ -30,7 +30,7 @@ B4 E9 43 3C 16 A5 EF 61 D5 2D 3E 39 A5 90 23 36   // ..C<...a.->9..#6
 .subsystem 0x0003       // WINDOWS_CUI
 .corflags 0x00000009    //  ILONLY
 .class public auto ansi beforefieldinit DummyAssembly.Class1
-extends [netstandard]System.Object
+extends [mscorlib]System.Object
 {
 .field private int32 'field'
 .method public hidebysig instance void
@@ -68,7 +68,7 @@ instance void  .ctor() cil managed
 {
 .maxstack  8
 IL_0000:  ldarg.0
-IL_0001:  call       instance void [netstandard]System.Object::.ctor()
+IL_0001:  call       instance void [mscorlib]System.Object::.ctor()
 IL_0006:  nop
 IL_0007:  ret
 }
