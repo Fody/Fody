@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" Condition="$(Configuration) == 'Release'" PrivateAssets="All" />
   </ItemGroup>
 
-  <!-- Using Cecil directly via project reference generates package dependencies to non-existing cecil packages => use ReferenceOutputAssembly="false" and reference the binaries directly -->
+  <!-- Using Cecil directly via project reference generates package dependencies to non-existing cecil packages (https://github.com/NuGet/Home/issues/3891) => use ReferenceOutputAssembly="false" and reference the binaries directly -->
   <ItemGroup>
     <ProjectReference Include="..\cecil\Mono.Cecil.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\cecil\rocks\Mono.Cecil.Rocks.csproj" ReferenceOutputAssembly="false"/>
