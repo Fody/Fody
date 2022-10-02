@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Xunit;
 
-public class ModuleReaderTests 
+public class ModuleReaderTests
 {
     [Fact]
     public void WithSymbols()

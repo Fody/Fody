@@ -1,14 +1,13 @@
 ﻿using System;
 
-namespace SampleWeaver
-{
-    [AttributeUsage(AttributeTargets.Method)]
-    public class SymbolValidationAttribute : Attribute
-    {
-        public SymbolValidationAttribute()
-        {
-        }
+namespace SampleWeaver;
 
-        public bool HasSymbols { get; set; }
+[AttributeUsage(AttributeTargets.Method)]
+public class SymbolValidationAttribute : Attribute
+{
+    public SymbolValidationAttribute()
+    {
     }
+
+    public bool HasSymbols { get; set; }
 }

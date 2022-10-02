@@ -12,6 +12,6 @@ public class ProjectWeaversReaderTests
         var path = @"Fody\ProjectWeaversReaderTests\Invalid.txt";
 
         var exception = Assert.ThrowsAny<Exception>(() => XDocumentEx.Load(path));
-        return VerifyXunit.Verifier.Verify(exception!.Message);
+        return VerifyXunit.Verifier.Verify(exception.Message);
     }
 }

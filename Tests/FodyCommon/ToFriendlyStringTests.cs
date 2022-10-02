@@ -38,13 +38,9 @@ void throwexception2()
         }
     }
 
-    void ThrowException1()
-    {
+    void ThrowException1() =>
         ThrowException2();
-    }
 
-    void ThrowException2()
-    {
-        throw new Exception("Foo");
-    }
+    void ThrowException2() =>
+        throw new("Foo");
 }

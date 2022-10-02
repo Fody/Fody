@@ -6,10 +6,8 @@ using Fody;
 
 public static class DelegateBuilder
 {
-    public static bool InheritsFromBaseWeaver(this Type weaverType)
-    {
-        return typeof(BaseModuleWeaver).IsAssignableFrom(weaverType);
-    }
+    public static bool InheritsFromBaseWeaver(this Type weaverType) =>
+        typeof(BaseModuleWeaver).IsAssignableFrom(weaverType);
 
     public static Func<BaseModuleWeaver> GetDelegateHolderFromCache(this Type weaverType)
     {
@@ -21,7 +19,7 @@ public static class DelegateBuilder
         return @delegate;
     }
 
-    static Dictionary<RuntimeTypeHandle, Func<BaseModuleWeaver>> weaverDelegates = new Dictionary<RuntimeTypeHandle, Func<BaseModuleWeaver>>();
+    static Dictionary<RuntimeTypeHandle, Func<BaseModuleWeaver>> weaverDelegates = new();
 
     public static Func<BaseModuleWeaver> BuildDelegateHolder(this Type weaverType)
     {

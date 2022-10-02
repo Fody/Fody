@@ -18,7 +18,7 @@ public static class ConfigFileFinder
         if (File.Exists(solutionConfigFilePath))
         {
             logger.LogDebug($"Found path to weavers file '{solutionConfigFilePath}'.");
-            yield return new WeaverConfigFile(solutionConfigFilePath, true);
+            yield return new(solutionConfigFilePath, true);
         }
 
         var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
@@ -26,13 +26,13 @@ public static class ConfigFileFinder
         if (File.Exists(projectConfigFilePath))
         {
             logger.LogDebug($"Found path to weavers file '{projectConfigFilePath}'.");
-            yield return new WeaverConfigFile(projectConfigFilePath);
+            yield return new(projectConfigFilePath);
         }
 
         if (!string.IsNullOrEmpty(weaverConfiguration))
         {
             logger.LogDebug("Found weaver configuration in project.");
-            yield return new WeaverConfigFile(XDocumentEx.Parse(weaverConfiguration!));
+            yield return new(XDocumentEx.Parse(weaverConfiguration!));
         }
     }
 
@@ -52,8 +52,7 @@ public static class ConfigFileFinder
                     executionOrders.Add(elementName, executionOrder = executionOrders.Count);
                 }
 
-                entries[elementName] = new WeaverConfigEntry
-                (
+                entries[elementName] = new(
                     executionOrder: executionOrder,
                     configFile: configFile,
                     elementName: elementName,
@@ -71,7 +70,7 @@ public static class ConfigFileFinder
 
         if (File.Exists(projectConfigFilePath))
         {
-            return new WeaverConfigFile(projectConfigFilePath);
+            return new(projectConfigFilePath);
         }
 
         var root = new XElement("Weavers", SchemaInstanceAttributes);
@@ -99,7 +98,7 @@ public static class ConfigFileFinder
             CreateSchemaForConfig(projectConfigFilePath, weaverEntries);
         }
 
-        return new WeaverConfigFile(projectConfigFilePath);
+        return new(projectConfigFilePath);
     }
 
     static void CreateSchemaForConfig(string projectConfigFilePath, IEnumerable<WeaverEntry> weavers)
@@ -172,7 +171,9 @@ public static class ConfigFileFinder
         try
         {
             if (!File.Exists(projectConfigFilePath))
+            {
                 return;
+            }
 
             var doc = XDocumentEx.Load(projectConfigFilePath);
             if (!ShouldGenerateXsd(doc, defaultGenerateXsd))

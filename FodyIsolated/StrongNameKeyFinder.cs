@@ -36,7 +36,7 @@ public partial class InnerWeaver
                 {
                     Logger.LogDebug("Extract public key from key file for signing.");
 
-                    StrongNameKeyPair = new StrongNameKeyPair(fileBytes);
+                    StrongNameKeyPair = new(fileBytes);
                     // Ensure that we can generate the public key from the key file. This requires the private key to
                     // work. If we cannot generate the public key, an ArgumentException will be thrown. In this case,
                     // the assembly is delay-signed with a public only key-file.

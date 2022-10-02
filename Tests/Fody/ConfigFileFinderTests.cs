@@ -174,7 +174,10 @@ public class ConfigFileFinderTests :
     {
         // Deliberately not writing the file in the project dir.
         if (File.Exists(xmlPath))
+        {
             File.Delete(xmlPath);
+        }
+
         File.WriteAllText(slnXmlPath, @"
 <Weavers>
   <TestWeaver />

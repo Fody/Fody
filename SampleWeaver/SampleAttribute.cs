@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace SampleWeaver
+namespace SampleWeaver;
+
+[AttributeUsage(AttributeTargets.Assembly)]
+public class SampleAttribute : Attribute
 {
-    [AttributeUsage(AttributeTargets.Assembly)]
-    public class SampleAttribute : Attribute
-    {
-    }
 }

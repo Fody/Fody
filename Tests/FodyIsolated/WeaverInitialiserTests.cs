@@ -34,9 +34,8 @@ public class WeaverInitialiserTests
         return VerifyXunit.Verifier.Verify(moduleWeaver, verifySettings);
     }
 
-    static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, IAssemblyResolver resolver)
-    {
-        return new InnerWeaver
+    static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, IAssemblyResolver resolver) =>
+        new()
         {
             Logger = new MockBuildLogger(),
             AssemblyFilePath = "AssemblyFilePath",
@@ -44,35 +43,30 @@ public class WeaverInitialiserTests
             ProjectFilePath = "ProjectFilePath",
             SolutionDirectoryPath = "SolutionDirectoryPath",
             DocumentationFilePath = "DocumentationFile",
-            ReferenceCopyLocalPaths = new List<string>
+            ReferenceCopyLocalPaths = new()
             {
                 "CopyRef1",
                 "CopyRef2"
             },
             References = "Ref1;Ref2",
             ModuleDefinition = moduleDefinition,
-            DefineConstants = new List<string>
+            DefineConstants = new()
             {
                 "Debug",
                 "Release"
             },
             assemblyResolver = resolver,
-            TypeCache = new TypeCache(resolver.Resolve)
+            TypeCache = new(resolver.Resolve)
         };
-    }
 }
 
 public class ValidFromBaseModuleWeaver : BaseModuleWeaver
 {
     public bool ExecuteCalled;
 
-    public override void Execute()
-    {
+    public override void Execute() =>
         ExecuteCalled = true;
-    }
 
-    public override IEnumerable<string> GetAssembliesForScanning()
-    {
-        return Enumerable.Empty<string>();
-    }
+    public override IEnumerable<string> GetAssembliesForScanning() =>
+        Enumerable.Empty<string>();
 }

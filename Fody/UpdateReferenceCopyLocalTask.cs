@@ -5,46 +5,45 @@ using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Fody
+namespace Fody;
+
+public class UpdateCopyLocalTask : Task
 {
-    public class UpdateCopyLocalTask : Task
+    [Required]
+    public ITaskItem[] CopyLocalFiles { get; set; } = null!;
+
+    [Output]
+    public ITaskItem[] UpdatedCopyLocalFiles { get; set; } = null!;
+
+    [Required]
+    public string IntermediateCopyLocalFilesCache { get; set; } = null!;
+
+    public override bool Execute()
     {
-        [Required]
-        public ITaskItem[] CopyLocalFiles { get; set; } = null!;
+        UpdatedCopyLocalFiles = CopyLocalFiles;
 
-        [Output]
-        public ITaskItem[] UpdatedCopyLocalFiles { get; set; } = null!;
+        InnerExecute();
 
-        [Required]
-        public string IntermediateCopyLocalFilesCache { get; set; } = null!;
+        return true;
+    }
 
-        public override bool Execute()
+    void InnerExecute()
+    {
+        if (string.IsNullOrEmpty(IntermediateCopyLocalFilesCache) || !File.Exists(IntermediateCopyLocalFilesCache))
         {
-            UpdatedCopyLocalFiles = CopyLocalFiles;
-
-            InnerExecute();
-
-            return true;
+            return;
         }
 
-        void InnerExecute()
-        {
-            if (string.IsNullOrEmpty(IntermediateCopyLocalFilesCache) || !File.Exists(IntermediateCopyLocalFilesCache))
-            {
-                return;
-            }
+        var updatedReferenceCopyLocalPaths = new HashSet<string>(File.ReadAllLines(IntermediateCopyLocalFilesCache), StringComparer.OrdinalIgnoreCase);
+        var referenceCopyLocalPaths = new HashSet<string>(CopyLocalFiles.Select(x => x.ItemSpec), StringComparer.OrdinalIgnoreCase);
 
-            var updatedReferenceCopyLocalPaths = new HashSet<string>(File.ReadAllLines(IntermediateCopyLocalFilesCache), StringComparer.OrdinalIgnoreCase);
-            var referenceCopyLocalPaths = new HashSet<string>(CopyLocalFiles.Select(x => x.ItemSpec), StringComparer.OrdinalIgnoreCase);
+        var existingReferenceCopyLocalFiles = CopyLocalFiles
+            .Where(item => updatedReferenceCopyLocalPaths.Contains(item.ItemSpec));
 
-            var existingReferenceCopyLocalFiles = CopyLocalFiles
-                .Where(item => updatedReferenceCopyLocalPaths.Contains(item.ItemSpec));
+        var newReferenceCopyLocalFiles = updatedReferenceCopyLocalPaths
+            .Where(item => !referenceCopyLocalPaths.Contains(item))
+            .Select(item => new TaskItem(item));
 
-            var newReferenceCopyLocalFiles = updatedReferenceCopyLocalPaths
-                .Where(item => !referenceCopyLocalPaths.Contains(item))
-                .Select(item => new TaskItem(item));
-
-            UpdatedCopyLocalFiles = existingReferenceCopyLocalFiles.Concat(newReferenceCopyLocalFiles).ToArray();
-        }
+        UpdatedCopyLocalFiles = existingReferenceCopyLocalFiles.Concat(newReferenceCopyLocalFiles).ToArray();
     }
 }
