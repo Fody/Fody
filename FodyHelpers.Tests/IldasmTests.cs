@@ -40,6 +40,7 @@ public class IldasmTests
     {
         var assembly = typeof(Class1).Assembly;
 
+#pragma warning disable SYSLIB0012
         var uri = new UriBuilder(assembly.CodeBase!);
         return Uri.UnescapeDataString(uri.Path);
     }

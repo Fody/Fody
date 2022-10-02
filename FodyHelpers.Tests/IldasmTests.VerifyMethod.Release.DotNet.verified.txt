@@ -1,4 +1,4 @@
-.class public auto ansi beforefieldinit DummyAssembly.Class1
+﻿.class public auto ansi beforefieldinit DummyAssembly.Class1
 extends [netstandard]System.Object
 {
 .method public hidebysig instance void

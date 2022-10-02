@@ -1,5 +1,5 @@
-.class public auto ansi beforefieldinit DummyAssembly.Class1
-extends [netstandard]System.Object
+﻿.class public auto ansi beforefieldinit DummyAssembly.Class1
+extends [mscorlib]System.Object
 {
 .method public hidebysig instance void
 Method(int32 param) cil managed
