@@ -1,7 +1,19 @@
 {
   ExecuteCalled: false,
   Config: {
-    foo: null
+    HasAttributes: false,
+    HasElements: false,
+    IsEmpty: true,
+    Name: {
+      LocalName: foo,
+      Namespace: {
+        NamespaceName: 
+      },
+      NamespaceName: 
+    },
+    NodeType: Element,
+    Value: ,
+    BaseUri: 
   },
   LogDebug: {
     Type: Action<string>,
