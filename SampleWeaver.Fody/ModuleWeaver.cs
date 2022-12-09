@@ -97,20 +97,16 @@ public class ModuleWeaver :
         }
     }
 
-    IEnumerable<MethodInfos> GetMethodInfos(string symbolValidationAttributeTypeName)
-    {
-        return from type in ModuleDefinition.GetTypes()
-               where type.IsClass
-               from method in type.GetMethods()
-               let attribute = method.ConsumeAttribute(symbolValidationAttributeTypeName)
-               where attribute != null
-               select new MethodInfos(method, attribute);
-    }
+    IEnumerable<MethodInfos> GetMethodInfos(string symbolValidationAttributeTypeName) =>
+        from type in ModuleDefinition.GetTypes()
+        where type.IsClass
+        from method in type.GetMethods()
+        let attribute = method.ConsumeAttribute(symbolValidationAttributeTypeName)
+        where attribute != null
+        select new MethodInfos(method, attribute);
 
-    bool HasSymbols(MethodDefinition method)
-    {
-        return ModuleDefinition.SymbolReader?.Read(method)?.HasSequencePoints == true;
-    }
+    bool HasSymbols(MethodDefinition method) =>
+        ModuleDefinition.SymbolReader?.Read(method)?.HasSequencePoints == true;
 
     public override IEnumerable<string> GetAssembliesForScanning()
     {
@@ -148,11 +144,9 @@ static class AttributeExtensionMethods
         return matches.FirstOrDefault();
     }
 
-    public static T GetPropertyValue<T>(this CustomAttribute attribute, string propertyName, T defaultValue)
-    {
-        return attribute.Properties.Where(p => p.Name == propertyName)
+    public static T GetPropertyValue<T>(this CustomAttribute attribute, string propertyName, T defaultValue) =>
+        attribute.Properties.Where(p => p.Name == propertyName)
             .Select(p => (T)p.Argument.Value)
             .DefaultIfEmpty(defaultValue)
             .Single();
-    }
 }
