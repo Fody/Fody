@@ -1,3 +1,5 @@
+#pragma warning disable IDE0022 // Use expression body for methods
+
 using System;
 using System.Globalization;
 using System.IO;
@@ -13,7 +15,7 @@ namespace SampleTarget
         [Fact]
         public void SampleWeaverAddedExtraFileDuringBuild()
         {
-            var assemblyPath = new Uri(GetType().Assembly.CodeBase).LocalPath;
+            var assemblyPath =  GetAssemblyLocation();
             var targetFolder = Path.GetDirectoryName(assemblyPath);
             var extraFilePath = Path.Combine(targetFolder, "SomeExtraFile.txt");
             var extraFileContent = File.ReadAllText(extraFilePath);
@@ -27,7 +29,7 @@ namespace SampleTarget
         [Fact]
         public void SampleWeaverRemovedObsoleteDependenciesDuringBuild()
         {
-            var assemblyPath = new Uri(GetType().Assembly.CodeBase).LocalPath;
+            var assemblyPath =  GetAssemblyLocation();
             var targetFolder = Path.GetDirectoryName(assemblyPath);
 
             var sampleWeaverFiles = Directory.EnumerateFiles(targetFolder, "SampleWeaver.*");
@@ -38,7 +40,7 @@ namespace SampleTarget
         [Fact]
         public void SampleWeaverRemovedWeaverFromDepsJsonDuringBuild()
         {
-            var assemblyPath = new Uri(GetType().Assembly.CodeBase).LocalPath;
+            var assemblyPath =  GetAssemblyLocation();
             var depsJson = Path.ChangeExtension(assemblyPath, "deps.json");
 
             if (!File.Exists(depsJson))
@@ -75,5 +77,15 @@ namespace SampleTarget
         {
             return parameter;
         }
+
+        string GetAssemblyLocation()
+        {
+#if NETFRAMEWORK
+            return new Uri(GetType().Assembly.CodeBase).LocalPath;
+#else
+            return GetType().Assembly.Location;
+#endif
+        }
+
     }
 }
