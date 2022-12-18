@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Text;
 
@@ -16,6 +16,7 @@ public static class Ildasm
 
     public static readonly bool FoundIldasm;
 
+    [Obsolete("Prefer using https://www.nuget.org/packages/Verify.ICSharpCode.Decompiler or https://www.nuget.org/packages/ICSharpCode.Decompiler")]
     public static string Decompile(string assemblyPath, string? item = "")
     {
         Guard.AgainstNullAndEmpty(nameof(assemblyPath), assemblyPath);
