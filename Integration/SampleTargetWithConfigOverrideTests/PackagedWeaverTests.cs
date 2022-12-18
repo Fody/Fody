@@ -13,7 +13,7 @@ namespace SampleTarget
         [Fact]
         public void SampleWeaverAddedExtraFileDuringBuild()
         {
-            var assemblyPath = new Uri(GetType().Assembly.CodeBase).LocalPath;
+            var assemblyPath = GetAssemblyLocation();
             var targetFolder = Path.GetDirectoryName(assemblyPath);
             var extraFilePath = Path.Combine(targetFolder, "SomeExtraFile.txt");
             var extraFileContent = File.ReadAllText(extraFilePath);
@@ -27,7 +27,7 @@ namespace SampleTarget
         [Fact]
         public void SampleWeaverRemovedObsoleteDependenciesDuringBuild()
         {
-            var assemblyPath = new Uri(GetType().Assembly.CodeBase).LocalPath;
+            var assemblyPath = GetAssemblyLocation();
             var targetFolder = Path.GetDirectoryName(assemblyPath);
 
             var sampleWeaverFiles = Directory.EnumerateFiles(targetFolder, "SampleWeaver.*");
@@ -60,6 +60,16 @@ namespace SampleTarget
         public object GuardedMethod([NotNull] object parameter)
         {
             return parameter;
+        }
+
+        string GetAssemblyLocation()
+        {
+#pragma warning disable IDE0022 // Use expression body for methods
+#if NETFRAMEWORK
+            return new Uri(GetType().Assembly.CodeBase).LocalPath;
+#else
+            return GetType().Assembly.Location;
+#endif
         }
     }
 }
