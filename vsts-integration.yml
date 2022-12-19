@@ -25,16 +25,16 @@ jobs:
       projects: 'Fody.sln'
       arguments: $(buildArgs)
   - task: DotNetCoreCLI@2
-    displayName: 'Test Fody'
-    inputs:
-      command: 'test'
-      projects: 'Fody.sln'
-      arguments: $(buildArgs)
-  - task: DotNetCoreCLI@2
     displayName: 'Build Integration'
     inputs:
       command: 'build'
       projects: 'Integration\Integration.sln'
+      arguments: $(buildArgs)
+  - task: DotNetCoreCLI@2
+    displayName: 'Test Fody'
+    inputs:
+      command: 'test'
+      projects: 'Fody.sln'
       arguments: $(buildArgs)
   - task: DotNetCoreCLI@2
     displayName: 'Test Integration'
