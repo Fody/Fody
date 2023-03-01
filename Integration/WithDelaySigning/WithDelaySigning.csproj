@@ -11,6 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <WeaverFiles Include="$(SolutionDir)Weavers\bin\$(Configuration)\netstandard2.0\Weavers.dll" />
+    <WeaverFiles Include="$(SolutionDir)Weavers\bin\$(Configuration)\netstandard2.0\Weavers.dll" WeaverClassNames="NamedWeaver;NamedWeaverFromBase;ModuleWeaver" />
   </ItemGroup>
 </Project>
