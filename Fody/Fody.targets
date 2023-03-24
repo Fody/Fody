@@ -10,7 +10,8 @@
     <MsBuildMajorVersion>15</MsBuildMajorVersion>
     <MsBuildMajorVersion Condition="'$(MSBuildVersion)' != ''">$([System.Version]::Parse($(MSBuildVersion)).Major)</MsBuildMajorVersion>
     <FodyAfterTargets Condition="($(MsBuildMajorVersion) &lt; 17) AND '$(FodyAfterTargets)'==''">AfterCompile</FodyAfterTargets>
-    <TargetsTriggeredByCompilation>$(TargetsTriggeredByCompilation);FodyTarget</TargetsTriggeredByCompilation>
+    <TargetsTriggeredByCompilation Condition="'$(FodyAfterTargets)'==''">$(TargetsTriggeredByCompilation);FodyTarget</TargetsTriggeredByCompilation>
+    <DisableFody Condition='$(UseWPF)==true AND $(MSBuildProjectName.EndsWith("_wpftmp"))'>true</DisableFody>
   </PropertyGroup>
 
   <ItemGroup Condition="Exists($(ProjectWeaverXml))">
