@@ -1,6 +1,6 @@
 <Project>
   <PropertyGroup>
-    <Version>6.6.4</Version>
+    <Version>6.6.5-beta2</Version>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <LangVersion>10.0</LangVersion>
     <NoWarn>CS1591;CS0618</NoWarn>
