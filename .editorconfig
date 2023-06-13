@@ -84,7 +84,7 @@ resharper_suggest_var_or_type_elsewhere_highlighting = hint
 resharper_suggest_var_or_type_simple_types_highlighting = hint
 resharper_unnecessary_whitespace_highlighting = error
 resharper_use_await_using_highlighting = warning
-resharper_use_deconstruction_highlighting = warning
+resharper_use_deconstruction_highlighting = error
 
 # Sort using and Import directives with System.* appearing first
 dotnet_sort_system_directives_first = true
