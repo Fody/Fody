@@ -13,7 +13,7 @@ public partial class InnerWeaver
             .ToList();
         Logger.LogDebug("Reference count: " + SplitReferences.Count);
 
-        var joinedReferences = string.Join(Environment.NewLine + "  ", SplitReferences.OrderBy(x => x));
+        var joinedReferences = string.Join(Environment.NewLine + "  ", SplitReferences.OrderBy(_ => _));
         Logger.LogDebug($"References:{Environment.NewLine}  {joinedReferences}");
     }
 }

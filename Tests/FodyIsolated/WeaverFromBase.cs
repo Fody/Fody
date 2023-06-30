@@ -8,8 +8,6 @@ public class WeaverFromBase : BaseModuleWeaver
     {
     }
 
-    public override IEnumerable<string> GetAssembliesForScanning()
-    {
-        return Enumerable.Empty<string>();
-    }
+    public override IEnumerable<string> GetAssembliesForScanning() =>
+        Enumerable.Empty<string>();
 }

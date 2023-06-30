@@ -64,7 +64,7 @@ public partial class InnerWeaver :
             return typeof(PdbReaderProvider).Assembly;
         }
 
-        foreach (var weaverPath in Weavers.Select(x => x.AssemblyPath))
+        foreach (var weaverPath in Weavers.Select(_ => _.AssemblyPath))
         {
             var directoryName = Path.GetDirectoryName(weaverPath);
             var assemblyFileName = $"{assemblyName}.dll";
@@ -99,7 +99,7 @@ public partial class InnerWeaver :
             assemblyResolver = new AssemblyResolver(Logger, SplitReferences);
             ReadModule();
             var weavingInfoClassName = GetWeavingInfoClassName();
-            if (ModuleDefinition.Types.Any(x => x.Name == weavingInfoClassName))
+            if (ModuleDefinition.Types.Any(_ => _.Name == weavingInfoClassName))
             {
                 Logger.LogWarning($"The assembly has already been processed by Fody. Weaving aborted. Path: {AssemblyFilePath}");
                 return;
@@ -107,7 +107,7 @@ public partial class InnerWeaver :
             TypeCache = new(assemblyResolver.Resolve);
             InitialiseWeavers();
             ValidatePackageReferenceSettings(weaverInstances, Logger);
-            TypeCache.BuildAssembliesToScan(weaverInstances.Select(x => x.Instance));
+            TypeCache.BuildAssembliesToScan(weaverInstances.Select(_ => _.Instance));
             InitialiseTypeSystem();
             ExecuteWeavers();
             AddWeavingInfo();
@@ -315,7 +315,7 @@ The recommended work around is to avoid using ValueTuple inside a weaver.", exce
     void DisposeWeavers()
     {
         foreach (var disposable in weaverInstances
-            .Select(x => x.Instance)
+            .Select(_ => _.Instance)
             // ReSharper disable once SuspiciousTypeConversion.Global
             .OfType<IDisposable>())
         {

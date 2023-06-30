@@ -25,10 +25,8 @@ public class IsolatedAssemblyLoadContext
         return innerWeaver;
     }
 
-    public void Unload()
-    {
+    public void Unload() =>
         AppDomain.Unload(appDomain);
-    }
 }
 #else
 using System.Reflection;

@@ -11,7 +11,7 @@ public static class TypeFinder
         {
             return readAssembly
                 .GetTypes()
-                .FirstOrDefault(x => x.Name == typeName);
+                .FirstOrDefault(_ => _.Name == typeName);
         }
         catch (ReflectionTypeLoadException exception)
         {

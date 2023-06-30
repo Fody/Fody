@@ -61,10 +61,10 @@ public class WeavingTask :
     public override bool Execute()
     {
         var referenceCopyLocalPaths = ReferenceCopyLocalFiles
-            .Select(x => x.ItemSpec)
+            .Select(_ => _.ItemSpec)
             .ToList();
         var runtimeCopyLocalPaths = RuntimeCopyLocalFiles
-            .Select(x => x.ItemSpec)
+            .Select(_ => _.ItemSpec)
             .ToList();
         var defineConstants = DefineConstants.GetConstants();
         var buildLogger = new BuildLogger
@@ -97,7 +97,7 @@ public class WeavingTask :
 
         if (success)
         {
-            var weavers = processor.Weavers.Select(x => x.ElementName);
+            var weavers = processor.Weavers.Select(_ => _.ElementName);
             ExecutedWeavers = string.Join(";", weavers) + ";";
 
             try

@@ -12,10 +12,8 @@ public class PeVerifierTests
 {
     string assemblyPath = "FodyHelpers.Tests.dll";
     [Fact]
-    public void StaticPathResolution()
-    {
+    public void StaticPathResolution() =>
         Assert.True(PeVerifier.FoundPeVerify);
-    }
 
     [Fact]
     public void Should_verify_current_assembly()
@@ -36,10 +34,8 @@ public class PeVerifierTests
         File.Delete(newAssemblyPath);
     }
 
-    static string[] GetIgnoreCodes()
-    {
-        return new[] {"0x80070002", "0x80131869"};
-    }
+    static string[] GetIgnoreCodes() =>
+        new[] {"0x80070002", "0x80131869"};
 
     [Fact]
     public Task TrimLineNumbers()

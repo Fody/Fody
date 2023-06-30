@@ -17,7 +17,7 @@ static class ReferenceCleaner
         var weaverLibName = weaver.GetType().Assembly.GetName().Name.ReplaceCaseless(".Fody", "");
         log($"Removing reference to '{weaverLibName}'.");
 
-        var referenceToRemove = module.AssemblyReferences.FirstOrDefault(x => x.Name == weaverLibName);
+        var referenceToRemove = module.AssemblyReferences.FirstOrDefault(_ => _.Name == weaverLibName);
         if (referenceToRemove != null)
         {
             module.AssemblyReferences.Remove(referenceToRemove);

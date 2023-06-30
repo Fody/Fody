@@ -83,7 +83,7 @@ public class TypeCache
         {
             foreach (var exportedType in assembly.MainModule.ExportedTypes)
             {
-                if (definitions.Any(x => x.Name.Name == exportedType.Scope.Name))
+                if (definitions.Any(_ => _.Name.Name == exportedType.Scope.Name))
                 {
                     continue;
                 }
@@ -119,7 +119,7 @@ public class TypeCache
         if (!typeName.Contains('.'))
         {
             var types = cachedTypes.Values
-                .Where(x => x.Name == typeName)
+                .Where(_ => _.Name == typeName)
                 .ToList();
             if (types.Count > 1)
             {

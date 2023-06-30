@@ -87,14 +87,10 @@ public class WeaverEntry
 
     class WeaverNameComparer : IEqualityComparer<WeaverEntry>
     {
-        public bool Equals(WeaverEntry? x, WeaverEntry? y)
-        {
-            return x?.ElementName == y?.ElementName;
-        }
+        public bool Equals(WeaverEntry? x, WeaverEntry? y) =>
+            x?.ElementName == y?.ElementName;
 
-        public int GetHashCode(WeaverEntry obj)
-        {
-            return obj.ElementName?.GetHashCode() ?? 0;
-        }
+        public int GetHashCode(WeaverEntry obj) =>
+            obj.ElementName?.GetHashCode() ?? 0;
     }
 }

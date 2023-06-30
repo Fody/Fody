@@ -75,7 +75,7 @@ public class Verifier
 
         ignoreCodes = ExtractVerifyIgnoreCodesConfigs(weaverConfigs).ToList();
 
-        if (DefineConstants.Any(x => x == "FodyVerifyAssembly"))
+        if (DefineConstants.Any(_ => _ == "FodyVerifyAssembly"))
         {
             return true;
         }

@@ -157,7 +157,7 @@ public partial class Processor
     {
         if (solutionAssemblyLoadContexts.TryGetValue(SolutionDirectory, out var loadContext))
         {
-            if (!WeaversHistory.HasChanged(Weavers.Select(x => x.AssemblyPath)))
+            if (!WeaversHistory.HasChanged(Weavers.Select(_ => _.AssemblyPath)))
             {
                 return loadContext;
             }

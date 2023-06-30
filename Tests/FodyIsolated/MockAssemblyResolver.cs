@@ -7,13 +7,9 @@ public class MockAssemblyResolver : IAssemblyResolver
     {
     }
 
-    public AssemblyDefinition Resolve(AssemblyNameReference name)
-    {
+    public AssemblyDefinition Resolve(AssemblyNameReference name) =>
         throw new NotImplementedException();
-    }
 
-    public AssemblyDefinition Resolve(AssemblyNameReference name, ReaderParameters parameters)
-    {
+    public AssemblyDefinition Resolve(AssemblyNameReference name, ReaderParameters parameters) =>
         throw new NotImplementedException();
-    }
 }

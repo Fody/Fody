@@ -32,7 +32,7 @@ public class CecilExtensionsTests
         var module = ModuleDefinition.ReadModule(assemblyPath, parameters);
 
         return module.GetType("DummyAssembly.Class1").Methods
-            .Single(x => x.Name == "Method")
+            .Single(_ => _.Name == "Method")
             .GetSequencePoint();
     }
 }

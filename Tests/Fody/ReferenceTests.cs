@@ -9,7 +9,7 @@ public class ReferenceTests
     {
         var references = typeof(WeavingTask).Assembly
             .GetReferencedAssemblies()
-            .Select(x => x.Name)
+            .Select(_ => _.Name)
             .ToList();
         Assert.DoesNotContain("Mono.Cecil", references);
     }
