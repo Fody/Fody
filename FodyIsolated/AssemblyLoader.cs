@@ -18,6 +18,7 @@ public partial class InnerWeaver
         return assemblies[assemblyPath] = LoadFromFile(assemblyPath);
     }
 
+    // ReSharper disable once MemberCanBeMadeStatic.Local
     Assembly LoadFromFile(string assemblyPath)
     {
         #if(NETSTANDARD)

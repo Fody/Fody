@@ -38,9 +38,9 @@ void throwexception2()
         }
     }
 
-    void ThrowException1() =>
+    static void ThrowException1() =>
         ThrowException2();
 
-    void ThrowException2() =>
+    static void ThrowException2() =>
         throw new("Foo");
 }
