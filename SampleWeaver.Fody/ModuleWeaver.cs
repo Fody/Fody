@@ -58,7 +58,7 @@ public class ModuleWeaver :
         RuntimeCopyLocalPaths.Remove(Path.ChangeExtension(filePath, ".xml"));
 
         // Do not use ShouldCleanReference in order to test the above code
-        var assemblyRef = ModuleDefinition.AssemblyReferences.FirstOrDefault(i => i.Name == "SampleWeaver");
+        var assemblyRef = ModuleDefinition.AssemblyReferences.FirstOrDefault(_ => _.Name == "SampleWeaver");
         if (assemblyRef != null)
         {
             ModuleDefinition.AssemblyReferences.Remove(assemblyRef);
@@ -145,7 +145,7 @@ static class AttributeExtensionMethods
     }
 
     public static T GetPropertyValue<T>(this CustomAttribute attribute, string propertyName, T defaultValue) =>
-        attribute.Properties.Where(p => p.Name == propertyName)
+        attribute.Properties.Where(_ => _.Name == propertyName)
             .Select(p => (T)p.Argument.Value)
             .DefaultIfEmpty(defaultValue)
             .Single();

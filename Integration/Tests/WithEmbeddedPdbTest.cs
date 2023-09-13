@@ -22,11 +22,11 @@ public class WithEmbeddedPdbTest
         using (var peReader = new PEReader(file))
         {
             var debugInfo = peReader.ReadDebugDirectory();
-            Assert.Contains(debugInfo, i => i.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
+            Assert.Contains(debugInfo, _ => _.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
 
             var metadataReader = peReader.GetMetadataReader();
 
-            using (var provider = peReader.ReadEmbeddedPortablePdbDebugDirectoryData(debugInfo.Single(i => i.Type == DebugDirectoryEntryType.EmbeddedPortablePdb)))
+            using (var provider = peReader.ReadEmbeddedPortablePdbDebugDirectoryData(debugInfo.Single(_ => _.Type == DebugDirectoryEntryType.EmbeddedPortablePdb)))
             {
                 var debugReader = provider.GetMetadataReader();
 

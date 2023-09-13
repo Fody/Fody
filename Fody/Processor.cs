@@ -88,7 +88,7 @@ public partial class Processor
 
         if (extraEntries.Any())
         {
-            throw new WeavingException($"No weavers found for the configuration entries {string.Join(", ", extraEntries.Select(e => e.ElementName))}. " + missingWeaversHelp);
+            throw new WeavingException($"No weavers found for the configuration entries {string.Join(", ", extraEntries.Select(_ => _.ElementName))}. " + missingWeaversHelp);
         }
 
         if (Weavers.Count == 0)
