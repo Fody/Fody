@@ -37,7 +37,7 @@ public class WeaverEntry
     /// <summary>
     /// The assembly name excluding the ".Fody" suffix.
     /// </summary>
-    string AssemblyBaseNam_ => _xtractAssemblyBaseName(AssemblyPath);
+    string AssemblyBaseName => extractAssemblyBaseName(AssemblyPath);
 
     /// <summary>
     /// The full path to the weaver assembly.
