@@ -17,7 +17,7 @@
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.7.2" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
-    <PackageReference Include="Verify.Xunit" Version="21.1.4" />
+    <PackageReference Include="Verify.Xunit" Version="21.1.5" />
     <PackageReference Include="xunit" Version="2.5.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
