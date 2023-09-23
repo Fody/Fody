@@ -1,8 +1,3 @@
-using System;
-using System.IO;
-using System.Linq;
-using Xunit;
-
 public class WeaversHistoryTests
 {
     [Fact]

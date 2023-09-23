@@ -1,7 +1,3 @@
-using System;
-using System.IO;
-using Xunit;
-
 public class SolutionPathValidatorTests
 {
     [Fact]

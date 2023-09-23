@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using DummyAssembly;
-using Xunit;
+﻿using DummyAssembly;
 
 public class AssemblyResolverTests
 {

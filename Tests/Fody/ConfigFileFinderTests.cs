@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Xml.Linq;
-using Xunit;
+﻿using System.Xml.Linq;
 
 public class ConfigFileFinderTests :
     IDisposable
