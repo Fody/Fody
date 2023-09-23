@@ -21,6 +21,7 @@ jobs:
           dotnet-version: |
             3.1.x
             6.0.x
+            7.0.x
 
       - name: Restore Fody
         run: dotnet restore Fody.sln
@@ -61,6 +62,7 @@ jobs:
           dotnet-version: |
             3.1.x
             6.0.x
+            7.0.x
 
       - name: Restore Fody
         run: dotnet restore Fody.sln
