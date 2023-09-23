@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using Task = Microsoft.Build.Utilities.Task;
 
 namespace Fody;
 
