@@ -1,5 +1,3 @@
-using System;
-
 namespace Fody;
 
 [Obsolete("Not for public use")]

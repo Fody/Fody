@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 public partial class Processor
 {
     public string AssemblyFilePath = null!;
