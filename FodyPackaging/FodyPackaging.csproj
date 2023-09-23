@@ -12,4 +12,7 @@
     <Content Include="buildMultiTargeting\*" PackagePath="buildMultiTargeting" />
     <Content Include="Weaver.props" PackagePath="\" />
   </ItemGroup>
+  <ItemGroup>
+    <Using Remove="System.Net.Http" />
+  </ItemGroup>
 </Project>
