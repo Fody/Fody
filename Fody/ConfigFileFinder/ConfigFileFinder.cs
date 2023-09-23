@@ -1,7 +1,4 @@
-﻿using System.Xml;
-using System.Xml.Linq;
-
-public static class ConfigFileFinder
+﻿public static class ConfigFileFinder
 {
     const string FodyWeaversConfigFileName = "FodyWeavers.xml";
     static readonly XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");

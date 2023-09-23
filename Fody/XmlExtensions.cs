@@ -1,6 +1,3 @@
-using System.Xml;
-using System.Xml.Linq;
-
 public static class XmlExtensions
 {
     public static void StripNamespace(this XDocument document)

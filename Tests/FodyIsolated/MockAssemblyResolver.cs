@@ -1,4 +1,3 @@
-using System;
 using Mono.Cecil;
 
 public class MockAssemblyResolver : IAssemblyResolver

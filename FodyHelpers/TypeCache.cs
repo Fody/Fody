@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using Mono.Cecil;
 
 namespace Fody;

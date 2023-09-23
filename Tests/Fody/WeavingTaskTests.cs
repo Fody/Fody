@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Fody;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using Xunit;
 
 public class WeavingTaskTests
 {

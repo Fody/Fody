@@ -1,6 +1,4 @@
-using System;
 using Fody;
-using Xunit;
 
 public class ConstructorDelegateBuilderTests
 {

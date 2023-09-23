@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-public class FodyVersionTests
+﻿public class FodyVersionTests
 {
     [Fact]
     public void FindFodyHelpersReference() =>
