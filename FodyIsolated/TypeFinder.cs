@@ -15,12 +15,13 @@ public static class TypeFinder
         }
         catch (ReflectionTypeLoadException exception)
         {
-            var message = string.Format(
-                @"Could not load '{1}' from '{0}' due to ReflectionTypeLoadException.
-It is possible the package needs to be updated.
-exception.LoaderExceptions:
-{2}", readAssembly.FullName, typeName, exception.GetLoaderMessages());
-            throw new WeavingException(message);
+            throw new WeavingException(
+                $"""
+                 Could not load '{typeName}' from '{readAssembly.FullName}' due to ReflectionTypeLoadException.
+                 It is possible the package needs to be updated.
+                 exception.LoaderExceptions:
+                 {exception.GetLoaderMessages()}
+                 """);
         }
     }
 }

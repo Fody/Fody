@@ -71,7 +71,5 @@ public class ConstructorDelegateBuilderTests
         Assert.Equal(type, anObject.GetType());
     }
 
-    public class NestedPublicClass
-    {
-    }
+    public class NestedPublicClass;
 }

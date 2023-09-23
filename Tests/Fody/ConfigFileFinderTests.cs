@@ -41,17 +41,23 @@ public class ConfigFileFinderTests :
     [Fact]
     public void ShouldCreateXsd()
     {
-        File.WriteAllText(xmlPath, @"
-<Weavers>
-  <TestWeaver />
-</Weavers>
-");
+        File.WriteAllText(
+            xmlPath,
+            """
+            <Weavers>
+              <TestWeaver />
+            </Weavers>
+            """);
 
-        File.WriteAllText(Path.Combine(testDir, "WeaverWithSchema.Fody.xcf"), @"
-<xs:complexType xmlns:xs=""http://www.w3.org/2001/XMLSchema"">
-  <xs:attribute name=""TestAttribute"" type=""xs:string"" />
-</xs:complexType>
-");
+        File.WriteAllText(
+            Path.Combine(
+                testDir,
+                "WeaverWithSchema.Fody.xcf"),
+            """
+            <xs:complexType xmlns:xs="http://www.w3.org/2001/XMLSchema">
+              <xs:attribute name="TestAttribute" type="xs:string" />
+            </xs:complexType>
+            """);
 
         var weavers = new[]
         {
@@ -112,11 +118,13 @@ public class ConfigFileFinderTests :
     [Fact]
     public void ShouldOptOutOfXsd()
     {
-        File.WriteAllText(xmlPath, @"
-<Weavers GenerateXsd=""false"">
-  <TestWeaver />
-</Weavers>
-");
+        File.WriteAllText(
+            xmlPath,
+            """
+            <Weavers GenerateXsd="false">
+              <TestWeaver />
+            </Weavers>
+            """);
 
         var weavers = new[]
         {
@@ -142,11 +150,13 @@ public class ConfigFileFinderTests :
     [Fact]
     public void ShouldOptOutOfXsdThroughMSBuildProperty()
     {
-        File.WriteAllText(xmlPath, @"
-<Weavers>
-  <TestWeaver />
-</Weavers>
-");
+        File.WriteAllText(
+            xmlPath,
+            """
+            <Weavers>
+              <TestWeaver />
+            </Weavers>
+            """);
 
         var weavers = new[]
         {
@@ -178,11 +188,13 @@ public class ConfigFileFinderTests :
             File.Delete(xmlPath);
         }
 
-        File.WriteAllText(slnXmlPath, @"
-<Weavers>
-  <TestWeaver />
-</Weavers>
-");
+        File.WriteAllText(
+            slnXmlPath,
+            """
+            <Weavers>
+              <TestWeaver />
+            </Weavers>
+            """);
 
         var weavers = new[]
         {
@@ -208,11 +220,13 @@ public class ConfigFileFinderTests :
     [Fact]
     public void XmlConfigShouldOverrideMSBuildPropertyForXsdGeneration()
     {
-        File.WriteAllText(xmlPath, @"
-<Weavers GenerateXsd=""true"">
-  <TestWeaver />
-</Weavers>
-");
+        File.WriteAllText(
+            xmlPath,
+            """
+            <Weavers GenerateXsd="true">
+              <TestWeaver />
+            </Weavers>
+            """);
 
         var weavers = new[]
         {
