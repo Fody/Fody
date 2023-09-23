@@ -1,3 +1,4 @@
+#if !NETFRAMEWORK
 using System.Linq;
 using Fody;
 using Xunit;
@@ -14,3 +15,4 @@ public class ReferenceTests
         Assert.DoesNotContain("Mono.Cecil", references);
     }
 }
+#endif
