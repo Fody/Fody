@@ -1,4 +1,3 @@
-using Fody;
 using Microsoft.Build.Framework;
 
 public class BuildLogger :

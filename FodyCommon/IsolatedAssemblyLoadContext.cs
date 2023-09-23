@@ -1,6 +1,4 @@
-﻿using System.IO;
-#if NET472
-using System;
+﻿#if NET472
 
 public class IsolatedAssemblyLoadContext
 {

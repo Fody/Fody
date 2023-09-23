@@ -1,6 +1,4 @@
-﻿
-
-namespace Fody;
+﻿namespace Fody;
 
 /// <summary>
 /// Verifies assemblies using peverify.exe.

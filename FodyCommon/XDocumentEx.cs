@@ -1,7 +1,3 @@
-using System.IO;
-using System.Xml;
-using System.Xml.Linq;
-
 public static class XDocumentEx
 {
     public static XDocument Load(string path)

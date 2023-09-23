@@ -1,6 +1,4 @@
-﻿using Fody;
-
-public class Verifier
+﻿public class Verifier
 {
     public ILogger Logger = null!;
     public string SolutionDirectory = null!;
