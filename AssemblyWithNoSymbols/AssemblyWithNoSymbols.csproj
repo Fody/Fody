@@ -5,4 +5,7 @@
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
+  <ItemGroup>
+    <Using Remove="System.Net.Http" />
+  </ItemGroup>
 </Project>
