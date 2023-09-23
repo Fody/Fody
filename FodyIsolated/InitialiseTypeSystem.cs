@@ -2,7 +2,7 @@ using TypeSystem = Fody.TypeSystem;
 
 public partial class InnerWeaver
 {
-    public TypeSystem TypeSystem = null!;
+    public TypeSystem TypeSystem = null !;
 
     void InitialiseTypeSystem()
     {

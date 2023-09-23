@@ -110,12 +110,10 @@ public class Verifier
                 continue;
             }
 
-            foreach (var value in codesConfigs.Split(
-                         new[]
-                         {
-                             ','
-                         },
-                         StringSplitOptions.RemoveEmptyEntries))
+            foreach (var value in codesConfigs.Split(new[]
+                     {
+                         ','
+                     }, StringSplitOptions.RemoveEmptyEntries))
             {
                 yield return value;
             }

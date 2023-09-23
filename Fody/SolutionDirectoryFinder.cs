@@ -9,8 +9,7 @@ public class SolutionDirectoryFinder
             return nCrunchOriginalSolutionDir!;
         }
 
-        if (!string.IsNullOrEmpty(solutionDir) &&
-            solutionDir != "*Undefined*")
+        if (!string.IsNullOrEmpty(solutionDir) && solutionDir != "*Undefined*")
         {
             return solutionDir!;
         }

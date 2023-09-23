@@ -25,7 +25,7 @@ public partial class Processor
     public List<WeaverConfigFile> ConfigFiles = null!;
     public Dictionary<string, WeaverConfigEntry> ConfigEntries = null!;
     public bool GenerateXsd;
-    IInnerWeaver? weaver;
+    IInnerWeaver? innerWeaver;
 
     static Dictionary<string, IsolatedAssemblyLoadContext> solutionAssemblyLoadContexts =
         new(StringComparer.OrdinalIgnoreCase);
@@ -82,7 +82,7 @@ public partial class Processor
 
         var extraEntries = ConfigEntries.Values
             .Where(entry => !entry.ConfigFile.AllowExtraEntries &&
-                            Weavers.All(_ => _.ElementName != entry.ElementName))
+                            Weavers.All(weaver => weaver.ElementName != entry.ElementName))
             .ToArray();
 
         const string missingWeaversHelp = "Add the desired weavers via their nuget package.";
@@ -128,30 +128,30 @@ public partial class Processor
     {
         var loadContext = GetLoadContext();
 
-        using (weaver = loadContext.CreateInstanceFromAndUnwrap())
+        using (innerWeaver = loadContext.CreateInstanceFromAndUnwrap())
         {
-            weaver.AssemblyFilePath = AssemblyFilePath;
-            weaver.References = References;
-            weaver.KeyFilePath = KeyFilePath;
-            weaver.ReferenceCopyLocalPaths = ReferenceCopyLocalPaths;
-            weaver.RuntimeCopyLocalPaths = RuntimeCopyLocalPaths;
-            weaver.SignAssembly = SignAssembly;
-            weaver.DelaySign = DelaySign;
-            weaver.Logger = Logger;
-            weaver.SolutionDirectoryPath = SolutionDirectory;
-            weaver.Weavers = Weavers;
-            weaver.IntermediateDirectoryPath = IntermediateDirectory;
-            weaver.DefineConstants = DefineConstants;
-            weaver.ProjectDirectoryPath = ProjectDirectory;
-            weaver.ProjectFilePath = ProjectFilePath;
-            weaver.DocumentationFilePath = DocumentationFilePath;
+            innerWeaver.AssemblyFilePath = AssemblyFilePath;
+            innerWeaver.References = References;
+            innerWeaver.KeyFilePath = KeyFilePath;
+            innerWeaver.ReferenceCopyLocalPaths = ReferenceCopyLocalPaths;
+            innerWeaver.RuntimeCopyLocalPaths = RuntimeCopyLocalPaths;
+            innerWeaver.SignAssembly = SignAssembly;
+            innerWeaver.DelaySign = DelaySign;
+            innerWeaver.Logger = Logger;
+            innerWeaver.SolutionDirectoryPath = SolutionDirectory;
+            innerWeaver.Weavers = Weavers;
+            innerWeaver.IntermediateDirectoryPath = IntermediateDirectory;
+            innerWeaver.DefineConstants = DefineConstants;
+            innerWeaver.ProjectDirectoryPath = ProjectDirectory;
+            innerWeaver.ProjectFilePath = ProjectFilePath;
+            innerWeaver.DocumentationFilePath = DocumentationFilePath;
 
-            weaver.Execute();
+            innerWeaver.Execute();
 
-            ReferenceCopyLocalPaths = weaver.ReferenceCopyLocalPaths;
-            RuntimeCopyLocalPaths = weaver.RuntimeCopyLocalPaths;
+            ReferenceCopyLocalPaths = innerWeaver.ReferenceCopyLocalPaths;
+            RuntimeCopyLocalPaths = innerWeaver.RuntimeCopyLocalPaths;
         }
-        weaver = null;
+        innerWeaver = null;
     }
 
     IsolatedAssemblyLoadContext GetLoadContext()
@@ -177,5 +177,5 @@ public partial class Processor
     }
 
     public void Cancel() =>
-        weaver?.Cancel();
+        innerWeaver?.Cancel();
 }
