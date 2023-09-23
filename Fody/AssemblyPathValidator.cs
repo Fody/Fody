@@ -1,5 +1,3 @@
-using System.IO;
-
 public partial class Processor
 {
     public virtual void ValidateAssemblyPath()

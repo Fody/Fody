@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-
 public static class WeaversHistory
 {
     public static Dictionary<string, DateTime> TimeStamps = new(StringComparer.OrdinalIgnoreCase);

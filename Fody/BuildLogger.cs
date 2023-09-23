@@ -1,4 +1,3 @@
-using System;
 using Fody;
 using Microsoft.Build.Framework;
 

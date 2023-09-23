@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using Mono.Cecil;
+﻿using Mono.Cecil;
 using Mono.Cecil.Cil;
 
 class SymbolReaderProvider : ISymbolReaderProvider
