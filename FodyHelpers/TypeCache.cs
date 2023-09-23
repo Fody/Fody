@@ -27,38 +27,38 @@ public class TypeCache(Func<string, AssemblyDefinition?> resolve)
 
     public void BuildAssembliesToScan(IEnumerable<BaseModuleWeaver> weavers)
     {
-        var assemblyDefinitions = new Dictionary<string, AssemblyDefinition>(StringComparer.OrdinalIgnoreCase);
-        foreach (var assemblyName in GetAssembliesForScanning(weavers))
+        var definitions = new Dictionary<string, AssemblyDefinition>(StringComparer.OrdinalIgnoreCase);
+        foreach (var name in GetAssembliesForScanning(weavers))
         {
-            var assembly = resolve(assemblyName);
+            var assembly = resolve(name);
             if (assembly == null)
             {
                 continue;
             }
 
-            if (assemblyDefinitions.ContainsKey(assemblyName))
+            if (definitions.ContainsKey(name))
             {
                 continue;
             }
 
-            assemblyDefinitions.Add(assemblyName, assembly);
+            definitions.Add(name, assembly);
         }
 
-        Initialise(assemblyDefinitions.Values);
+        Initialise(definitions.Values);
     }
 
     static IEnumerable<string> GetAssembliesForScanning(IEnumerable<BaseModuleWeaver> weavers)
     {
-        foreach (var assemblyName in defaultAssemblies)
+        foreach (var name in defaultAssemblies)
         {
-            yield return assemblyName;
+            yield return name;
         }
 
         foreach (var weaver in weavers)
         {
-            foreach (var assemblyName in weaver.GetAssembliesForScanning())
+            foreach (var name in weaver.GetAssembliesForScanning())
             {
-                yield return assemblyName;
+                yield return name;
             }
         }
     }
