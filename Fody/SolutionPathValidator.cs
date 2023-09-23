@@ -9,6 +9,7 @@ public partial class Processor
         {
             throw new WeavingException($"SolutionDir '{SolutionDirectory}' does not exist.");
         }
+
         Logger.LogDebug($"SolutionDirectory path is '{SolutionDirectory}'");
     }
 }
