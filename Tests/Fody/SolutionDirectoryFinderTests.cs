@@ -1,4 +1,8 @@
-﻿public class SolutionDirectoryFinderTests
+﻿using System;
+using System.IO;
+using Xunit;
+
+public class SolutionDirectoryFinderTests
 {
     [Fact]
     public void ReturnNCrunchSolutionWhenPresent()

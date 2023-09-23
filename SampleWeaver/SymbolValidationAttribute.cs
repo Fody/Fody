@@ -1,4 +1,6 @@
-﻿namespace SampleWeaver;
+﻿using System;
+
+namespace SampleWeaver;
 
 [AttributeUsage(AttributeTargets.Method)]
 public class SymbolValidationAttribute : Attribute

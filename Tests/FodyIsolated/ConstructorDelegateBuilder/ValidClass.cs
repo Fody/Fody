@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Fody;
 
 public class ValidClass:BaseModuleWeaver
