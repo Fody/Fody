@@ -1,5 +1,3 @@
-using Fody;
-
 public class WeaverHolder
 {
     public WeaverHolder(

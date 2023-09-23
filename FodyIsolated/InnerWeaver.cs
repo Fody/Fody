@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 #if NET472
 using System.Runtime.Remoting;
 #endif
-using Fody;
 using Mono.Cecil;
 using Mono.Cecil.Pdb;
 using Mono.Cecil.Rocks;

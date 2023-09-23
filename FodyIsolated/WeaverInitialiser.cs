@@ -1,6 +1,3 @@
-using System.IO;
-using System.Xml.Linq;
-using Fody;
 using Mono.Cecil.Cil;
 
 public partial class InnerWeaver
