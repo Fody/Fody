@@ -56,10 +56,10 @@ public class PeVerifierTests
         Directory.CreateDirectory("temp");
         var newAssemblyPath = Path.GetFullPath("temp/temp.dll");
         File.Copy(assemblyPath, newAssemblyPath, true);
-        using (var moduleDefinition = ModuleDefinition.ReadModule(assemblyPath))
+        using (var module = ModuleDefinition.ReadModule(assemblyPath))
         {
-            moduleDefinition.AssemblyReferences.Clear();
-            moduleDefinition.Write(newAssemblyPath);
+            module.AssemblyReferences.Clear();
+            module.Write(newAssemblyPath);
         }
 
         Assert.Throws<Exception>(() => PeVerifier.ThrowIfDifferent(assemblyPath, newAssemblyPath));

@@ -10,7 +10,7 @@ public static class CecilExtensions
     {
         Guard.AgainstNull(nameof(method), method);
         return method.Body.Instructions
-            .Select(instruction => method.DebugInformation.GetSequencePoint(instruction))
-            .FirstOrDefault(sequencePoint => sequencePoint != null);
+            .Select(_ => method.DebugInformation.GetSequencePoint(_))
+            .FirstOrDefault(_ => _ != null);
     }
 }

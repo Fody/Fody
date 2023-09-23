@@ -81,7 +81,8 @@ public partial class Processor
         ConfigEntries = ConfigFileFinder.ParseWeaverConfigEntries(ConfigFiles);
 
         var extraEntries = ConfigEntries.Values
-            .Where(entry => !entry.ConfigFile.AllowExtraEntries && !Weavers.Any(weaver => string.Equals(weaver.ElementName, entry.ElementName)))
+            .Where(entry => !entry.ConfigFile.AllowExtraEntries &&
+                            Weavers.All(weaver => weaver.ElementName != entry.ElementName))
             .ToArray();
 
         const string missingWeaversHelp = "Add the desired weavers via their nuget package.";
@@ -113,8 +114,8 @@ public partial class Processor
         ConfigFileFinder.EnsureSchemaIsUpToDate(ProjectDirectory, Weavers, GenerateXsd);
 
         Weavers = Weavers
-            .Where(weaver => weaver.Element != null)
-            .OrderBy(weaver => weaver.ExecutionOrder)
+            .Where(_ => _.Element != null)
+            .OrderBy(_ => _.ExecutionOrder)
             .ToList();
 
         lock (mutex)

@@ -8,5 +8,5 @@ public static class DomainAssemblyResolver
         AppDomain.CurrentDomain.AssemblyResolve += (_, args) => GetAssembly(args.Name);
 
     public static Assembly? GetAssembly(string name) =>
-        AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(x => string.Equals(x.FullName, name, StringComparison.OrdinalIgnoreCase));
+        AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(_ => string.Equals(_.FullName, name, StringComparison.OrdinalIgnoreCase));
 }

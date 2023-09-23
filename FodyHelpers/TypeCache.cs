@@ -9,10 +9,8 @@ namespace Fody;
 /// <summary>
 /// Only for test usage. Only for development purposes when building Fody addins. The API may change in minor releases.
 /// </summary>
-public class TypeCache
+public class TypeCache(Func<string, AssemblyDefinition?> resolve)
 {
-    Func<string, AssemblyDefinition?> resolve;
-
     public static List<string> defaultAssemblies = new()
     {
         "mscorlib",
@@ -23,9 +21,6 @@ public class TypeCache
     };
 
     Dictionary<string, TypeDefinition> cachedTypes = new();
-
-    public TypeCache(Func<string, AssemblyDefinition?> resolve) =>
-        this.resolve = resolve;
 
     public void BuildAssembliesToScan(BaseModuleWeaver weaver) =>
         BuildAssembliesToScan(new[] {weaver});

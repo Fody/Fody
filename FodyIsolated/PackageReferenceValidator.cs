@@ -6,7 +6,7 @@ public partial class InnerWeaver
 {
     static void ValidatePackageReferenceSettings(IList<WeaverHolder> weaverInstances, ILogger logger)
     {
-        var weaversWithoutReference = weaverInstances.Where(weaver => weaver.Instance.ShouldCleanReference).ToList();
+        var weaversWithoutReference = weaverInstances.Where(_ => _.Instance.ShouldCleanReference).ToList();
 
         if (!weaversWithoutReference.Any())
         {
@@ -43,9 +43,9 @@ public partial class InnerWeaver
             yield return $"The package reference for {weaver.WeaverName} does not contain PrivateAssets='All'";
         }
 
-        if (weaver.IncludeAssets != string.Empty
-            && !string.Equals(weaver.IncludeAssets, "All", StringComparison.OrdinalIgnoreCase)
-            && !weaver.IncludeAssets!.Split(';').Select(item => item.Trim()).Contains("compile", StringComparer.OrdinalIgnoreCase))
+        if (weaver.IncludeAssets != string.Empty &&
+            !string.Equals(weaver.IncludeAssets, "All", StringComparison.OrdinalIgnoreCase) &&
+            !weaver.IncludeAssets!.Split(';').Select(_ => _.Trim()).Contains("compile", StringComparer.OrdinalIgnoreCase))
         {
             yield return $"The package reference for {weaver.WeaverName} is missing the 'compile' part in the IncludeAssets setting; it's recommended to completely remove IncludeAssets";
         }

@@ -20,8 +20,8 @@ public static class XmlExtensions
 
     static IEnumerable<XAttribute> GetAttributes(XElement xElement) =>
         xElement.Attributes()
-            .Where(x => !x.IsNamespaceDeclaration)
-            .Select(x => new XAttribute(x.Name.LocalName, x.Value));
+            .Where(_ => !_.IsNamespaceDeclaration)
+            .Select(_ => new XAttribute(_.Name.LocalName, _.Value));
 
     public static bool TryReadBool(this XElement config, string nodeName, out bool value)
     {

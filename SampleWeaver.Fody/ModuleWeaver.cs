@@ -40,7 +40,8 @@ public class ModuleWeaver :
 
         var customAttributes = ModuleDefinition.Assembly.CustomAttributes;
 
-        var sampleAttr = customAttributes.FirstOrDefault(attr => attr.AttributeType.Name == "SampleAttribute");
+        var sampleAttr = customAttributes
+            .FirstOrDefault(_ => _.AttributeType.Name == "SampleAttribute");
         if (sampleAttr == null)
         {
             return;
@@ -58,7 +59,8 @@ public class ModuleWeaver :
         RuntimeCopyLocalPaths.Remove(Path.ChangeExtension(filePath, ".xml"));
 
         // Do not use ShouldCleanReference in order to test the above code
-        var assemblyRef = ModuleDefinition.AssemblyReferences.FirstOrDefault(_ => _.Name == "SampleWeaver");
+        var assemblyRef = ModuleDefinition.AssemblyReferences
+            .FirstOrDefault(_ => _.Name == "SampleWeaver");
         if (assemblyRef != null)
         {
             ModuleDefinition.AssemblyReferences.Remove(assemblyRef);

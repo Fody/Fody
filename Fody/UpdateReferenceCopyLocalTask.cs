@@ -38,11 +38,11 @@ public class UpdateCopyLocalTask : Task
         var referenceCopyLocalPaths = new HashSet<string>(CopyLocalFiles.Select(_ => _.ItemSpec), StringComparer.OrdinalIgnoreCase);
 
         var existingReferenceCopyLocalFiles = CopyLocalFiles
-            .Where(item => updatedReferenceCopyLocalPaths.Contains(item.ItemSpec));
+            .Where(_ => updatedReferenceCopyLocalPaths.Contains(_.ItemSpec));
 
         var newReferenceCopyLocalFiles = updatedReferenceCopyLocalPaths
-            .Where(item => !referenceCopyLocalPaths.Contains(item))
-            .Select(item => new TaskItem(item));
+            .Where(_ => !referenceCopyLocalPaths.Contains(_))
+            .Select(_ => new TaskItem(_));
 
         UpdatedCopyLocalFiles = existingReferenceCopyLocalFiles.Concat(newReferenceCopyLocalFiles).ToArray();
     }
