@@ -1,6 +1,5 @@
 using System.Linq;
 using Fody;
-using Xunit;
 
 public class ReferenceTests
 {

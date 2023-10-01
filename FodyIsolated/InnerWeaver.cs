@@ -1,13 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 #if NET472
 using System.Runtime.Remoting;
 #endif
-using Fody;
 using Mono.Cecil;
 using Mono.Cecil.Pdb;
 using Mono.Cecil.Rocks;
@@ -213,9 +209,13 @@ public partial class InnerWeaver :
                 }
                 catch (FileNotFoundException exception) when (exception.Message.Contains(nameof(ValueTuple)))
                 {
-                    throw new($@"Failed to execute weaver {weaver.Config.AssemblyPath} due to a failure to load ValueTuple.
-This is a known issue with in dotnet (https://github.com/dotnet/runtime/issues/27533).
-The recommended work around is to avoid using ValueTuple inside a weaver.", exception);
+                    throw new(
+                        $"""
+                         Failed to execute weaver {weaver.Config.AssemblyPath} due to a failure to load ValueTuple.
+                         This is a known issue with in dotnet (https://github.com/dotnet/runtime/issues/27533).
+                         The recommended work around is to avoid using ValueTuple inside a weaver.
+                         """,
+                        exception);
                 }
                 catch (Exception exception)
                 {

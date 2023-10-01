@@ -1,6 +1,3 @@
-using System;
-using System.IO;
-
 namespace Fody;
 
 [Obsolete("Not for public use")]

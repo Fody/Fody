@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -141,11 +137,11 @@ public class WeavingTask :
 
         return WeaverFiles
             .Select(
-                taskItem => new
+                _ => new
                 {
-                    taskItem.ItemSpec,
-                    ClassNames = GetConfiguredClassNames(taskItem),
-                    PackageReference = GetPackageReference(taskItem)
+                    _.ItemSpec,
+                    ClassNames = GetConfiguredClassNames(_),
+                    PackageReference = GetPackageReference(_)
                 })
             .SelectMany(entry => entry.ClassNames.Select(
                 className =>
@@ -163,14 +159,14 @@ public class WeavingTask :
     static IEnumerable<string> GetConfiguredClassNames(ITaskItem taskItem) =>
         taskItem.GetMetadata("WeaverClassNames")
             .Split(';')
-            .Select(name => name.Trim())
-            .Where(name => !string.IsNullOrEmpty(name))
+            .Select(_ => _.Trim())
+            .Where(_ => !string.IsNullOrEmpty(_))
             .DefaultIfEmpty();
 
     ITaskItem? GetPackageReference(ITaskItem weaverFileItem)
     {
         var packageName = Path.GetFileNameWithoutExtension(weaverFileItem.ItemSpec);
-        return PackageReferences?.FirstOrDefault(p => string.Equals(p.ItemSpec, packageName, StringComparison.OrdinalIgnoreCase));
+        return PackageReferences?.FirstOrDefault(_ => string.Equals(_.ItemSpec, packageName, StringComparison.OrdinalIgnoreCase));
     }
 
     public void Cancel() =>

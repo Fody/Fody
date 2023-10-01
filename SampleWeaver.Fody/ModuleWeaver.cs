@@ -40,7 +40,8 @@ public class ModuleWeaver :
 
         var customAttributes = ModuleDefinition.Assembly.CustomAttributes;
 
-        var sampleAttr = customAttributes.FirstOrDefault(attr => attr.AttributeType.Name == "SampleAttribute");
+        var sampleAttr = customAttributes
+            .FirstOrDefault(_ => _.AttributeType.Name == "SampleAttribute");
         if (sampleAttr == null)
         {
             return;
@@ -58,7 +59,8 @@ public class ModuleWeaver :
         RuntimeCopyLocalPaths.Remove(Path.ChangeExtension(filePath, ".xml"));
 
         // Do not use ShouldCleanReference in order to test the above code
-        var assemblyRef = ModuleDefinition.AssemblyReferences.FirstOrDefault(_ => _.Name == "SampleWeaver");
+        var assemblyRef = ModuleDefinition.AssemblyReferences
+            .FirstOrDefault(_ => _.Name == "SampleWeaver");
         if (assemblyRef != null)
         {
             ModuleDefinition.AssemblyReferences.Remove(assemblyRef);
@@ -117,16 +119,10 @@ public class ModuleWeaver :
     public override bool ShouldCleanReference => false;
 }
 
-class MethodInfos
+class MethodInfos(MethodDefinition method, CustomAttribute attribute)
 {
-    public MethodDefinition Method { get; }
-    public CustomAttribute Attribute { get; }
-
-    public MethodInfos(MethodDefinition method, CustomAttribute attribute)
-    {
-        Method = method;
-        Attribute = attribute;
-    }
+    public MethodDefinition Method { get; } = method;
+    public CustomAttribute Attribute { get; } = attribute;
 }
 
 static class AttributeExtensionMethods
@@ -134,7 +130,7 @@ static class AttributeExtensionMethods
     public static CustomAttribute? ConsumeAttribute(this ICustomAttributeProvider attributeProvider, string attributeName)
     {
         var attributes = attributeProvider.CustomAttributes;
-        var matches = attributes.Where(attribute => attribute.Constructor.DeclaringType.FullName == attributeName).ToList();
+        var matches = attributes.Where(_ => _.Constructor.DeclaringType.FullName == attributeName).ToList();
 
         foreach (var match in matches)
         {
@@ -146,7 +142,7 @@ static class AttributeExtensionMethods
 
     public static T GetPropertyValue<T>(this CustomAttribute attribute, string propertyName, T defaultValue) =>
         attribute.Properties.Where(_ => _.Name == propertyName)
-            .Select(p => (T)p.Argument.Value)
+            .Select(_ => (T)_.Argument.Value)
             .DefaultIfEmpty(defaultValue)
             .Single();
 }

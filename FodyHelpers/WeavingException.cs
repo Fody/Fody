@@ -1,15 +1,9 @@
-using System;
 using Mono.Cecil.Cil;
 
 namespace Fody;
 
-public class WeavingException :
-    Exception
+public class WeavingException(string message) :
+    Exception(message)
 {
-    public WeavingException(string message)
-        : base(message)
-    {
-    }
-
     public SequencePoint? SequencePoint { get; set; }
 }

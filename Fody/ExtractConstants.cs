@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-
 static class ExtractConstants
 {
     internal static List<string> GetConstants(this string? input)
@@ -9,6 +6,7 @@ static class ExtractConstants
         {
             return new();
         }
+
         return input.Split(';').ToList();
     }
 }

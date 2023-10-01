@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using Fody;
 using Mono.Cecil;
 
@@ -30,7 +26,7 @@ static class ReferenceCleaner
             weaverLibName + ".pdb"
         };
 
-        referenceCopyLocalPaths.RemoveAll(refPath => copyLocalFilesToRemove.Contains(Path.GetFileName(refPath)));
-        runtimeCopyLocalPaths.RemoveAll(refPath => copyLocalFilesToRemove.Contains(Path.GetFileName(refPath)));
+        referenceCopyLocalPaths.RemoveAll(_ => copyLocalFilesToRemove.Contains(Path.GetFileName(_)));
+        runtimeCopyLocalPaths.RemoveAll(_ => copyLocalFilesToRemove.Contains(Path.GetFileName(_)));
     }
 }

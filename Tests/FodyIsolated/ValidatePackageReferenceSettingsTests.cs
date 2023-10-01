@@ -1,6 +1,4 @@
-﻿using Xunit;
-
-namespace Tests.FodyIsolated;
+﻿namespace Tests.FodyIsolated;
 
 public class ValidatePackageReferenceSettingsTests
 {

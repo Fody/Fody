@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-public class WeaverConfigFile
+﻿public class WeaverConfigFile
 {
     public readonly bool AllowExtraEntries;
     public readonly string? FilePath;

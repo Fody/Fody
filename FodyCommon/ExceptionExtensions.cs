@@ -1,59 +1,56 @@
-using System;
-using System.Text;
-
 public static class ExceptionExtensions
 {
     public static string ToFriendlyString(this Exception exception)
     {
-        var stringBuilder = new StringBuilder();
-        stringBuilder.Append("An unhandled exception occurred:");
-        stringBuilder.Append(Environment.NewLine);
-        stringBuilder.Append("Exception:");
-        stringBuilder.Append(Environment.NewLine);
+        var builder = new StringBuilder();
+        builder.Append("An unhandled exception occurred:");
+        builder.Append(Environment.NewLine);
+        builder.Append("Exception:");
+        builder.Append(Environment.NewLine);
         while (exception != null)
         {
-            stringBuilder.Append(exception.Message);
-            stringBuilder.Append(Environment.NewLine);
+            builder.Append(exception.Message);
+            builder.Append(Environment.NewLine);
 
-            stringBuilder.Append("Type:");
-            stringBuilder.Append(Environment.NewLine);
-            stringBuilder.Append(exception.GetType());
-            stringBuilder.Append(Environment.NewLine);
+            builder.Append("Type:");
+            builder.Append(Environment.NewLine);
+            builder.Append(exception.GetType());
+            builder.Append(Environment.NewLine);
 
             foreach (var i in exception.Data)
             {
-                stringBuilder.Append("Data :");
-                stringBuilder.Append(i);
-                stringBuilder.Append(Environment.NewLine);
+                builder.Append("Data :");
+                builder.Append(i);
+                builder.Append(Environment.NewLine);
             }
 
             if (exception.StackTrace != null)
             {
-                stringBuilder.Append("StackTrace:");
-                stringBuilder.Append(Environment.NewLine);
-                stringBuilder.Append(exception.StackTrace);
-                stringBuilder.Append(Environment.NewLine);
+                builder.Append("StackTrace:");
+                builder.Append(Environment.NewLine);
+                builder.Append(exception.StackTrace);
+                builder.Append(Environment.NewLine);
             }
 
             if (exception.Source != null)
             {
-                stringBuilder.Append("Source:");
-                stringBuilder.Append(Environment.NewLine);
-                stringBuilder.Append(exception.Source);
-                stringBuilder.Append(Environment.NewLine);
+                builder.Append("Source:");
+                builder.Append(Environment.NewLine);
+                builder.Append(exception.Source);
+                builder.Append(Environment.NewLine);
             }
 
             if (exception.TargetSite != null)
             {
-                stringBuilder.Append("TargetSite:");
-                stringBuilder.Append(Environment.NewLine);
-                stringBuilder.Append(exception.TargetSite);
-                stringBuilder.Append(Environment.NewLine);
+                builder.Append("TargetSite:");
+                builder.Append(Environment.NewLine);
+                builder.Append(exception.TargetSite);
+                builder.Append(Environment.NewLine);
             }
 
             exception = exception.InnerException;
         }
 
-        return stringBuilder.ToString();
+        return builder.ToString();
     }
 }

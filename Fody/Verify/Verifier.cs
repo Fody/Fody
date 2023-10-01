@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using Fody;
-
-public class Verifier
+﻿public class Verifier
 {
     public ILogger Logger = null!;
     public string SolutionDirectory = null!;
@@ -94,6 +87,7 @@ public class Verifier
                 return value;
             }
         }
+
         return false;
     }
 
@@ -103,12 +97,16 @@ public class Verifier
         {
             var configXml = configFile.Document;
             var element = configXml.Root;
-            var codesConfigs = (string)element.Attribute("VerifyIgnoreCodes");
+            var codesConfigs = (string) element.Attribute("VerifyIgnoreCodes");
             if (string.IsNullOrWhiteSpace(codesConfigs))
             {
                 continue;
             }
-            foreach (var value in codesConfigs.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries))
+
+            foreach (var value in codesConfigs.Split(new[]
+                     {
+                         ','
+                     }, StringSplitOptions.RemoveEmptyEntries))
             {
                 yield return value;
             }

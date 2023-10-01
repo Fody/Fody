@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Xml;
-using System.Xml.Linq;
-
-public static class ConfigFileFinder
+﻿public static class ConfigFileFinder
 {
     const string FodyWeaversConfigFileName = "FodyWeavers.xml";
     static readonly XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");
@@ -77,7 +70,7 @@ public static class ConfigFileFinder
         var weaverConfig = new XDocument(root);
 
         var elements = weaverEntries
-            .Select(entry => new XElement(entry.ElementName))
+            .Select(_ => new XElement(_.ElementName))
             .ToArray();
 
         root.Add(elements);
@@ -105,7 +98,7 @@ public static class ConfigFileFinder
     {
         var schema = XDocument.Parse(Fody.Properties.Resources.FodyWeavers_SchemaTemplate);
 
-        var baseNode = schema.Descendants().First(item => item.Name == schemaNamespace.GetName("all"));
+        var baseNode = schema.Descendants().First(_ => _.Name == schemaNamespace.GetName("all"));
 
         var fragments = weavers.Select(CreateItemFragment);
 
@@ -182,9 +175,9 @@ public static class ConfigFileFinder
             }
 
             var hasNamespace = doc.Root.Attributes()
-                .Any(attr => !attr.IsNamespaceDeclaration &&
-                             attr.Name.LocalName == "noNamespaceSchemaLocation" &&
-                             string.Equals(attr.Value, "FodyWeavers.xsd", StringComparison.OrdinalIgnoreCase));
+                .Any(_ => !_.IsNamespaceDeclaration &&
+                          _.Name.LocalName == "noNamespaceSchemaLocation" &&
+                          string.Equals(_.Value, "FodyWeavers.xsd", StringComparison.OrdinalIgnoreCase));
 
             if (!hasNamespace)
             {

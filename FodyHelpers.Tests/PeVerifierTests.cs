@@ -40,11 +40,13 @@ public class PeVerifierTests
     [Fact]
     public Task TrimLineNumbers()
     {
-        var text = PeVerifier.TrimLineNumbers(@"
-[IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::MethodWithAmp][offset 0x00000002][found Native Int][expected unmanaged pointer] Unexpected type on the stack.
-[IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::get_NullProperty][offset 0x00000006][found unmanaged pointer][expected unmanaged pointer] Unexpected type on the stack.
-[IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::set_NullProperty][offset 0x00000001] Unmanaged pointers are not a verifiable type.
-3 Error(s) Verifying C:\Code\Fody\net452\AssemblyToProcess.dll");
+        var text = PeVerifier.TrimLineNumbers(
+            """
+            [IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::MethodWithAmp][offset 0x00000002][found Native Int][expected unmanaged pointer] Unexpected type on the stack.
+            [IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::get_NullProperty][offset 0x00000006][found unmanaged pointer][expected unmanaged pointer] Unexpected type on the stack.
+            [IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::set_NullProperty][offset 0x00000001] Unmanaged pointers are not a verifiable type.
+            3 Error(s) Verifying C:\Code\Fody\net452\AssemblyToProcess.dll
+            """);
         return Verifier.Verify(text);
     }
 
@@ -54,10 +56,10 @@ public class PeVerifierTests
         Directory.CreateDirectory("temp");
         var newAssemblyPath = Path.GetFullPath("temp/temp.dll");
         File.Copy(assemblyPath, newAssemblyPath, true);
-        using (var moduleDefinition = ModuleDefinition.ReadModule(assemblyPath))
+        using (var module = ModuleDefinition.ReadModule(assemblyPath))
         {
-            moduleDefinition.AssemblyReferences.Clear();
-            moduleDefinition.Write(newAssemblyPath);
+            module.AssemblyReferences.Clear();
+            module.Write(newAssemblyPath);
         }
 
         Assert.Throws<Exception>(() => PeVerifier.ThrowIfDifferent(assemblyPath, newAssemblyPath));

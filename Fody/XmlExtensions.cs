@@ -1,8 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
-using System.Xml.Linq;
-
 public static class XmlExtensions
 {
     public static void StripNamespace(this XDocument document)
@@ -20,8 +15,8 @@ public static class XmlExtensions
 
     static IEnumerable<XAttribute> GetAttributes(XElement xElement) =>
         xElement.Attributes()
-            .Where(x => !x.IsNamespaceDeclaration)
-            .Select(x => new XAttribute(x.Name.LocalName, x.Value));
+            .Where(_ => !_.IsNamespaceDeclaration)
+            .Select(_ => new XAttribute(_.Name.LocalName, _.Value));
 
     public static bool TryReadBool(this XElement config, string nodeName, out bool value)
     {

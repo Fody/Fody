@@ -5,7 +5,6 @@ using Fody;
 using Mono.Cecil;
 using VerifyTests;
 using VerifyXunit;
-using Xunit;
 
 [UsesVerify]
 public class WeaverInitialiserTests

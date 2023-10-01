@@ -7,7 +7,10 @@ public class WeaverUsingSymbols : BaseModuleWeaver
 {
     public override void Execute()
     {
-        var methods = ModuleDefinition.GetTypes().SelectMany(t => t.Methods).ToArray();
+        var methods = ModuleDefinition
+            .GetTypes()
+            .SelectMany(_ => _.Methods)
+            .ToArray();
 
         Assert.NotNull(methods);
         Assert.True(methods.Any());

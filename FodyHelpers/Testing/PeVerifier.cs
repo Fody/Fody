@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-
-namespace Fody;
+﻿namespace Fody;
 
 /// <summary>
 /// Verifies assemblies using peverify.exe.
@@ -93,13 +86,16 @@ public static class PeVerifier
             return;
         }
 
-        throw new($@"The files have difference peverify results.
+        throw new(
+            $"""
+             The files have difference peverify results.
 
-AfterOutput:
-{afterOutput}
+             AfterOutput:
+             {afterOutput}
 
-BeforeOutput:
-{beforeOutput}");
+             BeforeOutput:
+             {beforeOutput}
+             """);
     }
 
     public static string TrimLineNumbers(string input) =>

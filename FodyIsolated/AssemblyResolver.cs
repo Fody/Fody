@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using Mono.Cecil;
 
 public class AssemblyResolver : IAssemblyResolver

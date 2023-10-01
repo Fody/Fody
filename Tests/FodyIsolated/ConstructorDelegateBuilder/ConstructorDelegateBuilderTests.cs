@@ -1,6 +1,4 @@
-using System;
 using Fody;
-using Xunit;
 
 public class ConstructorDelegateBuilderTests
 {
@@ -71,7 +69,5 @@ public class ConstructorDelegateBuilderTests
         Assert.Equal(type, anObject.GetType());
     }
 
-    public class NestedPublicClass
-    {
-    }
+    public class NestedPublicClass;
 }

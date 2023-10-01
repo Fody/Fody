@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Fody;
+﻿namespace Fody;
 
 /// <summary>
 /// Abstraction for the MSBuild MessageImportance.

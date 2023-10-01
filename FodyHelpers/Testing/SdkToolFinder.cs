@@ -1,10 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Linq;
-
-static class SdkToolFinder
+﻿static class SdkToolFinder
 {
     static string windowsSdkDirectory;
 
@@ -29,10 +23,10 @@ static class SdkToolFinder
         }
 
         path = Directory.EnumerateFiles(windowsSdkDirectory, $"{tool}.exe", SearchOption.AllDirectories)
-            .Where(x => !x.ToLowerInvariant().Contains("x64"))
-            .OrderByDescending(x =>
+            .Where(_ => !_.ToLowerInvariant().Contains("x64"))
+            .OrderByDescending(_ =>
             {
-                var info = FileVersionInfo.GetVersionInfo(x);
+                var info = FileVersionInfo.GetVersionInfo(_);
                 return new Version(info.FileMajorPart, info.FileMinorPart, info.FileBuildPart);
             })
             .FirstOrDefault();
