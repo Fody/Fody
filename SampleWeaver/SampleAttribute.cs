@@ -3,6 +3,4 @@
 namespace SampleWeaver;
 
 [AttributeUsage(AttributeTargets.Assembly)]
-public class SampleAttribute : Attribute
-{
-}
+public class SampleAttribute : Attribute;

@@ -93,13 +93,16 @@ public static class PeVerifier
             return;
         }
 
-        throw new($@"The files have difference peverify results.
+        throw new(
+            $"""
+             The files have difference peverify results.
 
-AfterOutput:
-{afterOutput}
+             AfterOutput:
+             {afterOutput}
 
-BeforeOutput:
-{beforeOutput}");
+             BeforeOutput:
+             {beforeOutput}
+             """);
     }
 
     public static string TrimLineNumbers(string input) =>
