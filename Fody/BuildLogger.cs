@@ -7,6 +7,8 @@ public class BuildLogger :
     ILogger
 {
     public IBuildEngine BuildEngine { get; set; } = null!;
+    public bool TreatWarningsAsErrors { get; set; }
+
     string? currentWeaverName;
 
     public virtual void SetCurrentWeaverName(string weaverName) =>
@@ -27,8 +29,16 @@ public class BuildLogger :
     public virtual void LogWarning(string message, string? code) =>
         LogWarning(message, null, 0, 0, 0, 0, code);
 
-    public virtual void LogWarning(string message, string? file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string? code) =>
+    public virtual void LogWarning(string message, string? file, int lineNumber, int columnNumber, int endLineNumber, int endColumnNumber, string? code)
+    {
+        if (TreatWarningsAsErrors)
+        {
+            LogError(message, file, lineNumber, columnNumber, endLineNumber, endColumnNumber);
+            return;
+        }
+
         BuildEngine.LogWarningEvent(new("", code ?? "", file, lineNumber, columnNumber, endLineNumber, endColumnNumber, PrependMessage(message), "", "Fody"));
+    }
 
     public virtual void LogError(string message) =>
         LogError(message, null, 0, 0, 0, 0);

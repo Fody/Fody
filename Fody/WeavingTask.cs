@@ -57,6 +57,7 @@ public class WeavingTask :
     public string RuntimeCopyLocalFilesCache { get; set; } = null!;
 
     public bool GenerateXsd { get; set; }
+    public bool TreatWarningsAsErrors { get; set; }
 
     public override bool Execute()
     {
@@ -70,6 +71,7 @@ public class WeavingTask :
         var buildLogger = new BuildLogger
         {
             BuildEngine = BuildEngine,
+            TreatWarningsAsErrors = TreatWarningsAsErrors
         };
 
         processor = new()
