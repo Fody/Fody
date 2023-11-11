@@ -5,6 +5,9 @@
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+    <!-- Fody warnings are expected in the integration test -->
+    <FodyTreatWarningsAsErrors>false</FodyTreatWarningsAsErrors>
   </PropertyGroup>
 
 </Project>
