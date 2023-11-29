@@ -6,12 +6,11 @@
   <ItemGroup>
     <PackageReference Include="Fody" Version="$(IntegrationVersion)" />
     <PackageReference Include="SampleWeaver.Fody" Version="$(IntegrationVersion)" />
-    <PackageReference Include="Virtuosity.Fody" Version="1.21.3" PrivateAssets="All" />
+    <PackageReference Include="Virtuosity.Fody" Version="3.1.1" PrivateAssets="All" />
   </ItemGroup>
 
   <Target Name="VerifyThereAreNoWeaversInOutput" AfterTargets="PostBuildEvent">
-    <Error Condition="Exists('$(OutDir)Virtuosity.dll')"
-           Text="Virtuosity.dll found in build output" />
+    <Error Condition="Exists('$(OutDir)Virtuosity.dll')" Text="Virtuosity.dll found in build output" />
   </Target>
 
 </Project>
