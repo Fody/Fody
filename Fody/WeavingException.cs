@@ -1,9 +1,2 @@
-using System;
-
-class WeavingException : Exception
-{
-    public WeavingException(string message)
-        : base(message)
-    {
-    }
-}
+class WeavingException(string message) :
+    Exception(message);

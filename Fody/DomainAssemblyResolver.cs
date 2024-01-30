@@ -1,7 +1,3 @@
-using System;
-using System.Linq;
-using System.Reflection;
-
 public static class DomainAssemblyResolver
 {
     public static void Connect() =>

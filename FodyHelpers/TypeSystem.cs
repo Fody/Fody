@@ -1,6 +1,4 @@
-﻿using Mono.Cecil;
-
-namespace Fody;
+﻿namespace Fody;
 
 /// <summary>
 /// Replacement for <see cref="ModuleDefinition.TypeSystem"/>.

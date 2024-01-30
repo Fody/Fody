@@ -1,10 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
-using System.Linq;
-
-static class SdkToolFinder
+﻿static class SdkToolFinder
 {
     static string windowsSdkDirectory;
 

@@ -1,5 +1,3 @@
-using System.Reflection;
-
 public static class TypeFinder
 {
     public static Type? FindType(this Assembly readAssembly, string typeName)

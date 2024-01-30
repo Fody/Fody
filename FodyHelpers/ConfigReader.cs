@@ -1,6 +1,4 @@
 using System.Xml;
-using System.Xml.Linq;
-using Fody;
 
 static class ConfigReader
 {

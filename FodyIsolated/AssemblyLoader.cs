@@ -1,5 +1,3 @@
-using System.Reflection;
-
 public partial class InnerWeaver
 {
     static Dictionary<string, Assembly> assemblies = new(StringComparer.OrdinalIgnoreCase);

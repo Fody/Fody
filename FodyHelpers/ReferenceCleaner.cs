@@ -1,9 +1,3 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Fody;
-using Mono.Cecil;
-
 static class ReferenceCleaner
 {
     public static void CleanReferences(ModuleDefinition module, BaseModuleWeaver weaver, List<string> referenceCopyLocalPaths, List<string> runtimeCopyLocalPaths, Action<string> log)

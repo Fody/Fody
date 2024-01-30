@@ -1,7 +1,3 @@
-using System.Linq;
-using Mono.Cecil;
-using Mono.Cecil.Cil;
-
 namespace Fody;
 
 public static class CecilExtensions

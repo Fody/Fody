@@ -1,5 +1,3 @@
-using Mono.Cecil.Cil;
-
 namespace Fody;
 
 /// <summary>

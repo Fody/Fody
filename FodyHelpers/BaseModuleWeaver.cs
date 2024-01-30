@@ -1,10 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Xml.Linq;
-using Mono.Cecil;
-using Mono.Cecil.Cil;
-
-namespace Fody;
+﻿namespace Fody;
 
 /// <summary>
 /// Base class for module weavers.

@@ -1,6 +1,3 @@
-using Microsoft.Build.Framework;
-using Microsoft.Build.Utilities;
-
 namespace Fody;
 
 public class VerifyTask :

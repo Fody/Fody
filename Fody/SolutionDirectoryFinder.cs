@@ -1,5 +1,3 @@
-using System.IO;
-
 public class SolutionDirectoryFinder
 {
     public static string Find(string? solutionDir, string? nCrunchOriginalSolutionDir, string projectDirectory)
