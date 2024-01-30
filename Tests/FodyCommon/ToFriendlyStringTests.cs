@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-public class ToFriendlyStringTests
+﻿public class ToFriendlyStringTests
 {
     [Fact(Skip = "todo")]
     public void ToFriendlyName()

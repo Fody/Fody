@@ -71,10 +71,7 @@ public partial class Processor
 
         if (!ConfigFiles.Any())
         {
-            ConfigFiles = new()
-            {
-                ConfigFileFinder.GenerateDefault(ProjectDirectory, Weavers, GenerateXsd)
-            };
+            ConfigFiles = [ConfigFileFinder.GenerateDefault(ProjectDirectory, Weavers, GenerateXsd)];
             Logger.LogWarning($"Could not find a FodyWeavers.xml file at the project level ({ProjectDirectory}). A default file has been created. Please review the file and add it to your project.");
         }
 

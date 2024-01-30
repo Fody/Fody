@@ -1,6 +1,4 @@
-using System;
 using System.Reflection;
-using Fody;
 
 public static class FodyVersion
 {

@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using Fody;
-
 public class FakeModuleWeaver :BaseModuleWeaver
 {
     public override void Execute()

@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using Fody;
 
 public static class DelegateBuilder
 {
@@ -44,7 +41,7 @@ public static class DelegateBuilder
             throw new WeavingException($"'{weaverType.FullName}' is not a public instance class.");
         }
 
-        var constructorInfo = weaverType.GetConstructor(BindingFlags.Instance | BindingFlags.Public, null, new Type[] { }, null);
+        var constructorInfo = weaverType.GetConstructor(BindingFlags.Instance | BindingFlags.Public, null, [], null);
         if (constructorInfo == null)
         {
             var message = $"'{weaverType.FullName}' does not have a public instance constructor with no parameters.";

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -13,14 +12,14 @@ public class TypeCache
 {
     Func<string, AssemblyDefinition?> resolve;
 
-    public static List<string> defaultAssemblies = new()
-    {
+    public static List<string> defaultAssemblies =
+    [
         "mscorlib",
         "System",
         "System.Runtime",
         "System.Core",
         "netstandard"
-    };
+    ];
 
     Dictionary<string, TypeDefinition> cachedTypes = new();
 

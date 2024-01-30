@@ -1,8 +1,3 @@
-using System;
-using System.IO;
-using System.Linq;
-using Fody;
-
 #if (NETSTANDARD)
 using StrongNameKeyPair = Mono.Cecil.StrongNameKeyPair;
 #else

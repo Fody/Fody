@@ -211,9 +211,8 @@ public static class ConfigFileFinder
     }
 
     static XAttribute[] SchemaInstanceAttributes =>
-        new[]
-        {
-            new XAttribute(XNamespace.Xmlns + "xsi", schemaInstanceNamespace.NamespaceName),
-            new XAttribute(schemaInstanceNamespace.GetName("noNamespaceSchemaLocation"), "FodyWeavers.xsd"),
-        };
+    [
+        new(XNamespace.Xmlns + "xsi", schemaInstanceNamespace.NamespaceName),
+        new(schemaInstanceNamespace.GetName("noNamespaceSchemaLocation"), "FodyWeavers.xsd")
+    ];
 }

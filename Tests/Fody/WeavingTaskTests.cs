@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Fody;
-using Microsoft.Build.Framework;
-using Microsoft.Build.Utilities;
-using Xunit;
+﻿using Microsoft.Build.Utilities;
 
 public class WeavingTaskTests
 {
@@ -12,18 +7,18 @@ public class WeavingTaskTests
     {
         var task = new WeavingTask
         {
-            WeaverFiles = new ITaskItem[]
-            {
+            WeaverFiles =
+            [
                 new TaskItem(@"SampleWeaverDir\SampleWeaverA.Fody.dll"),
                 new TaskItem(@"SampleWeaverDir\SampleWeaverB.Fody.dll"),
                 new TaskItem(@"SampleWeaverDir\SampleWeaverC.Fody.dll"),
                 new TaskItem(@"SampleWeaverDir\SampleWeaverD.Fody.dll", Metadata(("WeaverClassNames", "WeaverDClass1;WeaverDClass2")))
-            },
-            PackageReferences = new ITaskItem[]
-            {
+            ],
+            PackageReferences =
+            [
                 new TaskItem("SampleWeaverA.Fody"),
                 new TaskItem("SampleWeaverB.Fody", Metadata(("PrivateAssets", "all"), ("IncludeAssets", "compile")))
-            }
+            ]
         };
 
         var weavers = task.GetWeaversFromProps();

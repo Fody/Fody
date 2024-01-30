@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using Xunit;
+﻿using System.IO;
 
 public class SolutionDirectoryFinderTests
 {

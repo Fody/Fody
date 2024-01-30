@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Microsoft.Build.Framework;
-using Xunit;
-
 public class BuildLoggerTests
 {
     MockBuildEngine buildEngine = new();

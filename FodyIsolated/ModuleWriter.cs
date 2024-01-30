@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using Mono.Cecil;
 
 public partial class InnerWeaver
 {

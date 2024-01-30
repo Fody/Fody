@@ -1,18 +1,18 @@
-using System;
 using System.Reflection;
 using System.Text;
-using Mono.Cecil.Cil;
 
 public static class ExceptionExtensions
 {
     public static string GetLoaderMessages(this ReflectionTypeLoadException exception)
     {
-        var stringBuilder = new StringBuilder();
+        var builder = new StringBuilder();
+
         foreach (var loaderException in exception.LoaderExceptions)
         {
-            stringBuilder.AppendLine(loaderException.ToString());
+            builder.AppendLine(loaderException.ToString());
         }
-        return stringBuilder.ToString();
+
+        return builder.ToString();
     }
 
     internal static void LogException(this ILogger logger, Exception exception)
@@ -39,12 +39,14 @@ public static class ExceptionExtensions
     {
         var exceptionType = exception.GetType();
         var sequencePointProperty = exceptionType.GetProperty("SequencePoint", BindingFlags.Public | BindingFlags.Instance);
-        var sequencePoint = (SequencePoint?)sequencePointProperty?.GetValue(exception, null);
+        var sequencePoint = (SequencePoint?) sequencePointProperty?.GetValue(exception, null);
+
         if (sequencePoint != null)
         {
             return sequencePoint;
         }
+
         var sequencePointField = exceptionType.GetField("SequencePoint", BindingFlags.Public | BindingFlags.Instance);
-        return (SequencePoint?)sequencePointField?.GetValue(exception);
+        return (SequencePoint?) sequencePointField?.GetValue(exception);
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
 

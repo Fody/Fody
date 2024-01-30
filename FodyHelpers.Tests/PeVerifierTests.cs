@@ -35,7 +35,7 @@ public class PeVerifierTests
     }
 
     static string[] GetIgnoreCodes() =>
-        new[] {"0x80070002", "0x80131869"};
+        ["0x80070002", "0x80131869"];
 
     [Fact]
     public Task TrimLineNumbers()

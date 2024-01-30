@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-public partial class InnerWeaver
+﻿public partial class InnerWeaver
 {
     static void ValidatePackageReferenceSettings(IList<WeaverHolder> weaverInstances, ILogger logger)
     {

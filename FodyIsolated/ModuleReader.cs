@@ -1,5 +1,3 @@
-using Mono.Cecil;
-
 public partial class InnerWeaver
 {
     public ModuleDefinition ModuleDefinition = null!;

@@ -1,13 +1,8 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Fody;
 using Mono.Cecil;
 using VerifyTests;
-using VerifyXunit;
-using Xunit;
 
-[UsesVerify]
 public class WeaverInitialiserTests
 {
     [Fact]
@@ -43,18 +38,18 @@ public class WeaverInitialiserTests
             ProjectFilePath = "ProjectFilePath",
             SolutionDirectoryPath = "SolutionDirectoryPath",
             DocumentationFilePath = "DocumentationFile",
-            ReferenceCopyLocalPaths = new()
-            {
+            ReferenceCopyLocalPaths =
+            [
                 "CopyRef1",
                 "CopyRef2"
-            },
+            ],
             References = "Ref1;Ref2",
             ModuleDefinition = moduleDefinition,
-            DefineConstants = new()
-            {
+            DefineConstants =
+            [
                 "Debug",
                 "Release"
-            },
+            ],
             assemblyResolver = resolver,
             TypeCache = new(resolver.Resolve)
         };
