@@ -5,7 +5,7 @@
 
   <ItemGroup>
     <PackageReference Include="Fody" Version="$(IntegrationVersion)" />
-    <PackageReference Include="Virtuosity.Fody" Version="1.21.3" PrivateAssets="All" />
+    <PackageReference Include="Virtuosity.Fody" Version="3.1.1" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

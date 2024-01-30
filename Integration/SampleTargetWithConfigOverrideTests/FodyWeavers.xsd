@@ -25,7 +25,49 @@
             </xs:attribute>
           </xs:complexType>
         </xs:element>
-        <xs:element name="NullGuard" minOccurs="0" maxOccurs="1" type="xs:anyType" />
+        <xs:element name="NullGuard" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:attribute name="IncludeDebugAssert" type="xs:boolean">
+              <xs:annotation>
+                <xs:documentation>Used to control whether asserts are added into debug builds or not.</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="Mode">
+              <xs:annotation>
+                <xs:documentation>The operation mode of NullGuard.</xs:documentation>
+              </xs:annotation>
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="AutoDetect">
+                    <xs:annotation>
+                      <xs:documentation>Automatically detect the mode by the usage of JetBrains.Annotations.</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="Implicit">
+                    <xs:annotation>
+                      <xs:documentation>In implicit mode everything is assumed to be not-null, unless attributed with [AllowNull].</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="Explicit">
+                    <xs:annotation>
+                      <xs:documentation>In explicit mode everything is assumed to be nullable, unless attributed with [NotNull].</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="NullableReferenceTypes">
+                    <xs:annotation>
+                      <xs:documentation>Use C# 8 nullable reference type annotations.</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="ExcludeRegex" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>A regular expression to specify the names of a classes to exclude from NullGuard.</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+          </xs:complexType>
+        </xs:element>
         <xs:element name="JetBrainsAnnotations" minOccurs="0" maxOccurs="1" type="xs:anyType" />
       </xs:all>
       <xs:attribute name="VerifyAssembly" type="xs:boolean">
