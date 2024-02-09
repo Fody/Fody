@@ -4,7 +4,6 @@ using Fody;
 using VerifyXunit;
 using Xunit;
 
-[UsesVerify]
 public class ConfigReaderTests
 {
     [Fact]

@@ -7,7 +7,6 @@ using Mono.Cecil;
 using Xunit;
 
 // ReSharper disable UnusedVariable
-[UsesVerify]
 public class PeVerifierTests
 {
     string assemblyPath = "FodyHelpers.Tests.dll";

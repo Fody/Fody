@@ -6,7 +6,6 @@ using Mono.Cecil;
 using VerifyXunit;
 using Xunit;
 
-[UsesVerify]
 public class WeaverTestHelperTests
 {
     [Fact]
