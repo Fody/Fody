@@ -9,7 +9,7 @@ Manipulating the IL of an assembly as part of a build requires a significant amo
 
 **This is the codebase of core Fody engine. For more information on the larger Fody project see https://github.com/Fody/Home.**
 
-**See [Milestones](../../milestones?state=closed) for release notes.**
+**See [Milestones](https://github.com/Fody/Fody/milestones?state=closed) for release notes.**
 
 
 <!--- StartOpenCollectiveBackers -->
