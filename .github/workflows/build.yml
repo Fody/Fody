@@ -21,7 +21,7 @@ jobs:
           dotnet-version: |
             3.x.x
             6.x.x
-            7.x.x
+            8.x.x
 
       - name: Restore Fody
         run: dotnet restore Fody.sln
@@ -62,7 +62,7 @@ jobs:
           dotnet-version: |
             3.x.x
             6.x.x
-            7.x.x
+            8.x.x
 
       - name: Restore Fody
         run: dotnet restore Fody.sln
