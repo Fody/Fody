@@ -14,14 +14,20 @@ public partial class InnerWeaver
         return assemblies[assemblyPath] = LoadFromFile(assemblyPath);
     }
 
-    // ReSharper disable once MemberCanBeMadeStatic.Local
     Assembly LoadFromFile(string assemblyPath)
     {
-        #if(NETSTANDARD)
-        return LoadContext.LoadNotLocked(assemblyPath);
-        #else
-        var rawAssembly = File.ReadAllBytes(assemblyPath);
-        return Assembly.Load(rawAssembly);
-        #endif
+        try
+        {
+#if NETSTANDARD
+            return LoadContext.LoadNotLocked(assemblyPath);
+#else
+            var rawAssembly = File.ReadAllBytes(assemblyPath);
+            return Assembly.Load(rawAssembly);
+#endif
+        }
+        catch (Exception ex)
+        {
+            throw new WeavingException($"Could not load weaver assembly from {assemblyPath}: {ex.Message}");
+        }
     }
 }
