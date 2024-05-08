@@ -11,15 +11,14 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: true
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
-            3.x.x
             6.x.x
             8.x.x
 
@@ -42,7 +41,7 @@ jobs:
         run: dotnet test --configuration Release --no-build Integration/Integration.sln
 
       - name: Upload NuGet
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: NuGet
           path: nugets/*.nupkg
@@ -52,15 +51,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: true
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
-            3.x.x
             6.x.x
             8.x.x
 
@@ -72,7 +70,7 @@ jobs:
 
 # TODO Uncomment this when tests pass on Linux
 #      - name: Test Fody
-#        run: dotnet test --configuration Release --framework netcoreapp3.1 --no-build Fody.sln
+#        run: dotnet test --configuration Release --framework net8.0 --no-build Fody.sln
 
       - name: Restore Integration
         run: dotnet restore Integration/Integration.sln
@@ -81,28 +79,29 @@ jobs:
         run: dotnet build --configuration Release --no-restore Integration/Integration.sln
 
       - name: Test Integration
-        run: dotnet test --configuration Release --framework netcoreapp3.1 --no-build Integration/Integration.sln
+        run: dotnet test --configuration Release --framework net6.0 --no-build Integration/Integration.sln
 
   windows-vs:
     name: Windows VS
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: true
 
-      - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1
+      - name: Setup VS Dev Tools
+        uses: ilammy/msvc-dev-cmd@v1
 
-      - name: Setup VSTest
-        uses: darenm/Setup-VSTest@v1
+      - name: Setup Environment
+        run: echo 'Platform=' >> $GITHUB_ENV
+        shell: bash
 
       - name: Build Fody
         run: msbuild -restore Fody.sln /p:Configuration=Release /verbosity:minimal
 
       - name: Test Fody
-        run: vstest.console Tests/bin/Release/net472/Tests.dll
+        run: vstest.console Tests/bin/Release/net48/Tests.dll
 
       - name: Build Integration
         run: msbuild -restore Integration/Integration.sln /p:Configuration=Release /verbosity:minimal
