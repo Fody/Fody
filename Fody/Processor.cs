@@ -22,8 +22,7 @@ public partial class Processor
     public bool GenerateXsd;
     IInnerWeaver? innerWeaver;
 
-    static Dictionary<string, IsolatedAssemblyLoadContext> solutionAssemblyLoadContexts =
-        new(StringComparer.OrdinalIgnoreCase);
+    static Dictionary<AssemblyPathSet, IsolatedAssemblyLoadContext> loadContexts = new();
 
     public ILogger Logger = null!;
     static readonly object mutex = new();
@@ -147,9 +146,11 @@ public partial class Processor
 
     IsolatedAssemblyLoadContext GetLoadContext()
     {
-        if (solutionAssemblyLoadContexts.TryGetValue(SolutionDirectory, out var loadContext))
+        var assemblyPathSet = new AssemblyPathSet(Weavers.Select(weaver => weaver.AssemblyPath));
+
+        if (loadContexts.TryGetValue(assemblyPathSet, out var loadContext))
         {
-            if (!WeaversHistory.HasChanged(Weavers.Select(_ => _.AssemblyPath)))
+            if (!WeaversHistory.HasChanged(assemblyPathSet.AssemblyPaths))
             {
                 return loadContext;
             }
@@ -158,7 +159,7 @@ public partial class Processor
             loadContext.Unload();
         }
 
-        return solutionAssemblyLoadContexts[SolutionDirectory] = CreateAssemblyLoadContext();
+        return loadContexts[assemblyPathSet] = CreateAssemblyLoadContext();
     }
 
     IsolatedAssemblyLoadContext CreateAssemblyLoadContext()
