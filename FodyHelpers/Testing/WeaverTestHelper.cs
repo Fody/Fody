@@ -12,6 +12,7 @@ public static class WeaverTestHelper
         bool runPeVerify = true,
         Action<ModuleDefinition>? afterExecuteCallback = null,
         Action<ModuleDefinition>? beforeExecuteCallback = null,
+        string? folderName = null,
         string? assemblyName = null,
         IEnumerable<string>? ignoreCodes = null,
         bool writeSymbols = false)
@@ -19,6 +20,12 @@ public static class WeaverTestHelper
         assemblyPath = Path.GetFullPath(assemblyPath);
         Guard.FileExists(nameof(assemblyPath), assemblyPath);
         var fodyTempDir = Path.Combine(Path.GetDirectoryName(assemblyPath), "fodytemp");
+
+        if (!string.IsNullOrWhiteSpace(folderName))
+        {
+            fodyTempDir = Path.Combine(fodyTempDir, folderName);
+        }
+
         Directory.CreateDirectory(fodyTempDir);
 
         string targetFileName;
