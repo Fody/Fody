@@ -12,10 +12,10 @@ public static class WeaverTestHelper
         bool runPeVerify = true,
         Action<ModuleDefinition>? afterExecuteCallback = null,
         Action<ModuleDefinition>? beforeExecuteCallback = null,
-        string? folderName = null,
         string? assemblyName = null,
         IEnumerable<string>? ignoreCodes = null,
-        bool writeSymbols = false)
+        bool writeSymbols = false,
+        string? folderName = null)
     {
         assemblyPath = Path.GetFullPath(assemblyPath);
         Guard.FileExists(nameof(assemblyPath), assemblyPath);
