@@ -12,7 +12,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" PrivateAssets="All" />
     <PackageReference Include="Nullable" Version="1.3.1" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.10.4" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.11.4" PrivateAssets="All" />
     <Compile Include="..\FodyHelpers\Guard.cs" Link="Guard.cs" />
     <Compile Include="..\FodyHelpers\MessageImportance.cs" Link="MessageImportance.cs" />
     <Compile Include="..\FodyHelpers\MessageImportanceDefaults.cs" Link="MessageImportanceDefaults.cs" />
