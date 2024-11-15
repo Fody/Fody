@@ -1,6 +1,6 @@
 variables:
   buildArgs: '-c Release'
-  testArgs: '$(buildArgs) -f net6.0 --no-build'
+  testArgs: '$(buildArgs) -f net8.0 --no-build'
 
 resources:
   repositories:
