@@ -8,6 +8,7 @@
     <license type="file">License.txt</license>
     <readme>readme.md</readme>
     <projectUrl>$projectUrl$</projectUrl>
+    <icon>package_icon.png</icon>
     <iconUrl>$iconUrl$</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
@@ -32,5 +33,6 @@
     <file src="Fody.targets" target="build" />
     <file src="..\License.txt"  />
     <file src="..\readme.md"  />
+    <file src="..\package_icon.png"  />
   </files>
 </package>
