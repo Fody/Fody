@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net472;net6.0</TargetFrameworks>
+	  <PathMap>$(MSBuildThisFileDirectory)=C:\MyNewPath</PathMap>
+	  <DebugType>full</DebugType>
+  </PropertyGroup>
+
+</Project>
