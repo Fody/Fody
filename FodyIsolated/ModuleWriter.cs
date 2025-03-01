@@ -9,7 +9,7 @@ public partial class InnerWeaver
 
         var parameters = new WriterParameters
         {
-            StrongNameKeyPair = StrongNameKeyPair,
+            StrongNameKeyBlob = StrongNameKeyBlob,
             WriteSymbols = hasSymbols
         };
 

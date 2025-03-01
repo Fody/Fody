@@ -1,12 +1,6 @@
-#if (NETSTANDARD)
-using StrongNameKeyPair = Mono.Cecil.StrongNameKeyPair;
-#else
-using StrongNameKeyPair = System.Reflection.StrongNameKeyPair;
-#endif
-
 public partial class InnerWeaver
 {
-    public StrongNameKeyPair? StrongNameKeyPair;
+    public byte[]? StrongNameKeyBlob;
     public byte[]? PublicKey;
 
     public virtual void FindStrongNameKey()
@@ -27,22 +21,13 @@ public partial class InnerWeaver
 
             if (!DelaySign)
             {
-                try
+                if (IsPrivateKeyFile(fileBytes))
                 {
-                    Logger.LogDebug("Extract public key from key file for signing.");
-
-                    StrongNameKeyPair = new(fileBytes);
-                    // Ensure that we can generate the public key from the key file. This requires the private key to
-                    // work. If we cannot generate the public key, an ArgumentException will be thrown. In this case,
-                    // the assembly is delay-signed with a public only key-file.
-                    // Note: The NETSTANDARD implementation of StrongNameKeyPair.PublicKey does never throw here.
-                    PublicKey = StrongNameKeyPair.PublicKey;
+                    StrongNameKeyBlob = fileBytes;
+                    // Cecil will update the assembly name's public key.
                     return;
                 }
-                catch (ArgumentException)
-                {
-                    Logger.LogWarning("Failed to extract public key from key file, fall back to delay-signing.");
-                }
+                Logger.LogWarning("Key file is not private key, fall back to delay-signing.");
             }
 
             // Fall back to delay signing, this was the original behavior, however that does not work in NETSTANDARD (s.a.)
@@ -50,7 +35,7 @@ public partial class InnerWeaver
 
             // We know that we cannot sign the assembly with this key-file. Let's assume that it is a public
             // only key-file and pass along all the bytes.
-            StrongNameKeyPair = null;
+            StrongNameKeyBlob = null;
             PublicKey = fileBytes;
         }
     }
@@ -78,4 +63,11 @@ public partial class InnerWeaver
         Logger.LogDebug("No strong name key found");
         return null;
     }
+
+    static bool IsPrivateKeyFile(byte[] blob) => blob.Length >= 12
+            && blob[0] == 0x07 // PRIVATEKEYBLOB (0x07)
+            && blob[1] == 0x02 // Version (0x02)
+            && blob[2] == 0x00 // Reserved (word)
+            && blob[3] == 0x00
+            && BitConverter.ToUInt32(blob, 8) == 0x32415352; // DWORD magic = RSA2
 }
