@@ -1,9 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net472;net8.0</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\DummyAssembly\DummyAssembly.csproj" />
     <ProjectReference Include="..\DummyExeAssembly\DummyExeAssembly.csproj" />
@@ -11,17 +10,18 @@
     <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" />
     <ProjectReference Include="..\SampleWeaver.Fody\SampleWeaver.Fody.csproj" />
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.11.4" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
-    <PackageReference Include="Verify.Xunit" Version="28.3.2" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
-    <PackageReference Include="xunit" Version="2.9.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Nullable" Version="1.3.1" PrivateAssets="All" />
     <ProjectReference Include="..\cecil\Mono.Cecil.csproj" />
     <ProjectReference Include="..\cecil\rocks\Mono.Cecil.Rocks.csproj" />
     <ProjectReference Include="..\cecil\symbols\pdb\Mono.Cecil.Pdb.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.11.4" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+    <PackageReference Include="Verify.Xunit" Version="28.13.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.0.2" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Nullable" Version="1.3.1" PrivateAssets="All" />
+  </ItemGroup>
 </Project>

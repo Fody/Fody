@@ -8,12 +8,13 @@
   <ItemGroup>
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
     <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
-    
-    <PackageReference Include="Nullable" Version="1.3.1" PrivateAssets="All" />
-
     <ProjectReference Include="..\cecil\Mono.Cecil.csproj" />
     <ProjectReference Include="..\cecil\rocks\Mono.Cecil.Rocks.csproj" />
     <ProjectReference Include="..\cecil\symbols\pdb\Mono.Cecil.Pdb.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nullable" Version="1.3.1" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>
