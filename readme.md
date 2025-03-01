@@ -2,6 +2,7 @@
 [![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg)](https://gitter.im/Fody/Fody)
 [![NuGet Status](https://img.shields.io/nuget/v/Fody.svg)](https://www.nuget.org/packages/Fody/)
 [![Patrons on Open Collective](https://opencollective.com/fody/tiers/patron/badge.svg)](#patrons)
+[![Build Status](https://dev.azure.com/tom-englert/Fody/_apis/build/status%2FFody.Integration?repoName=Fody%2FFody&branchName=master)](https://dev.azure.com/tom-englert/Fody/_build/latest?definitionId=42&repoName=Fody%2FFody&branchName=master)
 
 ### <img src="https://raw.githubusercontent.com/Fody/Fody/master/package_icon.png" height="28px"> Extensible tool for weaving .net assemblies
 
