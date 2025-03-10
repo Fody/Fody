@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 16.0.29201.188
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fody", "Fody\Fody.csproj", "{64880F43-E6C1-428E-B00A-E0374697B5CF}"
-	ProjectSection(ProjectDependencies) = postProject
-		{89681581-A390-4761-9C27-1F274FE506E7} = {89681581-A390-4761-9C27-1F274FE506E7}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWeaver.Fody", "SampleWeaver.Fody\SampleWeaver.Fody.csproj", "{2C10CBD1-5913-46D5-B705-0F3B46E68DD1}"
 EndProject
@@ -26,6 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\build.yml = .github\workflows\build.yml
 		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
 		package_readme.md = package_readme.md
 		readme.md = readme.md
 	EndProjectSection

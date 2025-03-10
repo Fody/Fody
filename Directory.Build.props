@@ -8,25 +8,17 @@
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Key.snk</AssemblyOriginatorKeyFile>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageOutputPath>$(MSBuildThisFileDirectory)nugets</PackageOutputPath>
-    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeAllInPackage</TargetsForTfmSpecificContentInPackage>
     <PackageProjectUrl>https://github.com/Fody/Fody</PackageProjectUrl>
-    <PackageIconUrl>https://raw.github.com/Fody/Fody/master/package_icon.png</PackageIconUrl>
+    <PackageIcon>package_icon.png</PackageIcon>
     <PackageTags>ILWeaving, Fody, Cecil, AOP</PackageTags>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Nullable>enable</Nullable>
-    <!-- work around https://github.com/dotnet/msbuild/issues/4303 -->
-    <AddSyntheticProjectReferencesForSolutionDependencies>false</AddSyntheticProjectReferencesForSolutionDependencies>
     <ResolveAssemblyReferencesSilent>true</ResolveAssemblyReferencesSilent>
     <NuGetAuditMode>direct</NuGetAuditMode>
   </PropertyGroup>
-
-  <Target Name="IncludeAllInPackage">
-    <ItemGroup>
-      <TfmSpecificPackageFile Include="$(OutputPath)\*.*"
-                              Exclude="**/$(TargetName).*;*.json;**/Microsoft*;**/System*"
-                              PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)" />
-    </ItemGroup>
-  </Target>
-
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)package_icon.png" Pack="true" PackagePath="" />
+  </ItemGroup>
 </Project>

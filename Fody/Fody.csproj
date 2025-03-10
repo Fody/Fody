@@ -1,18 +1,25 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
     <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
     <Description>Extensible tool for weaving .net assemblies.</Description>
     <DevelopmentDependency>true</DevelopmentDependency>
-    <NuSpecFile>Fody.nuspec</NuSpecFile>
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <PackageReadmeFile>package_readme.md</PackageReadmeFile>
+    <!-- Cecil does not build with embedded symbols; include them in the package. -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <FodyPackDependencies>true</FodyPackDependencies>
+    <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
+    <GenerateDependencyFile>true</GenerateDependencyFile>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" PrivateAssets="All" />
+    <!-- TODO: When https://github.com/dotnet/sdk/issues/47403 gets fixed, set ExcludeAssets="Compile" and remove the test in ReferenceTests.cs. -->
+    <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" PrivateAssets="All" />
     <PackageReference Include="Nullable" Version="1.3.1" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.11.4" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.11.4" PrivateAssets="All" ExcludeAssets="Runtime" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,14 +39,22 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <Target Name="SetPackageDependencies" BeforeTargets="GenerateNuspec">
-    <PropertyGroup>
-      <NuspecProperties>configuration=$(Configuration);version=$(PackageVersion);authors=$(Authors);iconUrl=$(PackageIconUrl);projectUrl=$(PackageProjectUrl);description=$(Description);tags=$(PackageTags)</NuspecProperties>
-    </PropertyGroup>
-  </Target>
+  <ItemGroup>
+    <None Include="..\package_readme.md" Pack="true" PackagePath="" />
+    <None Include="Fody.targets" Pack="true" PackagePath="build" />
+  </ItemGroup>
 
   <Target Name="PreparePackagesForIntegrationSolution" BeforeTargets="GenerateNuspec">
     <WriteLinesToFile Lines="&lt;Project&gt;&lt;PropertyGroup&gt;&lt;IntegrationVersion&gt;$(PackageVersion)&lt;/IntegrationVersion&gt;&lt;/PropertyGroup&gt;&lt;/Project&gt;" File="..\Integration\Directory.Build.props" Overwrite="true" />
+  </Target>
+
+  <Target Name="AddBuildDependencyFileToBuiltProjectOutputGroupOutput" BeforeTargets="BuiltProjectOutputGroup" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
+    <ItemGroup>
+      <BuiltProjectOutputGroupOutput
+        Include="$(ProjectDepsFilePath)"
+        TargetPath="$(ProjectDepsFileName)"
+        FinalOutputPath="$(ProjectDepsFilePath)" />
+    </ItemGroup>
   </Target>
 
 </Project>

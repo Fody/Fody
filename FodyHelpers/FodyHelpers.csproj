@@ -6,22 +6,19 @@
     <Description>Helpers for Fody.</Description>
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <!-- Cecil does not build with embedded symbols; include them in the package. -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <FodyPackDependencies>true</FodyPackDependencies>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Nullable" Version="1.3.1" PrivateAssets="All" />
   </ItemGroup>
 
-  <!-- Using Cecil directly via project reference generates package dependencies to non-existing cecil packages (https://github.com/NuGet/Home/issues/3891) => use ReferenceOutputAssembly="false" and reference the binaries directly -->
   <ItemGroup>
-    <ProjectReference Include="..\cecil\Mono.Cecil.csproj" ReferenceOutputAssembly="false" />
-    <ProjectReference Include="..\cecil\rocks\Mono.Cecil.Rocks.csproj" ReferenceOutputAssembly="false"/>
-    <ProjectReference Include="..\cecil\symbols\pdb\Mono.Cecil.Pdb.csproj" ReferenceOutputAssembly="false"/>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Mono.Cecil" HintPath="..\cecil\Lib\$(Configuration)\netstandard2.0\Mono.Cecil.dll" />
-    <Reference Include="Mono.Cecil.Pdb" HintPath="..\cecil\Lib\$(Configuration)\netstandard2.0\Mono.Cecil.Pdb.dll" />
-    <Reference Include="Mono.Cecil.Rocks" HintPath="..\cecil\Lib\$(Configuration)\netstandard2.0\Mono.Cecil.Rocks.dll" />
+    <ProjectReference Include="..\cecil\Mono.Cecil.csproj" PrivateAssets="All" />
+    <ProjectReference Include="..\cecil\rocks\Mono.Cecil.Rocks.csproj" PrivateAssets="All" />
+    <ProjectReference Include="..\cecil\symbols\pdb\Mono.Cecil.Pdb.csproj" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

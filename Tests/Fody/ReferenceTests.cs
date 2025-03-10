@@ -11,4 +11,14 @@ public class ReferenceTests
             .ToList();
         Assert.DoesNotContain("Mono.Cecil", references);
     }
+
+    [Fact]
+    public void Ensure_fody_has_no_reference_to_FodyIsolated()
+    {
+        var references = typeof(WeavingTask).Assembly
+            .GetReferencedAssemblies()
+            .Select(_ => _.Name)
+            .ToList();
+        Assert.DoesNotContain("FodyIsolated", references);
+    }
 }

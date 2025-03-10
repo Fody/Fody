@@ -1,0 +1,16 @@
+<Project>
+  <PropertyGroup Condition="$(FodyPackDependencies) == true">
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+    <NoWarn>$(NoWarn);NU5100</NoWarn>
+    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+  </PropertyGroup>
+
+  <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
+    <ItemGroup>
+      <BuildOutputInPackage
+        Include="@(ReferenceCopyLocalPaths)"
+        TargetPath="%(ReferenceCopyLocalPaths.DestinationSubPath)" />
+    </ItemGroup>
+  </Target>
+</Project>
