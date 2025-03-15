@@ -8,7 +8,7 @@
     <DebugSymbols>true</DebugSymbols>
     <PackageReadmeFile>package_readme.md</PackageReadmeFile>
     <!-- Cecil does not build with embedded symbols; include them in the package. -->
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>.dll;.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <FodyPackDependencies>true</FodyPackDependencies>
     <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
     <GenerateDependencyFile>true</GenerateDependencyFile>
@@ -44,6 +44,9 @@
     <None Include="Fody.targets" Pack="true" PackagePath="build" />
   </ItemGroup>
 
+  <!-- ExcludeAssets="compile" doesn't work on ProjectReference, and ReferenceOutputAssembly entirely
+  excludes the assembly from the package. This leaves us with manually removing FodyIsolated from the
+  references to pass to the compiler. -->
   <Target Name="RemoveFodyIsolatedReference" AfterTargets="ResolveReferences">
     <ItemGroup>
       <ReferencePath Remove="@(ReferencePath)" Condition="'%(FileName)' == 'FodyIsolated'" />
