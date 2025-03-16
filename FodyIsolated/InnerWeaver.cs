@@ -26,7 +26,7 @@ public partial class InnerWeaver :
     public List<string> ReferenceCopyLocalPaths { get; set; } = null!;
     public List<string> RuntimeCopyLocalPaths { get; set; } = null!;
     public List<string> DefineConstants { get; set; } = null!;
-#if (NETSTANDARD)
+#if NET
     public IsolatedAssemblyLoadContext LoadContext { get; set; } = null!;
 #endif
     bool cancelRequested;
@@ -34,7 +34,7 @@ public partial class InnerWeaver :
     Action? cancelDelegate;
     public IAssemblyResolver assemblyResolver = null!;
 
-    Assembly? CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+    Assembly? CurrentDomain_AssemblyResolve(object? _, ResolveEventArgs args)
     {
         var assemblyName = new AssemblyName(args.Name).Name;
         if (assemblyName == "FodyHelpers")
@@ -59,7 +59,7 @@ public partial class InnerWeaver :
 
         foreach (var weaverPath in Weavers.Select(_ => _.AssemblyPath))
         {
-            var directoryName = Path.GetDirectoryName(weaverPath);
+            var directoryName = Path.GetDirectoryName(weaverPath) ?? "";
             var assemblyFileName = $"{assemblyName}.dll";
             var assemblyPath = Path.Combine(directoryName, assemblyFileName);
             if (!File.Exists(assemblyPath))
@@ -320,17 +320,21 @@ public partial class InnerWeaver :
         }
     }
 
+#if NET472
     public sealed override object? InitializeLifetimeService() =>
         // Returning null designates an infinite non-expiring lease.
         // We must therefore ensure that RemotingServices.Disconnect() is called when
         // it's no longer needed otherwise there will be a memory leak.
         null;
+#endif
 
     public void Dispose()
     {
 #if NET472
         //Disconnects the remoting channel(s) of this object and all nested objects.
+#pragma warning disable IDE0022 // Use expression body for method
         RemotingServices.Disconnect(this);
+#pragma warning restore IDE0022 // Use expression body for method
 #endif
     }
 }

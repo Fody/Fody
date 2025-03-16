@@ -1,12 +1,17 @@
 public static class FodyVersion
 {
-    public static readonly Version Version = typeof(FodyVersion).Assembly.GetName().Version;
+    public static readonly Version Version = typeof(FodyVersion).Assembly.GetName().Version ?? new Version();
     public static readonly int Major = Version.Major;
 
     public static bool WeaverRequiresUpdate(Assembly assembly, out int referencedVersion)
     {
-        var reference = FindFodyHelpersReference(assembly);
-        referencedVersion = reference.Version.Major;
+        var version = FindFodyHelpersReference(assembly).Version;
+        if (version == null)
+        {
+            referencedVersion = 0;
+            return true;
+        }
+        referencedVersion = version.Major;
         return referencedVersion < Major;
     }
 

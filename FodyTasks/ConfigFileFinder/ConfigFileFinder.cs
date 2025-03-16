@@ -36,7 +36,7 @@ public static class ConfigFileFinder
 
         foreach (var configFile in configFiles)
         {
-            foreach (var element in configFile.Document.Root.Elements())
+            foreach (var element in configFile.Document.Root?.Elements() ?? [])
             {
                 var elementName = element.Name.LocalName;
 
@@ -174,14 +174,14 @@ public static class ConfigFileFinder
                 return;
             }
 
-            var hasNamespace = doc.Root.Attributes()
-                .Any(attr => !attr.IsNamespaceDeclaration &&
+            var hasNamespace = doc.Root?.Attributes()
+                ?.Any(attr => !attr.IsNamespaceDeclaration &&
                              attr.Name.LocalName == "noNamespaceSchemaLocation" &&
-                             string.Equals(attr.Value, "FodyWeavers.xsd", StringComparison.OrdinalIgnoreCase));
+                             string.Equals(attr.Value, "FodyWeavers.xsd", StringComparison.OrdinalIgnoreCase)) ?? false;
 
             if (!hasNamespace)
             {
-                doc.Root.Add(SchemaInstanceAttributes);
+                doc.Root!.Add(SchemaInstanceAttributes);
                 doc.Save(projectConfigFilePath);
             }
 
@@ -195,7 +195,7 @@ public static class ConfigFileFinder
 
     static bool ShouldGenerateXsd(XDocument doc, bool defaultGenerateXsd)
     {
-        if (doc.Root.TryReadBool("GenerateXsd", out var generateXsd))
+        if (doc.Root?.TryReadBool("GenerateXsd", out var generateXsd) ?? false)
         {
             return generateXsd;
         }

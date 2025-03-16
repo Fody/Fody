@@ -1,4 +1,4 @@
-﻿public class Verifier
+public class Verifier
 {
     public ILogger Logger = null!;
     public string SolutionDirectory = null!;
@@ -82,7 +82,7 @@
         {
             var configXml = configFile.Document;
             var element = configXml.Root;
-            if (element.TryReadBool("VerifyAssembly", out var value))
+            if (element?.TryReadBool("VerifyAssembly", out var value) ?? false)
             {
                 return value;
             }
@@ -96,7 +96,7 @@
         {
             var configXml = configFile.Document;
             var element = configXml.Root;
-            var codesConfigs = (string)element.Attribute("VerifyIgnoreCodes");
+            var codesConfigs = (string?)element?.Attribute("VerifyIgnoreCodes");
             if (string.IsNullOrWhiteSpace(codesConfigs))
             {
                 continue;

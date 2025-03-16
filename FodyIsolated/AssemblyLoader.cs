@@ -18,7 +18,7 @@ public partial class InnerWeaver
     {
         try
         {
-#if NETSTANDARD
+#if NET
             return LoadContext.LoadNotLocked(assemblyPath);
 #else
             var rawAssembly = File.ReadAllBytes(assemblyPath);

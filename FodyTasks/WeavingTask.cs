@@ -160,7 +160,7 @@ public class WeavingTask :
             .Split(';')
             .Select(name => name.Trim())
             .Where(name => !string.IsNullOrEmpty(name))
-            .DefaultIfEmpty();
+            .DefaultIfEmpty()!;
 
     ITaskItem? GetPackageReference(ITaskItem weaverFileItem)
     {

@@ -21,8 +21,7 @@
     <PackageReadmeFile>package_readme.md</PackageReadmeFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Nullable>enable</Nullable>
-    <!-- work around https://github.com/dotnet/msbuild/issues/4303 -->
-    <AddSyntheticProjectReferencesForSolutionDependencies>false</AddSyntheticProjectReferencesForSolutionDependencies>
+    <Nullable Condition="'$(TargetFramework)' != 'net8.0'">annotations</Nullable>
     <ResolveAssemblyReferencesSilent>true</ResolveAssemblyReferencesSilent>
     <NuGetAuditMode>direct</NuGetAuditMode>
   </PropertyGroup>

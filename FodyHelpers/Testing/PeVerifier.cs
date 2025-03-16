@@ -1,4 +1,4 @@
-﻿namespace Fody;
+namespace Fody;
 
 /// <summary>
 /// Verifies assemblies using peverify.exe.
@@ -110,7 +110,7 @@ public static class PeVerifier
         ignoreCodes.Add("0x80070002");
         ignoreCodes.Add("0x80131252");
         workingDirectory ??= Path.GetDirectoryName(assemblyPath);
-        var processStartInfo = new ProcessStartInfo(peverifyPath)
+        var processStartInfo = new ProcessStartInfo(peverifyPath!)
         {
             Arguments = $"\"{assemblyPath}\" /hresult /nologo /ignore={string.Join(",", ignoreCodes)}",
             WorkingDirectory = workingDirectory,
@@ -119,7 +119,7 @@ public static class PeVerifier
             RedirectStandardOutput = true
         };
 
-        using var process = Process.Start(processStartInfo);
+        using var process = Process.Start(processStartInfo)!;
         output = process.StandardOutput.ReadToEnd();
         output = Regex.Replace(output, "^All Classes and Methods.*", "");
         output = output.Trim();

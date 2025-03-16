@@ -12,7 +12,7 @@ public static class AssemblyLocation
             .Replace(@"file:\\\", "")
             .Replace(@"file:\\", "");
 
-        CurrentDirectory = Path.GetDirectoryName(path);
+        CurrentDirectory = Path.GetDirectoryName(path) ?? "";
     }
 
     public static readonly string CurrentDirectory;

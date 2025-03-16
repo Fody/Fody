@@ -18,7 +18,7 @@ public interface IInnerWeaver : IDisposable
     string ProjectDirectoryPath { get; set; }
     string ProjectFilePath { get; set; }
     string? DocumentationFilePath { get; set; }
-    #if(NETSTANDARD)
+    #if NET
     IsolatedAssemblyLoadContext LoadContext { get; set; }
     #endif
     void Execute();

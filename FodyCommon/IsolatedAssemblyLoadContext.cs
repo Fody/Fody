@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 #if NET472
 using System;
 
@@ -19,9 +19,6 @@ public class IsolatedAssemblyLoadContext
     {
         var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
         var innerWeaver = (IInnerWeaver)appDomain.CreateInstanceFromAndUnwrap(assemblyFile, "InnerWeaver");
-        #if(NETSTANDARD)
-        innerWeaver.LoadContext = this;
-        #endif
         return innerWeaver;
     }
 
@@ -35,6 +32,8 @@ using System.Runtime.Loader;
 public class IsolatedAssemblyLoadContext :
     AssemblyLoadContext
 {
+    public IsolatedAssemblyLoadContext() : base("Fody.IsolatedAssemblyLoadContext", isCollectible: true) { }
+
     protected override Assembly? Load(AssemblyName assemblyName)
     {
         if (assemblyName.Name == "FodyCommon")
@@ -55,7 +54,7 @@ public class IsolatedAssemblyLoadContext :
     {
         var assemblyFile = Path.Combine(AssemblyLocation.CurrentDirectory, "FodyIsolated.dll");
         var assembly = LoadFromAssemblyPath(assemblyFile);
-        var innerWeaver = (IInnerWeaver)assembly.CreateInstance("InnerWeaver");
+        var innerWeaver = (IInnerWeaver)assembly.CreateInstance("InnerWeaver")!;
         innerWeaver.LoadContext = this;
         return innerWeaver;
     }
@@ -64,11 +63,6 @@ public class IsolatedAssemblyLoadContext :
     {
         using var stream = File.OpenRead(assemblyPath);
         return LoadFromStream(stream);
-    }
-
-    public void Unload()
-    {
-        //TODO: Not supported on .NET Core yet
     }
 }
 #endif

@@ -1,11 +1,11 @@
-﻿namespace Fody;
+namespace Fody;
 
 /// <summary>
 /// Base class for module weavers.
 /// </summary>
 public abstract class BaseModuleWeaver
 {
-    static XElement Empty = new("Empty");
+    static XElement Empty { get; } = new("Empty");
 
     /// <summary>
     /// The full element XML from FodyWeavers.xml.

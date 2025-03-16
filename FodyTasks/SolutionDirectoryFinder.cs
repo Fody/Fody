@@ -12,6 +12,6 @@ public class SolutionDirectoryFinder
             return solutionDir!;
         }
 
-        return Directory.GetParent(projectDirectory).FullName;
+        return Directory.GetParent(projectDirectory)?.FullName ?? "";
     }
 }

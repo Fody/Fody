@@ -34,7 +34,7 @@ public partial class Processor
     {
         var assembly = typeof(Processor).Assembly;
 
-        Logger.LogInfo($"Fody (version {assembly.GetName().Version} @ {assembly.CodeBase}) Executing");
+        Logger.LogInfo($"Fody (version {assembly.GetName().Version} @ {assembly.Location}) Executing");
 
         var stopwatch = Stopwatch.StartNew();
 

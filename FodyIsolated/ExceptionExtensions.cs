@@ -8,6 +8,10 @@ public static class ExceptionExtensions
 
         foreach (var loaderException in exception.LoaderExceptions)
         {
+            if (loaderException == null)
+            {
+                continue;
+            }
             builder.AppendLine(loaderException.ToString());
         }
 

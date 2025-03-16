@@ -10,7 +10,7 @@ public partial class InnerWeaver
 
         weaverInstance.ModuleDefinition = ModuleDefinition;
         weaverInstance.AssemblyFilePath = AssemblyFilePath;
-        weaverInstance.AddinDirectoryPath = Path.GetDirectoryName(weaverEntry.AssemblyPath);
+        weaverInstance.AddinDirectoryPath = Path.GetDirectoryName(weaverEntry.AssemblyPath) ?? "";
         weaverInstance.References = References;
         weaverInstance.ReferenceCopyLocalPaths = ReferenceCopyLocalPaths;
         weaverInstance.SolutionDirectoryPath = SolutionDirectoryPath;
