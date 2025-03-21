@@ -11,7 +11,6 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder>.dll;.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <FodyPackDependencies>true</FodyPackDependencies>
     <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
-    <GenerateDependencyFile>true</GenerateDependencyFile>
     <DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
   </PropertyGroup>
 
@@ -55,15 +54,6 @@
 
   <Target Name="PreparePackagesForIntegrationSolution" BeforeTargets="GenerateNuspec">
     <WriteLinesToFile Lines="&lt;Project&gt;&lt;PropertyGroup&gt;&lt;IntegrationVersion&gt;$(PackageVersion)&lt;/IntegrationVersion&gt;&lt;/PropertyGroup&gt;&lt;/Project&gt;" File="..\Integration\Directory.Build.props" Overwrite="true" />
-  </Target>
-
-  <Target Name="AddBuildDependencyFileToBuiltProjectOutputGroupOutput" BeforeTargets="BuiltProjectOutputGroup" Condition="'$(TargetFrameworkIdentifier)' != '.NETFramework'">
-    <ItemGroup>
-      <BuiltProjectOutputGroupOutput
-        Include="$(ProjectDepsFilePath)"
-        TargetPath="$(ProjectDepsFileName)"
-        FinalOutputPath="$(ProjectDepsFilePath)" />
-    </ItemGroup>
   </Target>
 
 </Project>
