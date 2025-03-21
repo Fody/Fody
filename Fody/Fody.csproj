@@ -8,7 +8,8 @@
     <DebugSymbols>true</DebugSymbols>
     <PackageReadmeFile>package_readme.md</PackageReadmeFile>
     <!-- Cecil does not build with embedded symbols; include them in the package. -->
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>.dll;.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <!-- Use DefaultAllowedOutputExtensionsInPackageBuildOutputFolder to exclude XML documentation files. -->
+    <DefaultAllowedOutputExtensionsInPackageBuildOutputFolder>.dll;.pdb</DefaultAllowedOutputExtensionsInPackageBuildOutputFolder>
     <FodyPackDependencies>true</FodyPackDependencies>
     <BuildOutputTargetFolder>tasks</BuildOutputTargetFolder>
     <DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
