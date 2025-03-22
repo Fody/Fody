@@ -16,9 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\cecil\Mono.Cecil.csproj" PrivateAssets="All" />
-    <ProjectReference Include="..\cecil\rocks\Mono.Cecil.Rocks.csproj" PrivateAssets="All" />
-    <ProjectReference Include="..\cecil\symbols\pdb\Mono.Cecil.Pdb.csproj" PrivateAssets="All" />
+    <ProjectReference Include="..\cecil\Mono.Cecil.csproj" />
+    <ProjectReference Include="..\cecil\rocks\Mono.Cecil.Rocks.csproj" />
+    <ProjectReference Include="..\cecil\symbols\pdb\Mono.Cecil.Pdb.csproj" />
   </ItemGroup>
 
   <ItemGroup>
