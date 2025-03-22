@@ -18,8 +18,8 @@
   <ItemGroup>
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" />
-    <PackageReference Include="Nullable" Version="1.3.1" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.11.4" PrivateAssets="All" ExcludeAssets="Runtime" />
+    <PackageReference Include="Nullable" Version="1.3.1" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.11.4" ExcludeAssets="Runtime" />
   </ItemGroup>
 
   <ItemGroup>
