@@ -2,8 +2,8 @@
   <PropertyGroup>
     <ProjectWeaverXml Condition="$(ProjectWeaverXml) == ''">$(ProjectDir)FodyWeavers.xml</ProjectWeaverXml>
     <FodyPath Condition="$(FodyPath) == ''">$(MSBuildThisFileDirectory)..\</FodyPath>
-    <FodyAssemblyDirectory Condition="$(MSBuildRuntimeType) == 'Core'">$(FodyPath)netstandardtask</FodyAssemblyDirectory>
-    <FodyAssemblyDirectory Condition="$(MSBuildRuntimeType) != 'Core'">$(FodyPath)netclassictask</FodyAssemblyDirectory>
+    <FodyAssemblyDirectory Condition="$(MSBuildRuntimeType) == 'Core'">$(FodyPath)tasks\netstandard2.0</FodyAssemblyDirectory>
+    <FodyAssemblyDirectory Condition="$(MSBuildRuntimeType) != 'Core'">$(FodyPath)tasks\net472</FodyAssemblyDirectory>
     <FodyAssembly Condition="$(FodyAssembly) == ''">$(FodyAssemblyDirectory)\FodyTasks.dll</FodyAssembly>
     <DefaultItemExcludes>$(DefaultItemExcludes);FodyWeavers.xsd</DefaultItemExcludes>
     <FodyGenerateXsd Condition="$(FodyGenerateXsd) == ''">true</FodyGenerateXsd>

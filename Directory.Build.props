@@ -9,12 +9,14 @@
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <IsPackable>false</IsPackable>
     <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright (c) Simon Cropp and contributors</Copyright>
+    <PackageLicenseFile>License.txt</PackageLicenseFile>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageOutputPath>$(MSBuildThisFileDirectory)nugets</PackageOutputPath>
     <PackageProjectUrl>https://github.com/Fody/Fody</PackageProjectUrl>
     <PackageIcon>package_icon.png</PackageIcon>
     <PackageTags>ILWeaving, Fody, Cecil, AOP</PackageTags>
+    <PackageReadmeFile>package_readme.md</PackageReadmeFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Nullable>enable</Nullable>
     <!-- work around https://github.com/dotnet/msbuild/issues/4303 -->
@@ -23,6 +25,8 @@
     <NuGetAuditMode>direct</NuGetAuditMode>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)package_icon.png" Pack="true" PackagePath="" />
+    <Content Include="$(MSBuildThisFileDirectory)License.txt" PackagePath="" />
+    <Content Include="$(MSBuildThisFileDirectory)package_readme.md" PackagePath="" />
+    <Content Include="$(MSBuildThisFileDirectory)package_icon.png" PackagePath="" />
   </ItemGroup>
 </Project>
