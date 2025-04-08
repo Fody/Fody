@@ -4,7 +4,7 @@
     <IsPackable>true</IsPackable>
     <Description>NuGet packaging Fody repositories</Description>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <IsTool>true</IsTool>
+    <DevelopmentDependency>true</DevelopmentDependency>
   </PropertyGroup>
 
   <ItemGroup>

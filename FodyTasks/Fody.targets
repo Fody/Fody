@@ -4,7 +4,7 @@
     <FodyPath Condition="$(FodyPath) == ''">$(MSBuildThisFileDirectory)..\</FodyPath>
     <FodyAssemblyDirectory Condition="$(MSBuildRuntimeType) == 'Core'">$(FodyPath)netstandardtask</FodyAssemblyDirectory>
     <FodyAssemblyDirectory Condition="$(MSBuildRuntimeType) != 'Core'">$(FodyPath)netclassictask</FodyAssemblyDirectory>
-    <FodyAssembly Condition="$(FodyAssembly) == ''">$(FodyAssemblyDirectory)\Fody.dll</FodyAssembly>
+    <FodyAssembly Condition="$(FodyAssembly) == ''">$(FodyAssemblyDirectory)\FodyTasks.dll</FodyAssembly>
     <DefaultItemExcludes>$(DefaultItemExcludes);FodyWeavers.xsd</DefaultItemExcludes>
     <FodyGenerateXsd Condition="$(FodyGenerateXsd) == ''">true</FodyGenerateXsd>
     <MsBuildMajorVersion>15</MsBuildMajorVersion>

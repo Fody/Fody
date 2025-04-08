@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
     <IsPackable>true</IsPackable>
@@ -15,8 +15,8 @@
   <!-- Using Cecil directly via project reference generates package dependencies to non-existing cecil packages (https://github.com/NuGet/Home/issues/3891) => use ReferenceOutputAssembly="false" and reference the binaries directly -->
   <ItemGroup>
     <ProjectReference Include="..\cecil\Mono.Cecil.csproj" ReferenceOutputAssembly="false" />
-    <ProjectReference Include="..\cecil\rocks\Mono.Cecil.Rocks.csproj" ReferenceOutputAssembly="false"/>
-    <ProjectReference Include="..\cecil\symbols\pdb\Mono.Cecil.Pdb.csproj" ReferenceOutputAssembly="false"/>
+    <ProjectReference Include="..\cecil\rocks\Mono.Cecil.Rocks.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\cecil\symbols\pdb\Mono.Cecil.Pdb.csproj" ReferenceOutputAssembly="false" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Mono.Cecil" HintPath="..\cecil\Lib\$(Configuration)\netstandard2.0\Mono.Cecil.dll" />

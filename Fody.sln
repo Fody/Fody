@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 16.0.29201.188
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fody", "Fody\Fody.csproj", "{64880F43-E6C1-428E-B00A-E0374697B5CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyTasks", "FodyTasks\FodyTasks.csproj", "{64880F43-E6C1-428E-B00A-E0374697B5CF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{89681581-A390-4761-9C27-1F274FE506E7} = {89681581-A390-4761-9C27-1F274FE506E7}
 	EndProjectSection

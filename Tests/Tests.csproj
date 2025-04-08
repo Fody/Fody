@@ -11,7 +11,7 @@
     <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" />
     <ProjectReference Include="..\FodyHelpers\FodyHelpers.csproj" />
     <ProjectReference Include="..\FodyIsolated\FodyIsolated.csproj" />
-    <ProjectReference Include="..\Fody\Fody.csproj" />
+    <ProjectReference Include="..\FodyTasks\FodyTasks.csproj" />
     <ProjectReference Include="..\SampleWeaver.Fody\SampleWeaver.Fody.csproj" />
   </ItemGroup>
 
