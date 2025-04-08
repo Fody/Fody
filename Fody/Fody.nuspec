@@ -9,7 +9,6 @@
     <readme>package_readme.md</readme>
     <projectUrl>$projectUrl$</projectUrl>
     <icon>package_icon.png</icon>
-    <iconUrl>$iconUrl$</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <description>$description$</description>
     <copyright>$copyright$</copyright>

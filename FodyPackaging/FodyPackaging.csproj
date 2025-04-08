@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
-    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
+    <IsPackable>true</IsPackable>
     <Description>NuGet packaging Fody repositories</Description>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <IsTool>true</IsTool>

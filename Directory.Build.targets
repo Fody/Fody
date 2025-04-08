@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup>
+    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeAllInPackage</TargetsForTfmSpecificContentInPackage>
+  </PropertyGroup>
+
+  <Target Name="IncludeAllInPackage">
+    <ItemGroup>
+      <TfmSpecificPackageFile Include="$(OutputPath)\*.*"
+                              Exclude="**/$(TargetName).*;*.json;**/Microsoft*;**/System*"
+                              PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)" />
+    </ItemGroup>
+  </Target>
+
+</Project>

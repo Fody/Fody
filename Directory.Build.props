@@ -7,11 +7,13 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Key.snk</AssemblyOriginatorKeyFile>
     <NoPackageAnalysis>true</NoPackageAnalysis>
+    <IsPackable>false</IsPackable>
+    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageOutputPath>$(MSBuildThisFileDirectory)nugets</PackageOutputPath>
-    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeAllInPackage</TargetsForTfmSpecificContentInPackage>
     <PackageProjectUrl>https://github.com/Fody/Fody</PackageProjectUrl>
-    <PackageIconUrl>https://raw.github.com/Fody/Fody/master/package_icon.png</PackageIconUrl>
+    <PackageIcon>package_icon.png</PackageIcon>
     <PackageTags>ILWeaving, Fody, Cecil, AOP</PackageTags>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Nullable>enable</Nullable>
@@ -20,13 +22,7 @@
     <ResolveAssemblyReferencesSilent>true</ResolveAssemblyReferencesSilent>
     <NuGetAuditMode>direct</NuGetAuditMode>
   </PropertyGroup>
-
-  <Target Name="IncludeAllInPackage">
-    <ItemGroup>
-      <TfmSpecificPackageFile Include="$(OutputPath)\*.*"
-                              Exclude="**/$(TargetName).*;*.json;**/Microsoft*;**/System*"
-                              PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)" />
-    </ItemGroup>
-  </Target>
-
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)package_icon.png" Pack="true" PackagePath="" />
+  </ItemGroup>
 </Project>
