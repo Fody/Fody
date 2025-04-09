@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
-            8.x.x
+            9.x.x
 
       - name: Restore Fody
         run: dotnet restore Fody.sln
@@ -58,7 +58,7 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
-            8.x.x
+            9.x.x
 
       - name: Restore Fody
         run: dotnet restore Fody.sln
