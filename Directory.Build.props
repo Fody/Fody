@@ -9,12 +9,14 @@
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <IsPackable>false</IsPackable>
     <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
-    <Copyright>Copyright (c) Simon Cropp and contributors</Copyright>
-    <PackageLicenseFile>License.txt</PackageLicenseFile>
+    <Authors>The Fody Team</Authors>
+    <Copyright>Copyright (c) The Fody Team and contributors</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageOutputPath>$(MSBuildThisFileDirectory)nugets</PackageOutputPath>
     <PackageProjectUrl>https://github.com/Fody/Fody</PackageProjectUrl>
     <PackageIcon>package_icon.png</PackageIcon>
+    <PackageIconUrl>https://raw.github.com/Fody/Fody/master/package_icon.png</PackageIconUrl>
     <PackageTags>ILWeaving, Fody, Cecil, AOP</PackageTags>
     <PackageReadmeFile>package_readme.md</PackageReadmeFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -25,7 +27,6 @@
     <NuGetAuditMode>direct</NuGetAuditMode>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)License.txt" PackagePath="" />
     <Content Include="$(MSBuildThisFileDirectory)package_readme.md" PackagePath="" />
     <Content Include="$(MSBuildThisFileDirectory)package_icon.png" PackagePath="" />
   </ItemGroup>
