@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;net8.0</TargetFrameworks>
+    <TargetFrameworks>net472;net9.0</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
@@ -15,7 +15,7 @@
     <ProjectReference Include="..\cecil\symbols\pdb\Mono.Cecil.Pdb.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.11.4" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.13.9" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
     <PackageReference Include="Verify.Xunit" Version="29.2.0" />
