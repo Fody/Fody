@@ -1,4 +1,4 @@
-﻿public static class ConfigFileFinder
+public static class ConfigFileFinder
 {
     const string FodyWeaversConfigFileName = "FodyWeavers.xml";
     static readonly XNamespace schemaNamespace = XNamespace.Get("http://www.w3.org/2001/XMLSchema");
@@ -96,7 +96,7 @@
 
     static void CreateSchemaForConfig(string projectConfigFilePath, IEnumerable<WeaverEntry> weavers)
     {
-        var schema = XDocument.Parse(Fody.Properties.Resources.FodyWeavers_SchemaTemplate);
+        var schema = XDocument.Parse(FodyTasks.Properties.Resources.FodyWeavers_SchemaTemplate);
 
         var baseNode = schema.Descendants().First(item => item.Name == schemaNamespace.GetName("all"));
 

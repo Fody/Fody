@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FodyCommon\FodyCommon.csproj" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nullable" Version="1.3.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.11.4" PrivateAssets="All" Justification="Stick with this version to stay backward compatible - we don't ship this, but depend on the version installed with dotnet/msbuild"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\FodyHelpers\Guard.cs" Link="Guard.cs" />
+    <Compile Include="..\FodyHelpers\MessageImportance.cs" Link="MessageImportance.cs" />
+    <Compile Include="..\FodyHelpers\MessageImportanceDefaults.cs" Link="MessageImportanceDefaults.cs" />
+    <Compile Include="..\FodyHelpers\Testing\PeVerifier.cs" Link="Verify\PeVerifier.cs" />
+    <Compile Include="..\FodyHelpers\Testing\SdkToolFinder.cs" Link="Verify\SdkToolFinder.cs" />
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <Target Name="PreparePackagesForIntegrationSolution" BeforeTargets="GenerateNuspec">
+    <WriteLinesToFile Lines="&lt;Project&gt;&lt;PropertyGroup&gt;&lt;IntegrationVersion&gt;$(PackageVersion)&lt;/IntegrationVersion&gt;&lt;/PropertyGroup&gt;&lt;/Project&gt;" File="..\Integration\Directory.Build.props" Overwrite="true" />
+  </Target>
+
+</Project>

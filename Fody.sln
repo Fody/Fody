@@ -3,10 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 16.0.29201.188
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fody", "Fody\Fody.csproj", "{64880F43-E6C1-428E-B00A-E0374697B5CF}"
-	ProjectSection(ProjectDependencies) = postProject
-		{89681581-A390-4761-9C27-1F274FE506E7} = {89681581-A390-4761-9C27-1F274FE506E7}
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyTasks", "FodyTasks\FodyTasks.csproj", "{64880F43-E6C1-428E-B00A-E0374697B5CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWeaver.Fody", "SampleWeaver.Fody\SampleWeaver.Fody.csproj", "{2C10CBD1-5913-46D5-B705-0F3B46E68DD1}"
 EndProject
@@ -26,14 +23,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\build.yml = .github\workflows\build.yml
 		Directory.Build.props = Directory.Build.props
+		Directory.Build.targets = Directory.Build.targets
 		package_readme.md = package_readme.md
 		readme.md = readme.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWeaver", "SampleWeaver\SampleWeaver.csproj", "{C07F5786-84DD-460C-A846-50311562790D}"
-	ProjectSection(ProjectDependencies) = postProject
-		{2C10CBD1-5913-46D5-B705-0F3B46E68DD1} = {2C10CBD1-5913-46D5-B705-0F3B46E68DD1}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FodyHelpers.Tests", "FodyHelpers.Tests\FodyHelpers.Tests.csproj", "{68109B11-B125-47D2-A188-15D8793DEC6F}"
 EndProject
@@ -51,6 +46,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cecil", "cecil", "{FE2F1D5B
 	ProjectSection(SolutionItems) = preProject
 		cecil\Directory.Build.props = cecil\Directory.Build.props
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fody", "Fody\Fody.csproj", "{0F46EE86-14BD-3194-7A98-6C31CBF9CB93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -118,6 +115,10 @@ Global
 		{70E05599-64EE-4C11-A2F8-EE4113309039}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70E05599-64EE-4C11-A2F8-EE4113309039}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70E05599-64EE-4C11-A2F8-EE4113309039}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F46EE86-14BD-3194-7A98-6C31CBF9CB93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F46EE86-14BD-3194-7A98-6C31CBF9CB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F46EE86-14BD-3194-7A98-6C31CBF9CB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F46EE86-14BD-3194-7A98-6C31CBF9CB93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

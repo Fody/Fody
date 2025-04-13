@@ -7,12 +7,18 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Key.snk</AssemblyOriginatorKeyFile>
     <NoPackageAnalysis>true</NoPackageAnalysis>
+    <IsPackable>false</IsPackable>
+    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
+    <Authors>The Fody Team</Authors>
+    <Copyright>Copyright (c) The Fody Team and contributors</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageOutputPath>$(MSBuildThisFileDirectory)nugets</PackageOutputPath>
-    <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeAllInPackage</TargetsForTfmSpecificContentInPackage>
     <PackageProjectUrl>https://github.com/Fody/Fody</PackageProjectUrl>
+    <PackageIcon>package_icon.png</PackageIcon>
     <PackageIconUrl>https://raw.github.com/Fody/Fody/master/package_icon.png</PackageIconUrl>
     <PackageTags>ILWeaving, Fody, Cecil, AOP</PackageTags>
+    <PackageReadmeFile>package_readme.md</PackageReadmeFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <Nullable>enable</Nullable>
     <!-- work around https://github.com/dotnet/msbuild/issues/4303 -->
@@ -20,13 +26,8 @@
     <ResolveAssemblyReferencesSilent>true</ResolveAssemblyReferencesSilent>
     <NuGetAuditMode>direct</NuGetAuditMode>
   </PropertyGroup>
-
-  <Target Name="IncludeAllInPackage">
-    <ItemGroup>
-      <TfmSpecificPackageFile Include="$(OutputPath)\*.*"
-                              Exclude="**/$(TargetName).*;*.json;**/Microsoft*;**/System*"
-                              PackagePath="$(BuildOutputTargetFolder)/$(TargetFramework)" />
-    </ItemGroup>
-  </Target>
-
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)package_readme.md" PackagePath="" />
+    <Content Include="$(MSBuildThisFileDirectory)package_icon.png" PackagePath="" />
+  </ItemGroup>
 </Project>

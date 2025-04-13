@@ -2,6 +2,7 @@
   <PropertyGroup>
     <!-- This is just to test FodyPackaging, use local output path -->
     <PackageOutputPath>$(ProjectDir)bin</PackageOutputPath>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <Import Project="..\FodyPackaging\build\FodyPackaging.props" />
@@ -11,4 +12,8 @@
   </PropertyGroup>
 
   <Import Project="..\FodyPackaging\build\FodyPackaging.targets" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\SampleWeaver.Fody\SampleWeaver.Fody.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
 </Project>
