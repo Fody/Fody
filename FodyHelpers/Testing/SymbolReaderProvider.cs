@@ -14,6 +14,6 @@
         return inner.GetSymbolReader(module, uwpAssemblyPath);
     }
 
-    public ISymbolReader? GetSymbolReader(ModuleDefinition module, Stream symbolStream) =>
+    public ISymbolReader GetSymbolReader(ModuleDefinition module, Stream symbolStream) =>
         throw new NotSupportedException();
 }
