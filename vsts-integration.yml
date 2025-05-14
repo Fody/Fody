@@ -76,6 +76,12 @@ jobs:
   - task: UseDotNet@2
     inputs:
       packageType: 'sdk'
+      version: '8.x'
+      includePreviewVersions: false
+    displayName: 'Install DotNet SDK 8'
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
       version: '9.x'
       includePreviewVersions: false
     displayName: 'Install DotNet SDK 9'
