@@ -4,10 +4,10 @@ variables:
 
 resources:
   repositories:
-    - repository: FodyIntegrationTest
-      type: github
-      endpoint: Fody
-      name: tom-englert/FodyIntegrationTest
+  - repository: FodyIntegrationTest
+    type: github
+    endpoint: Fody
+    name: tom-englert/FodyIntegrationTest
 
 jobs:
 - job: 'Master'
@@ -15,13 +15,9 @@ jobs:
     vmImage: 'windows-2022'
   steps:
 
-  - task: NuGetToolInstaller@1
-    inputs:
-      versionSpec: 
-
   - powershell: |
-     (new-object Net.WebClient).DownloadString("https://raw.github.com/tom-englert/BuildScripts/master/BuildScripts.ps1") | iex
-     Project-SetVersion "Directory.Build.props"  | Build-AppendVersionToBuildNumber
+      (new-object Net.WebClient).DownloadString("https://raw.github.com/tom-englert/BuildScripts/master/BuildScripts.ps1") | iex
+      Project-SetVersion "Directory.Build.props"  | Build-AppendVersionToBuildNumber
     displayName: 'Patch version'
 
   - task: DotNetCoreCLI@2
@@ -69,14 +65,20 @@ jobs:
 
 - job: 'DotnetBuild'
   strategy:
-   matrix:
-     'Mac':
-       image: 'macOS-latest'
-     'Linux':
-       image: 'ubuntu-latest'
+    matrix:
+      'Mac':
+        image: 'macOS-latest'
+      'Linux':
+        image: 'ubuntu-latest'
   pool:
     vmImage: $(image)
   steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
+      version: '9.x'
+      includePreviewVersions: false
+    displayName: 'Install DotNet SDK 9'
   - task: DotNetCoreCLI@2
     displayName: 'Build Fody'
     inputs:
@@ -103,17 +105,16 @@ jobs:
       projects: 'Integration/Integration.sln'
       arguments: $(testArgs)
 
-
 - job: 'Integration'
   dependsOn: 'Master'
   strategy:
-   matrix:
-     'VS2022':
-       image: 'windows-2022'
-       vsVersion: '17.0'
-     'VS2019':
-       image: 'windows-2019'
-       vsVersion: '16.0'
+    matrix:
+      'VS2022':
+        image: 'windows-2022'
+        vsVersion: '17.0'
+      'VS2019':
+        image: 'windows-2019'
+        vsVersion: '16.0'
   pool:
     vmImage: $(image)
   steps:
