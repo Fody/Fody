@@ -101,15 +101,7 @@ public partial class Processor
             }
         }
 
-        try
-        {
-            ConfigFileFinder.EnsureSchemaIsUpToDate(ProjectDirectory, Weavers, GenerateXsd);
-        }
-        catch (Exception ex)
-        {
-            // Ignore, not super critical, see https://github.com/Fody/Fody/issues/1318
-            Logger.LogWarning(ex.Message);
-        }
+        ConfigFileFinder.EnsureSchemaIsUpToDate(Logger, ProjectDirectory, Weavers, GenerateXsd);
 
         Weavers = Weavers
             .Where(weaver => weaver.Element != null)
