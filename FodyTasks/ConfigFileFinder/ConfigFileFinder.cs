@@ -158,7 +158,7 @@ public static class ConfigFileFinder
         return element;
     }
 
-    public static void EnsureSchemaIsUpToDate(string projectDirectory, IEnumerable<WeaverEntry> weavers, bool defaultGenerateXsd)
+    public static void EnsureSchemaIsUpToDate(ILogger logger, string projectDirectory, IEnumerable<WeaverEntry> weavers, bool defaultGenerateXsd)
     {
         var projectConfigFilePath = Path.Combine(projectDirectory, FodyWeaversConfigFileName);
         try
@@ -189,7 +189,8 @@ public static class ConfigFileFinder
         }
         catch (Exception exception)
         {
-            throw new WeavingException($"Failed to update schema for ({projectConfigFilePath}). Exception message: {exception.Message}");
+            // Only log, not super critical, see https://github.com/Fody/Fody/issues/1318
+            logger.LogWarning($"Failed to update schema for ({projectConfigFilePath}). Exception message: {exception.Message}");
         }
     }
 

@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -68,8 +68,9 @@ public class ConfigFileFinderTests :
         };
 
         var configFiles = ConfigFileFinder.FindWeaverConfigFiles(null, slnDir, testDir, new MockBuildLogger()).ToArray();
+        var logger = new MockBuildLogger();
 
-        ConfigFileFinder.EnsureSchemaIsUpToDate(testDir, weavers, true);
+        ConfigFileFinder.EnsureSchemaIsUpToDate(logger, testDir, weavers, true);
 
         Assert.Single(configFiles);
         Assert.False(configFiles[0].AllowExtraEntries);
@@ -131,7 +132,9 @@ public class ConfigFileFinderTests :
         };
 
         var configFiles = ConfigFileFinder.FindWeaverConfigFiles(null, slnDir, testDir, new MockBuildLogger()).ToArray();
-        ConfigFileFinder.EnsureSchemaIsUpToDate(testDir, weavers, true);
+        var logger = new MockBuildLogger();
+
+        ConfigFileFinder.EnsureSchemaIsUpToDate(logger, testDir, weavers, true);
 
         Assert.Single(configFiles);
         Assert.Equal(xmlPath, configFiles[0].FilePath);
@@ -162,7 +165,9 @@ public class ConfigFileFinderTests :
         };
 
         var configFiles = ConfigFileFinder.FindWeaverConfigFiles(null, slnDir, testDir, new MockBuildLogger()).ToArray();
-        ConfigFileFinder.EnsureSchemaIsUpToDate(testDir, weavers, false);
+        var logger = new MockBuildLogger();
+
+        ConfigFileFinder.EnsureSchemaIsUpToDate(logger, testDir, weavers, false);
 
         Assert.Single(configFiles);
         Assert.Equal(xmlPath, configFiles[0].FilePath);
@@ -200,7 +205,9 @@ public class ConfigFileFinderTests :
         };
 
         var configFiles = ConfigFileFinder.FindWeaverConfigFiles(null, slnDir, testDir, new MockBuildLogger()).ToArray();
-        ConfigFileFinder.EnsureSchemaIsUpToDate(testDir, weavers, true);
+        var logger = new MockBuildLogger();
+
+        ConfigFileFinder.EnsureSchemaIsUpToDate(logger, testDir, weavers, true);
 
         Assert.Single(configFiles);
         Assert.Equal(slnXmlPath, configFiles[0].FilePath);
@@ -232,7 +239,9 @@ public class ConfigFileFinderTests :
         };
 
         var configs = ConfigFileFinder.FindWeaverConfigFiles(null, slnDir, testDir, new MockBuildLogger()).ToArray();
-        ConfigFileFinder.EnsureSchemaIsUpToDate(testDir, weavers, false);
+        var logger = new MockBuildLogger();
+
+        ConfigFileFinder.EnsureSchemaIsUpToDate(logger, testDir, weavers, false);
 
         Assert.Single(configs);
         Assert.Equal(xmlPath, configs[0].FilePath);
