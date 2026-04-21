@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using VerifyXunit;
 using Fody;
@@ -9,7 +10,9 @@ using Xunit;
 // ReSharper disable UnusedVariable
 public class PeVerifierTests
 {
-    string assemblyPath = "FodyHelpers.Tests.dll";
+    // xunit3 outputs .exe, not .dll, so we need to check for both
+    readonly string assemblyPath = new[] { "dll", "exe" }.Select(ext => $"FodyHelpers.Tests.{ext}").FirstOrDefault(File.Exists) ?? throw new InvalidOperationException("Test assembly does not exist");
+
     [Fact]
     public void StaticPathResolution() =>
         Assert.True(PeVerifier.FoundPeVerify);
@@ -17,6 +20,7 @@ public class PeVerifierTests
     [Fact]
     public void Should_verify_current_assembly()
     {
+        var cwd = Directory.GetCurrentDirectory();
         var verify = PeVerifier.Verify(assemblyPath, GetIgnoreCodes(), out var output);
         Assert.True(verify);
         Assert.NotNull(output);

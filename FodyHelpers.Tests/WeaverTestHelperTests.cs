@@ -5,6 +5,7 @@ using Fody;
 using Mono.Cecil;
 using VerifyXunit;
 using Xunit;
+using TestResult = Fody.TestResult;
 
 public class WeaverTestHelperTests
 {
