@@ -1,6 +1,6 @@
 variables:
   buildArgs: '-c Release'
-  testArgs: '$(buildArgs) -f net8.0 --no-build'
+  testArgs: '$(buildArgs) -f net10.0 --no-build'
 
 resources:
   repositories:
@@ -12,7 +12,7 @@ resources:
 jobs:
 - job: 'Master'
   pool:
-    vmImage: 'windows-2022'
+    vmImage: 'windows-2025-vs2026'
   steps:
 
   - powershell: |
@@ -76,15 +76,9 @@ jobs:
   - task: UseDotNet@2
     inputs:
       packageType: 'sdk'
-      version: '8.x'
+      version: '10.x'
       includePreviewVersions: false
-    displayName: 'Install DotNet SDK 8'
-  - task: UseDotNet@2
-    inputs:
-      packageType: 'sdk'
-      version: '9.x'
-      includePreviewVersions: false
-    displayName: 'Install DotNet SDK 9'
+    displayName: 'Install DotNet SDK 10'
   - task: DotNetCoreCLI@2
     displayName: 'Build Fody'
     inputs:
@@ -115,12 +109,12 @@ jobs:
   dependsOn: 'Master'
   strategy:
     matrix:
+      'VS2026':
+        image: 'windows-2025-vs2026'
+        vsVersion: '18.0'
       'VS2022':
         image: 'windows-2022'
         vsVersion: '17.0'
-      'VS2019':
-        image: 'windows-2019'
-        vsVersion: '16.0'
   pool:
     vmImage: $(image)
   steps:
