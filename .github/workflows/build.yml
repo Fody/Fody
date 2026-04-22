@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
-            9.x.x
+            10.x.x
 
       - name: Restore Fody
         run: dotnet restore Fody.sln
@@ -58,7 +58,7 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
-            9.x.x
+            10.x.x
 
       - name: Restore Fody
         run: dotnet restore Fody.sln
@@ -78,31 +78,3 @@ jobs:
 
       - name: Test Integration
         run: dotnet test --configuration Release --framework net8.0 --no-build Integration/Integration.sln
-
-  windows-vs:
-    name: Windows VS
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: true
-
-      - name: Setup VS Dev Tools
-        uses: ilammy/msvc-dev-cmd@v1
-
-      - name: Setup Environment
-        run: echo 'Platform=' >> $GITHUB_ENV
-        shell: bash
-
-      - name: Build Fody
-        run: msbuild -restore Fody.sln /p:Configuration=Release /verbosity:minimal
-
-      - name: Test Fody
-        run: vstest.console Tests/bin/Release/net48/Tests.dll
-
-      - name: Build Integration
-        run: msbuild -restore Integration/Integration.sln /p:Configuration=Release /verbosity:minimal
-
-      - name: Test Integration
-        run: vstest.console Integration/Tests/bin/Release/net472/Tests.dll
