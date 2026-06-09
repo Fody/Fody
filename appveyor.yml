@@ -1,6 +1,9 @@
 image: Visual Studio 2022
 install:
 - cmd: git submodule update --init --recursive
+- ps: |
+    Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile "$env:TEMP\dotnet-install.ps1"
+    & "$env:TEMP\dotnet-install.ps1" -Version 10.0.300 -InstallDir 'C:\Program Files\dotnet'
 environment:
   DOTNET_NOLOGO: true
   DOTNET_CLI_TELEMETRY_OPTOUT: true
