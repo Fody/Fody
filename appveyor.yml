@@ -10,11 +10,14 @@ environment:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
 build_script:
 - cmd: |
-    msbuild -restore Fody.sln /p:Configuration=Release /verbosity:minimal
-    msbuild -restore Integration\Integration.sln /p:Configuration=Release /verbosity:minimal
-    msbuild Integration\Tests\Tests.csproj /target:Restore
-test:
-  assemblies:
-    - '**\*Tests.dll'
+    dotnet restore Fody.sln
+    dotnet build Fody.sln -c Release --no-restore
+    dotnet restore Integration\Integration.sln
+    dotnet build Integration\Integration.sln -c Release --no-restore
+test: off
+test_script:
+- cmd: |
+    dotnet test Fody.sln -c Release --no-build
+    dotnet test Integration\Integration.sln -c Release --no-build
 artifacts:
 - path: nugets\*.nupkg
