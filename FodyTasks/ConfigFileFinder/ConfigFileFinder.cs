@@ -74,7 +74,6 @@ public static class ConfigFileFinder
             .ToArray();
 
         root.Add(elements);
-        weaverConfig.Save(projectConfigFilePath);
 
         var writerSettings = new XmlWriterSettings
         {

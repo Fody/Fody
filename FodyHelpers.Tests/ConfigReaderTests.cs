@@ -17,6 +17,12 @@ public class ConfigReaderTests
         Assert.True(xElementTrue.ReadBool("Name", false));
         var xElement1 = XElement.Parse("<Node Name='1'/>");
         Assert.True(xElement1.ReadBool("Name", false));
+        var xElementTrueMixedCase = XElement.Parse("<Node Name='True'/>");
+        Assert.True(xElementTrueMixedCase.ReadBool("Name", false));
+        var xElementFalseMixedCase = XElement.Parse("<Node Name='False'/>");
+        Assert.False(xElementFalseMixedCase.ReadBool("Name", true));
+        var xElementTrueUpperCase = XElement.Parse("<Node Name='TRUE'/>");
+        Assert.True(xElementTrueUpperCase.ReadBool("Name", false));
         var xElementNone = XElement.Parse("<Node />");
         Assert.False(xElementNone.ReadBool("Name", false));
         var xElementDefault = XElement.Parse("<Node/>");

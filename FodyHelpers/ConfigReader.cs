@@ -33,7 +33,7 @@ static class ConfigReader
 
         try
         {
-            return XmlConvert.ToBoolean(value);
+            return XmlConvert.ToBoolean(value.ToLowerInvariant());
         }
         catch
         {

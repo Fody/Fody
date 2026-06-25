@@ -6,6 +6,6 @@ static class ExtractConstants
         {
             return new();
         }
-        return input.Split(';').ToList();
+        return input.Split([';'], StringSplitOptions.RemoveEmptyEntries).ToList();
     }
 }

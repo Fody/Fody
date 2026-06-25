@@ -72,7 +72,7 @@ public partial class Processor
         ConfigEntries = ConfigFileFinder.ParseWeaverConfigEntries(ConfigFiles);
 
         var extraEntries = ConfigEntries.Values
-            .Where(entry => !entry.ConfigFile.AllowExtraEntries && !Weavers.Any(weaver => string.Equals(weaver.ElementName, entry.ElementName)))
+            .Where(entry => !entry.ConfigFile.AllowExtraEntries && !Weavers.Any(weaver => string.Equals(weaver.ElementName, entry.ElementName, StringComparison.OrdinalIgnoreCase)))
             .ToArray();
 
         const string missingWeaversHelp = "Add the desired weavers via their nuget package.";
