@@ -58,6 +58,20 @@ Thanks to all the backers and sponsors! Support this project by [becoming a patr
 <!--- EndOpenCollectiveBackers -->
 
 
+## Hot Reload
+
+Fody modifies the assembly after the compiler has run. This is fundamentally incompatible with in-process [.NET Hot Reload](https://learn.microsoft.com/visualstudio/debugger/hot-reload) / Edit and Continue: Hot Reload computes its changes against the assembly the compiler emitted, but the assembly running on disk is the *woven* one. The two diverge, so applying a Hot Reload edit to a Fody project results in errors rather than woven code. See [dotnet/roslyn#56678](https://github.com/dotnet/roslyn/issues/56678).
+
+To avoid this, Fody opts woven assemblies out of in-process Hot Reload:
+
+  * It removes the `EnableEditAndContinue` flag from the assembly. This flag is only emitted for debug builds, so this is a no-op for release builds.
+  * It sets `SupportsHotReload` to `false` so Visual Studio does not offer the Hot Reload button for Fody projects.
+
+As a result, editing a Fody project during a `dotnet watch`, Visual Studio, or Rider session falls back to a full rebuild and restart instead of an in-process update. The rebuild re-runs Fody, so the running application always matches the woven output. The trade-off is losing in-process Hot Reload speed in exchange for correctness.
+
+To opt out, disable Fody for the build via `<DisableFody>true</DisableFody>`.
+
+
 ## Documentation and Further Learning
 
   * [Licensing and patron FAQ](https://github.com/Fody/Home/tree/master/pages/licensing-patron-faq.md)<br>

@@ -13,6 +13,12 @@
     <TargetsTriggeredByCompilation Condition="'$(FodyAfterTargets)'==''">$(TargetsTriggeredByCompilation);FodyTarget</TargetsTriggeredByCompilation>
     <DisableFody Condition='$(UseWPF)==true AND $(MSBuildProjectName.EndsWith("_wpftmp"))'>true</DisableFody>
     <FodyTreatWarningsAsErrors Condition="$(FodyTreatWarningsAsErrors) == ''">$(TreatWarningsAsErrors)</FodyTreatWarningsAsErrors>
+    <!-- Fody rewrites the assembly after compilation, which is incompatible with in-process Hot Reload / Edit and Continue:
+         the woven assembly no longer matches the baseline Roslyn diffs against, producing errors rather than woven code.
+         Fody removes the EnableEditAndContinue flag from the woven assembly (see EditAndContinue.cs) so the host falls back
+         to a full rebuild + restart on each edit, which re-runs Fody. This property stops Visual Studio offering the
+         (broken) in-process Hot Reload button for Fody projects. Use DisableFody=true to opt out of Fody entirely. -->
+    <SupportsHotReload Condition="$(SupportsHotReload) == ''">false</SupportsHotReload>
   </PropertyGroup>
 
   <ItemGroup Condition="Exists($(ProjectWeaverXml))">

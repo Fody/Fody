@@ -105,6 +105,11 @@ public partial class InnerWeaver :
             ExecuteWeavers();
             AddWeavingInfo();
             FindStrongNameKey();
+            if (EditAndContinue.Disable(ModuleDefinition))
+            {
+                Logger.LogDebug("Removed the EnableEditAndContinue flag. The assembly will be re-woven by Fody on rebuild instead of via Hot Reload.");
+            }
+
             WriteModule();
             ModuleDefinition?.Dispose();
             ExecuteAfterWeavers();
