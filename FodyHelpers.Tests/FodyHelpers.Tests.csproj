@@ -20,7 +20,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.5.0" />
     <PackageReference Include="Verify.XunitV3" Version="31.16.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" PrivateAssets="All" />
-    <PackageReference Include="xunit.v3" Version="3.2.2" />
+    <PackageReference Include="xunit.v3" Version="4.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="Nullable" Version="1.3.1" PrivateAssets="All" />
   </ItemGroup>
