@@ -22,3 +22,6 @@
 *.pdb binary
 *.svg binary
 *.approved.txt binary
+
+# Verify: text files require UTF-8 encoding and LF line endings
+*.verified.txt text eol=lf working-tree-encoding=UTF-8
