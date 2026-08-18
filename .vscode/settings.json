@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "vsts-integration.yml": "azure-pipelines"
+    },
+    "yaml.format.singleQuote": true
+}
