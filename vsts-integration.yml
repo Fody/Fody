@@ -61,14 +61,14 @@ jobs:
       - script: dotnet build Fody.sln -c Release
         displayName: 'Build Fody'
 
-      - script: dotnet test Fody.sln -c Release --no-build
+      - script: dotnet test Fody.sln -c Release --no-build -f net10.0
         displayName: 'Test Fody'
         enabled: false # fody tests currently do not run on mac/linux
 
       - script: dotnet build Integration/Integration.sln -c Release
         displayName: 'Build Integration'
 
-      - script: dotnet test Integration/Integration.sln -c Release --no-build
+      - script: dotnet test Integration/Integration.sln -c Release --no-build -f net10.0
         displayName: 'Test Integration'
 
   - job: 'Integration'
