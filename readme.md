@@ -1,4 +1,4 @@
-[![AppVeyor](https://img.shields.io/appveyor/ci/SimonCropp/fody/master.svg?style=flat&max-age=86400&label=appveyor)](https://ci.appveyor.com/project/SimonCropp/fody/branch/master)
+[![Build status](https://github.com/Fody/Fody/actions/workflows/build.yml/badge.svg)](https://github.com/Fody/Fody/actions/workflows/build.yml)
 [![Chat on Gitter](https://img.shields.io/gitter/room/fody/fody.svg)](https://gitter.im/Fody/Fody)
 [![NuGet Status](https://img.shields.io/nuget/v/Fody.svg)](https://www.nuget.org/packages/Fody/)
 [![Patrons on Open Collective](https://opencollective.com/fody/tiers/patron/badge.svg)](#patrons)
