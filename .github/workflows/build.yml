@@ -27,17 +27,15 @@ jobs:
       - name: Build Fody
         run: dotnet build --configuration Release --no-restore Fody.sln
 
-      - name: Test Fody
-        run: dotnet test --configuration Release --no-build Fody.sln
-
       - name: Restore Integration
         run: dotnet restore Integration/Integration.sln
 
       - name: Build Integration
         run: dotnet build --configuration Release --no-restore Integration/Integration.sln
 
-      - name: Test Integration
-        run: dotnet test --configuration Release --no-build Integration/Integration.sln
+      - name: Test
+        run: ./runTests.ps1
+        shell: pwsh
 
       - name: Upload NuGet
         uses: actions/upload-artifact@v7
@@ -66,15 +64,13 @@ jobs:
       - name: Build Fody
         run: dotnet build --configuration Release --no-restore Fody.sln
 
-# TODO Uncomment this when tests pass on Linux
-#      - name: Test Fody
-#        run: dotnet test --configuration Release --framework net8.0 --no-build Fody.sln
-
       - name: Restore Integration
         run: dotnet restore Integration/Integration.sln
 
       - name: Build Integration
         run: dotnet build --configuration Release --no-restore Integration/Integration.sln
 
+# TODO Run the Fody tests when they pass on Linux
       - name: Test Integration
-        run: dotnet test --configuration Release --framework net8.0 --no-build Integration/Integration.sln
+        run: ./runTests.ps1 -IntegrationOnly -Framework net8.0
+        shell: pwsh
