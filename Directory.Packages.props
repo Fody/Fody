@@ -16,7 +16,7 @@
     <PackageVersion Include="TUnit.Core" Version="1.69.0" />
     <PackageVersion Include="TUnit.Assertions" Version="1.69.0" />
     <PackageVersion Include="TUnit.Engine" Version="1.69.0" />
-    <PackageVersion Include="Verify.TUnit" Version="31.28.0" />
+    <PackageVersion Include="Verify.TUnit" Version="33.1.3" />
     <PackageVersion Include="JetBrainsAnnotations.Fody" Version="2.17.0" />
     <PackageVersion Include="NullGuard.Fody" Version="3.1.1" />
     <PackageVersion Include="Virtuosity.Fody" Version="3.1.2" />

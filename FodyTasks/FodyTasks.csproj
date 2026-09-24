@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <Target Name="PreparePackagesForIntegrationSolution" BeforeTargets="GenerateNuspec">
-    <WriteLinesToFile Lines="&lt;Project&gt;&lt;PropertyGroup&gt;&lt;IntegrationVersion&gt;$(PackageVersion)&lt;/IntegrationVersion&gt;&lt;/PropertyGroup&gt;&lt;/Project&gt;" File="..\Integration\Directory.Build.props" Overwrite="true" />
+    <WriteLinesToFile Lines="&lt;Project&gt;&lt;PropertyGroup&gt;&lt;IntegrationVersion&gt;$(PackageVersion)&lt;/IntegrationVersion&gt;&lt;Verify_SponsorshipExemption&gt;$(Verify_SponsorshipExemption)&lt;/Verify_SponsorshipExemption&gt;&lt;Verify_SponsorshipExemptionUntil&gt;$(Verify_SponsorshipExemptionUntil)&lt;/Verify_SponsorshipExemptionUntil&gt;&lt;/PropertyGroup&gt;&lt;/Project&gt;" File="..\Integration\Directory.Build.props" Overwrite="true" />
   </Target>
 
 </Project>
