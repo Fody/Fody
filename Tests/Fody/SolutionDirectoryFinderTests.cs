@@ -1,32 +1,32 @@
-﻿using System.IO;
+using System.IO;
 
 public class SolutionDirectoryFinderTests
 {
-    [Fact]
-    public void ReturnNCrunchSolutionWhenPresent()
+    [Test]
+    public async Task ReturnNCrunchSolutionWhenPresent()
     {
         var result = SolutionDirectoryFinder.Find("Foo", "Baz", "Bar");
-        Assert.Equal("Baz", result);
+        await Assert.That(result).IsEqualTo("Baz");
     }
 
-    [Fact]
-    public void ReturnSolutionWhenPresent()
+    [Test]
+    public async Task ReturnSolutionWhenPresent()
     {
         var result = SolutionDirectoryFinder.Find("Foo", null, "Bar");
-        Assert.Equal("Foo", result);
+        await Assert.That(result).IsEqualTo("Foo");
     }
 
-    [Fact]
-    public void ReturnProjectParentWhenSolutionIsEmpty()
+    [Test]
+    public async Task ReturnProjectParentWhenSolutionIsEmpty()
     {
         var result = SolutionDirectoryFinder.Find(null, null, Environment.CurrentDirectory);
-        Assert.Equal(Path.GetDirectoryName(Environment.CurrentDirectory), result);
+        await Assert.That(result).IsEqualTo(Path.GetDirectoryName(Environment.CurrentDirectory));
     }
 
-    [Fact]
-    public void IgnoreUndefinedSolution()
+    [Test]
+    public async Task IgnoreUndefinedSolution()
     {
         var result = SolutionDirectoryFinder.Find("*Undefined*", null, Environment.CurrentDirectory);
-        Assert.Equal(Path.GetDirectoryName(Environment.CurrentDirectory), result);
+        await Assert.That(result).IsEqualTo(Path.GetDirectoryName(Environment.CurrentDirectory));
     }
 }

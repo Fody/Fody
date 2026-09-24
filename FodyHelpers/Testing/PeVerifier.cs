@@ -1,4 +1,4 @@
-﻿namespace Fody;
+namespace Fody;
 
 /// <summary>
 /// Verifies assemblies using peverify.exe.
@@ -121,7 +121,7 @@ public static class PeVerifier
 
         using var process = Process.Start(processStartInfo);
         output = process.StandardOutput.ReadToEnd();
-        output = Regex.Replace(output, "^All Classes and Methods.*", "");
+        output = Regex.Replace(output, "^All Classes and Methods.*", "", RegexOptions.Multiline);
         output = output.Trim();
         if (!process.WaitForExit(10000))
         {

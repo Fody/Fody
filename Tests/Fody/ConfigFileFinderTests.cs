@@ -36,8 +36,8 @@ public class ConfigFileFinderTests :
         Directory.Delete(slnDir, true);
     }
 
-    [Fact]
-    public void ShouldCreateXsd()
+    [Test]
+    public async Task ShouldCreateXsd()
     {
         File.WriteAllText(
             xmlPath,
@@ -72,48 +72,48 @@ public class ConfigFileFinderTests :
 
         ConfigFileFinder.EnsureSchemaIsUpToDate(logger, testDir, weavers, true);
 
-        Assert.Single(configFiles);
-        Assert.False(configFiles[0].AllowExtraEntries);
-        Assert.Equal(xmlPath, configFiles[0].FilePath);
+        await Assert.That(configFiles).HasSingleItem();
+        await Assert.That(configFiles[0].AllowExtraEntries).IsFalse();
+        await Assert.That(configFiles[0].FilePath).IsEqualTo(xmlPath);
 
-        Assert.True(File.Exists(xsdPath));
+        await Assert.That(File.Exists(xsdPath)).IsTrue();
 
         var xml = XDocumentEx.Load(xmlPath);
-        Assert.NotNull(xml.Root);
-        Assert.Equal("FodyWeavers.xsd", xml.Root.Attribute(schemaInstanceNamespace + "noNamespaceSchemaLocation")?.Value);
+        await Assert.That(xml.Root).IsNotNull();
+        await Assert.That(xml.Root.Attribute(schemaInstanceNamespace + "noNamespaceSchemaLocation")?.Value).IsEqualTo("FodyWeavers.xsd");
 
         var xsd = XDocumentEx.Load(xsdPath);
-        Assert.NotNull(xsd.Root);
+        await Assert.That(xsd.Root).IsNotNull();
         var elements = xsd.Root.Descendants(schemaNamespace + "all").First().Elements().ToList();
 
-        Assert.Equal(2, elements.Count);
+        await Assert.That(elements.Count).IsEqualTo(2);
 
         var defaultElem = elements[0];
-        Assert.Equal("element", defaultElem.Name.LocalName);
-        Assert.Equal("TestWeaver", defaultElem.Attribute("name")?.Value);
-        Assert.Equal("xs:anyType", defaultElem.Attribute("type")?.Value);
-        Assert.Equal("0", defaultElem.Attribute("minOccurs")?.Value);
-        Assert.Equal("1", defaultElem.Attribute("maxOccurs")?.Value);
+        await Assert.That(defaultElem.Name.LocalName).IsEqualTo("element");
+        await Assert.That(defaultElem.Attribute("name")?.Value).IsEqualTo("TestWeaver");
+        await Assert.That(defaultElem.Attribute("type")?.Value).IsEqualTo("xs:anyType");
+        await Assert.That(defaultElem.Attribute("minOccurs")?.Value).IsEqualTo("0");
+        await Assert.That(defaultElem.Attribute("maxOccurs")?.Value).IsEqualTo("1");
 
         var elemWithSchema = elements[1];
-        Assert.Equal("element", elemWithSchema.Name.LocalName);
-        Assert.Equal("WeaverWithSchema", elemWithSchema.Attribute("name")?.Value);
-        Assert.Null(elemWithSchema.Attribute("type"));
-        Assert.Equal("0", elemWithSchema.Attribute("minOccurs")?.Value);
-        Assert.Equal("1", elemWithSchema.Attribute("maxOccurs")?.Value);
+        await Assert.That(elemWithSchema.Name.LocalName).IsEqualTo("element");
+        await Assert.That(elemWithSchema.Attribute("name")?.Value).IsEqualTo("WeaverWithSchema");
+        await Assert.That(elemWithSchema.Attribute("type")).IsNull();
+        await Assert.That(elemWithSchema.Attribute("minOccurs")?.Value).IsEqualTo("0");
+        await Assert.That(elemWithSchema.Attribute("maxOccurs")?.Value).IsEqualTo("1");
 
-        var elemWithSchemaType = Assert.Single(elemWithSchema.Elements());
-        Assert.NotNull(elemWithSchemaType);
-        Assert.Equal("complexType", elemWithSchemaType.Name.LocalName);
+        var elemWithSchemaType = await Assert.That(elemWithSchema.Elements()).HasSingleItem();
+        await Assert.That(elemWithSchemaType).IsNotNull();
+        await Assert.That(elemWithSchemaType.Name.LocalName).IsEqualTo("complexType");
 
-        var elemWithSchemaTypeAttr = Assert.Single(elemWithSchemaType.Elements());
-        Assert.NotNull(elemWithSchemaTypeAttr);
-        Assert.Equal("attribute", elemWithSchemaTypeAttr.Name.LocalName);
-        Assert.Equal("TestAttribute", elemWithSchemaTypeAttr.Attribute("name")?.Value);
+        var elemWithSchemaTypeAttr = await Assert.That(elemWithSchemaType.Elements()).HasSingleItem();
+        await Assert.That(elemWithSchemaTypeAttr).IsNotNull();
+        await Assert.That(elemWithSchemaTypeAttr.Name.LocalName).IsEqualTo("attribute");
+        await Assert.That(elemWithSchemaTypeAttr.Attribute("name")?.Value).IsEqualTo("TestAttribute");
     }
 
-    [Fact]
-    public void ShouldOptOutOfXsd()
+    [Test]
+    public async Task ShouldOptOutOfXsd()
     {
         File.WriteAllText(
             xmlPath,
@@ -136,18 +136,18 @@ public class ConfigFileFinderTests :
 
         ConfigFileFinder.EnsureSchemaIsUpToDate(logger, testDir, weavers, true);
 
-        Assert.Single(configFiles);
-        Assert.Equal(xmlPath, configFiles[0].FilePath);
+        await Assert.That(configFiles).HasSingleItem();
+        await Assert.That(configFiles[0].FilePath).IsEqualTo(xmlPath);
 
-        Assert.False(File.Exists(xsdPath));
+        await Assert.That(File.Exists(xsdPath)).IsFalse();
 
         var xml = XDocumentEx.Load(xmlPath);
-        Assert.NotNull(xml.Root);
-        Assert.Null(xml.Root.Attribute(schemaInstanceNamespace + "noNamespaceSchemaLocation"));
+        await Assert.That(xml.Root).IsNotNull();
+        await Assert.That(xml.Root.Attribute(schemaInstanceNamespace + "noNamespaceSchemaLocation")).IsNull();
     }
 
-    [Fact]
-    public void ShouldOptOutOfXsdThroughMSBuildProperty()
+    [Test]
+    public async Task ShouldOptOutOfXsdThroughMSBuildProperty()
     {
         File.WriteAllText(xmlPath,
             """
@@ -169,18 +169,18 @@ public class ConfigFileFinderTests :
 
         ConfigFileFinder.EnsureSchemaIsUpToDate(logger, testDir, weavers, false);
 
-        Assert.Single(configFiles);
-        Assert.Equal(xmlPath, configFiles[0].FilePath);
+        await Assert.That(configFiles).HasSingleItem();
+        await Assert.That(configFiles[0].FilePath).IsEqualTo(xmlPath);
 
-        Assert.False(File.Exists(xsdPath));
+        await Assert.That(File.Exists(xsdPath)).IsFalse();
 
         var xml = XDocumentEx.Load(xmlPath);
-        Assert.NotNull(xml.Root);
-        Assert.Null(xml.Root.Attribute(schemaInstanceNamespace + "noNamespaceSchemaLocation"));
+        await Assert.That(xml.Root).IsNotNull();
+        await Assert.That(xml.Root.Attribute(schemaInstanceNamespace + "noNamespaceSchemaLocation")).IsNull();
     }
 
-    [Fact]
-    public void ShouldNotCreateXsd_OnlySolutionWideConfig()
+    [Test]
+    public async Task ShouldNotCreateXsd_OnlySolutionWideConfig()
     {
         // Deliberately not writing the file in the project dir.
         if (File.Exists(xmlPath))
@@ -209,18 +209,18 @@ public class ConfigFileFinderTests :
 
         ConfigFileFinder.EnsureSchemaIsUpToDate(logger, testDir, weavers, true);
 
-        Assert.Single(configFiles);
-        Assert.Equal(slnXmlPath, configFiles[0].FilePath);
+        await Assert.That(configFiles).HasSingleItem();
+        await Assert.That(configFiles[0].FilePath).IsEqualTo(slnXmlPath);
 
-        Assert.False(File.Exists(slnXsdPath));
+        await Assert.That(File.Exists(slnXsdPath)).IsFalse();
 
         var xml = XDocumentEx.Load(slnXmlPath);
-        Assert.NotNull(xml.Root);
-        Assert.Null(xml.Root.Attribute(schemaInstanceNamespace + "noNamespaceSchemaLocation"));
+        await Assert.That(xml.Root).IsNotNull();
+        await Assert.That(xml.Root.Attribute(schemaInstanceNamespace + "noNamespaceSchemaLocation")).IsNull();
     }
 
-    [Fact]
-    public void XmlConfigShouldOverrideMSBuildPropertyForXsdGeneration()
+    [Test]
+    public async Task XmlConfigShouldOverrideMSBuildPropertyForXsdGeneration()
     {
         File.WriteAllText(
             xmlPath,
@@ -243,13 +243,13 @@ public class ConfigFileFinderTests :
 
         ConfigFileFinder.EnsureSchemaIsUpToDate(logger, testDir, weavers, false);
 
-        Assert.Single(configs);
-        Assert.Equal(xmlPath, configs[0].FilePath);
+        await Assert.That(configs).HasSingleItem();
+        await Assert.That(configs[0].FilePath).IsEqualTo(xmlPath);
 
-        Assert.True(File.Exists(xsdPath));
+        await Assert.That(File.Exists(xsdPath)).IsTrue();
 
         var xml = XDocumentEx.Load(xmlPath);
-        Assert.NotNull(xml.Root);
-        Assert.Equal("FodyWeavers.xsd", xml.Root.Attribute(schemaInstanceNamespace + "noNamespaceSchemaLocation")?.Value);
+        await Assert.That(xml.Root).IsNotNull();
+        await Assert.That(xml.Root.Attribute(schemaInstanceNamespace + "noNamespaceSchemaLocation")?.Value).IsEqualTo("FodyWeavers.xsd");
     }
 }

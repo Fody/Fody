@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Fody" Version="$(IntegrationVersion)" />
-    <PackageReference Include="Virtuosity.Fody" Version="3.1.2" PrivateAssets="All" />
+    <PackageReference Include="Fody" />
+    <PackageReference Include="Virtuosity.Fody" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,22 +2,22 @@ namespace Tests.Fody;
 
 public class AssemblyPathSetTests
 {
-    [Fact]
-    public void ShouldDetectEquality()
+    [Test]
+    public async Task ShouldDetectEquality()
     {
         var a = new AssemblyPathSet(["foo", "bar"]);
         var b = new AssemblyPathSet(["bar", "foo", "bar"]);
 
-        Assert.Equal(a, b);
-        Assert.Equal(a.GetHashCode(), b.GetHashCode());
+        await Assert.That(b).IsEqualTo(a);
+        await Assert.That(b.GetHashCode()).IsEqualTo(a.GetHashCode());
     }
 
-    [Fact]
-    public void ShouldDetectInequality()
+    [Test]
+    public async Task ShouldDetectInequality()
     {
         var a = new AssemblyPathSet(["foo", "bar"]);
         var b = new AssemblyPathSet(["foo", "baz"]);
 
-        Assert.NotEqual(a, b);
+        await Assert.That(b).IsNotEqualTo(a);
     }
 }

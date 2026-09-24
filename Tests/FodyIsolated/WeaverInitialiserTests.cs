@@ -5,7 +5,7 @@ using VerifyTests;
 
 public class WeaverInitialiserTests
 {
-    [Fact]
+    [Test]
     public Task ValidPropsFromBase()
     {
         var moduleDefinition = ModuleDefinition.CreateModule("Foo", ModuleKind.Dll);
@@ -26,7 +26,7 @@ public class WeaverInitialiserTests
         verifySettings.IncludeObsoletes();
         verifySettings.UniqueForRuntime();
 
-        return VerifyXunit.Verifier.Verify(moduleWeaver, verifySettings);
+        return VerifyTUnit.Verifier.Verify(moduleWeaver, verifySettings);
     }
 
     static InnerWeaver BuildInnerWeaver(ModuleDefinition moduleDefinition, IAssemblyResolver resolver) =>

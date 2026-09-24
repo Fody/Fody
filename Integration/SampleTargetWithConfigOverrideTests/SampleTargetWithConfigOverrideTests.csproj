@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net472;net10.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
@@ -15,23 +15,30 @@
         <SampleWeaver MyProperty="$(MyPropertyValue)">
           <Content>Override</Content>
         </SampleWeaver>
-        <NullGuard IncludeDebugAssert="false" />
+        <NullGuard IncludeDebugAssert="false" Mode="Explicit" />
         <JetBrainsAnnotations />
       </Weavers>
     </WeaverConfiguration>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.4.0" />
-    <PackageReference Include="xunit.v3" Version="3.2.2" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" PrivateAssets="all" />
-    <PackageReference Include="Fody" Version="$(IntegrationVersion)" />
-    <PackageReference Include="SampleWeaver.Fody" Version="$(IntegrationVersion)" />
+    <Using Include="System.Threading.Tasks" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TUnit.Core" />
+    <PackageReference Include="TUnit.Assertions" />
+    <PackageReference Include="TUnit.Engine" />
+    <PackageReference Include="Fody" />
+    <PackageReference Include="SampleWeaver.Fody" />
   </ItemGroup>
 
   <!-- Do NOT update these versions, it's for backward compatibility testing!!! -->
   <ItemGroup>
-    <PackageReference Include="JetBrainsAnnotations.Fody" Version="2.17.0" PrivateAssets="All" />
-    <PackageReference Include="NullGuard.Fody" Version="3.1.1" PrivateAssets="All" />
+    <PackageReference Include="JetBrainsAnnotations.Fody" PrivateAssets="All" />
+    <PackageReference Include="NullGuard.Fody" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\ModuleInitializerAttribute.cs" Link="ModuleInitializerAttribute.cs" />
   </ItemGroup>
 </Project>

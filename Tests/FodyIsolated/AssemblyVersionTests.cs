@@ -5,17 +5,17 @@ using System.Reflection;
 
 public class AssemblyVersionTests
 {
-    [Fact]
-    public void ShouldReadTheSameFodyCommonVersionInfoFromAssemblyAttributeAndFile()
+    [Test]
+    public async Task ShouldReadTheSameFodyCommonVersionInfoFromAssemblyAttributeAndFile()
     {
-        var asm = Assembly.Load("FodyCommon");
+        var asm = System.Reflection.Assembly.Load("FodyCommon");
         var attrs = asm.GetCustomAttributes(typeof(AssemblyFileVersionAttribute));
         var asmFileVersionAttribute = (AssemblyFileVersionAttribute?)attrs.FirstOrDefault();
 
-        Assert.NotNull(asmFileVersionAttribute);
+        await Assert.That(asmFileVersionAttribute).IsNotNull();
 
         var fileVersion = FileVersionInfo.GetVersionInfo(Path.GetFullPath(asm.Location));
 
-        Assert.Equal(fileVersion.FileVersion, asmFileVersionAttribute.Version);
+        await Assert.That(asmFileVersionAttribute!.Version).IsEqualTo(fileVersion.FileVersion);
     }
 }

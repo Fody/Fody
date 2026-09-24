@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net472;net8.0</TargetFrameworks>
     <OutputType>Exe</OutputType>
@@ -13,10 +13,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Reflection.Metadata" Version="10.0.6" />
-    <PackageReference Include="xunit.v3" Version="3.2.2" />
-    <PackageReference Include="Verify.XunitV3" Version="31.16.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.4.0" />
+    <PackageReference Include="System.Reflection.Metadata" />
+    <Using Include="System.Threading.Tasks" />
+    <PackageReference Include="TUnit.Core" />
+    <PackageReference Include="TUnit.Assertions" />
+    <PackageReference Include="TUnit.Engine" />
+    <PackageReference Include="Verify.TUnit" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\ModuleInitializerAttribute.cs" Link="ModuleInitializerAttribute.cs" />
   </ItemGroup>
 </Project>

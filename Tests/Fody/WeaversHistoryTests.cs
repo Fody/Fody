@@ -1,17 +1,19 @@
 using System.IO;
 using System.Linq;
 
+// WeaversHistory uses static state
+[NotInParallel]
 public class WeaversHistoryTests
 {
-    [Fact]
-    public void AddNewFile()
+    [Test]
+    public async Task AddNewFile()
     {
         var fileName = Path.GetTempFileName();
         try
         {
             var hasChanged = WeaversHistory.HasChanged(new[] {fileName});
-            Assert.False(hasChanged);
-            Assert.Equal(fileName, WeaversHistory.TimeStamps.First().Key);
+            await Assert.That(hasChanged).IsFalse();
+            await Assert.That(WeaversHistory.TimeStamps.First().Key).IsEqualTo(fileName);
         }
         finally
         {
@@ -20,8 +22,8 @@ public class WeaversHistoryTests
         }
     }
 
-    [Fact]
-    public void Changed()
+    [Test]
+    public async Task Changed()
     {
         var fileName = Path.GetTempFileName();
         try
@@ -29,7 +31,7 @@ public class WeaversHistoryTests
             WeaversHistory.HasChanged(new[] {fileName});
             File.SetLastWriteTimeUtc(fileName, DateTime.Now.AddHours(1));
             var hasChanged = WeaversHistory.HasChanged(new[] {fileName});
-            Assert.True(hasChanged);
+            await Assert.That(hasChanged).IsTrue();
         }
         finally
         {
@@ -38,8 +40,8 @@ public class WeaversHistoryTests
         }
     }
 
-    [Fact]
-    public void Same()
+    [Test]
+    public async Task Same()
     {
         var fileName = Path.GetTempFileName();
         try
@@ -47,7 +49,7 @@ public class WeaversHistoryTests
             WeaversHistory.HasChanged(new[] { fileName });
 
             var hasChanged = WeaversHistory.HasChanged(new[] { fileName });
-            Assert.False(hasChanged);
+            await Assert.That(hasChanged).IsFalse();
         }
         finally
         {

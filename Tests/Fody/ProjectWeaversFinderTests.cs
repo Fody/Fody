@@ -1,12 +1,12 @@
 public class ProjectWeaversFinderTests
 {
-    [Fact]
-    public void NotFound()
+    [Test]
+    public async Task NotFound()
     {
         var logger = new MockBuildLogger();
 
         var configFiles = ConfigFileFinder.FindWeaverConfigFiles(null, Environment.CurrentDirectory, Environment.CurrentDirectory, logger);
 
-        Assert.Empty(configFiles);
+        await Assert.That(configFiles).IsEmpty();
     }
 }

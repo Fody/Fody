@@ -1,11 +1,10 @@
-﻿using Xunit;
 using WithNugetWeavers;
 
 public class WithNugetWeaversTest
 {
-    [Fact]
-    public void EnsureTypeChangedByNugetWeaver()
+    [Test]
+    public async Task EnsureTypeChangedByNugetWeaver()
     {
-        Assert.True(typeof(Class1).GetMethod("Method").IsVirtual);
+        await Assert.That(typeof(Class1).GetMethod("Method").IsVirtual).IsTrue();
     }
 }

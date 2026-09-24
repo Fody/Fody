@@ -1,30 +1,29 @@
-﻿using System;
-using Xunit;
+using System;
 using WithNugetAndInSolutionWeavers;
 
 public class WithNugetAndInSolutionWeaversTest
 {
-    [Fact]
-    public void EnsureTypeInjectedByModuleWeaver()
+    [Test]
+    public async Task EnsureTypeInjectedByModuleWeaver()
     {
-        Assert.NotNull(Type.GetType("Weavers.TypeInjectedByModuleWeaver, WithNugetAndInSolutionWeavers"));
+        await Assert.That(Type.GetType("Weavers.TypeInjectedByModuleWeaver, WithNugetAndInSolutionWeavers")).IsNotNull();
     }
 
-    [Fact]
-    public void EnsureTypeInjectedByNamedWeaver()
+    [Test]
+    public async Task EnsureTypeInjectedByNamedWeaver()
     {
-        Assert.NotNull(Type.GetType("Weavers.TypeInjectedByNamedWeaver, WithNugetAndInSolutionWeavers"));
+        await Assert.That(Type.GetType("Weavers.TypeInjectedByNamedWeaver, WithNugetAndInSolutionWeavers")).IsNotNull();
     }
 
-    [Fact]
-    public void EnsureTypeInjectedByNamedWeaverFromBase()
+    [Test]
+    public async Task EnsureTypeInjectedByNamedWeaverFromBase()
     {
-        Assert.NotNull(Type.GetType("Weavers.TypeInjectedByNamedWeaverFromBase, WithNugetAndInSolutionWeavers"));
+        await Assert.That(Type.GetType("Weavers.TypeInjectedByNamedWeaverFromBase, WithNugetAndInSolutionWeavers")).IsNotNull();
     }
 
-    [Fact]
-    public void EnsureTypeChangedByNugetWeaver()
+    [Test]
+    public async Task EnsureTypeChangedByNugetWeaver()
     {
-        Assert.True(typeof(Class1).GetMethod("Method").IsVirtual);
+        await Assert.That(typeof(Class1).GetMethod("Method").IsVirtual).IsTrue();
     }
 }

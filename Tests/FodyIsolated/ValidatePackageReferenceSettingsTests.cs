@@ -1,18 +1,18 @@
-﻿namespace Tests.FodyIsolated;
+namespace Tests.FodyIsolated;
 
 public class ValidatePackageReferenceSettingsTests
 {
-    [Theory]
-    [InlineData(null, null, "")]
-    [InlineData("All", "", "")]
-    [InlineData("all", "", "")]
-    [InlineData("", "", "The package reference for Weaver.Fody does not contain PrivateAssets='All'")]
-    [InlineData("All", "All", "")]
-    [InlineData("All", "all", "")]
-    [InlineData("All", "runtime; build; compile; native; contentfiles; analyzers; buildtransitive", "")]
-    [InlineData("None", "", "The package reference for Weaver.Fody does not contain PrivateAssets='All'")]
-    [InlineData("All", "runtime; build; native; contentfiles; analyzers; buildtransitive", "The package reference for Weaver.Fody is missing the 'compile' part in the IncludeAssets setting; it's recommended to completely remove IncludeAssets")]
-    void Test(string? privateAssets, string? includeAssets, string expectedErrors)
+    [Test]
+    [Arguments(null, null, "")]
+    [Arguments("All", "", "")]
+    [Arguments("all", "", "")]
+    [Arguments("", "", "The package reference for Weaver.Fody does not contain PrivateAssets='All'")]
+    [Arguments("All", "All", "")]
+    [Arguments("All", "all", "")]
+    [Arguments("All", "runtime; build; compile; native; contentfiles; analyzers; buildtransitive", "")]
+    [Arguments("None", "", "The package reference for Weaver.Fody does not contain PrivateAssets='All'")]
+    [Arguments("All", "runtime; build; native; contentfiles; analyzers; buildtransitive", "The package reference for Weaver.Fody is missing the 'compile' part in the IncludeAssets setting; it's recommended to completely remove IncludeAssets")]
+    public async Task Test(string? privateAssets, string? includeAssets, string expectedErrors)
     {
         var config = new WeaverEntry
         {
@@ -23,6 +23,6 @@ public class ValidatePackageReferenceSettingsTests
 
         var errors = InnerWeaver.GetPackageReferenceValidationErrors(config);
 
-        Assert.Equal(expectedErrors, string.Join("|", errors));
+        await Assert.That(string.Join("|", errors)).IsEqualTo(expectedErrors);
     }
 }

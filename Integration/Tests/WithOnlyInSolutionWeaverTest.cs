@@ -1,11 +1,10 @@
 using System;
-using Xunit;
 
 public class WithOnlyInSolutionWeaverTest
 {
-    [Fact]
-    public void EnsureTypeInjectedByModuleWeaver()
+    [Test]
+    public async Task EnsureTypeInjectedByModuleWeaver()
     {
-        Assert.NotNull(Type.GetType("Weavers.TypeInjectedByModuleWeaver, WithOnlyInSolutionWeaver"));
+        await Assert.That(Type.GetType("Weavers.TypeInjectedByModuleWeaver, WithOnlyInSolutionWeaver")).IsNotNull();
     }
 }

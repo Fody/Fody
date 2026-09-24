@@ -1,47 +1,46 @@
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Fody;
-using VerifyXunit;
-using Xunit;
+using VerifyTUnit;
 
 public class ConfigReaderTests
 {
-    [Fact]
-    public void Simple()
+    [Test]
+    public async Task Simple()
     {
         var xElementFalse = XElement.Parse("<Node Name='false'/>");
-        Assert.False(xElementFalse.ReadBool("Name", false));
+        await Assert.That(xElementFalse.ReadBool("Name", false)).IsFalse();
         var xElement0 = XElement.Parse("<Node Name='0'/>");
-        Assert.False(xElement0.ReadBool("Name", false));
+        await Assert.That(xElement0.ReadBool("Name", false)).IsFalse();
         var xElementTrue = XElement.Parse("<Node Name='true'/>");
-        Assert.True(xElementTrue.ReadBool("Name", false));
+        await Assert.That(xElementTrue.ReadBool("Name", false)).IsTrue();
         var xElement1 = XElement.Parse("<Node Name='1'/>");
-        Assert.True(xElement1.ReadBool("Name", false));
+        await Assert.That(xElement1.ReadBool("Name", false)).IsTrue();
         var xElementTrueMixedCase = XElement.Parse("<Node Name='True'/>");
-        Assert.True(xElementTrueMixedCase.ReadBool("Name", false));
+        await Assert.That(xElementTrueMixedCase.ReadBool("Name", false)).IsTrue();
         var xElementFalseMixedCase = XElement.Parse("<Node Name='False'/>");
-        Assert.False(xElementFalseMixedCase.ReadBool("Name", true));
+        await Assert.That(xElementFalseMixedCase.ReadBool("Name", true)).IsFalse();
         var xElementTrueUpperCase = XElement.Parse("<Node Name='TRUE'/>");
-        Assert.True(xElementTrueUpperCase.ReadBool("Name", false));
+        await Assert.That(xElementTrueUpperCase.ReadBool("Name", false)).IsTrue();
         var xElementNone = XElement.Parse("<Node />");
-        Assert.False(xElementNone.ReadBool("Name", false));
+        await Assert.That(xElementNone.ReadBool("Name", false)).IsFalse();
         var xElementDefault = XElement.Parse("<Node/>");
-        Assert.True(xElementDefault.ReadBool("Name", true));
+        await Assert.That(xElementDefault.ReadBool("Name", true)).IsTrue();
     }
 
-    [Fact]
-    public Task Whitespace()
+    [Test]
+    public async Task Whitespace()
     {
         var xElementFalse = XElement.Parse("<Node Name=' '/>");
-        var exception = Assert.Throws<WeavingException>(() => xElementFalse.ReadBool("Name", false));
-        return Verifier.Verify(exception.Message);
+        var exception = await Assert.That(() => xElementFalse.ReadBool("Name", false)).Throws<WeavingException>();
+        await Verifier.Verify(exception!.Message);
     }
 
-    [Fact]
-    public Task Empty()
+    [Test]
+    public async Task Empty()
     {
         var xElementFalse = XElement.Parse("<Node Name=''/>");
-        var exception = Assert.Throws<WeavingException>(() => xElementFalse.ReadBool("Name", false));
-        return Verifier.Verify(exception.Message);
+        var exception = await Assert.That(() => xElementFalse.ReadBool("Name", false)).Throws<WeavingException>();
+        await Verifier.Verify(exception!.Message);
     }
 }

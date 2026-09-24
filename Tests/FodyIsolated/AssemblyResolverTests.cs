@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Linq;
 using DummyAssembly;
 
@@ -6,8 +6,8 @@ public class AssemblyResolverTests
 {
     ILogger logger = new MockBuildLogger();
 
-    [Fact]
-    public void ShouldFindReferenceByAssemblyName()
+    [Test]
+    public async Task ShouldFindReferenceByAssemblyName()
     {
         var assemblyPath = Path.GetTempFileName();
         try
@@ -17,7 +17,7 @@ public class AssemblyResolverTests
 
             var resolver = new AssemblyResolver(logger, new[] {assemblyPath});
             using var resolvedAssembly = resolver.Resolve(assembly.GetName().Name!);
-            Assert.Equal(assembly.FullName, resolvedAssembly!.FullName);
+            await Assert.That(resolvedAssembly!.FullName).IsEqualTo(assembly.FullName);
         }
         finally
         {
@@ -25,17 +25,17 @@ public class AssemblyResolverTests
         }
     }
 
-    [Fact]
-    public void ShouldReturnNullWhenTheAssemblyIsNotFound()
+    [Test]
+    public async Task ShouldReturnNullWhenTheAssemblyIsNotFound()
     {
         var resolver = new AssemblyResolver(logger, Enumerable.Empty<string>());
-        Assert.Null(resolver.Resolve("SomeNonExistingAssembly"));
+        await Assert.That(resolver.Resolve("SomeNonExistingAssembly")).IsNull();
     }
 
-    [Fact]
-    public void ShouldGuessTheAssemblyNameFromTheFileNameIfTheAssemblyCannotBeLoaded()
+    [Test]
+    public async Task ShouldGuessTheAssemblyNameFromTheFileNameIfTheAssemblyCannotBeLoaded()
     {
         var resolver = new AssemblyResolver(logger, new[] {@"Fody\BadAssembly.dll"});
-        Assert.ThrowsAny<Exception>(() => resolver.Resolve("BadAssembly"));
+        await Assert.That(() => resolver.Resolve("BadAssembly")).ThrowsException();
     }
 }

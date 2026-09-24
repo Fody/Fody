@@ -2,8 +2,8 @@ using System.IO;
 
 public class SolutionPathValidatorTests
 {
-    [Fact]
-    public void Valid()
+    [Test]
+    public async Task Valid()
     {
         var loggerMock = new MockBuildLogger();
 
@@ -15,8 +15,8 @@ public class SolutionPathValidatorTests
         processor.ValidateSolutionPath();
     }
 
-    [Fact]
-    public void InValid()
+    [Test]
+    public async Task InValid()
     {
         Action action = () =>
         {
@@ -26,7 +26,7 @@ public class SolutionPathValidatorTests
             };
             processor.ValidateSolutionPath();
         };
-        var exception = Assert.ThrowsAny<Exception>(action);
-        Assert.Equal($"SolutionDir '{Path.GetFullPath("aString")}' does not exist.", exception.Message);
+        var exception = await Assert.That(action).ThrowsException();
+        await Assert.That(exception!.Message).IsEqualTo($"SolutionDir '{Path.GetFullPath("aString")}' does not exist.");
     }
 }

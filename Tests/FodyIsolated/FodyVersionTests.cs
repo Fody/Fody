@@ -1,6 +1,6 @@
-﻿public class FodyVersionTests
+public class FodyVersionTests
 {
-    [Fact]
-    public void FindFodyHelpersReference() =>
-        Assert.Equal("FodyHelpers", FodyVersion.FindFodyHelpersReference(GetType().Assembly).Name);
+    [Test]
+    public async Task FindFodyHelpersReference() =>
+        await Assert.That(FodyVersion.FindFodyHelpersReference(GetType().Assembly).Name).IsEqualTo("FodyHelpers");
 }

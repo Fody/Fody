@@ -2,32 +2,33 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using VerifyXunit;
+using VerifyTUnit;
 using Fody;
 using Mono.Cecil;
-using Xunit;
 
 // ReSharper disable UnusedVariable
+// tests share the temp folders
+[NotInParallel]
 public class PeVerifierTests
 {
-    // xunit3 outputs .exe, not .dll, so we need to check for both
+    // test framework outputs .exe, not .dll, so we need to check for both
     readonly string assemblyPath = new[] { "dll", "exe" }.Select(ext => $"FodyHelpers.Tests.{ext}").FirstOrDefault(File.Exists) ?? throw new InvalidOperationException("Test assembly does not exist");
 
-    [Fact]
-    public void StaticPathResolution() =>
-        Assert.True(PeVerifier.FoundPeVerify);
+    [Test]
+    public async Task StaticPathResolution() =>
+        await Assert.That(PeVerifier.FoundPeVerify).IsTrue();
 
-    [Fact]
-    public void Should_verify_current_assembly()
+    [Test]
+    public async Task Should_verify_current_assembly()
     {
         var cwd = Directory.GetCurrentDirectory();
         var verify = PeVerifier.Verify(assemblyPath, GetIgnoreCodes(), out var output);
-        Assert.True(verify);
-        Assert.NotNull(output);
+        await Assert.That(verify).IsTrue();
+        await Assert.That(output).IsNotNull();
     }
 
-    [Fact]
-    public void Same_assembly_should_not_throw()
+    [Test]
+    public async Task Same_assembly_should_not_throw()
     {
         Directory.CreateDirectory("temp");
         var newAssemblyPath = Path.GetFullPath("temp/temp.dll");
@@ -40,8 +41,8 @@ public class PeVerifierTests
     static string[] GetIgnoreCodes() =>
         ["0x80070002", "0x80131869"];
 
-    [Fact]
-    public Task TrimLineNumbers()
+    [Test]
+    public async Task TrimLineNumbers()
     {
         var text = PeVerifier.TrimLineNumbers(
             """
@@ -50,11 +51,11 @@ public class PeVerifierTests
             [IL]: Error: [C:\Code\net452\AssemblyToProcess.dll : UnsafeClass::set_NullProperty][offset 0x00000001] Unmanaged pointers are not a verifiable type.
             3 Error(s) Verifying C:\Code\Fody\net452\AssemblyToProcess.dll
             """);
-        return Verifier.Verify(text);
+        await Verifier.Verify(text);
     }
 
-    [Fact]
-    public void Invalid_assembly_should_throw()
+    [Test]
+    public async Task Invalid_assembly_should_throw()
     {
         Directory.CreateDirectory("temp");
         var newAssemblyPath = Path.GetFullPath("temp/temp.dll");
@@ -65,7 +66,7 @@ public class PeVerifierTests
             moduleDefinition.Write(newAssemblyPath);
         }
 
-        Assert.Throws<Exception>(() => PeVerifier.ThrowIfDifferent(assemblyPath, newAssemblyPath));
+        await Assert.That(() => PeVerifier.ThrowIfDifferent(assemblyPath, newAssemblyPath)).Throws<Exception>();
         File.Delete(newAssemblyPath);
     }
 }

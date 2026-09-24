@@ -1,16 +1,16 @@
 public class TypeFinderTest
 {
-    [Fact]
-    public void Valid()
+    [Test]
+    public async Task Valid()
     {
         var assembly = typeof(InnerWeaver).Assembly;
         assembly.FindType("ModuleReader");
     }
 
-    [Fact]
-    public void NoTypeInAssembly()
+    [Test]
+    public async Task NoTypeInAssembly()
     {
         var assembly = GetType().Assembly;
-        Assert.Null(assembly.FindType("ModuleWeaver"));
+        await Assert.That(assembly.FindType("ModuleWeaver")).IsNull();
     }
 }

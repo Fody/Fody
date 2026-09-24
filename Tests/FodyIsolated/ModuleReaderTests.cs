@@ -3,21 +3,21 @@ using System.Linq;
 
 public class ModuleReaderTests
 {
-    [Fact]
-    public void WithSymbols()
+    [Test]
+    public async Task WithSymbols()
     {
         var assemblyPath = Path.Combine(Environment.CurrentDirectory, "DummyAssembly.dll");
         var result = InnerWeaver.ReadModule(assemblyPath, new AssemblyResolver(new MockBuildLogger(), Enumerable.Empty<string>()));
-        Assert.NotNull(result.module);
-        Assert.True(result.hasSymbols);
+        await Assert.That(result.module).IsNotNull();
+        await Assert.That(result.hasSymbols).IsTrue();
     }
 
-    [Fact]
-    public void NoSymbols()
+    [Test]
+    public async Task NoSymbols()
     {
         var assemblyPath = Path.Combine(Environment.CurrentDirectory, "AssemblyWithNoSymbols.dll");
         var result = InnerWeaver.ReadModule(assemblyPath, new AssemblyResolver(new MockBuildLogger(), Enumerable.Empty<string>()));
-        Assert.NotNull(result.module);
-        Assert.False(result.hasSymbols);
+        await Assert.That(result.module).IsNotNull();
+        await Assert.That(result.hasSymbols).IsFalse();
     }
 }

@@ -9,24 +9,24 @@ public class BuildLoggerTests
             BuildEngine = buildEngine
         };
 
-    [Fact]
-    public void TreatWarningsAsErrors()
+    [Test]
+    public async Task TreatWarningsAsErrors()
     {
         buildLogger.TreatWarningsAsErrors = true;
         buildLogger.LogWarning("Message", "Code");
 
-        Assert.Single(buildEngine.Errors);
-        Assert.Empty(buildEngine.Warnings);
+        await Assert.That(buildEngine.Errors).HasSingleItem();
+        await Assert.That(buildEngine.Warnings).IsEmpty();
     }
 
-    [Fact]
-    public void DontTreatWarningsAsErrors()
+    [Test]
+    public async Task DontTreatWarningsAsErrors()
     {
         buildLogger.TreatWarningsAsErrors = false;
         buildLogger.LogWarning("Message", "Code");
 
-        Assert.Single(buildEngine.Warnings);
-        Assert.Empty(buildEngine.Errors);
+        await Assert.That(buildEngine.Warnings).HasSingleItem();
+        await Assert.That(buildEngine.Errors).IsEmpty();
     }
 
     private class MockBuildEngine : IBuildEngine

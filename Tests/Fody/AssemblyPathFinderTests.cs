@@ -2,8 +2,8 @@ using System.Diagnostics;
 
 public class AssemblyLocationTests
 {
-    [Fact]
-    public void Foo()
+    [Test]
+    public async Task Foo()
     {
         var currentDirectory = AssemblyLocation.CurrentDirectory;
         Trace.WriteLine(currentDirectory);

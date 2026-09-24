@@ -2,64 +2,64 @@ using System.Linq;
 
 public class VerifierTests
 {
-    [Fact]
-    public void ExtractVerifyAssemblyFromConfig_NotExists()
+    [Test]
+    public async Task ExtractVerifyAssemblyFromConfig_NotExists()
     {
         var verifyAssembly = Verifier.ExtractVerifyAssemblyFromConfigs(new[]
         {
             new WeaverConfigFile(@"Fody\Verify\VerifierTests_NoVerifyAssembly.xml")
         });
-        Assert.False(verifyAssembly);
+        await Assert.That(verifyAssembly).IsFalse();
     }
 
-    [Fact]
-    public void ExtractVerifyIgnoreCodes_NotExists()
+    [Test]
+    public async Task ExtractVerifyIgnoreCodes_NotExists()
     {
         var verifyAssembly = Verifier.ExtractVerifyIgnoreCodesConfigs(new[]
         {
             new WeaverConfigFile(@"Fody\Verify\VerifierTests_NoVerifyIgnoreCodes.xml")
         });
-        Assert.Empty(verifyAssembly);
+        await Assert.That(verifyAssembly).IsEmpty();
     }
 
-    [Fact]
-    public void ExtractVerifyIgnoreCodes_WithCodeMultiple()
+    [Test]
+    public async Task ExtractVerifyIgnoreCodes_WithCodeMultiple()
     {
         var verifyAssembly = Verifier.ExtractVerifyIgnoreCodesConfigs(new[]
         {
             new WeaverConfigFile(@"Fody\Verify\VerifierTests_VerifyIgnoreCodes_Multiple.xml")
         }).ToList();
-        Assert.Contains("myignorecode1", verifyAssembly);
-        Assert.Contains("myignorecode2", verifyAssembly);
+        await Assert.That(verifyAssembly).Contains("myignorecode1");
+        await Assert.That(verifyAssembly).Contains("myignorecode2");
     }
 
-    [Fact]
-    public void ExtractVerifyIgnoreCodes_WithCodeSingle()
+    [Test]
+    public async Task ExtractVerifyIgnoreCodes_WithCodeSingle()
     {
         var verifyAssembly = Verifier.ExtractVerifyIgnoreCodesConfigs(new[]
         {
             new WeaverConfigFile(@"Fody\Verify\VerifierTests_VerifyIgnoreCodes_Single.xml")
         }).ToList();
-        Assert.Contains("myignorecode1", verifyAssembly);
+        await Assert.That(verifyAssembly).Contains("myignorecode1");
     }
 
-    [Fact]
-    public void ExtractVerifyAssemblyFromConfig_WithTrue()
+    [Test]
+    public async Task ExtractVerifyAssemblyFromConfig_WithTrue()
     {
         var verifyAssembly = Verifier.ExtractVerifyAssemblyFromConfigs(new[]
         {
             new WeaverConfigFile(@"Fody\Verify\VerifierTests_WithTrueVerifyAssembly.xml")
         });
-        Assert.True(verifyAssembly);
+        await Assert.That(verifyAssembly).IsTrue();
     }
 
-    [Fact]
-    public void ExtractVerifyAssemblyFromConfig_WithFalse()
+    [Test]
+    public async Task ExtractVerifyAssemblyFromConfig_WithFalse()
     {
         var verifyAssembly = Verifier.ExtractVerifyAssemblyFromConfigs(new[]
         {
             new WeaverConfigFile(@"Fody\Verify\VerifierTests_WithFalseVerifyAssembly.xml")
         });
-        Assert.False(verifyAssembly);
+        await Assert.That(verifyAssembly).IsFalse();
     }
 }

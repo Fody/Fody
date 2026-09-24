@@ -1,16 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Fody;
-using Xunit;
 
 public class WeaverUsingSymbols : BaseModuleWeaver
 {
     public override void Execute()
     {
         var methods = ModuleDefinition.GetTypes().SelectMany(t => t.Methods).ToArray();
-
-        Assert.NotNull(methods);
-        Assert.True(methods.Any());
+        Check(methods.Length > 0);
 
         var total = 0;
 
@@ -20,7 +17,15 @@ public class WeaverUsingSymbols : BaseModuleWeaver
             total += sequencePoints.Count;
         }
 
-        Assert.True(total > 0);
+        Check(total > 0);
+    }
+
+    static void Check(bool condition)
+    {
+        if (!condition)
+        {
+            throw new WeavingException("Weaver assertion failed");
+        }
     }
 
     public override bool ShouldCleanReference => true;

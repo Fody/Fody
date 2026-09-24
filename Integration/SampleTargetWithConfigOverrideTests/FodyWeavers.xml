@@ -1,7 +1,7 @@
-﻿<Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FodyWeavers.xsd">
+<Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FodyWeavers.xsd">
   <SampleWeaver MyProperty="PropertyValue">
     <Content>Test</Content>
   </SampleWeaver>
-  <NullGuard IncludeDebugAssert="false" />
+  <NullGuard IncludeDebugAssert="false" Mode="Explicit" />
   <JetBrainsAnnotations />
 </Weavers>

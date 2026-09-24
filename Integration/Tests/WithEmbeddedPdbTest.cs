@@ -1,20 +1,19 @@
-﻿using System.IO;
+using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using WithEmbeddedPdb;
-using Xunit;
 
 public class WithEmbeddedPdbTest
 {
-    [Fact]
-    public void EnsureTypeChangedByNugetWeaver()
+    [Test]
+    public async Task EnsureTypeChangedByNugetWeaver()
     {
-        Assert.True(typeof(Class1).GetMethod("Method").IsVirtual);
+        await Assert.That(typeof(Class1).GetMethod("Method").IsVirtual).IsTrue();
     }
 
-    [Fact]
-    public void EnsureDebugInfoIsPresent()
+    [Test]
+    public async Task EnsureDebugInfoIsPresent()
     {
         var filePath = typeof(Class1).Assembly.Location;
 
@@ -22,7 +21,7 @@ public class WithEmbeddedPdbTest
         using (var peReader = new PEReader(file))
         {
             var debugInfo = peReader.ReadDebugDirectory();
-            Assert.Contains(debugInfo, _ => _.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
+            await Assert.That(debugInfo.Any(_ => _.Type == DebugDirectoryEntryType.EmbeddedPortablePdb)).IsTrue();
 
             var metadataReader = peReader.GetMetadataReader();
 
@@ -42,12 +41,12 @@ public class WithEmbeddedPdbTest
                     var docHandle = debugReader.GetDocument(methodDebugInfo.Document);
 
                     var docName = debugReader.GetString(docHandle.Name);
-                    Assert.EndsWith("Class1.cs", docName);
+                    await Assert.That(docName).EndsWith("Class1.cs");
                     found = true;
                     break;
                 }
 
-                Assert.True(found);
+                await Assert.That(found).IsTrue();
             }
         }
     }

@@ -1,11 +1,11 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
 
 public class XmlExtensionsTests
 {
-    [Fact]
-    public void Simple()
+    [Test]
+    public async Task Simple()
     {
         var xDocument = XDocument.Parse(
             """
@@ -18,8 +18,7 @@ public class XmlExtensionsTests
             </root>
             """);
         xDocument.StripNamespace();
-        Assert.Equal(
-            """
+        await Assert.That(xDocument.ToString().Replace("\r\n", "\n")).IsEqualTo("""
             <root>
               <table>
                 <name id="1" id2="2">African Coffee Table</name>
@@ -27,11 +26,11 @@ public class XmlExtensionsTests
                 <length>120</length>
               </table>
             </root>
-            """.Replace("\r\n", "\n"), xDocument.ToString().Replace("\r\n", "\n"));
+            """.Replace("\r\n", "\n"));
     }
 
-    [Fact]
-    public void QueryWithNamespace()
+    [Test]
+    public async Task QueryWithNamespace()
     {
         var xDocument = XDocument.Parse(
             """
@@ -48,8 +47,8 @@ public class XmlExtensionsTests
         Trace.WriteLine(tables.Count());
     }
 
-    [Fact]
-    public void QueryWithNoNamespace()
+    [Test]
+    public async Task QueryWithNoNamespace()
     {
         var xDocument = XDocument.Parse(
             """

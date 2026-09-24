@@ -16,8 +16,6 @@ build_script:
     dotnet build Integration\Integration.sln -c Release --no-restore
 test: off
 test_script:
-- cmd: |
-    dotnet test Fody.sln -c Release --no-build
-    dotnet test Integration\Integration.sln -c Release --no-build
+- ps: .\runTests.ps1
 artifacts:
 - path: nugets\*.nupkg

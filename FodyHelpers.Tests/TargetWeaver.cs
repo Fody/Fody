@@ -1,28 +1,35 @@
 using System.Collections.Generic;
 using Fody;
-using Xunit;
 
 public class TargetWeaver : BaseModuleWeaver
 {
     public override void Execute()
     {
         var result = TryFindType("System.Boolean", out var type);
-        Assert.True(result);
-        Assert.NotNull(type);
+        Check(result);
+        Check(type != null);
 
         type = FindType("System.Boolean");
-        Assert.NotNull(type);
+        Check(type != null);
 
         type = FindType("Boolean");
-        Assert.NotNull(type);
+        Check(type != null);
 
         result = TryFindType("Boolean", out type);
-        Assert.True(result);
-        Assert.NotNull(type);
+        Check(result);
+        Check(type != null);
 
         result = TryFindType("DDD", out type);
-        Assert.False(result);
-        Assert.Null(type);
+        Check(!result);
+        Check(type == null);
+    }
+
+    static void Check(bool condition)
+    {
+        if (!condition)
+        {
+            throw new WeavingException("Weaver assertion failed");
+        }
     }
 
     public override bool ShouldCleanReference => true;

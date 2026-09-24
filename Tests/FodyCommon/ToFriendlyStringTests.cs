@@ -1,7 +1,8 @@
-﻿public class ToFriendlyStringTests
+public class ToFriendlyStringTests
 {
-    [Fact(Skip = "todo")]
-    public void ToFriendlyName()
+    [Test]
+    [Skip("todo")]
+    public async Task ToFriendlyName()
     {
         var currentDirectory = Environment.CurrentDirectory.ToLowerInvariant()
             .Replace(@"bin\debug", string.Empty)
@@ -33,7 +34,7 @@
 
                            """;
 // ReSharper restore StringLiteralTypo
-            Assert.Equal(expected, friendlyString);
+            await Assert.That(friendlyString).IsEqualTo(expected);
         }
     }
 

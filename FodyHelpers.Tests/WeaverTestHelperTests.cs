@@ -3,13 +3,14 @@ using System.IO;
 using System.Threading.Tasks;
 using Fody;
 using Mono.Cecil;
-using VerifyXunit;
-using Xunit;
+using VerifyTUnit;
 using TestResult = Fody.TestResult;
 
+// tests share the temp folders
+[NotInParallel]
 public class WeaverTestHelperTests
 {
-    [Fact]
+    [Test]
     public Task Run()
     {
         var weaver = new TargetWeaver();
@@ -27,7 +28,7 @@ public class WeaverTestHelperTests
             result.Assembly.FullName
         });
 
-    [Fact]
+    [Test]
     public Task WithCustomAssemblyName()
     {
         var assemblyPath = Path.Combine(Environment.CurrentDirectory, "DummyAssembly.dll");
@@ -38,7 +39,7 @@ public class WeaverTestHelperTests
         return Verify(result);
     }
 
-    [Fact]
+    [Test]
     public Task WithCustomExeAssemblyName()
     {
         var assemblyPath = Path.Combine(Environment.CurrentDirectory, "DummyExeAssembly.exe");
@@ -57,8 +58,8 @@ public class WeaverTestHelperTests
         }
     }
 
-    [Fact]
-    public Task WeaverUsingSymbols()
+    [Test]
+    public async Task WeaverUsingSymbols()
     {
         var assemblyPath = Path.Combine(Environment.CurrentDirectory, "DummyAssembly.dll");
         var weaver = new WeaverUsingSymbols();
@@ -69,8 +70,8 @@ public class WeaverTestHelperTests
             {
                 ReadSymbols = true
             });
-        Assert.True(module.HasSymbols);
+        await Assert.That(module.HasSymbols).IsTrue();
 
-        return Verify(result);
+        await Verify(result);
     }
 }

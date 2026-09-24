@@ -2,7 +2,6 @@ using System;
 using System.Globalization;
 using System.IO;
 using JetBrains.Annotations;
-using Xunit;
 
 [assembly: SampleWeaver.Sample]
 
@@ -10,8 +9,8 @@ namespace SampleTarget
 {
     public class PackagedWeaverTests
     {
-        [Fact]
-        public void SampleWeaverAddedExtraFileDuringBuild()
+        [Test]
+        public async Task SampleWeaverAddedExtraFileDuringBuild()
         {
             var assemblyPath = GetAssemblyLocation();
             var targetFolder = Path.GetDirectoryName(assemblyPath);
@@ -19,48 +18,51 @@ namespace SampleTarget
             var extraFileContent = File.ReadAllText(extraFilePath);
             var assemblyBuildTime = File.GetLastWriteTime(assemblyPath);
 
-            Assert.True(DateTime.TryParse(extraFileContent, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out var weaverExecutionTime));
+            await Assert.That(DateTime.TryParse(extraFileContent, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out var weaverExecutionTime)).IsTrue();
             var elapsed = assemblyBuildTime - weaverExecutionTime;
-            Assert.True(elapsed < TimeSpan.FromMinutes(1));
+            await Assert.That(elapsed < TimeSpan.FromMinutes(1)).IsTrue();
         }
 
-        [Fact]
-        public void SampleWeaverRemovedObsoleteDependenciesDuringBuild()
+        [Test]
+        public async Task SampleWeaverRemovedObsoleteDependenciesDuringBuild()
         {
             var assemblyPath = GetAssemblyLocation();
             var targetFolder = Path.GetDirectoryName(assemblyPath);
 
             var sampleWeaverFiles = Directory.EnumerateFiles(targetFolder, "SampleWeaver.*");
 
-            Assert.Empty(sampleWeaverFiles);
+            await Assert.That(sampleWeaverFiles).IsEmpty();
         }
 
-        [Fact]
-        public void NullGuardsAreActive()
+        [Test]
+        public async Task NullGuardsAreActive()
         {
-            Assert.Throws<ArgumentNullException>(() => GuardedMethod(null));
+            await Assert.That(() => GuardedMethod(null)).Throws<ArgumentNullException>();
         }
 
-        [Fact]
-        public void WeaverConfigurationIsReadFromProperty()
+        [Test]
+        public async Task WeaverConfigurationIsReadFromProperty()
         {
             var type = Type.GetType("SampleWeaverTest.Configuration");
             var content = (string)type.GetField("Content").GetValue(null);
             var expectedContent = "<SampleWeaver MyProperty=\"CustomPropertyValue\">\r\n  <Content>Override</Content>\r\n</SampleWeaver>".Replace("\r\n", Environment.NewLine);
 
-            Assert.Equal(expectedContent, content);
+            await Assert.That(content).IsEqualTo(expectedContent);
 
             var propertyValue = (string)type.GetField("PropertyValue").GetValue(null);
             const string expectedPropertyValue = "CustomPropertyValue";
 
-            Assert.Equal(expectedPropertyValue, propertyValue);
+            await Assert.That(propertyValue).IsEqualTo(expectedPropertyValue);
         }
 
+        // public so that NullGuard weaves it
+#pragma warning disable TUnit0014
         [NotNull]
         public object GuardedMethod([NotNull] object parameter)
         {
             return parameter;
         }
+#pragma warning restore TUnit0014
 
         string GetAssemblyLocation()
         {

@@ -1,70 +1,70 @@
 public class ConstructorDelegateBuilderTests
 {
-    [Fact]
-    public void Should_throw_When_is_abstract_type()
+    [Test]
+    public async Task Should_throw_When_is_abstract_type()
     {
-        var exception = Assert.Throws<WeavingException>(() => typeof (Convert).BuildConstructorDelegate());
-        Assert.Equal("'System.Convert' is not a public instance class.", exception.Message);
+        var exception = await Assert.That(() => typeof (Convert).BuildConstructorDelegate()).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("'System.Convert' is not a public instance class.");
     }
 
-    [Fact]
-    public void Should_throw_When_is_abstract_static_type()
+    [Test]
+    public async Task Should_throw_When_is_abstract_static_type()
     {
-        var exception = Assert.Throws<WeavingException>(() => typeof(Console).BuildConstructorDelegate());
-        Assert.Equal("'System.Console' is not a public instance class.", exception.Message);
+        var exception = await Assert.That(() => typeof(Console).BuildConstructorDelegate()).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("'System.Console' is not a public instance class.");
     }
 
-    [Fact]
-    public void Should_throw_When_is_enum()
+    [Test]
+    public async Task Should_throw_When_is_enum()
     {
-        var exception = Assert.Throws<WeavingException>(() => typeof(AttributeTargets).BuildConstructorDelegate());
-        Assert.Equal("'System.AttributeTargets' is not a public instance class.", exception.Message);
+        var exception = await Assert.That(() => typeof(AttributeTargets).BuildConstructorDelegate()).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("'System.AttributeTargets' is not a public instance class.");
     }
 
-    [Fact]
-    public void Should_throw_When_is_private()
+    [Test]
+    public async Task Should_throw_When_is_private()
     {
-        var exception = Assert.Throws<WeavingException>(() => typeof(PrivateClass).BuildConstructorDelegate());
-        Assert.Equal("'PrivateClass' is not a public instance class.", exception.Message);
+        var exception = await Assert.That(() => typeof(PrivateClass).BuildConstructorDelegate()).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("'PrivateClass' is not a public instance class.");
     }
 
-    [Fact]
-    public void Should_throw_When_is_internal()
+    [Test]
+    public async Task Should_throw_When_is_internal()
     {
-        var exception = Assert.Throws<WeavingException>(() => typeof(InternalClass).BuildConstructorDelegate());
-        Assert.Equal("'InternalClass' is not a public instance class.", exception.Message);
+        var exception = await Assert.That(() => typeof(InternalClass).BuildConstructorDelegate()).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("'InternalClass' is not a public instance class.");
     }
 
-    [Fact]
-    public void Should_throw_When_has_parameters()
+    [Test]
+    public async Task Should_throw_When_has_parameters()
     {
         var type = typeof (WithParamsClass);
-        var exception = Assert.Throws<WeavingException>(() => type.BuildConstructorDelegate());
-        Assert.Equal("'WithParamsClass' does not have a public instance constructor with no parameters.", exception.Message);
+        var exception = await Assert.That(() => type.BuildConstructorDelegate()).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("'WithParamsClass' does not have a public instance constructor with no parameters.");
     }
 
-    [Fact]
-    public void Should_throw_When_is_nested()
+    [Test]
+    public async Task Should_throw_When_is_nested()
     {
         var type = typeof(NestedPublicClass);
-        var exception = Assert.Throws<WeavingException>(() => type.BuildConstructorDelegate());
-        Assert.Equal("'ConstructorDelegateBuilderTests+NestedPublicClass' is a nested class which is not supported.", exception.Message);
+        var exception = await Assert.That(() => type.BuildConstructorDelegate()).Throws<WeavingException>();
+        await Assert.That(exception!.Message).IsEqualTo("'ConstructorDelegateBuilderTests+NestedPublicClass' is a nested class which is not supported.");
     }
 
-    [Fact]
-    public void Find_and_run()
+    [Test]
+    public async Task Find_and_run()
     {
         var type = typeof(ValidClass);
         var anObject = type.BuildConstructorDelegate()();
-        Assert.Equal(type, anObject.GetType());
+        await Assert.That(anObject.GetType()).IsEqualTo(type);
     }
 
-    [Fact]
-    public void Find_and_run_from_base()
+    [Test]
+    public async Task Find_and_run_from_base()
     {
         var type = typeof(WeaverFromBase);
         var anObject = type.BuildConstructorDelegate()();
-        Assert.Equal(type, anObject.GetType());
+        await Assert.That(anObject.GetType()).IsEqualTo(type);
     }
 
     public class NestedPublicClass;

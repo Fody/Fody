@@ -4,22 +4,21 @@ using System.Linq;
 using Fody;
 using Mono.Cecil;
 using Mono.Cecil.Cil;
-using Xunit;
 
 public class CecilExtensionsTests
 {
-    [Fact]
-    public void GetSequencePointWithNoSymbols()
+    [Test]
+    public async Task GetSequencePointWithNoSymbols()
     {
         var sequencePoint = ReadSequencePoint(false);
-        Assert.Null(sequencePoint);
+        await Assert.That(sequencePoint).IsNull();
     }
 
-    [Fact]
-    public void GetSequencePointWithSymbols()
+    [Test]
+    public async Task GetSequencePointWithSymbols()
     {
         var sequencePoint = ReadSequencePoint(true);
-        Assert.NotNull(sequencePoint);
+        await Assert.That(sequencePoint).IsNotNull();
     }
 
     static SequencePoint? ReadSequencePoint(bool readSymbols)
