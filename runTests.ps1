@@ -25,11 +25,11 @@ foreach ($project in $projects) {
     if ($Framework) {
         $frameworks = $frameworks | Where-Object { $_ -eq $Framework }
     }
-    foreach ($framework in $frameworks) {
-        Write-Host "Running $project ($framework)"
-        dotnet run --project $project -c Release -f $framework --no-build
+    foreach ($targetFramework in $frameworks) {
+        Write-Host "Running $project ($targetFramework)"
+        dotnet run --project $project -c Release -f $targetFramework --no-build
         if ($LASTEXITCODE -ne 0) {
-            $failed += "$project ($framework)"
+            $failed += "$project ($targetFramework)"
         }
     }
 }
