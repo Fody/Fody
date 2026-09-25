@@ -109,7 +109,7 @@ jobs:
 
 # TODO Run the Fody tests when they pass on Linux
       - name: Test Integration
-        run: ./runTests.ps1 -IntegrationOnly -Framework net8.0
+        run: ./runTests.ps1 -IntegrationOnly -Framework net10.0
         shell: pwsh
 
   # Trusted publishing: no stored API key. nuget.org validates GitHub's OIDC token against the
