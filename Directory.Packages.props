@@ -11,7 +11,7 @@
     <PackageVersion Include="System.Reflection.Metadata" Version="10.0.12" />
     <PackageVersion Include="System.Runtime.Loader" Version="4.3.0" />
     <!-- the TUnit metapackage is not used since it brings in a Mono.Cecil that conflicts with the Cecil used by Fody -->
-    <PackageVersion Include="TUnit.Core" Version="1.69.0" />
+    <PackageVersion Include="TUnit.Core" Version="1.69.16" />
     <PackageVersion Include="TUnit.Assertions" Version="1.69.0" />
     <PackageVersion Include="TUnit.Engine" Version="1.69.0" />
     <PackageVersion Include="Verify.TUnit" Version="33.1.4" />
