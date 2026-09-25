@@ -27,9 +27,6 @@
     <PackageReference Include="Verify.TUnit" />
     <PackageReference Include="Newtonsoft.Json" />
   </ItemGroup>
-  <ItemGroup Condition="$(TargetFrameworkIdentifier) == '.NETFramework'">
-    <Reference Include="Microsoft.Build.Utilities.v4.0" Aliases="msbuild4" />
-  </ItemGroup>
   <ItemGroup>
     <Content Include="Fody\NugetConfig*.txt" CopyToOutputDirectory="Always" />
     <Content Include="Fody\Verify\VerifierTests_*.*" CopyToOutputDirectory="Always" />

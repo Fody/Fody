@@ -10,9 +10,16 @@ jobs:
     pool:
       vmImage: 'windows-2025-vs2026'
     steps:
+      - task: UseDotNet@2
+        inputs:
+          packageType: 'sdk'
+          version: '10.x'
+          includePreviewVersions: false
+        displayName: 'Install latest DotNet SDK 10'
+
       - powershell: |
           (new-object Net.WebClient).DownloadString("https://raw.github.com/tom-englert/BuildScripts/master/BuildScripts.ps1") | iex
-          Project-SetVersion "Directory.Build.props"  | Build-AppendVersionToBuildNumber
+          Project-SetVersion "Directory.Build.props" | Build-AppendVersionToBuildNumber
         displayName: 'Patch version'
 
       - script: dotnet build Fody.sln -c Release

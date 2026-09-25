@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net472</TargetFrameworks>
     <DebugType>embedded</DebugType>
@@ -11,7 +11,12 @@
 
   <ItemGroup>
     <PackageReference Include="Nullable" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" NoWarn="NU1903" PrivateAssets="All" IsPinned="true" Justification="Must stick with version 17.11.4 to stay backward compatible - we don't ship this, but depend on the version installed with dotnet/msbuild"/>
+    <!-- 
+    Must stick with Microsoft.Build.Utilities.Core 17.11.4 to stay backward compatible.
+    It is just a compile time interface reference, and we don't ship this, so there is no risk about any vulnerability.
+    At runtime it will use the version installed with dotnet/msbuild, which is e.g. 18.10.1 in the latest .NET SDK, and that version is not vulnerable.
+    -->
+    <PackageReference Include="Microsoft.Build.Utilities.Core" VersionOverride="17.11.4" NoWarn="NU1903" PrivateAssets="All" IsPinned="true" Justification="Must stick with version 17.11.4 to stay backward compatible - we don't ship this, but depend on the version installed with dotnet/msbuild"/>
   </ItemGroup>
 
   <ItemGroup>
