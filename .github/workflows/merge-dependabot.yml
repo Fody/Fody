@@ -1,0 +1,45 @@
+name: merge-dependabot
+
+# Merges minor and patch Dependabot pull requests once the Build workflow has passed on them.
+# Triggering on workflow_run rather than pull_request means an untested bump is never merged, and
+# no branch protection is needed (a required check would also block the docs workflow's pushes).
+# No personal access token: GITHUB_TOKEN gets write access through the permissions block below.
+# Major version bumps are left for a person.
+on:
+  workflow_run:
+    workflows: [Build]
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    if: >
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.actor.login == 'dependabot[bot]'
+    steps:
+      # Dependabot records the update type in its commit message metadata, for example
+      # "update-type: version-update:semver-minor". A grouped bump lists one per dependency.
+      # --match-head-commit refuses the merge if the branch moved after this build ran.
+      - name: Merge when the bump is minor or patch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          BRANCH: ${{ github.event.workflow_run.head_branch }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          MESSAGE: ${{ github.event.workflow_run.head_commit.message }}
+        run: |
+          if grep -q 'update-type: version-update:semver-major' <<< "$MESSAGE"; then
+            echo "Major version bump, leaving for review"
+            exit 0
+          fi
+          pr=$(gh pr list --head "$BRANCH" --state open --json number --jq '.[0].number')
+          if [ -z "$pr" ]; then
+            echo "::warning::No open pull request for $BRANCH"
+            exit 0
+          fi
+          gh pr merge "$pr" --squash --match-head-commit "$HEAD_SHA"
