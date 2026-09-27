@@ -2,7 +2,7 @@ name: Build
 
 on:
   push:
-    branches: [master]
+    branches: ['*']
     tags: ['*']
   pull_request:
   workflow_dispatch:
@@ -112,10 +112,92 @@ jobs:
         run: ./runTests.ps1 -IntegrationOnly -Framework net10.0
         shell: pwsh
 
+  e2e-build:
+    name: E2E Build
+    runs-on: windows-latest
+    timeout-minutes: 60
+    outputs:
+      build-version: ${{ steps.version.outputs.build-version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          submodules: true
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      # Use a unique, unpublished version so we're certain nuget.org has no package with this
+      # id/version, and that the e2e tests exercise exactly this build.
+      - name: Generate Build Version
+        id: version
+        shell: pwsh
+        run: |
+          [xml]$projectXml = Get-Content "Directory.Build.props"
+          $propertyGroup = $projectXml.Project.PropertyGroup | Select -First 1
+          $version = [System.Version]$propertyGroup.Version.'#text'
+          $buildVersion = [System.Version]"$($version.Major).$($version.Minor).$($env:GITHUB_RUN_NUMBER % [uint16]::MaxValue)"
+          echo "build-version=$buildVersion" >> $env:GITHUB_OUTPUT
+
+      - name: Log Build Version
+        run: echo "Build Version = ${{ steps.version.outputs.build-version }}"
+
+      - name: Build Fody
+        run: dotnet build Fody.sln -c Release -p:Version=${{ steps.version.outputs.build-version }}
+
+      - name: Upload packages
+        uses: actions/upload-artifact@v7
+        with:
+          name: nupkgs-e2e
+          path: nugets/*.nupkg
+          if-no-files-found: error
+          retention-days: 7
+
+  e2e-tests:
+    name: E2E Tests
+    needs: e2e-build
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: 'VS2026'
+            image: 'windows-2025-vs2026'
+            vsVersion: '18.0'
+          - name: 'VS2022'
+            image: 'windows-2022'
+            vsVersion: '17.0'
+    runs-on: ${{ matrix.image }}
+    timeout-minutes: 60
+    steps:
+      - name: Checkout FodyIntegrationTest
+        uses: actions/checkout@v7
+        with:
+          repository: tom-englert/FodyIntegrationTest
+          path: FodyIntegrationTest
+
+      - name: Download nuget artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: nupkgs-e2e
+          path: FodyIntegrationTest\nuget
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v3
+        with:
+          vs-version: ${{ matrix.vsVersion }}
+
+      - name: Build solution
+        run: msbuild FodyIntegrationTest\FodyIntegrationTest.sln -restore -p:Platform="any cpu" -p:Configuration=Release
+
+      - name: Test
+        run: dotnet test FodyIntegrationTest\Test\Test.csproj --no-build -c Release
+
   # Trusted publishing: no stored API key. nuget.org validates GitHub's OIDC token against the
   # policy naming this repository and this workflow file, and returns a key good for an hour.
   publish:
-    needs: [windows, linux]
+    needs: [windows, linux, e2e-tests]
     environment: nuget
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
