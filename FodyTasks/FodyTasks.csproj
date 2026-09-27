@@ -40,4 +40,16 @@
     <WriteLinesToFile Lines="&lt;Project&gt;&lt;PropertyGroup&gt;&lt;IntegrationVersion&gt;$(PackageVersion)&lt;/IntegrationVersion&gt;&lt;Verify_SponsorshipExemption&gt;$(Verify_SponsorshipExemption)&lt;/Verify_SponsorshipExemption&gt;&lt;Verify_SponsorshipExemptionUntil&gt;$(Verify_SponsorshipExemptionUntil)&lt;/Verify_SponsorshipExemptionUntil&gt;&lt;/PropertyGroup&gt;&lt;/Project&gt;" File="..\Integration\Directory.Build.props" Overwrite="true" />
   </Target>
 
+  <Target Name="VerifyPinnedMicrosoftBuildUtilitiesCoreVersion" BeforeTargets="Restore;CollectPackageReferences;GenerateNuspec">
+    <ItemGroup>
+      <_PinnedMicrosoftBuildUtilitiesCoreReference Include="@(PackageReference)"
+                                                   Condition="'%(Identity)' == 'Microsoft.Build.Utilities.Core'" />
+    </ItemGroup>
+
+    <Error Condition="'@(_PinnedMicrosoftBuildUtilitiesCoreReference)' == ''"
+           Text="Microsoft.Build.Utilities.Core package reference is required and must stay pinned to version 17.11.4." />
+    <Error Condition="'%(_PinnedMicrosoftBuildUtilitiesCoreReference.VersionOverride)' != '17.11.4'"
+           Text="Microsoft.Build.Utilities.Core must stay pinned to version 17.11.4. Current VersionOverride is '%(_PinnedMicrosoftBuildUtilitiesCoreReference.VersionOverride)'." />
+  </Target>
+
 </Project>
