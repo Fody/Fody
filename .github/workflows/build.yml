@@ -138,7 +138,7 @@ jobs:
           [xml]$projectXml = Get-Content "Directory.Build.props"
           $propertyGroup = $projectXml.Project.PropertyGroup | Select -First 1
           $version = [System.Version]$propertyGroup.Version.'#text'
-          $buildVersion = [System.Version]"$($version.Major).$($version.Minor).$($env:GITHUB_RUN_NUMBER % [uint16]::MaxValue)"
+          $buildVersion = [System.Version]"$($version.Major).$($version.Minor).$($version.Build).$env:GITHUB_RUN_NUMBER"
           echo "build-version=$buildVersion" >> $env:GITHUB_OUTPUT
 
       - name: Log Build Version
