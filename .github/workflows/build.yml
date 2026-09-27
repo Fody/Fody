@@ -148,7 +148,7 @@ jobs:
         run: dotnet build Fody.sln -c Release -p:Version=${{ steps.version.outputs.build-version }}
 
       - name: Cache packages
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v6
         with:
           path: nugets/*.nupkg
           key: nupkgs-e2e-${{ github.run_id }}-${{ github.run_attempt }}
@@ -176,7 +176,7 @@ jobs:
           path: FodyIntegrationTest
 
       - name: Restore cached packages
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
           path: nugets/*.nupkg
           key: nupkgs-e2e-${{ github.run_id }}-${{ github.run_attempt }}
@@ -187,6 +187,7 @@ jobs:
         run: |
           New-Item -ItemType Directory -Force -Path FodyIntegrationTest\nuget | Out-Null
           Copy-Item nugets\*.nupkg FodyIntegrationTest\nuget\
+          Get-ChildItem FodyIntegrationTest\nuget
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v3
