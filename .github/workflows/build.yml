@@ -2,7 +2,7 @@ name: Build
 
 on:
   push:
-    branches: ['**']
+    branches: [master]
     tags: ['*']
   pull_request:
   workflow_dispatch:
@@ -138,7 +138,7 @@ jobs:
           [xml]$projectXml = Get-Content "Directory.Build.props"
           $propertyGroup = $projectXml.Project.PropertyGroup | Select -First 1
           $version = [System.Version]$propertyGroup.Version.'#text'
-          $buildVersion = [System.Version]"$($version.Major).$($version.Minor).$($version.Build).$env:GITHUB_RUN_NUMBER"
+          $buildVersion = [System.Version]"99.$($version.Major).$($version.Minor).$($version.Build)"
           echo "build-version=$buildVersion" >> $env:GITHUB_OUTPUT
 
       - name: Log Build Version
@@ -147,13 +147,11 @@ jobs:
       - name: Build Fody
         run: dotnet build Fody.sln -c Release -p:Version=${{ steps.version.outputs.build-version }}
 
-      - name: Upload packages
-        uses: actions/upload-artifact@v7
+      - name: Cache packages
+        uses: actions/cache/save@v4
         with:
-          name: nupkgs-e2e
           path: nugets/*.nupkg
-          if-no-files-found: error
-          retention-days: 7
+          key: nupkgs-e2e-${{ github.run_id }}-${{ github.run_attempt }}
 
   e2e-tests:
     name: E2E Tests
@@ -177,11 +175,18 @@ jobs:
           repository: tom-englert/FodyIntegrationTest
           path: FodyIntegrationTest
 
-      - name: Download nuget artifact
-        uses: actions/download-artifact@v8
+      - name: Restore cached packages
+        uses: actions/cache/restore@v4
         with:
-          name: nupkgs-e2e
-          path: FodyIntegrationTest\nuget
+          path: nugets/*.nupkg
+          key: nupkgs-e2e-${{ github.run_id }}-${{ github.run_attempt }}
+          fail-on-cache-miss: true
+
+      - name: Copy nuget to integration source folder
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path FodyIntegrationTest\nuget | Out-Null
+          Copy-Item nugets\*.nupkg FodyIntegrationTest\nuget\
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v3
