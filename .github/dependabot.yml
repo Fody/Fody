@@ -5,3 +5,7 @@ updates:
   schedule:
     interval: daily
   open-pull-requests-limit: 10
+  ignore:
+  # V 18 ships only net472 and net11.0, so the net10.0 tests cannot load it
+  - dependency-name: "Microsoft.Build*"
+    versions: [">= 18"]
