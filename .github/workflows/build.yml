@@ -130,21 +130,8 @@ jobs:
 
       # Use a unique, unpublished version so we're certain nuget.org has no package with this
       # id/version, and that the e2e tests exercise exactly this build.
-      - name: Generate Build Version
-        id: version
-        shell: pwsh
-        run: |
-          [xml]$projectXml = Get-Content "Directory.Build.props"
-          $propertyGroup = $projectXml.Project.PropertyGroup | Select -First 1
-          $version = [System.Version]$propertyGroup.Version.'#text'
-          $buildVersion = [System.Version]"99.$($version.Major).$($version.Minor).$($version.Build)"
-          echo "build-version=$buildVersion" >> $env:GITHUB_OUTPUT
-
-      - name: Log Build Version
-        run: echo "Build Version = ${{ steps.version.outputs.build-version }}"
-
       - name: Build Fody
-        run: dotnet build Fody.sln -c Release -p:Version=${{ steps.version.outputs.build-version }}
+        run: dotnet build Fody.sln -c Release -p:Version=99.9
 
       - name: Cache packages
         uses: actions/cache/save@v6
