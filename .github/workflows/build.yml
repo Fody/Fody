@@ -38,13 +38,12 @@ jobs:
 
       # The tag is the version: tag 1.2.3 (or v1.2.3) builds 1.2.3. Other builds use the
       # Version in Directory.Build.props. Integration restores the packages just built from
-      # ../nugets by IntegrationVersion, so it has to be told the same version.
+      # ../nugets, so it has to be told the same version.
       - name: Resolve the version from the tag
         if: startsWith(github.ref, 'refs/tags/')
         shell: bash
         run: |
           echo "VERSION_ARGUMENT=-p:Version=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
-          echo "INTEGRATION_ARGUMENT=-p:IntegrationVersion=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
 
       - name: Restore Fody
         run: dotnet restore Fody.sln ${{ env.VERSION_ARGUMENT }}
@@ -53,14 +52,14 @@ jobs:
         run: dotnet build --configuration Release --no-restore Fody.sln ${{ env.VERSION_ARGUMENT }}
 
       - name: Restore Integration
-        run: dotnet restore Integration/Integration.sln ${{ env.INTEGRATION_ARGUMENT }}
+        run: dotnet restore Integration/Integration.sln ${{ env.VERSION_ARGUMENT }}
 
       - name: Build Integration
-        run: dotnet build --configuration Release --no-restore Integration/Integration.sln ${{ env.INTEGRATION_ARGUMENT }}
+        run: dotnet build --configuration Release --no-restore Integration/Integration.sln ${{ env.VERSION_ARGUMENT }}
 
       - name: Test
-        run: ./runTests.ps1
         shell: pwsh
+        run: ./runTests.ps1
 
       - name: Upload received on failure
         if: failure()
@@ -109,8 +108,8 @@ jobs:
 
 # TODO Run the Fody tests when they pass on Linux
       - name: Test Integration
-        run: ./runTests.ps1 -IntegrationOnly -Framework net10.0
         shell: pwsh
+        run: ./runTests.ps1 -IntegrationOnly -Framework net10.0
 
   e2e-build:
     name: E2E Build

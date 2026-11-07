@@ -1,0 +1,9 @@
+<Project>
+  <Import Project="../Directory.Build.props" />
+  <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- Fody warnings are expected in the integration test -->
+    <FodyTreatWarningsAsErrors>false</FodyTreatWarningsAsErrors>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+</Project>

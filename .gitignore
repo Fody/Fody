@@ -90,7 +90,6 @@ Fody/.DS_Store
 *.userprefs
 *.received.txt
 *.bak
-Integration/Directory.Build.props
 /SampleTarget/SampleTargetTests.ExternalAnnotations.xml
-/SampleTarget/FodyWeavers.xsd
+FodyWeavers.xsd
 msbuild.binlog
